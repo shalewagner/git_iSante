@@ -1,0 +1,1297 @@
+/***** GLOBAL *****/
+
+/*** Structure ***/
+
+body { font-family: Verdana,Arial,Helvetica,sans-serif; color: #444; font-size: 11px; line-height: 1.5em; margin: 0; padding: 0 }
+
+/*** Typographic ***/
+p, li, td, body, blockquote, h1, h2, h3, h4, h5, h6, a, select, small, table.header { }
+select, option { color: #454545; font-size: 1em }
+
+/*** Tables ***/
+table.header { border-collapse: collapse; width: 100% }
+/*rows or cells with alternate background color*/
+.alt { background-color: #dcdcdc }
+.reg { background-color: #FFFFFF }
+
+/*** Misc ***/
+
+/* Cursor becomes pointer on hover */
+label, select, button, input[type="button"], input[type="reset"], input[type="submit"], input[type="radio"], input[type="checkbox"] { cursor: pointer }
+.hide-this, .hidden { display: none }
+
+/***** HEADER *****/
+
+#banner { color: white; background-color: #4E78B1; width: 100% }
+#banner table.header { background-color: #4E78B1 }
+.banner { text-align: left }
+#top_title { padding: 4px 16px 0 16px; margin: 0; width: 120px  }
+#top_title div { width: 120px; min-width: 120px; margin: 0; padding: 0 }
+/* following style needed to override body style set in example.css. FIXME - need to update styles for ext panels */
+#top_menu, #app_version { font-size: 11px; font-family: Verdana,Arial,Helvetica,sans-serif; line-height: 17px }
+#top_menu { text-align: right; vertical-align: top; white-space: nowrap }
+#top_menu div { margin: 4px 8px 12px 0; padding-left: 28px; white-space: nowrap }
+#top_menu select.banner { margin: 0px; border: 0px }
+#top_menu a, #top_menu a:visited { color: white }
+#top_menu a:hover, #top_menu a:active  { color: #FF9966;}
+#banner_toolbar { display:block; float:left; list-style:none outside none }
+#banner_toolbar li { display:inline }
+#toolbar { z-index:1000; position:relative; color: #454545; font-size: 12px }
+
+/*** Main Nav ***/
+/* Main menu click UI/behavior based on Bootstrap. Further CSS below */
+#main-menu-area { background: url(images/main-menu/background.png) repeat scroll 0 0 #F3EFEC; min-width: 760px }
+.main-menu > li { float: left; position: relative }
+.main-menu li a, .dropdown-menu li span { color: #444; display: block; font-size: 12px; line-height: 12px; padding: 10px 8px 10px 16px; position: relative; text-decoration: none; border-left: 1px solid #e3dad1; border-bottom: 1px solid #e3dad1 }
+span.menudisable { color: gray !important}
+.main-menu > li > a { border-top: 1px solid #E3DAD1 }
+.main-menu > li > a:hover { background: url(images/main-menu/top-item-hover.png) repeat; border-bottom: 1px solid #E3DAD1; }
+.main-menu .open .dropdown-toggle { color: #ffffff; background: url(images/main-menu/top-item-open.png) repeat }
+.main-menu li.dropdown.open .caret { border-top-color: #ffffff; border-bottom-color: #ffffff; opacity: 1; filter: alpha(opacity=100) }
+.main-menu a.submenu-item { padding-left: 30px }
+.dropdown-menu { z-index: 9905 } /* Fixes problem with Ext panels */
+.dropdown-menu li a { border-bottom: 1px solid #d9d9d9 } 
+#top-help { border-right: 1px solid #E3DAD1 } /* right border for last menu item */
+#searchbox .x-toolbar { display: block; position: relative; text-decoration: none; color: #432; border: none; background: #f3efec url(images/main-menu/background.png) repeat; font-size: 12px; line-height: 12px; padding: 7px 14px }
+#searchbox .x-toolbar td { font: 11px Verdana,Arial,Helvetica,sans-serif }
+#searchbox .x-toolbar td.x-toolbar-right { display: none } /* to fix layout bug in Chrome */
+#searchbox .x-toolbar .xtb-sep { background-image: none }
+#searchbox .x-toolbar .x-form-field { padding: 2px 3px 0px }
+.ext-webkit #searchbox .x-form-search-trigger { height: 19px }
+
+/*** Patient Nav ***/
+#pheader { background-color: #4E78B1 }
+#head { min-width: 1152px; border-collapse: collapse; white-space: nowrap; line-height: 19px } /* Removes default spacing in table. Min-width to prevent line breaks at smaller sizes. */
+#head button { width: auto; overflow: visible; margin: 0 0 0 10px } /* Spacing for buttons in patient header */
+#fpheader { width: 40px; padding: 0 20px; text-align: center }
+#nofpheader { width: 100px; padding: 0 10px; text-align: center; font-style: italic; color: #666; font-size: 10px }
+#nofpheader-ie { width: 150px; padding: 0; text-align: center; line-height: 15px; font-size: 10px }
+#nofpheader-ie button { margin: 0 }
+
+/***** CONTENT AREA *****/
+
+.contentArea{ padding: 8px; background-color: white }
+.contentArea ul.bulletList  { margin: 1em 0; padding-left: 40px; list-style-type: circle; list-style-position: outside }
+.bulletList li { margin-bottom: 0.5em }
+.bulletList ul { padding: 5px 0 0 20px; list-style-type: circle; list-style-position: outside }
+.bulletList ul li { margin-bottom: 0.3em  }
+#reportsTable td { padding: 5px 10px }
+
+/*** Forms ***/
+#forms { background-color: #fff }
+.formButton button.x-btn-text { font-size: 12px; font-weight: bold; color: #333; margin-top: -2px; padding: 0 6px }
+.formDateBox { width: 80px; padding-left: 24px; }
+/* uses EXT gray background - if we keep, should be moved to an iSante specific location */
+.formButton .x-btn-tl, .formButton .x-btn-tr, .formButton .x-btn-tc, .formButton .x-btn-ml, .formButton .x-btn-mr, .formButton .x-btn-mc, .formButton .x-btn-bl, .formButton .x-btn-br, .formButton .x-btn-bc {
+    background-image: url(images/ext-button-grey-background.gif);
+}
+
+/** Used in new lab form **/
+.checkbox-list table label {
+  margin-right: 3px;
+  top: 0;
+  vertical-align: middle
+}
+.checkbox-list table td {
+  padding: 0 1px;
+}
+.checkbox-list table input {
+  vertical-align: middle;
+  margin-left: 2px;
+}
+.checkbox-list .test-list-panel div {
+  background-color: #E7F5E1;
+}
+
+.print-break-before { display: inline }
+.print-break-before span { padding: 0 3px }
+/** /Used in new lab forms **/
+
+/* below formButton styles are needed to keep background on button after save - due to strange setting we have where "pressed" is the default state. */
+.formButton .x-btn-tl { background-position: -12px 0 }
+.formButton .x-btn-tr { background-position: -15px 0 }
+.formButton .x-btn-tc { background-position: 0 -12px }
+.formButton .x-btn-ml { background-position: -12px -24px }
+.formButton .x-btn-mr { background-position: -15px -24px }
+.formButton .x-btn-mc { background-position: 0 -3240px }
+.formButton .x-btn-bl { background-position: -12px -3px }
+.formButton .x-btn-br { background-position: -15px -3px }
+.formButton .x-btn-bc { background-position: 0 -21px } 
+
+/** to organize **/
+
+input.text { background-color:white }
+th { font: bold 9pt  Verdana, Arial, Helvetica,Geneva,sans-serif;text-align: left;padding: 6px 6px 6px 12px }
+table.formType { border: 0px; width: 100%; background-color:#8db2e3; color:#DFEAF6 } 
+table.header2 { border-collapse: collapse; width: 100%; padding-left: 12px; border: thin solid #404040; text-align: center }
+table.header2>tr { border: thin solid #404040; width: 100%; padding: 3px }
+
+/* div#banner>table>tbody>tr { line-height: 1.5em } */
+table.pidSection { align:center; width: 100%; background-color:#8DB2E3 }
+caption.pages { font-weight: bold; font-size: 8pt; padding: 5px; margin-bottom: 5px }
+a.pages { padding: 5px; font-size: 8pt; margin-bottom: 5px }
+table.b_header_nb, table.b_header_nb_nw {border-spacing: 0px; padding:0px; width: 100%; border: 0px }
+table.cover { border-spacing:4px; border:4px; min-width: 300px; width: 100%}
+td.cover {padding:3px; text-align:left; font-size:8pt }
+
+/* Used on cover page right column */
+.cover-list-box { clear: both; margin: 5px 10px 5px 5px }
+.cover-list-inner { margin-left: 10px }
+.cover-list-inner > p { margin-bottom: 2px }
+.cover-list-box > h2 { font-size: 14px; line-height: 24px }
+
+#grid1 thead, #grid2 thead, #grid3 thead, #grid4 thead {display:none }
+#motif1 thead, #motif2 thead, #motif3 thead {display:none }
+
+td#backButton { float: right; margin-right: 10% }
+span#errorWhite { color: white; font-size: 1.5em; font-style:italic }
+td.m_header { font-size: 11pt; font-weight: bold; color:#444444; background-color:#8db2e3; padding: 2px; text-align: left }
+td.patName { color: #336699; font-size: 16px; font-weight: bold; font-family: Arial, Helvetica, sans-serif; padding-right: 20px; padding:10px }
+td.patInfo, em.patInfo { color:#336699; font-size: 12px; font-family: Helvetica; padding-left: 3px; font-weight: 500 }
+tr.patHeader { text-align: left }
+tr.POC {  }
+td.POC {  }
+div#POC {  }
+
+td.vDateTitle { font-size: 12pt; font-weight:bold; color: #FFFFFF; font-family: Calibri,Helvetica }
+td.s_header { background-color: #000000; font-size: 10pt; font-weight: bold; color: #FFFFFF; border-collapse: separate; border-spacing: 0px; padding: 1px; text-align: left }
+td.w_header { background-color: #214552; font-size: 12pt; font-weight: bold; color: #FFFFFF; padding: 1px; text-align: center }
+td.under_header { background-color: #FFFFFF; font-size: 10pt; font-weight: bold; color: #FFFFFF; border-collapse: separate; border-spacing: 0px; padding: 1px; padding-top: 6px; text-align: left }
+td.sm_header_cnt { font-size: 8pt; font-weight: bold; padding: 4px; text-align: center; width: 5% }
+td.sm_header_cnt_np { font-size: 8pt; font-weight: bold; padding: 0px; text-align: center }
+td.sm_header_lt, th.sm_header_lt { font-size: 8pt; font-weight: bold; padding: 1px; text-align: left }
+td.sm_header_lt_pd_top { font-size: 8pt; font-weight: bold; padding-top: 14px; text-align: left }
+td.sm_header_lt_np { font-size: 8pt; font-weight: bold; padding: 0px; text-align: left }
+td.sm_header_lt_pd { font-size: 8pt; font-weight: bold; padding-left: 8px; text-align: left }
+td.sm_cnt { font-size: 8pt; padding: 1px; text-align: center }
+td.sm_lt{ font-size: 9pt;  background-color: #4E78B1; color: #ffffff; padding: 3px; padding-left: 10px; vertical-align: bottom; text-align: right }
+td.sm_lt2{ font-size: 9pt;  background-color: #4E78B1; color: #ffffff; text-align: right; vertical-align: top }
+td.sm_patHead { font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight:bold; color:#677C97; padding: 3px 6px 3px 3px }
+td.sm_cnt_pd { font-size: 8pt; padding-left: 8px; text-align: center }
+td.sm_lt_pd { font-size: 8pt; padding-left: 8px }
+td.bold { font-size: 10pt; padding: 1px; font-weight: bold }
+td.bottom_line { border-bottom: #000000 thin solid }
+td.top_line { border-top: #000000 thin solid }
+td.vert_line { font-size: 10pt; padding: 1px; border-right: #000000 thin solid }
+td.left_pad { padding-left: 8px }
+td.top_pad { padding-top: 8px }
+td.top_pad_date { padding-top: 22px; font-weight: bold; color: #215365 }
+td.top_pad_lang { padding-top: 12px; padding-left: 28px; font-weight: bold; color: #215365 }
+td.top_pad_announc { padding-top: 8px; padding-left: 54px }
+td.left_top_pad { padding-top: 8px; padding-left: 8px }
+td.top_pad_cnt { padding-top: 8px; text-align: center }
+td.menu_header { font-size: 10pt; font-weight: bold; color: #47747E; padding: 1px; text-align: left }
+td.menu_header_nopad { font-size: 10pt; font-weight: bold; color: #215365; padding: 1px; text-align: left }
+td.menu_action { font-size: 8pt; padding-left: 3px; text-align: left }
+td.legend_display { font-size: 7pt; padding-left: 3px; text-align: left }
+td.num_display { font-size: 7pt; padding-left: 3px; text-align: right }
+td.menu_active { font-size: 8pt; padding-left: 3px; text-align: left; color: #33AA33 }
+td.menu_active_bl { font-size: 8pt; padding-left: 3px; padding-bottom: 8px; border-bottom: #000000 thin solid; text-align: left; color: #33AA33 }
+td.menu_enclist { font-size: 8pt; padding-left: 3px; text-align: left; width: 70px }
+td.allEncs { font-size: 8pt; padding-top: 2px; padding-bottom: 2px; padding-left: 8px; border-left: thin solid #404040; border-right:thin solid #404040; border-collapse: collapse; text-align: left }
+th.allEncsH { font-size: 8pt; padding-top: 2px; padding-bottom: 2px; border: thin solid; border-collapse: collapse }
+input#deleteForm { float:right }
+h4.statMsg { text-align: center; padding: 2%; position: relative; top: -300px }
+h3.statusMsg { font-size: 1.5em; position:relative; top: -300px }
+span.errorStat { color: #C11B17; font-weight: bold }
+span.review { color: blue; font-weight: bold }
+span.complete { color: green; font-weight: bold }
+span.deletedStat { color: #9933FF; font-weight: bold }
+span.incomplete { color: #FF00CC; font-weight: bold }
+td.key { font-size: .75em }
+input#bugButton { margin-top: 10px; margin-bottom : 10px; background-color: #F0DBDF; color: #8A0F28 }
+.small_cnt { font-size: 8pt }
+
+.statusFormError { color: #AA3344; background-color:	#E77471; font-size: 10pt; font-weight: bold; text-align: left }
+.statusMsg { color: #AA3344;  font-size: 10pt; font-weight: bold; text-align: left; padding: 3% }
+.statusFormOk { color: #000000; font-size: 10pt; font-weight: bold; text-align: left }
+.dateFormat, .comment { font-style: italic }
+.formVersion { font-size: 8pt; text-align: right }
+.error { color: #CB2B2B; font-size: 12pt;font-family: Arial Narrow }
+.warning { background-color: #EEEE77 }
+div.saveMessage0 { position:absolute; height:60px; width: 100%; padding: 5px; line-height: 2em; padding-left: 10px; background-color: #C3FDB8; font-weight: bold; font-size: 11pt }
+div.saveMessage1 { position:absolute; height:60px; width: 100%; padding: 5px; background-color:#FFE4E1; color: red; line-height: 2em;padding-left: 10px; font-weight: bold; font-size: 11pt }
+input#bugButton { margin-bottom: 10% }
+div#tab-panes, div#saveButtons, div#formheader,div#content, div.formArea { margin-left: 2%; margin-right: 4% }
+div#encsMain { margin-left: 1px; margin-right: 3.5% }
+
+a.menu_action:link,a.menu_action:active,a.menu_action:visited { font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF }
+a.menu_action:hover { color: #FF9966 }
+a.onWhite:link, a#onWhite:active { font-family: Verdana, Arial, Helvetica, Genceva, sans-serif; color: black }
+a.onWhite:hover { color: #FF9966 }
+a:active, a:hover { outline: 0 }
+a:active, a:link { font-family: Verdana, Arial, Helvetica, Geneva, sans-serif; color: #3F547F }
+a:visited { color: #732C7B }
+a:hover { color: #FF9966 }
+a.link_back { padding: 10px; font-size: 1.25em }
+/*td.newForms { color: #369; font-size: .75em }
+td.newForms > a:link, td.newForms > a:visited { font-size: 1em }
+td.newForms, tr.newForms { background-color: #FFFFD8 }*/
+
+input[disabled],select[disabled],textarea[disabled] { cursor: not-allowed } /* Generic disable function */
+
+/*NASTAD*/
+table.b_header { border-spacing: 1px; padding: 0px; border: 0px; width: 100%; border: #000000 thin solid }
+
+
+/*vital signs formatting*/
+
+.inlineblock + .inlineblock { display:inline; padding-left:4em }
+.inlineblock { display:inline }
+.allergies table { border-color: red }
+.r_float { float:right;	padding-right:2em }
+.allergies .r_float { display:block; width:100%; text-align:right }
+
+.ext-ie .x-fieldset, .x-fieldset { padding: 0px; margin: 0px }
+
+/*** Notification Bar ***/
+#notification-bar, #notification-pull {
+    -webkit-box-shadow: 0 0 5px black;
+    -moz-box-shadow:    0 0 5px black;
+    box-shadow:         0 0 5px black;
+    opacity: 0.95;
+    filter: alpha(opacity=95)
+}
+#notification-bar {
+    position: fixed;
+    display: none;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 6px 0;
+    overflow: hidden
+}
+.notification-note {
+    background-color: #fde073;
+    border-bottom: 2px solid #fad44b
+}
+.notification-success {
+    background-color: #D1EED1;
+    border-bottom: 2px solid #BFE7BF
+}
+.notification-failure {
+    /* background-color: #FDDFDE; old color */
+    background-color: #fc6a65;
+}
+.notification-div {
+    margin: 0px auto;
+    width: 800px
+}
+#notification-close {
+    cursor: pointer;
+    float: right;
+    margin-right: 20px;
+    padding: 0 6px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #444
+}
+#notification-close:hover, #notification-close:active {
+    color: #333
+}
+#notification-pull {
+    position: fixed;
+    display: none;
+    z-index: 8999;
+    top: 0;
+    left: 140px;
+    padding: 4px 6px 2px;
+    -webkit-border-radius:0 0 4px 4px;
+    -moz-border-radius:0 0 4px 4px;
+    border-radius:0 0 4px 4px;
+}
+#notification-pull-button, #notification-push-button {
+    cursor: pointer;
+}
+#notification-push-button {
+    position: absolute;
+    left: 142px;
+    display: none;
+    padding: 4px;
+}
+#notification-text {
+    margin: 0 40px 0 164px;
+    font-size: 12px;
+    line-height: 22px;
+}
+.notification-failure #notification-text {
+    color: #fff;
+}
+/* Use for persistent note at top of page. Place in bannerbody and add margin in splash, patienttabs and maintainSites */
+.top-alert {
+    background-color: #fde073;
+    color: #333;
+    text-align: center;
+    padding: 4px;
+    white-space: nowrap
+}
+.top-alert.demo {
+    background-color: #dff0d8
+}
+
+/*** Tables styles based on Bootstrap ***/
+.table {
+    max-width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    margin-bottom: 18px;
+}
+.table th, .table td {
+    padding: 8px;
+    line-height: 18px;
+    border-top: 1px solid #ddd;
+}
+.table td {
+    vertical-align: top;
+    text-align: left
+}
+.table th, td.powerUpHeader {
+    font-weight: bold;
+    vertical-align: bottom;
+    text-align: center
+}
+.table thead:first-child tr th, .table thead:first-child tr td, .powerUpHeader {
+    border-top: 0
+}
+.table tbody + tbody {
+    border-top: 2px solid #ddd
+}
+.table-condensed th, .table-condensed td {
+    padding: 4px 5px
+}
+.table-bordered {
+    border: 1px solid #ddd;
+    border-collapse: separate;
+    *border-collapse: collapsed;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px
+}
+.table-bordered th + th,
+.table-bordered td + td,
+.table-bordered th + td,
+.table-bordered td + th {
+    border-left: 1px solid #ddd;
+}
+.table-bordered thead tr th:first-child, .table-bordered tbody tr td:first-child {
+    border-left: 0;
+}
+.table-bordered thead:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child td {
+    border-top: 0;
+}
+.table-bordered thead:first-child tr:first-child th:first-child, .table-bordered tbody:first-child tr:first-child td:first-child {
+    -webkit-border-radius: 4px 0 0 0;
+    -moz-border-radius: 4px 0 0 0;
+    border-radius: 4px 0 0 0;
+}
+.table-bordered thead:first-child tr:first-child th:last-child, .table-bordered tbody:first-child tr:first-child td:last-child {
+    -webkit-border-radius: 0 4px 0 0;
+    -moz-border-radius: 0 4px 0 0;
+    border-radius: 0 4px 0 0;
+}
+.table-bordered thead:last-child tr:last-child th:first-child, .table-bordered tbody:last-child tr:last-child td:first-child {
+    -webkit-border-radius: 0 0 0 4px;
+    -moz-border-radius: 0 0 0 4px;
+    border-radius: 0 0 0 4px;
+}
+.table-bordered thead:last-child tr:last-child th:last-child, .table-bordered tbody:last-child tr:last-child td:last-child {
+    -webkit-border-radius: 0 0 4px 0;
+    -moz-border-radius: 0 0 4px 0;
+    border-radius: 0 0 4px 0;
+}
+.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
+    background-color: #f9f9f9;
+}
+/* link directly below the table, used on patient cover page */
+.table-more-link {
+  margin: -1.25em 0 1em;
+  float: left; 
+}
+
+/* Similar to bootstrap, directly defines background color when using PHP to
+ * assign class to every other row. */
+.row-stripe {
+    background-color: #f5f5f5;    
+}
+.find-table th, .find-table td {
+    padding: 2px 4px;
+    line-height: 16px
+}
+.find-table th {
+    background-color: #c7c7c7;
+    color: #333;
+    font-size: 1em
+}
+.find-table tbody tr:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+.merge-row-main, .find-table tr.merge-row-main:hover {
+    background-color: #BCE8F1;
+}
+.merge-row, .find-table tr.merge-row:hover {
+    background-color: #D9EDF7;
+}
+.combine-button-container {
+    text-align: center;
+    padding: 5px 0;
+}
+.combine-button {
+    word-wrap: break-word;
+    white-space: normal;
+}
+#mergeCol {
+    width: 140px;
+    min-width: 140px
+}
+
+/* Menu dropdown based on bootstrap.
+*  Requires boostrap-dropdown.js
+*/
+.dropup,
+.dropdown {
+  position: relative;
+}
+.dropdown-toggle {
+  *margin-bottom: -3px;
+}
+.dropdown-toggle:active,
+.open .dropdown-toggle {
+  outline: 0;
+}
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: top;
+  border-top: 4px solid #000000;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  content: "";
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+.dropdown .caret {
+  margin-top: 4px;
+  margin-left: 2px;
+}
+.dropdown:hover .caret,
+.open .caret {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 9988;
+  display: none;
+  float: left;
+  min-width: 160px;
+  margin: 0;
+  list-style: none;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: none;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+.dropdown-menu.pull-right {
+  right: 0;
+  left: auto;
+}
+.dropdown-menu .divider {
+  *width: 100%;
+  height: 1px;
+  margin: 8px 1px;
+  *margin: -5px 0 5px;
+  overflow: hidden;
+  background-color: #e5e5e5;
+  border-bottom: 1px solid #ffffff;
+}
+.dropdown-menu a {
+  display: block;
+  padding: 3px 15px;
+  clear: both;
+  font-weight: normal;
+  line-height: 18px;
+  color: #333333;
+  white-space: nowrap;
+}
+.dropdown-menu li > a:hover,
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover {
+  text-decoration: none;
+  background-color: #0088cc;
+  background: url(images/main-menu/link-hover.png) repeat;
+}
+.open {
+  *z-index: 1000;
+}
+.open .dropdown-menu {
+  display: block;
+}
+.pull-right .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+.dropup .caret,
+.navbar-fixed-bottom .dropdown .caret {
+  border-top: 0;
+  border-bottom: 4px solid #000000;
+  content: "\2191";
+}
+.dropup .dropdown-menu,
+.navbar-fixed-bottom .dropdown .dropdown-menu {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: 1px;
+}
+.typeahead {
+  margin-top: 2px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+/* end menu dropdown */
+
+/* Styles for lab results */
+.lab-results h4 { margin-bottom: 4px }
+.lab-section-header { margin: 12px 0 4px }
+.lab-section-header span { margin-left: 40px; color: #666 }
+.lab-section-header div { display: inline-block; font-weight: bold; font-size: 1em; min-width: 100px }
+.lab-section-container { margin: 0 0 18px 30px }
+.lab-panel { padding-left: 8px !important; background-color: #E2E4FF }
+.panel-table { table-layout: fixed; }
+.panel-table td:first-child, .panel-table th:first-child {
+    padding-left: 30px
+}
+.panel-table tr.results td:first-child + td {
+    text-align: right
+}
+.panel-table th, .panel-table td, td.powerUpHeader, .power-up-table td {
+    padding: 2px 4px
+}
+.panel-table th, td.powerUpHeader {
+    background-color: #c7c7c7;
+    color: #333;
+    font-size: 1em
+}
+.panel-table tbody tr:nth-child(even), .power-up-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.panel-table tbody tr.results:hover, .power-up-table tbody tr:hover, .cover-table tbody tr:hover {
+    background-color: #e0e0e0
+}
+.cover-table {
+  max-width: 600px;
+  table-layout: auto;
+}
+.cover-table td {
+  text-align: center;
+}
+.cover-table td:first-child {
+  text-align: left;
+}
+.nutrition-table tbody tr:nth-child(even) {
+    background-color: inherit;
+}
+.nutrition-table tbody tr.success > td {
+  background-color: #dff0d8;
+}
+.nutrition-table tbody tr.error > td {
+  background-color: #f2dede;
+}
+.nutrition-table tbody tr.error {
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+.nutrition-table tbody tr.warning > td {
+  background-color: #fcf8e3;
+}
+.result-sort {
+    background-color: #666;
+    color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-weight: bold;
+    margin-bottom: 10px
+}
+.result-sort span {
+    margin-right: 60px
+}
+.single-result td {
+    padding-left: 8px !important;
+}
+
+/*** Object-oriented CSS style ***/
+/* Taking a more object oriented approach to building CSS. See */
+.container-1030 { margin: 20px 0; padding: 0 10px; width: 1030px }
+.container-960 { margin: 20px 0; padding: 0 10px; width: 960px }
+.centered { margin-left: auto; margin-right: auto }
+.width-120 { width: 120px }
+.width-140 { width: 140px }
+.width-150 { width: 150px }
+.width-220 { width: 220px }
+.min-width-100 { min-width: 100px }
+
+.col-left-220 { float: left; width: 220px }
+.col-main-220 { margin-left: 220px }
+
+.margin-1em { margin: 1em }
+.margin-vertical { margin: 1em 0 }
+.margin-horizontal { margin: 0 1em }
+
+.list-lead { font-weight: bold }
+.list-lead + ul { margin-bottom: 18px; margin-left: 10px }
+.list-lead + ul li { margin-bottom: 4px; text-indent: -6px; margin-left: 6px }
+
+/* button-maker used to style any <a>, <button>, <input> to look like a
+/* button in the iSante style. Set sizing with button[size] class below */
+.button-maker, .button-maker:link, .button-maker:visited {
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    color: #155799;
+    text-decoration: none;
+    border: 1px solid #6c6c6c;
+    text-shadow: 1px 1px 2px #FFFFFF;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #d2d2d6; /* Old browsers */
+    background: -moz-linear-gradient(top, #ececef 0%, #a9a9b4 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ececef), color-stop(100%,#a9a9b4)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ececef 0%,#a9a9b4 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ececef 0%,#a9a9b4 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #ececef 0%,#a9a9b4 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ececef', endColorstr='#a9a9b4',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, #ececef 0%,#a9a9b4 100%); /* W3C */
+}
+.button-maker:hover {
+    cursor: pointer;
+    color: #fff;
+    text-shadow: none;
+    background-color: #ff9966; /* Old browsers */
+    background: -moz-linear-gradient(top, #ff9966 0%, #ff6219 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff9966), color-stop(100%,#ff6219)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ff9966 0%,#ff6219 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ff9966 0%,#ff6219 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #ff9966 0%,#ff6219 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9966', endColorstr='#ff6219',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, #ff9966 0%,#ff6219 100%); /* W3C */    
+}
+.button-maker:active {
+    -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+    outline: 0
+}
+/* Used when button state is disabled */
+.button-maker.disabled,.button-maker[disabled] {
+    color: #333;
+    cursor: default;
+    background-image: none;
+    background-color: #e6e6e6;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+/* Button sizing - used with button-maker above. 
+/* Example: <a class="button-maker button12"> */
+.button10 { font-size: 10px; padding: 1px 6px }
+.button12 { font-size: 12px; padding: 3px 6px }
+.button12-short { font-size: 12px;  padding: 1px 6px }
+.button14 { font-size: 14px; padding: 3px 6px }
+/* For buttons that aren't as important */
+.button-subdued { font-weight: normal; color: #333 }
+
+/* Styles for ext tables used in vaccination & supplements */
+.power-up-table {
+    width: auto;
+    max-width: auto
+}
+td.powerUpColumnHeader {
+    padding-left: 5px;
+    min-width: 12em;
+    font-weight: bold;
+    text-align: left
+}
+td.powerUpColumnHeader input {
+    font-weight: bold;
+    text-align: left
+}
+/* Ext generated inputs on ped forms have strange width, overriding */
+#formSections .power-up-table td {
+    min-width: 100px
+}
+#formSections .power-up-table .powerUpOtherInput input {
+    width: 8em;
+    margin-left: 4px
+}
+/* Vaccinations are set as input type=text but don't need to be editable, 
+so hiding border. TODO: change inputs to basic <div> or <span> */
+.hide-inputs input {
+    border: 0;
+    background: none;
+    text-align: center;
+    color: #444;
+    font-size: 11px;
+    font-family: Verdana,Arial,Helvetica,sans-serif
+} 
+/* Changes format of Ext panel to look of old form */
+.extToOldForm .x-panel-header {
+  background-image: none;
+  border: none;
+  background-color: #000000;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: #FFFFFF;
+  font-size: 10pt;
+  font-weight: bold;
+  padding: 1px;
+  text-align: left;
+}
+.extToOldForm .x-panel-body {
+  border: none
+}
+
+.overlay{
+    position:absolute;
+    top:0px;
+    left:0px;
+    visibility: hidden
+}
+.visible {
+    visibility: visible !important;
+}
+.invisible {
+    visibility: hidden !important;
+}
+/* image sprites - used to reduce server requests
+*  add additional images to sprite as needed
+*/
+.original-icon-sprites {
+    background-image: url("images/sprites.png");
+    background-repeat: no-repeat;    
+}
+.original-icon-arrow-down {
+    background-position: 0px 0px;
+    width: 12px;
+    height: 7px
+}
+.original-icon-arrow-up {
+    background-position: 0px -19px;
+    width: 12px;
+    height: 7px
+}
+
+/* Testing ways to streamline/make consistent form styles */
+.formTableStd td {
+    padding-right: 10px
+}
+
+/** added for nutrition **/
+ .modal {
+     width: 800px;
+     margin-left: -400px;
+ }
+ .chart-launch:hover {
+     cursor: pointer;
+ }
+
+    
+/*** Bootstrap icons ***/
+
+/* Remove underline on links that are buttons */
+a.btn {
+  text-decoration: none;
+}
+[class^="icon-"],
+[class*=" icon-"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+  background-image: url("images/glyphicons-halflings.png");
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
+  margin-top: 1px;
+}
+/* White icons with optional class, or on hover/active states of certain elements */
+.icon-white,
+.nav-pills > .active > a > [class^="icon-"],
+.nav-pills > .active > a > [class*=" icon-"],
+.nav-list > .active > a > [class^="icon-"],
+.nav-list > .active > a > [class*=" icon-"],
+.navbar-inverse .nav > .active > a > [class^="icon-"],
+.navbar-inverse .nav > .active > a > [class*=" icon-"],
+.dropdown-menu > li > a:hover > [class^="icon-"],
+.dropdown-menu > li > a:hover > [class*=" icon-"],
+.dropdown-menu > .active > a > [class^="icon-"],
+.dropdown-menu > .active > a > [class*=" icon-"],
+.dropdown-submenu:hover > a > [class^="icon-"],
+.dropdown-submenu:hover > a > [class*=" icon-"] {
+  background-image: url("images/glyphicons-halflings-white.png");
+}
+.icon-glass {
+  background-position: 0      0;
+}
+.icon-music {
+  background-position: -24px 0;
+}
+.icon-search {
+  background-position: -48px 0;
+}
+.icon-envelope {
+  background-position: -72px 0;
+}
+.icon-heart {
+  background-position: -96px 0;
+}
+.icon-star {
+  background-position: -120px 0;
+}
+.icon-star-empty {
+  background-position: -144px 0;
+}
+.icon-user {
+  background-position: -168px 0;
+}
+.icon-film {
+  background-position: -192px 0;
+}
+.icon-th-large {
+  background-position: -216px 0;
+}
+.icon-th {
+  background-position: -240px 0;
+}
+.icon-th-list {
+  background-position: -264px 0;
+}
+.icon-ok {
+  background-position: -288px 0;
+}
+.icon-remove {
+  background-position: -312px 0;
+}
+.icon-zoom-in {
+  background-position: -336px 0;
+}
+.icon-zoom-out {
+  background-position: -360px 0;
+}
+.icon-off {
+  background-position: -384px 0;
+}
+.icon-signal {
+  background-position: -408px 0;
+}
+.icon-cog {
+  background-position: -432px 0;
+}
+.icon-trash {
+  background-position: -456px 0;
+}
+.icon-home {
+  background-position: 0 -24px;
+}
+.icon-file {
+  background-position: -24px -24px;
+}
+.icon-time {
+  background-position: -48px -24px;
+}
+.icon-road {
+  background-position: -72px -24px;
+}
+.icon-download-alt {
+  background-position: -96px -24px;
+}
+.icon-download {
+  background-position: -120px -24px;
+}
+.icon-upload {
+  background-position: -144px -24px;
+}
+.icon-inbox {
+  background-position: -168px -24px;
+}
+.icon-play-circle {
+  background-position: -192px -24px;
+}
+.icon-repeat {
+  background-position: -216px -24px;
+}
+.icon-refresh {
+  background-position: -240px -24px;
+}
+.icon-list-alt {
+  background-position: -264px -24px;
+}
+.icon-lock {
+  background-position: -287px -24px;
+}
+.icon-flag {
+  background-position: -312px -24px;
+}
+.icon-headphones {
+  background-position: -336px -24px;
+}
+.icon-volume-off {
+  background-position: -360px -24px;
+}
+.icon-volume-down {
+  background-position: -384px -24px;
+}
+.icon-volume-up {
+  background-position: -408px -24px;
+}
+.icon-qrcode {
+  background-position: -432px -24px;
+}
+.icon-barcode {
+  background-position: -456px -24px;
+}
+.icon-tag {
+  background-position: 0 -48px;
+}
+.icon-tags {
+  background-position: -25px -48px;
+}
+.icon-book {
+  background-position: -48px -48px;
+}
+.icon-bookmark {
+  background-position: -72px -48px;
+}
+.icon-print {
+  background-position: -96px -48px;
+}
+.icon-camera {
+  background-position: -120px -48px;
+}
+.icon-font {
+  background-position: -144px -48px;
+}
+.icon-bold {
+  background-position: -167px -48px;
+}
+.icon-italic {
+  background-position: -192px -48px;
+}
+.icon-text-height {
+  background-position: -216px -48px;
+}
+.icon-text-width {
+  background-position: -240px -48px;
+}
+.icon-align-left {
+  background-position: -264px -48px;
+}
+.icon-align-center {
+  background-position: -288px -48px;
+}
+.icon-align-right {
+  background-position: -312px -48px;
+}
+.icon-align-justify {
+  background-position: -336px -48px;
+}
+.icon-list {
+  background-position: -360px -48px;
+}
+.icon-indent-left {
+  background-position: -384px -48px;
+}
+.icon-indent-right {
+  background-position: -408px -48px;
+}
+.icon-facetime-video {
+  background-position: -432px -48px;
+}
+.icon-picture {
+  background-position: -456px -48px;
+}
+.icon-pencil {
+  background-position: 0 -72px;
+}
+.icon-map-marker {
+  background-position: -24px -72px;
+}
+.icon-adjust {
+  background-position: -48px -72px;
+}
+.icon-tint {
+  background-position: -72px -72px;
+}
+.icon-edit {
+  background-position: -96px -72px;
+}
+.icon-share {
+  background-position: -120px -72px;
+}
+.icon-check {
+  background-position: -144px -72px;
+}
+.icon-move {
+  background-position: -168px -72px;
+}
+.icon-step-backward {
+  background-position: -192px -72px;
+}
+.icon-fast-backward {
+  background-position: -216px -72px;
+}
+.icon-backward {
+  background-position: -240px -72px;
+}
+.icon-play {
+  background-position: -264px -72px;
+}
+.icon-pause {
+  background-position: -288px -72px;
+}
+.icon-stop {
+  background-position: -312px -72px;
+}
+.icon-forward {
+  background-position: -336px -72px;
+}
+.icon-fast-forward {
+  background-position: -360px -72px;
+}
+.icon-step-forward {
+  background-position: -384px -72px;
+}
+.icon-eject {
+  background-position: -408px -72px;
+}
+.icon-chevron-left {
+  background-position: -432px -72px;
+}
+.icon-chevron-right {
+  background-position: -456px -72px;
+}
+.icon-plus-sign {
+  background-position: 0 -96px;
+}
+.icon-minus-sign {
+  background-position: -24px -96px;
+}
+.icon-remove-sign {
+  background-position: -48px -96px;
+}
+.icon-ok-sign {
+  background-position: -72px -96px;
+}
+.icon-question-sign {
+  background-position: -96px -96px;
+}
+.icon-info-sign {
+  background-position: -120px -96px;
+}
+.icon-screenshot {
+  background-position: -144px -96px;
+}
+.icon-remove-circle {
+  background-position: -168px -96px;
+}
+.icon-ok-circle {
+  background-position: -192px -96px;
+}
+.icon-ban-circle {
+  background-position: -216px -96px;
+}
+.icon-arrow-left {
+  background-position: -240px -96px;
+}
+.icon-arrow-right {
+  background-position: -264px -96px;
+}
+.icon-arrow-up {
+  background-position: -289px -96px;
+}
+.icon-arrow-down {
+  background-position: -312px -96px;
+}
+.icon-share-alt {
+  background-position: -336px -96px;
+}
+.icon-resize-full {
+  background-position: -360px -96px;
+}
+.icon-resize-small {
+  background-position: -384px -96px;
+}
+.icon-plus {
+  background-position: -408px -96px;
+}
+.icon-minus {
+  background-position: -433px -96px;
+}
+.icon-asterisk {
+  background-position: -456px -96px;
+}
+.icon-exclamation-sign {
+  background-position: 0 -120px;
+}
+.icon-gift {
+  background-position: -24px -120px;
+}
+.icon-leaf {
+  background-position: -48px -120px;
+}
+.icon-fire {
+  background-position: -72px -120px;
+}
+.icon-eye-open {
+  background-position: -96px -120px;
+}
+.icon-eye-close {
+  background-position: -120px -120px;
+}
+.icon-warning-sign {
+  background-position: -144px -120px;
+}
+.icon-plane {
+  background-position: -168px -120px;
+}
+.icon-calendar {
+  background-position: -192px -120px;
+}
+.icon-random {
+  background-position: -216px -120px;
+  width: 16px;
+}
+.icon-comment {
+  background-position: -240px -120px;
+}
+.icon-magnet {
+  background-position: -264px -120px;
+}
+.icon-chevron-up {
+  background-position: -288px -120px;
+}
+.icon-chevron-down {
+  background-position: -313px -119px;
+}
+.icon-retweet {
+  background-position: -336px -120px;
+}
+.icon-shopping-cart {
+  background-position: -360px -120px;
+}
+.icon-folder-close {
+  background-position: -384px -120px;
+}
+.icon-folder-open {
+  background-position: -408px -120px;
+  width: 16px;
+}
+.icon-resize-vertical {
+  background-position: -432px -119px;
+}
+.icon-resize-horizontal {
+  background-position: -456px -118px;
+}
+.icon-hdd {
+  background-position: 0 -144px;
+}
+.icon-bullhorn {
+  background-position: -24px -144px;
+}
+.icon-bell {
+  background-position: -48px -144px;
+}
+.icon-certificate {
+  background-position: -72px -144px;
+}
+.icon-thumbs-up {
+  background-position: -96px -144px;
+}
+.icon-thumbs-down {
+  background-position: -120px -144px;
+}
+.icon-hand-right {
+  background-position: -144px -144px;
+}
+.icon-hand-left {
+  background-position: -168px -144px;
+}
+.icon-hand-up {
+  background-position: -192px -144px;
+}
+.icon-hand-down {
+  background-position: -216px -144px;
+}
+.icon-circle-arrow-right {
+  background-position: -240px -144px;
+}
+.icon-circle-arrow-left {
+  background-position: -264px -144px;
+}
+.icon-circle-arrow-up {
+  background-position: -288px -144px;
+}
+.icon-circle-arrow-down {
+  background-position: -312px -144px;
+}
+.icon-globe {
+  background-position: -336px -144px;
+}
+.icon-wrench {
+  background-position: -360px -144px;
+}
+.icon-tasks {
+  background-position: -384px -144px;
+}
+.icon-filter {
+  background-position: -408px -144px;
+}
+.icon-briefcase {
+  background-position: -432px -144px;
+}
+.icon-fullscreen {
+  background-position: -456px -144px;
+}
+/*** Additional color options for glyphicons ***/
+.icon-blue {
+  background-image: url('images/glyphicons-halflings-blue.png');
+}
+.icon-blue-hover, a:hover i.icon-blue {
+  background-image: url('images/glyphicons-halflings-blue-hover.png');
+}
+.icon-gray {
+  background-image: url('images/glyphicons-halflings-gray.png');
+}
+.icon-green {
+  background-image: url('images/glyphicons-halflings-green.png');
+}
+.icon-red, .hover-icon-red:hover i {
+  background-image: url('images/glyphicons-halflings-red.png');
+}
+.hover-icon-red {
+  text-align: center;
+  cursor: pointer
+}

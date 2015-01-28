@@ -1,0 +1,7 @@
+iSanté:     https://$ipaddr
+phpmyadmin: https://$ipaddr/phpmyadmin
+SSH/SFTP:   itech@$ipaddr (port 22)
+
+ALT+F1 -> login
+ALT+F8 -> confconsole
+

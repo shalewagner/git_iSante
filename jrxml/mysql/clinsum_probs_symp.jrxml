@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_probs_symp"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="540"
+		 pageHeight="13"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="isPediatric" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select 1; 
+</queryString>
+
+	<field name="Symptom" class="java.lang.String"/>
+	<field name="Value" class="java.lang.String"/>
+	<field name="Txt" class="java.lang.String"/>
+	<field name="Dd" class="java.lang.String"/>
+	<field name="Mm" class="java.lang.String"/>
+	<field name="Yy" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="108"
+						y="0"
+						width="432"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "abPain".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Abdominal Pain" : "Douleur abdominale" ) :
+( "anorexia".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Anorexia/Loss of appetite" : "Anorexie/Perte d'appétit" ) :
+( "asymptomaticWho".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "WHO Stage I: Asymptomatic" : "OMS Stade I: Asymptomatique" ) :
+( "chronicWeakness".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "WHO Stage I: Fatigue" : "OMS Stade I: Fatigue chronique" ) :
+( "cough".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? ( "1".equals($P{isPediatric}) ? "Cough, persistent: " + ( $F{Txt} != null && !"".equals($F{Txt}) ? $F{Txt} : "[not specified]" ) : "Cough, non-productive" ) : ( "1".equals($P{isPediatric}) ? "Toux, persistante: " + ( $F{Txt} != null && !"".equals($F{Txt}) ? $F{Txt} : "[pas spécifié]" ) : "Toux" ) ) :
+( "cough3WeeksEqualMore".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Cough >= 3 weeks" : "Toux >= 3 semaines" ) :
+( "cough3WeeksLess".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Cough < 3 weeks" : "Toux < 3 semaines" ) :
+( "diarrheaLessMo".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "WHO Stage II: Diarrhea < 1 month" : "OMS Stade II: Diarrhée < 1 mois" ) :
+( "diarrheaPlusMo".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Diarrhea > 1 month unexplained" : "Diarrhée > 1 mois sans cause identifiée" ) :
+( "dyspnea".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Dyspnea" : "Dyspnée" ) :
+( "expectoration".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Cough, productive" : "Toux/Expectoration (sauf hémoptysie)" ) :
+( "feverLessMo".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Fever < 1 month" : "Fièvre < 1 mois" ) :
+( "feverPlusMo".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Fever > 1 month unexplained" : "Fièvre > 1 mois sans cause identifiée" ) :
+( "headache".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Headache" : "Céphalée" ) :
+( "hemoptysie".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Hemoptysis" : "Hémoptysie" ) :
+( "lymphadenopathies".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "WHO Stage I: Lymphadenopathies" : "OMS Stade I: Lymphadenopathies" ) :
+( "nausea".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Nausea" : "Nausée" ) :
+( "nightSweats".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Night sweats" : "Sueurs nocturnes" ) :
+( "numbness".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Numbness/tingling" : "Perte de sensibilité" ) :
+( "odynophagia".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Odynophagia/dysphagia" : "Odynophagie/dysphagie" ) :
+( "pedSympAsthenia".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Asthenia" : "Asthénie" ) :
+( "pedSympDiarrhea".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Diarrhea < 14 days" : "Diarrhée < 14 jours" ) :
+( "pedSympEarache".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Earache / Otorrhea" : "Otalgie / Otorrhée" ) :
+( "pedSympInsuffWt".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Weight, insufficient gain" : "Poids, insuffisance de gain" ) :
+( "pedSympIrritability".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Irritability" : "Irritabilité" ) :
+( "pedSympLethargy".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Lethargy" : "Malaise" ) :
+( "pedSympMuscPain".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Muscle / joint pain" : "Douleurs musculaires" ) :
+( "pedSympPrurigo".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Prurigo" : "Prurigo" ) :
+( "pedSympRegurg".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Regurgitaion" : "Régurgitations" ) :
+( "pedSympSeizure".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Convulsions / seizure" : "Convulsions" ) :
+( "pedSympVision".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Vision problems" : "Problèmes de vision" ) :
+( "pedSympWhoDiarrhea".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "WHO Stage II: Diarrhea > 14 days" : "OMS Stade II: Diarrhée > 14 jours" ) :
+( "pedSympWhoWtLoss2".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "WHO Stage III: Weight loss up to 2 standard deviations" : "OMS Stade III: Perte de poids jusqu'à 2 écarts types (ET)" ) :
+( "pedSympWhoWtLoss3".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "WHO Stage IV: Weight loss up to 3 standard deviations" : "OMS Stade IV: Perte de poids jusqu'à 3 écarts types (ET)" ) :
+( "pedSympWtLoss".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Weight, loss up to 1 standard deviation" : "Poids, perte jusqu'à 1 écart type (ET)" ) :
+( "prurigo".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Prurigo" : "Prurigo" ) :
+( "sympOther".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Other: " + ( $F{Txt} != null && !"".equals($F{Txt}) ? $F{Txt} : "[not specified]" ) : "Autres: " + ( $F{Txt} != null && !"".equals($F{Txt}) ? $F{Txt} : "[pas spécifié]" ) ) :
+( "sympRash".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? ( "1".equals($P{isPediatric}) ? "Rash: " + ( $F{Txt} != null && !"".equals($F{Txt}) ? $F{Txt} : "[not specified]" ) : "Rash" ) : ( "1".equals($P{isPediatric}) ? "Eruption cutanée: " + ( $F{Txt} != null && !"".equals($F{Txt}) ? $F{Txt} : "[pas spécifié]" ) : "Eruption cutanée" ) ) :
+( "vomiting".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "Vomiting" : "Vomissement" ) :
+( "weightLossLessTenPercMo".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "WHO Stage II: Weight loss < 10%" : "OMS Stade II: Perte de poids < 10%" ) :
+( "weightLossPlusTenPercMo".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "WHO Stage III: Weight loss > 10%" : "OMS Stade III: Perte de poids > 10%" ) :
+( "wtLossTenPercWithDiarrMo".equals($F{Symptom}) ? ( "en".equals($P{lang}) ? "WHO Stage IV: Wasting syndrome" : "OMS Stade IV: Syndrome cachetique" ) :
+"" ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="60"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-7"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{Dd}.trim().length() == 1 ? "0" + $F{Dd}.trim() : $F{Dd}.trim() ) + "/" +
+( $F{Mm}.trim().length() == 1 ? "0" + $F{Mm}.trim() : $F{Mm}.trim() ) + "/" +
+( $F{Yy}.trim().length() == 1 ? "0" + $F{Yy}.trim() : $F{Yy}.trim() )]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

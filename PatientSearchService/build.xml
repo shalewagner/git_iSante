@@ -1,0 +1,84 @@
+<project name="PatientSearchService" default="package" basedir=".">
+
+  <property name="app.name" value="PatientSearchService"/>
+  <property name="target" value="1.5"/>
+  <property name="source" value="1.5"/>
+
+  <echo message="${basedir}"/>
+
+  <path id="classpath">
+    <fileset dir="${basedir}/lib/">
+          <include name="*.jar"/>
+    </fileset>
+        <fileset dir="${basedir}/lib/compile/">
+          <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <target name="init">
+    <tstamp/>
+  </target>
+
+  <target name="clean" description="Deletes the Web Application's war directory and war file"  depends="init">
+    <echo message="Deleting war directory and war file."/>
+    <delete dir="${basedir}/war"/>
+    <delete file="${basedir}/${app.name}.war"/>
+  </target>
+  
+  <target name="prepare" description="Creates the Web Application's war directory" depends="clean">
+    <echo message="Creating war directory ..."/>
+    <mkdir dir="${basedir}/war"/>
+    <mkdir dir="${basedir}/war/META-INF"/>
+    <copy todir="${basedir}/war/META-INF">
+      <fileset dir="${basedir}/src">
+	<include name="context.xml"/>
+      </fileset>
+    </copy>
+    <mkdir dir="${basedir}/war/WEB-INF"/>
+    <mkdir dir="${basedir}/war/WEB-INF/classes"/>
+    <mkdir dir="${basedir}/war/WEB-INF/lib"/>
+    <copy todir="${basedir}/war/WEB-INF/lib">
+      <fileset dir="${basedir}/lib">
+	<include name="*.jar"/>
+      </fileset>
+    </copy>
+
+    <copy todir="${basedir}/war">
+      <fileset dir="${basedir}/web">
+	<include name="**/*.html"/>
+	<include name="**/*.jsp"/>
+	<include name="**/*.txt"/>
+	<include name="**/*.zip"/>
+	<include name="**/*.sit"/>
+	<include name="**/*.gif"/>
+	<include name="**/*.jpg"/>
+	<include name="**/*.png"/>
+	<include name="**/*.js"/>
+        <include name="**/*.css"/>
+        <include name="**/*.xml"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="build" description="Builds the Web Application"  depends="prepare">
+    <echo message="Building ${app.name} ..."/>
+    <javac srcdir="${basedir}/src"
+	   destdir="${basedir}/war/WEB-INF/classes"
+	   classpathref="classpath"
+	   debug="true" source="${source}" target="${target}">
+      <include name="**/*.java"/>
+      <classpath refid="classpath"/>
+      <!-- compilerarg value="-Xlint"/ -->
+    </javac>
+  </target>
+
+  <target name="package" description="Packages the Web Application's web archive file" depends="build">
+    <echo message="Packaging war file ..."/>
+    <delete file="${basedir}/${app.name}.war"/>
+    <jar jarfile="${basedir}/${app.name}.war">
+      <fileset dir="${basedir}/war" includes="**"/>
+    </jar>
+  </target>
+
+</project>
+

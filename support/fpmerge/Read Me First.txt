@@ -1,0 +1,69 @@
+================================================================================
+ENGLISH (see french version below)
+================================================================================
+
+You will set up a task to merge the local fingerprint database with the national consolidated database, retrieve any duplicate fingerprint entries that may exist, and upload that list to the local iSanté server to aid with patient de-duplication.
+
+HOW TO SETUP
+1. Copy the ~/support/fpmerge folder and its contents from ~/support/fpmerge on the local  iSanté server to C:\Program Files\BioPlugin\fpmerge on the local Windows fingerprint server.
+2. Replace the curl.exe file in C:\Program Files\BioPlugin\fpmerge with the appropriate one for your operating system (http://curl.haxx.se/download.html)
+3. Update the "hybrid_datamerger.ini" file to correspond to your local configuration. It contains PORT and IP of the destination national BioPlugin Server and the connect string for your local fingerprint database:
+   - PORT: Port of the destination BioPlugin Server
+   - IP: IP of the destination BioPlugin Server
+   - ConnectStr: ODBC Connection to the source (local) BioPlugin Database
+4. Update the "hybrid_datamerger.cmd" file with your login information for the local iSanté Server (lines 20-22)
+5. Verify the installation:
+   - Execute "hybrid_datamerger.cmd"
+   - Consult the hybrid_datamerger.log to see if the transaction worked or curlErrorFile.htm if it exists to debug
+   - The uploaded DuplicateTemplateFound.log should be found in the iSanteMergers_done folder with the current date
+6.   Set up a scheduled task in Windows that will execute:
+C:\Program Files\BioPlugin\fpmerge\hybrid_datamerger.cmd 
+daily.
+
+IMPORTANT >>> the BioPlugin Server on the national fingerprint server must be running. Otherwise the process will not work.
+
+--- Files in the ~/support/fpmerge folder ---
+- Read Me First.txt: documentation
+- curlSendFile.cmd: secondary executable that uploads a file to the serveur via HTTP with cURL and calls the iSanté local merge process
+- hybrid_datamerger.cmd: main executable file that starts the fingerprint database merge process with hybrid_datamerger.exe and then calls curlSendFile.cmd for every DuplicateTemplateFound.log in the iSanteMergers_todo folder
+- hybrid_datamerger.exe: executable file created by M2Sys that merges the local database with the destination database. It uses the hybrid_datamerger.ini file for its configuration.
+- hybrid_datamerger.ini: configuration file for hybrid_datamerger.exe.
+- hybrid_datamerger.log: log of the previous executions of hybrid_datamerger.cmd
+- dataMerge.txt: file created by the hybrid_datamerger.exe (not used in our process)
+- DuplicateIDFound.txt: file created by the hybrid_datamerger.exe (not used in our process)
+- MergedRecords.txt: file created by the hybrid_datamerger.exe (not used in our process)
+
+================================================================================
+FRANCAIS
+================================================================================
+
+Vous allez configurer une tâche permettant de fusionner la base de données d'empreintes digitales locale avec la base de données nationale consolidée, de récupérer toutes les entrées en double empreintes digitales qui peuvent exister, et de télécharger cette liste sur le serveur local iSanté pour permettre la dédoublonnage des patients.
+
+INSTALLATION
+1. Copiez le dossier ~/support/fpmerge et son contenu de ~/support/fpmerge vers le serveur local iSanté dans C:\Program Files\BioPlugin\fpmerge sur le serveur Windows qui recueille localement les empreintes digitales.
+2. Remplacez le fichier curl.exe dans C: Program Files \BioPlugin\fpmerge avec celui qui est approprié pour votre système d'exploitation (http://curl.haxx.se/download.html)
+3. Mettre à jour le fichier "hybrid_datamerger.ini" pour qu'il corresponde à votre configuration locale. Il contient les informations de PORT et d'adresse IP du serveur national BioPlugin destination et la chaîne de connexion pour votre base de données locale d'empreintes digitales :
+   PORT : le port du serveur de destination BioPlugin
+   IP : IP du serveur de destination BioPlugin
+   ConnectStr : connexion ODBC à la base de données BioPlugin source (locale)
+4. Mettre à jour le fichier "hybrid_datamerger.cmd" avec vos informations de connexion pour le serveur local iSanté (lignes 20-22)
+5. Vérification de l'installation:
+   - Exécuter "hybrid_datamerger.cmd"
+   Consultez le hybrid_datamerger.log pour voir si la transaction a fonctionné ou curlErrorFile.htm si le fichier existe pour déboguer
+   Le fichier DuplicateTemplateFound.log téléchargé doit apparaître dans le dossier iSanteMergers_done avec la date du jour d'exécution
+6.   Mettez en place une tâche planifiée dans Windows qui va exécuter :
+C:\Program Files\BioPlugin\fpmerge\hybrid_datamerger.cmd 
+quotidiennement.
+
+IMPORTANT >>> le serveur BioPlugin sur le serveur national d'empreintes digitales doit être démarré et actif. Sinon, le processus ne fonctionnera pas.
+
+Description des fichiers dans le dossier ~/support/fpmerge :
+Read Me First.txt : documentation
+curlSendFile.cmd : exécutable secondaire qui upload un fichier vers le serveur via le protocole HTTP avec cURL et appelle le processus local de fusion iSanté
+hybrid_datamerger.cmd : exécutable principal qui démarre le processus de fusion de la base de données d'empreintes digitale avec hybrid_datamerger.exe puis appelle curlSendFile.cmd pour chaque DuplicateTemplateFound.log dans le dossier iSanteMergers_todo
+hybrid_datamerger.exe : fichier exécutable créé par M2SYS qui fusionne la base de données locale avec la base de données de destination. Il utilise le fichier hybrid_datamerger.ini pour sa configuration.
+hybrid_datamerger.ini : fichier de configuration pour hybrid_datamerger.exe.
+hybrid_datamerger.log : journal des exécutions précédentes de hybrid_datamerger.cmd
+dataMerge.txt : fichier créé par le hybrid_datamerger.exe (pas utilisé dans notre processus)
+DuplicateIDFound.txt : fichier créé par le hybrid_datamerger.exe (pas utilisé dans notre processus)
+MergedRecords.txt : fichier créé par le hybrid_datamerger.exe (pas utilisé dans notre processus)

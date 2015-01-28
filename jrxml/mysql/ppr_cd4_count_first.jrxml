@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="ppr_cd4_count_first"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="144"
+		 pageHeight="14"
+		 columnWidth="144"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 isIgnorePagination="true">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select distinct v . lowestcd4cnt as cnt , ifnull(nullif(ltrim(v . lowestcd4cntdd) , '') , v . visitdatedd) as dd , ifnull(nullif(ltrim(v . lowestcd4cntmm) , '') , v . visitdatemm) as mm , ifnull(nullif(ltrim(v . lowestcd4cntyy) , '') , v . visitdateyy) as yy from vitals v , encounter e where e . patientid = $P{pid} and e . encstatus &lt; 255 and e . encountertype in (1 , 2) and e . sitecode = v . sitecode and e . patientid = v . patientid and e . visitdatedd = v . visitdatedd and e . visitdatemm = v . visitdatemm and e . visitdateyy = v . visitdateyy and e . seqnum = v . seqnum and v . lowestcd4cnt is not NULL and ltrim(v . lowestcd4cnt) != '' and v . visitdatedd is not NULL and ltrim(v . visitdatedd) != '' and v . visitdatemm is not NULL and ltrim(v . visitdatemm) != '' and v . visitdateyy is not NULL and ltrim(v . visitdateyy) != '' union all select distinct l . result as cnt , ifnull(nullif(ltrim(l . resultDateDd) , '') , l . visitdatedd) as dd , ifnull(nullif(ltrim(l . resultDateMm) , '') , l . visitdatemm) as mm , ifnull(nullif(ltrim(l . resultDateYy) , '') , l . visitdateyy) as yy from labs l , encounter e where e . patientid = $P{pid} and l . labID in (102 , 176) and e . encstatus &lt; 255 and e . encountertype = '6' and e . sitecode = l . sitecode and e . patientid = l . patientid and e . visitdatedd = l . visitdatedd and e . visitdatemm = l . visitdatemm and e . visitdateyy = l . visitdateyy and e . seqnum = l . seqnum and l . result is not NULL and l . result != '' and l . visitdatedd is not NULL and ltrim(l . visitdatedd) != '' and l . visitdatemm is not NULL and ltrim(l . visitdatemm) != '' and l . visitdateyy is not NULL and ltrim(l . visitdateyy) != '' order by yy asc , mm asc , dd asc; 
+</queryString>
+
+	<field name="mm" class="java.lang.String"/>
+	<field name="dd" class="java.lang.String"/>
+	<field name="yy" class="java.lang.String"/>
+	<field name="cnt" class="java.lang.String"/>
+
+	<variable name="firstCd4Count" class="java.lang.Integer" resetType="Report" calculation="Count">
+		<variableExpression><![CDATA[$F{cnt}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="59"
+						height="13"
+						key="textField-3"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $V{firstCd4Count}.intValue() < 2 ? $F{dd}+"/"+$F{mm}+"/"+$F{yy} : "" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="71"
+						y="0"
+						width="28"
+						height="13"
+						key="textField-4"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $V{firstCd4Count}.intValue() < 2 ?
+  ( $F{cnt}.matches ("[\\d\\.,/-]+") ?
+    ( $F{cnt}.length () > 4 ? $F{cnt}.substring (0, 4) : $F{cnt} )
+    : "NaN" )
+  : " " )]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

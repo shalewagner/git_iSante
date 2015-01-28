@@ -1,0 +1,18 @@
+Source: isante
+Section: web
+Priority: extra
+Maintainer: Eric Webster <ew@uw.edu>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.7.2
+
+Package: isante
+Architecture: any
+Depends: apache2-mpm-prefork, expect, libapache2-mod-php5, php5-curl, php5-ldap, php5-mcrypt, php5-mhash, php5-mysql, mysql-server, libio-zlib-perl, libcommons-configuration-java, libcommons-lang-java, libcommons-collections3-java, libmysql-java, libcommons-logging-java, libdom4j-java, libservlet2.4-java, libcommons-digester-java, libcommons-beanutils-java, libjcommon-java, libjaxen-java, libjaxme-java, libitext-java, pwgen
+Description: iSante application
+ iSante application
+
+Package: isante-live-config
+Architecture: all
+Depends: isante
+Description: iSante Live Configuration 
+ This package contains scripts that configure iSante after a live-build system boots for the first time.

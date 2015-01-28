@@ -1,0 +1,9 @@
+
+/var/log/itech/ten-minute.log
+/var/log/itech/patient-status.log
+{
+  compress
+  delaycompress
+  missingok
+  notifempty
+}

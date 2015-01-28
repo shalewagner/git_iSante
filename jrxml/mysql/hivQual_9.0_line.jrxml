@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="hivQual_9.0_line"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="1189"
+		 pageHeight="39"
+		 columnWidth="1189"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="BlueText"
+		isDefault="false"
+		forecolor="#0033FF"
+		fontName="Arial"
+	/>
+
+	<parameter name="siteList" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="startDate" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="endDate" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="user" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="jasperRenderer" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="reportDir" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select distinct l . department , l . clinic , i . siteCode , i . startDate , i . endDate , i . cases from clinicLookup l , hivQual i where l . siteCode = i . siteCode and i . siteCode in ($P!{siteList}) and i . startDate = '$P!{startDate}' and i . endDate = '$P!{endDate}' order by l . department , i . siteCode; 
+</queryString>
+
+	<field name="siteCode" class="java.lang.String"/>
+	<field name="department" class="java.lang.String"/>
+	<field name="clinic" class="java.lang.String"/>
+	<field name="startDate" class="java.lang.String"/>
+	<field name="endDate" class="java.lang.String"/>
+	<field name="cases" class="java.lang.String"/>
+
+	<variable name="cases_total" class="java.lang.Integer" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[Integer.valueOf($F{cases})]]></variableExpression>
+	</variable>
+	<variable name="startDate" class="java.lang.String" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[$F{startDate}]]></variableExpression>
+	</variable>
+	<variable name="endDate" class="java.lang.String" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[$F{endDate}]]></variableExpression>
+	</variable>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="39"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="0"
+						y="0"
+						width="48"
+						height="39"
+						key="textField-1"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isUnderline="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{department}]]></textFieldExpression>
+						<anchorNameExpression><![CDATA[$F{department}]]></anchorNameExpression>
+						<hyperlinkReferenceExpression><![CDATA[$P{jasperRenderer} + "?report=212&lang=" + $P{lang} + "&format=html&user=" + $P{user} +
+"&siteName=" + $F{siteCode}.trim() + "&site=" + $F{siteCode}.trim()]]></hyperlinkReferenceExpression>
+						<hyperlinkTooltipExpression><![CDATA[( "en".equals($P{lang}) ? "Click for department graph" : "Cliquer pour histogramme du département" )]]></hyperlinkTooltipExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="48"
+						y="0"
+						width="155"
+						height="39"
+						key="textField-63"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isUnderline="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{clinic}]]></textFieldExpression>
+						<anchorNameExpression><![CDATA[$F{siteCode}]]></anchorNameExpression>
+						<hyperlinkReferenceExpression><![CDATA[$P{jasperRenderer} + "?report=210&lang=" + $P{lang} + "&format=html&user=" + $P{user} +
+"&siteName=" + $F{siteCode}.trim() + "&site=" + $F{siteCode}.trim()]]></hyperlinkReferenceExpression>
+						<hyperlinkTooltipExpression><![CDATA[( "en".equals($P{lang}) ? "Click for clinic graph" : "Cliquer pour histogramme de la clinique" )]]></hyperlinkTooltipExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="203"
+						y="0"
+						width="48"
+						height="39"
+						key="textField-64"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{cases}]]></textFieldExpression>
+				</textField>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="289"
+						y="0"
+						width="900"
+						height="13"
+						key="subreport-1"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<subreportParameter  name="siteCode">
+						<subreportParameterExpression><![CDATA[$F{siteCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="startDate">
+						<subreportParameterExpression><![CDATA[$P{startDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="endDate">
+						<subreportParameterExpression><![CDATA[$P{endDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="type">
+						<subreportParameterExpression><![CDATA["0 OR i.row_type IS NULL"]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "hivQual_9.0_subline.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="289"
+						y="13"
+						width="900"
+						height="13"
+						key="subreport-2"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<subreportParameter  name="siteCode">
+						<subreportParameterExpression><![CDATA[$F{siteCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="startDate">
+						<subreportParameterExpression><![CDATA[$P{startDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="endDate">
+						<subreportParameterExpression><![CDATA[$P{endDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="type">
+						<subreportParameterExpression><![CDATA["2"]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "hivQual_9.0_subline.jasper")]]></subreportExpression>
+				</subreport>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="251"
+						y="0"
+						width="38"
+						height="13"
+						key="textField-65"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["en".equals ($P{lang}) ?
+"Adult" : "Adulte"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="251"
+						y="13"
+						width="38"
+						height="13"
+						key="textField-66"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["en".equals ($P{lang}) ?
+"Ped." : "Péd."]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Opaque"
+						x="251"
+						y="26"
+						width="38"
+						height="13"
+						backcolor="#DDDDDD"
+						key="textField-67"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["en".equals ($P{lang}) ?
+"Total" : "Total"]]></textFieldExpression>
+				</textField>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="289"
+						y="26"
+						width="900"
+						height="13"
+						key="subreport-3"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<subreportParameter  name="siteCode">
+						<subreportParameterExpression><![CDATA[$F{siteCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="startDate">
+						<subreportParameterExpression><![CDATA[$P{startDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="endDate">
+						<subreportParameterExpression><![CDATA[$P{endDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="type">
+						<subreportParameterExpression><![CDATA["2 OR i.row_type = 0 OR i.row_type IS NULL"]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "hivQual_9.0_totline.jasper")]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

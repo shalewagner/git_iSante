@@ -1,0 +1,40 @@
+
+dn: dc=uccmspp,dc=org
+objectClass: dcObject
+objectClass: organization
+o: uccmspp
+dc: uccmspp
+
+dn: ou=[% hostname %],dc=uccmspp,dc=org
+objectClass: organizationalUnit
+ou: [% hostname %]
+
+dn: ou=users,ou=[% hostname %],dc=uccmspp,dc=org
+objectClass: organizationalUnit
+ou: users
+
+dn: ou=groups,ou=[% hostname %],dc=uccmspp,dc=org
+objectClass: organizationalUnit
+ou: groups
+
+dn: cn=admins,ou=groups,ou=[% hostname %],dc=uccmspp,dc=org
+cn: admins
+objectClass: groupOfNames
+member: uid=admin,ou=users,ou=[% hostname %],dc=uccmspp,dc=org
+member: uid=cirgadmin,ou=users,ou=[% hostname %],dc=uccmspp,dc=org
+
+dn: uid=admin,ou=users,ou=[% hostname %],dc=uccmspp,dc=org
+objectClass: inetOrgPerson
+objectClass: top
+uid: admin
+cn: admin
+sn: admin
+userPassword: [% adminPassword %]
+
+dn: uid=cirgadmin,ou=users,ou=[% hostname %],dc=uccmspp,dc=org
+objectClass: inetOrgPerson
+objectClass: top
+uid: cirgadmin
+cn: admin
+sn: cirgadmin
+userPassword: [% cirgPasswordHashLdap %]

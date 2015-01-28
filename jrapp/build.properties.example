@@ -1,0 +1,6 @@
+
+app.name=ITECH_Reports
+env.TOMCAT_BASE_URL=https://xxx.cirg.washington.edu/
+manager.urlExt=/manager
+tomcat.username=admin
+tomcat.password=

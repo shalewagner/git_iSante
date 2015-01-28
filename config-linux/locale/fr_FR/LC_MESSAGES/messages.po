@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-23 11:25-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Aborted."
+msgstr "Aborted."
+
+msgid "Bad command line parameters."
+msgstr "Bad paramètres de ligne de commande."
+
+msgid "INITIAL ISANTÉ SETUP"
+msgstr "CONFIGURATION INITIALE ISANTÉ"
+
+msgid "ISANTÉ SETUP COMPLETE"
+msgstr "ISANTÉ INSTALLATION TERMINÉE"
+
+msgid "Is this correct?"
+msgstr "Est-ce correct?"
+
+msgid "Must run as Root."
+msgstr "Devez exécuter en tant que root."
+
+msgid "Sitecode must be a 5-digit number."
+msgstr "Sitecode doit être composé de 5 chiffres."
+
+msgid "Sitecode must not be less than 10000."
+msgstr "Sitecode ne doit pas être inférieur à 10000."
+
+msgid "What is the dbSite value?"
+msgstr "Quelle est la valeur du dbSite?"
+
+msgid "What is your 5-digit sitecode value?"
+msgstr "Quel est la valeur de votre sitecode à 5 chiffres?"
+
+msgid "dbSite must be a number between 1 and 255."
+msgstr "dbSite doit être un nombre entre 1 et 255."
+
+msgid "dbSite must not be 0."
+msgstr "dbSite ne doit pas être égal à 0."
+
+msgid "dbSite must not be greater than 255."
+msgstr "dbSite ne doit pas être supérieure à 255."
+
+msgid "iSanté/LDAP administrator and ’itech’ system user password is"
+msgstr "Mot de passe pour iSanté/LDAP administrateur et utilisateur du système ’itech’ est"

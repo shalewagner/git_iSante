@@ -1,0 +1,22 @@
+info	NAME	en	iSanté Patient Statistics V2	N/A
+info	NAME	fr	Statistiques patients iSanté V2	N/A
+info	DESCRIPTION	en	Statistics about patients from the iSanté Haiti database from pentaho pipeline	N/A
+info	DESCRIPTION	fr	Statistiques sur les patients inclus dans la base de données d'iSanté pour Haiti from pentaho pipeline	N/A
+info	URL	en	http://code.google.com/p/isante/	N/A
+info	URL	fr	http://code.google.com/p/isante/	N/A
+provider	NAME	en	iSanté	N/A
+provider	NAME	fr	iSanté	N/A
+provider	URL	en	http://code.google.com/p/isante/	N/A
+provider	URL	fr	http://code.google.com/p/isante/	N/A
+concept	clinic	en	Clinics	List of clinics followed by the program.
+concept	clinic	fr	Cliniques	Liste des cliniques suivies par le programme.
+concept	department	en	Department	List of clinics followed by the program.
+concept	department	fr	Département	Liste des cliniques suivies par le programme.
+concept	sex	en	Gender	Gender, Male or Female
+concept	sex	fr	Sexe	Sexe, Homme ou Femme
+concept	patientStatus	en	Status	Status of the patient in iSanté
+concept	patientStatus	fr	Statut	Statut du patient dans iSanté
+concept	pregnant	en	Pregnancy	Pregnant patients
+concept	pregnant	fr	Grossesse	Patientes enceintes
+concept	population	en	Number of patients	Total number of patients for the selected dimensions
+concept	population	fr	Nombre de patients	Nombre total de patients répondant aux critères sélectionnés

@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="healthQual_12.3_subline"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="1050"
+		 pageHeight="13"
+		 columnWidth="1050"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="BlueText"
+		isDefault="false"
+		forecolor="#0033FF"
+		fontName="Arial"
+	/>
+
+	<parameter name="siteCode" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="startDate" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="endDate" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="type" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="ind1_num_m" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind1_num_f" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind1_num_total" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind1_den_m" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind1_den_f" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind1_den_total" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind1_ratio_m" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind1_ratio_f" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind1_ratio_total" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind2_num_m" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind2_num_f" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind2_num_total" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind2_den_m" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind2_den_f" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind2_den_total" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind2_ratio_m" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind2_ratio_f" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind2_ratio_total" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind3_num_m" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind3_num_f" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind3_num_total" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind3_den_m" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind3_den_f" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind3_den_total" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind3_ratio_m" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind3_ratio_f" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind3_ratio_total" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind1_actual" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind2_actual" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="ind3_actual" isForPrompting="false" class="java.lang.String"/>
+	<queryString><![CDATA[select casesM,
+casesF,
+$P!{ind1_num_m} as 'ind1_num_m',
+$P!{ind1_num_f} as 'ind1_num_f',
+$P!{ind1_num_total} as 'ind1_num_total',
+$P!{ind1_den_m} as 'ind1_den_m',
+$P!{ind1_den_f} as 'ind1_den_f',
+$P!{ind1_den_total} as 'ind1_den_total',
+$P!{ind1_ratio_m} as 'ind1_ratio_m',
+$P!{ind1_ratio_f} as 'ind1_ratio_f',
+$P!{ind1_ratio_total} as 'ind1_ratio_total',
+$P!{ind2_num_m} as 'ind2_num_m',
+$P!{ind2_num_f} as 'ind2_num_f',
+$P!{ind2_num_total} as 'ind2_num_total',
+$P!{ind2_den_m} as 'ind2_den_m',
+$P!{ind2_den_f} as 'ind2_den_f',
+$P!{ind2_den_total} as 'ind2_den_total',
+$P!{ind2_ratio_m} as 'ind2_ratio_m',
+$P!{ind2_ratio_f} as 'ind2_ratio_f',
+$P!{ind2_ratio_total} as 'ind2_ratio_total',
+$P!{ind3_num_m} as 'ind3_num_m',
+$P!{ind3_num_f} as 'ind3_num_f',
+$P!{ind3_num_total} as 'ind3_num_total',
+$P!{ind3_den_m} as 'ind3_den_m',
+$P!{ind3_den_f} as 'ind3_den_f',
+$P!{ind3_den_total} as 'ind3_den_total',
+$P!{ind3_ratio_m} as 'ind3_ratio_m',
+$P!{ind3_ratio_f} as 'ind3_ratio_f',
+$P!{ind3_ratio_total} as 'ind3_ratio_total'
+from healthQual
+where siteCode = '$P!{siteCode}'
+ and startDate = '$P!{startDate}'
+ and endDate = '$P!{endDate}'
+ and (row_type = $P!{type});]]></queryString>
+
+	<field name="ind1_num_m" class="java.lang.String"/>
+	<field name="ind1_num_f" class="java.lang.String"/>
+	<field name="ind1_num_total" class="java.lang.String"/>
+	<field name="ind1_den_m" class="java.lang.String"/>
+	<field name="ind1_den_f" class="java.lang.String"/>
+	<field name="ind1_den_total" class="java.lang.String"/>
+	<field name="ind1_ratio_m" class="java.lang.String"/>
+	<field name="ind1_ratio_f" class="java.lang.String"/>
+	<field name="ind1_ratio_total" class="java.lang.String"/>
+	<field name="ind2_num_m" class="java.lang.String"/>
+	<field name="ind2_num_f" class="java.lang.String"/>
+	<field name="ind2_num_total" class="java.lang.String"/>
+	<field name="ind2_den_m" class="java.lang.String"/>
+	<field name="ind2_den_f" class="java.lang.String"/>
+	<field name="ind2_den_total" class="java.lang.String"/>
+	<field name="ind2_ratio_m" class="java.lang.String"/>
+	<field name="ind2_ratio_f" class="java.lang.String"/>
+	<field name="ind2_ratio_total" class="java.lang.String"/>
+	<field name="ind3_num_m" class="java.lang.String"/>
+	<field name="ind3_num_f" class="java.lang.String"/>
+	<field name="ind3_num_total" class="java.lang.String"/>
+	<field name="ind3_den_m" class="java.lang.String"/>
+	<field name="ind3_den_f" class="java.lang.String"/>
+	<field name="ind3_den_total" class="java.lang.String"/>
+	<field name="ind3_ratio_m" class="java.lang.String"/>
+	<field name="ind3_ratio_f" class="java.lang.String"/>
+	<field name="ind3_ratio_total" class="java.lang.String"/>
+	<field name="casesM" class="java.lang.String"/>
+	<field name="casesF" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="105"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-65"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isUnderline="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind1_num_m}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="140"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-66"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind1_num_f}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="175"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#0033FF"
+						key="textField-67"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind1_num_total}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["healthQualPatientID.php?index=" + $P{ind1_actual} + "&site=" + $P{siteCode} +
+"&endDate=" + $P{endDate} + "&startDate=" + $P{startDate} + "&lang=" + $P{lang} +
+"&type=num&group=" + ($P{type} == "2" ? "kids" : "adults")]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="210"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-68"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind1_den_m}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="245"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-69"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind1_den_f}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="280"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#0033FF"
+						key="textField-70"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind1_den_total}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["healthQualPatientID.php?index=" + $P{ind1_actual} + "&site=" + $P{siteCode} +
+"&endDate=" + $P{endDate} + "&startDate=" + $P{startDate} + "&lang=" + $P{lang} +
+"&type=den&group=" + ($P{type} == "2" ? "kids" : "adults")]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="315"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-71"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind1_ratio_m}.replace(".0", "")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="350"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-72"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind1_ratio_f}.replace(".0", "")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="385"
+						y="0"
+						width="35"
+						height="13"
+						key="textField-73"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind1_ratio_total}.replace(".0", "")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="420"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-74"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind2_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind2_num_m}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="455"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-75"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind2_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind2_num_f}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="490"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#0033FF"
+						key="textField-76"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind2_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind2_num_total}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["healthQualPatientID.php?index=" + $P{ind2_actual} + "&site=" + $P{siteCode} +
+"&endDate=" + $P{endDate} + "&startDate=" + $P{startDate} + "&lang=" + $P{lang} +
+"&type=num&group=" + ($P{type} == "2" ? "kids" : "adults")]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="525"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-80"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind2_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind2_den_m}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="560"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-81"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind2_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind2_den_f}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="595"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#0033FF"
+						key="textField-82"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind2_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind2_den_total}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["healthQualPatientID.php?index=" + $P{ind2_actual} + "&site=" + $P{siteCode} +
+"&endDate=" + $P{endDate} + "&startDate=" + $P{startDate} + "&lang=" + $P{lang} +
+"&type=den&group=" + ($P{type} == "2" ? "kids" : "adults")]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="630"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-83"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind2_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind2_ratio_m}.replace(".0", "")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="665"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-84"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind2_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind2_ratio_f}.replace(".0", "")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="700"
+						y="0"
+						width="35"
+						height="13"
+						key="textField-85"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind2_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind2_ratio_total}.replace(".0", "")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="735"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-86"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind3_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind3_num_m}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="770"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-87"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind3_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind3_num_f}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="805"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#0033FF"
+						key="textField-88"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind3_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind3_num_total}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["healthQualPatientID.php?index=" + $P{ind3_actual} + "&site=" + $P{siteCode} +
+"&endDate=" + $P{endDate} + "&startDate=" + $P{startDate} + "&lang=" + $P{lang} +
+"&type=num&group=" + ($P{type} == "2" ? "kids" : "adults")]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="945"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-89"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind3_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind3_ratio_m}.replace(".0", "")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="980"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-90"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind3_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind3_ratio_f}.replace(".0", "")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1015"
+						y="0"
+						width="35"
+						height="13"
+						key="textField-91"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind3_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind3_ratio_total}.replace(".0", "")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="840"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-95"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind3_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind3_den_m}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="875"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#000000"
+						key="textField-96"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind3_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind3_den_f}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="910"
+						y="0"
+						width="35"
+						height="13"
+						forecolor="#0033FF"
+						key="textField-97"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( !"null".equals($P{ind3_num_m}) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind3_den_total}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["healthQualPatientID.php?index=" + $P{ind3_actual} + "&site=" + $P{siteCode} +
+"&endDate=" + $P{endDate} + "&startDate=" + $P{startDate} + "&lang=" + $P{lang} +
+"&type=den&group=" + ($P{type} == "2" ? "kids" : "adults")]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="35"
+						height="13"
+						key="textField-98"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{casesM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="35"
+						y="0"
+						width="35"
+						height="13"
+						key="textField-99"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{casesF}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="70"
+						y="0"
+						width="35"
+						height="13"
+						key="textField-100"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[Integer.toString(Integer.parseInt($F{casesM}) + Integer.parseInt($F{casesF}))]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

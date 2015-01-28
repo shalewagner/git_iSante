@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_aller_reac"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="170"
+		 pageHeight="13"
+		 columnWidth="170"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="allergyName" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select a . rash , a . rashF , a . ABC , a . hives , a . SJ , a . anaph , a . allergyOther from allergies a , encounter e where a . allergyName = $P{allergyName} and a . patientID = $P{pid} and e . encStatus &lt; 255 and e . encounterType in (1 , 16 , 17) and isnumeric(a . visitDateDd) = 1 and isnumeric(a . visitDateMm) = 1 and isnumeric(a . visitDateYy) = 1 and isdate(ymdToDate(ltrim(rtrim(a . visitDateYy)) , ltrim(rtrim(a . visitDateMm)) , ltrim(rtrim(a . visitDateDd)))) = 1 and e . siteCode = a . siteCode and e . patientID = a . patientID and e . visitDateDd = a . visitDateDd and e . visitDateMm = a . visitDateMm and e . visitDateYy = a . visitDateYy and e . seqNum = a . seqNum order by ymdToDate(ltrim(rtrim(a . visitDateYy)) , ltrim(rtrim(a . visitDateMm)) , ltrim(rtrim(a . visitDateDd))) desc , e . encounterType desc limit 1; 
+</queryString>
+
+	<field name="rash" class="java.lang.Integer"/>
+	<field name="rashF" class="java.lang.Integer"/>
+	<field name="ABC" class="java.lang.Integer"/>
+	<field name="hives" class="java.lang.Integer"/>
+	<field name="SJ" class="java.lang.Integer"/>
+	<field name="anaph" class="java.lang.Integer"/>
+	<field name="allergyOther" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="29"
+						height="13"
+						key="textField-3"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{rash} != null && $F{rash}.intValue() > 0  ? "X" : " " ) +
+"]"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="113"
+						y="0"
+						width="28"
+						height="13"
+						key="textField-4"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{anaph} != null && $F{anaph}.intValue() > 0  ? "X" : " " ) +
+"]"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="85"
+						y="0"
+						width="28"
+						height="13"
+						key="textField-5"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{SJ} != null && $F{SJ}.intValue() > 0  ? "X" : " " ) +
+"]"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="57"
+						y="0"
+						width="28"
+						height="13"
+						key="textField-6"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{hives} != null && $F{hives}.intValue() > 0  ? "X" : " " ) +
+"]"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="29"
+						y="0"
+						width="28"
+						height="13"
+						key="textField-7"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{rashF} != null && $F{rashF}.intValue() > 0  ? "X" : " " ) +
+"]"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="141"
+						y="0"
+						width="29"
+						height="13"
+						key="textField-8"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{allergyOther} != null && $F{allergyOther}.intValue() > 0  ? "X" : " " ) +
+"]"]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

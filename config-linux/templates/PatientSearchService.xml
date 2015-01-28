@@ -1,0 +1,39 @@
+<Context path="/PatientSearchService" docBase="PatientSearchService" debug="1" reloadable="true" crossContext="true">
+
+<!--
+#################################
+########## !WARNING! ############
+#################################
+#This file is created by setup-isante.pl and will be overwritten during upgrades of iSante.
+-->
+
+  <Logger className="org.apache.catalina.logger.FileLogger" prefix="localhost_PatientSearchService_log." suffix=".txt" timestamp="true"/>
+
+  <Resource name="jdbc/PatientSearchServiceMySql" auth="Container" type="javax.sql.DataSource"
+            maxActive="100" maxIdle="30" maxWait="10000"
+            username="itechapp" password="[% itechappPassword %]" 
+            driverClassName="com.mysql.jdbc.Driver"
+            url="jdbc:mysql://localhost:3306/itech?autoReconnect=true"
+            validationQuery="SELECT 1"/>
+
+  <!-- This parameter must be "MsSql" or "MySql" -->
+  <Parameter name="dbType" value="MySql" override="false"/>
+
+  <!-- URLs for generating clinical summaries (HIV+ or Primary Care), needed on consolidated servers only -->
+  <Parameter name="hivUrl" value="https://[% consolidatedUrl %]/isante/jrReport.php?report=206" override="false"/>
+  <Parameter name="pcUrl" value="https://[% consolidatedUrl %]/isante/primCareSummaryRenderer.php?" override="false"/>
+
+  <!-- Enter the encoding type for the "patient" database table -->
+  <!-- Consult 'http://java.sun.com/j2se/1.4.2/docs/guide/intl/encoding.doc.html' -->
+  <Parameter name="dbEncoding" value="UTF-8" override="false"/>
+                        
+  <Parameter name="svcUsername" value="iSanteSvcUser" override="false"/>
+  <Parameter name="svcPassword" value="cq:qzhuxpVz80oD" override="false"/>
+
+  <Parameter name="mshUsername" value="mshSvcUser" override="false"/>
+  <Parameter name="mshPassword" value="LcuOqD9Wm#lDg2" override="false"/>
+
+  <Parameter name="cirgUsername" value="cirgSvcUser" override="false"/>
+  <Parameter name="cirgPassword" value="cirg01itech10haiti" override="false"/>
+
+</Context>

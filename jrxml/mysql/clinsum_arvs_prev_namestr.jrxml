@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_arvs_prev_namestr"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="234"
+		 pageHeight="13"
+		 columnWidth="234"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="drugID" isForPrompting="true" class="java.lang.Integer"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="isPediatric" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select l . drugLabelen , l . drugLabelfr , l . stdDosageDescription , l . pedDosageLabel from drugLookup l where l . drugID = $P{drugID}; 
+</queryString>
+
+	<field name="drugLabelen" class="java.lang.String"/>
+	<field name="drugLabelfr" class="java.lang.String"/>
+	<field name="stdDosageDescription" class="java.lang.String"/>
+	<field name="pedDosageLabel" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="234"
+						height="13"
+						key="textField-3"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? 
+  ( $F{drugLabelen}.replaceAll(" \\(TMS\\), <i>other indication</i>", "/Other (TMS)").replaceAll(", <i>other indication</i>", "/Other").replaceAll(", <i>MAC prophylaxis indication</i>", "/MAC proph.").replaceAll(" \\(TMS\\), <i>PCP prophylaxis indication</i>", "/PCP proph. (TMS)").indexOf(" (") != -1 ?
+    $F{drugLabelen}.replaceAll(" \\(TMS\\), <i>other indication</i>", "/Other (TMS)").replaceAll(", <i>other indication</i>", "/Other").replaceAll(", <i>MAC prophylaxis indication</i>", "/MAC proph.").replaceAll(" \\(TMS\\), <i>PCP prophylaxis indication</i>", "/PCP proph.").substring(0, $F{drugLabelen}.replaceAll(" \\(TMS\\), <i>other indication</i>", "/Other (TMS)").replaceAll(", <i>other indication</i>", "/Other").replaceAll(", <i>MAC prophylaxis indication</i>", "/MAC proph.").replaceAll(" \\(TMS\\), <i>PCP prophylaxis indication</i>", "/PCP proph. (TMS)").indexOf(" ("))
+  :
+    $F{drugLabelen}.replaceAll(" \\(TMS\\), <i>other indication</i>", "/Other (TMS)").replaceAll(", <i>other indication</i>", "/Other").replaceAll(", <i>MAC prophylaxis indication</i>", "/MAC proph.").replaceAll(" \\(TMS\\), <i>PCP prophylaxis indication</i>", "/PCP proph. (TMS)")
+  )
+:
+  ( $F{drugLabelfr}.replaceAll(" \\(TMS\\), <i>autre indication</i>", "/Autre (TMS)").replaceAll(", <i>autre indication</i>", "/Autre").replaceAll(", <i>indication de la prophylaxie du MAC</i>", "/proph. du MAC").replaceAll(" \\(TMS\\), <i>indication de la prophylaxie du PCP</i>", "/proph. du PCP (TMS)").replaceAll("&#xe9;", "é").indexOf(" (") != -1 ?
+    $F{drugLabelfr}.replaceAll(" \\(TMS\\), <i>autre indication</i>", "/Autre (TMS)").replaceAll(", <i>autre indication</i>", "/Autre").replaceAll(", <i>indication de la prophylaxie du MAC</i>", "/proph. du MAC").replaceAll(" \\(TMS\\), <i>indication de la prophylaxie du PCP</i>", "/proph. du PCP (TMS)").replaceAll("&#xe9;", "é").substring(0, $F{drugLabelfr}.replaceAll(" \\(TMS\\), <i>autre indication</i>", "/Autre (TMS)").replaceAll(", <i>autre indication</i>", "/Autre").replaceAll(", <i>indication de la prophylaxie du MAC</i>", "/proph. du MAC").replaceAll(" \\(TMS\\), <i>indication de la prophylaxie du PCP</i>", "/proph. du PCP (TMS)").replaceAll("&#xe9;", "é").indexOf(" ("))
+  :
+    $F{drugLabelfr}.replaceAll(" \\(TMS\\), <i>autre indication</i>", "/Autre (TMS)").replaceAll(", <i>autre indication</i>", "/Autre").replaceAll(", <i>indication de la prophylaxie du MAC</i>", "/proph. du MAC").replaceAll(" \\(TMS\\), <i>indication de la prophylaxie du PCP</i>", "/proph. du PCP (TMS)").replaceAll("&#xe9;", "é")
+  )
+)]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

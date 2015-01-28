@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_cd4_chart"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="265"
+		 pageHeight="130"
+		 columnWidth="265"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<subDataset name="cd4History" >
+
+		<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+		
+  <queryString>select distinct cd4 , visitdate from cd4Table where patientid = $P{pid} and visitdate between date_add(now() , INTERVAL - 24 month) and now() order by visitdate desc; 
+</queryString>
+
+		<field name="Cd4" class="java.lang.Float"/>
+		<field name="visitdate" class="java.util.Date"/>
+
+	</subDataset>
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String">
+		<defaultValueExpression ><![CDATA["fr"]]></defaultValueExpression>
+	</parameter>
+	
+  <queryString>select 1 as 'true'; 
+</queryString>
+
+	<field name="true" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="130"  isSplitAllowed="true" >
+				<timeSeriesChart>
+					<chart isShowLegend="false"  hyperlinkTarget="Self"  customizerClass="TimeSeriesCustomizer" >
+					<reportElement
+						mode="Transparent"
+						x="0"
+						y="0"
+						width="265"
+						height="130"
+						key="element-1"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+						<chartTitle color="#000000" >
+					<font fontName="Lucida Console" pdfFontName="Courier" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+								<titleExpression><![CDATA[( "en".equals($P{lang}) ? "CD4 History (2 years)" : "Historique de CD4 (2 années)" )]]></titleExpression>
+					</chartTitle>
+					</chart>
+					<timeSeriesDataset>
+						<dataset >
+							<datasetRun subDataset="cd4History">
+								<datasetParameter  name="pid">
+									<datasetParameterExpression><![CDATA[$P{pid}]]></datasetParameterExpression>
+								</datasetParameter>
+								<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+							</datasetRun>
+						</dataset>
+						<timeSeries>
+							<seriesExpression><![CDATA["CD4 History"]]></seriesExpression>
+							<timePeriodExpression><![CDATA[$F{visitdate}]]></timePeriodExpression>
+							<valueExpression><![CDATA[$F{Cd4}]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</timeSeries>
+					</timeSeriesDataset>
+					<timeSeriesPlot >
+						<plot orientation="Horizontal" labelRotation="180.0" >
+							<seriesColor seriesOrder="0" color="#0000FF"/>
+</plot>
+					<timeAxisLabelExpression><![CDATA["Date"]]></timeAxisLabelExpression>
+						<timeAxisFormat>
+							<axisFormat tickLabelMask="MM/yy" >
+								<labelFont>
+					<font fontName="Lucida Console" pdfFontName="Courier" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+								</labelFont>
+								<tickLabelFont>
+					<font fontName="Lucida Console" pdfFontName="Courier" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+								</tickLabelFont>
+							</axisFormat>
+						</timeAxisFormat>
+					<valueAxisLabelExpression><![CDATA["CD4 (/mm³)"]]></valueAxisLabelExpression>
+						<valueAxisFormat>
+							<axisFormat >
+								<labelFont>
+					<font fontName="Lucida Console" pdfFontName="Courier" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+								</labelFont>
+								<tickLabelFont>
+					<font fontName="Lucida Console" pdfFontName="Courier" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+								</tickLabelFont>
+							</axisFormat>
+						</valueAxisFormat>
+					</timeSeriesPlot>
+				</timeSeriesChart>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

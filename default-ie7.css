@@ -1,0 +1,13 @@
+/***
+/*  Styles specific to IE7 (and below). Called in standardHeaderExt.php
+***/
+
+/*** Patient Nav ***/
+
+#head { min-width: 1180px; width: 1180px } /* Fix for line breaks at smaller screen sizes */
+
+#nofpheader-ie {  padding: 0 } /* Fix for spacing in patient header. FIXME: still some extra space to right of fp button in IE7 */
+
+#nofpheader-ie button { padding: 0 .25em }
+
+#centerPanel { padding-top: 4px } /* Adds spacing to top of main center panel so ext tabs have enough space */

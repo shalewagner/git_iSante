@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="hivQual_9.0_defs"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="1189"
+		 pageHeight="520"
+		 columnWidth="1189"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="BlueText"
+		isDefault="false"
+		forecolor="#0033FF"
+		fontName="Arial"
+	/>
+
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="startDate" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select 1 as 'true'; 
+</queryString>
+
+	<field name="true" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="375"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="585"
+						height="375"
+						forecolor="#000000"
+						key="textField-17"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" isStyledText="true">
+						<font fontName="Arial"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[(
+"en".equals ($P{lang}) ?
+ "<B><U>HIVQUAL definitions version 9.0 (02/14/11)</U></B><BR/><BR/>" +
+ "<B>Continuity of Care:</B><BR/> - Numerator: All active patients on ART with at " +
+ "least two visits within 90 days prior to the end of the analysis period.<BR/> - Denominator: All " +
+ "active and inactive patients on ART enrolled in the program > 3 months prior to the " +
+ "end of the period of analysis.<BR/><BR/>" +
+ "<B>HIV Monitoring:</B><BR/> - Numerator: All patients with first visit in the range " +
+ "of 6 months prior to the beginning and the end of period of analysis with at least two " +
+ "CD4 counts since enrollment.<BR/> - Denominator: All patients with first visit in the range of 6 months " +
+ "prior to the beginning and the end of period of analysis.<BR/><BR/>" +
+ "<B>ART Enrollment:</B><BR/> - Numerator: All patients eligible for ART according to " +
+ "WHO criteria who initiated ART in the period of analysis.<BR/> - Denominator: All " +
+ "patients eligible for ART according to WHO criteria with <U>&gt;</U> 1 visit during " +
+ "period of analysis.<BR/><BR/>" +
+ "<B>Cotrimoxazole Prophylaxis:</B><BR/> - Numerator: All HIV-infected and " +
+ "exposed children age 6 wks-12 mos, all HIV-infected children age 1-4 years with WHO " +
+ "stage II, III or IV, all HIV-infected children age 5-14 years and all patients &gt; 14 " +
+ "years who received at least one prescription for Cotrimoxazole in the period of analysis.<BR/> - " +
+ "Denominator: All HIV-infected and exposed children age 6 wks-12 mos, all HIV-infected " +
+ "children age 1-4 years and WHO stage II, III or IV, all HIV-infected children age " +
+ "5-14 years and all patients &gt; 14 years with at least one visit in the period of analysis.<BR/><BR/>" +
+ "<B>Adherence Assessment:</B><BR/> - Numerator: All patients on ART for > 3 months " +
+ "with completed adherence form in the period of analysis.<BR/> - Denominator: All " +
+ "patients on ART for > 3 months with at least one visit in period of analysis.<BR/><BR/>"
+:
+ "<B><U>Définitions HIVQUAL version 9.0 (14/02/11)</U></B><BR/><BR/>" +
+ "<B>Continuité des soins:</B><BR/> - Numérateur: Les patients actifs sous ARV qui " +
+ "ont effectué au moins deux visites dans les 90 jours avant la fin de la période d'analyse.<BR/> - " +
+ "Dénominateur: Les patients actifs et inactifs sous ARV enrôlés dans le programme > 3 " +
+ "mois avant la fin de la période d'analyse.<BR/><BR/>" +
+ "<B>Surveillance immunologique:</B><BR/> - Numérateur: Les patients dont la première " +
+ "visite a été effectuée entre 6 mois avant le début et 6 mois avant la fin de la période " +
+ "d'analyse et dont deux décomptes de CD4 ont été effectués.<BR/> - Dénominateur: Les " +
+ "patients ayant effectué une première visite entre 6 mois avant le début et 6 mois avant " +
+ "la fin de la période d'analyse.<BR/><BR/>" +
+ "<B>Enrôlement ARV:</B><BR/> - Numérateur: L’ensemble des patients éligibles aux ARV " +
+ "selon les critères de l’OMS enrôlés sous ARV durant la période d'analyse.<BR/> - Dénominateur: " +
+ "L’ensemble des patients éligibles aux ARV selon les critères de l’OMS ayant effectué au moins " +
+ "une visite durant la période d'analyse.<BR/><BR/>" +
+ "<B>Prophylaxie à la cotrimoxazole:</B><BR/> - Numérateur: Les enfants " +
+ "exposés et infectés par le VIH âgés entre 6 semaines et 12 mois, les enfants " +
+ "infectés par le VIH âgés entre 1 et 4 ans présentant un stade OMS II, III ou IV, " +
+ "les enfants infectés par le VIH âgés entre 5 et 14 ans et les patients &gt; 14 ans " +
+ "qui ont reçu au moins une prescription de cotrimoxazole durant la période d'analyse.<BR/> - Dénominateur: " +
+ "Les enfants exposés et infectés par le VIH âgés entre 6 semaines et 12 mois, les " +
+ "enfants infectés par le VIH âgés entre 1 et 4 ans présentant un stade OMS II, III " +
+ "ou IV, les enfants infectés âgés entre 5 et 14 ans et les patients &gt; 14 ans ayant " +
+ "effectués au moins une visite durant la période d'analyse.<BR/><BR/>" +
+ "<B>Évaluation d'adhérence:</B><BR/> - Numérateur: Les patients sous ARV depuis &gt; 3 " +
+ "mois dont une fiche d'adhérence a été complétée dans la période d'analyse.<BR/> - " +
+ "Dénominateur: Les patients sous ARV depuis &gt; 3 mois ayant effectué au moins une " +
+ "visite dans la période d'analyse.<BR/><BR/>" 
+)]]></textFieldExpression>
+						<hyperlinkTooltipExpression><![CDATA["Click Me"]]></hyperlinkTooltipExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="595"
+						y="0"
+						width="594"
+						height="375"
+						forecolor="#000000"
+						key="textField-18"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" isStyledText="true">
+						<font fontName="Arial"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[(
+"en".equals ($P{lang}) ?
+ "<B>TB Assessment:</B><BR/> - Numerator: All patients enrolled in the range of 3 days " +
+ "prior to the beginning and the end of period of analysis who've had a PPD test " +
+(
+ new GregorianCalendar(Integer.parseInt($P{startDate}.substring(0, 4)),
+                       Integer.parseInt($P{startDate}.substring(5, 7)),
+                       Integer.parseInt($P{startDate}.substring(8, 10)))
+                       .getTimeInMillis() >= new GregorianCalendar(2010,12,31)
+                                             .getTimeInMillis() ?
+ "or screening for symptoms of cough, fever and weight loss " :
+ ""
+) +
+ "since enrollment.<BR/> - Denominator: All " +
+ "patients enrolled in the range of 3 days prior to the beginning and the end of period " +
+ "of analysis and not receiving TB treatment.<BR/><BR/>" +
+ "<B>Nutritional Assessment:</B><BR/> - Numerator: All patients with data necessary to " +
+ "calculate BMI.<BR/> - Denominator: All patients with at least one visit in the " +
+ "period of analysis.<BR/><BR/>" +
+ "<B>Family Planning:</B><BR/> - Numerator: Number of women between 15 and 49 years " +
+ "old who used a method of family planning during the period of analysis.<BR/> - " +
+ "Denominator: Number of women between 15 and 49 years old with at least one visit in " +
+ "the period of analysis.<BR/><BR/>" +
+ "<B>PMTCT:</B><BR/> - Numerator: All pregnant patients with <U>&gt;</U> 1 visit " +
+ "in period of analysis and not previously on ART and eligible for ART prophylaxis " + 
+ "who've started ART for PMTCT purposes since their eligibility date.<BR/> - " +
+ "Denominator: All pregnant patients with <U>&gt;</U> 1 visit in period of analysis and " +
+ "not previously on ART and eligible for ART prophylaxis.<BR/><BR/>" +
+ "<B>Immunization:</B><BR/> - Numerator: All HIV-exposed and infected children less " +
+ "than 5 years old followed in the clinic in the period of analysis with all recommended " +
+ "vaccinations for age.<BR/> - Denominator: All HIV-exposed and infected children less " +
+ "than 5 years old with at least one visit in period of analysis.<BR/><BR/>"
+:
+ "<B>Évaluation TB:</B><BR/> - Numérateur: L’ensemble des patients enrôlés entre 3 jours " +
+ "avant le début et 3 jours avant la fin de la période d'analyse et qui ont fait le test " +
+ "PPD" +
+(
+ new GregorianCalendar(Integer.parseInt($P{startDate}.substring(0, 4)),
+                       Integer.parseInt($P{startDate}.substring(5, 7)),
+                       Integer.parseInt($P{startDate}.substring(8, 10)))
+                       .getTimeInMillis() >= new GregorianCalendar(2010,12,31)
+                                             .getTimeInMillis() ?
+ " ou le dépistage des symptômes pour toux, fièvre et perte de poids" :
+ ""
+) +
+ ".<BR/> - " +
+ "Dénominateur: Les patients enrôlés entre 3 jours avant le début et 3 jours avant la " +
+ "fin de la période d'analyse et qui ne sont pas sous traitement de TB.<BR/><BR/>" +
+ "<B>Évaluation nutritionnelle:</B><BR/> - Numérateur: Les patients ayant les données " +
+ "nécessaires pour calculer le IMC : Indice de Masse Corporelle.<BR/> - " +
+ "Dénominateur: Les patients qui ont effectué au moins une visite durant la période " +
+ "d'analyse.<BR/><BR/>" +
+ "<B>Planification familiale:</B><BR/> - Numérateur: Nombre de femmes âgées entre 15 et " +
+ "49 ans qui ont utilisé une méthode de planification familiale durant la période " +
+ "d'analyse.<BR/> - Dénominateur: Nombre de femmes âgées entre 15 et 49 ans ayant " +
+ "bénéficié au moins d'une visite durant la période d'analyse.<BR/><BR/>" +
+ "<B>PTME:</B><BR/> - Numérateur: Toutes les gestantes ayant effectué <U>&gt;</U> 1 visite " +
+ "dans la période d'analyse non mise préalablement sous ARV et éligibles pour une " +
+ "prophylaxie ARV qui ont démarré des ARV pour des raisons de PTME depuis leur " +
+ "date d'éligibilité.<BR/> - Dénominateur: Toutes les gestantes <U>&gt;</U> " +
+ "1 visite dans la période d'analyse non mises préalablement sous ARV mais éligibles pour une " +
+ "prophylaxie ARV.<BR/><BR/>" +
+ "<B>Immunisation:</B><BR/> - Numérateur: Les enfants de moins de 5 ans exposés et infectés par le VIH, " +
+ "suivis en clinique durant la période d'analyse qui ont reçu tous les vaccins " +
+ "indiqués en fonction de leur âge.<BR/> - Dénominateur: Les enfants de moins de 5 ans exposés et " +
+ "infectés par le VIH, qui ont effectué au moins 1 visite durant la période d'analyse." +
+ "<BR/><BR/>"
+)]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

@@ -1,0 +1,121 @@
+<div class="row">
+    <div class="col-xs-2">
+        <h5><b>Grouping</b></h5>
+        <p>
+            <h5>Time Level:</h5>
+            <select ng-model="selectedTimeLevel" ng-options="timeLevel.name for timeLevel in timeLevels"></select>
+        </p>
+        <div>
+            <p>
+                <h5>Geography Level:</h5>
+                <select ng-model="selectedGeographyLevel" ng-options="geoLevel.name for geoLevel in geographyLevels"></select>
+            </p>
+            <p>                 
+                <input type="checkbox" ng-model="groupOnAge">  Age <br />
+            </p>
+            <p>
+                <input type="checkbox" ng-model="groupOnGender">  Gender <br />
+            </p>
+        </div>
+        <br />
+        <p>
+            <button ng-click="performAction()">Update Grid</button>
+        </p>
+        <!--
+            TODO: Angular is interfering with the download process. Find a fix
+            <form name="downloadRawForm" method='POST' action="placeholder">
+                <input type='submit' value="Download Raw" />
+                <input type="hidden" name="subjectIdRaw" id="subjectIdRaw" value="placeholder" />
+            </form>
+            <br/>-->
+    </div>
+
+    <div class="col-xs-10">
+        <table ng-table="tableParamsFields" class="table ng-table-responsive">
+            <tr ng-repeat="row in $data">
+                <td data-title="'Time Level'" sortable="'TimeLevel'">
+                    {{row.TimeLevel}}
+                </td>
+                <td data-title="'Geography Level'" sortable="'GeographyLevel'">
+                    {{row.GeographyLevel}}
+                </td>
+                <td data-title="'AgeLevel'" sortable="'AgeLevel'">
+                    {{row.AgeLevel}}
+                </td>
+                <td data-title="'Gender Level'" sortable="'GenderLevel'">
+                    {{row.GenderLevel}}
+                </td>
+                <td data-title="'New Diagnosis of Malaria'" sortable="'malariadxa'">
+                    {{row.malariadxa}}
+                </td>
+                <td data-title="'Existing Diagnosis of Malaria'" sortable="'malariadx'">
+                    {{row.malariadx}}
+                </td>
+                <td data-title="'Is Pregnant'" sortable="'ispregnant'">
+                    {{row.ispregnant}}
+                </td>
+                <td data-title="'Fever LT 2 Weeks'" sortable="'feverless2'">
+                    {{row.feverless2}}
+                </td>
+                <td data-title="'Chloroquine'" sortable="'chloroquine'">
+                    {{row.chloroquine}}
+                </td>
+                <td data-title="'Quinine'" sortable="'quinine'">
+                    {{row.quinine}}
+                </td>
+                <td data-title="'Primaquine'" sortable="'primaquine'">
+                    {{row.primaquine}}
+                </td>
+                <td data-title="'Rapid Result Positive'" sortable="'rapidresultpositive'">
+                    {{row.rapidresultpositive}}
+                </td>
+                <td data-title="'Rapid Result Negative'" sortable="'rapidresultnegative'">
+                    {{row.rapidresultnegative}}
+                </td>
+                <td data-title="'Microscopy Result Positive'" sortable="'smearresultpositive'">
+                    {{row.smearresultpositive}}
+                </td>
+                <td data-title="'Smear Result Negative'" sortable="'smearresultnegative'">
+                    {{row.smearresultnegative}}
+                </td>
+                <td data-title="'FT'" sortable="'ft'">
+                    {{row.ft}}
+                </td>
+                <td data-title="'FG'" sortable="'fg'">
+                    {{row.fg}}
+                </td>
+                <td data-title="'Vx'" sortable="'vx'">
+                    {{row.vx}}
+                </td>
+                <td data-title="'Ov'" sortable="'ov'">
+                    {{row.ov}}
+                </td>
+                <td data-title="'Mai'" sortable="'mai'">
+                    {{row.mai}}
+                </td>
+                <td data-title="'Confirmed Case'" sortable="'confirmedcase'">
+                    {{row.confirmedcase}}
+                </td>
+                <td data-title="'All Treatments'" sortable="'alltreatments'">
+                    {{row.alltreatments}}
+                </td>
+                <td data-title="'Single Treatment'" sortable="'singletreatment'">
+                    {{row.singletreatment}}
+                </td>
+                <td data-title="'Any Treatment'" sortable="'anytreatment'">
+                    {{row.anytreatment}}
+                </td>
+                <td data-title="'Positive Falciparum Test'" sortable="'positivefalciparumtest'">
+                    {{row.positivefalciparumtest}}
+                </td>
+                <td data-title="'Positive Other Parasite Test'" sortable="'positiveotherparasitetest'">
+                    {{row.positiveotherparasitetest}}
+                </td>
+
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+

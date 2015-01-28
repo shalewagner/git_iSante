@@ -1,0 +1,33 @@
+/***** STYLES USED WHEN PRINTING WITHIN ISANTE *****/
+
+/* TODO - change print size to points? Further abstract styles */
+body, table, p, div { font-size: 8px; }
+.table th, .table td { line-height: 1.5em }
+
+.print-show {display: inline} /* Show items in print view that were previously hidden */
+.print-hide { display: none }
+
+.print-break-before { display: block; margin-left:6px }
+
+/* Styles for patient header when printing */
+.print-patient-info td { vertical-align: top }
+.print-patient-info img { margin-right: 10px; height: 30px; width: 108px }
+.print-patient-info h2 {font-size: 1.5em; margin-bottom: 5px; margin-top: 0; padding-top: 0}
+.print-patient-info span { padding-left: 20px }
+.print-patient-info div span:first-child { padding-left: 0px }
+.print-report-title { font-size: 1.5em; font-weight: bold }
+
+#pedGrowthContainer { margin: 1em 0 0 0 }
+.print-chart-title { font-size: 2em; font-weight: bold; line-height: 3em }
+
+/* Print styles for lab results */
+.lab-results {width: 100%; padding: 0}
+.result-sort { padding: 4px 0; color: #333; background: none; border-bottom: 1px solid #333;
+    -webkit-border-radius: 0px; -moz-border-radius: 0px; border-radius: 0px; } /* Remove rounded corners - caused problems printing */
+.lab-section-container { margin-left: 10px }
+.lab-section-container, .lab-section-container tr.results, .lab-section-container h4 { page-break-before: avoid }
+.width-220 { width: 25% }
+.width-150, .width-140 { width: 20% }
+
+table.report-data-table { border-collapse: collapse }
+thead { display: table-header-group }

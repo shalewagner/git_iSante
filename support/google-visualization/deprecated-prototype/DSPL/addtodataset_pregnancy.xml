@@ -1,0 +1,38 @@
+
+	<slice id="pregnancy_slice">
+	  <dimension concept="pregnant"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="pregnancy_slice_table"/>
+	</slice>
+	
+	<slice id="pregnancy_slice">
+	  <dimension concept="pregnant"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="pregnancy_slice_table"/>
+	</slice>
+	
+==============================================================
+==============================================================
+==============================================================
+
+
+	<table id="pregnancy_slice_table">
+	  <column id="pregnant" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">pregnancy_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="pregnancy_slice_table">
+	  <column id="pregnant" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">pregnancy_slice.csv</file>
+	  </data>
+	</table>
+	

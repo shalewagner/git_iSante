@@ -1,0 +1,145 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-04-26 14:57-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Account created"
+msgstr "Compte créé"
+
+msgid "Account deleted"
+msgstr "Compte supprimé"
+
+# TODO: check this
+msgid "Account information"
+msgstr "L'information de compte"
+
+msgid "Account list"
+msgstr "Liste des comptes"
+
+msgid "Are you sure?"
+msgstr "Êtes-vous certain?"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Comments"
+msgstr "Commentaires"
+
+msgid "Confirm"
+msgstr "Valider"
+
+msgid "Create failed"
+msgstr "Créer failli"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "Delete failed"
+msgstr "Échec de la suppression"
+
+msgid "Edit account"
+msgstr "Éditer compte"
+
+msgid "Edit failed"
+msgstr "Echec de l'édition"
+
+msgid "Edit succeeded"
+msgstr "Éditez réussi"
+
+msgid "Email address"
+msgstr "Adresse électronique"
+
+msgid "Email address is required"
+msgstr "L'adresse électronique est requise"
+
+msgid "First name"
+msgstr "Prénom"
+
+msgid "First name is required"
+msgstr "Prénom est requise"
+
+msgid "Full name"
+msgstr "Nom complet"
+
+msgid "Full name is required"
+msgstr "Le nom complet est requise"
+
+msgid "Last name"
+msgstr "Nom de famille"
+
+msgid "Last name is required"
+msgstr "Nom de famille est requise"
+
+msgid "Login"
+msgstr "Connexion"
+
+msgid "Login failed"
+msgstr "Echec de la connexion"
+
+msgid "Logout"
+msgstr "Déconnexion"
+
+msgid "New account"
+msgstr "Nouveau compte"
+
+msgid "Organization is required"
+msgstr "Le nom de compagnie est requise"
+
+msgid "Organization name"
+msgstr "Compagnie"
+
+msgid "Password"
+msgstr "Mot de passe"
+
+msgid "Password fails compexity requirements"
+msgstr "Le mot de passe de satisfait pas les paramètres requis"
+
+msgid "Password is too short"
+msgstr "Mot de passe est trop courte"
+
+msgid "Password must be at least 8 characters long and must contain at least one letter, one number, and one symbol."
+msgstr "Le mot de passe doit comprendre au moins 8 caractères et être composé d'au moins un chiffre, une lettre et un symbole"
+
+msgid "Passwords do not match"
+msgstr "Les mots de passe sont différents"
+
+msgid "Phone number"
+msgstr "Numéro de téléphone"
+
+msgid "Please correct these errors"
+msgstr "Veuillez corriger ces erreurs"
+
+msgid "Required field"
+msgstr "Champs requis"
+
+msgid "Submit"
+msgstr "Confirmer"
+
+# TODO: check this
+msgid "User information"
+msgstr "L'information d'utilisateur"
+
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+msgid "Username contains illegal characters"
+msgstr "Le nom d'utilisateur de satisfait pas les paramètres requis"
+
+msgid "Username exists"
+msgstr "Le nom d'utilisateur existe"
+
+msgid "Username is too short"
+msgstr "Le nom d'utilisateur est trop short"

@@ -1,0 +1,331 @@
+abacavir
+acetaminophen
+acyclovir
+albendazol
+amoxicilline
+amphotericineb
+amprenavir
+amprenavirPlusBostRtv
+aspirin
+atazanavir
+atazanavirPlusBostRtv
+bcomplex
+capravirine
+chloroquine
+ciprofloxacin
+clarithromycin
+clindamycine
+combivir
+cotrimoxazole
+didanosine
+efavirenz
+emtricitabine
+erythromycin
+ethambutol
+fluconazole
+folicacid
+fosamprenavir
+ibuprofen
+indinavir
+indinavirPlusBostRtv
+iron
+isoniazid
+itraconazole
+ivermectine
+ketaconazole
+lamivudine
+loperamide
+lopinavirPlusBostRtv
+metromidazole
+miconazole
+multivitamin
+nelfinavir
+nevirapine
+nystatin
+paracetamol
+promethazine
+proteinsupplement
+pyrazinamide
+pyridoxine
+pyrimthamine
+quinine
+rifampicine
+ritonavir
+saquinavir
+saquinavirPlusBostRtv
+stavudine
+streptomycine
+sulfadiazine
+tenofovir
+tipranavir
+traditional
+trizivir
+tylenol
+vitaminc
+zidovudine
+
+conditiongroup conditioncode conditionnameen
+0	persistLymph	Persistent lymphadenopathy
+1	angChelitis	Angular chelitis
+1	candidVulvo	Candidose, vulvo-vaginal (not chronicle)
+1	candidVulvoLT1	Candidiasis, vulvovaginal Not chronic (<1 month)
+1	hsvMucocUlcer	HSV mucocutaneous ulcer Not chronic (<1 month)
+1	hsvMucocUlcerNoChron	Ulcere recurring oral Ulcerations (not chronicle)
+1	onycho	Onychomycosis
+1	oralUlcers	Oral ulcers recurrent
+1	otherMucoc	Other minor mucocutaneous manifestations
+1	persistChronLymph	Persistent chronicle lymphadenopathy
+1	recurUpperResp	Recurrent upper respiratory Infections
+1	sebDerm	Seborrheic dermatitis
+1	sinusBac	Sinusitis, bacterial
+1	zona	Herpes Zoster
+2	bactPneumo	Bacterial pneumonia
+2	candidOral	Candidiasis, oral (thrush)
+2	candidVulvoGT1	Candidiasis, vulvovaginal Chronic (>1 month)
+2	endocard	Endocarditis, bacterial
+2	mening	Meningitis, bacterial
+2	mtbPulm	M.TB, pulmonary
+2	oralLeuko	Oral hairy leukoplakia
+2	otherInfectBact	Infections bacterial, other (septicaemia included)
+2	pelvicInflam	Pelvic inflammatory disease
+2	pneumo	Pneumonia
+2	pulmTB	Pulmonary Mr. tuberculosis(TB)
+2	pulTB	Pulmonary TB (within past year)
+2	sepsis	Other severe bacterial infection including sepsis
+3	candidEsoph	Candidiasis, esophagitis
+3	candidPulm	Candidiasis visceral including pulmonary, esophageal
+3	cervCanc	Cervical cancer, invasive
+3	cmvOther	CMV visceral (not retinitis, or liver, spleen, nodes)
+3	cmvRet	CMV retinitis
+3	coccidio	Coccidiomycosis (not pulmonary)
+3	crypto	Cryptosporidiosis
+3	cryptococc	Cryptococcosis (not pulmonary)
+3	cryptoMening	Cryptococcal meningitis (not pulmonary)
+3	dementiaHiv	Dementia due to HIV
+3	dementiaHIVRelated	Insanity related to the VIH
+3	histoplasm	Histoplasmosis (not pulmonary)
+3	hsvChron	HSV mucocutaneous ulcer chronic (>1 month)
+3	hsvEsoph	HSV visceral including esophagitis, pneumonitis
+3	isospor	Isosporiasis
+3	kaposiCut	Kaposi's sarcoma, cutaneous
+3	kaposiVisc	Kaposi's sarcoma, visceral
+3	lymphOther	Lymphoma, other than primary CNS
+3	lymphPrim	Lymphoma, primary CNS
+3	mycobacAvium	Other mycobacterium including M. avium complex
+3	mycobacDissem	Mycobacterium dissem, other
+3	otherCancerNot4	Other cancer (Not Stage IV)
+3	otherNot4	Other known cause (Not Stage IV)
+3	pcp	PCP
+3	pml	PML (Progressive multifocal leukoencephalopathy)
+3	retiMVC	Retinite with MVC
+3	salmon	Salmonella sepsis
+3	tbExtrapulm	TB extrapulmonary or disseminated
+3	toxoplasm	Toxoplasmosis, CNS
+3	wasting	Wasting syndrome
+4	analCanc	Rectal cancer
+4	anemia	Anemia
+4	candidose	Candidose
+4	cardiomyo	Cardiomyopathy
+4	cerebrovasc	Cerebrovascular disease (stroke)
+4	coronaryArtery	Coronary artery disease
+4	cvAccidents	C&#xe9;r&#xe9;bro-vasculaires accidents
+4	diarrUnknownCause	Unknown cause
+4	dm	DM
+4	dmType1	Type 1
+4	dmType2	Type 2
+4	extrapulmTB	Mr. tuberculosis(TB) extrapulmonaire or disseminated
+4	hepB	Hepatitis B
+4	hepC	Hepatitis C
+4	hyperlipid	Hyperlipidemia
+4	hypertens	Hypertension
+4	intestIsosp	Intestinal Isosporose 
+4	itp	ITP
+4	kaposi	Sarcome de Kaposi
+4	lesionUnknownCause	Unknown cause
+4	lipodys	Lipodystrophy
+4	lymphHodgkins	Lymphomas, Hodgkins
+4	lymphNonHodgkins	Lymphomas, non-Hodgkins
+4	malaria	Malaria
+4	myelopathyHiv	Myelopathy due to HIV
+4	nephropathyHiv	Nephropathy due to HIV
+4	oesoHSV	Oesophagites HSV
+4	oesoMVC	Oesophagites MVC
+4	oesoUnknownCause	Unknown cause
+4	oesphCandi	Oesphagites which had with candidose 
+4	otherInfec	Other infection, <i>specify in Comments section</i>
+4	otherMycob	Mycobacteriose, other (incl. avium complex)
+4	otherStd	Other STD, <i>specify in Comments section</i>
+4	periphNeuro	Peripheral neuropathy
+4	periphVasc	Peripheral vascular disease
+4	pneumUnknownCause	Unknown cause
+4	salmonNotTyphoid	Salmonella sepsis (not typhoid)
+4	scabies	Scabies
+4	seizure	Seizure
+4	syphilis	Syphilis
+4	viralInfect	Viral infections (incl. HSV, MVC)
+5	alcohol	Alcohol
+5	anxiety	Anxiety
+5	bipolar	Bipolar Affective Disorder
+5	cocaine	Cocaine
+5	coronaropathies	Coronaropathies
+5	cryptos	Cryptosporidiose
+5	depression	Depression
+5	drugOther	Drug other, <i>specify in Comments section</i>
+5	otherCancer	Cancer, Other (Stage IV of WHO excluded) to specify
+5	otherMentalHealth	Other, <i>specify in Comments section</i>
+5	psychosis	Psychosis
+6	anxietyDepression	Anxiety/Depression
+7	otherToxic	Other, <i>specify in Comments section</i>
+
+testnameen  labname
+
+&Eacute;lectrophor&egrave;se de lh&eacute;moglobine	electrophorese
+ALT/SGPT	altSgpt
+ALT/SGPT	altSgpt
+Amylase	amylase
+Amylase	amylase
+AST/SGOT	astSgot
+AST/SGOT	astSgot
+Autre imagerie	otherImages
+Basophils	basophils
+Blood Type	bloodtype
+Blood Type	bloodtype
+Blood Urea	bloodUrea
+CD4	cd4
+CD4	cd4
+CD4/CD8 ratio	
+CD8 cell absolute	
+CD8 percent	
+Chest X-Ray	chestXray
+Chloride	
+Cholesterol HDL (Fasting)	
+Cholesterol HDL (Random)	
+Cholesterol LDL (Fasting)	
+Cholesterol LDL (Random)	
+Cholesterol Total (Fasting)	
+Cholesterol Total (Random)	
+Cl	chlorine
+Cl/Clore	chlorine
+Creatinine	
+Creatinine	creatinine
+Creatinine	creatinine
+Cryptococcal Antigen Blood	
+Cryptococcal Antigen CSF	
+Eosinophil absolute	
+Eospinophils	eospinophils
+ESR	esr
+ESR	esr
+Fasting Glucose	fastingGlucose
+Fasting Glucose	fastingGlucose
+Gamma glutamyl transferase	
+Glucose (Fasting)	
+Glucose (Random)	
+Goutte pendante	gouttePendante
+H&eacute;patite A, pr&eacute;sence de:	hepatitisA
+H&eacute;patite B, pr&eacute;sence de:	hepatitisB
+H&eacute;patite C, pr&eacute;sence de:	hepatitisC
+HCO3	bicarbonate
+HCO3	bicarbonate
+HDL	hdl
+Hematocrit	
+Hematocrit/ Hemoglobin (Hct/Hb)	hematocrit
+Hematocrite (Hct)	hematocrit
+Hemoculture	hemoculture
+Hemoglobin	
+Hemoglobin A1C	
+Hemoglobine (Hb)	hemoglobine
+Hepatitis A Antibody IgM	
+Hepatitis A Antibody Total	
+Hepatitis B core Antibody IgM	
+Hepatitis B core Antibody Total	
+Hepatitis B e Antigen	
+Hepatitis B surface Antibody	
+Hepatitis B surface Antigen	
+Hepatitis B virus DNA	
+Hepatitis C Antibody (ELISA/EIA)	
+Hepatitis C Genotype (1 - 6, with subtypes)	
+Hepatitis C RIBA (HCV WB)	
+Hepatitis C RNA, qualitative	
+Hepatitis C RNA, quantitative	
+HIV p24 Antigen	
+HIV-1 Antibody (EIA)	
+HIV-1 Antibody (WB)	
+HIV-1 DNA PCR Quantitative (Unspecified)	
+HIV-1 RNA Branched DNA version 1.0 Quantitative	
+HIV-1 RNA Branched DNA version 2.0 Quantitative	
+HIV-1 RNA Branched DNA version 3.0 Quantitative	
+HIV-1 RNA Roche Amplicore RT-PCR	
+HIV-1 RNA Roche Ultrasensitive RT-PCR	
+HIV-1 RNA UW RT-PCR	
+HIV-2 Antibody	
+K	potassium
+K/Potassium	potassium
+Lactate	
+Lactate dehydrogenase	
+Large Lymphocyte absolute	
+LDL	ldl
+Lipase	
+Lipase	lipase
+Lymphocyte absolute	
+Lymphocytes	lymphocytes
+Malaria	malaria
+Malaria	malaria
+Mean Corpuscular Volume (MCV)	
+Monocyte absolute	
+Monocytes	monocytes
+Na	sodium
+Na/Sodium	sodium
+Neutrophil absolute	
+Other X-Ray	otherXray
+Pap test	papTest
+Partial Thromboplastin Time (PTT)	
+Platelet count	
+Platelets	platelets
+Platelets	platelets
+Polymorphs	polymorphs
+Polynucleaires Basophiles	polymorphsBasophils
+Polynucleaires Eosonophiles	polymorphsEospinophils
+Polynucleaires Neutrophiles	polymorphsNeutrophils
+Potassium	
+PPD/Mantoux	ppdMantoux
+PPD/Mantoux	ppdMantoux
+Pregnancy test	pregnancy
+Protein Total	
+Prothrombin INR	
+Prothrombin Time (PT)	
+Random Glucose	randomGlucose
+Random Glucose	randomGlucose
+Rapid Plasma Reagin (RPR)	
+Rapid test	rapidHiv
+Red blood cell count (RBC)	
+Reticulocyte	reticulocyte
+Reticulocyte	reticulocyte
+RPR	rpr
+RPR	rpr
+Sickling test	sickling
+Sodium	
+Sputum	sputum
+Sputum	sputum
+Stool	stool
+Test ELISA	elisa
+Total Bilirubin	totalBilirubin
+Total Bilirubin	totalBilirubin
+Total Cholesterol	totalCholesterol
+Total Cholesterol	totalCholesterol
+Toxoplasma Antibody IgG	
+Toxoplasma Antibody IgM	
+Toxoplasmosis titre	toxoplasmosis
+Toxoplasmosis titre	toxoplasmosis
+Triglyceride	triglyceride
+Triglyceride	triglyceride
+Triglycerides (Fasting))	
+Triglycerides (Random)	
+Uric Acid	
+Urine	urine
+Vaginal smear	frottisvaginal
+Venereal Disease Research Laboratory (VDRL)	
+Viral load	viralLoad
+WBC	wbc
+WBC	wbc
+White blood cell count (WBC)	
+

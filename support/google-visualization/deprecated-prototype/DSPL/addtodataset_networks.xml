@@ -1,0 +1,158 @@
+
+	<slice id="networks_slice">
+	  <dimension concept="network"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="networks_slice_table"/>
+	</slice>
+	
+	<slice id="networks_sex_slice">
+	  <dimension concept="network"/>
+	  <dimension concept="sex"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="networks_sex_slice_table"/>
+	</slice>
+	
+	<slice id="networks_hiv_slice">
+	  <dimension concept="network"/>
+	  <dimension concept="hiv"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="networks_hiv_slice_table"/>
+	</slice>
+	
+	<slice id="networks_status_slice">
+	  <dimension concept="network"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="networks_status_slice_table"/>
+	</slice>
+	
+	<slice id="networks_hiv_status_slice">
+	  <dimension concept="network"/>
+	  <dimension concept="hiv"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="networks_hiv_status_slice_table"/>
+	</slice>
+	
+	<slice id="networks_sex_status_slice">
+	  <dimension concept="network"/>
+	  <dimension concept="sex"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="networks_sex_status_slice_table"/>
+	</slice>
+	
+	<slice id="networks_sex_hiv_slice">
+	  <dimension concept="network"/>
+	  <dimension concept="sex"/>
+	  <dimension concept="hiv"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="networks_sex_hiv_slice_table"/>
+	</slice>
+	
+	<slice id="networks_sex_hiv_status_slice">
+	  <dimension concept="network"/>
+	  <dimension concept="sex"/>
+	  <dimension concept="hiv"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="networks_sex_hiv_status_slice_table"/>
+	</slice>
+	
+==============================================================
+==============================================================
+==============================================================
+
+
+	<table id="networks_slice_table">
+	  <column id="network" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">networks_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="networks_sex_slice_table">
+	  <column id="network" type="string"/>
+	  <column id="sex" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">networks_sex_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="networks_hiv_slice_table">
+	  <column id="network" type="string"/>
+	  <column id="hiv" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">networks_hiv_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="networks_status_slice_table">
+	  <column id="network" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">networks_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="networks_hiv_status_slice_table">
+	  <column id="network" type="string"/>
+	  <column id="hiv" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">networks_hiv_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="networks_sex_status_slice_table">
+	  <column id="network" type="string"/>
+	  <column id="sex" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">networks_sex_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="networks_sex_hiv_slice_table">
+	  <column id="network" type="string"/>
+	  <column id="sex" type="string"/>
+	  <column id="hiv" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">networks_sex_hiv_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="networks_sex_hiv_status_slice_table">
+	  <column id="network" type="string"/>
+	  <column id="sex" type="string"/>
+	  <column id="hiv" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">networks_sex_hiv_status_slice.csv</file>
+	  </data>
+	</table>
+	

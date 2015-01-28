@@ -1,0 +1,9 @@
+#################################
+########## !WARNING! ############
+#################################
+#This file is created by setup-isante.pl and will be overwritten during upgrades of iSante.
+
+Defaults	env_reset
+root	ALL=(ALL) NOPASSWD: ALL
+itech	ALL=(ALL) ALL
+%sudo	ALL=(ALL) NOPASSWD: ALL

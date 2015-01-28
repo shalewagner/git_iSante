@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Name>webapi</Name>
+    <ProjectGuid>{01d11721-5a29-4898-9977-995cfa613f25}</ProjectGuid>
+    <RootNamespace>webapi</RootNamespace>
+    <OutputType>Library</OutputType>
+    <ProjectTypeGuids>{A0786B88-2ADB-4C21-ABE8-AA2D79766269}</ProjectTypeGuids>
+    <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+    <Server>PHPDev</Server>
+    <CustomServerUrl>http://localhost:82/</CustomServerUrl>
+    <PublishEvent>None</PublishEvent>
+    <PHPDevAutoPort>False</PHPDevAutoPort>
+    <PHPDevPort>85</PHPDevPort>
+    <PHPDevHostName>localhost</PHPDevHostName>
+    <IISProjectUrl>http://localhost:49934/</IISProjectUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <IncludeDebugInformation>true</IncludeDebugInformation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <IncludeDebugInformation>false</IncludeDebugInformation>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="query.php" />
+    <Compile Include="DataAccess\Repository.php" />
+    <Compile Include="Logic\QueryLogic.php" />
+    <Compile Include="Models\QueryResult.php" />
+    <Compile Include="Tests\QueryLogicTest.php" />
+    <Compile Include="Tests\ParserTest.php" />
+    <Compile Include="Utilities\Http.php" />
+    <Compile Include="Logic\IndicatorLogic.php" />
+    <Compile Include="createuserindicator.php" />
+    <Compile Include="deleteuserindicator.php" />
+    <Compile Include="userindicator.php" />
+    <Compile Include="Logic\AggregatedDataLogic.php" />
+    <Compile Include="Logic\DownloadLogic.php" />
+    <Compile Include="Logic\FieldLogic.php" />
+    <Compile Include="Logic\Helpers.php" />
+    <Compile Include="Logic\LinqMethods.php" />
+    <Compile Include="Logic\EquationFormatter.php" />
+    <Compile Include="Logic\Sorting.php" />
+    <Compile Include="Models\QueryRequest.php" />
+    <Compile Include="Models\DataField.php" />
+    <Compile Include="Models\DataResult.php" />
+    <Compile Include="Models\GridRow.php" />
+    <Compile Include="Models\Indicator.php" />
+    <Compile Include="Models\Malaria.php" />
+    <Compile Include="Models\MalariaRaw.php" />
+    <Compile Include="Tests\AggregatedDataLogicTest.php" />
+    <Compile Include="Tests\DownloadLogicTest.php" />
+    <Compile Include="Tests\FieldLogicTest.php" />
+    <Compile Include="Tests\includes.php" />
+    <Compile Include="Tests\EquationFormatterTest.php" />
+    <Compile Include="Tests\RepositoryTest.php" />
+    <Compile Include="Tests\SortingTest.php" />
+    <Compile Include="aggregateddata.php" />
+    <Compile Include="apitest.php" />
+    <Compile Include="autoload.php" />
+    <Compile Include="downloadaggregated.php" />
+    <Compile Include="downloadraw.php" />
+    <Compile Include="fields.php" />
+    <Compile Include="rawdata.php" />
+    <Compile Include="web.config" />
+    <Compile Include="webapi.sln" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataAccess" />
+    <Folder Include="Export" />
+    <Folder Include="Logic" />
+    <Folder Include="Models" />
+    <Folder Include="Utilities\" />
+    <Folder Include="Tests" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="monthlyInd_main_paginated"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="1069"
+		 pageHeight="612"
+		 columnWidth="1009"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="BlueText"
+		isDefault="false"
+		forecolor="#0033FF"
+	/>
+
+	<parameter name="queryTable" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="reportDir" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>$P!{queryTable}; 
+</queryString>
+
+	<field name="username" class="java.lang.String"/>
+	<field name="siteList" class="java.lang.String"/>
+	<field name="endDate" class="java.lang.String"/>
+	<field name="startDate" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="30"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="1009"
+						height="30"
+						key="textField-2"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="18"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals ($P{lang}) ? "Monthly Quality of Care Indicator Report" : "Rapport mensuel des indicateurs de qualité des soins" )]]></textFieldExpression>
+				</textField>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="26"  isSplitAllowed="true" >
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="0"
+						width="1009"
+						height="13"
+						key="subreport-1"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<subreportParameter  name="siteList">
+						<subreportParameterExpression><![CDATA[$F{siteList}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="endDate">
+						<subreportParameterExpression><![CDATA[$F{endDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="startDate">
+						<subreportParameterExpression><![CDATA[$F{startDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="reportDir">
+						<subreportParameterExpression><![CDATA[$P{reportDir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="user">
+						<subreportParameterExpression><![CDATA[$F{username}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "monthlyInd_1.0.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="13"
+						width="1009"
+						height="13"
+						key="subreport-2"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "monthlyInd_1.0_defs.jasper")]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

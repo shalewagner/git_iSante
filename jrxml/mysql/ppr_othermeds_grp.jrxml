@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="ppr_othermeds_grp"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="556"
+		 pageHeight="28"
+		 columnWidth="556"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 isIgnorePagination="true">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/><parameter name="reportDir" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="drugGroup" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>if $P{drugGroup} = 'Other Treatments' begin select distinct l . drugLabel as drugName , d . drugID , 0 as drugOther from drugs d , drugLookup l , encounter e where d . patientid = $P{pid} and d . drugID = l . drugID and l . drugGroup = $P{drugGroup} and d . startMm is not NULL and ltrim(d . startMm) != '' and d . startYy is not NULL and ltrim(d . startYy) != '' and d . drugID not in (1 , 5 , 6 , 8 , 10 , 11 , 12 , 16 , 17 , 20 , 21 , 23 , 29 , 31 , 33 , 34) and e . encStatus &lt; 255 and e . siteCode = d . siteCode and e . patientID = d . patientID and e . visitDateDd = d . visitDateDd and e . visitDateMm = d . visitDateMm and e . visitDateYy = d . visitDateYy and e . seqNum = d . seqNum union all select distinct o . drugName , o . drugSlot as drugID , 1 as drugOther from otherDrugs o , encounter e where o . patientid = $P{pid} and o . startMm is not NULL and ltrim(o . startMm) != '' and o . startYy is not NULL and ltrim(o . startYy) != '' and e . encStatus &lt; 255 and e . siteCode = o . siteCode and e . patientID = o . patientID and e . visitDateDd = o . visitDateDd and e . visitDateMm = o . visitDateMm and e . visitDateYy = o . visitDateYy and e . seqNum = o . seqNum order by drugName asc end else begin select distinct l . drugLabel as drugName , d . drugID , 0 as drugOther from drugs d , drugLookup l , encounter e where d . patientid = $P{pid} and d . drugID = l . drugID and l . drugGroup = $P{drugGroup} and d . startMm is not NULL and ltrim(d . startMm) != '' and d . startYy is not NULL and ltrim(d . startYy) != '' and d . drugID not in (1 , 5 , 6 , 8 , 10 , 11 , 12 , 16 , 17 , 20 , 21 , 23 , 29 , 31 , 33 , 34) and e . encStatus &lt; 255 and e . siteCode = d . siteCode and e . patientID = d . patientID and e . visitDateDd = d . visitDateDd and e . visitDateMm = d . visitDateMm and e . visitDateYy = d . visitDateYy and e . seqNum = d . seqNum order by drugName asc end; 
+</queryString>
+
+	<field name="drugName" class="java.lang.String"/>
+	<field name="drugID" class="java.lang.Integer"/>
+	<field name="drugOther" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="0"
+						width="250"
+						height="13"
+						key="subreport-1"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugGroup">
+						<subreportParameterExpression><![CDATA[$P{drugGroup}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugID">
+						<subreportParameterExpression><![CDATA[$F{drugID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugName">
+						<subreportParameterExpression><![CDATA[$F{drugName}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_othermeds_namestr.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="269"
+						y="0"
+						width="69"
+						height="13"
+						key="subreport-2"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugGroup">
+						<subreportParameterExpression><![CDATA[$P{drugGroup}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugID">
+						<subreportParameterExpression><![CDATA[$F{drugID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugName">
+						<subreportParameterExpression><![CDATA[$F{drugName}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugOther">
+						<subreportParameterExpression><![CDATA[$F{drugOther}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_othermeds_startdt.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="344"
+						y="0"
+						width="69"
+						height="13"
+						key="subreport-3"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugGroup">
+						<subreportParameterExpression><![CDATA[$P{drugGroup}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugID">
+						<subreportParameterExpression><![CDATA[$F{drugID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugName">
+						<subreportParameterExpression><![CDATA[$F{drugName}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugOther">
+						<subreportParameterExpression><![CDATA[$F{drugOther}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_othermeds_discdt.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="419"
+						y="0"
+						width="94"
+						height="13"
+						key="subreport-4"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugGroup">
+						<subreportParameterExpression><![CDATA[$P{drugGroup}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugID">
+						<subreportParameterExpression><![CDATA[$F{drugID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugName">
+						<subreportParameterExpression><![CDATA[$F{drugName}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="drugOther">
+						<subreportParameterExpression><![CDATA[$F{drugOther}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_othermeds_discreason.jasper")]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

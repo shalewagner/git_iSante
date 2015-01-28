@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+if [ "$1" = "configure" ] || [ "$1" = "reconfigure" ]; then
+
+    update-rc.d isante-live-config defaults
+
+    # The following only on a new install
+    if [ "$2" = "" ]; then
+	echo "RECONFIGURE=true" >> /etc/default/isante-live-config
+    fi
+
+fi
+
+#DEBHELPER#

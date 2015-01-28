@@ -1,0 +1,127 @@
+/*
+ * Application Stylesheet
+ *
+ * Fonts are sans-serif, text is black and dark gray.  Form fieldsets are
+ * separated by horizontal lines.
+ *
+ * Author	Svend Sorensen
+ * Version	$Id: main.css 138 2006-10-25 19:11:57Z svends $
+ */
+
+body {
+	color: #333;
+	background-color: #fff;
+}
+
+body, p, ol, ul, td {
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+
+a {
+	color: #000;
+	background-color:#fff;
+}
+
+a:visited {
+	color: #666;
+	background-color: #fff;
+}
+
+a:hover {
+	color: #fff;
+	background-color:#000;
+}
+
+.error li {
+	color: red;
+	background-color: #fff;
+}
+
+.info li {
+	color: green;
+	background-color: #fff;
+}
+
+/*
+ * Default table
+ */
+
+table {
+	border: none;
+	border-collapse: collapse;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+
+thead tr {
+	border-bottom: 1px solid #000;
+}
+
+th {
+	padding: .1em .3em;
+	font-weight: bold;
+	border-bottom: 1px solid #000;
+	margin-bottom: 2px;
+	text-align: left;
+}
+
+tbody tr {
+	border-top: 1px dotted #bbb;
+}
+
+td {
+	padding: .1em .3em;
+	vertical-align: top;
+	font-weight: normal;
+}
+
+/*
+ * Default form
+ */
+
+form {
+	padding: 0;
+	margin: 0 0 10px 0;
+}
+
+/* Outermost fieldset, contains all form items */
+form fieldset {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+form fieldset fieldset {
+	border: solid;
+	border-width: 1px 0 0 0;
+	padding: .5em 0;
+	margin: 0;
+}
+
+form label {
+	float: left;
+	display: block;
+	width: 12em;
+	padding: 0;
+	margin: .25em 0 .25em 0;
+	font-size: .8em;
+}
+
+form input {
+	padding: 0;
+	margin: .25em 0 .25em 0;
+}
+
+form p {
+	font-size: .8em;
+}
+
+form p.description {
+	padding: 0;
+	margin: 0 0 0 12em;
+	font-style: italic;
+}
+
+form br {
+	clear: left;
+}

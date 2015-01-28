@@ -1,0 +1,10 @@
+#################################
+########## !WARNING! ############
+#################################
+#This file is created by setup-isante.pl and will be overwritten during upgrades of iSante.
+
+
+deb http://archive.debian.org/debian-security lenny/updates main contrib non-free
+deb http://archive.debian.org/debian lenny main contrib non-free
+deb http://archive.debian.org/debian-volatile lenny/volatile main contrib non-free
+

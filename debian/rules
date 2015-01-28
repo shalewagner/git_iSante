@@ -1,0 +1,94 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+build: 
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
+	dh_installdirs
+	dh_installinit --no-start -- defaults 99
+
+	make sqlProcess mysql-udf all
+	#copy most regular files
+	find . -type f -not \( \
+		-path '*/.svn/*' -or \
+		-path './debian/*' -or \
+		-path './support/google-visualization/*' -or \
+		-path './support/pentaho/*' -or \
+		-path './PatientSearchService/war/*' -or \
+		-path './PatientSearchService/lib/*' -or \
+		-path './ext-3*/*debug*.js' -or \
+		-path './jrapp/war/*' -or \
+		-path './jrapp/lib/compile/*' -or \
+		-name '*~' -or \
+		-name '*.jrxml' -or \
+		-name '.htaccess' -or \
+		-name 'build.properties' -or \
+		-name 'build-stamp' \
+	\) -exec install -D --mode=644 {} debian/isante/usr/share/isante/htdocs/{} \;
+	#symlinks
+	find . -type l -not \( \
+		-path '*/.svn/*' -or \
+		-path './debian/*' \
+	\) -exec cp -l {} debian/isante/usr/share/isante/htdocs/{} \;
+	mkdir -p debian/isante/var/www
+	ln -s /usr/share/isante/htdocs debian/isante/var/www/isante
+	#copy generated version.ini
+	cp debian/version.ini debian/isante/usr/share/isante/htdocs/support/version.ini
+	#copy executables and libraries
+	install -D --mode=755 config-linux/setup-isante.pl debian/isante/usr/bin/setup-isante.pl
+	install -D --mode=755 support/getRouterIP.sh debian/isante/usr/bin/getRouterIP.sh
+	install -D --mode=644 support/schema-user-functions/udf_itech.so debian/isante/usr/lib/udf_itech.so
+	mkdir -p debian/isante/`php-config --extension-dir`
+	ln -s /usr/share/isante/htdocs/sqlProcess/itech_sql.so debian/isante/`php-config --extension-dir`/itech_sql.so
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+
+	# Add here commands to clean up after the build process.
+	#-$(MAKE) clean
+
+	dh_clean 
+
+
+# Build architecture-independent files here.
+binary-indep: build 
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build 
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs 
+#	dh_installdocs
+#	dh_installexamples
+#	dh_install
+#	dh_installmenu
+#	dh_installdebconf	
+#	dh_installlogrotate
+#	dh_installemacsen
+#	dh_installpam
+#	dh_installmime
+#	dh_python
+#	dh_installinit
+#	dh_installcron
+#	dh_installinfo
+#	dh_installman
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+#	dh_perl
+#	dh_makeshlibs
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb --destdir=./debian/built-packages -- -Zlzma
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary

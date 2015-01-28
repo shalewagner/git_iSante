@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="ppr"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="612"
+		 pageHeight="792"
+		 columnWidth="556"
+		 columnSpacing="0"
+		 leftMargin="28"
+		 rightMargin="28"
+		 topMargin="36"
+		 bottomMargin="36"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 isIgnorePagination="true">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+	<import value="it.businesslogic.ireport.IReportScriptlet" />
+
+	<parameter name="Title" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="queryTable" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/><parameter name="reportDir" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>$P!{queryTable}; 
+</queryString>
+
+	<field name="patientID" class="java.lang.Long"/>
+	<field name="nationalID" class="java.lang.String"/>
+	<field name="lname" class="java.lang.String"/>
+	<field name="fname" class="java.lang.String"/>
+	<field name="sex" class="java.lang.Integer"/>
+	<field name="siteName" class="java.lang.String"/>
+	<field name="clinicPatientID" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="42"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="289"
+						y="0"
+						width="28"
+						height="13"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="251"
+						y="0"
+						width="38"
+						height="13"
+						key="staticText-2"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[PAGE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="13"
+						width="230"
+						height="13"
+						key="staticText-4"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[Appt with: xxxxxxxxxxxxxxxxxxxxxx]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="326"
+						y="0"
+						width="230"
+						height="13"
+						key="staticText-6"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[Records Summary For:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="326"
+						y="13"
+						width="230"
+						height="13"
+						key="textField-6"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{lname}+", "+$F{fname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="326"
+						y="26"
+						width="230"
+						height="13"
+						key="textField-7"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{clinicPatientID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yy HH:mm:ss" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="26"
+						width="230"
+						height="13"
+						key="textField-8"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="0"
+						y="0"
+						width="230"
+						height="13"
+						key="staticText-34"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[I.D. CLINIC AIDS SESSION (033)]]></text>
+				</staticText>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="650"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="115"
+						y="0"
+						width="326"
+						height="13"
+						key="textField-1"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{Title}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="115"
+						y="13"
+						width="326"
+						height="13"
+						key="textField-4"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{siteName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="0"
+						y="39"
+						width="556"
+						height="13"
+						key="staticText-8"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[==[TRENDS]=================================================================================]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="123"
+						y="52"
+						width="74"
+						height="13"
+						key="staticText-9"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[CD4 COUNT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="97"
+						y="65"
+						width="35"
+						height="13"
+						key="staticText-10"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="162"
+						y="65"
+						width="26"
+						height="13"
+						key="staticText-11"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[Abs]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="199"
+						y="65"
+						width="31"
+						height="13"
+						key="staticText-12"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[Pcnt]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="85"
+						y="78"
+						width="59"
+						height="13"
+						key="staticText-13"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[--------]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="156"
+						y="78"
+						width="38"
+						height="13"
+						key="staticText-14"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[-----]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="199"
+						y="78"
+						width="31"
+						height="13"
+						key="staticText-15"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[----]]></text>
+				</staticText>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="85"
+						y="92"
+						width="124"
+						height="116"
+						key="subreport-1"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_cd4_count.jasper")]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement
+						x="271"
+						y="52"
+						width="83"
+						height="13"
+						key="staticText-16"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[VIRAL LOAD]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="258"
+						y="65"
+						width="36"
+						height="13"
+						key="staticText-17"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="247"
+						y="78"
+						width="59"
+						height="13"
+						key="staticText-18"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[--------]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="322"
+						y="65"
+						width="43"
+						height="13"
+						key="staticText-19"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[Count]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="317"
+						y="78"
+						width="53"
+						height="13"
+						key="staticText-20"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[--------]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="420"
+						y="52"
+						width="91"
+						height="13"
+						key="staticText-21"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[BODY WEIGHT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="398"
+						y="65"
+						width="37"
+						height="13"
+						key="staticText-22"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="386"
+						y="78"
+						width="61"
+						height="13"
+						key="staticText-23"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[--------]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="460"
+						y="65"
+						width="28"
+						height="13"
+						key="staticText-24"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[Lbs]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="455"
+						y="78"
+						width="38"
+						height="13"
+						key="staticText-25"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[-------]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="503"
+						y="65"
+						width="32"
+						height="13"
+						key="staticText-26"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[Kgs]]></text>
+				</staticText>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="387"
+						y="92"
+						width="140"
+						height="113"
+						key="subreport-2"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_body_weight.jasper")]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement
+						x="499"
+						y="78"
+						width="39"
+						height="13"
+						key="staticText-28"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[-------]]></text>
+				</staticText>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="248"
+						y="92"
+						width="108"
+						height="113"
+						key="subreport-3"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_viral_load.jasper")]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement
+						x="0"
+						y="251"
+						width="495"
+						height="13"
+						key="staticText-29"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[Indication for prophylaxis: PCP (CD4 < 200/14%); MAC (CD4 < 50); Toxo (CD4 < 100).]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="225"
+						width="52"
+						height="13"
+						key="staticText-30"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[If more,]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="238"
+						width="77"
+						height="13"
+						key="staticText-31"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[first visit:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="277"
+						width="556"
+						height="13"
+						key="staticText-32"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[==[COMPREHENSIVE ANTIRETROVIRAL TREATMENT HISTORY]=========================================]]></text>
+				</staticText>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="85"
+						y="225"
+						width="142"
+						height="26"
+						key="subreport-4"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_cd4_count_more.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="248"
+						y="225"
+						width="108"
+						height="26"
+						key="subreport-5"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_viral_load_more.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="387"
+						y="225"
+						width="141"
+						height="26"
+						key="subreport-6"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_body_weight_more.jasper")]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement
+						x="0"
+						y="303"
+						width="139"
+						height="13"
+						key="staticText-35"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[Generic Name, Strength]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="195"
+						y="303"
+						width="53"
+						height="13"
+						key="staticText-36"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[Start Dt]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="255"
+						y="303"
+						width="51"
+						height="13"
+						key="staticText-37"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[LastFill]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="321"
+						y="290"
+						width="23"
+						height="13"
+						key="staticText-38"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[Dur]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="315"
+						y="303"
+						width="33"
+						height="13"
+						key="staticText-39"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[(mos)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="355"
+						y="290"
+						width="52"
+						height="13"
+						key="staticText-40"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[D/C Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="357"
+						y="303"
+						width="46"
+						height="13"
+						key="staticText-41"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[(mo/yr)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="414"
+						y="290"
+						width="93"
+						height="13"
+						key="staticText-42"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[Reason for D/C]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="414"
+						y="303"
+						width="23"
+						height="13"
+						key="staticText-43"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[Tox]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="441"
+						y="303"
+						width="32"
+						height="13"
+						key="staticText-44"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[Intol]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="478"
+						y="303"
+						width="27"
+						height="13"
+						key="staticText-45"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[Fail]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="510"
+						y="303"
+						width="23"
+						height="13"
+						key="staticText-46"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[Unk]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="510"
+						y="316"
+						width="23"
+						height="13"
+						key="staticText-47"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[---]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="478"
+						y="316"
+						width="27"
+						height="13"
+						key="staticText-48"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[----]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="441"
+						y="316"
+						width="32"
+						height="13"
+						key="staticText-49"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[-----]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="414"
+						y="316"
+						width="23"
+						height="13"
+						key="staticText-50"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[---]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="355"
+						y="316"
+						width="52"
+						height="13"
+						key="staticText-51"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[--------]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="315"
+						y="316"
+						width="33"
+						height="13"
+						key="staticText-52"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[-----]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="255"
+						y="316"
+						width="51"
+						height="13"
+						key="staticText-53"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[--------]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="195"
+						y="316"
+						width="53"
+						height="13"
+						key="staticText-54"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[--------]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="316"
+						width="190"
+						height="13"
+						key="staticText-55"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<text><![CDATA[-------------------------------]]></text>
+				</staticText>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="329"
+						width="556"
+						height="20"
+						key="subreport-7"
+						isPrintWhenDetailOverflows="true"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_arvs.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="349"
+						width="556"
+						height="20"
+						key="subreport-8"
+						positionType="Float"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_othermeds_title.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="369"
+						width="556"
+						height="20"
+						key="subreport-9"
+						positionType="Float"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_screening_title.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="389"
+						width="556"
+						height="20"
+						key="subreport-10"
+						positionType="Float"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[new File($P{reportDir} + "ppr_initvisit_title.jasper")]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="28"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="232"
+						y="9"
+						width="100"
+						height="13"
+						key="staticText-1"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<text><![CDATA[CURRENT VERSION]]></text>
+				</staticText>
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

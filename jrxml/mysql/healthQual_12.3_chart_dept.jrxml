@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="healthQual_12.3_chart_dept"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="792"
+		 pageHeight="612"
+		 columnWidth="732"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isFloatColumnFooter="true"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 resourceBundle="healthQual_main"
+		 isIgnorePagination="true">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<subDataset name="SubDataset1" >
+
+		<parameter name="queryTable" isForPrompting="true" class="java.lang.String"/>
+		<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+		<queryString><![CDATA[$P!{queryTable};]]></queryString>
+
+		<field name="ind1_ratio" class="java.lang.String"/>
+		<field name="ind2_ratio" class="java.lang.String"/>
+		<field name="ind3_ratio" class="java.lang.String"/>
+		<field name="endDate" class="java.lang.String"/>
+		<field name="ind4_ratio" class="java.lang.String"/>
+		<field name="ind5_ratio" class="java.lang.String"/>
+		<field name="ind6_ratio" class="java.lang.String"/>
+		<field name="ind7_ratio" class="java.lang.String"/>
+		<field name="ind8_ratio" class="java.lang.String"/>
+		<field name="ind9_ratio" class="java.lang.String"/>
+		<field name="ind10_ratio" class="java.lang.String"/>
+		<field name="ind11_ratio" class="java.lang.String"/>
+		<field name="ind12_ratio" class="java.lang.String"/>
+		<field name="ind13_ratio" class="java.lang.String"/>
+		<field name="ind14_ratio" class="java.lang.String"/>
+		<field name="ind15_ratio" class="java.lang.String"/>
+		<field name="ind16_ratio" class="java.lang.String"/>
+		<field name="ind17_ratio" class="java.lang.String"/>
+		<field name="ind18_ratio" class="java.lang.String"/>
+		<field name="ind19_ratio" class="java.lang.String"/>
+
+	</subDataset>
+
+	<parameter name="queryTable" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="siteName" isForPrompting="true" class="java.lang.String"/>
+	<queryString><![CDATA[select department from clinicLookup where siteCode = $P!{siteName};]]></queryString>
+
+	<field name="department" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="73"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="732"
+						height="30"
+						key="textField-2"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="18"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[str("graph.title")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="30"
+						width="732"
+						height="30"
+						key="textField-3"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="18"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[msg(str("graph.department"), $F{department})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="60"
+						width="732"
+						height="13"
+						key="textField-4"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[msg(str("date.generated"),
+( Integer.toString(new GregorianCalendar().get(Calendar.MONTH) + 1).length() < 2 ?
+ "0" + Integer.toString(new GregorianCalendar().get(Calendar.MONTH) + 1)
+:
+ Integer.toString(new GregorianCalendar().get(Calendar.MONTH) + 1)
+),
+( Integer.toString(new GregorianCalendar().get(Calendar.DATE)).length() < 2 ?
+ "0" + Integer.toString(new GregorianCalendar().get(Calendar.DATE))
+:
+ Integer.toString(new GregorianCalendar().get(Calendar.DATE))
+),
+Integer.toString(new GregorianCalendar().get(Calendar.YEAR)).substring(2))
++ " " +
+msg(str("time.generated"),
+( Integer.toString(new GregorianCalendar().get(Calendar.HOUR_OF_DAY)).length() < 2 ?
+ "0" + Integer.toString(new GregorianCalendar().get(Calendar.HOUR_OF_DAY))
+:
+ Integer.toString(new GregorianCalendar().get(Calendar.HOUR_OF_DAY))
+),
+( Integer.toString(new GregorianCalendar().get(Calendar.MINUTE)).length() < 2 ?
+ "0" + Integer.toString(new GregorianCalendar().get(Calendar.MINUTE))
+:
+ Integer.toString(new GregorianCalendar().get(Calendar.MINUTE))
+),
+( Integer.toString(new GregorianCalendar().get(Calendar.SECOND)).length() < 2 ?
+ "0" + Integer.toString(new GregorianCalendar().get(Calendar.SECOND))
+:
+ Integer.toString(new GregorianCalendar().get(Calendar.SECOND))
+))]]></textFieldExpression>
+				</textField>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="390"  isSplitAllowed="true" >
+				<barChart>
+					<chart  hyperlinkTarget="Self"  customizerClass="hivQualBarRendererCustomizer" >
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="0"
+						width="732"
+						height="390"
+						forecolor="#FFFFFF"
+						backcolor="#FFFFFF"
+						key="element-1"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+						<chartLegend textColor="#000000" backgroundColor="#FFFFFF" >
+					<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+					</chartLegend>
+					</chart>
+					<categoryDataset>
+						<dataset >
+							<datasetRun subDataset="SubDataset1">
+								<datasetParameter  name="queryTable">
+									<datasetParameterExpression><![CDATA[$P{queryTable}]]></datasetParameterExpression>
+								</datasetParameter>
+								<datasetParameter  name="lang">
+									<datasetParameterExpression><![CDATA[$P{lang}]]></datasetParameterExpression>
+								</datasetParameter>
+								<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+							</datasetRun>
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.01")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind1_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.02")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind2_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.03")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind3_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.04")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind4_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.05")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind5_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.06")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind6_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.07")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind7_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.08")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind8_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.09")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind9_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.10")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind10_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.11")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind11_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.12")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind12_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.13")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind13_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.14")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind14_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.15")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind15_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.16")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind16_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.17")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind17_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.18")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind18_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA[msg(str("date.range.end"), $F{endDate}.substring(5, 7), $F{endDate}.substring(8, 10), $F{endDate}.substring(2, 4))]]></seriesExpression>
+							<categoryExpression><![CDATA[str("indicator.title.19")]]></categoryExpression>
+							<valueExpression><![CDATA[Float.valueOf($F{ind19_ratio})]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+					</categoryDataset>
+					<barPlot >
+						<plot backcolor="#FFFFFF" labelRotation="45.0" >
+							<seriesColor seriesOrder="0" color="#0000CC"/>
+							<seriesColor seriesOrder="1" color="#FF0033"/>
+							<seriesColor seriesOrder="2" color="#00CC00"/>
+							<seriesColor seriesOrder="3" color="#FFFF00"/>
+							<seriesColor seriesOrder="4" color="#FF9900"/>
+							<seriesColor seriesOrder="5" color="#9900FF"/>
+							<seriesColor seriesOrder="6" color="#00CCCC"/>
+							<seriesColor seriesOrder="7" color="#FF9999"/>
+							<seriesColor seriesOrder="8" color="#CCFFCC"/>
+							<seriesColor seriesOrder="9" color="#FFFFCC"/>
+							<seriesColor seriesOrder="10" color="#FFCCCC"/>
+							<seriesColor seriesOrder="11" color="#CCCCFF"/>
+</plot>
+					<categoryAxisLabelExpression><![CDATA[( "en".equals($P{lang}) ? "Indicators" : "Indicateurs" )]]></categoryAxisLabelExpression>
+						<categoryAxisFormat>
+							<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000" >
+								<labelFont>
+					<font fontName="Arial" pdfFontName="Helvetica" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+								</labelFont>
+								<tickLabelFont>
+					<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+								</tickLabelFont>
+							</axisFormat>
+						</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA["%age"]]></valueAxisLabelExpression>
+						<valueAxisFormat>
+							<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000" >
+								<labelFont>
+					<font fontName="Arial" pdfFontName="Helvetica" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+								</labelFont>
+								<tickLabelFont>
+					<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false" pdfEncoding="Cp1252"/>
+								</tickLabelFont>
+							</axisFormat>
+						</valueAxisFormat>
+					</barPlot>
+				</barChart>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

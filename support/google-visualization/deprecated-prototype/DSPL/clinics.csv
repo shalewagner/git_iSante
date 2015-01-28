@@ -1,0 +1,95 @@
+clinic,name,department,network,latitude,longitude
+11100,""Hôpital de l'Universite d'Etat d'Haiti - HUEH"",""1"",""COAG MSPP"",18.5393,-72.3402
+11109,""Centre de Santé de Solino"",""1"",""FOSREF"",,
+11120,""Hôpital Saint François de Sales"",""1"",""CRS"",18.5378,-72.344
+11123,""Sanatorium de Port-au-Prince"",""1"",""ICC"",18.5268,-72.3445
+11127,""Institut Fame Pereo"",""1"",""GHESKIO"",18.5437,-72.3216
+11144,""Centre de Santé St Michel barreau"",""1"","""",,
+11155,""Centre Jeunes de Lalue"",""1"",""FOSREF"",18.5366,-72.3311
+11156,""Centre Lakay Centre Ville"",""1"",""FOSREF"",18.5259,-72.3351
+11157,""CEGYPEF"",""1"",""FOSREF"",18.5304,-72.3478
+11158,""Centre de Christ Roi"",""1"",""FOSREF"",18.5459,-72.4351
+11164,""Missionnaires de la Charite adulte"",""1"",""ICC"",18.5437,-72.3215
+11208,""Grace Children's Hospital"",""1"",""MSH"",18.5597,-72.3018
+11217,""Maternite Isaie Jeanty"",""1"",""COAG MSPP"",18.5645,-72.3354
+11221,""Hôpital Universitaire de la Paix"",""1"",""COAG MSPP"",18.5533,-72.322
+11224,""Centre de Santé de Petite Place Cazeau"",""1"",""CDS"",,
+11228,""Hôpital Bernard Mevs"",""1"",""GHESKIO"",18.5502,-72.3102
+11229,""CHOSCAL"",""1"",""COAG MSPP"",18.5704,-72.2915
+11234,""Centre Jeunes de Delmas 19"",""1"",""FOSREF"",18.5704,-72.2915
+11235,""Clinique Communautaire de Delmas 75"",""1"",""MSH"",18.5513,-72.4789
+11240,""Centre Jeunes de Delmas 33"",""1"",""FOSREF"",18.5486,-72.3063
+11303,""Hôpital de Carrefour"",""1"",""COAG MSPP"",18.5383,-72.4075
+11306,""Hôpital Adventiste de Diquini"",""1"",""GHESKIO"",18.5313,-72.387
+11316,""Centre Hospitalier d'Arcachon 32"",""1"",""GHESKIO"",18.5415,-72.3978
+11327,""Clinique mennonite de Carrefour"",""1"",""ICC"",,
+11404,""Hôpital de la Communauté Haïtienne"",""1"",""GHESKIO"",18.524,-72.2726
+11405,""Centre Hospitalier Eliazar Germain"",""1"",""GHESKIO"",18.5173,-72.2889
+11412,""Hôpital Saint Damien (NPFS)"",""1"",""ITECH"",18.5707,-72.2535
+11423,""Centre Lakay de Pétion ville"",""1"",""FOSREF"",18.4809,-72.2546
+11503,""Hôpital de Fermathe (mission baptiste)"",""1"",""GHESKIO"",18.467,-72.2939
+12107,""Sanatorium de Sigueneau"",""1"",""GHESKIO"",18.4394,-72.5884
+12108,""Hôpital Sainte-Croix de Leogane"",""1"",""CRS"",18.507,-72.6313
+12201,""Hôpital Notre Dame de Petit Goave"",""1"",""GHESKIO"",18.3766,-72.9316
+13103,""Centre de Santé de la Croix-des-Bouquets"",""1"",""COAG MSPP"",18.5757,-72.227
+13109,""Foyer St Camille"",""1"",""CRS"",,
+13114,""Centre Jeunes de la Plaine du cul de sac"",""1"",""FOSREF"",18.5395,-72.1839
+13119,""Clinique mennonite de Croix des Bouquets"",""1"",""ICC"",18.5757,-72.227
+14103,""SADA   matheux"",""1"",""MSH"",18.8207,-72.5393
+14106,""CSL St Paul (montrouis)"",""1"",""MSH"",18.8198,-72.5667
+15103,""Hôpital Wesleyen de la Gonave"",""1"",""GHESKIO"",18.834,-72.8623
+21100,""Hôpital St Michel de Jacmel"",""2"",""GHESKIO"",18.2383,-72.5418
+21201,""Centre de Sante de Marigot"",""2"",""COAG MSPP"",18.2317,-72.3264
+21401,""Hôpital Saint Joseph de La Vallée de Jacmel"",""2"",""COAG MSPP"",18.2679,-72.6662
+22101,""CAL de Bainet"",""2"",""COAG MSPP"",18.183,-72.7552
+22202,""Dispensaire Saint Joseph de Cotes de Fer"",""2"",""ICC"",,
+31100,""Hôpital Universitaire Justinien"",""3"",""UM"",19.7624,-72.2063
+31101,""CDS La Fossette"",""3"",""MSH"",19.7538,-72.206
+31102,""Hôpital Fort St Michel"",""3"",""COAG MSPP"",19.7411,-72.1942
+31110,""FOSREF rue 16"",""3"","""",19.761,-72.2028
+32205,""Clinique Béthesda de Vaudreuil"",""3"",""COAG MSPP"",19.72,-72.2519
+32207,""Clinique Medico-Chirurgicale Dugue"",""3"",""MSH"",19.7072,-72.2782
+32301,""Hôpital Sacre Coeur de Milot"",""3"",""CRS"",19.6087,-72.2127
+33101,""Hôpital de La Grande Riviere du Nord"",""3"",""COAG MSPP"",19.58,-72.17
+34102,""Dispensaire Saint Joseph de Saint Raphael"",""3"",""ICC"",,
+34401,""Hôpital Bienfaisance de Pignon"",""3"","""",19.3304,-72.1189
+35101,""Alliance Santé de Borgne"",""3"",""COAG MSPP"",19.8389,-72.5151
+36101,""Hôpital Saint-Jean de Limbe"",""3"",""COAG MSPP"",19.6579,-72.4093
+36102,""Hopital Bon Samaritain"",""3"",""ICC"",,
+37201,""Hôpital Esperance de Pilate"",""3"",""CRS"",19.6928,-72.5529
+41100,""Hôpital de Fort Liberté"",""4"",""MSH"",19.667,-71.8382
+41201,""Centre Medico-Social de Ouanaminthe"",""4"",""MSH"",19.6162,-71.7799
+42301,""CAL de Mont Organise"",""4"",""CDS"",19.3377,-72.1167
+51100,""Hôpital La Providence des Gonaives"",""5"",""CRS"",19.4502,-72.6854
+51106,""CS K-Soleil"",""5"",""ICC"",,
+51204,""Clinique Saint-François d’Assise"",""5"",""ICC"",,
+52101,""Hôpital Alma Mater de Gros Morne"",""5"",""CRS"",19.6714,-72.6764
+52114,""Clinique mennonite Carnifice"",""5"",""ICC"",19.7715,-72.6727
+53108,""Centre de Sante Pierre Payen"",""5"",""MSH"",18.9978,-72.7379
+54101,""Hôpital Claire Heureuse"",""5"",""MSH"",19.2613,-72.5168
+54111,""Dispensaire Sainte Claire d’Assise"",""5"",""ICC"",,
+62104,""Dispensaire Marché Canard"",""6"",""MSH"",18.7855,-72.0305
+71100,""Hôpital Immaculée Conception des Cayes"",""7"",""GHESKIO"",18.3007,-73.7614
+71104,""Centre de Sante Lumiere (FINCA)"",""7"",""MSH"",18.228,-73.7608
+71106,""Quatre Chemins"",""7"",""MSPP"",18.3007,-73.7614
+71107,""Dispensaire Sacre-Coeur de Charpentier"",""7"",""COAG MSPP"",18.3007,-73.7614
+71117,""Missionnaires de la Charite du Sud"",""7"",""ICC"",18.2224,-73.7457
+71201,""Maison de Naissance"",""7"","""",,
+71301,""Dispensaire Sainte Jeanne de Chantal"",""7"",""COAG MSPP"",18.2029,-73.8875
+71401,""Hôpital Sainte-Anne de Camp-Perrin"",""7"",""COAG MSPP"",18.3013,-73.942
+72101,""HCR de Port Salut"",""7"",""COAG MSPP"",18.249,-74.0976
+73101,""HCR d'Aquin"",""7"",""COAG MSPP"",18.2809,-73.2189
+73103,""Hôpital Saint Boniface de Fond des Blancs"",""7"",""CRS"",18.2809,-73.2189
+73301,""Hôpital Lumiere Bonne-Fin"",""7"",""MSH"",18.2996,-73.659
+81100,""Hôpital Saint Antoine de Jeremie"",""8"",""GHESKIO"",18.6103,-74.0136
+81101,""Haitian Health Foundation"",""8"","""",18.6495,-74.1167
+82201,""Hopital de Communaute Dame-Marienne"",""8"",""MSH"",18.5615,-74.4196
+82501,""Dispensaire Luc Guillaume"",""10"",""ICC"",18.4535,-73.5219
+83401,""Centre de Sante de Pestel"",""8"",""COAG MSPP"",18.5306,-73.7907
+84100,""Hôpital Sainte Thérèse de Miragoane"",""10"",""COAG MSPP"",18.446,-73.0701
+84111,""Hôpital Armee du Salut Clinic Béthel"",""10"",""CRS"",18.361,-73.2129
+91100,""Hôpital Immaculée Conception de Port de Paix"",""9"",""COAG MSPP"",19.9293,-72.8456
+91114,""Centre Medical Beraca"",""9"",""MSH"",19.6762,-72.2701
+93301,""Hôpital Evangelique de Bombardopolis"",""9"",""GHESKIO"",19.6861,-73.3138
+93401,""Hôpital Notre Dame de la Paix de Jean Rabel"",""9"",""COAG MSPP"",19.8644,-73.1568
+95698,""CEPOZ Centre Espoir"",""9"",""POZ"",18.539,-72.335

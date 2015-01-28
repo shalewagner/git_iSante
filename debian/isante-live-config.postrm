@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ -f /usr/share/debconf/confmodule ]; then
+    . /usr/share/debconf/confmodule
+fi
+
+if [ "$1" = "purge" ]; then
+    update-rc.d isante-live-config remove
+fi
+
+#DEBHELPER#

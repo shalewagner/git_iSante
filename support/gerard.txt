@@ -1,0 +1,723 @@
+Artibonite	Anse Rouge	Cal Anse Rouge	NULL	52301
+Artibonite	Anse Rouge	Disp. Atrel	NULL	52308
+Artibonite	Anse Rouge	Disp. Illodep	NULL	52304
+Artibonite	Anse Rouge	Disp. Plaine de l’Arbre	NULL	52305
+Artibonite	Anse Rouge	Disp. Sources Chaudes	NULL	52306
+Artibonite	Anse Rouge	Disp. Tanté	NULL	52307
+Artibonite	Anse Rouge	Dispens. Coridon	NULL	52302
+Artibonite	Anse Rouge	Dispens. Figuier	NULL	52303
+Artibonite	Desdunes	CSL St Pierre	NULL	54401
+Artibonite	Desdunes	Disp. Aux Sources	NULL	54403
+Artibonite	Desdunes	Disp. Descahos	NULL	54402
+Artibonite	Dessalines	Celio 	NULL	54104
+Artibonite	Dessalines	Chenot	NULL	54112
+Artibonite	Dessalines	Claire Heureuse	NULL	54101
+Artibonite	Dessalines	Coupe à l’Inde 	NULL	54107
+Artibonite	Dessalines	Deseaux 	NULL	54109
+Artibonite	Dessalines	Grande Hatte	NULL	54110
+Artibonite	Dessalines	Hatte Chevreau	NULL	54114
+Artibonite	Dessalines	La Croix 	NULL	54103
+Artibonite	Dessalines	Niel 	NULL	54105
+Artibonite	Dessalines	Ogé	NULL	54113
+Artibonite	Dessalines	Pelissier/ Laraque	NULL	54102
+Artibonite	Dessalines	Poste Pierrot 	NULL	54106
+Artibonite	Dessalines	Sanie Claire d’Assise	NULL	54111
+Artibonite	Dessalines	Sanoix 	NULL	54108
+Artibonite	Ennery	Passe Reine	NULL	51202
+Artibonite	Ennery	Savanne Carrée	NULL	51203
+Artibonite	Ennery	St François d’Assise	NULL	51204
+Artibonite	Ennery	Toussaint Louverture	NULL	51201
+Artibonite	Gonaïves	Bayonnais	NULL	51101
+Artibonite	Gonaïves	Bayonnais	NULL	51102
+Artibonite	Gonaïves	Bon Berger/Bassin	NULL	51107
+Artibonite	Gonaïves	Clinique Dr Baudin	NULL	51104
+Artibonite	Gonaïves	Eben-Ezer/Belle Anse	NULL	51105
+Artibonite	Gonaïves	Ka-Soleil (NF)	NULL	51106
+Artibonite	Gonaïves	La Pierre (NF)	NULL	51108
+Artibonite	Gonaïves	La Providence	CRS	51100
+Artibonite	Gonaïves	Labranle	NULL	51103
+Artibonite	Gonaïves	Poteau	NULL	51111
+Artibonite	Gonaïves	Raboteau (NF)	NULL	51109
+Artibonite	Gonaïves	Trou Sable	NULL	51110
+Artibonite	Grande Saline	Drouin	NULL	54301
+Artibonite	Grande Saline	Grande Saline	NULL	54302
+Artibonite	Grande Saline	Poteneau	NULL	54303
+Artibonite	Gros Morne	Alma Mater	CRS	52101
+Artibonite	Gros Morne	David 6e section	NULL	52102
+Artibonite	Gros Morne	Moulin	NULL	52107
+Artibonite	Gros Morne	Pendu  5e section	NULL	52103
+Artibonite	Gros Morne	Pérou	NULL	NULL
+Artibonite	Gros Morne	Riv Mancelle  2e section	NULL	52104
+Artibonite	Gros Morne	SOS France  4e section	NULL	52105
+Artibonite	Gros Morne	Treuil	NULL	52106
+Artibonite	Gros Morne	Verneille	NULL	52109
+Artibonite	L’Estère	L’Estère	NULL	51302
+Artibonite	L’Estère	La Croix  Missionnaire	NULL	51301
+Artibonite	L’Estère	New Testament la Croix Perisse	NULL	51303
+Artibonite	La Chapelle	La Chapelle	NULL	53301
+Artibonite	Marmelade	CSL	NULL	55101
+Artibonite	Petite Rivière	Charles Colimon	NULL	54201
+Artibonite	Petite Rivière	Deslandes	NULL	54202
+Artibonite	Petite Rivière	Deslandes	NULL	54204
+Artibonite	Petite Rivière	Jean Denis	NULL	54209
+Artibonite	Petite Rivière	Mauger	NULL	54203
+Artibonite	Petite Rivière	Perodin	NULL	54205
+Artibonite	Petite Rivière	Plassac	NULL	54206
+Artibonite	Petite Rivière	Savanne à Roche	NULL	54207
+Artibonite	Petite Rivière	Segur	NULL	54208
+Artibonite	Saint Marc	Bocozelle	NULL	53110
+Artibonite	Saint Marc	Chardene	NULL	53102
+Artibonite	Saint Marc	Charrettes	NULL	53103
+Artibonite	Saint Marc	Gervais	NULL	53111
+Artibonite	Saint Marc	Gilbert	NULL	53112
+Artibonite	Saint Marc	Goyavier	NULL	53104
+Artibonite	Saint Marc	Gresseau	NULL	53105
+Artibonite	Saint Marc	Jeanton	NULL	53106
+Artibonite	Saint Marc	Montrouis	NULL	53107
+Artibonite	Saint Marc	Pierre Payen	NULL	53108
+Artibonite	Saint Marc	Pont Sondé	NULL	53109
+Artibonite	Saint Marc	RSCH	NULL	53116
+Artibonite	Saint Marc	Saint Nicolas 	NULL	53101
+Artibonite	Saint Marc	SSPE	NULL	53115
+Artibonite	Saint Marc	St Laurent/Barbe	NULL	53114
+Artibonite	Saint Marc	Terre Blanche	NULL	53113
+Artibonite	Saint Michel de l’Attalaye 	Bas de Sault	NULL	55205
+Artibonite	Saint Michel de l’Attalaye	Camathe	NULL	55207
+Artibonite	Saint Michel de l’Attalaye	Gade Baptiste	NULL	55204
+Artibonite	Saint Michel de l’Attalaye	L’Ermite	NULL	55206
+Artibonite	Saint Michel de l’Attalaye	Lalomas	NULL	55202
+Artibonite	Saint Michel de l’Attalaye	Marmont/Nan Paul	NULL	55203
+Artibonite	Saint Michel de l’Attalaye	Saint Michel de l’Attalaye	NULL	55201
+Artibonite	Verrettes	Albert Schweitzer	CRS	53201
+Artibonite	Verrettes	Barbe	NULL	53202
+Artibonite	Verrettes	Bastien	NULL	53203
+Artibonite	Verrettes	Desarmes	NULL	53204
+Artibonite	Verrettes	Deschapelles	NULL	53205
+Artibonite	Verrettes	Dumarsais Estimé	NULL	53206
+Artibonite	Verrettes	Gabriel	NULL	53207
+Artibonite	Verrettes	Liancourt	NULL	53208
+Centre	Belladère 	Dispensaire Baptiste	NULL	63204
+Centre	Belladère 	Dispensaire de Croix de fer	NULL	63202
+Centre	Belladère 	Dispensaire de Roy Sec	NULL	63203
+Centre	Belladère 	Hôpital Notre Dame de la Nativité	NULL	63201
+Centre	Boucan Carré 	Centre de Santé avec lits de Cange	NULL	62303
+Centre	Boucan Carré 	Centre de Santé avec Lits Saint Esprit	NULL	62302
+Centre	Boucan Carré 	Dispensaire de Boucan Carré	NULL	62301
+Centre	Cerca Cavajal 	Centre de Santé Farnèse Louis Jeune	NULL	61407
+Centre	Cerca Cavajal 	Dispensaire Bon Samaritain	NULL	61405
+Centre	Cerca Cavajal 	Dispensaire d’Angoman	NULL	61406
+Centre	Cerca Cavajal 	Dispensaire de Basin Zim	NULL	61402
+Centre	Cerca Cavajal 	Dispensaire de Cerca Cavajal	NULL	61401
+Centre	Cerca Cavajal 	Dispensaire de Los Palis	NULL	61404
+Centre	Cerca Cavajal 	Dispensaire de Montegrande	NULL	61403
+Centre	Cerca La Source 	Centre de Santé Nan Cajou	NULL	64101
+Centre	Cerca La Source 	Dispensaire de Baltazar (NF)	NULL	64103
+Centre	Cerca La Source 	Dispensaire de Pacasse (NF)	NULL	64104
+Centre	Cerca La Source 	Dispensaire de Saltadère	NULL	64102
+Centre	Cerca La Source 	Dispensaire Ti Lory	NULL	64105
+Centre	Hinche	Clinique de l’incarnation de Pandiasou	NULL	61106
+Centre	Hinche	Disoensaire de Marmont	NULL	61101
+Centre	Hinche	Dispensaire de Dos Palais (NF)	NULL	61103
+Centre	Hinche	Dispensaire de Los Palma (NF)	NULL	61105
+Centre	Hinche	Dispensaire des Abricots	NULL	61104
+Centre	Hinche	Dispensaire la Belle Onde	NULL	61102
+Centre	Hinche	Hôpital Sainte Thérèse	NULL	61100
+Centre	Lascaobas	Centre de Santé sans Lit de Lascaobas	NULL	63101
+Centre	Lascaobas	Dispensaire Caste	NULL	63104
+Centre	Lascaobas	Dispensaire la Hoye	NULL	63102
+Centre	Lascaobas	Dispensaire Pareidon (NF)	NULL	63103
+Centre	Maïssade 	Centre de Santé sans Lit de Maïssade	NULL	61201
+Centre	Maïssade 	Dispensaire Bassin Cave (NF)	NULL	61203
+Centre	Maïssade 	Dispensaire Cinquième	NULL	61205
+Centre	Maïssade 	Dispensaire de Bois Rouge	NULL	61202
+Centre	Maïssade 	Dispensaire de Selpètre	NULL	61204
+Centre	Maïssade 	Dispensaire Hatty (NF)	NULL	61206
+Centre	Mirebalais 	Clinique Mennonite	NULL	62103
+Centre	Mirebalais 	Dispensaire de Sarazin	NULL	62101
+Centre	Mirebalais 	Dispensaire Fonds Michel	NULL	62106
+Centre	Mirebalais 	Dispensaire Grand Boucan (NF)	NULL	62105
+Centre	Mirebalais 	Dispensaire Marché Canard	MSH	62104
+Centre	Mirebalais 	Hôpital Eye Care	NULL	62102
+Centre	Saut d’Eau 	Centre de Santé sans Lit de Saut d’Eau	NULL	62201
+Centre	Saut d’Eau 	Dispensaire Cap Anamur (NF)	NULL	62203
+Centre	Saut d’Eau 	Dispensaire Montagne Terrible	NULL	62202
+Centre	Savanette 	Centre de Santé de Savanette	NULL	63301
+Centre	Savanette 	Dispensaire de Colombier	NULL	63302
+Centre	Thomassique 	Dispensaire de Boc Banic	NULL	64201
+Centre	Thomassique 	Dispensaire de Thomassique	NULL	64202
+Centre	Thomonde 	Centre de Santé de Thomonde	NULL	61301
+Grande-anse	Abricot	Centre de Santé Léon Coicou d’Anse du Clerc	NULL	81202
+Grande-anse	Abricot	SSPE des Abricots	NULL	81201
+Grande-anse	Anse d’Hainault	CAL Saint Jean-Baptiste de l’Anse d’Hainault	NULL	82101
+Grande-anse	Anse d’Hainault	SSPE de Mandou	NULL	82102
+Grande-anse	Beaumont	CAL Sainte Agnès Citimed de Beaumont	NULL	83301
+Grande-anse	Beaumont	SSPE Communautaire de Beaumont	NULL	83302
+Grande-anse	Bonbon	Chemen La vi de Bonbon	NULL	81301
+Grande-anse	Bonbon	HHF de Bonbon	NULL	81302
+Grande-anse	Chambellan	Centre de Santé de Chambellan	NULL	81501
+Grande-anse	Chambellan	SSPE de Bourdon	NULL	81502
+Grande-anse	Corail	CAL St Pierre de Corail	NULL	83101
+Grande-anse	Corail	CMS de Gebeau a Corail	NULL	83103
+Grande-anse	Corail	SSPE de Moulines	NULL	83102
+Grande-anse	Dame Marie	CAL de la Communauté Dame-Marienne	NULL	82201
+Grande-anse	Dame Marie	Notre Dame des Malades	NULL	82202
+Grande-anse	Dame Marie	Saint Michel de Désormeaux	NULL	82205
+Grande-anse	Dame Marie	Sainte Anne de Bariadelle	NULL	82203
+Grande-anse	Dame Marie	SKS Petite Rivière de Dame Marie	NULL	82204
+Grande-anse	Irois	Saint Martin de Porres des Irois	NULL	82302
+Grande-anse	Irois	Sant sante espwa AFSC/Irois	NULL	82301
+Grande-anse	Jérémie	Bon Pasteur  de Prévilé	NULL	81109
+Grande-anse	Jérémie	CARITAS	NULL	81112
+Grande-anse	Jérémie	Centre Immaculé Conception de Ste Hélène	NULL	81110
+Grande-anse	Jérémie	Centre médico social de Gebeau	NULL	81102
+Grande-anse	Jérémie	FOSREF	NULL	81111
+Grande-anse	Jérémie	Haitian Health Foundation	NULL	81101
+Grande-anse	Jérémie	Hôpital Saint Antoine	MSPP	81100
+Grande-anse	Jérémie	Notre Dame de l’Assomption de Numéro deux	NULL	81108
+Grande-anse	Jérémie	Notre Dame du Perpétuel Secours de Latibolière	NULL	81104
+Grande-anse	Jérémie	Sainte Thérèse de l’Enfant Jésus	NULL	81103
+Grande-anse	Jérémie	Siloé de Léon	NULL	81105
+Grande-anse	Jérémie	SSPE de Mackandal	NULL	81106
+Grande-anse	Jérémie	SSPE de Marfranc	NULL	81107
+Grande-anse	Moron	Centre de Santé de Moron	NULL	81401
+Grande-anse	Moron	HHF de Moron	NULL	81402
+Grande-anse	Moron	Notre Dame de Lourdes de Moron	NULL	81403
+Grande-anse	Pestel	SSPE de Duchity	NULL	83403
+Grande-anse	Pestel	SSPE de Pestel	NULL	83401
+Grande-anse	Pestel	SSPE des Basses	NULL	83402
+Grande-anse	Pestel	SSPE Espwa de Pointe Sable	NULL	83404
+Grande-anse	Roseaux	Bon Samaritain des Roseaux	NULL	83201
+Grande-anse	Roseaux	CMS de Gébeau à Roseaux	NULL	83203
+Grande-anse	Roseaux	HHF a Roseaux	NULL	83205
+Grande-anse	Roseaux	Saint Antoine de Padoue de Lopino	NULL	83204
+Grande-anse	Roseaux	SSPE de Carrefour Charles	NULL	83202
+Nippes	Anse à Veau	CAL Jules Fleury	NULL	85101
+Nippes	Anse à Veau	SSPE d’Arnault	NULL	85105
+Nippes	Anse à Veau	SSPE de Javel	NULL	85103
+Nippes	Anse à Veau	SSPE de Saint Yves	NULL	85104
+Nippes	Anse à Veau	SSPE Ste Catherine de Bouzy	NULL	85102
+Nippes	L’Asile	SSPE de Béthesda	NULL	85402
+Nippes	L’Asile	SSPE de Changieux	NULL	85403
+Nippes	L’Asile	SSPE de l’Asile	NULL	85401
+Nippes	L’Asile	SSPE de Morisseaux	NULL	85404
+Nippes	Miragoane	CAL de Béthel	NULL	84111
+Nippes	Miragoane	CAL de Paillant	NULL	84101
+Nippes	Miragoane	Hôpital Sainte Thérèse	MSPP	84100
+Nippes	Miragoane	SSPE de Belle Rivière	NULL	84108
+Nippes	Miragoane	SSPE de Beraca	NULL	84105
+Nippes	Miragoane	SSPE de Chalon	NULL	84106
+Nippes	Miragoane	SSPE de Etang Rey	NULL	84104
+Nippes	Miragoane	SSPE de Jeannette	NULL	84102
+Nippes	Miragoane	SSPE de Lhomond	NULL	84107
+Nippes	Miragoane	SSPE de Mussotte	NULL	84103
+Nippes	Miragoane	SSPE de St Michel du Sud	NULL	84109
+Nippes	Miragoane	SSPE St Joseph de Pemerle	NULL	84110
+Nippes	Petite Rivière de Nippes	CAL de Madian	NULL	84201
+Nippes	Petite Rivière de Nippes	SSPE de Petite Rivière	NULL	84202
+Nippes	Petite Trou de Nippes	CAL de Petit Trou	NULL	85301
+Nippes	Petite Trou de Nippes	SSPE de Gauthier Civil	NULL	85302
+Nippes	Petite Trou de Nippes	SSPE de Plaisance	NULL	85303
+Nord	Acul du Nord 	Disp de Camp Louise	NULL	32105
+Nord	Acul du Nord 	Disp de la Bruyère	NULL	32108
+Nord	Acul du Nord 	Disp de Pilatre	NULL	32104
+Nord	Acul du Nord 	Disp de Soufrière	NULL	32107
+Nord	Acul du Nord 	Dispensaire de Délivrance	NULL	32106
+Nord	Acul du Nord 	Grison Garde (NF)	NULL	32103
+Nord	Acul du Nord 	Nativité	NULL	32101
+Nord	Acul du Nord 	Tovar	NULL	32102
+Nord	Bahon	Disp de Bahon	NULL	33201
+Nord	Bas Limbe	Disp de Bas Limbé	NULL	36201
+Nord	Borgne	CAL de Borgne	NULL	35101
+Nord	Borgne	Corpus Christi	NULL	35103
+Nord	Borgne	Disp de Petit Bourg Borgne	NULL	35102
+Nord	Cap Haïtien  	CARITAS	NULL	31111
+Nord	Cap Haïtien  	CDS La Fossette	NULL	31101
+Nord	Cap Haïtien  	CEMAD Petite Anse	NULL	31109
+Nord	Cap Haïtien  	CSL Fort St Michel	NULL	31102
+Nord	Cap Haïtien  	CSL Madeline	NULL	31108
+Nord	Cap Haïtien  	Disp Notre Dame de Lourdes de Carénage	NULL	31103
+Nord	Cap Haïtien  	Dispensaire de Labadie	NULL	31104
+Nord	Cap Haïtien  	Dispensaire Notre Dame Ste Philomène	NULL	31107
+Nord	Cap Haïtien  	Dispensaire Sacre Coeur, Rue 2K	NULL	31105
+Nord	Cap Haïtien  	Dispensaire Solano SA, Labadie	NULL	31106
+Nord	Cap Haïtien  	FOSREF, rue 16	NULL	31110
+Nord	Cap Haïtien  	Hôpital Justinien	MSPP	31100
+Nord	Dondon	CSL de Dondon	NULL	34201
+Nord	Dondon	St Joseph	NULL	34202
+Nord	Grande Rivière du Nord	CAL Grande Rivière du Nord	NULL	33101
+Nord	Grande Rivière du Nord	Disp Méth. De la Tannerie	NULL	33102
+Nord	La Victoire	CSL La Victoire	NULL	34501
+Nord	La Victoire	Dispensaire Saint Joseph	NULL	34502
+Nord	Limbe	CAL St Jean de Limbe	NULL	36101
+Nord	Limbe	Disp de Camp Coq	NULL	36103
+Nord	Limbe	Disp Haut Limbe	NULL	36104
+Nord	Limbe	Hop Bon Samaritain	NULL	36102
+Nord	Limonade	Dispensaire Bord de mer Limonade	NULL	32302
+Nord	Limonade	Dispensaire de Limonade	NULL	31301
+Nord	Milot	CAL Sacre Coeur	CRS	32301
+Nord	Milot	Disp Carrefour des Pères	NULL	32302
+Nord	Milot	Disp de Thibault	NULL	32303
+Nord	Milot	Disp St Yves de Thibault	NULL	32304
+Nord	Milot	La Providence de Lory	NULL	32305
+Nord	Pignon	Hôpital Bienfaisance de Pignon	NULL	34401
+Nord	Pignon	St Joseph	NULL	34402
+Nord	Pilate	CAL de Pilate	CRS	37201
+Nord	Plaine du Nord	Clin. François DUGUE	NULL	32207
+Nord	Plaine du Nord	CSL Béthesda de Vaudreuil	NULL	32205
+Nord	Plaine du Nord	CSL Jehova Jireh	NULL	32208
+Nord	Plaine du Nord	Disp de Balan	NULL	32202
+Nord	Plaine du Nord	Disp de Morne Rouge	NULL	32203
+Nord	Plaine du Nord	Disp de Paine du Nord	NULL	32201
+Nord	Plaine du Nord	Disp De Robillard	NULL	32204
+Nord	Plaine du Nord	St Fr.de Sales	NULL	32206
+Nord	Plaisance	CMP Progressio	NULL	37101
+Nord	Plaisance	Disp de Gobert	NULL	37102
+Nord	Plaisance	Disp La Trouble	NULL	37103
+Nord	Plaisance	Disp St Henry de Puilboreau	NULL	37104
+Nord	Port Margot	CSL de Port Margot	NULL	35201
+Nord	Port Margot	Disp Cath de Pt Bourg	NULL	35206
+Nord	Port Margot	Disp de Bayeux	NULL	35203
+Nord	Port Margot	Disp Malachy	NULL	35204
+Nord	Port Margot	Disp Petit Bourg de Port-Margot	NULL	35202
+Nord	Port Margot	Disp Wesleyen de Fauché	NULL	35205
+Nord	Quartier Morin	Disp de Cadush	NULL	31202
+Nord	Quartier Morin	Disp de Morne Pelé	NULL	31203
+Nord	Quartier Morin	Disp de Quartier Morin	NULL	31201
+Nord	Quartier Morin	Disp St Louis	NULL	31204
+Nord	Quartier Morin	Grand Pré	NULL	31206
+Nord	Quartier Morin	Ste Bernadette de Cadush	NULL	31205
+Nord	Ranquitte	CSL de Ranquitte	NULL	34301
+Nord	Ranquitte	Disp Catholique	NULL	34303
+Nord	Ranquitte	Palmary	NULL	34302
+Nord	Saint Raphaël	CSL de St Raphaël	NULL	34101
+Nord	Saint Raphaël	St Joseph	NULL	34102
+Nord-est	Capotille	Dispensaire de Capotille	NULL	42201
+Nord-est	Caracol	Disp de Caracol	NULL	43402
+Nord-est	Caracol	Dispensaire de Jacquezyl	NULL	43401
+Nord-est	Carice 	Dispensaire de Carice	NULL	44201
+Nord-est	Carice 	Dispensaire Sainte Hélène de Carice	NULL	44202
+Nord-est	Ferrier 	Dispensaire de Ferrier	NULL	41201
+Nord-est	Fort Liberté 	Acul Samedi	NULL	41102
+Nord-est	Fort Liberté 	Derac	NULL	41101
+Nord-est	Fort Liberté 	Hôpital de Fort Liberté	NULL	41100
+Nord-est	Mombin Crochu	CAL de Mombin Crochu	NULL	44302
+Nord-est	Mombin Crochu	Dispensaire de Bois de Laurence	NULL	44301
+Nord-est	Mont Organisé	CAL de Mont Organise	NULL	42301
+Nord-est	Ouanaminthe	CAL de Ouanaminthe	NULL	41201
+Nord-est	Ouanaminthe	Dispensaire d’Acul des Pins	NULL	41202
+Nord-est	Ouanaminthe	Dispensaire de Gens de Nantes	NULL	41203
+Nord-est	Perches	Dispensaire de Perches	NULL	41301
+Nord-est	Sainte Suzanne	Dispensaire de Dupity	NULL	43202
+Nord-est	Sainte Suzanne	Dispensaire de Sainte Suzanne	NULL	43201
+Nord-est	Terrier Rouge 	CSL de Grand Bassin	NULL	43302
+Nord-est	Terrier Rouge 	CSL de Terrier Rouge	NULL	43301
+Nord-est	Terrier Rouge 	Disp de Danda	NULL	43304
+Nord-est	Terrier Rouge 	Disp de Phaéton	NULL	43303
+Nord-est	Trou du Nord 	CAL de Trou du Nord	NULL	43101
+Nord-est	Trou du Nord 	Dispensaire de Roche Plate	NULL	43102
+Nord-est	Vallières 	Dispensaire de Grosse Roche	NULL	44102
+Nord-est	Vallières 	Dispensaire de Vallières	NULL	44101
+Nord-ouest	Anse à Foleur	Anse à Foleur	NULL	92201
+Nord-ouest	Anse à Foleur	Côtes de Fer	NULL	92203
+Nord-ouest	Anse à Foleur	Dity	NULL	92202
+Nord-ouest	Baie de Henne	Baie de Henne	NULL	93201
+Nord-ouest	Baie de Henne	La Source	NULL	93202
+Nord-ouest	Baie de Henne	Pte Riv. Baie de Henne	NULL	93203
+Nord-ouest	Bassin Bleu	Bon Samaritain	NULL	91301
+Nord-ouest	Bassin Bleu	Haut Moustique	NULL	91303
+Nord-ouest	Bassin Bleu	La Plate	NULL	91302
+Nord-ouest	Bombardopolis	Bombardopolis	NULL	93301
+Nord-ouest	Bombardopolis	Desforges	NULL	93305
+Nord-ouest	Bombardopolis	Mont des Oliviers	NULL	93303
+Nord-ouest	Bombardopolis	Plate Forme	NULL	93304
+Nord-ouest	Bombardopolis	Rochefort	NULL	93302
+Nord-ouest	Chansolme	Chansolme	NULL	91401
+Nord-ouest	Jean Rabel	Bord de Mer	NULL	93402
+Nord-ouest	Jean Rabel	Boucan Patriot	NULL	93412
+Nord-ouest	Jean Rabel	Cabaret	NULL	93410
+Nord-ouest	Jean Rabel	Café Paul	NULL	93414
+Nord-ouest	Jean Rabel	Croix Sauval	NULL	93418
+Nord-ouest	Jean Rabel	Dubois	NULL	93409
+Nord-ouest	Jean Rabel	Gombo	NULL	93407
+Nord-ouest	Jean Rabel	Grann Lison	NULL	93417
+Nord-ouest	Jean Rabel	Guinaudée	NULL	93405
+Nord-ouest	Jean Rabel	K-Philippe	NULL	93411
+Nord-ouest	Jean Rabel	La Bellée	NULL	93415
+Nord-ouest	Jean Rabel	La Coma	NULL	93404
+Nord-ouest	Jean Rabel	La Montagne	NULL	93403
+Nord-ouest	Jean Rabel	La Réserve	NULL	93406
+Nord-ouest	Jean Rabel	N.D la Paix	CRS	93401
+Nord-ouest	Jean Rabel	Porrier	NULL	93416
+Nord-ouest	Jean Rabel	Port à l’Ecu	NULL	93413
+Nord-ouest	Jean Rabel	Raymond	NULL	93408
+Nord-ouest	La Tortue	Haut Plaine	NULL	91202
+Nord-ouest	La Tortue	La Vallée	NULL	91203
+Nord-ouest	La Tortue	Mare Rouge	NULL	91204
+Nord-ouest	La Tortue	Montry	NULL	91205
+Nord-ouest	La Tortue	Palmistes	NULL	91201
+Nord-ouest	Môle St Nicolas	Côtes de Fer	NULL	93104
+Nord-ouest	Môle St Nicolas	Mare Rouge	NULL	93102
+Nord-ouest	Môle St Nicolas	Môle Saint Nicolas	NULL	93101
+Nord-ouest	Môle St Nicolas	Sentrain	NULL	93103
+Nord-ouest	Môle St Nicolas	Temps Perdu	NULL	93105
+Nord-ouest	Port de Paix	Baie des Moustiques	NULL	91104
+Nord-ouest	Port de Paix	Beauchamp	NULL	91106
+Nord-ouest	Port de Paix	Beaudin	NULL	91110
+Nord-ouest	Port de Paix	Beraca	MSH	91114
+Nord-ouest	Port de Paix	Caluc	NULL	91108
+Nord-ouest	Port de Paix	Fatima Chalet	NULL	91112
+Nord-ouest	Port de Paix	Fatima la Coupe	NULL	91111
+Nord-ouest	Port de Paix	Foison	NULL	91107
+Nord-ouest	Port de Paix	Immaculée Conception	MSPP	91100
+Nord-ouest	Port de Paix	La Croix St Joseph	NULL	91113
+Nord-ouest	Port de Paix	Passe Catabois	NULL	91105
+Nord-ouest	Port de Paix	Poste Métier	NULL	91103
+Nord-ouest	Port de Paix	Profamil	NULL	91102
+Nord-ouest	Port de Paix	Soleil	NULL	91109
+Nord-ouest	Port de Paix	Trois Rivières	NULL	91101
+Nord-ouest	St Ls du Nord	Bonneau	NULL	92101
+Nord-ouest	St Ls du Nord	Chaineau	NULL	92110
+Nord-ouest	St Ls du Nord	Chamoise	NULL	92105
+Nord-ouest	St Ls du Nord	Desgranges	NULL	92104
+Nord-ouest	St Ls du Nord	Gaspard	NULL	92109
+Nord-ouest	St Ls du Nord	Glacis	NULL	92106
+Nord-ouest	St Ls du Nord	Guichard	NULL	92113
+Nord-ouest	St Ls du Nord	Jean Clair	NULL	92108
+Nord-ouest	St Ls du Nord	La Perrière	NULL	92107
+Nord-ouest	St Ls du Nord	NWCM	NULL	92103
+Nord-ouest	St Ls du Nord	St Louis du Nord	NULL	92102
+Nord-ouest	St Ls du Nord	Villaceau	NULL	92111
+Nord-ouest	St Ls du Nord	Zabricot	NULL	92112
+Ouest	Anse à Galets	Disp. Bill-Rice	NULL	15102
+Ouest	Anse à Galets	Disp. Grande Source	NULL	15105
+Ouest	Anse à Galets	Disp. Marsucrin	NULL	15104
+Ouest	Anse à Galets	Disp. Trou Ligeune	NULL	15101
+Ouest	Anse à Galets	Hôpital Wesleyen	NULL	15103
+Ouest	Arcahaie	CAL d’Arcahaie	NULL	14102
+Ouest	Arcahaie	Clinique Meres et Enfants	NULL	14105
+Ouest	Arcahaie	CSL de Saintard	NULL	14107
+Ouest	Arcahaie	CSL St Paul (montrouis)	NULL	14106
+Ouest	Arcahaie	Dispensaire Notre Dame du Perpétuel Secours	NULL	14104
+Ouest	Arcahaie	Nicolas Armand	NULL	14101
+Ouest	Arcahaie	SADA   matheux	NULL	14103
+Ouest	Cabaret	Centre de santé St Antoine de Titanyen	NULL	14205
+Ouest	Cabaret	CSL de Bélanger (SADA)	NULL	14204
+Ouest	Cabaret	CSL de Cabaret	NULL	14202
+Ouest	Cabaret	CSL de source matelas (SADA)	NULL	14201
+Ouest	Cabaret	Dispensaire de Casale	NULL	14203
+Ouest	Carrefour	C/S Bertin	NULL	11326
+Ouest	Carrefour	C/S Béthel Mahotière 81	NULL	11305
+Ouest	Carrefour	C/S Fondeph Bizoton 61	NULL	11301
+Ouest	Carrefour	C/S Maranatha	NULL	11322
+Ouest	Carrefour	C/S Maranatha	NULL	11324
+Ouest	Carrefour	C/S Mère Térésa	NULL	11318
+Ouest	Carrefour	C/S Omes	NULL	11317
+Ouest	Carrefour	Centre de la communauté des frères unis	NULL	11320
+Ouest	Carrefour	Centre de Santé Béthel	NULL	11313
+Ouest	Carrefour	Centre de Santé Communautaire de Waney 87	NULL	11312
+Ouest	Carrefour	Centre de Santé Hands of Love	NULL	11319
+Ouest	Carrefour	Centre de Santé Multi fonctionnaire de sous-rail	NULL	11314
+Ouest	Carrefour	Centre médico social (rivière froide)	NULL	11304
+Ouest	Carrefour	Clinique mennonite	NULL	11327
+Ouest	Carrefour	CSL La Barque de Pierre	NULL	11307
+Ouest	Carrefour	CSL OBCG	NULL	11309
+Ouest	Carrefour	Dispensaire ASCOSADEC	NULL	11315
+Ouest	Carrefour	Dispensaire de Cookson Hill	NULL	11302
+Ouest	Carrefour	Dispensaire de Taiffer	NULL	11311
+Ouest	Carrefour	Dispensaire la main tendue de Bertin	NULL	11308
+Ouest	Carrefour	Dispensaire Marie Louise de Jésus	NULL	11321
+Ouest	Carrefour	Dispensaire Mocot	NULL	11325
+Ouest	Carrefour	Hôpital Adventiste de Diquini	NULL	11306
+Ouest	Carrefour	Hôpital de carrefour	MSPP	11303
+Ouest	Carrefour	Hôpital Food for the Poor	GHESKIO	11316
+Ouest	Carrefour	SHEKINAH	NULL	11310
+Ouest	Carrefour	Zion par la Foi	NULL	11323
+Ouest	Conillon	Dispensaire de conillon	NULL	13401
+Ouest	Cornillon	C/S de Saint Pierre	NULL	13402
+Ouest	Cx des Bouquets	Bon Samaritain en action	NULL	13112
+Ouest	Cx des Bouquets	C/S Kampech Dumaz	NULL	13110
+Ouest	Cx des Bouquets	Centre de Santé de Double Harvest	NULL	13104
+Ouest	Cx des Bouquets	Centre de Santé de la Croix-des-Bouquets	NULL	13103
+Ouest	Cx des Bouquets	Centre de Santé de Turbé	NULL	13107
+Ouest	Cx des Bouquets	Centre de Santé Foyer Ste Catherine	NULL	13109
+Ouest	Cx des Bouquets	Centre de Santé HELP de Vaudreuil	NULL	13105
+Ouest	Cx des Bouquets	Centre de Santé Life Line	NULL	13111
+Ouest	Cx des Bouquets	Centre de Santé Lucelia Bontemps	NULL	13106
+Ouest	Cx des Bouquets	Centre de Santé Petits Amis de Jésus	NULL	13113
+Ouest	Cx des Bouquets	Centre de Santé Sainte thérèse de Santo	NULL	13108
+Ouest	Cx des Bouquets	Dispensaire de Bas Boën	NULL	13101
+Ouest	Cx des Bouquets	Hôpital Défilé de Beudet	NULL	13102
+Ouest	Delmas	Bernard Mews	GHESKIO	11228
+Ouest	Delmas	C/S Bas Fd Philomène Delmas 32	NULL	11202
+Ouest	Delmas	C/S communauté chrétienne Fleuriot de Tabarre 	NULL	11207
+Ouest	Delmas	C/S Delmas 30	NULL	11203
+Ouest	Delmas	C/S Fontaine	NULL	11231
+Ouest	Delmas	C/S La Saline	NULL	11204
+Ouest	Delmas	C/S Pèlerin	NULL	11233
+Ouest	Delmas	Centre de santé  Armée du Salut	NULL	11201
+Ouest	Delmas	Centre de Santé  Saint-Jean	NULL	11222
+Ouest	Delmas	Centre de santé croix des missions	NULL	11219
+Ouest	Delmas	Centre de santé de Delmas 33	NULL	11206
+Ouest	Delmas	Centre de Santé de Petite Place Cazeau	NULL	11224
+Ouest	Delmas	Centre de santé lumière	NULL	11213
+Ouest	Delmas	Centre de santé Mais gaté	NULL	11220
+Ouest	Delmas	Centre de Santé Saint-Martin I	NULL	11225
+Ouest	Delmas	Centre de Santé Saint-Martin II	NULL	11226
+Ouest	Delmas	Centre de santé solidarité	NULL	11210
+Ouest	Delmas	Centre de santé St Paul   	NULL	11227
+Ouest	Delmas	Centre médical & de nutrition Rosalie Rendu	NULL	11232
+Ouest	Delmas	CHAPI	NULL	11230
+Ouest	Delmas	CHOSCAL	NULL	11229
+Ouest	Delmas	Citymed de Delmas	NULL	11205
+Ouest	Delmas	CPFO	NULL	11214
+Ouest	Delmas	Fondeph	NULL	11216
+Ouest	Delmas	Haiti Med	NULL	11218
+Ouest	Delmas	Hôpital de l'OFATMA	NULL	11223
+Ouest	Delmas	Hôpital Espoir	NULL	11209
+Ouest	Delmas	Hôpital Grace Children	MSH	11208
+Ouest	Delmas	Hopital Isaïe Jeanty	NULL	11217
+Ouest	Delmas	Hopital Jude Anne (DASH)	NULL	11212
+Ouest	Delmas	Hopital la paix Delmas 33	NULL	11221
+Ouest	Delmas	Hopital saint Charbel (DASH)	NULL	11211
+Ouest	Delmas	Vie et  santé	NULL	11215
+Ouest	Fonds Verrettes	C/S de Fonds Verrettes	NULL	13501
+Ouest	Fonds Verrettes	Dispensaire  de Foret des Pins	NULL	13502
+Ouest	Fonds Verrettes	Dispensaire d’Orianie	NULL	13503
+Ouest	Ganthier	Centre de Santé de Ganthier	NULL	13302
+Ouest	Ganthier	Dispensaire de Fonds Parisien	NULL	13301
+Ouest	Ganthier	Dispensaire de FOPECG	NULL	13304
+Ouest	Ganthier	Dispensaire de Savane cabri	NULL	13303
+Ouest	Grand Goave	Centre de Santé de Meyer	NULL	12302
+Ouest	Grand Goave	Centre de Santé Georges Gauvin	NULL	12301
+Ouest	Grand Goave	Danneau	NULL	11304
+Ouest	Grand Goave	Dispensaire de Dufour	NULL	12303
+Ouest	Gressier	Centre de Santé de Alphonse	NULL	11604
+Ouest	Gressier	Centre de Santé de Christianville	NULL	11602
+Ouest	Gressier	Centre de Santé FOSADEC	NULL	11603
+Ouest	Gressier	Dispensaire Bon Berger	NULL	11601
+Ouest	Gressier	Dispensaire morne a bateau	NULL	11606
+Ouest	Gressier	Dispensaire Zev Atizan Lape	NULL	11605
+Ouest	Kenscoff	Centre de Santé de Kenscoff 	NULL	11501
+Ouest	Kenscoff	Disp. Notre Dame Perpétuel Secours (Furcy)	NULL	11507
+Ouest	Kenscoff	Dispensaire aux  cadets  (Afè nèg kombit)	NULL	11511
+Ouest	Kenscoff	Dispensaire d’Athis	NULL	11508
+Ouest	Kenscoff	Dispensaire de  Greffin (mission baptiste)	NULL	11504
+Ouest	Kenscoff	Dispensaire de Bolosse (mission baptiste)	NULL	11502
+Ouest	Kenscoff	Dispensaire de Bongars (mission baptiste) 	NULL	11506
+Ouest	Kenscoff	Dispensaire de Robin  (mission baptiste)	NULL	11505
+Ouest	Kenscoff	Dispensaire Dumisseau (Afè nèg kombit)	NULL	11510
+Ouest	Kenscoff	Dispensaire Godey (Afè nèg kombit)	NULL	11509
+Ouest	Kenscoff	Hôpital de Fermathe (mission baptiste)	NULL	11503
+Ouest	Léogane	Asile de Sigueneau	NULL	12107
+Ouest	Léogane	Biré (new mission)	NULL	12109
+Ouest	Léogane	C/S Farnèse Louis Charles de Palmiste a vin	NULL	12103
+Ouest	Léogane	Centre de santé Monsanto Petit	NULL	11403
+Ouest	Léogane	Centre materno-infantile	NULL	12105
+Ouest	Léogane	Centre medico communautaire de Darbonne	NULL	12102
+Ouest	Léogane	Centre petit Harpon	NULL	12112
+Ouest	Léogane	Citymed de Pétion ville	NULL	11402
+Ouest	Léogane	Dispensaire de Beauséjour	NULL	12101
+Ouest	Léogane	Dispensaire de Fonds d'oie	NULL	12110
+Ouest	Léogane	Dispensaire de Trouin	NULL	12111
+Ouest	Léogane	Hôpital Cardinal Léger	NULL	12104
+Ouest	Léogane	Hôpital Sainte-Croix	CRS	12108
+Ouest	Léogane	Sanatorium de Léogane	NULL	12106
+Ouest	Pétion ville	C/S  retraite sainte Anne	NULL	11416
+Ouest	Pétion ville	C/S Concardia	NULL	11419
+Ouest	Pétion ville	C/S de Pernier	NULL	11415
+Ouest	Pétion ville	C/S Francisca Cabrini	NULL	11406
+Ouest	Pétion ville	C/S kay lavi	NULL	11411
+Ouest	Pétion ville	C/S l’espoir	NULL	11422
+Ouest	Pétion ville	C/S Notre Dame du Cap	NULL	11414
+Ouest	Pétion ville	Centre de Santé calebasse	NULL	11401
+Ouest	Pétion ville	Centre de Santé de Thomassin 25	NULL	11417
+Ouest	Pétion ville	Centre de Santé Nazaréen	NULL	11413
+Ouest	Pétion ville	Centre de Santé philantropique de dupont	NULL	11420
+Ouest	Pétion ville	Centre de santé Zafè Fanm	NULL	11418
+Ouest	Pétion ville	Centre Eliazar Germain	NULL	11405
+Ouest	Pétion ville	CSL family center	NULL	11408
+Ouest	Pétion ville	Dispensaire de Diegue	NULL	11421
+Ouest	Pétion ville	Dispensaire Sainte Claire	NULL	11410
+Ouest	Pétion ville	Fondeph	NULL	11409
+Ouest	Pétion ville	Hopital Censhop	NULL	11407
+Ouest	Pétion ville	Hôpital de la communauté haïtienne	NULL	11404
+Ouest	Pétion ville	Hopital nos petits frères et soeurs	NULL	11412
+Ouest	Petit Goave	Centre de Santé de Delattre	NULL	12206
+Ouest	Petit Goave	Centre de Santé Henry Gérard Desgranges	NULL	12208
+Ouest	Petit Goave	Centre de Santé Les Palmes (Besace)	NULL	12205
+Ouest	Petit Goave	Clinique mobile Olivier	NULL	12207
+Ouest	Petit Goave	Dispensaire APV de Vallue	NULL	12209
+Ouest	Petit Goave	Dispensaire de Arnoux	NULL	12204
+Ouest	Petit Goave	Dispensaire de Madeleine	NULL	12203
+Ouest	Petit Goave	Dispensaire de Vialet	NULL	12202
+Ouest	Petit Goave	Hôpital Notre Dame	MSPP	12201
+Ouest	Port-au-Prince	APROSIFA	NULL	11130
+Ouest	Port-au-Prince	ASOLDO	NULL	11113
+Ouest	Port-au-Prince	CAL SODEC	NULL	11121
+Ouest	Port-au-Prince	Centre de psychiatrie Mars & Kline	NULL	11118
+Ouest	Port-au-Prince	Centre de Santé ACDEF mapou	NULL	11139
+Ouest	Port-au-Prince	Centre de Santé Aurore du Belair	NULL	11103
+Ouest	Port-au-Prince	Centre de Santé Bethanie	NULL	11137
+Ouest	Port-au-Prince	Centre de Santé Bethesda	NULL	11141
+Ouest	Port-au-Prince	Centre de santé Caravelle 	NULL	11135
+Ouest	Port-au-Prince	Centre de Santé cite Canada (Haut Turgeau)	NULL	11153
+Ouest	Port-au-Prince	Centre de santé communautaire (rue Mgr. Guilloux)	NULL	11143
+Ouest	Port-au-Prince	Centre de santé croix des prés	NULL	11128
+Ouest	Port-au-Prince	Centre de Santé de Solino	NULL	11109
+Ouest	Port-au-Prince	Centre de santé de St. Antoine	NULL	11107
+Ouest	Port-au-Prince	Centre de Santé du Bon Secours	NULL	11115
+Ouest	Port-au-Prince	Centre de Santé du Portail Léogane	NULL	11106
+Ouest	Port-au-Prince	Centre de santé kay ti moun	NULL	11132
+Ouest	Port-au-Prince	Centre de santé Martissant	NULL	11134
+Ouest	Port-au-Prince	Centre de Santé Providence	NULL	11140
+Ouest	Port-au-Prince	Centre de Santé Richard Allen	NULL	11112
+Ouest	Port-au-Prince	Centre de santé Sainte elizabeth	NULL	11131
+Ouest	Port-au-Prince	Centre de Santé Snelak	NULL	11108
+Ouest	Port-au-Prince	Centre de Santé St Michel barreau	NULL	11144
+Ouest	Port-au-Prince	Centre de Santé trou sable	NULL	11110
+Ouest	Port-au-Prince	Centre médico-social (fhsm)	NULL	11142
+Ouest	Port-au-Prince	Centre Pédodontique	NULL	11125
+Ouest	Port-au-Prince	Centre St Antoine	NULL	11119
+Ouest	Port-au-Prince	Centre St Jude	NULL	11138
+Ouest	Port-au-Prince	CMS/FHSM	NULL	11133
+Ouest	Port-au-Prince	Dispensaire Carifont de Fontamara	NULL	11105
+Ouest	Port-au-Prince	Dispensaire de Baillergeau c/s campêche	NULL	11102
+Ouest	Port-au-Prince	Dispensaire de l’Ass. Des Chauffeurs guides	NULL	11101
+Ouest	Port-au-Prince	FOSREF	NULL	11151
+Ouest	Port-au-Prince	Gheskio	NULL	11136
+Ouest	Port-au-Prince	Hôpital du Canapé Vert	NULL	11104
+Ouest	Port-au-Prince	Hôpital du Canapé-vert 	NULL	11154
+Ouest	Port-au-Prince	Hôpital François	NULL	11114
+Ouest	Port-au-Prince	Hôpital la fleur du chêne	NULL	11150
+Ouest	Port-au-Prince	Hôpital la Sainte Famille	NULL	11149
+Ouest	Port-au-Prince	Hôpital Saint-esprit	NULL	11145
+Ouest	Port-au-Prince	Hôpital Saint-Joseph	NULL	11124
+Ouest	Port-au-Prince	Hôpital Sainte Claire	NULL	11146
+Ouest	Port-au-Prince	Hôpital Sapiens	NULL	11147
+Ouest	Port-au-Prince	Hôpital St. François de Salle	NULL	11120
+Ouest	Port-au-Prince	HUEH	MSPP	11100
+Ouest	Port-au-Prince	Institut Fame Pereo	GHESKIO	11127
+Ouest	Port-au-Prince	Klinik fanm kafou fey	NULL	11116
+Ouest	Port-au-Prince	Ligue anti anemie falciforme (LAAF)	NULL	11117
+Ouest	Port-au-Prince	Maternité de Christ-roi	NULL	11152
+Ouest	Port-au-Prince	Maternité UMO	NULL	11148
+Ouest	Port-au-Prince	PROFAMIL	NULL	11122
+Ouest	Port-au-Prince	Renaissance	NULL	11129
+Ouest	Port-au-Prince	Sanatorium de Port-au-Prince	NULL	11123
+Ouest	Port-au-Prince	SOFA	NULL	11111
+Ouest	Port-au-Prince	World Relief	NULL	11126
+Ouest	Pte à Raquette	Centre World Vision  ti palmiste	NULL	15204
+Ouest	Pte à Raquette	Centre World Vision de gros mangle	NULL	15203
+Ouest	Pte à Raquette	Dispensaire de  tamarin	NULL	15202
+Ouest	Pte à Raquette	Dispensaire la source	NULL	15201
+Ouest	Pte à Raquette	Dispensaire méthodiste de source a Philippe	NULL	15206
+Ouest	Pte à Raquette	Dispensaire Saint-Louis	NULL	15205
+Ouest	Thomazeau	C/S de Thomazeau	NULL	13201
+Ouest	Thomazeau	L’étang	NULL	13202
+Sud	Aquin	Charles Pasqua	NULL	73104
+Sud	Aquin	CS Aquin	MSPP	73101
+Sud	Aquin	CS La Colline	NULL	73102
+Sud	Aquin	Fond des Blancs	NULL	73103
+Sud	Aquin	Mouillage Fouquet	NULL	73107
+Sud	Aquin	Ste Hélène	NULL	73106
+Sud	Aquin	Vx Bourg	NULL	73105
+Sud	Arniquet	Arniquet	NULL	72301
+Sud	Arniquet	Chateau	NULL	72302
+Sud	Baraderes	Baradères	NULL	85201
+Sud	Camp-Perrin	CS Camp-Perrin	NULL	71401
+Sud	Camp-Perrin	Guichard	NULL	71403
+Sud	Camp-Perrin	Mazenod	NULL	71402
+Sud	Camp-Perrin	Mersan	NULL	71404
+Sud	Camp-Perrin	Rhé	NULL	71405
+Sud	Cavaillon	Cavaillon NDPS	NULL	73303
+Sud	Cavaillon	Com. Bonne Fin	NULL	73305
+Sud	Cavaillon	CS Cavaillon	NULL	73302
+Sud	Cavaillon	Flamands	NULL	73304
+Sud	Cavaillon	Hop Bonne Fin	NULL	73301
+Sud	Cavaillon	Sudre	NULL	73306
+Sud	Cayes	Autres	NULL	NULL
+Sud	Cayes	Charpentier	NULL	71107
+Sud	Cayes	Cite Lumiere	NULL	71104
+Sud	Cayes	Citymed	NULL	71103
+Sud	Cayes	Colette	NULL	71110
+Sud	Cayes	Fonfred	NULL	71113
+Sud	Cayes	FORSREF	NULL	71116
+Sud	Cayes	HIC	NULL	71100
+Sud	Cayes	I. O. Brenda	NULL	71101
+Sud	Cayes	Klinik Lafanmy	NULL	71105
+Sud	Cayes	Laborde	NULL	71109
+Sud	Cayes	Laurent	NULL	71112
+Sud	Cayes	LKTMBD	NULL	71108
+Sud	Cayes	Quatre Chemins	NULL	71106
+Sud	Cayes	Sanatorium	MSPP	71102
+Sud	Cayes	Terre des Hommes	NULL	71115
+Sud	Cayes	World Vision	NULL	71114
+Sud	Chantal	Chantal	NULL	71301
+Sud	Chantal	Lepretre	NULL	71302
+Sud	Chardonnieres	Ste Anne	NULL	75101
+Sud	Chardonnières	Rendel	NULL	75102
+Sud	Coteaux	Coteaux	NULL	74101
+Sud	Coteaux	Damassin	NULL	74102
+Sud	Ile a Vache	Ile à Vache	NULL	71601
+Sud	Les Anglais	Les Anglais	NULL	75201
+Sud	Maniche	Dory	NULL	71502
+Sud	Maniche	Maniche	NULL	71501
+Sud	Maniche	Melon	NULL	71503
+Sud	Port à Piment	Port à Piment	NULL	74201
+Sud	Port Salut	Carpentier	NULL	72103
+Sud	Port Salut	Dumont	NULL	72102
+Sud	Port Salut	Port Salut	MSPP	72101
+Sud	Roche à Bateau	Roche à Bateau	NULL	74301
+Sud	Saint Jean du Sud	Carrefour Joute	NULL	72202
+Sud	Saint Jean du Sud	St Jean	NULL	72201
+Sud	Saint Louis du Sud	Cherette	NULL	73205
+Sud	Saint Louis du Sud	Saint Louis	NULL	73201
+Sud	Saint Louis du Sud	Saint Patrick	NULL	73202
+Sud	Saint Louis du Sud	Sucrerie Henry	NULL	73203
+Sud	Saint Louis du Sud	World Vision BD	NULL	73204
+Sud	Torbeck	Béraud	NULL	71205
+Sud	Torbeck	Ducis	NULL	71203
+Sud	Torbeck	Ferme Leblanc	NULL	71206
+Sud	Torbeck	Maillard	NULL	71204
+Sud	Torbeck	Maison de Naissance	NULL	71201
+Sud	Torbeck	Saint joseph	NULL	71202
+Sud-est	Anse-a-Pitres	Centre sans lit des Anse-a-Pitres	NULL	23401
+Sud-est	Anse-a-Pitres	Dispensairede Banane	NULL	23402
+Sud-est	Bainet	Centre a Lits de Bainet	NULL	22101
+Sud-est	Bainet	Dispensaire Bahot *	NULL	22103
+Sud-est	Bainet	Dispensaire Saurel	NULL	22102
+Sud-est	Belle Anse	Centre sans lit Belle Anse	NULL	23101
+Sud-est	Belle Anse	Dispensaire de Mapou	NULL	23102
+Sud-est	Belle Anse	Dispensaire Ricot	NULL	22204
+Sud-est	Cayes Jacmel	Centre de Santé Cayes Jacmel 	NULL	21301
+Sud-est	Cayes Jacmel	Centre de sante Emmanuel Baptiste 	NULL	21302
+Sud-est	Cayes Jacmel	Dispensaire Cap Rouge	NULL	21303
+Sud-est	Cote de Fer	Centre a lits de Gris Gris	NULL	22201
+Sud-est	Cote de Fer	Dispensaire Boucan Bélier	NULL	22203
+Sud-est	Cote de Fer	Dispensaire Saint Joseph	NULL	22202
+Sud-est	Grand Gosier	Dispensaire de Bodarie  	NULL	23202
+Sud-est	Grand Gosier	Dispensaire Grand Gosier	NULL	23201
+Sud-est	Jacmel	Centre a lits Christian Martinez 	NULL	21112
+Sud-est	Jacmel	Centre de Fosref	NULL	21111
+Sud-est	Jacmel	CSL PROFAMIL	NULL	21102
+Sud-est	Jacmel	CSLdes Orangers	NULL	21101
+Sud-est	Jacmel	Dispensaire Bellevue la Montagne	NULL	21109
+Sud-est	Jacmel	Dispensaire Cyvadier	NULL	21103
+Sud-est	Jacmel	Dispensaire La Montagne	NULL	21104
+Sud-est	Jacmel	Dispensaire La Montagne la Voûte 	NULL	21106
+Sud-est	Jacmel	Dispensaire La Vanneau	NULL	21107
+Sud-est	Jacmel	Dispensaire Lafond	NULL	21110
+Sud-est	Jacmel	Dispensaire Marbial	NULL	21105
+Sud-est	Jacmel	Dispensaire Marbial 	NULL	21113
+Sud-est	Jacmel	Dispensaire Notre Dame de Lourdes 	NULL	21108
+Sud-est	Jacmel 	Hopital St Michel 	PIH	21100
+Sud-est	La Vallée	Centre a lits Joseph	NULL	21401
+Sud-est	La Vallée	Dispensaire Amalia	NULL	21403
+Sud-est	La Vallée	Dispensaire Morne a Brûler	NULL	21402
+Sud-est	Marigot	Centre de Santé de Marigot	NULL	21201
+Sud-est	Marigot	Dispensaire Peredo	NULL	21202
+Sud-est	Marigot	Dispensaire Seguin	NULL	21203
+Sud-est	Thiotte	Centre sans lit de Thiotte	NULL	23301
+Sud-est	Thiotte	Dispensaire Bleck	NULL	23302
+Sud-est	Thiotte	Dispensaire Mare Blanche*	NULL	23304
+Sud-est	Thiotte	Dispensaire Savane Zombi	NULL	23303

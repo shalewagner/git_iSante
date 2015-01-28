@@ -1,0 +1,5096 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-07-20 15:28-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: tuberculosis/tbEval.php:108
+msgid "              RESULTATS DE L’EXPECTORATION"
+msgstr "              RESULTS OF EXPECTORATION"
+
+#: primaryIntake/diagnosis.php:534
+msgid "  N: nouveau, A: actif, G: guéri"
+msgstr "N: new, A: active, G: cured"
+
+#: primaryIntake/generalPanel.php:221
+msgid " : Enceinte"
+msgstr " : Pregnant"
+
+#: include/verticalTabHeader.php:206
+msgid " erreurs"
+msgstr "errors"
+
+#: maintainSites/maintainSites.php:101 maintainSites/maintainSites.php:167
+msgid " établissements répondent ce à des critères."
+msgstr " institutions to meet this criteria."
+
+#: primaryIntake/vitalsPanel.php:204
+msgid "(diastolique)"
+msgstr "(Diastolic)"
+
+#: primaryIntake/otherplans.php:252
+msgid "(jj/mm/aa)"
+msgstr "(Dd / mm / yy)"
+
+#: primaryIntake/generalPanel.php:277 primaryIntake/generalPanel.php:304
+msgid "(mm/aa)"
+msgstr "(Mm / yy)"
+
+#: primaryIntake/vitalsPanel.php:196
+msgid "(systolique)"
+msgstr "(Systolic)"
+
+#: primaryIntake/vitalsPanel.php:143
+msgid "(âge 1 mois - 5 ans)"
+msgstr "(Age 1 month - 5 years)"
+
+#: splash.php:241
+msgid "* Autre : Patients en soins de santé primaires (adulte, pédiatrique, ob-gyn) et les patients avec fiche d’enregistrement seulement"
+msgstr "* Other: Patients in primary health care (adult, pediatric, ob-gyn) and patients with registration form only"
+
+#: primaryIntake/diagnosis.php:532
+msgid "*Notifiez le Ministère de la Santé pour le registre de surveillance épidémiologique."
+msgstr "* Notify the Ministry of Health to register for the epidemiological surveillance."
+
+#: primaryIntake/physicalExamPanel.php:83
+msgid "--Axillaire"
+msgstr "--Axillary"
+
+#: primaryIntake/physicalExamPanel.php:81
+msgid "--Cervicale"
+msgstr "--Cervical"
+
+#: primaryIntake/physicalExamPanel.php:84
+msgid "--Inguinale"
+msgstr "--Inguinal"
+
+#: primaryIntake/physicalExamPanel.php:82
+msgid "--Supraclaviculaire"
+msgstr "--Supraclavicular"
+
+#: primaryIntake/consultationPanel.php:53
+msgid "120h-2sem"
+msgstr "120h-2sem"
+
+#: labor/1.php:509 labor/2.php:659
+msgid "1er"
+msgstr "1st"
+
+#: tuberculosis/tuberculosis.php:176
+msgid "2RHEZ"
+msgstr "2RHEZ"
+
+#: tuberculosis/tuberculosis.php:179
+msgid "2S"
+msgstr "2S"
+
+#: labor/1.php:510 labor/2.php:660
+msgid "2eme"
+msgstr "2nd"
+
+#: labor/1.php:511 labor/2.php:661
+msgid "3eme"
+msgstr "3rd"
+
+#: labor/1.php:512 labor/2.php:662
+msgid "4eme"
+msgstr "4th"
+
+#: primaryIntake/consultationPanel.php:51
+msgid "72-120h"
+msgstr "72-120h"
+
+#: include/verticalTabHeader.php:208 include/verticalTabHeader.php:211
+msgid ": Veuillez fournir ce message d’erreur à votre administrateur!"
+msgstr ": Please submit this error to your administrator!"
+
+#: primaryIntake/consultationPanel.php:49
+msgid "<72h"
+msgstr "<72h"
+
+#: primaryIntake/personalHistoryPanel.php:92
+msgid "> 1 mois à un an"
+msgstr "> 1 month to one year"
+
+#: primaryIntake/personalHistoryPanel.php:93
+msgid "> un an"
+msgstr "> one year"
+
+#: primaryIntake/consultationPanel.php:55
+msgid ">2sem"
+msgstr "> 2sem"
+
+#: labor/1.php:215 labor/2.php:273
+msgid "ACCOUCHEMENT"
+msgstr "CHILDBIRTH"
+
+#: pedPrimaryIntake/diet.php:105
+msgid "ALIMENTAIRE ACTUELLE"
+msgstr "CURRENT FOOD"
+
+#: primaryIntake/relatives.php:65
+msgid "ANTECEDENTS HEREDO-COLLATERAUX"
+msgstr "BACKGROUND hereditary COLLATERAL"
+
+#: pmtctintake/obgynHistoryPanel.php:45
+msgid "ANTECEDENTS OBSTETRICO-GYNECOLOGIQUES"
+msgstr "Obstetrics GYNECOLOGICAL HISTORY"
+
+#: primaryIntake/personalHistoryPanel.php:187
+msgid "ANTECEDENTS PERSONNELS/HABITUDES"
+msgstr "PERSONAL HISTORY / HABITS"
+
+#: tuberculosis/tuberculosis.php:315
+msgid "ARV"
+msgstr "ARV"
+
+#: primaryIntake/procedures.php:108
+msgid "ASAT / ALAT"
+msgstr "AST / ALT"
+
+#: primaryIntake/procedures.php:112
+msgid "ASO"
+msgstr "ASO"
+
+#: pmtctintake/obgynHistoryPanel.php:213
+msgid "ATCD de Césarienne"
+msgstr "ATCD of Cesarean"
+
+#: primaryIntake/otherplans.php:17
+msgid "AUTRE PLAN"
+msgstr "ANOTHER PLAN"
+
+#: primaryIntake/diagnosis.php:108
+msgid "Abcès [682.9]"
+msgstr "Abscess [682.9]"
+
+#: primaryIntake/physicalExamPanel.php:27
+#: primaryIntake/physicalExamPanel.php:45
+msgid "Abdomen"
+msgstr "Abdomen"
+
+#: labor/1.php:441 labor/2.php:365
+msgid "Abruptio placentae"
+msgstr "Abruptio placentae"
+
+#: primaryIntake/consultationPanel.php:131
+#: primaryIntake/consultationPanel.php:298
+msgid "Accident Voie Publique"
+msgstr "Public Ways accident"
+
+#: primaryIntake/personalHistoryPanel.php:56
+msgid "Accident cérébro-vasculaire"
+msgstr "Stroke"
+
+#: primaryIntake/diagnosis.php:109
+msgid "Accident cérébro-vasculaire [434.91]"
+msgstr "Stroke [434.91]"
+
+#: tuberculosis/tuberculosis.php:245
+msgid "Accompagnateur"
+msgstr "Accompanist"
+
+#: pmtctintake/obgynHistoryPanel.php:22 labor/0.php:226
+msgid "Accouchement"
+msgstr "Childbirth"
+
+#: pedPrimaryIntake/powerUpsPanel.php:55 patient/vaccinations.php:76
+msgid "Act Hib"
+msgstr "Act Hib"
+
+#: primaryIntake/diagnosis.php:110
+msgid "Adénofibrome (ADF) du sein [610.3]"
+msgstr "Fibroadenoma (ADF) of the breast [610.3]"
+
+#: primaryIntake/consultationPanel.php:119
+msgid "Adénopathie"
+msgstr "Lymphadenopathy"
+
+#: labor/1.php:163 labor/2.php:204
+msgid "Age"
+msgstr "Age"
+
+#: pmtctintake/obgynHistoryPanel.php:64
+msgid "Age des Ménarches"
+msgstr "Age of menarche"
+
+#: pmtctintake/obgynHistoryPanel.php:75
+msgid "Age des premières relations sexuelles"
+msgstr "Age of first intercourse"
+
+#: labor/1.php:231 labor/2.php:289 labor/0.php:122
+msgid "Age gestationnel"
+msgstr "Gestational age"
+
+#: primaryIntake/generalPanel.php:9
+msgid "Age:"
+msgstr "Age:"
+
+#: primaryIntake/consultationPanel.php:128
+msgid "Agression Auto-infligée"
+msgstr "Self-inflicted Assault"
+
+#: primaryIntake/consultationPanel.php:129
+#: primaryIntake/consultationPanel.php:296
+#: primaryIntake/consultationPanel.php:398
+msgid "Agression Sexuelle"
+msgstr "Sexual assault"
+
+#: primaryIntake/diagnosis.php:111
+msgid "Agression sexuelle [995.83]"
+msgstr "Sexual assault [995.83]"
+
+#: primaryIntake/consultationPanel.php:295
+msgid "Agression à domicile"
+msgstr "Aggression at home"
+
+#: patient/patientHeader.php:67
+msgid "Ajoutez les<br />empreintes digitales"
+msgstr "Add the <br /> fingerprints"
+
+#: maintainSites/maintainSites.php:359 maintainSites/maintainSites.php:472
+msgid "Ajoutez l’etablissement"
+msgstr "Add the establishment"
+
+#: primaryIntake/personalHistoryPanel.php:117
+msgid "Alcool"
+msgstr "Alcohol"
+
+#: primaryIntake/personalHistoryPanel.php:112
+msgid "Alcool/Drogue, précisez:"
+msgstr "Alcohol / Drugs, specify:"
+
+#: labor/2.php:34
+msgid "Alimentation mixte"
+msgstr "Mixed feeding"
+
+#: labor/2.php:656
+msgid "Allaitement maternel 1 ère heure"
+msgstr "Breastfeeding 1st hour"
+
+#: labor/2.php:34
+msgid "Allaitement maternel exclusif"
+msgstr "Exclusive breastfeeding"
+
+#: primaryIntake/personalHistoryPanel.php:58
+msgid "Allergie, précisez:"
+msgstr "Allergy, specify:"
+
+#: primaryIntake/generalPanel.php:203
+msgid "Alphabétisée"
+msgstr "Literate"
+
+#: primaryIntake/diagnosis.php:112
+msgid "Amygdalites"
+msgstr "Tonsillitis"
+
+#: primaryIntake/consultationPanel.php:218
+msgid "Aménorrhée, précisez"
+msgstr "Amenorrhea, specify"
+
+#: primaryIntake/physicalExamPanel.php:32
+msgid "Annexes"
+msgstr "Schedules"
+
+#: maintainSites/maintainSites.php:340
+msgid "Annuler"
+msgstr "Cancel"
+
+#: primaryIntake/consultationPanel.php:199
+#: primaryIntake/consultationPanel.php:341
+msgid "Anorexie > 2 semaines"
+msgstr "Anorexia > 2 weeks"
+
+#: primaryIntake/physicalExamPanel.php:55
+msgid "Anormal"
+msgstr "Abnormal"
+
+#: pmtctintake/obgynHistoryPanel.php:283 pmtctintake/obgynHistoryPanel.php:323
+msgid "Anormale"
+msgstr "Abnormal"
+
+#: primaryIntake/diagnosis.php:114
+msgid "Anémie Carentielle [281.0]"
+msgstr "Iron deficiency anemia [281.0]"
+
+#: primaryIntake/diagnosis.php:115
+msgid "Anémie Falciforme [282.6]"
+msgstr "Sickle cell anemia [282.6]"
+
+#: primaryIntake/diagnosis.php:113
+msgid "Anémie [285.9]"
+msgstr "Anemia [285.9]"
+
+#: labor/0.php:292
+msgid "Apgar à"
+msgstr "Apgar"
+
+#: primaryIntake/consultationPanel.php:167
+msgid "Aphasie"
+msgstr "Aphasia"
+
+#: primaryIntake/consultationPanel.php:136
+msgid "Arme blanche"
+msgstr "Cold steel"
+
+#: primaryIntake/consultationPanel.php:135
+msgid "Arme à feu"
+msgstr "Firearm"
+
+#: primaryIntake/consultationPanel.php:312
+msgid "Arthralgie"
+msgstr "Arthralgia"
+
+#: labor/1.php:411 labor/2.php:477 labor/0.php:261
+msgid "Artificielle"
+msgstr "Artificial"
+
+#: primaryIntake/personalHistoryPanel.php:59 primaryIntake/relatives.php:41
+msgid "Asthme"
+msgstr "Asthma"
+
+#: primaryIntake/diagnosis.php:116
+msgid "Asthme [493.9]"
+msgstr "Asthma [493.9]"
+
+#: primaryIntake/consultationPanel.php:262
+msgid "Asthénie/léthargie"
+msgstr "Asthenia / lethargy"
+
+#: primaryIntake/personalHistoryPanel.php:197 primaryIntake/relatives.php:80
+#: labor/1.php:294 labor/2.php:557 labor/0.php:177
+msgid "Aucune"
+msgstr "No"
+
+#: patient/patientHeader.php:69
+msgid "Aucunes empreintes digitales"
+msgstr "No fingerprints"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:24
+#: pedPrimaryFollowup/powerUpsPanel2.php:31
+#: pedPrimaryFollowup/powerUpsPanel2.php:38 pmtctintake/vaccins.php:29
+#: tuberculosis/tuberculosis.php:118 pedPrimaryIntake/powerUpsPanel.php:66
+#: pedPrimaryIntake/powerUpsPanel.php:78 pedPrimaryIntake/powerUpsPanel.php:90
+#: primaryIntake/diagnosis.php:224 primaryIntake/diagnosis.php:225
+#: primaryIntake/diagnosis.php:226 primaryIntake/procedures.php:278
+#: primaryIntake/procedures.php:307 labor/2.php:227 labor/2.php:350
+#: labor/2.php:425 labor/2.php:712 backend/materializedViews.php:2551
+msgid "Autre"
+msgstr "Other"
+
+#: splash.php:130
+msgid "Autre *"
+msgstr "other *"
+
+#: labor/2.php:424
+msgid "Autre Institution"
+msgstr "Another Institution"
+
+#: primaryIntake/procedures.php:514
+msgid "Autre services, précisez"
+msgstr "Other services, specify"
+
+#: primaryIntake/procedures.php:519
+msgid "Autre établissement / clinique"
+msgstr "Another school / clinic"
+
+#: primaryIntake/diagnosis.php:400 primaryIntake/generalPanel.php:45
+#: primaryIntake/procedures.php:391 labor/1.php:445 labor/1.php:554
+#: labor/2.php:19 labor/2.php:27 labor/2.php:369 labor/2.php:564
+#: labor/2.php:720
+msgid "Autre, précisez"
+msgstr "Other, specify"
+
+#: primaryIntake/diagnosis.php:331 primaryIntake/diagnosis.php:499
+#: primaryIntake/personalHistoryPanel.php:121 primaryIntake/relatives.php:110
+#: primaryIntake/procedures.php:189 primaryIntake/consultationPanel.php:204
+#: primaryIntake/consultationPanel.php:349
+msgid "Autres"
+msgstr "Other"
+
+#: labor/2.php:626
+msgid "Autres médicaments, Précisez, posologie"
+msgstr "Other drugs, Specify, dosage"
+
+#: labor/1.php:353 labor/0.php:210
+msgid "Autres médications"
+msgstr "Other medications"
+
+#: primaryIntake/consultationPanel.php:252
+msgid "Autres, précisez :"
+msgstr "Other, please specify:"
+
+#: primaryIntake/consultationPanel.php:137
+msgid "Autres:"
+msgstr "Others:"
+
+#: pmtctintake/obgynHistoryPanel.php:16
+msgid "Avortement"
+msgstr "Abortion"
+
+#: primaryIntake/diagnosis.php:117
+msgid "Avortement [634.9]"
+msgstr "Abortion [634.9]"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:4
+#: pedPrimaryIntake/powerUpsPanel.php:6 labor/2.php:144
+#: patient/vaccinations.php:6
+msgid "BCG"
+msgstr "BCG"
+
+#: tuberculosis/tbEval.php:58
+msgid "Bacilloscopie"
+msgstr "Smear"
+
+#: splash.php:301
+msgid "Bleu"
+msgstr "blue"
+
+#: primaryIntake/consultationPanel.php:168
+msgid "Boiterie/Steppage"
+msgstr "Lameness / steppage"
+
+#: primaryIntake/physicalExamPanel.php:40
+msgid "Bouche"
+msgstr "Mouth"
+
+#: primaryIntake/diagnosis.php:118
+msgid "Bronchite [490]"
+msgstr "Bronchitis [490]"
+
+#: primaryIntake/diagnosis.php:119
+msgid "Brûlure [949.0]"
+msgstr "Burn [949.0]"
+
+#: primaryIntake/consultationPanel.php:132
+#: primaryIntake/consultationPanel.php:299
+msgid "Brûlure, précisez:"
+msgstr "Burn, specify:"
+
+#: primaryIntake/consultationPanel.php:149
+#: primaryIntake/consultationPanel.php:321
+msgid "Brûlures mictionnelles"
+msgstr "Burning on urination"
+
+#: primaryIntake/procedures.php:91
+msgid "C Réactive Protéine"
+msgstr "C Reactive Protein"
+
+#: primaryIntake/procedures.php:101
+msgid "CD4"
+msgstr "CD4"
+
+#: primaryIntake/procedures.php:595
+msgid "CONDUITE A TENIR"
+msgstr "CONDUCT IN"
+
+#: labor/0.php:246
+msgid "CS+Hystérectomie"
+msgstr "CS + Hysterectomy"
+
+#: primaryIntake/diagnosis.php:120
+msgid "Cancer"
+msgstr "Cancer"
+
+#: primaryIntake/diagnosis.php:123
+msgid "Cancer de la prostate [185]"
+msgstr "Prostate cancer [185]"
+
+#: primaryIntake/diagnosis.php:121
+msgid "Cancer de l’endomètre [182.0]"
+msgstr "Endometrial cancer [182.0]"
+
+#: primaryIntake/diagnosis.php:122
+msgid "Cancer de l’ovaire [183.0]"
+msgstr "Ovarian cancer [183.0]"
+
+#: primaryIntake/diagnosis.php:124
+msgid "Cancer du col [180.9]"
+msgstr "Cervical cancer [180.9]"
+
+#: primaryIntake/diagnosis.php:125
+msgid "Cancer du col cervical"
+msgstr "Cancer of cervix"
+
+#: primaryIntake/diagnosis.php:126
+msgid "Cancer du sein [174.9]"
+msgstr "Breast cancer [174.9]"
+
+#: primaryIntake/relatives.php:43
+msgid "Cancer, précisez"
+msgstr "Cancer, specify"
+
+#: primaryIntake/personalHistoryPanel.php:60
+msgid "Cancer, précisez:"
+msgstr "Cancer, specify:"
+
+#: labor/2.php:711
+msgid "Cardiomyopathie"
+msgstr "Cardiomyopathy"
+
+#: primaryIntake/personalHistoryPanel.php:61 primaryIntake/relatives.php:47
+msgid "Cardiopathie"
+msgstr "Heart"
+
+#: primaryIntake/diagnosis.php:127
+msgid "Cardiopathie [429.9]"
+msgstr "Heart [429.9]"
+
+#: primaryIntake/consultationPanel.php:176
+#: primaryIntake/consultationPanel.php:277
+msgid "Cardiovasculaire/Pulmonaire"
+msgstr "Cardiovascular / Pulmonary"
+
+#: tuberculosis/tuberculosis.php:218
+msgid "Cas Contact"
+msgstr "Contact case"
+
+#: maintainSites/maintainSites.php:188 maintainSites/maintainSites.php:244
+msgid "Category"
+msgstr "Category"
+
+#: patient/patientLabResults.php:138
+msgid "Ce résultat a été remplacé par un nouveau résultat daté du "
+msgstr "This result has been replaced by a new result dated"
+
+#: primaryIntake/generalPanel.php:151
+msgid "Centres CDV intégrés"
+msgstr "Integrated VCT centers"
+
+#: primaryIntake/consultationPanel.php:222
+msgid "Changement dans la fréquence et/ou <br/> intensité des mouvements foetaux"
+msgstr "Change in frequency and / or <br/> intensity of fetal movements"
+
+#: primaryIntake/diagnosis.php:128
+msgid "Charbon [022.9]"
+msgstr "Coal [022.9]"
+
+#: primaryIntake/personalHistoryPanel.php:62
+msgid "Chirurgie/Trauma, précisez:"
+msgstr "Surgery / Trauma, specify:"
+
+#: labor/2.php:726
+msgid "Choix d’une méthode contraceptive"
+msgstr "Choosing a contraceptive method"
+
+#: primaryIntake/diagnosis.php:129
+msgid "Choléra [001.9]"
+msgstr "Cholera [001.9]"
+
+#: primaryIntake/diagnosis.php:185
+msgid "Chorioamniotite [658.4]"
+msgstr "Chorioamnionitis [658.4]"
+
+#: labor/0.php:166
+msgid "Clair"
+msgstr "Clear"
+
+#: labor/1.php:276 labor/2.php:344
+msgid "Claire"
+msgstr "Clear"
+
+#: tuberculosis/tuberculosis.php:79
+msgid "Classification"
+msgstr "Classification"
+
+#: primaryIntake/generalPanel.php:148
+msgid "Clinique Externe"
+msgstr "Outpatient"
+
+#: splash.php:303
+msgid "Cliquez sur un marqueur pour voir l’information additionnelle d’emplacement.<br>"
+msgstr "Click a marker to see additional information site. <br>"
+
+#: primaryIntake/otherplans.php:97
+msgid "Club des Mères"
+msgstr "Mothers Club"
+
+#: maintainSites/maintainSites.php:119 maintainSites/maintainSites.php:183
+msgid "Code de Site"
+msgstr "Site Code"
+
+#: primaryIntake/physicalExamPanel.php:25
+msgid "Coeur"
+msgstr "Heart"
+
+#: primaryIntake/physicalExamPanel.php:31
+msgid "Col"
+msgstr "Col"
+
+#: maintainSites/maintainSites.php:50 maintainSites/maintainSites.php:55
+msgid "Commune"
+msgstr "Town"
+
+#: labor/1.php:426 labor/2.php:483 labor/0.php:276
+msgid "Complet/Total"
+msgstr "Complete / Total"
+
+#: primaryIntake/procedures.php:259
+msgid "Comprimé"
+msgstr "Tablet"
+
+#: primaryIntake/procedures.php:250
+msgid "Condom"
+msgstr "Condom"
+
+#: primaryIntake/diagnosis.php:180
+msgid "Confirmé"
+msgstr "Confirmed"
+
+#: primaryIntake/diagnosis.php:130
+msgid "Conjonctivite [372.30]"
+msgstr "Conjunctivitis [372.30]"
+
+#: receiveLabResults.php:12
+msgid "Connexion réussie. C´est le service de réception de laboratoire résultat pour iSanté."
+msgstr "Successful connection. This is the service of receipt of laboratory results for iSanté."
+
+#: labor/1.php:534 labor/2.php:684
+msgid "Conscience"
+msgstr "Consciousness"
+
+#: primaryIntake/consultationPanel.php:191
+#: primaryIntake/consultationPanel.php:330
+msgid "Constipation"
+msgstr "Constipation"
+
+#: labor/0.php:220
+msgid "Contact en cas d'urgence"
+msgstr "Emergency Contact"
+
+#: primaryIntake/physicalExamPanel.php:177
+msgid "Contraction utérine"
+msgstr "Uterine contraction"
+
+#: primaryIntake/consultationPanel.php:170
+#: primaryIntake/consultationPanel.php:223
+#: primaryIntake/consultationPanel.php:314
+msgid "Convulsions"
+msgstr "Convulsions"
+
+#: primaryIntake/diagnosis.php:131
+msgid "Coqueluche [033.9]"
+msgstr "Pertussis [033.9]"
+
+#: primaryIntake/physicalExamPanel.php:42
+msgid "Cou"
+msgstr "Neck"
+
+#: primaryIntake/physicalExamPanel.php:23
+msgid "Cou + Thyroïde"
+msgstr "Neck + Thyroid"
+
+#: labor/1.php:481
+msgid "Counseling sur la Nutrition du (des) Nné (s)"
+msgstr "Counseling on Nutrition (the) NNE (s)"
+
+#: labor/2.php:522
+msgid "Counseling sur la Nutrition du Nouveau-né"
+msgstr "Counseling on Nutrition of the Newborn"
+
+#: labor/0.php:308
+msgid "Counseling sur la nutrition du Nné"
+msgstr "Counseling on new born nutrition"
+
+#: primaryIntake/consultationPanel.php:121
+#: primaryIntake/consultationPanel.php:221
+#: primaryIntake/consultationPanel.php:263
+msgid "Courbatures"
+msgstr "Aches"
+
+#: tuberculosis/tuberculosis.php:133
+msgid "Crachat"
+msgstr "Sputum"
+
+#: primaryIntake/procedures.php:92
+msgid "Crachats en série"
+msgstr "Serial sputum"
+
+#: primaryIntake/diagnosis.php:132
+msgid "Crise d’asthme [J45]"
+msgstr "Asthma [J45]"
+
+#: primaryIntake/diagnosis.php:133
+msgid "Crises convulsives fébriles [780.31]"
+msgstr "Febrile seizures [780.31]"
+
+#: maintainSites/maintainSites.php:115
+msgid "Critères de recherche :"
+msgstr "Search Criteria :"
+
+#: primaryIntake/physicalExamPanel.php:145 labor/1.php:243 labor/2.php:304
+#: labor/0.php:134
+msgid "Céphalique"
+msgstr "Cephalic"
+
+#: primaryIntake/consultationPanel.php:220
+msgid "Céphalée"
+msgstr "Cephalalgia"
+
+#: primaryIntake/consultationPanel.php:169
+#: primaryIntake/consultationPanel.php:313
+msgid "Céphalée/Maux de tète"
+msgstr "Headache / Headache"
+
+#: labor/1.php:460 labor/2.php:509
+msgid "Césarienne"
+msgstr "Caesarean"
+
+#: pmtctintake/obgynHistoryPanel.php:120 primaryIntake/generalPanel.php:395
+msgid "DDR"
+msgstr "DDR"
+
+#: pmtctintake/obgynHistoryPanel.php:127 primaryIntake/generalPanel.php:428
+msgid "DPA"
+msgstr "DPA"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:16
+#: pedPrimaryIntake/powerUpsPanel.php:41 patient/vaccinations.php:48
+msgid "DT"
+msgstr "DT"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:8
+#: pedPrimaryIntake/powerUpsPanel.php:20 patient/vaccinations.php:20
+msgid "DTPer"
+msgstr "DTPer"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:61 tuberculosis/tuberculosis.php:278
+#: tuberculosis/tuberculosis.php:297 tuberculosis/tbEval.php:58
+#: pedPrimaryIntake/powerUpsPanel.php:162
+#: pedPrimaryIntake/powerUpsPanel.php:163
+#: pedPrimaryIntake/powerUpsPanel.php:164
+#: pedPrimaryIntake/powerUpsPanel.php:165 primaryIntake/generalPanel.php:271
+#: primaryIntake/generalPanel.php:298
+msgid "Date"
+msgstr "Date"
+
+#: primaryIntake/otherplans.php:113
+msgid "Date Probable d’accouchement"
+msgstr "Probable date of birth"
+
+#: pmtctintake/vaccins.php:41
+msgid "Date Reçu"
+msgstr "Date Received"
+
+#: labor/1.php:342 labor/2.php:615
+msgid "Date de Début"
+msgstr "Start Date"
+
+#: primaryIntake/otherplans.php:242
+msgid "Date de Prochaine Visite"
+msgstr "Date of Next Visit"
+
+#: tuberculosis/tuberculosis.php:338
+msgid "Date de début"
+msgstr "Start Date"
+
+#: labor/0.php:199
+msgid "Date de début (< 72 heures)"
+msgstr "Start Date (<72 hours)"
+
+#: primaryIntake/otherplans.php:48
+msgid "Date de prochaine visite"
+msgstr "Date next visit"
+
+#: include/visitDatePanel.php:20
+msgid "Date de visite"
+msgstr "Date of visit"
+
+#: pmtctintake/obgynHistoryPanel.php:261
+msgid "Date du dernier dépistage du cancer du Col"
+msgstr "Latest Cervical Cancer Screening"
+
+#: primaryIntake/procedures.php:223
+msgid "Date début :"
+msgstr "Start date:"
+
+#: tuberculosis/tuberculosis.php:149
+msgid "Date début traitement"
+msgstr "Date first treatment"
+
+#: tuberculosis/tuberculosis.php:426
+msgid "Date d’arret du traitement"
+msgstr "Date of judgment of treatment"
+
+#: primaryIntake/procedures.php:229
+msgid "Date d’arrêt"
+msgstr "Stop Date"
+
+#: tuberculosis/tuberculosis.php:30
+msgid "Date d’enregistrement :"
+msgstr "Date of registration :"
+
+#: labor/1.php:224 labor/1.php:268 labor/1.php:365 labor/1.php:529
+#: labor/2.php:282 labor/2.php:336 labor/2.php:403 labor/2.php:648
+#: labor/2.php:679
+msgid "Date et Heure"
+msgstr "Date and Time"
+
+#: labor/0.php:115
+msgid "Date et Heure de début du Travail"
+msgstr "Date and Start Time of Labour"
+
+#: labor/0.php:158 labor/0.php:232
+msgid "Date/Heure"
+msgstr "Date / Time"
+
+#: pmtctintake/obgynHistoryPanel.php:233
+msgid "Date1"
+msgstr "Date1"
+
+#: pmtctintake/obgynHistoryPanel.php:248
+msgid "Date2"
+msgstr "Date2"
+
+#: maintainSites/maintainSites.php:222
+msgid "Dbsite"
+msgstr "Dbsite"
+
+#: primaryIntake/diagnosis.php:134
+msgid "Dengue [061]"
+msgstr "Dengue [061]"
+
+#: pedPrimaryIntake/powerUpsPanel.php:124
+msgid "Deparasitage"
+msgstr "Deworming"
+
+#: primaryIntake/diagnosis.php:138
+msgid "Dermatite atopique [691]"
+msgstr "Atopic dermatitis [691]"
+
+#: primaryIntake/consultationPanel.php:184
+#: primaryIntake/consultationPanel.php:304
+msgid "Dermatologique"
+msgstr "Dermatological"
+
+#: runReport.php:479 kickPoint.php:553
+msgid "Description"
+msgstr "Description"
+
+#: primaryIntake/physicalExamPanel.php:247
+msgid "Description des conclusions anormales"
+msgstr "Description of abnormal findings"
+
+#: primaryIntake/personalHistoryPanel.php:64
+#: primaryIntake/personalHistoryPanel.php:78 primaryIntake/relatives.php:42
+msgid "Diabète"
+msgstr "Diabetes"
+
+#: primaryIntake/diagnosis.php:139
+msgid "Diabète + grossesse [648.8]"
+msgstr "Diabetes + pregnancy [648.8]"
+
+#: primaryIntake/diagnosis.php:140
+msgid "Diabète Type 1 [250.01]"
+msgstr "Type 1 diabetes [250.01]"
+
+#: primaryIntake/diagnosis.php:141
+msgid "Diabète Type 2 [250.00]"
+msgstr "Type 2 diabetes [250.00]"
+
+#: tuberculosis/tuberculosis.php:131
+msgid "Diagnostic base sur :"
+msgstr "Diagnosis based on :"
+
+#: primaryIntake/consultationPanel.php:224
+msgid "Diarrhée"
+msgstr "Diarrhea"
+
+#: primaryIntake/consultationPanel.php:192
+#: primaryIntake/consultationPanel.php:331
+msgid "Diarrhée < 2 semaines"
+msgstr "Diarrhea <2 weeks"
+
+#: primaryIntake/diagnosis.php:142
+msgid "Diarrhée aigue aqueuse [787.91]"
+msgstr "Acute watery diarrhea [787.91]"
+
+#: primaryIntake/diagnosis.php:143
+msgid "Diarrhée aigue sanguinolente [787.91]"
+msgstr "Acute bloody diarrhea [787.91]"
+
+#: primaryIntake/diagnosis.php:144
+msgid "Diarrhée cause indéterminée [787.91]"
+msgstr "Diarrhea undetermined [787.91]"
+
+#: primaryIntake/consultationPanel.php:193
+#: primaryIntake/consultationPanel.php:332
+msgid "Diarrhée ≥ 2 semaines"
+msgstr "Diarrhea ≥ 2 weeks"
+
+#: primaryIntake/personalHistoryPanel.php:67
+msgid "Diphtérie"
+msgstr "Diphtheria"
+
+#: primaryIntake/diagnosis.php:145
+msgid "Diphtérie [032]"
+msgstr "Diphtheria [032]"
+
+#: primaryIntake/otherplans.php:65
+msgid "Dispensation ARV"
+msgstr "Dispensing ARVs"
+
+#: pmtctintake/obgynHistoryPanel.php:24 primaryIntake/otherplans.php:123
+#: labor/1.php:373 labor/2.php:417 labor/0.php:109
+msgid "Domicile"
+msgstr "Home"
+
+#: pedPrimaryIntake/powerUpsPanel.php:151
+msgid "Dose 0"
+msgstr "0 dose"
+
+#: pedPrimaryIntake/powerUpsPanel.php:151 patient/vaccinations.php:151
+msgid "Dose 1"
+msgstr "Dose 1"
+
+#: pedPrimaryIntake/powerUpsPanel.php:152 patient/vaccinations.php:151
+msgid "Dose 2"
+msgstr "Dose 2"
+
+#: pedPrimaryIntake/powerUpsPanel.php:152 patient/vaccinations.php:152
+msgid "Dose 3"
+msgstr "Dose 3"
+
+#: patient/vaccinations.php:152
+msgid "Dose 4"
+msgstr "Dose 4"
+
+#: patient/vaccinations.php:153
+msgid "Dose 5"
+msgstr "Dose 5"
+
+#: patient/vaccinations.php:153
+msgid "Dose 6"
+msgstr "Dose 6"
+
+#: primaryIntake/consultationPanel.php:194
+msgid "Douleur abdominale"
+msgstr "Abdominal pain"
+
+#: primaryIntake/consultationPanel.php:150
+msgid "Douleur hypogastrique"
+msgstr "Hypogastric pain"
+
+#: primaryIntake/consultationPanel.php:264
+msgid "Douleur, précisez :"
+msgstr "Pain, specify:"
+
+#: primaryIntake/consultationPanel.php:123
+msgid "Douleur, précisez:"
+msgstr "Pain, specify:"
+
+#: primaryIntake/consultationPanel.php:225
+msgid "Douleurs Abdominales"
+msgstr "Abdominal pain"
+
+#: primaryIntake/consultationPanel.php:227
+msgid "Douleurs Hypogastriques"
+msgstr "Hypogastric pain"
+
+#: primaryIntake/consultationPanel.php:333
+msgid "Douleurs abdominales"
+msgstr "Abdominal pain"
+
+#: primaryIntake/consultationPanel.php:177
+msgid "Douleurs précordiales"
+msgstr "Chest pain"
+
+#: primaryIntake/consultationPanel.php:226
+msgid "Douleurs Épigastriques en barre"
+msgstr "Epigastric pain in bar"
+
+#: splash.php:304
+msgid "Drague/baisse/bourdonnement au foyer dedans sur un secteur spécifique"
+msgstr "Drag / drop / buzzing in the home in on a specific sector"
+
+#: primaryIntake/personalHistoryPanel.php:118
+msgid "Drogue, précisez:"
+msgstr "Drug, specify:"
+
+#: primaryIntake/diagnosis.php:146
+msgid "Drépanocytose : SS/SC [282.6]"
+msgstr "Sickle cell SS / SC [282.6]"
+
+#: pmtctintake/obgynHistoryPanel.php:109
+msgid "Durée des Cycle"
+msgstr "Duration of Cycle"
+
+#: pmtctintake/obgynHistoryPanel.php:98
+msgid "Durée des Règles"
+msgstr "Length Rules"
+
+#: labor/2.php:350
+msgid "Dynamique"
+msgstr "Dynamic"
+
+#: pmtctintake/obgynHistoryPanel.php:140
+msgid "Dysménorrhée"
+msgstr "Dysmenorrhea"
+
+#: primaryIntake/consultationPanel.php:195
+#: primaryIntake/consultationPanel.php:334
+msgid "Dysphagie"
+msgstr "Dysphagia"
+
+#: primaryIntake/consultationPanel.php:178
+#: primaryIntake/consultationPanel.php:278
+msgid "Dyspnée"
+msgstr "Dyspnea"
+
+#: labor/2.php:349
+msgid "Dystocie"
+msgstr "Dystocia"
+
+#: primaryIntake/diagnosis.php:147
+msgid "Dystrophie ovarienne [620.8]"
+msgstr "Ovarian dystrophy [620.8]"
+
+#: primaryIntake/consultationPanel.php:151
+#: primaryIntake/consultationPanel.php:228
+#: primaryIntake/consultationPanel.php:322
+msgid "Dysurie"
+msgstr "Dysuria"
+
+#: labor/1.php:214 labor/2.php:272
+msgid "DÉBUT DU TRAVAIL"
+msgstr "BEGINNING OF WORK"
+
+#: maintainSites/maintainSites.php:415
+msgid "Déchargez les données d’etablissement"
+msgstr "Unload data from establishment"
+
+#: labor/2.php:26
+msgid "Décédé"
+msgstr "Deceased"
+
+#: labor/1.php:553 labor/2.php:719
+msgid "Décédée"
+msgstr "Died"
+
+#: labor/1.php:410 labor/2.php:476 labor/0.php:259
+msgid "Délivrance"
+msgstr "Delivery"
+
+#: primaryIntake/diagnosis.php:135
+msgid "Dénutrition légère [263.1]"
+msgstr "Mild malnutrition [263.1]"
+
+#: primaryIntake/diagnosis.php:136
+msgid "Dénutrition modérée [263.0]"
+msgstr "Moderate malnutrition [263.0]"
+
+#: primaryIntake/diagnosis.php:137
+msgid "Dénutrition sévère [261]"
+msgstr "Severe malnutrition [261]"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:49
+msgid "Déparasitage"
+msgstr "Deworming"
+
+#: maintainSites/maintainSites.php:24 maintainSites/maintainSites.php:29
+#: maintainSites/maintainSites.php:179
+msgid "Département"
+msgstr "Department"
+
+#: primaryIntake/generalPanel.php:293
+msgid "Dépistage CA de la Prostate (Homme > 40ans)"
+msgstr "Prostate CA screening (Men> 40 years)"
+
+#: primaryIntake/generalPanel.php:266
+msgid "Dépistage CA du Col"
+msgstr "Trace GC Col"
+
+#: labor/2.php:18
+msgid "Détresse respiratoire"
+msgstr "Respiratory distress"
+
+#: pedPrimaryIntake/psychomotor.php:20 pedPrimaryIntake/psychomotor.php:30
+#: pedPrimaryIntake/psychomotor.php:40 pedPrimaryIntake/psychomotor.php:50
+msgid "Développement normal pour âge"
+msgstr "Normal development to age"
+
+#: tuberculosis/tuberculosis.php:173
+msgid "E"
+msgstr "E"
+
+#: tuberculosis/tuberculosis.php:206
+msgid "E: Ethambutol"
+msgstr "E: Ethambutol"
+
+#: pedPrimaryIntake/psychomotor.php:4
+msgid "EVALUATION DU DEVELOPPEMENT PSYCHOMOTEUR"
+msgstr "PSYCHOMOTOR ASSESSMENT OF DEVELOPMENT"
+
+#: labor/1.php:546
+msgid "EVOLUTION"
+msgstr "EVOLUTION"
+
+#: labor/2.php:699
+msgid "EVOLUTION MERE"
+msgstr "EVOLUTION MOTHER"
+
+#: labor/2.php:7
+msgid "EVOLUTION NOUVEAU NE"
+msgstr "EVOLUTION NEWBORN"
+
+#: primaryIntake/physicalExamPanel.php:213
+msgid "EXAMEN PHYSIQUE"
+msgstr "PHYSICAL EXAMINATION"
+
+#: tuberculosis/tuberculosis.php:59
+msgid "Echec"
+msgstr "Failure"
+
+#: primaryIntake/procedures.php:120
+msgid "Echographie, précisez:"
+msgstr "Ultrasound, specify:"
+
+#: labor/2.php:392
+msgid "Eclampsie"
+msgstr "Eclampsia"
+
+#: primaryIntake/diagnosis.php:148
+msgid "Eclampsie [642.6]"
+msgstr "Eclampsia [642.6]"
+
+#: primaryIntake/consultationPanel.php:142
+msgid "Ecoulement nasal"
+msgstr "Nasal discharge"
+
+#: primaryIntake/consultationPanel.php:229
+#: primaryIntake/consultationPanel.php:287
+msgid "Ecoulement nasal/Rhinorrhée"
+msgstr "Nasal discharge/Rhinorrhea"
+
+#: primaryIntake/consultationPanel.php:152
+msgid "Ecoulement uréthral"
+msgstr "Urethral discharge"
+
+#: primaryIntake/otherplans.php:81
+msgid "Education des<br> Accompagnateurs"
+msgstr "Education <br> Companions"
+
+#: primaryIntake/otherplans.php:73
+msgid "Education<br> Individuelle"
+msgstr "Education <br> Individual"
+
+#: primaryIntake/generalPanel.php:25 primaryIntake/procedures.php:103
+msgid "Electrophorèse de l’hémoglobine"
+msgstr "Electrophoresis of hemoglobin"
+
+#: patient/patientHeader.php:62
+msgid "Empreintes digitales"
+msgstr "Fingerprints"
+
+#: primaryIntake/diagnosis.php:149
+msgid "Endométriose [617.9]"
+msgstr "Endometriosis [617.9]"
+
+#: primaryIntake/diagnosis.php:150
+msgid "Entorse [848.9]"
+msgstr "Sprain [848.9]"
+
+#: maintainSites/maintainSites.php:495 bannerbody.php:214
+msgid "Entretien des cliniques de iSanté"
+msgstr "Maintenance of clinical iSanté"
+
+#: primaryIntake/consultationPanel.php:323
+msgid "Enurésie"
+msgstr "Enuresis"
+
+#: primaryIntake/personalHistoryPanel.php:80 primaryIntake/relatives.php:44
+msgid "Epilepsie"
+msgstr "Epilepsy"
+
+#: primaryIntake/diagnosis.php:151
+msgid "Epilepsie [345.9]"
+msgstr "Epilepsy [345.9]"
+
+#: labor/1.php:393 labor/2.php:450 labor/0.php:240
+msgid "Episio"
+msgstr "Episio"
+
+#: primaryIntake/consultationPanel.php:144
+#: primaryIntake/consultationPanel.php:288
+msgid "Epistaxis"
+msgstr "Epistaxis"
+
+#: primaryIntake/consultationPanel.php:305
+msgid "Eruptions cutanées"
+msgstr "Rash"
+
+#: primaryIntake/consultationPanel.php:185
+msgid "Eruptions cutanées, précisez:"
+msgstr "Rash, specify:"
+
+#: tuberculosis/tuberculosis.php:38
+msgid "Etablissement :"
+msgstr "Establishment :"
+
+#: primaryIntake/procedures.php:412
+msgid "Evaluation & planification"
+msgstr "Evaluation & Planning"
+
+#: primaryIntake/physicalExamPanel.php:49
+msgid "Examen neurologique"
+msgstr "Neurological examination"
+
+#: tuberculosis/tuberculosis.php:84
+msgid "Extra-pulmonaire"
+msgstr "Extrapulmonary"
+
+#: labor/2.php:25
+msgid "Exéaté"
+msgstr "Exéaté"
+
+#: labor/1.php:552 labor/2.php:718
+msgid "Exéatée"
+msgstr "Exéatée"
+
+#: primaryIntake/vitalsPanel.php:249 labor/1.php:26 labor/1.php:532
+#: labor/2.php:62 labor/2.php:682 labor/0.php:26
+msgid "FR"
+msgstr "RR"
+
+#: primaryIntake/procedures.php:100
+msgid "FSH/LH"
+msgstr "FSH / LH"
+
+#: primaryIntake/procedures.php:426
+msgid "Facteur de risque:"
+msgstr "Risk Factor:"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:45
+#: pedPrimaryIntake/powerUpsPanel.php:108
+msgid "Fer."
+msgstr "Iron."
+
+#: primaryIntake/diagnosis.php:152
+msgid "Fibrome utérin [219.9]"
+msgstr "Uterine fibroids [219.9]"
+
+#: backend/constants.php:211
+msgid "Fiche de Première Consultation OB-GYN"
+msgstr "First Consultation Sheet OB-GYN"
+
+#: splash.php:202
+msgid "Fiche<br />total"
+msgstr "Sheet<br/>total"
+
+#: primaryIntake/procedures.php:507
+msgid "Fiches de Référence Remplie"
+msgstr "Reference Sheets Filled"
+
+#: primaryIntake/diagnosis.php:156
+msgid "Filariose lymphatique [125.9]"
+msgstr "Lymphatic filariasis [125.9]"
+
+#: backend/config-edit.php:76
+msgid "Fingerprint URL"
+msgstr "Fingerprint URL"
+
+#: labor/1.php:255 labor/2.php:323 labor/0.php:141
+msgid "Fièvre"
+msgstr "Fever"
+
+#: primaryIntake/consultationPanel.php:124
+#: primaryIntake/consultationPanel.php:266
+msgid "Fièvre < 2 semaines"
+msgstr "Fever <2 weeks"
+
+#: primaryIntake/diagnosis.php:155
+msgid "Fièvre Typhoïde [002]"
+msgstr "Typhoid fever [002]"
+
+#: primaryIntake/diagnosis.php:154
+msgid "Fièvre hémorragique aiguë [065]"
+msgstr "Acute hemorrhagic fever [065]"
+
+#: primaryIntake/consultationPanel.php:125
+#: primaryIntake/consultationPanel.php:267
+msgid "Fièvre ≥ 2 semaines"
+msgstr "Fever ≥ 2 weeks"
+
+#: primaryIntake/diagnosis.php:153
+msgid "Fièvre, cause indéterminée [780.60]"
+msgstr "Fever, undetermined [780.60]"
+
+#: labor/1.php:399 labor/2.php:459
+msgid "Forceps"
+msgstr "Forceps"
+
+#: primaryIntake/consultationPanel.php:133
+#: primaryIntake/consultationPanel.php:300
+msgid "Fracture osseuse"
+msgstr "Bone fracture"
+
+#: primaryIntake/diagnosis.php:157
+msgid "Fracture osseuse [829.0]"
+msgstr "Bone fracture [829.0]"
+
+#: primaryIntake/consultationPanel.php:231
+msgid "Frisson et/ou Fièvre"
+msgstr "Chill and / or fever"
+
+#: primaryIntake/procedures.php:115
+msgid "Frottis sanguin"
+msgstr "Blood smear"
+
+#: primaryIntake/procedures.php:94
+msgid "Frottis vaginal / gouttes pendantes"
+msgstr "Pap / hanging drop"
+
+#: primaryIntake/relatives.php:96 primaryIntake/relatives.php:107
+msgid "Frère/Sœur"
+msgstr "Brother / Sister"
+
+#: labor/1.php:105 labor/2.php:143
+msgid "Fém."
+msgstr "Fem."
+
+#: primaryIntake/generalPanel.php:250
+msgid "Féminin"
+msgstr "Women"
+
+#: primaryIntake/diagnosis.php:158
+msgid "Gale [133.0]"
+msgstr "Gale [133.0]"
+
+#: tuberculosis/tuberculosis.php:112
+msgid "Ganglionnaire"
+msgstr "Ganglionic"
+
+#: primaryIntake/diagnosis.php:427
+msgid "Gastro-entérite [558.9] avec"
+msgstr "Gastroenteritis [558.9] with"
+
+#: primaryIntake/consultationPanel.php:190
+#: primaryIntake/consultationPanel.php:329
+msgid "Gastro-intestinale"
+msgstr "Gastro-intestinal"
+
+#: primaryIntake/consultationPanel.php:338
+msgid "Gastro-intestinale, cont."
+msgstr "Gastrointestinal, cont."
+
+#: labor/2.php:685
+msgid "Globe Sec."
+msgstr "Globe Sec."
+
+#: primaryIntake/diagnosis.php:162
+msgid "Glomérulonéphrite aiguë [580.9]"
+msgstr "Acute glomerulonephritis [580.9]"
+
+#: primaryIntake/procedures.php:87
+msgid "Glycémie"
+msgstr "Glucose"
+
+#: primaryIntake/diagnosis.php:181
+msgid "Grave"
+msgstr "Serious"
+
+#: pmtctintake/obgynHistoryPanel.php:8
+#: primaryIntake/personalHistoryPanel.php:82 labor/1.php:205 labor/2.php:263
+msgid "Grossesse"
+msgstr "Pregnancy"
+
+#: labor/1.php:155 labor/2.php:196
+msgid "Grossesse Suivie"
+msgstr "Pregnancy Followed"
+
+#: primaryIntake/diagnosis.php:163
+msgid "Grossesse [V22.2]"
+msgstr "Pregnancy [V22.2]"
+
+#: labor/2.php:222
+msgid "Grossesse désirée"
+msgstr "Wanted pregnancy"
+
+#: primaryIntake/diagnosis.php:164
+msgid "Grossesse ectopique [633.00]"
+msgstr "Ectopic pregnancy [633.00]"
+
+#: primaryIntake/diagnosis.php:165
+msgid "Grossesse intra utérine [V22.2]"
+msgstr "Intrauterine pregnancy [V22.2]"
+
+#: pmtctintake/obgynHistoryPanel.php:191
+msgid "Grossesse multiple"
+msgstr "Multiple pregnancy"
+
+#: primaryIntake/otherplans.php:97
+msgid "Groupe de Support"
+msgstr "Support group"
+
+#: primaryIntake/generalPanel.php:343 primaryIntake/procedures.php:93
+msgid "Groupe sanguin"
+msgstr "Blood group"
+
+#: primaryIntake/generalPanel.php:171
+msgid "Gynécologique"
+msgstr "Gynecological"
+
+#: labor/1.php:206 labor/2.php:264
+msgid "Gémellaire"
+msgstr "Twins"
+
+#: tuberculosis/tuberculosis.php:103
+msgid "Génitale"
+msgstr "Genital"
+
+#: primaryIntake/consultationPanel.php:148
+#: primaryIntake/consultationPanel.php:320
+msgid "Génito-urinaire"
+msgstr "Genito-urinary"
+
+#: primaryIntake/consultationPanel.php:118
+#: primaryIntake/consultationPanel.php:261
+#: primaryIntake/physicalExamPanel.php:21
+msgid "Général"
+msgstr "General"
+
+#: primaryIntake/diagnosis.php:407
+msgid "Générale"
+msgstr "General"
+
+#: primaryIntake/diagnosis.php:249
+msgid "Générales"
+msgstr "General"
+
+#: tuberculosis/tuberculosis.php:203
+msgid "H: Isoniazide"
+msgstr "H: Isoniazid"
+
+#: pedPrimaryIntake/diet.php:105
+msgid "HISTOIRE ALIMENTAIRE"
+msgstr "FOOD HISTORY"
+
+#: primaryIntake/personalHistoryPanel.php:85 primaryIntake/relatives.php:46
+#: labor/1.php:473 labor/2.php:384 labor/2.php:709
+msgid "HTA"
+msgstr "HTA"
+
+#: primaryIntake/diagnosis.php:166
+msgid "HTA + grossesse [642.9]"
+msgstr "MV + pregnancy [642.9]"
+
+#: labor/1.php:235 labor/2.php:293 labor/0.php:126
+msgid "Hauteur Utérine"
+msgstr "Uterine size"
+
+#: primaryIntake/physicalExamPanel.php:112
+msgid "Hauteur utérine"
+msgstr "Uterine"
+
+#: labor/1.php:193 labor/2.php:251
+msgid "Heure d’admission"
+msgstr "Time of admission"
+
+#: primaryIntake/procedures.php:505
+msgid "Hospitalisation"
+msgstr "Hospitalization"
+
+#: primaryIntake/personalHistoryPanel.php:168
+msgid "Hospitalisation Antérieure"
+msgstr "Previous hospitalization"
+
+#: primaryIntake/personalHistoryPanel.php:87
+msgid "Hypercholestérolémie"
+msgstr "Hypercholesterolemia"
+
+#: primaryIntake/consultationPanel.php:235
+msgid "Hyperménorrhée"
+msgstr "Hypermenorrhea"
+
+#: primaryIntake/diagnosis.php:169
+msgid "Hypertension artérielle [401.9]"
+msgstr "Hypertension [401.9]"
+
+#: primaryIntake/diagnosis.php:167
+msgid "Hyperémèse gravidique [643.0]"
+msgstr "Hyperemesis gravidarum [643.0]"
+
+#: primaryIntake/consultationPanel.php:234
+msgid "Hypoménorrhée"
+msgstr "Hypomenorrhea"
+
+#: primaryIntake/consultationPanel.php:153
+#: primaryIntake/consultationPanel.php:324
+msgid "Hématurie"
+msgstr "Hematuria"
+
+#: primaryIntake/consultationPanel.php:196
+#: primaryIntake/consultationPanel.php:342
+msgid "Hématémèse"
+msgstr "Hematemesis"
+
+#: primaryIntake/consultationPanel.php:171
+msgid "Hémiplégie"
+msgstr "Hemiplegia"
+
+#: primaryIntake/personalHistoryPanel.php:84
+msgid "Hémoglobinopathie, précisez:"
+msgstr "Hemoglobinopathy, specify:"
+
+#: primaryIntake/procedures.php:85
+msgid "Hémogramme"
+msgstr "Bloodlines"
+
+#: primaryIntake/consultationPanel.php:179
+#: primaryIntake/consultationPanel.php:232
+#: primaryIntake/consultationPanel.php:279
+msgid "Hémoptysie"
+msgstr "Hemoptysis"
+
+#: labor/2.php:709
+msgid "Hémorragie"
+msgstr "Hemorrhage"
+
+#: pmtctintake/obgynHistoryPanel.php:197
+msgid "Hémorragie de la grossesse/post-partum"
+msgstr "Hemorrhage of pregnancy / postpartum"
+
+#: primaryIntake/diagnosis.php:168
+msgid "Hémorragie troisième trimestre [641.9]"
+msgstr "Third trimester bleeding [641.9]"
+
+#: primaryIntake/consultationPanel.php:154 labor/1.php:437 labor/2.php:361
+#: labor/0.php:279
+msgid "Hémorragie vaginale"
+msgstr "Vaginal bleeding"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:18 pmtctintake/vaccins.php:5
+#: pedPrimaryIntake/powerUpsPanel.php:48 primaryIntake/procedures.php:303
+#: patient/vaccinations.php:55
+msgid "Hépatite B"
+msgstr "Hepatitis B"
+
+#: primaryIntake/generalPanel.php:145 labor/0.php:107
+msgid "Hôpital"
+msgstr "Hospital"
+
+#: primaryIntake/otherplans.php:126
+msgid "Hôpital, précisez"
+msgstr "Hospital, state"
+
+#: labor/1.php:374
+msgid "Hôpital/Dispensaire"
+msgstr "Hospital / Dispensary"
+
+#: primaryIntake/vitalsPanel.php:72
+msgid "IMC"
+msgstr "BMI"
+
+#: primaryIntake/diagnosis.php:539
+msgid "IMPRESSIONS CLINIQUES/DIAGNOSTIQUES"
+msgstr "CLINICAL IMPRESSIONS / DIAGNOSTICS"
+
+#: primaryIntake/generalPanel.php:507
+msgid "INFORMATIONS GÉNÉRALES"
+msgstr "GENERAL INFORMATION"
+
+#: tuberculosis/tuberculosis.php:353
+msgid "IO"
+msgstr "IO"
+
+#: tuberculosis/tuberculosis.php:362
+msgid "IO Prophylaxie : "
+msgstr "IO Prophylaxis :"
+
+#: primaryIntake/diagnosis.php:173
+msgid "IST"
+msgstr "IST"
+
+#: primaryIntake/personalHistoryPanel.php:89
+msgid "IST, précisez:"
+msgstr "STI, specify:"
+
+#: primaryIntake/consultationPanel.php:197
+#: primaryIntake/consultationPanel.php:339
+msgid "Ictère/jaunisse"
+msgstr "Jaundice / jaundice"
+
+#: patient/patientLabResults.php:134
+msgid "Il s’agit d’un résultat mis à jour."
+msgstr "This is an updated result."
+
+#: primaryIntake/procedures.php:265
+msgid "Implants"
+msgstr "Implants"
+
+#: tuberculosis/tuberculosis.php:139
+msgid "Impression Clinique"
+msgstr "Impression Clinic"
+
+#: patienttabs.php:570 patienttabs.php:575
+msgid "Imprimer"
+msgstr "Print"
+
+#: primaryIntake/diagnosis.php:170
+msgid "Impétigo [684]"
+msgstr "Impetigo [684]"
+
+#: primaryIntake/consultationPanel.php:198
+#: primaryIntake/consultationPanel.php:340
+msgid "Inappétence"
+msgstr "Inappetence"
+
+#: labor/1.php:426 labor/2.php:483 labor/0.php:276
+msgid "Incomplet"
+msgstr "Incomplete"
+
+#: backendAddon.php:2301 backendAddon.php:2356
+#: primaryIntake/generalPanel.php:229 primaryIntake/generalPanel.php:378
+#: primaryIntake/procedures.php:127
+msgid "Inconnu"
+msgstr "Unknown"
+
+#: tuberculosis/tuberculosis.php:303
+msgid "Inconnue"
+msgstr "Unknown"
+
+#: labor/1.php:461 labor/2.php:510
+msgid "Indication"
+msgstr "Indication"
+
+#: pmtctintake/obgynHistoryPanel.php:242
+msgid "Indication2"
+msgstr "Indication2"
+
+#: labor/2.php:710
+msgid "Infection"
+msgstr "Infection"
+
+#: primaryIntake/diagnosis.php:171
+msgid "Infection des tissus mous"
+msgstr "Soft tissue infections"
+
+#: primaryIntake/diagnosis.php:236
+msgid "Infection génito-urinaire"
+msgstr "Genito-urinary infection"
+
+#: primaryIntake/diagnosis.php:234
+msgid "Infection génito-urinaire (IGU) [614.9]"
+msgstr "Genito-urinary infection (SWI) [614.9]"
+
+#: primaryIntake/diagnosis.php:172
+msgid "Infection respiratoire aiguë [465.9]"
+msgstr "Acute respiratory infection [465.9]"
+
+#: adminPat.php:82
+msgid "Information sur le patient non trouvée"
+msgstr "Patient information not found"
+
+#: primaryIntake/procedures.php:271
+msgid "Injectable"
+msgstr "Injection"
+
+#: primaryIntake/otherplans.php:226
+msgid "Inscrite dans un Club des Mères"
+msgstr "Enrolled in a Mothers Club"
+
+#: pmtctintake/obgynHistoryPanel.php:27
+msgid "Institution"
+msgstr "Institution"
+
+#: labor/2.php:416
+msgid "Institution actuelle"
+msgstr "Present institution"
+
+#: primaryIntake/consultationPanel.php:268
+msgid "Insuffisance gain de poids"
+msgstr "Insufficient weight gain"
+
+#: tuberculosis/tuberculosis.php:115
+msgid "Intestinale"
+msgstr "Intestinal"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:47
+#: pedPrimaryIntake/powerUpsPanel.php:116
+msgid "Iode"
+msgstr "Iodine"
+
+#: primaryIntake/consultationPanel.php:315
+msgid "Irritablilité/agitation"
+msgstr "Irritablilité / agitation"
+
+#: include/visitDatePanel.php:30
+msgid "JJ/MM/AA"
+msgstr "DD / MM / YY"
+
+#: pmtctintake/vaccins.php:42
+msgid "Jamais Reçu"
+msgstr "Not Received"
+
+#: pmtctintake/obgynHistoryPanel.php:286
+msgid "Jamais réalisé"
+msgstr "Ever"
+
+#: primaryIntake/diagnosis.php:174
+msgid "Kyste de l’ovaire [620.2]"
+msgstr "Ovarian cyst [620.2]"
+
+#: labor/0.php:165
+msgid "LA"
+msgstr "LA"
+
+#: include/verticalTabHeader.php:206
+msgid "La fiche sauvée avec "
+msgstr "Saved with the sheet"
+
+#: include/verticalTabHeader.php:204
+msgid "La fiche sauvée avec succès"
+msgstr "The record saved successfully"
+
+#: labor/1.php:416 labor/2.php:500 labor/0.php:265
+msgid "Lacération du périnée"
+msgstr "Perineal laceration"
+
+#: primaryIntake/procedures.php:369
+msgid "Lait enrichi"
+msgstr "Fortified milk"
+
+#: backend/fingerprint.php:35
+msgid "Le logiciel Fingerprint n’est pas installé ou l’url est incorrecte"
+msgstr "Fingerprint software is not installed or the URL is incorrect"
+
+#: splash.php:263
+msgid "Les totaux sont cumulatifs à partir de 01.04.2011 à la date actuelle.<br>"
+msgstr "Totals are cumulative from 01.04.2011 to the current date. <br>"
+
+#: primaryIntake/consultationPanel.php:236
+#: primaryIntake/consultationPanel.php:325
+msgid "Leucorrhée"
+msgstr "Leucorrhoea"
+
+#: primaryIntake/otherplans.php:121 labor/0.php:106
+msgid "Lieu"
+msgstr "Location"
+
+#: labor/1.php:372 labor/2.php:413
+msgid "Lieu Accouchement"
+msgstr "Delivery Location"
+
+#: primaryIntake/procedures.php:268
+msgid "Ligature des trompes"
+msgstr "Tubal ligation"
+
+#: labor/2.php:470
+msgid "Ligature tardive du cordon"
+msgstr "Late cord ligation"
+
+#: labor/1.php:275 labor/2.php:343
+msgid "Liquide Amniotique"
+msgstr "Amniotic fluid"
+
+#: primaryIntake/diagnosis.php:177
+msgid "Luxation [839.8]"
+msgstr "Dislocation [839.8]"
+
+#: primaryIntake/diagnosis.php:175
+msgid "Lèpre [030]"
+msgstr "Leprosy [030]"
+
+#: splash.php:254
+msgid "Légende"
+msgstr "legend"
+
+#: primaryIntake/diagnosis.php:176
+msgid "Lésion cervicale [219.0]"
+msgstr "Cervical lesion [219.0]"
+
+#: setPrivs.php:76
+msgid "L’emplacement de défaut doit être signé la liste visualisable d’emplacement."
+msgstr "The location of the fault must be signed list viewable location."
+
+#: tuberculosis/tuberculosis.php:68
+msgid "MDR TB"
+msgstr "MDR TB"
+
+#: primaryIntake/personalHistoryPanel.php:110
+#: primaryIntake/personalHistoryPanel.php:115
+msgid "MDR-TB"
+msgstr "MDR-TB"
+
+#: primaryIntake/diagnosis.php:216
+msgid "MDR-TB (remplir la section Tuberculose ci-dessous)"
+msgstr "MDR-TB (Tuberculosis complete section below)"
+
+#: labor/2.php:531
+msgid "MEDICAMENTS"
+msgstr "DRUGS"
+
+#: primaryIntake/consultationPanel.php:367
+msgid "MOTIFS DE CONSULTATION"
+msgstr "STATEMENT OF CONSULTATION"
+
+#: pedPrimaryFollowup/0.php:31
+msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRE: CONSULTATION - PEDIATRIE (VERSION Août 2012)"
+msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: CONSULTATION - PEDIATRICS (August 2012 VERSION)"
+
+#: pedPrimaryIntake/0.php:36
+msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRE: PREMIÉRE CONSULTATION - PEDIATRIE (VERSION Août 2012)"
+msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: FIRST VISIT - PEDIATRICS (August 2012 VERSION)"
+
+#: primaryFollowup/0.php:25
+msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRES: CONSULATION ADULTE (VERSION Août 2012)"
+msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: CONSULATION ADULT (August 2012 VERSION)"
+
+#: primaryIntake/0.php:30
+msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRES: PREMIÉRE CONSULTATION - ADULTE (VERSION Août 2012)"
+msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: FIRST VISIT - ADULT (August 2012 VERSION)"
+
+#: pmtctfollowup/2.php:27
+msgid "MSPP FICHE DE CONSULTATION OB-GYN (VERSION Août 2012)"
+msgstr "MSPP REFERENCE CARD OB-GYN (August 2012 VERSION)"
+
+#: pmtctintake/2.php:35
+msgid "MSPP FICHE DE PREMIÈRE CONSULTATION OB-GYN (VERSION Août 2012)"
+msgstr "MSPP SHEET FIRST CONSULTATION OB-GYN (August 2012 VERSION)"
+
+#: tuberculosis/0.php:22
+msgid "MSPP FICHE DE SOINS DE TUBERCULOSE (VERSION Août 2012)"
+msgstr "MSPP CARE SHEET OF TUBERCULOSIS (August 2012 VERSION)"
+
+#: labor/2.php:18
+msgid "Macrosomie"
+msgstr "Macrosomia"
+
+#: labor/1.php:500 labor/2.php:646
+msgid "Macérée"
+msgstr "Macerated"
+
+#: primaryIntake/diagnosis.php:178
+msgid "Maladie inflammatoire pelvienne [614.9]"
+msgstr "Pelvic inflammatory disease [614.9]"
+
+#: primaryIntake/diagnosis.php:276 primaryIntake/diagnosis.php:309
+msgid "Maladies Infectieuses, cont."
+msgstr "Infectious Diseases, cont."
+
+#: primaryIntake/diagnosis.php:265 primaryIntake/diagnosis.php:439
+msgid "Maladies infectieuses"
+msgstr "Infectious Diseases"
+
+#: primaryIntake/diagnosis.php:446 primaryIntake/diagnosis.php:479
+msgid "Maladies infectieuses, cont."
+msgstr "Infectious Diseases, cont."
+
+#: primaryIntake/consultationPanel.php:269
+msgid "Malaise"
+msgstr "Malaise"
+
+#: primaryIntake/procedures.php:113
+msgid "Malaria"
+msgstr "Malaria"
+
+#: primaryIntake/diagnosis.php:290 primaryIntake/diagnosis.php:380
+#: primaryIntake/diagnosis.php:465
+msgid "Malaria (paludiame) [084]"
+msgstr "Malaria (paludiame) [084]"
+
+#: primaryIntake/personalHistoryPanel.php:90
+msgid "Malaria : Si oui, depuis quand?"
+msgstr "Malaria : If yes, since when?"
+
+#: primaryIntake/personalHistoryPanel.php:96
+msgid "Malf. Congénitales, précisez:"
+msgstr "Malfa. Defects, specify:"
+
+#: labor/2.php:655
+msgid "Malformation Congénitale visible"
+msgstr "Congenital malformation visible"
+
+#: primaryIntake/diagnosis.php:182
+msgid "Malnutrition [E40]"
+msgstr "Malnutrition [E40]"
+
+#: primaryIntake/personalHistoryPanel.php:104
+msgid "Malnutrition/Perte de poids"
+msgstr "Malnutrition / Weight Loss"
+
+#: primaryIntake/diagnosis.php:183
+msgid "Malnutrition/Perte de poids [263.9]"
+msgstr "Malnutrition / Weight Loss [263.9]"
+
+#: pmtctintake/obgynHistoryPanel.php:309
+msgid "Mammographie (âge > 35ans)"
+msgstr "Mammogram (age> 35 years)"
+
+#: labor/1.php:105 labor/2.php:143
+msgid "Masc."
+msgstr "Masc."
+
+#: primaryIntake/generalPanel.php:247
+msgid "Masculin"
+msgstr "Male"
+
+#: primaryIntake/consultationPanel.php:237
+msgid "Masse Hypogastrique"
+msgstr "Hypogastric mass"
+
+#: labor/2.php:227
+msgid "Matrone"
+msgstr "Matron"
+
+#: primaryIntake/procedures.php:377
+msgid "Medica mamba"
+msgstr "Medica mamba"
+
+#: primaryIntake/procedures.php:323
+msgid "Medicaments prescrits / Posologie"
+msgstr "Medications prescribed / Dosage"
+
+#: labor/1.php:428 labor/2.php:488
+msgid "Membranes Complètes"
+msgstr "Complete membranes"
+
+#: primaryIntake/physicalExamPanel.php:34
+#: primaryIntake/physicalExamPanel.php:47
+msgid "Membres"
+msgstr "Members"
+
+#: primaryIntake/diagnosis.php:184
+msgid "Menace d’accouchement prématurée [658.1]"
+msgstr "Threatened premature delivery [658.1]"
+
+#: tuberculosis/tuberculosis.php:109
+msgid "Miliaire"
+msgstr "Miliary"
+
+#: tuberculosis/tbEval.php:55
+msgid "Mois"
+msgstr "Month"
+
+#: labor/0.php:296
+msgid "Mort"
+msgstr "Death"
+
+#: labor/1.php:500 labor/2.php:647
+msgid "Mort Fœtale"
+msgstr "Fetal death"
+
+#: labor/1.php:502 labor/2.php:649
+msgid "Mort Néonatale"
+msgstr "Neonatal death"
+
+#: primaryIntake/diagnosis.php:187
+msgid "Mort fœtale [656.4]"
+msgstr "Fetal death [656.4]"
+
+#: labor/1.php:206 labor/2.php:264
+msgid "Multiple"
+msgstr "Multiple"
+
+#: primaryIntake/diagnosis.php:188
+msgid "Mycose cutanée [111.9]"
+msgstr "Fungal Skin [111.9]"
+
+#: primaryIntake/relatives.php:90 primaryIntake/relatives.php:101
+msgid "Mère"
+msgstr "Mother"
+
+#: labor/2.php:350
+msgid "Mécanique"
+msgstr "Mechanical"
+
+#: labor/1.php:276 labor/2.php:344 labor/0.php:166
+msgid "Méconiale"
+msgstr "Meconium"
+
+#: primaryIntake/personalHistoryPanel.php:216
+msgid "Médicaments Actuels"
+msgstr "Current medications"
+
+#: primaryIntake/consultationPanel.php:200
+#: primaryIntake/consultationPanel.php:343
+msgid "Méléna"
+msgstr "Melena"
+
+#: tuberculosis/tuberculosis.php:100
+msgid "Méningite"
+msgstr "Meningitis"
+
+#: primaryIntake/diagnosis.php:186
+msgid "Méningites [322]"
+msgstr "Meningitis [322]"
+
+#: pmtctintake/obgynHistoryPanel.php:352
+msgid "Ménopause"
+msgstr "Menopause"
+
+#: primaryIntake/consultationPanel.php:238
+msgid "Ménorragie"
+msgstr "Menorrhagia"
+
+#: labor/2.php:33
+msgid "Méthode d’alimentation choisie à la sortie"
+msgstr "Feeding method selected at the output"
+
+#: pmtctintake/obgynHistoryPanel.php:273
+msgid "Méthode utilisée"
+msgstr "Method"
+
+#: primaryIntake/consultationPanel.php:239
+msgid "Métrorragie"
+msgstr "Metrorrhagia"
+
+#: primaryIntake/diagnosis.php:243
+msgid "N&nbsp; &nbsp;A&nbsp; &nbsp;G&nbsp;&nbsp;&nbsp;&nbsp;"
+msgstr "N A G"
+
+#: labor/0.php:291
+msgid "NNé"
+msgstr "NNé"
+
+#: labor/1.php:499 labor/2.php:645
+msgid "Naissance Vivante"
+msgstr "Live birth"
+
+#: pmtctintake/obgynHistoryPanel.php:33
+msgid "Naissance vivante"
+msgstr "Live Birth"
+
+#: labor/1.php:411 labor/2.php:477 labor/0.php:261
+msgid "Naturelle"
+msgstr "Natural"
+
+#: primaryIntake/consultationPanel.php:201
+#: primaryIntake/consultationPanel.php:344
+msgid "Nausée"
+msgstr "Nausea"
+
+#: primaryIntake/procedures.php:125
+msgid "Neg"
+msgstr "Neg"
+
+#: primaryIntake/consultationPanel.php:166
+#: primaryIntake/consultationPanel.php:311
+msgid "Neurologique"
+msgstr "Neurological"
+
+#: primaryIntake/physicalExamPanel.php:39
+msgid "Nez"
+msgstr "Nose"
+
+#: primaryIntake/generalPanel.php:192
+msgid "Niveau d’étude"
+msgstr "Level of study"
+
+#: tuberculosis/tuberculosis.php:233
+msgid "No de référence du cas index : "
+msgstr "No reference in the index case :"
+
+#: tuberculosis/tuberculosis.php:23
+msgid "No. d’enregistrement TB :"
+msgstr "Registration No. TB :"
+
+#: tuberculosis/tuberculosis.php:463
+msgid "Nom de prestataire :"
+msgstr "Name of service :"
+
+#: primaryIntake/otherplans.php:260
+msgid "Nom et Prénom 1"
+msgstr "Full Name 1"
+
+#: primaryIntake/otherplans.php:268
+msgid "Nom et Prénom 2"
+msgstr "Full Name 2"
+
+#: primaryIntake/otherplans.php:279
+msgid "Nom et Prénom 3"
+msgstr "Full Name 3"
+
+#: tuberculosis/tuberculosis.php:254
+msgid "Nom et Prénom :"
+msgstr "Full name :"
+
+#: primaryIntake/vitalsPanel.php:268
+msgid "Nom et Prénom du Prestataire"
+msgstr "Full Name of Provider"
+
+#: pmtctintake/obgynHistoryPanel.php:86
+msgid "Nombre cumulé de partenaires sexuels"
+msgstr "Cumulative number of sexual partners"
+
+#: tuberculosis/tuberculosis.php:227
+msgid "Nombre de contacts :"
+msgstr "Number of Contacts :"
+
+#: pmtctintake/obgynHistoryPanel.php:13 pmtctintake/obgynHistoryPanel.php:38
+#: pmtctintake/obgynHistoryPanel.php:145 pmtctintake/obgynHistoryPanel.php:218
+#: pmtctintake/obgynHistoryPanel.php:300 pmtctintake/obgynHistoryPanel.php:314
+#: pmtctintake/obgynHistoryPanel.php:337 pmtctintake/obgynHistoryPanel.php:357
+#: tuberculosis/tuberculosis.php:223 tuberculosis/tuberculosis.php:250
+#: tuberculosis/tuberculosis.php:320 tuberculosis/tuberculosis.php:358
+#: tuberculosis/tuberculosis.php:379 pedPrimaryIntake/diet.php:17
+#: pedPrimaryIntake/diet.php:44 pedPrimaryIntake/diet.php:69
+#: pedPrimaryIntake/diet.php:84 primaryIntake/personalHistoryPanel.php:147
+#: primaryIntake/personalHistoryPanel.php:173
+#: primaryIntake/generalPanel.php:101 primaryIntake/generalPanel.php:128
+#: primaryIntake/generalPanel.php:226 primaryIntake/generalPanel.php:451
+#: primaryIntake/procedures.php:358 primaryIntake/procedures.php:434
+#: primaryIntake/physicalExamPanel.php:133
+#: primaryIntake/physicalExamPanel.php:182 primaryIntake/otherplans.php:142
+#: primaryIntake/otherplans.php:167 primaryIntake/otherplans.php:192
+#: primaryIntake/otherplans.php:217 primaryIntake/otherplans.php:231
+#: labor/1.php:155 labor/1.php:256 labor/1.php:282 labor/1.php:304
+#: labor/1.php:323 labor/1.php:380 labor/1.php:391 labor/1.php:394
+#: labor/1.php:396 labor/1.php:400 labor/1.php:402 labor/1.php:417
+#: labor/1.php:420 labor/1.php:429 labor/1.php:432 labor/1.php:438
+#: labor/1.php:455 labor/1.php:474 labor/1.php:476 labor/1.php:482
+#: labor/2.php:145 labor/2.php:146 labor/2.php:196 labor/2.php:222
+#: labor/2.php:225 labor/2.php:232 labor/2.php:324 labor/2.php:356
+#: labor/2.php:362 labor/2.php:379 labor/2.php:385 labor/2.php:387
+#: labor/2.php:393 labor/2.php:434 labor/2.php:448 labor/2.php:451
+#: labor/2.php:453 labor/2.php:460 labor/2.php:462 labor/2.php:471
+#: labor/2.php:489 labor/2.php:495 labor/2.php:501 labor/2.php:504
+#: labor/2.php:523 labor/2.php:539 labor/2.php:574 labor/2.php:598
+#: labor/2.php:727 labor/0.php:142 labor/0.php:184 labor/0.php:241
+#: labor/0.php:243 labor/0.php:252 labor/0.php:267 labor/0.php:271
+#: labor/0.php:280 labor/0.php:284 labor/0.php:309 adminPat.php:75
+msgid "Non"
+msgstr "No"
+
+#: primaryIntake/generalPanel.php:206
+msgid "Non Alphabétisée"
+msgstr "Non-literate"
+
+#: primaryIntake/physicalExamPanel.php:56
+msgid "Non Effectué"
+msgstr "Not Done"
+
+#: labor/1.php:501 labor/2.php:647
+msgid "Non Macérée"
+msgstr "Not macerated"
+
+#: primaryIntake/physicalExamPanel.php:226
+msgid "Non effectue"
+msgstr "Not done"
+
+#: tuberculosis/tuberculosis.php:268
+msgid "Non testé"
+msgstr "Not tested"
+
+#: primaryIntake/procedures.php:487
+msgid "Non, si non date prèvue pour l’initiation de la prophylaxie :"
+msgstr "No, if no date for initiation of prophylaxis:"
+
+#: pmtctintake/obgynHistoryPanel.php:280
+#: primaryIntake/physicalExamPanel.php:54
+msgid "Normal"
+msgstr "Normal"
+
+#: pmtctintake/obgynHistoryPanel.php:320
+msgid "Normale"
+msgstr "Normal"
+
+#: backendAddon.php:1287
+#, php-format
+msgid "Note : L’affichage des résultats a été tronqué après %d lignes. Pour voir les résultats complets, veuillez cliquer sur le bouton « excel » ci-dessus."
+msgstr "Note: The display of the results was truncated after %d rows. To see the full results, please click on the button ”excel” above."
+
+#: tuberculosis/tuberculosis.php:53
+msgid "Nouveau"
+msgstr "New"
+
+#: primaryIntake/consultationPanel.php:384
+msgid "Nouveau Problème"
+msgstr "New Pattern"
+
+#: bannerbody.php:231
+msgid "Nouveau dans la 12.2"
+msgstr "New in 12.2"
+
+#: bannerbody.php:234
+msgid "Nouveau dans la 9.0 RC1"
+msgstr "New in 9.0 RC1"
+
+#: bannerbody.php:233
+msgid "Nouveau dans la 9.0 RC2"
+msgstr "New in 9.0 RC2"
+
+#: bannerbody.php:232
+msgid "Nouveau dans la 9.0 RC3"
+msgstr "New in 9.0 RC3"
+
+#: tuberculosis/tuberculosis.php:8
+msgid "Nouveau diagnostic"
+msgstr "New diagnosis"
+
+#: primaryIntake/procedures.php:469
+msgid "Numération ou taux de CD4:"
+msgstr "Count or CD4:"
+
+#: tuberculosis/tuberculosis.php:271
+msgid "Négatif"
+msgstr "Negative"
+
+#: splash.php:260
+msgid "OB: Patients ob-gyn<br>"
+msgstr "OB: Patients ob-gyn <br>"
+
+#: primaryIntake/generalPanel.php:174
+msgid "Obstétricale"
+msgstr "Obstetric"
+
+#: primaryIntake/diagnosis.php:189
+msgid "Obésité [278.00]"
+msgstr "Obesity [278.00]"
+
+#: primaryIntake/consultationPanel.php:240
+msgid "Oligo ménorrhée"
+msgstr "Oligo menorrhea"
+
+#: primaryIntake/diagnosis.php:203
+msgid "Oligoamnios [658.0]"
+msgstr "Oligohydramnios [658.0]"
+
+#: primaryIntake/physicalExamPanel.php:41
+msgid "Oreille"
+msgstr "Ear"
+
+#: primaryIntake/consultationPanel.php:141
+#: primaryIntake/consultationPanel.php:286
+msgid "Oreilles, Nez, Gorge"
+msgstr "Ear, Nose, Throat"
+
+#: primaryIntake/physicalExamPanel.php:46
+msgid "Organes génitaux"
+msgstr "Genitalia"
+
+#: primaryIntake/physicalExamPanel.php:29
+msgid "Organes génitaux Externes"
+msgstr "External genitalia"
+
+#: primaryIntake/consultationPanel.php:180
+#: primaryIntake/consultationPanel.php:233
+#: primaryIntake/consultationPanel.php:280
+msgid "Orthopnée"
+msgstr "Orthopnea"
+
+#: primaryIntake/consultationPanel.php:146
+#: primaryIntake/consultationPanel.php:290
+msgid "Otalgie"
+msgstr "Otalgia"
+
+#: primaryIntake/diagnosis.php:190
+msgid "Otite"
+msgstr "Otitis"
+
+#: primaryIntake/consultationPanel.php:147
+#: primaryIntake/consultationPanel.php:291
+msgid "Otorrhée"
+msgstr "Otorrhea"
+
+#: pmtctintake/obgynHistoryPanel.php:10 pmtctintake/obgynHistoryPanel.php:35
+#: pmtctintake/obgynHistoryPanel.php:142 pmtctintake/obgynHistoryPanel.php:215
+#: pmtctintake/obgynHistoryPanel.php:297 pmtctintake/obgynHistoryPanel.php:311
+#: pmtctintake/obgynHistoryPanel.php:334 pmtctintake/obgynHistoryPanel.php:354
+#: tuberculosis/tuberculosis.php:220 tuberculosis/tuberculosis.php:247
+#: tuberculosis/tuberculosis.php:317 tuberculosis/tuberculosis.php:355
+#: tuberculosis/tuberculosis.php:376 pedPrimaryIntake/diet.php:12
+#: pedPrimaryIntake/diet.php:39 pedPrimaryIntake/diet.php:64
+#: pedPrimaryIntake/diet.php:79 primaryIntake/personalHistoryPanel.php:143
+#: primaryIntake/personalHistoryPanel.php:170
+#: primaryIntake/generalPanel.php:98 primaryIntake/generalPanel.php:125
+#: primaryIntake/generalPanel.php:223 primaryIntake/generalPanel.php:448
+#: primaryIntake/procedures.php:357 primaryIntake/procedures.php:484
+#: primaryIntake/physicalExamPanel.php:130
+#: primaryIntake/physicalExamPanel.php:179 primaryIntake/otherplans.php:139
+#: primaryIntake/otherplans.php:164 primaryIntake/otherplans.php:189
+#: primaryIntake/otherplans.php:214 primaryIntake/otherplans.php:228
+#: labor/1.php:155 labor/1.php:256 labor/1.php:282 labor/1.php:304
+#: labor/1.php:323 labor/1.php:380 labor/1.php:391 labor/1.php:394
+#: labor/1.php:396 labor/1.php:400 labor/1.php:402 labor/1.php:417
+#: labor/1.php:420 labor/1.php:429 labor/1.php:432 labor/1.php:438
+#: labor/1.php:455 labor/1.php:474 labor/1.php:476 labor/1.php:482
+#: labor/2.php:145 labor/2.php:146 labor/2.php:196 labor/2.php:222
+#: labor/2.php:225 labor/2.php:232 labor/2.php:324 labor/2.php:356
+#: labor/2.php:362 labor/2.php:379 labor/2.php:385 labor/2.php:387
+#: labor/2.php:393 labor/2.php:434 labor/2.php:448 labor/2.php:451
+#: labor/2.php:453 labor/2.php:460 labor/2.php:462 labor/2.php:471
+#: labor/2.php:489 labor/2.php:495 labor/2.php:501 labor/2.php:504
+#: labor/2.php:523 labor/2.php:539 labor/2.php:574 labor/2.php:598
+#: labor/2.php:727 labor/0.php:142 labor/0.php:184 labor/0.php:241
+#: labor/0.php:243 labor/0.php:252 labor/0.php:267 labor/0.php:271
+#: labor/0.php:280 labor/0.php:284 labor/0.php:309 adminPat.php:72
+msgid "Oui"
+msgstr "Yes"
+
+#: primaryIntake/procedures.php:428
+msgid "Oui, précisez: "
+msgstr "Yes, specify:"
+
+#: splash.php:256
+msgid "PA: Patients adultes soins de santé primaires<br>"
+msgstr "PA: Adult patients with primary health care <br>"
+
+#: primaryIntake/procedures.php:95
+msgid "PAP test"
+msgstr "PAP test"
+
+#: primaryIntake/vitalsPanel.php:115
+msgid "PB"
+msgstr "PB"
+
+#: primaryIntake/vitalsPanel.php:136
+msgid "PB/PC"
+msgstr "PB / PC"
+
+#: primaryIntake/vitalsPanel.php:94
+msgid "PC"
+msgstr "PC"
+
+#: labor/1.php:475
+msgid "PES"
+msgstr "Pes"
+
+#: splash.php:258
+msgid "PP: Patients pédiatrique soins de santé primaires<br>"
+msgstr "PP: Patients pediatric primary care <br>"
+
+#: primaryIntake/procedures.php:99
+msgid "PPD"
+msgstr "PPD"
+
+#: primaryIntake/consultationPanel.php:247
+msgid "PTME"
+msgstr "PMTCT"
+
+#: pmtctintake/obgynHistoryPanel.php:295 primaryIntake/generalPanel.php:446
+msgid "Palpation mensuelle des Seins"
+msgstr "Monthly Breast palpation"
+
+#: primaryIntake/consultationPanel.php:181
+#: primaryIntake/consultationPanel.php:281
+msgid "Palpitation"
+msgstr "Palpitation"
+
+#: primaryIntake/consultationPanel.php:172
+#: primaryIntake/consultationPanel.php:316
+msgid "Paralysie flasque"
+msgstr "Flaccid paralysis"
+
+#: config.php:85
+msgid "Paramètres de configuration"
+msgstr "Configuration settings"
+
+#: primaryIntake/consultationPanel.php:173
+msgid "Paraplégie"
+msgstr "Paraplegia"
+
+#: primaryIntake/diagnosis.php:191
+msgid "Parasitose [136.9]"
+msgstr "Parasitosis [136.9]"
+
+#: primaryIntake/consultationPanel.php:241
+msgid "Passage de liquide par le Vagin"
+msgstr "Passage of liquid through the Vagina"
+
+#: primaryIntake/diagnosis.php:204
+msgid "Pathologie rénale, précisez:"
+msgstr "Renal disease, specify:"
+
+#: primaryIntake/diagnosis.php:341 primaryIntake/diagnosis.php:360
+#: primaryIntake/diagnosis.php:377
+msgid "Pathologies"
+msgstr "Pathologies"
+
+#: primaryIntake/diagnosis.php:327
+msgid "Pathologies tumorales"
+msgstr "Malignancies"
+
+#: primaryIntake/procedures.php:482
+msgid "Patiente sous ARV:"
+msgstr "Patient on ART:"
+
+#: primaryIntake/generalPanel.php:169
+msgid "Patiente vue pour Consultation"
+msgstr "Patient view for Consultation"
+
+#: primaryIntake/vitalsPanel.php:44 labor/0.php:35 labor/0.php:301
+msgid "Pds"
+msgstr "Wt"
+
+#: primaryIntake/vitalsPanel.php:80
+msgid "Pds kg/T² m"
+msgstr "Wt kg / m ² T"
+
+#: primaryIntake/physicalExamPanel.php:36
+#: primaryIntake/physicalExamPanel.php:48
+msgid "Peau"
+msgstr "Skin"
+
+#: primaryIntake/consultationPanel.php:126
+#: primaryIntake/consultationPanel.php:270
+msgid "Perte de poids"
+msgstr "Weight Loss"
+
+#: labor/1.php:451 labor/2.php:375
+msgid "Perte sanguine estimée à"
+msgstr "Estimated blood loss"
+
+#: primaryIntake/consultationPanel.php:155
+msgid "Pertes vaginales"
+msgstr "Vaginal discharge"
+
+#: labor/1.php:425 labor/2.php:482 labor/0.php:274
+msgid "Placenta"
+msgstr "Placenta"
+
+#: labor/1.php:442 labor/2.php:366
+msgid "Placenta prævia"
+msgstr "Placenta previa"
+
+#: primaryIntake/diagnosis.php:192
+msgid "Plaie [E928.9]"
+msgstr "Wound [E928.9]"
+
+#: primaryIntake/consultationPanel.php:134
+msgid "Plaie, précisez"
+msgstr "Wound, specify"
+
+#: primaryIntake/consultationPanel.php:301
+msgid "Plaie, précisez:"
+msgstr "Wound, specify:"
+
+#: primaryIntake/otherplans.php:105
+msgid "Plan de d’accouchement"
+msgstr "Plan delivery"
+
+#: primaryIntake/otherplans.php:35
+msgid "Plan de naissance"
+msgstr "Birth plan"
+
+#: splash.php:302
+msgid "Planez au-dessus d’un marqueur pour voir le nom d’emplacement.<br>"
+msgstr "Hover over a marker to see the location name. <br>"
+
+#: primaryIntake/procedures.php:509
+msgid "Planification Familiale"
+msgstr "Family Planning"
+
+#: pmtctintake/obgynHistoryPanel.php:332 primaryIntake/procedures.php:214
+#: primaryIntake/consultationPanel.php:242
+msgid "Planification familiale"
+msgstr "Family Planning"
+
+#: primaryIntake/otherplans.php:212
+msgid "Planification pour transition dans une Maison de Naissance"
+msgstr "Planning for transition in a birthing"
+
+#: primaryIntake/otherplans.php:187
+msgid "Planification pour un accompagnateur"
+msgstr "Planning for an attendant"
+
+#: tuberculosis/tuberculosis.php:106
+msgid "Pleurale"
+msgstr "Pleural"
+
+#: primaryIntake/consultationPanel.php:271
+msgid "Pleurs incessants inexpliqués"
+msgstr "Unexplained constant crying"
+
+#: primaryIntake/diagnosis.php:193
+msgid "Pneumonie [486]"
+msgstr "Pneumonia [486]"
+
+#: pmtctintake/vaccins.php:19 patient/vaccinations.php:69
+msgid "Pneumovax"
+msgstr "Pneumovax"
+
+#: labor/1.php:158 labor/2.php:199
+msgid "Poids"
+msgstr "Weight"
+
+#: tuberculosis/tbEval.php:58
+msgid "Poids (kg)"
+msgstr "Weight (kg)"
+
+#: primaryIntake/generalPanel.php:69
+msgid "Poids de naissance"
+msgstr "Birth weight"
+
+#: labor/1.php:504 labor/2.php:651
+msgid "Poids du (ou des) Nné(s)"
+msgstr "Weight (s) NNE (s)"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:6
+#: pedPrimaryIntake/powerUpsPanel.php:13 patient/vaccinations.php:13
+msgid "Polio"
+msgstr "Polio"
+
+#: labor/2.php:144
+msgid "Polio O"
+msgstr "Polio O"
+
+#: primaryIntake/diagnosis.php:194
+msgid "Poliomyélite [045.90]"
+msgstr "Poliomyelitis [045.90]"
+
+#: primaryIntake/consultationPanel.php:156
+#: primaryIntake/consultationPanel.php:244
+msgid "Pollakiurie"
+msgstr "Urinary frequency"
+
+#: primaryIntake/consultationPanel.php:245
+msgid "Poly ménorrhée"
+msgstr "Poly menorrhea"
+
+#: primaryIntake/diagnosis.php:196
+msgid "Poly traumatisme [869.0]"
+msgstr "Poly trauma [869.0]"
+
+#: primaryIntake/consultationPanel.php:157
+#: primaryIntake/consultationPanel.php:326
+msgid "Polyurie"
+msgstr "Polyuria"
+
+#: primaryIntake/procedures.php:126
+msgid "Pos"
+msgstr "Pos"
+
+#: tuberculosis/tuberculosis.php:274
+msgid "Positif"
+msgstr "Positive"
+
+#: primaryIntake/physicalExamPanel.php:163
+msgid "Position"
+msgstr "Position"
+
+#: labor/2.php:710
+msgid "Post op"
+msgstr "Post op"
+
+#: primaryIntake/generalPanel.php:177
+msgid "Postnatale"
+msgstr "Postnatal"
+
+#: primaryIntake/vitalsPanel.php:230 labor/1.php:22 labor/1.php:531
+#: labor/2.php:58 labor/2.php:681 labor/0.php:22
+msgid "Pouls"
+msgstr "Pulse"
+
+#: primaryIntake/physicalExamPanel.php:24
+msgid "Poumons"
+msgstr "Lungs"
+
+#: pmtctintake/obgynHistoryPanel.php:153 primaryIntake/generalPanel.php:194
+msgid "Primaire"
+msgstr "Primary"
+
+#: labor/2.php:355
+msgid "Procidence du Cordon"
+msgstr "Prolapsed cord"
+
+#: primaryIntake/generalPanel.php:154
+msgid "Programme communautaire"
+msgstr "Community Programme"
+
+#: primaryIntake/procedures.php:506
+msgid "Programme de nutrition"
+msgstr "Nutrition Program"
+
+#: primaryIntake/procedures.php:105
+msgid "Prolactine"
+msgstr "Prolactin"
+
+#: labor/1.php:289 labor/2.php:549 labor/0.php:176
+msgid "Prophylaxie ARV"
+msgstr "ARV prophylaxis"
+
+#: labor/2.php:597
+msgid "Prophylaxie ARV Nouveau-né"
+msgstr "ARV prophylaxis Newborn"
+
+#: labor/1.php:322
+msgid "Prophylaxie Nouveau-né"
+msgstr "Prophylaxis Newborn"
+
+#: labor/2.php:232
+msgid "Prophylaxie contre la Malaria"
+msgstr "Prophylaxis against Malaria"
+
+#: labor/1.php:262 labor/2.php:330 labor/0.php:152
+msgid "Provoquée"
+msgstr "Provoked"
+
+#: primaryIntake/consultationPanel.php:327
+msgid "Pruirit vulvaire"
+msgstr "Pruirit vulvar"
+
+#: primaryIntake/consultationPanel.php:186
+#: primaryIntake/consultationPanel.php:307
+msgid "Prurit"
+msgstr "Itching"
+
+#: primaryIntake/consultationPanel.php:158
+#: primaryIntake/consultationPanel.php:246
+msgid "Prurit Vulvaire"
+msgstr "Vulvar pruritus"
+
+#: primaryIntake/consultationPanel.php:345
+msgid "Prurtis Anal"
+msgstr "Anal Prurtis"
+
+#: labor/2.php:386
+msgid "Pré éclampsie Sévère"
+msgstr "Severe preeclampsia"
+
+#: primaryIntake/diagnosis.php:195
+msgid "Pré éclampsie [642.4]"
+msgstr "Preeclampsia [642.4]"
+
+#: pmtctintake/obgynHistoryPanel.php:194
+msgid "Pré éclampsie sévère"
+msgstr "Severe preeclampsia"
+
+#: labor/1.php:283 labor/2.php:540
+msgid "Précisez"
+msgstr "Specify"
+
+#: primaryIntake/personalHistoryPanel.php:106 labor/2.php:18
+msgid "Prématurité"
+msgstr "Prematurity"
+
+#: labor/2.php:34
+msgid "Préparation pour nourrissons"
+msgstr "Infant Formula"
+
+#: primaryIntake/procedures.php:373
+msgid "Préparation pour nourrissons (LM)"
+msgstr "Infant Formula (SM)"
+
+#: primaryIntake/physicalExamPanel.php:143 labor/1.php:242 labor/2.php:302
+#: labor/0.php:133
+msgid "Présentation"
+msgstr "Presentation"
+
+#: primaryIntake/personalHistoryPanel.php:141
+msgid "Présentement suivi par un médecin ?"
+msgstr "Currently monitored by a doctor?"
+
+#: primaryIntake/diagnosis.php:319 primaryIntake/diagnosis.php:488
+msgid "Psychiatrie"
+msgstr "Psychiatry"
+
+#: primaryIntake/consultationPanel.php:161
+#: primaryIntake/consultationPanel.php:274
+msgid "Psychiatrique"
+msgstr "Psychiatric"
+
+#: primaryIntake/procedures.php:508
+msgid "Psychologue"
+msgstr "Psychologist"
+
+#: tuberculosis/tuberculosis.php:81
+msgid "Pulmonaire"
+msgstr "Pulmonary"
+
+#: primaryIntake/consultationPanel.php:202
+msgid "Pyrosis"
+msgstr "Heartburn"
+
+#: primaryIntake/relatives.php:93 primaryIntake/relatives.php:104
+msgid "Père"
+msgstr "Father"
+
+#: labor/1.php:505 labor/2.php:652
+msgid "Périmètre Crânien et Taille"
+msgstr "Cranial Size and Scope"
+
+#: primaryIntake/consultationPanel.php:306
+msgid "Pétéchie/Ecchymose"
+msgstr "Petechiae / ecchymosis"
+
+#: tuberculosis/tuberculosis.php:200
+msgid "R: Rifampicine"
+msgstr "R: Rifampicin"
+
+#: primaryIntake/personalHistoryPanel.php:107
+msgid "RAA"
+msgstr "RAA"
+
+#: tuberculosis/tuberculosis.php:167
+msgid "RH"
+msgstr "RH"
+
+#: tuberculosis/tuberculosis.php:182
+msgid "RHEZ"
+msgstr "RHEZ"
+
+#: patient/vaccinations.php:41
+msgid "ROR"
+msgstr "MMR"
+
+#: primaryIntake/procedures.php:97
+msgid "RPR"
+msgstr "RPR"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:12
+#: pedPrimaryIntake/powerUpsPanel.php:34 primaryIntake/procedures.php:296
+#: patient/vaccinations.php:34
+msgid "RR"
+msgstr "RR"
+
+#: primaryIntake/procedures.php:119
+msgid "Radiographie, précisez:"
+msgstr "Radiography, specify:"
+
+#: primaryIntake/diagnosis.php:198
+msgid "Rage [071]"
+msgstr "Rage [071]"
+
+#: pedPrimaryIntake/powerUpsPanel.php:153
+msgid "Rappel 1"
+msgstr "Background 1"
+
+#: pedPrimaryIntake/powerUpsPanel.php:153
+msgid "Rappel 2"
+msgstr "Recall 2"
+
+#: primaryIntake/procedures.php:381
+msgid "Ration sèche"
+msgstr "Dry ration"
+
+#: maintainSites/maintainSites.php:87
+msgid "Recherche"
+msgstr "Search"
+
+#: tuberculosis/tuberculosis.php:62
+msgid "Rechute"
+msgstr "Relapse"
+
+#: primaryIntake/physicalExamPanel.php:35
+msgid "Reflexes Ostéo-Tendineux"
+msgstr "Tendon reflexes"
+
+#: primaryIntake/diagnosis.php:199
+msgid "Reflux gastro-œsophagien [530.81]"
+msgstr "Gastroesophageal reflux disease [530.81]"
+
+#: primaryIntake/consultationPanel.php:272
+msgid "Refus de téter / boire"
+msgstr "Refusal to breastfeed or drink"
+
+#: primaryIntake/personalHistoryPanel.php:221
+#: primaryIntake/consultationPanel.php:413
+msgid "Remarque"
+msgstr "Note"
+
+#: primaryIntake/diagnosis.php:555 splash.php:298
+msgid "Remarques"
+msgstr "Notes"
+
+#: splash.php:262
+msgid "Remarques : "
+msgstr "Notes:"
+
+#: primaryIntake/procedures.php:124
+msgid "Resultat"
+msgstr "Result"
+
+#: primaryIntake/diagnosis.php:205
+msgid "Retard croissance itra-utérin [p05]"
+msgstr "Uterine growth retardation [p05]"
+
+#: primaryIntake/consultationPanel.php:159
+msgid "Retard des Règles"
+msgstr "Delay Rules"
+
+#: pedPrimaryIntake/psychomotor.php:33 pedPrimaryIntake/psychomotor.php:43
+#: pedPrimaryIntake/psychomotor.php:53
+msgid "Retard du Développement"
+msgstr "Development delay"
+
+#: pedPrimaryIntake/psychomotor.php:23
+msgid "Retard du développement"
+msgstr "Developmental delay"
+
+#: include/visitDatePanel.php:45
+msgid "Retourner"
+msgstr "Return"
+
+#: pmtctintake/vaccins.php:42
+msgid "Reçu, Date Inconnu"
+msgstr "Received, Date Unknown"
+
+#: primaryIntake/diagnosis.php:200
+msgid "Rhinite allergique [477]"
+msgstr "Allergic rhinitis [477]"
+
+#: primaryIntake/diagnosis.php:197
+msgid "Rhumatisme articulaire aigu [714.30]"
+msgstr "Rheumatic fever [714.30]"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:10
+#: pedPrimaryIntake/powerUpsPanel.php:27
+#: primaryIntake/personalHistoryPanel.php:108 patient/vaccinations.php:27
+msgid "Rougeole"
+msgstr "Measles"
+
+#: primaryIntake/diagnosis.php:201
+msgid "Rougeole [055]"
+msgstr "Measles [055]"
+
+#: primaryIntake/diagnosis.php:202
+msgid "Rubéole [056]"
+msgstr "Rubella [056]"
+
+#: labor/1.php:261 labor/2.php:329 labor/0.php:147
+msgid "Rupture des membranes"
+msgstr "Rupture of membranes"
+
+#: primaryIntake/diagnosis.php:206
+msgid "Rupture prématurée des membranes [658.1]"
+msgstr "Premature rupture of membranes [658.1]"
+
+#: labor/1.php:443 labor/2.php:367
+msgid "Rupture utérine"
+msgstr "Uterine rupture"
+
+#: labor/1.php:253 labor/2.php:321
+msgid "Rythme Cardiaque Foetal"
+msgstr "Fetal Heart Rate"
+
+#: labor/0.php:139
+msgid "Rythme cardiaque foetal"
+msgstr "Fetal heart rate"
+
+#: primaryIntake/physicalExamPanel.php:96
+msgid "Rythme cardiaque fœtal"
+msgstr "Fetal heart rate"
+
+#: primaryIntake/procedures.php:569 labor/2.php:225
+msgid "Référence"
+msgstr "Reference"
+
+#: primaryIntake/generalPanel.php:123
+msgid "Référé(e):"
+msgstr "Referred (e):"
+
+#: labor/2.php:16
+msgid "Référée en Pédiatrie pour"
+msgstr "Referred to in Pediatrics"
+
+#: labor/1.php:551
+msgid "Référée en pathologie"
+msgstr "Referred pathology"
+
+#: labor/2.php:708
+msgid "Référée en pathologie pour"
+msgstr "Referred to in pathology"
+
+#: labor/1.php:550 labor/2.php:703
+msgid "Référée en suites de couche"
+msgstr "Referred in puerperium"
+
+#: labor/2.php:11
+msgid "Référée à la pouponnière ou en suites de couche avec sa maman"
+msgstr "Referred to the nursery or in puerperium with his mom"
+
+#: tuberculosis/tuberculosis.php:162
+msgid "Régime prescrits"
+msgstr "Regime prescribed"
+
+#: primaryIntake/consultationPanel.php:346
+msgid "Régurgitation"
+msgstr "Regurgitation"
+
+#: maintainSites/maintainSites.php:76 maintainSites/maintainSites.php:81
+#: maintainSites/maintainSites.php:182
+msgid "Réseau"
+msgstr "Network"
+
+#: pmtctintake/obgynHistoryPanel.php:278
+msgid "Résultat"
+msgstr "Result"
+
+#: primaryIntake/consultationPanel.php:385
+msgid "Résultat de Laboratoire"
+msgstr "Laboratory results"
+
+#: primaryIntake/generalPanel.php:321
+msgid "Résultat:"
+msgstr "Result:"
+
+#: runReport.php:485
+msgid "Résultats"
+msgstr "Results"
+
+#: labor/1.php:431 labor/2.php:494
+msgid "Rétention Placentaire"
+msgstr "Placental retention"
+
+#: tuberculosis/tuberculosis.php:164
+msgid "S"
+msgstr "S"
+
+#: tuberculosis/tuberculosis.php:197
+msgid "S: Streptomycine"
+msgstr "S: Streptomycin"
+
+#: labor/0.php:318
+msgid "SIGNES VITAUX A 6 HEURES DU POST-PARTUM"
+msgstr "VITAL SIGNS 6 HOURS POSTPARTUM"
+
+#: labor/1.php:519 labor/2.php:669
+msgid "SIGNES VITAUX A L’ADMISSSION"
+msgstr "VITAL SIGNS AL’ADMISSSION"
+
+#: labor/0.php:316
+msgid "SIGNES VITAUX AU TRAVAIL"
+msgstr "VITAL SIGNS DURING LABOR"
+
+#: labor/0.php:317
+msgid "SIGNES VITAUX DU POST-PARTUM IMMEDIAT"
+msgstr "VITAL SIGNS IMMEDIATELY POSTPARTUM"
+
+#: labor/1.php:523 labor/2.php:673
+msgid "SIGNES VITAUX POST PARTUM ET ETAT DE CONSCIENCE"
+msgstr "VITAL SIGNS postpartum AND STATE OF CONSCIOUSNESS"
+
+#: primaryIntake/vitalsPanel.php:305
+msgid "SIGNES VITAUX/ANTHROPOMETRIE"
+msgstr "VITAL SIGNS / ANTHROPOMETRY"
+
+#: pedPrimaryIntake/powerUpsPanel.php:158
+msgid "SUPPLEMENTATION EN VITAMINE A (VIT. A), FER, IODE, ZINC, DEPARASITAGE (DEP.)"
+msgstr "Supplementation of vitamin A (Vit. A), IRON, IODINE, ZINC, deworming (DEP.)"
+
+#: primaryIntake/consultationPanel.php:248
+msgid "Saignement Vaginal"
+msgstr "Vaginal bleeding"
+
+#: primaryIntake/diagnosis.php:207
+msgid "Saignement utérin anormal [626.8]"
+msgstr "Abnormal uterine bleeding [626.8]"
+
+#: primaryIntake/procedures.php:512
+msgid "Salle de Travail et d’Accouchement (STA)"
+msgstr "Room labor and delivery (STA)"
+
+#: include/visitDatePanel.php:36 config.php:33
+#: maintainSites/maintainSites.php:294
+msgid "Sauvegarder"
+msgstr "Save"
+
+#: primaryIntake/generalPanel.php:96
+msgid "Scolarisé"
+msgstr "Schooled"
+
+#: pmtctintake/obgynHistoryPanel.php:159 primaryIntake/generalPanel.php:197
+msgid "Secondaire"
+msgstr "Secondary"
+
+#: labor/0.php:245
+msgid "Section Césarienne"
+msgstr "Cesarean Section"
+
+#: labor/1.php:464 labor/2.php:513
+msgid "Section césarienne + Hystérectomie"
+msgstr "Cesarean section hysterectomy +"
+
+#: primaryIntake/physicalExamPanel.php:26
+msgid "Seins"
+msgstr "Boobs"
+
+#: primaryIntake/procedures.php:89
+msgid "Selles"
+msgstr "Stool"
+
+#: primaryIntake/procedures.php:418
+msgid "Semaine de Gestation:"
+msgstr "Week of Gestation:"
+
+#: splash.php:300
+msgid "Serveur local<br>"
+msgstr "Local server <br>"
+
+#: primaryIntake/generalPanel.php:245 labor/1.php:506 labor/2.php:653
+msgid "Sexe"
+msgstr "Sex"
+
+#: labor/2.php:538
+msgid "Si VIH positif"
+msgstr "If HIV positive"
+
+#: labor/1.php:281 labor/0.php:171
+msgid "Si ViH positif"
+msgstr "If HIV positive"
+
+#: labor/0.php:183
+msgid "Si a domicile, avoir pris prophylaxie"
+msgstr "If at home, taking prophylaxis"
+
+#: labor/1.php:303 labor/2.php:573
+msgid "Si accouchement à domicile, a pris prophylaxie"
+msgstr "If homebirth took prophylaxis"
+
+#: labor/1.php:379 labor/2.php:433
+msgid "Si accouchement à domicile, assisté par Matrone"
+msgstr "If home birth assisted by Matron"
+
+#: primaryIntake/otherplans.php:162
+msgid "Si domicile : Planification pour la présence d’une matrone"
+msgstr "If home: Planning for the presence of a matron"
+
+#: primaryIntake/otherplans.php:137
+msgid "Si domicile et femme VIH positif : est-ce qu’il y a une planification faite pour la prophylaxie ARV de l’enfant"
+msgstr "If HIV positive woman and home: Is there any planning done for ARV prophylaxis child"
+
+#: labor/0.php:251
+msgid "Si l'accouchement ete a domicile, assiste par matronne"
+msgstr "If delivered at home, assisted by midwife"
+
+#: pmtctintake/obgynHistoryPanel.php:151 pmtctintake/obgynHistoryPanel.php:318
+#: labor/1.php:309 labor/1.php:328 labor/2.php:227 labor/2.php:579
+#: labor/2.php:606 labor/0.php:189
+msgid "Si oui"
+msgstr "If yes"
+
+#: pmtctintake/obgynHistoryPanel.php:227
+msgid "Si oui, Indication1"
+msgstr "If yes, Indication1"
+
+#: labor/1.php:395 labor/2.php:452
+msgid "Si oui, Réparée"
+msgstr "If yes, Repaired"
+
+#: pedPrimaryIntake/diet.php:24
+msgid "Si oui, durée en mois :"
+msgstr "If yes, duration in months:"
+
+#: tuberculosis/tuberculosis.php:324
+msgid "Si oui, médicaments : "
+msgstr "If so, drugs :"
+
+#: pmtctintake/obgynHistoryPanel.php:341
+msgid "Si oui, méthode"
+msgstr "If yes, method"
+
+#: primaryIntake/otherplans.php:176
+msgid "Si oui, nom de la Matrone"
+msgstr "If yes, name of the Matron"
+
+#: primaryIntake/otherplans.php:201
+msgid "Si oui, nom de l’Accompagnateur du Nouveau Né"
+msgstr "If yes, name of the Companion of the New Born"
+
+#: primaryIntake/personalHistoryPanel.php:151
+msgid "Si oui, nom détablissement :"
+msgstr "If yes, name of establishment :"
+
+#: primaryIntake/otherplans.php:151 labor/1.php:439 labor/2.php:363
+#: labor/2.php:728
+msgid "Si oui, précisez"
+msgstr "If yes, please specify"
+
+#: primaryIntake/personalHistoryPanel.php:177
+msgid "Si oui, précisez :"
+msgstr "If yes, explain:"
+
+#: primaryIntake/generalPanel.php:106
+msgid "Si oui, précisez classe"
+msgstr "If yes, indicate class"
+
+#: pedPrimaryIntake/diet.php:50
+msgid "Si oui, précisez le lait :"
+msgstr "If yes, milk:"
+
+#: primaryIntake/procedures.php:359
+msgid "Si oui, précisez:"
+msgstr "If yes, explain:"
+
+#: labor/1.php:419 labor/2.php:503 labor/0.php:270
+msgid "Si oui, réparation"
+msgstr "If yes, repaired"
+
+#: pmtctintake/obgynHistoryPanel.php:361
+msgid "Si oui, âge"
+msgstr "If yes, age"
+
+#: pedPrimaryIntake/diet.php:90
+msgid "Si oui, âge en mois"
+msgstr "If yes, age in months"
+
+#: tuberculosis/tuberculosis.php:291
+msgid "Si positif : CD4 (résultat) : "
+msgstr "If positive: CD4 (result) :"
+
+#: primaryIntake/procedures.php:102
+msgid "Sickling test"
+msgstr "Sickling test"
+
+#: primaryIntake/physicalExamPanel.php:149 labor/1.php:245 labor/2.php:306
+#: labor/0.php:134
+msgid "Siège"
+msgstr "Breech"
+
+#: backend/constants.php:215
+msgid "Soins de santé primaire--consultation"
+msgstr "Primary Health Care - consultation"
+
+#: backend/constants.php:218
+msgid "Soins de santé primaire--consultation pédiatrique"
+msgstr "Primary Health Care - Pediatric Consultation"
+
+#: backend/constants.php:214
+msgid "Soins de santé primaire--première consultation"
+msgstr "Primary health care - first consultation"
+
+#: backend/constants.php:216
+msgid "Soins de santé primaire--première consultation pédiatrique"
+msgstr "Primary health care - first consultation pediatric"
+
+#: primaryIntake/generalPanel.php:143
+msgid "Source de référence"
+msgstr "Source reference"
+
+#: labor/1.php:262 labor/2.php:330 labor/0.php:152
+msgid "Spontanée"
+msgstr "Spontaneous"
+
+#: primaryIntake/procedures.php:452
+msgid "Stade I"
+msgstr "Stage I"
+
+#: primaryIntake/procedures.php:455
+msgid "Stade II"
+msgstr "Stage II"
+
+#: primaryIntake/procedures.php:458
+msgid "Stade III"
+msgstr "Stage III"
+
+#: primaryIntake/procedures.php:461
+msgid "Stade IV"
+msgstr "Stage IV"
+
+#: primaryIntake/procedures.php:450
+msgid "Stade OMS"
+msgstr "WHO stage"
+
+#: primaryIntake/procedures.php:464
+msgid "Stade inconnu"
+msgstr "Stage unknown"
+
+#: tuberculosis/tuberculosis.php:266
+msgid "Statut VIH"
+msgstr "HIV status"
+
+#: primaryIntake/procedures.php:510
+msgid "Structure Communautaire"
+msgstr "Community structure"
+
+#: primaryIntake/procedures.php:256
+msgid "Stérilet"
+msgstr "IUD"
+
+#: primaryIntake/consultationPanel.php:249
+msgid "Sueurs profuses face/doigts"
+msgstr "Sweating face / fingers"
+
+#: pmtctintake/obgynHistoryPanel.php:8 tuberculosis/tuberculosis.php:11
+msgid "Suivi"
+msgstr "Monitoring"
+
+#: primaryIntake/otherplans.php:57
+msgid "Suivi Prénatal"
+msgstr "Prenatal monitoring"
+
+#: primaryIntake/consultationPanel.php:383
+msgid "Suivi Diagnostic Actuel"
+msgstr "Current Monitoring Diagnosis"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:109
+msgid "Supplément"
+msgstr "Supplement"
+
+#: tuberculosis/tuberculosis.php:374
+msgid "Supplémentation Alimentaire"
+msgstr "Food supplementation"
+
+#: primaryIntake/procedures.php:351
+msgid "Support Nutritionnel"
+msgstr "Nutritional Support"
+
+#: primaryIntake/diagnosis.php:179
+msgid "Suspecté"
+msgstr "Suspected"
+
+#: labor/2.php:18
+msgid "Suspicion d’infection materno-foetale"
+msgstr "Suspicion of infection from mother to fetus"
+
+#: primaryIntake/consultationPanel.php:174
+#: primaryIntake/consultationPanel.php:317
+msgid "Syncope"
+msgstr "Syncope"
+
+#: primaryIntake/diagnosis.php:208
+msgid "Syndrome Grippal"
+msgstr "ILI"
+
+#: primaryIntake/diagnosis.php:209
+msgid "Syndrome ictérique fébrile [070.1]"
+msgstr "Febrile icteric syndrome [070.1]"
+
+#: primaryIntake/diagnosis.php:210
+msgid "Syndrome néphrotique [581]"
+msgstr "Nephrotic syndrome [581]"
+
+#: primaryIntake/diagnosis.php:219
+msgid "Syphilis [097.9]"
+msgstr "Syphilis [097.9]"
+
+#: primaryIntake/consultationPanel.php:292
+msgid "Sécrétions purulentes yeux"
+msgstr "Purulent secretions eyes"
+
+#: primaryIntake/procedures.php:106
+msgid "Sérologie VIH"
+msgstr "HIV serology"
+
+#: primaryIntake/procedures.php:104
+msgid "Sérologie à Hélicobacter Pylori"
+msgstr "Helicobacter pylori serology"
+
+#: primaryIntake/vitalsPanel.php:188 labor/1.php:17 labor/1.php:530
+#: labor/2.php:53 labor/2.php:680 labor/0.php:30
+msgid "TA"
+msgstr "BP"
+
+#: labor/1.php:490 labor/2.php:636
+msgid "TABLEAU DE NAISSANCE"
+msgstr "TABLE OF BIRTH"
+
+#: labor/1.php:281 labor/2.php:538
+msgid "TAR"
+msgstr "TAR"
+
+#: labor/1.php:295 labor/1.php:315 labor/2.php:585 labor/0.php:177
+#: labor/0.php:190
+msgid "TAR Spécifier"
+msgstr "Specify ART"
+
+#: labor/1.php:182 labor/2.php:240 labor/0.php:99
+msgid "TRAVAIL ET ACCOUCHEMENT"
+msgstr "LABOUR AND DELIVERY"
+
+#: primaryIntake/personalHistoryPanel.php:119
+msgid "Tabac"
+msgstr "Tobacco"
+
+#: primaryIntake/procedures.php:253
+msgid "Tablet Vaginale"
+msgstr "Vaginal Tablet"
+
+#: primaryIntake/vitalsPanel.php:12
+msgid "Taille"
+msgstr "Size"
+
+#: primaryIntake/physicalExamPanel.php:66
+msgid "Tanner"
+msgstr "Tan"
+
+#: primaryIntake/diagnosis.php:211
+msgid "Teigne [110.9]"
+msgstr "Ringworm [110.9]"
+
+#: labor/1.php:276 labor/2.php:344 labor/0.php:166
+msgid "Teinté"
+msgstr "Tinted"
+
+#: primaryIntake/vitalsPanel.php:157
+msgid "Temp"
+msgstr "Temp"
+
+#: labor/1.php:533 labor/2.php:683
+msgid "Température"
+msgstr "Temperature"
+
+#: primaryIntake/procedures.php:90
+msgid "Test de grossesse"
+msgstr "Pregnancy test"
+
+#: primaryIntake/procedures.php:114
+msgid "Test rapide"
+msgstr "Quick test"
+
+#: primaryIntake/procedures.php:202
+msgid "Tests Laboratoire"
+msgstr "Laboratory tests"
+
+#: patient/vaccinations.php:62
+msgid "Tetanos"
+msgstr "Tetanus"
+
+#: primaryIntake/physicalExamPanel.php:43
+msgid "Thorax antérieur"
+msgstr "Anterior chest"
+
+#: primaryIntake/physicalExamPanel.php:44
+msgid "Thorax postérieur"
+msgstr "Posterior thorax"
+
+#: primaryIntake/diagnosis.php:220
+msgid "Thrombopénie [287.5]"
+msgstr "Thrombocytopenia [287.5]"
+
+#: primaryIntake/diagnosis.php:221
+msgid "Thrombose"
+msgstr "Thrombosis"
+
+#: splash.php:264
+msgid "Totals des patients est inférieure à la somme de la zone de service totaux en raison de patients communs."
+msgstr "Total patients is less than the sum of the total service area due to common patients."
+
+#: backend/materializedViews.php:2551
+msgid "Totaux"
+msgstr "totals"
+
+#: map/totals-primary.php:52
+msgid "Totaux généraux"
+msgstr "grand total"
+
+#: primaryIntake/physicalExamPanel.php:33
+#: primaryIntake/physicalExamPanel.php:60
+msgid "Toucher rectal"
+msgstr "DRE"
+
+#: include/visitDatePanel.php:45
+msgid "Toutes les fiches"
+msgstr "All Records"
+
+#: primaryIntake/consultationPanel.php:182
+#: primaryIntake/consultationPanel.php:282
+msgid "Toux < 2 semaines"
+msgstr "Cough <2 weeks"
+
+#: primaryIntake/consultationPanel.php:183
+#: primaryIntake/consultationPanel.php:283
+msgid "Toux ≥ 2 semaines"
+msgstr "Cough ≥ 2 weeks"
+
+#: tuberculosis/tuberculosis.php:56
+msgid "Traitement après interruption"
+msgstr "Treatment after interruption"
+
+#: labor/1.php:454 labor/2.php:378 labor/0.php:283
+msgid "Transfusion"
+msgstr "Transfusion"
+
+#: tuberculosis/tuberculosis.php:65
+msgid "Transféré"
+msgstr "Transferred"
+
+#: primaryIntake/physicalExamPanel.php:153 labor/1.php:247 labor/2.php:312
+#: labor/0.php:134
+msgid "Transversale"
+msgstr "Transverse"
+
+#: primaryIntake/diagnosis.php:321 primaryIntake/diagnosis.php:490
+#: primaryIntake/consultationPanel.php:127
+#: primaryIntake/consultationPanel.php:294
+msgid "Trauma"
+msgstr "Trauma"
+
+#: primaryIntake/consultationPanel.php:139
+#: primaryIntake/consultationPanel.php:302
+msgid "Trauma crânien"
+msgstr "Head trauma"
+
+#: primaryIntake/diagnosis.php:213
+msgid "Trauma crânien [959.01]"
+msgstr "Head trauma [959.01]"
+
+#: primaryIntake/diagnosis.php:214
+msgid "Trouble psychiatrique d’étiologie à investiguer"
+msgstr "Aetiology of psychiatric disorder to investigate"
+
+#: primaryIntake/consultationPanel.php:250
+msgid "Troubles Visuels"
+msgstr "Eyestrain"
+
+#: primaryIntake/consultationPanel.php:162
+#: primaryIntake/consultationPanel.php:275
+msgid "Troubles mentaux, précisez:"
+msgstr "Mental disorders, specify:"
+
+#: primaryIntake/personalHistoryPanel.php:116
+msgid "Troubles psychiatriques, précisez:"
+msgstr "Psychiatric disorders, specify:"
+
+#: primaryIntake/personalHistoryPanel.php:109
+#: primaryIntake/personalHistoryPanel.php:114 primaryIntake/relatives.php:48
+msgid "Tuberculose"
+msgstr "TB"
+
+#: primaryIntake/diagnosis.php:215
+msgid "Tuberculose (remplir la section Tuberculose ci-dessous)"
+msgstr "Tuberculosis (TB complete section below)"
+
+#: pmtctintake/vaccins.php:40 maintainSites/maintainSites.php:189
+#: maintainSites/maintainSites.php:265
+msgid "Type"
+msgstr "Type"
+
+#: tuberculosis/tuberculosis.php:51
+msgid "Type de Malade"
+msgstr "Type of Patient"
+
+#: pmtctintake/vaccins.php:12
+msgid "Tétanos Texoïde"
+msgstr "Tetanus Texoïde"
+
+#: primaryIntake/diagnosis.php:212
+msgid "Tétanos [037]"
+msgstr "Tetanus [037]"
+
+#: primaryIntake/procedures.php:300
+msgid "Tétanos toxoïde"
+msgstr "Tetanus toxoid"
+
+#: primaryIntake/physicalExamPanel.php:22
+msgid "Tête"
+msgstr "Head"
+
+#: primaryIntake/consultationPanel.php:160
+msgid "Ulcération(s)"
+msgstr "Ulceration (s)"
+
+#: labor/1.php:206 labor/2.php:264
+msgid "Unique"
+msgstr "Single"
+
+#: primaryIntake/generalPanel.php:200
+msgid "Universitaire"
+msgstr "University"
+
+#: primaryIntake/diagnosis.php:217
+msgid "Urgence Chirurgicale"
+msgstr "Emergency Surgery"
+
+#: primaryIntake/procedures.php:88
+msgid "Urines"
+msgstr "Urine"
+
+#: primaryIntake/consultationPanel.php:308
+msgid "Urticaire"
+msgstr "Urticaria"
+
+#: primaryIntake/procedures.php:109
+msgid "Urée / créatinine"
+msgstr "Urea / creatinine"
+
+#: splash.php:301
+msgid "Utilisant le serveur d’asp.<br>"
+msgstr "Using the ASP server. <br>"
+
+#: primaryIntake/procedures.php:234
+msgid "Utilisation Courante"
+msgstr "Current use"
+
+#: primaryIntake/physicalExamPanel.php:28
+msgid "Utérus"
+msgstr "Uterus"
+
+#: pedPrimaryIntake/powerUpsPanel.php:147
+msgid "VACCINATION"
+msgstr "VACCINATION"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:93
+msgid "VACCINATION ET SUPPLEMENTATION"
+msgstr "VACCINATION AND SUPPLEMENTATION"
+
+#: pmtctintake/vaccins.php:75
+msgid "VACCINS"
+msgstr "VACCINES"
+
+#: primaryIntake/procedures.php:107
+msgid "VIA"
+msgstr "VIA"
+
+#: primaryIntake/procedures.php:98
+msgid "VIH"
+msgstr "HIV"
+
+#: primaryIntake/procedures.php:447
+msgid "VIH Positif"
+msgstr "HIV Positive"
+
+#: labels/menu.php:154
+msgid "VIH négatif"
+msgstr "HIV negative"
+
+#: backend/materializedViews.php:2551
+msgid "VIH soins TAR"
+msgstr "HIV care ART"
+
+#: backend/materializedViews.php:2551
+msgid "VIH soins palliatifs"
+msgstr "HIV palliative care"
+
+#: primaryIntake/diagnosis.php:222
+msgid "VIH/SIDA [042]"
+msgstr "HIV / AIDS [042]"
+
+#: splash.php:261
+msgid "VOB: Visites ob-gyn<br>"
+msgstr "VOB: ob-gyn visits <br>"
+
+#: splash.php:257
+msgid "VPA: Adulte visites soins de santé primaires<br>"
+msgstr "VPA: Adult primary care visits <br>"
+
+#: splash.php:259
+msgid "VPP: Pédiatrique visites soins de santé primaires<br>"
+msgstr "VPP: Pediatric primary care visits <br>"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:107
+#: pedPrimaryFollowup/powerUpsPanel2.php:108
+#: pedPrimaryIntake/powerUpsPanel.php:148 patient/vaccinations.php:148
+msgid "Vaccin"
+msgstr "Vaccine"
+
+#: primaryIntake/procedures.php:291 primaryIntake/procedures.php:511
+#: patient/vaccinations.php:147
+msgid "Vaccination"
+msgstr "Vaccination"
+
+#: labor/2.php:654
+msgid "Vaccins"
+msgstr "Vaccines"
+
+#: labor/1.php:401 labor/2.php:461 labor/0.php:242
+msgid "Vacuum"
+msgstr "Vacuum"
+
+#: primaryIntake/physicalExamPanel.php:30
+msgid "Vagin"
+msgstr "Vagina"
+
+#: labor/1.php:388 labor/2.php:443 labor/2.php:447 labor/0.php:239
+msgid "Vaginal"
+msgstr "Vaginal"
+
+#: primaryIntake/personalHistoryPanel.php:111
+msgid "Varicelle"
+msgstr "Varicella"
+
+#: primaryIntake/diagnosis.php:218
+msgid "Varicelle [052.9]"
+msgstr "Varicella [052.9]"
+
+#: splash.php:300
+msgid "Vert"
+msgstr "green"
+
+#: primaryIntake/consultationPanel.php:175
+#: primaryIntake/consultationPanel.php:318
+msgid "Vertiges"
+msgstr "Dizziness"
+
+#: maintainSites/maintainSites.php:405 maintainSites/maintainSites.php:419
+#: maintainSites/maintainSites.php:448 maintainSites/maintainSites.php:462
+msgid "Veuillez choisir un établissement."
+msgstr "Please select a facility."
+
+#: primaryIntake/otherplans.php:89
+msgid "Visite<br> Domiciliaire"
+msgstr "Visit <br> Home"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:43
+#: pedPrimaryIntake/powerUpsPanel.php:100
+msgid "Vitamine A"
+msgstr "Vitamin A"
+
+#: primaryIntake/procedures.php:111
+msgid "Vitesse de sédimentation (ESR)"
+msgstr "Sedimentation rate (ESR)"
+
+#: primaryIntake/consultationPanel.php:251
+#: primaryIntake/consultationPanel.php:347
+msgid "Vomissement"
+msgstr "Vomiting"
+
+#: primaryIntake/consultationPanel.php:203
+msgid "Vomissements"
+msgstr "Vomiting"
+
+#: primaryIntake/diagnosis.php:223
+msgid "Vulvo vaginite [616.10]"
+msgstr "Vulvo vaginitis [616.10]"
+
+#: adminPat.php:28 adminPat.php:61
+msgid "Vérification de suppression de patient"
+msgstr "Vérification de suppression de patient"
+
+#: primaryIntake/procedures.php:86
+msgid "Widal"
+msgstr "Widal"
+
+#: primaryIntake/diagnosis.php:227 primaryIntake/diagnosis.php:228
+#: primaryIntake/diagnosis.php:229 primaryIntake/diagnosis.php:230
+#: primaryIntake/diagnosis.php:231
+msgid "X"
+msgstr "X"
+
+#: tuberculosis/tuberculosis.php:136
+msgid "X-Ray"
+msgstr "X-Ray"
+
+#: primaryIntake/physicalExamPanel.php:38
+msgid "Yeux"
+msgstr "Eyes"
+
+#: tuberculosis/tuberculosis.php:170
+msgid "Z"
+msgstr "Z"
+
+#: tuberculosis/tuberculosis.php:209
+msgid "Z: Pyrizinamide"
+msgstr "Z: Pyrizinamide"
+
+#: pedPrimaryFollowup/powerUpsPanel2.php:51
+#: pedPrimaryIntake/powerUpsPanel.php:132
+msgid "Zinc"
+msgstr "Zinc"
+
+#: backendAddon.php:2362
+msgid "a"
+msgstr "y"
+
+#: primaryIntake/vitalsPanel.php:26 primaryIntake/vitalsPanel.php:122
+#: primaryIntake/vitalsPanel.php:206 primaryIntake/physicalExamPanel.php:120
+#: labor/2.php:55
+msgid "cm"
+msgstr "cm"
+
+#: primaryIntake/vitalsPanel.php:101
+msgid "cm (âge < 3 ans)"
+msgstr "cm (age <3 years)"
+
+#: labor/1.php:19 labor/0.php:32
+msgid "cm de Hg"
+msgstr "mm Hg"
+
+#: primaryIntake/diagnosis.php:159
+msgid "déshydratation légère"
+msgstr "dehydration"
+
+#: primaryIntake/diagnosis.php:160
+msgid "déshydratation modérée"
+msgstr "dehydration"
+
+#: primaryIntake/diagnosis.php:161
+msgid "déshydratation sévère"
+msgstr "Severe dehydration"
+
+#: patient/graphSetup.js.php:474 patient/graphSetup.js.php:486
+#: patient/graphSetup.js.php:500 patient/graphSetup.js.php:511
+#: patient/graphSetup.js.php:523 patient/graphSetup.js.php:537
+#: patient/graphSetup.js.php:551 patient/graphSetup.js.php:567
+#: patient/graphSetup.js.php:578 patient/graphSetup.js.php:594
+#: patient/graphSetup.js.php:610 patient/graphSetup.js.php:626
+#: patient/graphSetup.js.php:644
+msgid "en:Age"
+msgstr "Age"
+
+#: patient/graphSetup.js.php:552 patient/graphSetup.js.php:579
+msgid "en:BMI"
+msgstr "BMI"
+
+#: patient/graphSetup.js.php:550 patient/graphSetup.js.php:577
+msgid "en:BMI for Age"
+msgstr "BMI for Age"
+
+#: backend/config-edit.php:90
+msgid "en:Backup Encryption Key"
+msgstr "Backup Encryption Key"
+
+#: patient/graphSetup.js.php:727
+msgid "en:Boys"
+msgstr "Boys"
+
+#: backend/config-edit.php:85
+msgid "en:By default identified and deidentified data will be sent to isante-consolidated.cirg.washington.edu and forwarded to isante.ugp.ht"
+msgstr "By default identified and deidentified data will be sent to isante-consolidated.cirg.washington.edu and forwarded to isante.ugp.ht"
+
+#: patienttabs.php:521
+msgid "en:Can not draw graph without known gender and birth date."
+msgstr "Can not draw graph without known gender and birth date."
+
+#: scannerStatus.php:16
+msgid "en:Check Status"
+msgstr "Check Status"
+
+#: scannerStatus.php:8
+msgid "en:Check to see if the scanner is set up"
+msgstr "Check to see if the scanner is set up"
+
+#: patient/patientHeader.php:62
+msgid "en:Click to delete these prints"
+msgstr "Click to delete these prints"
+
+#: fingerprint/getFingerprintID.php:31
+msgid "en:Client software either not installed or not running."
+msgstr "Client software either not installed or not running."
+
+#: backend/config-edit.php:63
+msgid "en:Consolidated"
+msgstr "Consolidated"
+
+#: patienttabs.php:540 patient/graphSetup.js.php:775
+msgid "en:Date"
+msgstr "Date"
+
+#: backend/config-edit.php:50
+msgid "en:Default siteCode"
+msgstr "Default siteCode"
+
+#: scannerStatus.php:20
+msgid "en:Display scanner window"
+msgstr "Display scanner window"
+
+#: fingerprint/getFingerprintID.php:7 fingerprint/getFingerprintID.php:37
+msgid "en:Enter fingerprint"
+msgstr "Enter fingerprint"
+
+#: backend/config-edit.php:84
+msgid "en:Every set of three values represents one replication target. ‘targetName’ is a unique name for this replication. ‘targetUrl’ is the URL where the read files should be sent to. ‘identified’ has either a value of either ‘identified’ or ‘deidentified’. When the value is ‘deidentified’ certain identifying fields will be set to null."
+msgstr "Every set of three values represents one replication target. ‘targetName’ is a unique name for this replication. ‘targetUrl’ is the URL where the read files should be sent to. ‘identified’ has either a value of either ‘identified’ or ‘deidentified’. When the value is ‘deidentified’ certain identifying fields will be set to null."
+
+#: backend/fingerprint.php:28
+msgid "en:Fingerprint URL NOT DEFINED"
+msgstr "Fingerprint URL NOT DEFINED"
+
+#: patient/graphSetup.js.php:729
+msgid "en:Girls"
+msgstr "Girls"
+
+#: patienttabs.php:343
+msgid "en:Growth Charts"
+msgstr "Growth Charts"
+
+#: patient/graphSetup.js.php:512 patient/graphSetup.js.php:595
+msgid "en:Head Circumference"
+msgstr "Head Circumference"
+
+#: patient/graphSetup.js.php:510 patient/graphSetup.js.php:593
+msgid "en:Head Circumference for Age"
+msgstr "Head Circumference for Age"
+
+#: patient/graphSetup.js.php:522
+msgid "en:Height for Age"
+msgstr "Height for Age"
+
+#: backend/config-edit.php:64
+msgid "en:LDAP Directory Base DN"
+msgstr "LDAP Directory Base DN"
+
+#: backend/config-edit.php:70
+msgid "en:LDAP Directory Server URI"
+msgstr "LDAP Directory Server URI"
+
+#: patienttabs.php:538
+msgid "en:Last value percentile"
+msgstr "Last value percentile"
+
+#: patient/graphSetup.js.php:487 patient/graphSetup.js.php:498
+#: patient/graphSetup.js.php:524 patient/graphSetup.js.php:611
+#: patient/graphSetup.js.php:642
+msgid "en:Length"
+msgstr "Length"
+
+#: patient/graphSetup.js.php:485 patient/graphSetup.js.php:609
+msgid "en:Length for Age"
+msgstr "Length for Age"
+
+#: scannerStatus.php:47
+msgid "en:M2Sys client software installed"
+msgstr "M2Sys client software installed"
+
+#: scannerStatus.php:49
+msgid "en:M2Sys client software not installed."
+msgstr "M2Sys client software not installed."
+
+#: scannerStatus.php:55
+msgid "en:M2Sys client software not running."
+msgstr "M2Sys client software not running."
+
+#: patient/graphSetup.js.php:473 patient/graphSetup.js.php:474
+#: patient/graphSetup.js.php:485 patient/graphSetup.js.php:486
+#: patient/graphSetup.js.php:497 patient/graphSetup.js.php:500
+#: patient/graphSetup.js.php:510 patient/graphSetup.js.php:511
+#: patient/graphSetup.js.php:577 patient/graphSetup.js.php:578
+#: patient/graphSetup.js.php:593 patient/graphSetup.js.php:594
+#: patient/graphSetup.js.php:609 patient/graphSetup.js.php:610
+#: patient/graphSetup.js.php:625 patient/graphSetup.js.php:626
+#: patient/graphSetup.js.php:641 patient/graphSetup.js.php:644
+msgid "en:Months"
+msgstr "Months"
+
+#: patient/graphSetup.js.php:771
+msgid "en:Percentile"
+msgstr "Percentile"
+
+#: runQuery.php:39 runReport.php:442
+msgid "en:Print"
+msgstr "Print"
+
+#: backend/config-edit.php:62
+msgid "en:Production"
+msgstr "Production"
+
+#: patienttabs.php:204
+msgid "en:Really delete this patient’s fingerprints?"
+msgstr "Really delete this patient’s fingerprints?"
+
+#: fingerprint/submitPrints.php:7 fingerprint/submitPrints.php:32
+msgid "en:Register fingerprints--registration requires prints of both middle fingers, three scans each."
+msgstr "Register fingerprints--registration requires prints of both middle fingers, three scans each."
+
+#: backend/config-edit.php:82
+msgid "en:Replication Targets"
+msgstr "Replication Targets"
+
+#: scannerStatus.php:21
+msgid "en:Return to iSanté"
+msgstr "Return to iSanté"
+
+#: scannerStatus.php:15
+msgid "en:Scanner Status"
+msgstr "Scanner Status"
+
+#: scannerStatus.php:60
+msgid "en:Scanner count is: "
+msgstr "Scanner count is: "
+
+#: scannerStatus.php:39
+msgid "en:Scanner window cannot be displayed"
+msgstr "Scanner window cannot be displayed"
+
+#: backend/config-edit.php:56
+msgid "en:Server Role"
+msgstr "Server Role"
+
+#: patient/graphSetup.js.php:565
+msgid "en:Stature"
+msgstr "Stature"
+
+#: backend/config-edit.php:61
+msgid "en:Testing"
+msgstr "Testing"
+
+#: backend/config-edit.php:51
+msgid "en:The default siteCode used for new users."
+msgstr "The default siteCode used for new users."
+
+#: backend/config-edit.php:45
+msgid "en:The numeric dbSite code for this database. dbSite codes are unique to particular site and should never be changed."
+msgstr "The numeric dbSite code for this database. dbSite codes are unique to particular site and should never be changed."
+
+#: backend/config-edit.php:83
+msgid "en:This is a list of target information on where replicated data should be sent. Its value is a list that looks like"
+msgstr "This is a list of target information on where replicated data should be sent. Its value is a list that looks like"
+
+#: backend/config-edit.php:65
+msgid "en:This is an LDAP DN containing the users and groups OU that iSanté uses for authentication. e.g."
+msgstr "This is an LDAP DN containing the users and groups OU that iSanté uses for authentication. e.g."
+
+#: backend/config-edit.php:71
+msgid "en:This is the URI of the LDAP server. By default the value is"
+msgstr "This is the URI of the LDAP server. By default the value is"
+
+#: backend/config-edit.php:91
+msgid "en:This value is used to encrypt backup files. If no value is provided backup files will not be encrypted. Encrypted backup files can not be used unless the encryption key is known."
+msgstr "This value is used to encrypt backup files. If no value is provided backup files will not be encrypted. Encrypted backup files can not be used unless the encryption key is known."
+
+#: backend/config-edit.php:77
+msgid "en:URL of the My2sys fingerprint server. e.g."
+msgstr "URL of the My2sys fingerprint server. e.g."
+
+#: patient/graphSetup.js.php:475 patient/graphSetup.js.php:499
+#: patient/graphSetup.js.php:538 patient/graphSetup.js.php:566
+#: patient/graphSetup.js.php:627 patient/graphSetup.js.php:643
+msgid "en:Weight"
+msgstr "Weight"
+
+#: patient/graphSetup.js.php:473 patient/graphSetup.js.php:536
+#: patient/graphSetup.js.php:625
+msgid "en:Weight for Age"
+msgstr "Weight for Age"
+
+#: patient/graphSetup.js.php:497 patient/graphSetup.js.php:641
+msgid "en:Weight for Length"
+msgstr "Weight for Length"
+
+#: patient/graphSetup.js.php:564
+msgid "en:Weight for Stature"
+msgstr "Weight for Stature"
+
+#: backend/config-edit.php:57
+msgid "en:What is the purpose of this server? ‘Testing’ is for servers which will contain fake data or be used for evaluation purposes. ‘Production’ is for servers which will contain real patient data and be configured with a real dbSite code value. ‘Consolidated’ is for servers which will contain aggregated data from production servers obtained through replication only."
+msgstr "What is the purpose of this server? ‘Testing’ is for servers which will contain fake data or be used for evaluation purposes. ‘Production’ is for servers which will contain real patient data and be configured with a real dbSite code value. ‘Consolidated’ is for servers which will contain aggregated data from production servers obtained through replication only."
+
+#: patient/graphSetup.js.php:522 patient/graphSetup.js.php:523
+#: patient/graphSetup.js.php:536 patient/graphSetup.js.php:537
+#: patient/graphSetup.js.php:550 patient/graphSetup.js.php:551
+#: patient/graphSetup.js.php:564 patient/graphSetup.js.php:567
+msgid "en:Years"
+msgstr "Years"
+
+#: config.php:53
+msgid "en:can not be changed"
+msgstr "can not be changed"
+
+#: patient/graphSetup.js.php:759 patient/graphSetup.js.php:765
+msgid "en:day of birth"
+msgstr "day of birth"
+
+#: backend/config-edit.php:44
+msgid "en:dbSite Code"
+msgstr "dbSite Code"
+
+#: config.php:39
+msgid "en:not an administrator"
+msgstr "not an administrator"
+
+#: config.php:69
+msgid "en:set to"
+msgstr "set to"
+
+#: config.php:67
+msgid "en:set to default"
+msgstr "set to default"
+
+#: config.php:61
+msgid "en:value is invalid"
+msgstr "value is invalid"
+
+#: maintainSites/maintainSites.php:178
+msgid "iSanté"
+msgstr "iSanté"
+
+#: maintainSites/maintainSites.php:121
+msgid "iSanté seulement"
+msgstr "iSanté only"
+
+#: primaryIntake/personalHistoryPanel.php:94
+msgid "inconnu"
+msgstr "unknown"
+
+#: backendAddon.php:2358
+msgid "j"
+msgstr "d"
+
+#: pmtctintake/obgynHistoryPanel.php:104 pmtctintake/obgynHistoryPanel.php:115
+msgid "jours"
+msgstr "days"
+
+#: primaryIntake/vitalsPanel.php:51
+msgid "kg"
+msgstr "kg"
+
+#: primaryIntake/vitalsPanel.php:54
+msgid "lb"
+msgstr "lb"
+
+#: backendAddon.php:2360
+msgid "m"
+msgstr "m"
+
+#: tuberculosis/tuberculosis.php:89
+msgid "marquer ci-dessous :"
+msgstr "score below :"
+
+#: primaryIntake/physicalExamPanel.php:104
+msgid "min"
+msgstr "min"
+
+#: primaryIntake/vitalsPanel.php:209 labor/1.php:19 labor/2.php:55
+#: labor/0.php:32
+msgid "mm de Hg"
+msgstr "mm Hg"
+
+#: primaryIntake/vitalsPanel.php:19
+msgid "mètres"
+msgstr "m"
+
+#: pmtctintake/obgynHistoryPanel.php:157
+msgid "ou"
+msgstr "or"
+
+#: primaryIntake/diagnosis.php:86 labor/1.php:243 labor/1.php:247
+#: labor/2.php:304 labor/2.php:312
+msgid "précisez"
+msgstr "specify"
+
+#: labor/1.php:233 labor/2.php:291 labor/0.php:124
+msgid "semaines"
+msgstr "weeks"
+
+#: config.php:107
+msgid "server version"
+msgstr "server version"
+
+#: primaryIntake/vitalsPanel.php:164
+msgid "°C"
+msgstr "C"
+
+#: primaryIntake/vitalsPanel.php:167
+msgid "°F"
+msgstr "F"
+
+#: maintainSites/maintainSites.php:376 maintainSites/maintainSites.php:400
+msgid "Éditez l’etablissement"
+msgstr "Edit the establishment"
+
+#: splash.php:52 splash.php:191 maintainSites/maintainSites.php:118
+#: maintainSites/maintainSites.php:181
+msgid "Établissement"
+msgstr "Establishment"
+
+#: adminPat.php:31 adminPat.php:65
+msgid "Étes-vous sûr vous voulez-vous supprimer ce patient et toutes leurs formes ?"
+msgstr "Étes-vous sûr vous voulez-vous supprimer ce patient et toutes leurs formes ?"
+
+#: find.php:127
+msgid "Êtes-vous sûr que vous voudriez combiner ces patients ? Cette action ne peut pas être renversée ! ! !"
+msgstr "Are you sure you want to combine these patients? This action can not be reversed! ! !"
+
+#: primaryIntake/physicalExamPanel.php:128
+msgid "Œdème"
+msgstr "Edema"
+
+#: primaryIntake/consultationPanel.php:265
+msgid "Œdème, précisez :"
+msgstr "Edema, specify:"
+
+#: primaryIntake/consultationPanel.php:122
+msgid "Œdème, précisez:"
+msgstr "Edema, specify:"
+
+#: primaryIntake/consultationPanel.php:145
+#: primaryIntake/consultationPanel.php:289
+msgid "Œil rouge"
+msgstr "Red Eye"
+
+#: primaryIntake/procedures.php:110
+msgid "Œstrogène / Progestérone"
+msgstr "Estrogen / Progesterone"
+
+#: primaryIntake/personalHistoryPanel.php:91
+msgid "≤ 1 mois"
+msgstr "≤ 1 month"
+
+#~ msgid "  N   A   G  "
+#~ msgstr "NAG"
+
+#~ msgid "*Notifiez la direction de la surveillance épidémiologique du MSPP"
+#~ msgstr "* Notify management of epidemiological surveillance of MSPP"
+
+#~ msgid "*Notifiez la direction de la surveillance épidémiologique du MSPP.         N : nouveau    A: actif    G : guéri"
+#~ msgstr "* Notify management of epidemiological surveillance of MSPP. N: new A: active G: cured"
+
+#~ msgid ", précisez:"
+#~ msgstr ", Specify:"
+
+#~ msgid "ALIMENTAIRE"
+#~ msgstr "FOOD"
+
+#~ msgid "ANTECEDANTS HEREDO-COLLATERAUX"
+#~ msgstr "Supersedes hereditary COLLATERAL"
+
+#~ msgid "ATCD de Césarienne:"
+#~ msgstr "ATCD of Caesarean section"
+
+#~ msgid "Abcès"
+#~ msgstr "Abscess"
+
+#~ msgid "Accident Voie Publique (AVP)"
+#~ msgstr "Public Ways accident (AVP)"
+
+#~ msgid "Accident cérébro-vasculaire [164]"
+#~ msgstr "Stroke [164]"
+
+#~ msgid "Accouchement:"
+#~ msgstr "Delivery:"
+
+#~ msgid "Adénofibrome (ADF) du sein "
+#~ msgstr "Fibroadenoma (ADF) of the breast"
+
+#~ msgid "Age des Menarches"
+#~ msgstr "Age of Menarche"
+
+#~ msgid "Agression sexuelle"
+#~ msgstr "Sexual assault"
+
+#~ msgid "Alcohol"
+#~ msgstr "Alcohol"
+
+#~ msgid "Alcohol/Drogue, précisez:"
+#~ msgstr "Alcohol / Drugs, specify:"
+
+#~ msgid "Alimentaire"
+#~ msgstr "Food"
+
+#~ msgid "Allergies"
+#~ msgstr "Allergies"
+
+#~ msgid "Amygdalites [463]"
+#~ msgstr "Tonsillitis [463]"
+
+#~ msgid "Amygdalites [J02.9]"
+#~ msgstr "Tonsillitis [J02.9]"
+
+#~ msgid "Anémie Carentielle"
+#~ msgstr "Iron deficiency anemia"
+
+#~ msgid "Anémie Falciforme"
+#~ msgstr "SCD"
+
+#~ msgid "Anémie [D57]"
+#~ msgstr "Anemia [D57]"
+
+#~ msgid "Arme blanche, précisez:"
+#~ msgstr "Stab, specify:"
+
+#~ msgid "Arme à feu, précisez:"
+#~ msgstr "Gun, specify:"
+
+#~ msgid "Asthme [J45]"
+#~ msgstr "Asthma [J45]"
+
+#~ msgid "Asthénie"
+#~ msgstr "Asthenia"
+
+#~ msgid "Aucun"
+#~ msgstr "No"
+
+#~ msgid "Autre : "
+#~ msgstr "Other:"
+
+#~ msgid "Autre Information"
+#~ msgstr "Other Information"
+
+#~ msgid "Autre Plan"
+#~ msgstr "Other Plan"
+
+#~ msgid "Autre services, précisez:"
+#~ msgstr "Other services, specify:"
+
+#~ msgid "Autre établissement clinique, précisez:"
+#~ msgstr "Other clinical settings, specify:"
+
+#~ msgid "Autre, précisez :"
+#~ msgstr "Other, please specify:"
+
+#~ msgid "Autre, précisez:"
+#~ msgstr "Other, please specify:"
+
+#~ msgid "Autre:"
+#~ msgstr "Other:"
+
+#~ msgid "Autres :"
+#~ msgstr "Others:"
+
+#~ msgid "Autres Pathologies"
+#~ msgstr "Other Pathologies"
+
+#~ msgid "Autres Services"
+#~ msgstr "Other Services"
+
+#~ msgid "Autres, précisez:"
+#~ msgstr "Other, please specify:"
+
+#~ msgid "Avortement [006]"
+#~ msgstr "Abortion [006]"
+
+#~ msgid "Axillaire"
+#~ msgstr "Axillary"
+
+#~ msgid "Bronchite"
+#~ msgstr "Bronchitis"
+
+#~ msgid "Brûlure"
+#~ msgstr "Burning"
+
+#~ msgid "Brûlure Précisez"
+#~ msgstr "Specify burn"
+
+#~ msgid "C. réactive protéine (CRP)"
+#~ msgstr "C. reactive protein (CRP)"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancel"
+
+#~ msgid "Cancer de la prostate"
+#~ msgstr "Prostate Cancer"
+
+#~ msgid "Cancer de l’endomètre"
+#~ msgstr "Endometrial cancer"
+
+#~ msgid "Cancer de l’ovaire [C56]"
+#~ msgstr "Ovarian cancer [C56]"
+
+#~ msgid "Cancer de sein"
+#~ msgstr "Breast cancer"
+
+#~ msgid "Cancer de sein [174.9]"
+#~ msgstr "Breast cancer [174.9]"
+
+#~ msgid "Cancer du col"
+#~ msgstr "Cervical Cancer"
+
+#~ msgid "Cancer du sein [C50]"
+#~ msgstr "Breast cancer [C50]"
+
+#~ msgid "Cardio-respiratoire"
+#~ msgstr "Cardio-respiratory"
+
+#~ msgid "Cardiopathie [I151]"
+#~ msgstr "Heart [I151]"
+
+#~ msgid "Cervicale"
+#~ msgstr "Cervical"
+
+#~ msgid "Changement dans la fréquence et/ou intensité des mouvements foetaux"
+#~ msgstr "Change in frequency and / or intensity of fetal movements"
+
+#~ msgid "Charbon [A22]"
+#~ msgstr "Coal [A22]"
+
+#~ msgid "Chirurgie/Trauma"
+#~ msgstr "Surgery / Trauma"
+
+#~ msgid "Cholera [001.9]"
+#~ msgstr "Cholera [001.9]"
+
+#~ msgid "Cholera [A00]"
+#~ msgstr "Cholera [A00]"
+
+#~ msgid "Client Running"
+#~ msgstr "Running Client"
+
+#~ msgid "Club des Mères Groupe Support"
+#~ msgstr "Mothers Club Support Group"
+
+#~ msgid "Configuration"
+#~ msgstr "Configuration"
+
+#~ msgid "Conjonctivites [B30]"
+#~ msgstr "Conjunctivitis [B30]"
+
+#~ msgid "Continue"
+#~ msgstr "Continue"
+
+#~ msgid "Coqueluche [A37]"
+#~ msgstr "Pertussis [A37]"
+
+#~ msgid "Couer"
+#~ msgstr "Couer"
+
+#~ msgid "Crises convulsives fébriles"
+#~ msgstr "Febrile seizures"
+
+#~ msgid "Cyanose"
+#~ msgstr "Cyanosis"
+
+#~ msgid "C°"
+#~ msgstr "C °"
+
+#~ msgid "DEBUT DU TRAVAIL"
+#~ msgstr "BEGINNING OF WORK"
+
+#~ msgid "DEP."
+#~ msgstr "DEP."
+
+#~ msgid "DEVELOPPEMENT PSYCHOMOTOR"
+#~ msgstr "DEVELOPMENT psychomotor"
+
+#~ msgid "DMPA"
+#~ msgstr "DMPA"
+
+#~ msgid "Date 1"
+#~ msgstr "Date 1"
+
+#~ msgid "Date 2"
+#~ msgstr "Date 2"
+
+#~ msgid "Date 3"
+#~ msgstr "Date 3"
+
+#~ msgid "Date 4"
+#~ msgstr "Date 4"
+
+#~ msgid "Date 5"
+#~ msgstr "Date 5"
+
+#~ msgid "Date 6"
+#~ msgstr "Date 6"
+
+#~ msgid "Date 7"
+#~ msgstr "Date 7"
+
+#~ msgid "Date Début :"
+#~ msgstr "Start date:"
+
+#~ msgid "Date Reçue"
+#~ msgstr "Date Received"
+
+#~ msgid "Date de Prochaine Visite : "
+#~ msgstr "Date of Next Visit:"
+
+#~ msgid "Date d’arrêt :"
+#~ msgstr "Stop Date:"
+
+#~ msgid "Dengue [A90]"
+#~ msgstr "Dengue [A90]"
+
+#~ msgid "Dermatite Atopique"
+#~ msgstr "Atopic Dermatitis"
+
+#~ msgid "Dermatite Atopique [691]"
+#~ msgstr "Atopic dermatitis [691]"
+
+#~ msgid "Des données seront déchargées à xxxx, mais peuvent prendre à 3 heures pour finir"
+#~ msgstr "Data will be discharged at xxxx, but can take 3 hours to finish"
+
+#~ msgid "Dépistage CA de la prostate (Homme > 40ans)"
+#~ msgstr "Screening for prostate CA (Men> 40 years)"
+
+#~ msgid "Dépistage CA du col"
+#~ msgstr "Screening for cervical CA"
+
+#~ msgid "Diabète + grossesse"
+#~ msgstr "Diabetes + pregnancy"
+
+#~ msgid "Diabète Type 1 [E10]"
+#~ msgstr "Type 1 diabetes [E10]"
+
+#~ msgid "Diabète Type 2 [E11]"
+#~ msgstr "Type 2 diabetes [E11]"
+
+#~ msgid "Diarrhée aigue aqueuse"
+#~ msgstr "Acute watery diarrhea"
+
+#~ msgid "Diarrhée aigue sanguinolente"
+#~ msgstr "Acute bloody diarrhea"
+
+#~ msgid "Diarrhée cause indéterminée [A109]"
+#~ msgstr "Diarrhea of undetermined cause [A109]"
+
+#~ msgid "Diphtérie [A36]"
+#~ msgstr "Diphtheria [A36]"
+
+#~ msgid "Dose"
+#~ msgstr "Dose"
+
+#~ msgid "Douleur Précisez"
+#~ msgstr "Specify pain"
+
+#~ msgid "Douleur, précisez au dessous"
+#~ msgstr "Pain, specify below"
+
+#~ msgid "Douleurs épigastriques en barre"
+#~ msgstr "Epigastric pain in bar"
+
+#~ msgid "Drogue"
+#~ msgstr "Drug"
+
+#~ msgid "Drépanocytose : SS/SC"
+#~ msgstr "Sickle cell SS / SC"
+
+#~ msgid "Durée des Cycles"
+#~ msgstr "Duration of Cycles"
+
+#~ msgid "Dystrophie ovarienne"
+#~ msgstr "Ovarian dystrophy"
+
+#~ msgid "Délirium/Délires"
+#~ msgstr "Delirium / Delusions"
+
+#~ msgid "Dénutrition légère"
+#~ msgstr "Mild malnutrition"
+
+#~ msgid "Dénutrition modérée"
+#~ msgstr "Moderate malnutrition"
+
+#~ msgid "Dénutrition sévère"
+#~ msgstr "Severe malnutrition"
+
+#~ msgid "Dépistage CA de la prostate (Homme > 40ans)"
+#~ msgstr "Screening for prostate CA (Men> 40 years)"
+
+#~ msgid "Dépistage CA du col"
+#~ msgstr "Cervical screening CA"
+
+#~ msgid "Développement normal"
+#~ msgstr "Normal development"
+
+#~ msgid "Eclampsie [015]"
+#~ msgstr "Eclampsia [015]"
+
+#~ msgid "Education Individuelle"
+#~ msgstr "Individual Education"
+
+#~ msgid "Education des Accompagnateurs"
+#~ msgstr "Education Companions"
+
+#~ msgid "Electrophorese de l’hemoglobine"
+#~ msgstr "Hemoglobin electrophoresis"
+
+#~ msgid "Endométriose [N80.9]"
+#~ msgstr "Endometriosis [N80.9]"
+
+#~ msgid "Entorse"
+#~ msgstr "Sprain"
+
+#~ msgid "Epilepsie [G40]"
+#~ msgstr "Epilepsy [G40]"
+
+#~ msgid "Eruptions cutanées Précisez"
+#~ msgstr "Specify Rash"
+
+#~ msgid "Evaluation du Developpement Pyschomotor"
+#~ msgstr "Evaluation of Development Pyschomotor"
+
+#~ msgid "Evaluation et planification"
+#~ msgstr "Assessment and planning"
+
+#~ msgid "Fer"
+#~ msgstr "Iron"
+
+#~ msgid "Fibrome utérin"
+#~ msgstr "Uterine fibroids"
+
+#~ msgid "Fiches De Référence Remplie"
+#~ msgstr "Reference Card Filled"
+
+#~ msgid "Filariose lymphatique [B74]"
+#~ msgstr "Lymphatic filariasis [B74]"
+
+#~ msgid "Fièvre Typhoïde [A01.0]"
+#~ msgstr "Typhoid fever [A01.0]"
+
+#~ msgid "Fièvre cause indéterminée [780.60]"
+#~ msgstr "Fever undetermined [780.60]"
+
+#~ msgid "Fièvre cause indéterminée [R50]"
+#~ msgstr "Fever of undetermined cause [R50]"
+
+#~ msgid "Fièvre du nouveau-né [P81.9]"
+#~ msgstr "Fever of the newborn [P81.9]"
+
+#~ msgid "Fièvre hémorragique [065]"
+#~ msgstr "Hemorrhagic fever [065]"
+
+#~ msgid "Fièvre hémorragique [A91]"
+#~ msgstr "Hemorrhagic fever [A91]"
+
+#~ msgid "Fièvre hémorragique aigue"
+#~ msgstr "Acute hemorrhagic fever"
+
+#~ msgid "Fièvre hémorragique aigue [065]"
+#~ msgstr "Acute hemorrhagic fever [065]"
+
+#~ msgid "Fièvre hémorragique aigue[065]"
+#~ msgstr "Acute hemorrhagic fever [065]"
+
+#~ msgid "Frissons"
+#~ msgstr "Chills"
+
+#~ msgid "F°"
+#~ msgstr "F °"
+
+#~ msgid "Gale [B86]"
+#~ msgstr "Gale [B86]"
+
+#~ msgid "Gastro-entérite [558.9] avec :"
+#~ msgstr "Gastroenteritis [558.9] with:"
+
+#~ msgid "Gastro-entérite avec déshydratation Légère [A09]"
+#~ msgstr "Gastroenteritis with mild dehydration [A09]"
+
+#~ msgid "Gastro-entérite avec déshydratation Modérée [A09]"
+#~ msgstr "Gastroenteritis with dehydration [A09]"
+
+#~ msgid "Gastro-entérite avec déshydratation Sévère [A09]"
+#~ msgstr "Gastroenteritis with severe dehydration [A09]"
+
+#~ msgid "Gastro-entérite avec:   [558.9]"
+#~ msgstr "Gastro-enteritis with: [558.9]"
+
+#~ msgid "Glomérulonéphrite aigue"
+#~ msgstr "Acute glomerulonephritis"
+
+#~ msgid "Glomérulonéphrite aigue [580.9]"
+#~ msgstr "Acute glomerulonephritis [580.9]"
+
+#~ msgid "Grossesse ectopique"
+#~ msgstr "Ectopic Pregnancy"
+
+#~ msgid "Grossesse intra utérine"
+#~ msgstr "Intrauterine pregnancy"
+
+#~ msgid "Groupe Support"
+#~ msgstr "Support group"
+
+#~ msgid "HTA + grossesse [010]"
+#~ msgstr "MV + pregnancy [010]"
+
+#~ msgid "Hypertension Artérielle [401.9]"
+#~ msgstr "Hypertension [401.9]"
+
+#~ msgid "Hypertension Artérielle [I10]"
+#~ msgstr "Arterial hypertension [I10]"
+
+#~ msgid "Hyperémèse gravidique [021.0]"
+#~ msgstr "Hyperemesis gravidarum [021.0]"
+
+#~ msgid "Hémoglobinopathie"
+#~ msgstr "Hemoglobinopathy"
+
+#~ msgid "Hémorragie 3ième trimestre [641.9]"
+#~ msgstr "3rd trimester bleeding [641.9]"
+
+#~ msgid "Hémorragie troisième trimestres"
+#~ msgstr "Third trimester bleeding"
+
+#~ msgid "IMPRESSIONS CLINIQUES"
+#~ msgstr "CLINICAL IMPRESSIONS"
+
+#~ msgid "IST [A64]"
+#~ msgstr "STI [A64]"
+
+#~ msgid "IVA"
+#~ msgstr "IVA"
+
+#~ msgid "Ictère/Jaunisse"
+#~ msgstr "Jaundice / Jaundice"
+
+#~ msgid "Implant"
+#~ msgstr "Implant"
+
+#~ msgid "Impressions cliniques / diagnostiques"
+#~ msgstr "Impressions clinical / diagnostic"
+
+#~ msgid "Impétigo [I01]"
+#~ msgstr "Impetigo [I01]"
+
+#~ msgid "Inappétence/anorexie"
+#~ msgstr "Inappetence / anorexia"
+
+#~ msgid "Indication1:"
+#~ msgstr "Indication1:"
+
+#~ msgid "Indication2:"
+#~ msgstr "Indication2:"
+
+#~ msgid "Infection Génito-urinaire"
+#~ msgstr "Genitourinary infection"
+
+#~ msgid "Infection Génito-urinaire [N39.0]"
+#~ msgstr "Genito-urinary infection [N39.0]"
+
+#~ msgid "Infection respiratoire aigue [465.9]"
+#~ msgstr "Acute respiratory infection [465.9]"
+
+#~ msgid "Infection respiratoire aigue [J06]"
+#~ msgstr "Acute respiratory infection [J06]"
+
+#~ msgid "Inguinale"
+#~ msgstr "Inguinal"
+
+#~ msgid "Insuffisance gain de poids, précisez:"
+#~ msgstr "Insufficient weight gain, explain:"
+
+#~ msgid "Kyste de l’ovaire [N83.2]"
+#~ msgstr "Ovarian cyst [N83.2]"
+
+#~ msgid "L'emplacement de défaut doit être signé la liste visualisable d'emplacement."
+#~ msgstr "The location of the fault must be signed list viewable location."
+
+#~ msgid "Luxation"
+#~ msgstr "Dislocation"
+
+#~ msgid "Lymphadénopathie"
+#~ msgstr "Lymphadenopathy"
+
+#~ msgid "Lèpre"
+#~ msgstr "Leprosy"
+
+#~ msgid "Lésion cervicale [G54.2]"
+#~ msgstr "Cervical lesions [G54.2]"
+
+#~ msgid "M2Sys client software installed"
+#~ msgstr "M2SYS client software installed"
+
+#~ msgid "M2Sys client software not installed."
+#~ msgstr "M2SYS not installed client software."
+
+#~ msgid "M2Sys client software not running."
+#~ msgstr "M2SYS client software not running."
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ ADULTE DE PREMIER NIVEAU: PREMIÉRE VISITE (VERSION JUIN 2010)"
+#~ msgstr "MSPP / FORM OF ADULT HEALTH CARE TOP LEVEL: first visit (June 2010 VERSION)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ ADULTE DE PREMIER NIVEAU: VISITE DE SUIVI (VERSION JUIN 2010)"
+#~ msgstr "MSPP / FORM OF ADULT HEALTH CARE TOP LEVEL: FOLLOW-UP VISIT (June 2010 VERSION)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ PEDIATRIQUE: PREMIÉRE VISITE (VERSION OCTOBRE 2010)"
+#~ msgstr "MSPP / STATEMENT OF PEDIATRIC HEALTH CARE: first visit (October 2010 VERSION)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ PEDIATRIQUE: VISITE SUIVI (VERSION OCTOBRE 2010)"
+#~ msgstr "MSPP / STATEMENT OF PEDIATRIC HEALTH CARE: VISIT FOLLOW-UP (VERSION October 2010)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRE: CONSULTATION - PEDIATRIE (VERSION JUIN 2012)"
+#~ msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: CONSULTATION - PEDIATRICS (June 2012 VERSION)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRE: CONSULTATION - PEDIATRIE (VERSION MARS 2011)"
+#~ msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: CONSULTATION - PEDIATRIC (version March 2011)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRE: CONSULTATION - PEDIATRIE (VERSION NOVEMBRE 2010)"
+#~ msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: CONSULTATION - PEDIATRIC (November 2010 VERSION)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRE: PREMIÉRE CONSULTATION - PEDIATRIE (VERSION MARS 2011)"
+#~ msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: FIRST CONSULTATION - PEDIATRIC (version March 2011)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRE: PREMIÉRE CONSULTATION - PEDIATRIE (VERSION NOVEMBRE 2010)"
+#~ msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: FIRST CONSULTATION - PEDIATRIC (November 2010 VERSION)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRES: CONSULATION ADULTE (VERSION MARS 2011)"
+#~ msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: ADULT CONSULTATIONS (version March 2011)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRES: CONSULATION ADULTE (VERSION NOVEMBER 2010)"
+#~ msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: ADULT CONSULTATIONS (VERSION NOVEMBER 2010)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRES: PREMIÉRE CONSULTATION - ADULTE (VERSION JUIN 2012)"
+#~ msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: FIRST VISIT - ADULT (June 2012 VERSION)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRES: PREMIÉRE CONSULTATION - ADULTE (VERSION MARS 2011)"
+#~ msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: FIRST CONSULTATION - ADULT (March 2011 VERSION)"
+
+#~ msgid "MSPP / FICHE DE SOINS DE SANTÉ PRIMAIRES: PREMIÉRE CONSULTATION - ADULTE (VERSION NOVEMBRE 2010)"
+#~ msgstr "MSPP / SHEET OF PRIMARY HEALTH CARE: FIRST CONSULTATION - ADULT (November 2010 VERSION)"
+
+#~ msgid "MSPP FICHE DE CONSULTATION OB-GYN (VERSION MARS 2011)"
+#~ msgstr "MSPP STATEMENT OF CONSULTATION OB-GYN (version March 2011)"
+
+#~ msgid "MSPP FICHE DE CONSULTATION OB-GYN (VERSION NOVEMBRE 2010)"
+#~ msgstr "MSPP STATEMENT OF CONSULTATION OB-GYN (November 2010 VERSION)"
+
+#~ msgid "MSPP FICHE DE CONSULTATION OB-GYN (VERSION OCTOBRE 2010)"
+#~ msgstr "MSPP STATEMENT OF CONSULTATION OB-GYN (October 2010 VERSION)"
+
+#~ msgid "MSPP FICHE DE PREMIÈRE CONSULTATION OB-GYN (VERSION JUIN 2012)"
+#~ msgstr "MSPP SHEET FIRST CONSULTATION OB-GYN (June 2012 VERSION)"
+
+#~ msgid "MSPP FICHE DE PREMIÈRE CONSULTATION OB-GYN (VERSION MARS 2011)"
+#~ msgstr "MSPP CONSULTATION FORM FIRST OB-GYN (version March 2011)"
+
+#~ msgid "MSPP FICHE DE PREMIÈRE CONSULTATION OB-GYN (VERSION NOVEMBRE 2010)"
+#~ msgstr "MSPP CONSULTATION FORM FIRST OB-GYN (November 2010 VERSION)"
+
+#~ msgid "MSPP FICHE DE SOINS DE PREMIÈRE CONSULTATION OB-GYN (VERSION OCTOBRE 2010)"
+#~ msgstr "MSPP CARE SHEET FOR FIRST CONSULTATION OB-GYN (October 2010 VERSION)"
+
+#~ msgid "MSPP FICHE DE SOINS DE TUBERCULOSE (VERSION JUIN 2012)"
+#~ msgstr "MSPP CARE SHEET OF TUBERCULOSIS (June 2012 VERSION)"
+
+#~ msgid "Maladie Inflamm. Pelvienne [614.9]"
+#~ msgstr "Inflammatory disease. Pelvic [614.9]"
+
+#~ msgid "Maladie Inflamm. Pelvienne [N73.8]"
+#~ msgstr "Inflammatory disease. Pelvic [N73.8]"
+
+#~ msgid "Malaria : Si oui, depuis quand ?"
+#~ msgstr "Malaria: If yes, since when?"
+
+#~ msgid "Malaria [B54]"
+#~ msgstr "Malaria [B54]"
+
+#~ msgid "Malaria test"
+#~ msgstr "Malaria test"
+
+#~ msgid "Medicaments Actuels"
+#~ msgstr "Current Medication"
+
+#~ msgid "Menace d’accouchement prématurée"
+#~ msgstr "Threatened premature delivery"
+
+#~ msgid "Miction impérieuse"
+#~ msgstr "Urinary urgency"
+
+#~ msgid "Mort fœtale"
+#~ msgstr "Fetal death"
+
+#~ msgid "Mycose cutanée"
+#~ msgstr "Fungal Skin"
+
+#~ msgid "Médicaments prescrits"
+#~ msgstr "Prescribed drugs"
+
+#~ msgid "Médicaments prescrits / Posologie"
+#~ msgstr "Prescribed medications / dosage"
+
+#~ msgid "Médicaments préscrits / Posologie"
+#~ msgstr "Prescription Drugs / Dosage"
+
+#~ msgid "Méningites [G.009]"
+#~ msgstr "Meningitis [G.009]"
+
+#~ msgid "Méthode PF administré"
+#~ msgstr "PF administered method"
+
+#~ msgid "N&nbsp; &nbsp;A&nbsp; &nbsp;G&nbsp;&nbsp;&nbsp;"
+#~ msgstr "N A G"
+
+#~ msgid "N: nouveau, A: actif, G: guéri"
+#~ msgstr "N: new, A: active, G: cured"
+
+#~ msgid "Naissance vivante:"
+#~ msgstr "Live birth:"
+
+#~ msgid "Neurologique/Ortho."
+#~ msgstr "Neurological / Ortho."
+
+#~ msgid "Nom Prénom du Prestataire :"
+#~ msgstr "Name Name of Provider:"
+
+#~ msgid "Non, si non date prèvue pour l’initiation à la prophylaxie :"
+#~ msgstr "No, if no date set for the initiation of prophylaxis:"
+
+#~ msgid "Norplant"
+#~ msgstr "Norplant"
+
+#~ msgid "OEil rouge"
+#~ msgstr "Red Eye"
+
+#~ msgid "Obésité"
+#~ msgstr "Obesity"
+
+#~ msgid "Organe génitaux"
+#~ msgstr "Genitalia"
+
+#~ msgid "Organe génitaux Externes"
+#~ msgstr "External genitalia"
+
+#~ msgid "Ortho/Neurologique"
+#~ msgstr "Ortho / Neurological"
+
+#~ msgid "Otite [H60-H66.0]"
+#~ msgstr "Otitis [H60-H66.0]"
+
+#~ msgid "PLAN"
+#~ msgstr "MAP"
+
+#~ msgid "Palpitations"
+#~ msgstr "Palpitations"
+
+#~ msgid "Parasitose"
+#~ msgstr "Parasitosis"
+
+#~ msgid "Perte de poids, précisez:"
+#~ msgstr "Weight loss, specify:"
+
+#~ msgid "Plaie"
+#~ msgstr "Wound"
+
+#~ msgid "Plaie Précisez"
+#~ msgstr "Specify wound"
+
+#~ msgid "Planification pour un Accompagnateur"
+#~ msgstr "Planning for a Companion"
+
+#~ msgid "Pneumonie [J15]"
+#~ msgstr "Pneumonia [J15]"
+
+#~ msgid "Poliomyélite"
+#~ msgstr "Polio"
+
+#~ msgid "Poliomyélite [A80]"
+#~ msgstr "Poliomyelitis [A80]"
+
+#~ msgid "Poliomyélite/paralysie flasque"
+#~ msgstr "Polio / AFP"
+
+#~ msgid "Poliomyélite/paralysie flasque [A80]"
+#~ msgstr "Polio / AFP [A80]"
+
+#~ msgid "Poly traumatisme"
+#~ msgstr "Poly trauma"
+
+#~ msgid "Pour prochaine visite"
+#~ msgstr "For next visit"
+
+#~ msgid "Prurtis Ani"
+#~ msgstr "Ani Prurtis"
+
+#~ msgid "Pré éclampsie [014.9]"
+#~ msgstr "Preeclampsia [014.9]"
+
+#~ msgid "Préparation pour nourrissons(LM)"
+#~ msgstr "Infant Formula (SM)"
+
+#~ msgid "REMARQUES"
+#~ msgstr "NOTES"
+
+#~ msgid "Rage [A82]"
+#~ msgstr "Rage [A82]"
+
+#~ msgid "Reflexes Osteo-Tendinaux"
+#~ msgstr "Reflexes Tendinaux"
+
+#~ msgid "Reflux gastro-oesophagien"
+#~ msgstr "Gastroesophageal reflux"
+
+#~ msgid "Reflux gastro-oesophagien [530.81]"
+#~ msgstr "Gastroesophageal reflux [530.81]"
+
+#~ msgid "Remarques:"
+#~ msgstr "Notes:"
+
+#~ msgid "Resultat : "
+#~ msgstr "Result :"
+
+#~ msgid "Rhinite allergique"
+#~ msgstr "Allergic rhinitis"
+
+#~ msgid "Rhinorrhée/ encombrement nasal"
+#~ msgstr "Rhinorrhea / nasal congestion"
+
+#~ msgid "Rougeole [B05]"
+#~ msgstr "Measles [B05]"
+
+#~ msgid "Rubéole [A82]"
+#~ msgstr "Rubella [A82]"
+
+#~ msgid "Rupture prématurée des membranes [042]"
+#~ msgstr "Premature rupture of membranes [042]"
+
+#~ msgid "SIGNES VITAUX 6 Heures après"
+#~ msgstr "VITAL SIGNS 6 hours after"
+
+#~ msgid "SIGNES VITAUX A L'ADMISSSION"
+#~ msgstr "VITAL SIGNS IN ADMISSSION"
+
+#~ msgid "SIGNES VITAUX POST PARTUM IMMEDIAT"
+#~ msgstr "VITAL SIGNS POST partum"
+
+#~ msgid "SUPPLEMENTATION"
+#~ msgstr "SUPPLEMENTATION"
+
+#~ msgid "Saignement utérin anormal [N03.9]"
+#~ msgstr "Abnormal uterine bleeding [N03.9]"
+
+#~ msgid "Salle de Travail e d’Accouchement (STA)"
+#~ msgstr "Labour room ed'Accouchement (STA)"
+
+#~ msgid "Scolarise"
+#~ msgstr "Educates"
+
+#~ msgid "Scolarisé(e)"
+#~ msgstr "Educated (e)"
+
+#~ msgid "Si oui,"
+#~ msgstr "If yes,"
+
+#~ msgid "Si oui, Age en mois"
+#~ msgstr "If yes, age in months"
+
+#~ msgid "Si oui, Age en mois :"
+#~ msgstr "If yes, age in months:"
+
+#~ msgid "Si oui, durée en mois"
+#~ msgstr "If yes, duration in months"
+
+#~ msgid "Si oui, nom l’Accompagnateur du Nouveau Né"
+#~ msgstr "If yes, name the Companion of the New Born"
+
+#~ msgid "Si oui, précisez le lait"
+#~ msgstr "If yes, milk"
+
+#~ msgid "Sueurs profuses de la face et/ou des doigts"
+#~ msgstr "Profuse sweating of the face and / or fingers"
+
+#~ msgid "Suivi:"
+#~ msgstr "Action:"
+
+#~ msgid "Supplementation"
+#~ msgstr "Supplementation"
+
+#~ msgid "Supraclaviculaire"
+#~ msgstr "Supraclavicular"
+
+#~ msgid "Syndrome ictérique fébrile"
+#~ msgstr "Febrile icteric syndrome"
+
+#~ msgid "Syndrome néphrotique"
+#~ msgstr "Nephrotic syndrome"
+
+#~ msgid "Teigne"
+#~ msgstr "Ringworm"
+
+#~ msgid "Tests de Laboratoires"
+#~ msgstr "Testing Laboratories"
+
+#~ msgid "Troubles mentaux précisez"
+#~ msgstr "Mental Disorders specify"
+
+#~ msgid "Troubles psychiatriques"
+#~ msgstr "Psychiatric Disorders"
+
+#~ msgid "Troubles psychiatriques, Mental d’étiologie à investiguer"
+#~ msgstr "Psychiatric Disorders, Mental etiology to investigate"
+
+#~ msgid "Tuberculose [A15]"
+#~ msgstr "TB [A15]"
+
+#~ msgid "Tétanos Texoïd"
+#~ msgstr "Tetanus Texoïd"
+
+#~ msgid "Tétanos [A35]"
+#~ msgstr "Tetanus [A35]"
+
+#~ msgid "Tétanos toxoïd"
+#~ msgstr "Tetanus toxoid"
+
+#~ msgid "Utilisation Courante: "
+#~ msgstr "Current use:"
+
+#~ msgid "VACCINATION/SUPPLEMENTATION"
+#~ msgstr "VACCINATION / SUPPLEMENTATION"
+
+#~ msgid "VIH Positif: Stade OMS"
+#~ msgstr "HIV Positive: WHO Stage"
+
+#~ msgid "VIH/SIDA"
+#~ msgstr "HIV / AIDS"
+
+#~ msgid "VIT. A"
+#~ msgstr "VIT. A"
+
+#~ msgid "Varicelle [B01]"
+#~ msgstr "Varicella [B01]"
+
+#~ msgid "Visite Domiciliaire"
+#~ msgstr "Residential visits"
+
+#~ msgid "Vit. A"
+#~ msgstr "Vit. A"
+
+#~ msgid "Vulvo vaginite"
+#~ msgstr "Vulvo vaginitis"
+
+#~ msgid "Warning: You are about to view a patient or service area for which you are not specifically authorized."
+#~ msgstr "Warning: You are about to view a patient or service area for which you are not specifically authorized."
+
+#~ msgid "check to see if the scanner is set up"
+#~ msgstr "check to see if the scanner is set up"
+
+#~ msgid "dbsite"
+#~ msgstr "dbsite"
+
+#~ msgid "en:Age (Months)"
+#~ msgstr "Age (Months)"
+
+#~ msgid "en:Client Running"
+#~ msgstr "Client Running"
+
+#~ msgid "en:Confidentiality Warning"
+#~ msgstr "Confidentiality Warning"
+
+#~ msgid "en:Every set of three values represents one replication target. \"targetName\" is a unique name for this replication. \"targetUrl\" is the URL where the read files should be sent to. \"identified\" has either a value of either \"identified\" or \"deidentified\". When the value is \"deidentified\" certain identifying fields will be set to null."
+#~ msgstr "Every set of three values represents one replication target. \"targetName\" is a unique name for this replication. \"targetUrl\" is the URL where the read files should be sent to. \"identified\" has either a value of either \"identified\" or \"deidentified\". When the value is \"deidentified\" certain identifying fields will be set to null."
+
+#~ msgid "en:Fingerprint software NOT INSTALLED OR URL INCORRECT"
+#~ msgstr "Fingerprint software NOT INSTALLED OR URL INCORRECT"
+
+#~ msgid "en:Growth History"
+#~ msgstr "Growth History"
+
+#~ msgid "en:Height"
+#~ msgstr "Height"
+
+#~ msgid "en:New in 9.0 RC1"
+#~ msgstr "New in 9.0 RC1"
+
+#~ msgid "en:New in 9.0 RC2"
+#~ msgstr "New in 9.0 RC2"
+
+#~ msgid "en:Really delete this patientâ€™s fingerprints?"
+#~ msgstr "Really delete this patientâ€™s fingerprints?"
+
+#~ msgid "en:Register fingerprints--registration requires prints of both index fingers, three scans each."
+#~ msgstr "Register fingerprints--registration requires prints of both index fingers, three scans each."
+
+#~ msgid "en:SUCCESS"
+#~ msgstr "SUCCESS"
+
+#~ msgid "en:Save"
+#~ msgstr "Save"
+
+#~ msgid "en:Scanner count is: 0"
+#~ msgstr "Scanner count is: 0"
+
+#~ msgid "en:Script feedback appears below."
+#~ msgstr "Script feedback appears below."
+
+#~ msgid "en:This is a list of target information on where replicated data should be sent. Its value is a list that looks like "
+#~ msgstr "This is a list of target information on where replicated data should be sent. Its value is a list that looks like "
+
+#~ msgid "en:This is an LDAP DN containing the users and groups OU that iSanté uses for authentication. e.g. "
+#~ msgstr "This is an LDAP DN containing the users and groups OU that iSanté uses for authentication. e.g. "
+
+#~ msgid "en:This is the URI of the LDAP server. By default the value is "
+#~ msgstr "This is the URI of the LDAP server. By default the value is "
+
+#~ msgid "en:URL of the My2sys fingerprint server. e.g. "
+#~ msgstr "URL of the My2sys fingerprint server. e.g. "
+
+#~ msgid "en:Updating the database"
+#~ msgstr "Updating the database"
+
+#~ msgid "en:Weight (kg)"
+#~ msgstr "Weight (kg)"
+
+#~ msgid "en:Weight for Age (0-36 Months)"
+#~ msgstr "Weight for Age (0-36 Months)"
+
+#~ msgid "en:Weight for Height"
+#~ msgstr "Weight for Height"
+
+#~ msgid "en:What is the purpose of this server? Testing is for servers which will contain fake data or be used for evaluation purposes. Production is for servers which will contain real patient data and be configured with a real dbSite code value. Consolidated is for servers which will contain aggregated data from production servers obtained through replication only."
+#~ msgstr "What is the purpose of this server? Testing is for servers which will contain fake data or be used for evaluation purposes. Production is for servers which will contain real patient data and be configured with a real dbSite code value. Consolidated is for servers which will contain aggregated data from production servers obtained through replication only."
+
+#~ msgid "en:not a super administrator"
+#~ msgstr "not a super administrator"
+
+#~ msgid "jj/mm/aa"
+#~ msgstr "mm / dd / yy"
+
+#~ msgid "Êtes-vous sûr vous voulez-vous combiner ces patients ? Cette action ne peut pas être renversée ! ! !"
+#~ msgstr "Are you sure you want to do you combine these patients? This action can not be reversed! ! !"
+
+#~ msgid "Œdème"
+#~ msgstr "Edema"
+
+#~ msgid "Œdème, précisez au dessous"
+#~ msgstr "Edema, specify below"

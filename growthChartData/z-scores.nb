@@ -1,0 +1,177 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      5783,        168]
+NotebookOptionsPosition[      5341,        148]
+NotebookOutlinePosition[      5696,        164]
+CellTagsIndexPosition[      5653,        161]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"fromula", " ", "for", " ", "computing", " ", "z"}], "-", 
+    RowBox[{
+    "scores", " ", "for", " ", "a", " ", "particular", " ", "percentile"}]}], 
+   " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"pFormula", "=", 
+    RowBox[{"Solve", "[", 
+     RowBox[{
+      RowBox[{"p", "\[Equal]", 
+       RowBox[{
+        SubsuperscriptBox["\[Integral]", 
+         RowBox[{"-", "\[Infinity]"}], "z"], 
+        RowBox[{
+         FractionBox["1", 
+          SqrtBox[
+           RowBox[{"2", "\[Pi]"}]]], 
+         SuperscriptBox["E", 
+          FractionBox[
+           RowBox[{"-", 
+            SuperscriptBox["u", "2"]}], "2"]], 
+         RowBox[{"\[DifferentialD]", "u"}]}]}]}], ",", "z"}], "]"}]}], 
+   ";"}]}]], "Input",
+ CellChangeTimes->{{3.534863991581852*^9, 3.534864029560301*^9}, {
+  3.534865314403721*^9, 3.534865353743457*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Solve", "::", "ifun"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Inverse functions are being used by \
+\[NoBreak]\\!\\(Solve\\)\[NoBreak], so some solutions may not be found; use \
+Reduce for complete solution information. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/Solve/ifun\\\", ButtonNote -> \
+\\\"Solve::ifun\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{
+  3.53486404463661*^9, 3.5348644761469316`*^9, 3.534864884339953*^9, 
+   3.5348649371824827`*^9, 3.534865056103949*^9, 3.534865189489531*^9, {
+   3.534865321288979*^9, 3.534865355242852*^9}, {3.534865805809505*^9, 
+   3.534865815033044*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"generate", " ", "a", " ", "table", " ", "of", " ", 
+    RowBox[{"{", 
+     RowBox[{"percentile", ",", " ", 
+      RowBox[{"z", "-", "score"}]}], "}"}], " ", "values", " ", "with", " ", 
+    "percentile", " ", "range", " ", "0.5", " ", "to", " ", "0.999", " ", 
+    "with", " ", "step", " ", "size", " ", "0.001"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"zTable", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"p", ",", "pFormula"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", 
+        FractionBox["500", "1000"], ",", 
+        FractionBox["9995", "10000"], ",", 
+        FractionBox["5", "10000"]}], "}"}]}], "]"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.53486378948104*^9, 3.5348638499683943`*^9}, {
+  3.534863896190544*^9, 3.534863902358699*^9}, {3.5348640361759377`*^9, 
+  3.53486404070485*^9}, {3.534864344628303*^9, 3.534864344876248*^9}, {
+  3.534864447917389*^9, 3.53486444843471*^9}, {3.5348645539044247`*^9, 
+  3.534864555412862*^9}, {3.534864869020486*^9, 3.534864870061076*^9}, {
+  3.534865000979479*^9, 3.5348650424884243`*^9}, {3.5348651663966627`*^9, 
+  3.534865176448895*^9}, {3.534865420188937*^9, 3.5348654204295883`*^9}, {
+  3.5348658010286837`*^9, 3.5348658011716747`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "reformat", " ", "ztable", " ", "so", " ", "that", " ", "it", " ", "is", 
+    " ", "a", " ", "its", " ", "values", " ", "are", " ", "of", " ", "the", 
+    " ", "form", " ", 
+    RowBox[{"{", 
+     RowBox[{"percentile", ",", " ", 
+      RowBox[{"z", "-", "score"}]}], "}"}]}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"zTableFormat", "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"List", "@@", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], "}"}], ")"}], "&"}], "/@", 
+     "zTable"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.5348642584621897`*^9, 3.5348643643546343`*^9}, {
+   3.534864561130542*^9, 3.534864595010027*^9}, {3.534864840046438*^9, 
+   3.534864843372661*^9}, 3.534864877825431*^9, 3.534864926147396*^9, {
+   3.534865376420977*^9, 3.534865385825253*^9}, {3.534865423654153*^9, 
+   3.534865449744162*^9}, {3.534865789083592*^9, 3.534865810066309*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "export", " ", "the", " ", "table", " ", "in", " ", "JSON", " ", 
+    "format"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{"\"\<z-scores.json\>\"", ",", "zTableFormat"}], "]"}], 
+   ";"}]}]], "Input",
+ CellChangeTimes->{{3.534864367206738*^9, 3.534864399637802*^9}}]
+},
+WindowSize->{870, 847},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 913, 27, 89, "Input"],
+Cell[1495, 51, 751, 15, 47, "Message"]
+}, Open  ]],
+Cell[2261, 69, 1329, 28, 96, "Input"],
+Cell[3593, 99, 1368, 35, 72, "Input"],
+Cell[4964, 136, 373, 10, 53, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

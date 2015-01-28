@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_hist_tb"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="540"
+		 pageHeight="156"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="isPediatric" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select t . asymptomaticTb , t . suspectedTb , t . currentTreat , t . currentProp , t . currentTreatNo , t . currentTreatFac , t . completeTreat , t . completeTreatDd , t . completeTreatMm , t . completeTreatYy , t . completeTreatFac , t . suspicionTBwSymptoms , t . noTBsymptoms , t . propINH , t . arretINHMm , t . arretINHYy from tbStatus t , encounter e where t . patientID = $P{pid} and (e . encounterType in (1 , 16 , 17) or (e . encounterType = 2 and (e . formVersion != 1 or e . formVersion is NULL))) and e . encStatus &lt; 255 and isnumeric(t . visitDateDd) = 1 and isnumeric(t . visitDateMm) = 1 and isnumeric(t . visitDateYy) = 1 and isdate(ymdToDate(ltrim(rtrim(t . visitDateYy)) , ltrim(rtrim(t . visitDateMm)) , ltrim(rtrim(t . visitDateDd)))) = 1 and t . patientID = e . patientID and t . siteCode = e . siteCode and t . visitDateDd = e . visitDateDd and t . visitDateMm = e . visitDateMm and t . visitDateYy = e . visitDateYy and t . seqNum = e . seqNum order by ymdToDate(ltrim(rtrim(t . visitDateYy)) , ltrim(rtrim(t . visitDateMm)) , ltrim(rtrim(t . visitDateDd))) desc , e . encounterType desc limit 1; 
+</queryString>
+
+	<field name="asymptomaticTb" class="java.lang.Integer"/>
+	<field name="suspectedTb" class="java.lang.Integer"/>
+	<field name="currentTreat" class="java.lang.Integer"/>
+	<field name="currentProp" class="java.lang.Integer"/>
+	<field name="currentTreatNo" class="java.lang.String"/>
+	<field name="currentTreatFac" class="java.lang.String"/>
+	<field name="completeTreat" class="java.lang.Integer"/>
+	<field name="completeTreatDd" class="java.lang.String"/>
+	<field name="completeTreatMm" class="java.lang.String"/>
+	<field name="completeTreatYy" class="java.lang.String"/>
+	<field name="completeTreatFac" class="java.lang.String"/>
+	<field name="suspicionTBwSymptoms" class="java.lang.Integer"/>
+	<field name="noTBsymptoms" class="java.lang.Integer"/>
+	<field name="propINH" class="java.lang.Integer"/>
+	<field name="arretINHMm" class="java.lang.String"/>
+	<field name="arretINHYy" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="156"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="13"
+						width="540"
+						height="13"
+						key="textField-18"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier-Bold" isBold="true" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "TB Status" : "Statut de TB" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="91"
+						width="334"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-25"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "TB Treatment Completed" : "Traitement contre la TB complété" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="91"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-26"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{completeTreat} != null && $F{completeTreat}.intValue() > 0  ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+( $F{completeTreat} == null || $F{completeTreat}.intValue() == 0 ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "No " : "Non" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="104"
+						width="125"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-27"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{completeTreatDd} != null &&
+  ("XX".equals($F{completeTreatDd}.toUpperCase()) ||
+   $F{completeTreatDd}.trim().matches("[\\d]{1,2}")) &&
+  $F{completeTreatMm} != null &&
+  ("XX".equals($F{completeTreatMm}.toUpperCase()) ||
+   $F{completeTreatMm}.trim().matches("[\\d]{1,2}")) &&
+  $F{completeTreatYy} != null &&
+  ("XX".equals($F{completeTreatYy}.toUpperCase()) ||
+   $F{completeTreatYy}.trim().matches("[\\d]{1,2}")) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Date Completed: " : "Date complété: " )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="125"
+						y="104"
+						width="415"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-28"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{completeTreatDd} != null &&
+  ("XX".equals($F{completeTreatDd}.toUpperCase()) ||
+   $F{completeTreatDd}.trim().matches("[\\d]{1,2}")) &&
+  $F{completeTreatMm} != null &&
+  ("XX".equals($F{completeTreatMm}.toUpperCase()) ||
+   $F{completeTreatMm}.trim().matches("[\\d]{1,2}")) &&
+  $F{completeTreatYy} != null &&
+  ("XX".equals($F{completeTreatYy}.toUpperCase()) ||
+   $F{completeTreatYy}.trim().matches("[\\d]{1,2}")) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ?
+ ( $F{completeTreatDd} != null && $F{completeTreatDd}.trim().length() > 0 &&
+   $F{completeTreatMm} != null && $F{completeTreatMm}.trim().length() > 0 &&
+   $F{completeTreatYy} != null && $F{completeTreatYy}.trim().length() > 0 ?
+  ( $F{completeTreatMm}.trim().length() == 1 ? "0" + $F{completeTreatMm}.trim() : $F{completeTreatMm}.trim() ) + "/" +
+  ( $F{completeTreatDd}.trim().length() == 1 ? "0" + $F{completeTreatDd}.trim() : $F{completeTreatDd}.trim() ) + "/" +
+  ( $F{completeTreatYy}.trim().length() == 1 ? "0" + $F{completeTreatYy}.trim() : $F{completeTreatYy}.trim() ) : ""
+ )
+ :
+ ( $F{completeTreatDd} != null && $F{completeTreatDd}.trim().length() > 0 &&
+   $F{completeTreatMm} != null && $F{completeTreatMm}.trim().length() > 0 &&
+   $F{completeTreatYy} != null && $F{completeTreatYy}.trim().length() > 0 ?
+  ( $F{completeTreatDd}.trim().length() == 1 ? "0" + $F{completeTreatDd}.trim() : $F{completeTreatDd}.trim() ) + "/" +
+  ( $F{completeTreatMm}.trim().length() == 1 ? "0" + $F{completeTreatMm}.trim() : $F{completeTreatMm}.trim() ) + "/" +
+  ( $F{completeTreatYy}.trim().length() == 1 ? "0" + $F{completeTreatYy}.trim() : $F{completeTreatYy}.trim() ) : ""
+ )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="117"
+						width="125"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-29"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{completeTreatFac} != null && $F{completeTreatFac}.trim().length() > 0 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Location: " : "Établissement: " )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="125"
+						y="117"
+						width="415"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-30"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{completeTreatFac} != null && $F{completeTreatFac}.trim().length() > 0 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{completeTreatFac} != null && $F{completeTreatFac}.trim().length() > 0 ?
+  $F{completeTreatFac}.trim() : "" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="26"
+						width="334"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-31"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "No signs or symptoms suggesting TB" : "Pas de signes ou symptômes suggestifs de la TB" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="26"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-32"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( ($F{asymptomaticTb} != null && $F{asymptomaticTb}.intValue() > 0) ||
+  ($F{noTBsymptoms} != null && $F{noTBsymptoms}.intValue() > 0) ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+( ($F{asymptomaticTb} == null || $F{asymptomaticTb}.intValue() == 0) &&
+  ($F{noTBsymptoms} == null || $F{noTBsymptoms}.intValue() == 0) ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "No " : "Non" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="39"
+						width="334"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-33"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Suspicion of TB due to symptoms" : "Suspicion de TB selon les symptômes" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="39"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-34"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( ($F{suspectedTb} != null && $F{suspectedTb}.intValue() > 0) ||
+  ($F{suspicionTBwSymptoms} != null && $F{suspicionTBwSymptoms}.intValue() > 0) ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+( ($F{suspectedTb} == null || $F{suspectedTb}.intValue() == 0) &&
+  ($F{suspicionTBwSymptoms} == null || $F{suspicionTBwSymptoms}.intValue() == 0) ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "No " : "Non" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="52"
+						width="334"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-35"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Currently on TB Treatment" : "Actuellement sous traitement TB" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="52"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-36"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{currentTreat} != null && $F{currentTreat}.intValue() > 0  ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+( $F{currentTreat} == null || $F{currentTreat}.intValue() == 0 ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "No " : "Non" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="65"
+						width="125"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-37"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentTreatNo} != null && $F{currentTreatNo}.trim().length() > 0 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Date Completed: " : "Date complété: " )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="125"
+						y="65"
+						width="415"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-38"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentTreatNo} != null && $F{currentTreatNo}.trim().length() > 0 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{currentTreatNo} != null && $F{currentTreatNo}.trim().length() > 0 ?
+  $F{currentTreatNo}.trim() : "" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="78"
+						width="125"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-39"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentTreatFac} != null && $F{currentTreatFac}.trim().length() > 0 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Location: " : "Établissement: " )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="125"
+						y="78"
+						width="415"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-40"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentTreatFac} != null && $F{currentTreatFac}.trim().length() > 0 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{currentTreatFac} != null && $F{currentTreatFac}.trim().length() > 0 ?
+  $F{currentTreatFac}.trim() : "" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="130"
+						width="334"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-41"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Currently on INH Prophylaxis" : "Actuellement sous prophylaxie INH" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="143"
+						width="125"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-42"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{arretINHMm} != null &&
+  ("XX".equals($F{arretINHMm}.toUpperCase()) ||
+   $F{arretINHMm}.trim().matches("[\\d]{1,2}")) &&
+  $F{arretINHYy} != null &&
+  ("XX".equals($F{arretINHYy}.toUpperCase()) ||
+   $F{arretINHYy}.trim().matches("[\\d]{1,2}")) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Date Completed: " : "Date complété: " )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="125"
+						y="143"
+						width="415"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-43"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{arretINHMm} != null &&
+  ("XX".equals($F{arretINHMm}.toUpperCase()) ||
+   $F{arretINHMm}.trim().matches("[\\d]{1,2}")) &&
+  $F{arretINHYy} != null &&
+  ("XX".equals($F{arretINHYy}.toUpperCase()) ||
+   $F{arretINHYy}.trim().matches("[\\d]{1,2}")) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{arretINHMm}.trim().length() == 1 ? "0" + $F{arretINHMm}.trim() : $F{arretINHMm}.trim() ) + "/" +
+( $F{arretINHYy}.trim().length() == 1 ? "0" + $F{arretINHYy}.trim() : $F{arretINHYy}.trim() )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="130"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-46"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( ($F{currentProp} != null && $F{currentProp}.intValue() > 0) ||
+  ($F{propINH} != null && $F{propINH}.intValue() > 0) ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+( ($F{currentProp} == null || $F{currentProp}.intValue() == 0) &&
+  ($F{propINH} == null || $F{propINH}.intValue() == 0) ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "No " : "Non" )]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

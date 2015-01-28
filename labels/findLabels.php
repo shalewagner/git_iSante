@@ -1,0 +1,47 @@
+<?php
+
+$find_labels = array (
+"header" => array ("en" => "Patient Search", "fr" => "Rechercher patient"),
+"regfindheader" => array( "en" => "Registry Entry Search", "fr" => " Rechercher R&eacute;gistre" ),
+"regheader" => array("en" => "Pre-ARV Registry", "fr" => "Registre Pr&eacute;-ARV"),
+"regheader2" => array("en" => "ARV Registry", "fr" => "Registre ARV"),
+"NatLabel" => array ("en" => "National ID", "fr" => "No. de code national de patient&nbsp;"),
+"clinicNumberLabel" => array ("en" => "Clinic Code", "fr" => "Code de site&nbsp;"),
+"allsites" => array ("en" => "All Sites", "fr" => "Tous les &eacute;tablissements"),
+"clinicIdLabel" => array (
+	"en" => "Clinic Patient ID",
+	"fr" => "No. de patient attribu&#xe9; par le site&nbsp;"),
+"fnameLabel" => array ("en" => "First Name", "fr" => "Pr&#xe9;nom"),
+"nameLabel" => array ("en" => " or Last Name", "fr" => " ou Nom"),
+"dobPreLabel" => array ("en" => "Birthdate", "fr" => "Date de naissance"),
+"dobPostLabel" => array ("en" => "(dd/mm/yy)", "fr" => "(jj/mm/aa)"),
+"wildcardMessage" => array (
+	"en" => "(Each field entered is automatically wildcarded % at the end)",
+	"fr" => "Les commentaires peuvent &ecirc;tre relatifs &agrave; la qualit&eacute; des donn&eacute;es de cette fiche, des probl&egrave;mes de saisie ou d'utilisation de ce syst&egrave;me, ou encore des suggestions d'ordre g&eacute;n&eacute;ral."),
+"formSubmit" => array ("en" => "Search", "fr" => "Rechercher"),
+"notSelected" => array ("en" => "Please select a patient.", "fr" => "Veuillez choisir un patient."),
+"canView" => array ("en" => "You do not have privilege to view the patient's encounter at this site.", "fr" => "Vous n'avez pas le privil&egrave;ge de regarder la rencontre du patient &agrave; cet emplacement."),
+"column0" => array ("en" => "New", "fr" => "Nouveau"),
+"column1" => array ("en" => "Last Name", "fr" => "Nom"),
+"column2" => array ("en" => "First Name", "fr" => "Pr&#xe9;nom"),
+"column3" => array ("en" => "Date of Birth", "fr" => "Date de<br />naissance"),
+"column4" => array ("en" => "Mother's<br />First Name", "fr" => "Pr&#xe9;nom<br />de la m&egrave;re"),
+"column5" => array ("en" => "National ID", "fr" => "Code national<br />de patient"),
+"column6" => array ("en" => "Clinic<br />Patient ID", "fr" => "No. de Patient<br />attribu&#xe9; par le site"),
+"column7" => array ("en" => "Clinic Site", "fr" => "Etablissement"),
+"column8" => array ("en" => "Visit Date", "fr" => "Date de visite"),
+"column9" => array ("en" => "Edit Existing", "fr" => "Edition existant"),
+"select"  => array ("en" => "Select", "fr" => "S&#xe9;lectionner"),
+"select2" => array ("en" => "Select", "fr" => "Sélectionner"),
+"merge"   => array ("en" => "Combine", "fr" => "Combiner"),
+"mergeRecords"   => array ("en" => "records", "fr" => "dossiers"),
+"mainMerge"   => array ("en" => "Main", "fr" => "Principal"),
+"addToMerge"   => array ("en" => "Add", "fr" => "Ajouter"),
+"selectedMerge"   => array ("en" => "Selected", "fr" => "Sélectionné"),
+"error1"  => array ("en" => "Patient Not Found!", "fr" => "Patient inconnu&nbsp;!"),
+"error2"  => array ("en" => "Add Patient", "fr" => "Ajouter patient"),
+"error3"  => array ("en" => "or Search Again", "fr" => "ou rechercher"),
+"version" => array ("en" => "I-TECH PATIENT SEARCH FORM (Version May 2012)", "fr" => "MSPP PATIENT RECHERCHE (Version Mai 2012)"),
+);
+
+?>

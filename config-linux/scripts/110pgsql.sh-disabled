@@ -1,0 +1,10 @@
+#!/bin/sh -vx
+
+#do nothing on upgrade
+if [ $UPGRADE ]
+then
+    exit;
+fi
+
+# add initial db users
+su -c "psql < templates-output/pgsql-permissions.sql" postgres

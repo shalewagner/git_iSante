@@ -1,0 +1,23 @@
+/* app css stylesheet */
+
+.container {
+    width: 1100px !important;
+    min-width: 1000px;
+}
+
+.sidebar {
+    min-width: 100px;
+}
+
+.table td {
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+/* hide the table count buttons*/
+.ng-table-counts {
+    display: none;
+}

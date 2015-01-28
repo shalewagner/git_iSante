@@ -1,0 +1,332 @@
+/*  
+// Icon Classes */
+.original-icon-ob {
+	background-image:url(../../images/silk_icons_v013/img/icons/ob_16.png) ! important;
+}
+.original-icon-graph {
+	background-image:url(../../images/silk_icons_v013/img/chart_curve.png) ! important;
+}
+.original-icon-chart {
+	background-image:url(../../images/silk_icons_v013/img/chart_bar.png) ! important;
+}
+.original-icon-prefs {
+	background-image:url(../../images/silk_icons_v013/img/application_form.png) ! important;
+}
+.original-icon-ok {
+	background-image:url(../../images/silk_icons_v013/img/icons/ok16.png) ! important;
+}
+.original-icon-view-tile {
+	background-image:url(../../images/silk_icons_v013/img/application_view_tile.png) ! important;
+}
+.original-icon-stat-data {
+	background-image:url(../../images/silk_icons_v013/img/icons/kate_16.png) ! important;
+}
+.original-icon-rename {
+	background-image:url(../../images/silk_icons_v013/img/textfield_rename.png) ! important;
+}
+.original-icon-add-col {
+	background-image:url(../../images/silk_icons_v013/img/page_white_add.png) ! important;
+}
+.original-icon-del-col {
+	background-image:url(../../images/silk_icons_v013/img/page_white_delete.png) ! important;
+}
+.original-icon-save-table {
+	background-image:url(../../images/silk_icons_v013/img/table_save.png) ! important;
+}
+.original-icon-add-tab {
+	background-image:url(../../images/silk_icons_v013/img/tab_add.png) ! important;
+}
+.original-icon-del-tab {
+	background-image:url(../../images/silk_icons_v013/img/tab_delete.png) ! important;
+}
+.original-icon-go-tab {
+	background-image:url(../../images/silk_icons_v013/img/tab_go.png) ! important;
+}
+.original-icon-add-table {
+	background-image:url(../../images/silk_icons_v013/img/table_add.png) ! important;
+}
+.original-icon-del-table {
+	background-image:url(../../images/silk_icons_v013/img/table_delete.png) ! important;
+}
+.original-icon-admin {
+	background-image:url(../../images/silk_icons_v013/img/icons/adv_settings_16.png) ! important;
+}
+.original-icon-grid {
+    background-image:url(../../images/silk_icons_v013/img/application_view_columns.png) !important;
+}
+.original-icon-key {
+	background-image:url(../../images/silk_icons_v013/img/key.png) ! important;
+}
+.original-icon-key2 {
+	background-image:url(../../images/silk_icons_v013/img/icons/key_16.png) ! important;
+}
+.original-icon-expand-all {
+	background-image:url(../../images/silk_icons_v013/img/icons/expand-all.gif) ! important;
+}
+.original-icon-collapse-all {
+	background-image:url(../../images/silk_icons_v013/img/icons/collapse-all.gif) ! important;
+}
+.original-icon-expand {
+	background-image:url(../../images/silk_icons_v013/img/icons/expand-all.gif) ! important;
+}
+.original-icon-collapse {
+	background-image:url(../../images/silk_icons_v013/img/icons/collapse-all.gif) ! important;
+}
+.original-icon-tree-orgboard {
+	background-image:url(../../images/silk_icons_v013/img/chart_organisation.png) ! important;
+}
+.original-icon-tree-area {
+	background-image:url(../../images/silk_icons_v013/img/post_title.png) ! important;
+}
+.original-icon-tree-post {
+	background-image:url(../../images/silk_icons_v013/img/page_white.png) ! important;
+}
+.original-icon-plus {
+	background-image:url(../../images/silk_icons_v013/img/add.png) ! important;
+}
+.original-icon-minus {
+	background-image:url(../../images/silk_icons_v013/img/delete.png) ! important;
+}
+.original-icon-house {
+	background-image:url(../../images/silk_icons_v013/img/icons/house_16.png) ! important;
+}
+.original-icon-user {
+	background-image:url(../../images/silk_icons_v013/img/icons/user2_16.png) ! important;
+}
+.original-icon-trash-empty {
+	background-image:url(../../images/silk_icons_v013/img/bin_empty.png) ! important;
+}
+.original-icon-trash-closed {
+	background-image:url(../../images/silk_icons_v013/img/bin_closed.png) ! important;
+}
+.original-icon-disk {
+	background-image:url(../../images/silk_icons_v013/img/disk.png) ! important;
+}
+.original-icon-disk-bullet {
+	background-image:url(../../images/silk_icons_v013/img/bullet_disk.png) ! important;
+}
+.original-icon-undo {
+	background-image:url(../../images/silk_icons_v013/img/arrow_undo.png) ! important;
+}
+.original-icon-db-refresh {
+	background-image:url(../../images/silk_icons_v013/img/database_refresh.png) ! important;
+}
+.original-icon-db-gear {
+	background-image:url(../../images/silk_icons_v013/img/database_gear.png) ! important;
+}
+.original-icon-magnifier {
+	background-image:url(../../images/silk_icons_v013/img/magnifier.png) ! important;
+}
+.original-icon-wrench {
+	background-image:url(../../images/silk_icons_v013/img/icons/wrench_16.png) ! important;
+}
+.original-icon-wrench-orange {
+	background-image:url(../../images/silk_icons_v013/img/wrench_orange.png) ! important;
+}
+.original-icon-star {
+	background-image:url(../../images/silk_icons_v013/img/star.png) ! important;
+}
+.original-icon-lock-go {
+	background-image:url(../../images/silk_icons_v013/img/lock_go.png) ! important;
+}
+.original-icon-group-add {
+	background-image:url(../../images/silk_icons_v013/img/group_add.png) ! important;
+}
+.original-icon-group-del {
+	background-image:url(../../images/silk_icons_v013/img/group_delete.png) ! important;
+}
+.original-icon-stat-portal {
+	background-image:url(../../images/silk_icons_v013/img/icons/stat_portal_16.png) ! important;
+}
+.original-icon-stat-list {
+	background-image:url(../../images/silk_icons_v013/img/icons/stat_list_16.png) ! important;
+}
+.original-icon-cancel {
+	background-image:url(../../images/silk_icons_v013/img/icons/cancel16.png) ! important;
+}
+.original-icon-cross {
+	background-image:url(../../images/silk_icons_v013/img/cross.png) ! important;
+}
+.original-icon-defaults {
+	background-image:url(../../images/silk_icons_v013/img/arrow_rotate_clockwise.png) ! important;
+}
+.original-icon-load {
+	background-image:url(../../images/silk_icons_v013/img/database_go.png) ! important;
+}
+.original-icon-reconfigure {
+	background-image:url(../../images/silk_icons_v013/img/database_gear.png) ! important;
+}
+.original-icon-upload {
+	background-image:url(../../images/silk_icons_v013/img/icons/up.png) ! important;
+}
+.original-icon-folder-add {
+	background-image:url(../../images/silk_icons_v013/img/folder_add.png) ! important;
+}
+.original-icon-open {
+	background-image:url(../../images/silk_icons_v013/img/application_go.png) ! important;
+}
+.original-icon-open-self {
+	background-image:url(../../images/silk_icons_v013/img/application.png) ! important;
+}
+.original-icon-open-popup {
+	background-image:url(../../images/silk_icons_v013/img/application_double.png) ! important;
+}
+.original-icon-open-blank {
+	background-image:url(../../images/silk_icons_v013/img/application_cascade.png) ! important;
+}
+.original-icon-open-download {
+	background-image:url(../../images/silk_icons_v013/img/application_put.png) ! important;
+}
+.original-icon-refresh {
+	background-image:url(../../images/silk_icons_v013/img/arrow_refresh.png) ! important;
+}
+.original-icon-pencil {
+	background-image:url(../../images/silk_icons_v013/img/pencil.png) ! important;
+}
+.original-icon-stop {
+	background-image:url(../../images/silk_icons_v013/img/control_stop.png) ! important;
+}
+.original-icon-email {
+	background-image:url(../../images/silk_icons_v013/img/email.png) ! important;
+}
+.original-icon-email-compose {
+	background-image:url(../../images/silk_icons_v013/img/email_edit.png) ! important;
+}
+.original-icon-coins {
+	background-image:url(../../images/silk_icons_v013/img/coins.png) ! important;
+}
+.original-icon-clock {
+	background-image:url(../../images/silk_icons_v013/img/clock.png) ! important;
+}
+.original-icon-zoom {
+	background-image:url(../../images/silk_icons_v013/img/zoom.png) ! important;
+}
+.original-icon-print {
+	background-image:url(../../images/silk_icons_v013/img/printer.png) ! important;
+}
+.original-icon-folder-component {
+	background-image:url(../../images/silk_icons_v013/img/folder_brick.png) ! important;
+}
+.original-icon-plugin {
+	background-image:url(../../images/silk_icons_v013/img/plugin.png) ! important;
+}
+.original-icon-extension {
+	background-image:url(../../images/silk_icons_v013/img/brick.png) ! important;
+}
+.original-icon-function {
+	background-image:url(../../images/silk_icons_v013/img/flag_yellow.png) ! important;
+}
+.original-icon-bulb {
+	background-image:url(../../images/silk_icons_v013/img/lightbulb.png) ! important;
+}
+.original-icon-bulb-off {
+	background-image:url(../../images/silk_icons_v013/img/lightbulb_off.png) ! important;
+}
+.original-icon-copy {
+	background-image:url(../../images/silk_icons_v013/img/page_white_copy.png) ! important;
+}
+.original-icon-star {
+	background-image:url(../../images/silk_icons_v013/img/award_star_gold_3.png) ! important;
+}
+.original-icon-edit-record {
+	background-image:url(../../images/silk_icons_v013/img/table_edit.png) ! important;
+}
+.original-icon-actions {
+	background-image:url(../../images/silk_icons_v013/img/lightning.png) ! important;
+}
+.original-icon-form-add {
+	background-image:url(../../images/silk_icons_v013/img/layout_add.png) ! important;
+}
+.original-icon-html {
+	background-image:url(../../images/silk_icons_v013/img/html.png) ! important;
+}
+.original-icon-script {
+	background-image:url(../../images/silk_icons_v013/img/script.png) ! important;
+}
+.original-icon-php {
+	background-image:url(../../images/silk_icons_v013/img/script_code.png) ! important;
+}
+.original-icon-css {
+	background-image:url(../../images/silk_icons_v013/img/css.png) ! important;
+}
+.original-icon-run {
+	background-image:url(../../images/silk_icons_v013/img/application_go.png) ! important;
+}
+.original-icon-info {
+	background-image:url(../../images/silk_icons_v013/img/information.png) ! important;
+}
+.original-icon-error {
+	background-image:url(../../images/silk_icons_v013/img/cancel.png) ! important;
+}
+.original-icon-warn {
+	background-image:url(../../images/silk_icons_v013/img/error.png) ! important;
+}
+.original-icon-wages {
+	background-image:url(../../images/silk_icons_v013/img/icons/euro_16.png) ! important;
+}
+.original-icon-calculator {
+	background-image:url(../../images/silk_icons_v013/img/calculator.png) ! important;
+}
+.original-icon-add-wage {
+	background-image:url(../../images/silk_icons_v013/img/coins_add.png) ! important;
+}
+.original-icon-del-wage {
+	background-image:url(../../images/silk_icons_v013/img/bin_closed.png) ! important;
+}
+.original-icon-manual {
+	background-image:url(../../images/silk_icons_v013/img/book_open.png) ! important;
+}
+.original-icon-lock {
+	background-image:url(../../images/silk_icons_v013/img/icons/lock16.png) ! important;
+}
+.original-icon-lock-open {
+	background-image:url(../../images/silk_icons_v013/img/icons/unlock16.png) ! important;
+}
+.original-icon-arrow-down {
+	background-image:url(../../images/silk_icons_v013/img/arrow_down.png) ! important;
+}
+.original-icon-arrow-right {
+	background-image:url(../../images/silk_icons_v013/img/arrow_right.png) ! important;
+}
+.original-icon-delete {
+	background-image:url(../../images/silk_icons_v013/img/icons/bin_empty.png) ! important;
+}
+.original-icon-tree {
+	background-image:url(../../images/silk_icons_v013/img/icons/tree_16.png) ! important;
+}
+.original-icon-form-edit {
+	background-image:url(../../images/silk_icons_v013/img/application_form_edit.png) ! important;
+}
+.original-icon-form-add {
+	background-image:url(../../images/silk_icons_v013/img/application_form_add.png) ! important;
+}
+.original-icon-filter {
+	background-image:url(../../images/silk_icons_v013/img/icons/view-filter16.png) ! important;
+}
+.original-icon-filter-active {
+	background-image:url(../../images/silk_icons_v013/img/icons/view-filter-go16.png) ! important;
+}
+.original-icon-stat-cat {
+	background-image:url(../../images/silk_icons_v013/img/icons/stat-cat_16.png) ! important;
+}
+.x-form-field-wrap .trigger-tag-add {
+	background-image: url(../../images/silk_icons_v013/img/trigger-tag-add.png);
+	cursor:pointer;
+}
+.x-form-field-wrap .trigger-tag {
+	background-image: url(../../images/silk_icons_v013/img/trigger-tag.png);
+	cursor:pointer;
+}
+.x-form-field-wrap .x-trigger-disabled {
+	cursor:default;
+	opacity:0.5;
+	background-position:0 0;
+}
+.x-form-field-wrap .trigger-tree {
+	background-image: url(../../images/silk_icons_v013/img/trigger-tree.png);
+	cursor:pointer;
+}
+
+
+/*  Icon Classes end */
+

@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-xs-12" style="text-align: center; margin: 0 100px 0 100px;">
+        <div class="row">
+            <h4>Custom Indicators for {{subjectName}}</h4>
+            <hr />
+            <table ng-table="tableParamsIndicators" class="table ng-table-responsive">
+                <tr ng-repeat="ind in $data">
+                    <td data-title="'Name'" style="width:30%; text-align: left;">
+                        {{ind.userIndicatorName}}
+                    </td>
+                    <td data-title="'Age Level'" style="width:5%">
+                        {{ind.ageLevelText}}
+                    </td>
+                    <td data-title="'Gender Level'" style="width:5%">
+                        {{ind.genderLevelText}}
+                    </td>
+                    <td data-title="'Numerator Equation'" style="width: 30%; text-align: left; "">
+                        {{ind.numeratorEquation}}
+                    </td>
+                    <td data-title="'Denominator Equation'" style="width: 30%; text-align: left; "">
+                        {{ind.denominatorEquation}}
+                    </td>
+                    <td width="30" style="text-align: left">
+                        <input type="button" ng-click="deleteIndicator(ind.userIndicatorId)" value="X">
+                    </td>
+                </tr>
+            </table>                                
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="healthQual_12.3_line"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="1290"
+		 pageHeight="39"
+		 columnWidth="1290"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 resourceBundle="healthQual_main">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="BlueText"
+		isDefault="false"
+		forecolor="#0033FF"
+		fontName="Arial"
+	/>
+
+	<parameter name="siteList" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="startDate" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="endDate" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="user" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="jasperRenderer" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="reportDir" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="indList" isForPrompting="true" class="java.lang.String"/>
+	<queryString><![CDATA[select distinct l . department , l . clinic , i . siteCode , i . startDate , i . endDate from clinicLookup l , healthQual i where l . siteCode = i . siteCode and i . siteCode in ($P!{siteList}) and i . startDate = '$P!{startDate}' and i . endDate = '$P!{endDate}' order by l . department , i . siteCode;]]></queryString>
+
+	<field name="siteCode" class="java.lang.String"/>
+	<field name="department" class="java.lang.String"/>
+	<field name="clinic" class="java.lang.String"/>
+	<field name="startDate" class="java.lang.String"/>
+	<field name="endDate" class="java.lang.String"/>
+
+	<variable name="startDate" class="java.lang.String" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[$F{startDate}]]></variableExpression>
+	</variable>
+	<variable name="endDate" class="java.lang.String" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[$F{endDate}]]></variableExpression>
+	</variable>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="39"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="0"
+						y="0"
+						width="48"
+						height="39"
+						key="textField-1"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isUnderline="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{department}]]></textFieldExpression>
+						<anchorNameExpression><![CDATA[$F{department}]]></anchorNameExpression>
+						<hyperlinkReferenceExpression><![CDATA[$P{jasperRenderer} + "?report=217&lang=" + $P{lang} + "&format=html&user=" + $P{user} +
+"&siteName=" + $F{siteCode}.trim() + "&site=" + $F{siteCode}.trim()]]></hyperlinkReferenceExpression>
+						<hyperlinkTooltipExpression><![CDATA[str("tooltip.department")]]></hyperlinkTooltipExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="48"
+						y="0"
+						width="155"
+						height="39"
+						key="textField-63"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isUnderline="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{clinic}]]></textFieldExpression>
+						<anchorNameExpression><![CDATA[$F{siteCode}]]></anchorNameExpression>
+						<hyperlinkReferenceExpression><![CDATA[$P{jasperRenderer} + "?report=215&lang=" + $P{lang} + "&format=html&user=" + $P{user} +
+"&siteName=" + $F{siteCode}.trim() + "&site=" + $F{siteCode}.trim()]]></hyperlinkReferenceExpression>
+						<hyperlinkTooltipExpression><![CDATA[str("tooltip.clinic")]]></hyperlinkTooltipExpression>
+				</textField>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="240"
+						y="0"
+						width="1050"
+						height="13"
+						key="subreport-1"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<subreportParameter  name="siteCode">
+						<subreportParameterExpression><![CDATA[$F{siteCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="startDate">
+						<subreportParameterExpression><![CDATA[$P{startDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="endDate">
+						<subreportParameterExpression><![CDATA[$P{endDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="type">
+						<subreportParameterExpression><![CDATA["1"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_num_m">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_num_m"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_num_f">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_num_f"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_num_total">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_num_total"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_den_m">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_den_m"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_den_f">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_den_f"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_den_total">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_den_total"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_ratio_m">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_ratio_m"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_ratio_f">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_ratio_f"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_ratio_total">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_ratio_total"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_num_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_num_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_num_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_num_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_num_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_num_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_den_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_den_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_den_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_den_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_den_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_den_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_ratio_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_ratio_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_ratio_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_ratio_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_ratio_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_ratio_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_num_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_num_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_num_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_num_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_num_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_num_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_den_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_den_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_den_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_den_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_den_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_den_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_ratio_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_ratio_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_ratio_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_ratio_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_ratio_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_ratio_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_actual">
+						<subreportParameterExpression><![CDATA[$P{indList}.substring(0,2)]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_actual">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? $P{indList}.substring(3,5) : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_actual">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? $P{indList}.substring(6,8) : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "healthQual_12.3_subline.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="240"
+						y="13"
+						width="1050"
+						height="13"
+						key="subreport-2"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<subreportParameter  name="siteCode">
+						<subreportParameterExpression><![CDATA[$F{siteCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="startDate">
+						<subreportParameterExpression><![CDATA[$P{startDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="endDate">
+						<subreportParameterExpression><![CDATA[$P{endDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="type">
+						<subreportParameterExpression><![CDATA["2"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_num_m">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_num_m"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_num_f">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_num_f"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_num_total">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_num_total"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_den_m">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_den_m"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_den_f">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_den_f"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_den_total">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_den_total"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_ratio_m">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_ratio_m"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_ratio_f">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_ratio_f"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_ratio_total">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_ratio_total"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_num_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_num_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_num_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_num_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_num_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_num_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_den_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_den_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_den_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_den_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_den_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_den_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_ratio_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_ratio_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_ratio_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_ratio_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_ratio_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_ratio_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_num_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_num_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_num_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_num_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_num_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_num_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_den_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_den_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_den_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_den_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_den_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_den_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_ratio_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_ratio_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_ratio_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_ratio_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_ratio_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_ratio_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_actual">
+						<subreportParameterExpression><![CDATA[$P{indList}.substring(0,2)]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_actual">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? $P{indList}.substring(3,5) : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_actual">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? $P{indList}.substring(6,8) : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "healthQual_12.3_subline.jasper")]]></subreportExpression>
+				</subreport>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="203"
+						y="0"
+						width="37"
+						height="13"
+						key="textField-65"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[str("type.adult")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="203"
+						y="13"
+						width="37"
+						height="13"
+						key="textField-66"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[str("type.pediatric")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Opaque"
+						x="203"
+						y="26"
+						width="37"
+						height="13"
+						backcolor="#DDDDDD"
+						key="textField-67"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[str("type.total")]]></textFieldExpression>
+				</textField>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="240"
+						y="26"
+						width="1050"
+						height="13"
+						key="subreport-3"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<subreportParameter  name="siteCode">
+						<subreportParameterExpression><![CDATA[$F{siteCode}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="startDate">
+						<subreportParameterExpression><![CDATA[$P{startDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="endDate">
+						<subreportParameterExpression><![CDATA[$P{endDate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="type">
+						<subreportParameterExpression><![CDATA["1 OR row_type = 2"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_num_m">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_num_m"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_num_f">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_num_f"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_num_total">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_num_total"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_den_m">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_den_m"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_den_f">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_den_f"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_den_total">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_den_total"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_ratio_m">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_ratio_m"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_ratio_f">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_ratio_f"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_ratio_total">
+						<subreportParameterExpression><![CDATA["ind" + $P{indList}.substring(0,2) + "_ratio_total"]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_num_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_num_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_num_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_num_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_num_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_num_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_den_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_den_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_den_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_den_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_den_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_den_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_ratio_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_ratio_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_ratio_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_ratio_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_ratio_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? "ind" + $P{indList}.substring(3,5) + "_ratio_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_num_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_num_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_num_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_num_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_num_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_num_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_den_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_den_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_den_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_den_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_den_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_den_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_ratio_m">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_ratio_m" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_ratio_f">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_ratio_f" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_ratio_total">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? "ind" + $P{indList}.substring(6,8) + "_ratio_total" : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind1_actual">
+						<subreportParameterExpression><![CDATA[$P{indList}.substring(0,2)]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind2_actual">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 3 ? $P{indList}.substring(3,5) : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ind3_actual">
+						<subreportParameterExpression><![CDATA[( $P{indList}.length() >= 6 ? $P{indList}.substring(6,8) : "null" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "healthQual_12.3_totline.jasper")]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

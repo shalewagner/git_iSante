@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_forms_list"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="540"
+		 pageHeight="13"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="reportDir" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select e . visitDateDd , e . visitDateMm , e . visitDateYy , e . encounterType , l . enName , l . frName from encValid e , encTypeLookup l where e . patientID = $P{pid} and e . encounterType not in (10 , 12 , 15 , 21) and e . encounterType = l . encounterType and (e . visitDate between date_add(now() , INTERVAL - 6 month) and now() or e . encounterType in (1 , 16)) order by e . visitDate desc , e . encounterType desc; 
+</queryString>
+
+	<field name="visitDateDd" class="java.lang.String"/>
+	<field name="visitDateMm" class="java.lang.String"/>
+	<field name="visitDateYy" class="java.lang.String"/>
+	<field name="encounterType" class="java.lang.Integer"/>
+	<field name="enName" class="java.lang.String"/>
+	<field name="frName" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="72"
+						y="0"
+						width="468"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? $F{enName} :
+$F{frName}.replaceAll("&#xe9;", "é").replaceAll("&#xe8;", "è").replaceAll("&#xf4;", "ô").replaceAll("&#xe0;", "à") )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="60"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-7"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? 
+  ( $F{visitDateMm}.trim().length() == 1 ? "0" + $F{visitDateMm}.trim() : $F{visitDateMm}.trim() ) + "/" +
+  ( $F{visitDateDd}.trim().length() == 1 ? "0" + $F{visitDateDd}.trim() : $F{visitDateDd}.trim() ) + "/" +
+  ( $F{visitDateYy}.trim().length() == 1 ? "0" + $F{visitDateYy}.trim() : $F{visitDateYy}.trim() )
+:
+  ( $F{visitDateDd}.trim().length() == 1 ? "0" + $F{visitDateDd}.trim() : $F{visitDateDd}.trim() ) + "/" +
+  ( $F{visitDateMm}.trim().length() == 1 ? "0" + $F{visitDateMm}.trim() : $F{visitDateMm}.trim() ) + "/" +
+  ( $F{visitDateYy}.trim().length() == 1 ? "0" + $F{visitDateYy}.trim() : $F{visitDateYy}.trim() )
+)]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

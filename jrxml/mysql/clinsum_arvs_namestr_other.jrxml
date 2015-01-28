@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_arvs_namestr_other"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="234"
+		 pageHeight="13"
+		 columnWidth="234"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="drugID" isForPrompting="true" class="java.lang.Integer"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="isPediatric" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="drugGroup" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="drugName" isForPrompting="true" class="java.lang.String"/>
+	<queryString><![CDATA[select $P{drugName} as drugLabelen , $P{drugName} as drugLabelfr , NULL as stdDosageDescription , NULL as pedDosageLabel , p . dispensed , p . stdDosage , p . altDosageSpecify , p . dispAltDosageSpecify , p . pedDosageDesc , e . encounterType from otherPrescriptions p , encValid e where p . rxSlot = $P{drugID} and p . patientID = $P{pid} and p . drug = $P{drugName} and e . encounterType in (5 , 18) and e . siteCode = p . siteCode and e . patientID = p . patientID and e . visitDateDd = p . visitDateDd and e . visitDateMm = p . visitDateMm and e . visitDateYy = p . visitDateYy and e . seqNum = p . seqNum order by case when (isnumeric(p . dispDateMm) = 1 and isnumeric(p . dispDateYy) = 1 and isdate(ymdToDate(p . dispDateYy , p . dispDateMm , '01')) = 1) then ymdToDate(p . dispDateYy , p . dispDateMm , '01') else ymdToDate(p . visitDateYy , p . visitDateMm , '01') end desc limit 1;]]></queryString>
+
+	<field name="drugLabelen" class="java.lang.String"/>
+	<field name="drugLabelfr" class="java.lang.String"/>
+	<field name="stdDosageDescription" class="java.lang.String"/>
+	<field name="pedDosageLabel" class="java.lang.String"/>
+	<field name="dispensed" class="java.lang.Integer"/>
+	<field name="stdDosage" class="java.lang.Integer"/>
+	<field name="altDosageSpecify" class="java.lang.String"/>
+	<field name="dispAltDosageSpecify" class="java.lang.String"/>
+	<field name="pedDosageDesc" class="java.lang.String"/>
+	<field name="encounterType" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="234"
+						height="13"
+						key="textField-3"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? 
+  ( $F{drugLabelen}.indexOf(" (") != -1 ?
+    $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" ("))
+  :
+    $F{drugLabelen}
+  )
+:
+  ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+    $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" ("))
+  :
+    $F{drugLabelfr}
+  )
+)
++ 
+( $F{encounterType}.intValue() == 18 ? 
+  ( $F{pedDosageDesc} != null && $F{pedDosageDesc}.trim().length() > 0 
+    &&
+    ( "en".equals($P{lang}) ? 
+      ( $F{drugLabelen}.indexOf(" (") != -1 ?
+        $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" (")).length()
+      :
+        $F{drugLabelen}.length()
+      )
+    :
+      ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+        $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" (")).length()
+      :
+        $F{drugLabelfr}.length()
+      )
+    ) < 33 ?
+    " "
+    +
+    ( $F{pedDosageDesc}.length() > ( 33 -
+      ( "en".equals($P{lang}) ? 
+        ( $F{drugLabelen}.indexOf(" (") != -1 ?
+          $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" (")).length()
+        :
+          $F{drugLabelen}.length()
+        )
+      :
+        ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+          $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" (")).length()
+        :
+          $F{drugLabelfr}.length()
+        )
+      ) ) ?
+      ( $F{pedDosageDesc}.substring(0, ( 33 -
+        ( "en".equals($P{lang}) ? 
+          ( $F{drugLabelen}.indexOf(" (") != -1 ?
+            $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" (")).length()
+          :
+            $F{drugLabelen}.length()
+          )
+        :
+          ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+            $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" (")).length()
+          :
+            $F{drugLabelfr}.length()
+          )
+        ) ) )
+      )
+    :
+      $F{pedDosageDesc}
+    )
+    +
+    ( $F{pedDosageLabel} != null && $F{pedDosageLabel}.length() > 0 ?
+      " " + $F{pedDosageLabel}
+    :
+      ""
+    )
+  :
+    ""
+  )
+:
+  ( $F{dispensed} != null && $F{dispensed}.intValue() == 1 &&
+    $F{dispAltDosageSpecify} != null && $F{dispAltDosageSpecify}.trim().length() > 0
+    &&
+    ( "en".equals($P{lang}) ? 
+      ( $F{drugLabelen}.indexOf(" (") != -1 ?
+        $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" (")).length()
+      :
+        $F{drugLabelen}.length()
+      )
+    :
+      ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+        $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" (")).length()
+      :
+        $F{drugLabelfr}.length()
+      )
+    ) < 36 ?
+    " "
+    +
+    ( $F{dispAltDosageSpecify}.length() > ( 36 - 
+      ( "en".equals($P{lang}) ? 
+        ( $F{drugLabelen}.indexOf(" (") != -1 ?
+          $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" (")).length()
+        :
+          $F{drugLabelen}.length()
+        )
+      :
+        ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+          $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" (")).length()
+        :
+          $F{drugLabelfr}.length()
+        )
+      ) ) ?
+      ( $F{dispAltDosageSpecify}.substring(0, ( 36 - 
+        ( "en".equals($P{lang}) ? 
+          ( $F{drugLabelen}.indexOf(" (") != -1 ?
+            $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" (")).length()
+          :
+            $F{drugLabelen}.length()
+          )
+        :
+          ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+            $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" (")).length()
+          :
+            $F{drugLabelfr}.length()
+          )
+        ) ) )
+      )
+    :
+      $F{dispAltDosageSpecify}
+    )
+  :
+    ( $F{altDosageSpecify} != null && $F{altDosageSpecify}.trim().length() > 0
+      &&
+      ( "en".equals($P{lang}) ? 
+        ( $F{drugLabelen}.indexOf(" (") != -1 ?
+          $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" (")).length()
+        :
+          $F{drugLabelen}.length()
+        )
+      :
+        ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+          $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" (")).length()
+        :
+          $F{drugLabelfr}.length()
+        )
+      ) < 36 ?
+      " "
+      +
+      ( $F{altDosageSpecify}.length() > ( 36 - 
+        ( "en".equals($P{lang}) ? 
+          ( $F{drugLabelen}.indexOf(" (") != -1 ?
+            $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" (")).length()
+          :
+            $F{drugLabelen}.length()
+          )
+        :
+          ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+            $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" (")).length()
+          :
+            $F{drugLabelfr}.length()
+          )
+        ) ) ?
+        ( $F{altDosageSpecify}.substring(0, ( 36 - 
+          ( "en".equals($P{lang}) ? 
+            ( $F{drugLabelen}.indexOf(" (") != -1 ?
+              $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" (")).length()
+            :
+              $F{drugLabelen}.length()
+            )
+          :
+            ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+              $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" (")).length()
+            :
+              $F{drugLabelfr}.length()
+            )
+          ) ) )
+        )
+      :
+        $F{altDosageSpecify}
+      )
+    :
+      ( $F{stdDosage} != null && $F{stdDosage}.intValue() == 1 &&
+        $F{stdDosageDescription} != null && $F{stdDosageDescription}.trim().length() > 0
+        &&
+        ( "en".equals($P{lang}) ? 
+          ( $F{drugLabelen}.indexOf(" (") != -1 ?
+            $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" (")).length()
+          :
+            $F{drugLabelen}.length()
+          )
+        :
+          ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+            $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" (")).length()
+          :
+            $F{drugLabelfr}.length()
+          )
+        ) < 36 ?
+        " "
+        +
+        ( $F{stdDosageDescription}.length() > ( 36 - 
+          ( "en".equals($P{lang}) ? 
+            ( $F{drugLabelen}.indexOf(" (") != -1 ?
+              $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" (")).length()
+            :
+              $F{drugLabelen}.length()
+            )
+          :
+            ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+              $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" (")).length()
+            :
+              $F{drugLabelfr}.length()
+            )
+          ) ) ?
+          ( $F{stdDosageDescription}.substring(0, ( 36 - 
+            ( "en".equals($P{lang}) ? 
+              ( $F{drugLabelen}.indexOf(" (") != -1 ?
+                $F{drugLabelen}.substring(0, $F{drugLabelen}.indexOf(" (")).length()
+              :
+                $F{drugLabelen}.length()
+              )
+            :
+              ( $F{drugLabelfr}.indexOf(" (") != -1 ?
+                $F{drugLabelfr}.substring(0, $F{drugLabelfr}.indexOf(" (")).length()
+              :
+                $F{drugLabelfr}.length()
+              )
+            ) ) )
+          )
+        :
+          $F{stdDosageDescription}
+        )
+      :
+        ""
+      )
+    )
+  )
+)]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

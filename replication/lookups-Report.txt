@@ -1,0 +1,47 @@
+Most recent change: 1970-01-01 00:00:00
+Application version: 14.2 test (6400+)
+Schema version: 39
+Seconds elapsed: 5
+Total records read: 13188
+Records per second: 2637.6
+
+Record counts by table:
+announcements                36
+clinicLookup                748
+concept                    2384
+concept_class                18
+concept_datatype             11
+concept_name               4768
+conditionLookup             205
+conditionOrder              166
+cohortAsort                  19
+discReasonLookup             16
+drugGroupLookup              10
+drugLookup                   85
+drugVersionOrder             65
+dw_dataqualityReportLookup    40
+dw_malariaReportLookup      144
+dw_nutritionReportLookup     14
+dw_obgynReportLookup         18
+dw_measureForAgeLookup      582
+dw_tbReportLookup            63
+dw_weightForHeightLookup    484
+encTypeLookup                30
+immunizationLookup           12
+immunizationRendering        23
+isanteConcepts              879
+labelLookup                   0
+labGroupLookup               14
+labLookup                   617
+labPanelLookup               40
+nastadLookup                 54
+networkLookup                39
+patientStatusLookup          11
+pedLabsLookup                 4
+pedLabsRendering              4
+queueStatusLookup             6
+referralLookup               19
+regimen                     106
+riskLookup                   37
+riskOrder                    80
+staticConcepts             1337

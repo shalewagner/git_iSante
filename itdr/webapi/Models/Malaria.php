@@ -1,0 +1,30 @@
+<?php
+class Malaria{
+    public $TimeLevel;
+    public $GeographyLevel;
+    public $AgeLevel;
+    public $GenderLevel;
+    public $malariadxa;
+    public $malariadx;
+    public $ispregnant;
+    public $feverless2;
+    public $chloroquine;
+    public $quinine;
+    public $primaquine;
+    public $rapidresultpositive;
+    public $rapidresultnegative;
+    public $smearresultpositive;
+    public $smearresultnegative;
+    public $hospitalisation;
+    public $ft;
+    public $fg;
+    public $vx;
+    public $ov;
+    public $mai;
+    public $confirmedcase;
+    public $alltreatments;
+    public $singletreatment;
+    public $anytreatment;
+    public $positivefalciparumtest;
+    public $positiveotherparasitetest;
+}

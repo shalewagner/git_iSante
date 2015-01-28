@@ -1,0 +1,18 @@
+/***
+/*  Styles specific to IE9. Called in standardHeaderExt.php
+***/
+
+/*** Patient Nav ***/
+
+#head button { /* Styles buttons in patient header */
+  background-image: url('images/header_button_gradient.svg'); /* for IE9 - abouthalf.com/2010/10/25/internet-explorer-9-gradients-with-rounded-corners */
+  background-size: 100% 100%;
+  background-repeat: repeat-x;
+  background-position: 0 0;
+  filter:none
+}
+
+#head button:hover {
+  background-image: url('images/header_button_gradient_hover.svg');
+  filter: none
+}

@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_hist"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="540"
+		 pageHeight="169"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="reportDir" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="isPediatric" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select (select count(*) from v_riskAssessments r where r . patientid = $P{pid} and isnumeric(r . riskAnswer) = 1 and r . encounterType = 1) as data4 , (select count(*) from v_vitals v where v . patientID = $P{pid} and (isnumeric(v . firstTestDd) = 1 or upper(ltrim(rtrim(v . firstTestDd))) = 'XX') and (isnumeric(v . firstTestMm) = 1 or upper(ltrim(rtrim(v . firstTestMm))) = 'XX') and (isnumeric(v . firstTestYy) = 1 or upper(ltrim(rtrim(v . firstTestYy))) = 'XX') and isdate(ymdToDate(ifnull(nullif(upper(ltrim(rtrim(v . firstTestYy))) , 'XX') , '25') , ifnull(nullif(upper(ltrim(rtrim(v . firstTestMm))) , 'XX') , '06') , ifnull(nullif(upper(ltrim(rtrim(v . firstTestDd))) , 'XX') , '15'))) = 1 and v . encounterType in (1)) as data1 , (select count(*) from v_vitals v where v . patientID = $P{pid} and v . encounterType in (1) and (v . referHosp = 1 or v . referVctCenter = 1 or v . referPmtctProg = 1 or v . referOutpatStd = 1 or v . referCommunityBasedProg = 1 or v . transferIn = 1)) as data2 , (select count(*) from v_vitals v where v . patientID = $P{pid} and v . encounterType in (1 , 16) and transferIn = 1) as data3 , (select count(*) from v_vitals v where v . patientID = $P{pid} and v . encounterType in (1 , 2 , 16 , 17) and (isnumeric(v . gravida) = 1 or isnumeric(v . para) = 1 or isnumeric(v . aborta) = 1 or isnumeric(v . children) = 1)) as data5 , case when (select v . pregnant from v_vitals v where v . patientID = $P{pid} and v . encounterType in (1 , 2 , 16 , 17) order by v . visitdate desc limit 1) > 0 then 1 else 0 end as data6 , (select count(*) from v_vitals v where v . patientID = $P{pid} and v . encounterType in (1 , 2 , 16 , 17) and (isnumeric(v . pregnantLmpDd) = 1 or upper(ltrim(rtrim(v . pregnantLmpDd))) = 'XX') and (isnumeric(v . pregnantLmpMm) = 1 or upper(ltrim(rtrim(v . pregnantLmpMm))) = 'XX') and (isnumeric(v . pregnantLmpYy) = 1 or upper(ltrim(rtrim(v . pregnantLmpYy))) = 'XX') and isdate(ymdToDate(ifnull(nullif(upper(ltrim(rtrim(v . pregnantLmpYy))) , 'XX') , '25') , ifnull(nullif(upper(ltrim(rtrim(v . pregnantLmpMm))) , 'XX') , '06') , ifnull(nullif(upper(ltrim(rtrim(v . pregnantLmpDd))) , 'XX') , '15'))) = 1) as data7 , (select count(*) from v_vitals v where v . patientID = $P{pid} and v . encounterType in (1) and (v . famPlanMethodCondom > 0 or v . famPlanMethodDmpa > 0 or v . famPlanMethodOcPills > 0 or v . famPlanMethodTubalLig > 0 or v . famPlanOther > 0)) as data8 , case when (select currentHivStage from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) > 0 or (select cd4LT200 from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select WHOIII from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select PMTCT from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select tlcLT1200 from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select WHOIV from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select medEligHAART from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select formerARVtherapy from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select pedMedEligCd4Cnt from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select PEP from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select pedMedEligWho3 from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select pedMedEligWho4 from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select pedMedEligTlc from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select pedMedEligPmtct from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 or (select pedMedEligFormerTherapy from v_medicalEligARVs where patientID = $P{pid} and encounterType in (1 , 2 , 16 , 17) order by visitdate desc limit 1) = 1 then 1 else 0 end as data9; 
+</queryString>
+
+	<field name="data1" class="java.lang.Integer"/>
+	<field name="data2" class="java.lang.Integer"/>
+	<field name="data3" class="java.lang.Integer"/>
+	<field name="data4" class="java.lang.Integer"/>
+	<field name="data5" class="java.lang.Integer"/>
+	<field name="data6" class="java.lang.Integer"/>
+	<field name="data7" class="java.lang.Integer"/>
+	<field name="data8" class="java.lang.Integer"/>
+	<field name="data9" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="169"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="0"
+						y="12"
+						width="540"
+						height="14"
+						key="textField-1"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{data1}.intValue() >= 1 || $F{data2}.intValue() >= 1 || $F{data3}.intValue() >= 1 || 
+  $F{data4}.intValue() >= 1 || $F{data5}.intValue() >= 1 || $F{data6}.intValue() >= 1 || 
+  $F{data7}.intValue() >= 1 || $F{data8}.intValue() >= 1 || $F{data9}.intValue() >= 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier-Bold" size="12" isBold="true" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals ($P{lang}) ? "History" : "Historique" )]]></textFieldExpression>
+				</textField>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="26"
+						width="540"
+						height="13"
+						key="subreport-9"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{data1}.intValue() >= 1 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$P{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist_test.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="52"
+						width="540"
+						height="13"
+						key="subreport-10"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[$F{data3}.intValue() >= 1 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$P{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist_xfer.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="39"
+						width="540"
+						height="13"
+						key="subreport-11"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{data2}.intValue() >= 1 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$P{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="reportDir">
+						<subreportParameterExpression><![CDATA[$P{reportDir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist_ref.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="65"
+						width="540"
+						height="13"
+						key="subreport-12"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[$F{data4}.intValue() >= 1 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$P{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="reportDir">
+						<subreportParameterExpression><![CDATA[$P{reportDir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist_risk.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="91"
+						width="540"
+						height="13"
+						key="subreport-13"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{data5}.intValue() >= 1 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$P{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist_obst.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="130"
+						width="540"
+						height="13"
+						key="subreport-14"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[$F{data8}.intValue() >= 1 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$P{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist_famp.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="143"
+						width="540"
+						height="13"
+						key="subreport-15"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$P{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist_tb.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="156"
+						width="540"
+						height="13"
+						key="subreport-16"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[$F{data9}.intValue() >= 1 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$P{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="reportDir">
+						<subreportParameterExpression><![CDATA[$P{reportDir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist_elig.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="104"
+						width="540"
+						height="13"
+						key="subreport-17"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[$F{data6}.intValue() >= 1 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$P{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist_obst_preg.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="117"
+						width="540"
+						height="13"
+						key="subreport-18"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[$F{data7}.intValue() >= 1 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+						</reportElement>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$P{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist_obst_lmp.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="78"
+						width="540"
+						height="13"
+						key="subreport-19"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{data5}.intValue() >= 1 || $F{data6}.intValue() >= 1 || $F{data7}.intValue() >= 1 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$P{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist_obst_title.jasper")]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

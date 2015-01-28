@@ -1,0 +1,15 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+logs/*
+!.gitkeep
+node_modules/
+bower_components/
+tmp
+.DS_Store
+.idea
+/webapi/malaria.csv
+*.suo
+*.csv
+client/client.v12.suo

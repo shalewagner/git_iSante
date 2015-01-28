@@ -1,0 +1,28 @@
+#################################
+########## !WARNING! ############
+#################################
+#This file is created by setup-isante.pl and will be overwritten during upgrades of iSante.
+
+
+[mysqld]
+#use innodb tables by default
+default-storage-engine = InnoDB
+
+
+#these options are to enhance performance
+
+#write fewer internal temporary tables to disk
+tmp_table_size = 256M
+max_heap_table_size = 256M
+
+#allow all tables to be open at once
+table_cache = 128
+
+#reduce the number of key reads
+key_buffer_size = 2048M
+
+#more innodb data in memory
+innodb_buffer_pool_size = 512M
+
+#don't have to wait for the log buffer to flush as often
+innodb_log_buffer_size = 16M

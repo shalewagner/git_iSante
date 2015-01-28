@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_hist_elig"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="540"
+		 pageHeight="195"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="reportDir" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="isPediatric" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select m . currentHivStage , m . cd4LT200 , m . WHOIII , m . PMTCT , m . tlcLT1200 , m . WHOIV , m . medEligHAART , m . formerARVtherapy , m . PEP , m . pedMedEligCd4Cnt , m . pedMedEligWho3 , m . pedMedEligWho4 , m . pedMedEligTlc , m . pedMedEligPmtct , m . pedMedEligFormerTherapy , m . expFromDt , m . expFromMm , m . expFromYy , m . formVersion , m . encounterType from v_medicalEligARVs m where m . patientID = $P{pid} and m . encounterType in (1 , 2 , 16 , 17) order by m . visitdate desc , m . encounterType desc limit 1; 
+</queryString>
+
+	<field name="currentHivStage" class="java.lang.Integer"/>
+	<field name="cd4LT200" class="java.lang.Integer"/>
+	<field name="WHOIII" class="java.lang.Integer"/>
+	<field name="PMTCT" class="java.lang.Integer"/>
+	<field name="tlcLT1200" class="java.lang.Integer"/>
+	<field name="WHOIV" class="java.lang.Integer"/>
+	<field name="medEligHAART" class="java.lang.Integer"/>
+	<field name="formerARVtherapy" class="java.lang.Integer"/>
+	<field name="PEP" class="java.lang.Integer"/>
+	<field name="pedMedEligCd4Cnt" class="java.lang.Integer"/>
+	<field name="pedMedEligWho3" class="java.lang.Integer"/>
+	<field name="pedMedEligWho4" class="java.lang.Integer"/>
+	<field name="pedMedEligTlc" class="java.lang.Integer"/>
+	<field name="pedMedEligPmtct" class="java.lang.Integer"/>
+	<field name="pedMedEligFormerTherapy" class="java.lang.Integer"/>
+	<field name="expFromDt" class="java.lang.String"/>
+	<field name="expFromMm" class="java.lang.String"/>
+	<field name="expFromYy" class="java.lang.String"/>
+	<field name="formVersion" class="java.lang.Integer"/>
+	<field name="encounterType" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="195"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="13"
+						width="540"
+						height="13"
+						key="textField-18"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier-Bold" isBold="true" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Medical Eligibility for ARVs" : "Eligibilité Médical aux ARV" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="39"
+						width="180"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-25"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentHivStage}.intValue() > 0 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Stage I (Asymptomatic)" : "Stade I (Asymptomatique)" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="39"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-26"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentHivStage}.intValue() > 0 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).charAt($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() - 1) == '1' ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+( $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).charAt($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() - 1) == '0' ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "No " : "Non" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="26"
+						width="540"
+						height="13"
+						key="textField-31"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentHivStage}.intValue() > 0 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier-Bold" isBold="true" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Current WHO Stage" : "Stade OMS actuel" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="52"
+						width="180"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-32"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentHivStage}.intValue() > 0 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Stage II (Symptomatic)" : "Stade II (Symptomatique)" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="65"
+						width="180"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-33"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentHivStage}.intValue() > 0 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Stage III (Symptomatic)" : "Stade III (Symptomatique)" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="78"
+						width="180"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-34"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentHivStage}.intValue() > 0 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Stage IV (AIDS)" : "Stade IV (SIDA)" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="52"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-35"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentHivStage}.intValue() > 0 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() > 1 &&
+  $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).charAt($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() - 2) == '1' ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+( ($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() > 1 &&
+   $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).charAt($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() - 2) == '0') ||
+  $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() < 2 ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "No " : "Non" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="65"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-36"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentHivStage}.intValue() > 0 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{formVersion}.intValue() == 0 && $F{encounterType}.intValue() <= 15 ?
+  "[" +
+  ( $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() > 1 &&
+    $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).charAt($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() - 2) == '1' ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( ($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() > 1 &&
+     $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).charAt($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() - 2) == '0') ||
+    $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() < 2 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+  : "[" +
+  ( $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() > 2 &&
+    $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).charAt($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() - 3) == '1' ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( ($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() > 2 &&
+     $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).charAt($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() - 3) == '0') ||
+    $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() < 3  ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="78"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-37"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{currentHivStage}.intValue() > 0 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{formVersion}.intValue() == 0 && $F{encounterType}.intValue() <= 15 ?
+  "[" +
+  ( $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() > 2 &&
+    $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).charAt($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() - 3) == '1' ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( ($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() > 2 &&
+     $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).charAt($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() - 3) == '0') ||
+    $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() < 3 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+  : "[" +
+  ( $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() > 3 &&
+    $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).charAt($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() - 4) == '1' ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( ($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() > 3 &&
+     $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).charAt($F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() - 4) == '0') ||
+    $F{currentHivStage}.toBinaryString($F{currentHivStage}.intValue()).length() < 4 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="91"
+						width="540"
+						height="13"
+						key="textField-38"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{cd4LT200}.intValue() == 1 || $F{WHOIII}.intValue() == 1 || $F{PMTCT}.intValue() == 1 ||
+  $F{tlcLT1200}.intValue() == 1 || $F{WHOIV}.intValue() == 1 || $F{medEligHAART}.intValue() == 1 ||
+  $F{formerARVtherapy}.intValue() == 1 || $F{PEP}.intValue() == 1 || $F{pedMedEligCd4Cnt}.intValue() == 1 ||
+  $F{pedMedEligWho3}.intValue() == 1 || $F{pedMedEligWho4}.intValue() == 1 || $F{pedMedEligTlc}.intValue() == 1 ||
+  $F{pedMedEligPmtct}.intValue() == 1 || $F{pedMedEligFormerTherapy}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier-Bold" isBold="true" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Reason for Medical Eligibility of ARV" : "Raison d’éligibilité médicale aux ARV" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="104"
+						width="340"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-39"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{cd4LT200}.intValue() == 1 || $F{pedMedEligCd4Cnt}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ?
+  ( "en".equals($P{lang}) ? "% CD4/CD4 count by age" : "% CD4/Numération CD4 par tranche d'âge" ) :
+  ( "en".equals($P{lang}) ? "CD4 below threshold" : "CD4 inférieur au seuil" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="104"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-40"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{cd4LT200}.intValue() == 1 || $F{pedMedEligCd4Cnt}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ?
+  "[" +
+  ( $F{pedMedEligCd4Cnt}.intValue() == 1 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( $F{pedMedEligCd4Cnt} == null || $F{pedMedEligCd4Cnt}.intValue() == 0 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+  :
+  "[" +
+  ( $F{cd4LT200}.intValue() == 1 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( $F{cd4LT200} == null || $F{cd4LT200}.intValue() == 0 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="117"
+						width="340"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-41"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{tlcLT1200}.intValue() == 1 || $F{pedMedEligWho3}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ?
+  ( "en".equals($P{lang}) ? "WHO Stage III" : "OMS Stade III" ) :
+  ( "en".equals($P{lang}) ? "TLC<1200" : "TLC<1200" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="117"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-42"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{tlcLT1200}.intValue() == 1 || $F{pedMedEligWho3}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ?
+  "[" +
+  ( $F{pedMedEligWho3}.intValue() == 1 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( $F{pedMedEligWho3} == null || $F{pedMedEligWho3}.intValue() == 0 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+  :
+  "[" +
+  ( $F{tlcLT1200}.intValue() == 1 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( $F{tlcLT1200} == null || $F{tlcLT1200}.intValue() == 0 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="130"
+						width="340"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-43"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{WHOIII}.intValue() == 1 || $F{pedMedEligWho4}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ?
+  ( "en".equals($P{lang}) ? "WHO Stage IV" : "OMS Stade IV" ) :
+  ( "en".equals($P{lang}) ? "WHO Stage III+CD4 below threshold" : "OMS Stade III+CD4 inférieur au seuil" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="130"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-44"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{WHOIII}.intValue() == 1 || $F{pedMedEligWho4}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ?
+  "[" +
+  ( $F{pedMedEligWho4}.intValue() == 1 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( $F{pedMedEligWho4} == null || $F{pedMedEligWho4}.intValue() == 0 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+  :
+  "[" +
+  ( $F{WHOIII}.intValue() == 1 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( $F{WHOIII} == null || $F{WHOIII}.intValue() == 0 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="143"
+						width="340"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-45"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{WHOIV}.intValue() == 1 || $F{pedMedEligTlc}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ?
+  ( "en".equals($P{lang}) ? "TLC" : "TLC" ) :
+  ( "en".equals($P{lang}) ? "WHO Stage IV" : "OMS Stade IV" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="143"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-46"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{WHOIV}.intValue() == 1 || $F{pedMedEligTlc}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ?
+  "[" +
+  ( $F{pedMedEligTlc}.intValue() == 1 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( $F{pedMedEligTlc} == null || $F{pedMedEligTlc}.intValue() == 0 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+  :
+  "[" +
+  ( $F{WHOIV}.intValue() == 1 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( $F{WHOIV} == null || $F{WHOIV}.intValue() == 0 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="156"
+						width="340"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-47"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{PMTCT}.intValue() == 1 || $F{pedMedEligPmtct}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ?
+  ( "en".equals($P{lang}) ? "PMTCT" : "PTME" ) :
+  ( "en".equals($P{lang}) ? "PMTCT" : "PTME" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="156"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-48"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{PMTCT}.intValue() == 1 || $F{pedMedEligPmtct}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ?
+  "[" +
+  ( $F{pedMedEligPmtct}.intValue() == 1 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( $F{pedMedEligPmtct} == null || $F{pedMedEligPmtct}.intValue() == 0 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+  :
+  "[" +
+  ( $F{PMTCT}.intValue() == 1 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( $F{PMTCT} == null || $F{PMTCT}.intValue() == 0 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="169"
+						width="340"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-49"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{medEligHAART}.intValue() == 1 || $F{pedMedEligFormerTherapy}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ?
+  ( "en".equals($P{lang}) ? "Former ARV therapy" : "ARV trithérapie antérieure" ) :
+  ( "en".equals($P{lang}) ? "Medical eligibility established with the former visit" : "Éligibilité médicale établie à la visite antérieure" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="169"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-50"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{medEligHAART}.intValue() == 1 || $F{pedMedEligFormerTherapy}.intValue() == 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ?
+  "[" +
+  ( $F{pedMedEligFormerTherapy}.intValue() == 1 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( $F{pedMedEligFormerTherapy} == null || $F{pedMedEligFormerTherapy}.intValue() == 0 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+  :
+  "[" +
+  ( $F{medEligHAART}.intValue() == 1 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+  ( $F{medEligHAART} == null || $F{medEligHAART}.intValue() == 0 ? "X" : " " ) +
+  "] " + ( "en".equals($P{lang}) ? "No " : "Non" )
+)]]></textFieldExpression>
+				</textField>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="182"
+						width="540"
+						height="13"
+						key="subreport-1"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{encounterType}.intValue() == 16 || $F{encounterType}.intValue() == 17 ? Boolean.FALSE : Boolean.TRUE )]]></printWhenExpression>
+						</reportElement>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$P{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist_elig_more.jasper")]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

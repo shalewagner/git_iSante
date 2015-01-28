@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="hivQual_6.4_defs"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="1189"
+		 pageHeight="520"
+		 columnWidth="1189"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="BlueText"
+		isDefault="false"
+		forecolor="#0033FF"
+		fontName="Arial"
+	/>
+
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select 1 as true; 
+</queryString>
+
+	<field name="true" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="338"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="590"
+						height="338"
+						forecolor="#000000"
+						key="textField-17"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" isStyledText="true">
+						<font fontName="Arial"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[(
+"en".equals ($P{lang}) ?
+ "<B><U>HIVQUAL definitions version 6.4 (10/1/08)</U></B><BR/>" +
+ "<B>Continuity of Care:</B><BR/> - Numerator: All active patients on ART with at " +
+ "least one visit in the preceding 3 months.<BR/> - Denominator: All active and " +
+ "inactive patients on ART enrolled in the program > 3 months prior to the end of the " +
+ "period of analysis.<BR/><BR/>" +
+ "<B>HIV Monitoring:</B><BR/> - Numerator: All patients with first visit 6-12 months " +
+ "prior to end of period of analysis with a CD4 count drawn at: 1) enrollment or &lt;= " +
+ "2 months after enrollment, and 2) within 2-8 months after enrollment.<BR/> - " +
+ "Denominator: All patients with first visit 6-12 months prior to end of period of " +
+ "analysis.<BR/><BR/>" +
+ "<B>ART Eligibility:</B><BR/> - Numerator: All patients who initiated ART in the " +
+ "preceding 12 months.<BR/> - Denominator: All patients eligible for ART and not " +
+ "receiving ART in the preceding 12 months.<BR/><BR/>" +
+ "<B>Cotrimoxazole Prophylaxis Adult:</B><BR/> - Numerator: All patients age &gt; 10 " +
+ "years who received at least one prescription for Cotrimoxazole in the preceding 6 " +
+ "months.<BR/> - Denominator: All patients age &gt; 10 years with at least one visit in " +
+ "the preceding 6 months.<BR/><BR/>" +
+ "<B>Cotrimoxazole Prophylaxis Pediatric:</B><BR/> - Numerator: All HIV-infected and " +
+ "exposed children age 6 wks-12 mos, all HIV-infected children age 1-4 years with WHO " +
+ "stage II, III or IV, and all HIV-infected children age 5-10 years who received at " +
+ "least one prescription for Cotrimoxazole in the preceding 6 months.<BR/> - " +
+ "Denominator: All HIV-infected and exposed children age 6 wks-12 mos, all HIV-infected " +
+ "children age 1-4 years and WHO stage II, III or IV, and all HIV-infected children age " +
+ "5-10 years, with at least one visit in the preceding 6 months.<BR/><BR/>"
+:
+ "<B><U>Définitions HIVQUAL version 6.4 (1/10/08)</U></B><BR/>" +
+ "<B>Continuité des soins:</B><BR/> - Numérateur: Les patients actifs sous ARV qui " +
+ "ont effectué au moins une visite dans les 3 mois précédents.<BR/> - Dénominateur: " +
+ "Les patients actifs et inactifs sous ARV enrôlés dans le programme > 3 mois avant la " +
+ "fin de la période d'analyse.<BR/><BR/>" +
+ "<B>Surveillance VIH+:</B><BR/> - Numérateur: Les patients dont la première visite a " +
+ "été effectuée entre 6 et 12 mois avant la fin de la période d'analyse et dont le " +
+ "compte CD4 a été effectué au moment de l'enrôlement ou &lt;= 2 mois après " +
+ "l'enrôlement, puis, entre 2 à 8 mois après enrôlement.<BR/> - Dénominateur: Les " +
+ "patients avec une première visite effectuée entre 6 et 12 mois avant la fin de la " +
+ "période d'analyse.<BR/><BR/>" +
+ "<B>Éligibilité ART:</B><BR/> - Numérateur: Les patients qui ont démarré les ARV " +
+ "dans les 12 mois précédents.<BR/> - Dénominateur: Les patients éligibles aux ARV et " +
+ "qui n'en ont pas reçus dans les 12 mois précédents.<BR/><BR/>" +
+ "<B>Prophylaxie à la cotrimoxazole adulte:</B><BR/> - Numérateur: Les patients âgés " +
+ "de &gt; 10 ans qui ont reçu au moins une prescription de cotrim au cours des 6 mois " +
+ "précédents.<BR/> - Dénominateur: Les patients âgés de &gt; 10 avec au moins une " +
+ "visite au cours des 6 mois précédents.<BR/><BR/>" +
+ "<B>Prophylaxie à la cotrimoxazole pédiatrique:</B><BR/> - Numérateur: Les enfants " +
+ "exposés et infectés par le VIH âgés entre 6 semaines et 12 mois, les enfants " +
+ "infectés par le VIH âgés entre 1et 4 ans présentant un stade OMS II, III ou IV, et " +
+ "les enfants infectés par le VIH âgés entre 5 et 10 ans qui ont reçu au moins une " +
+ "prescription de cotrimoxazole au cours des 6 mois précédents.<BR/> - Dénominateur: " +
+ "Les enfants exposés et infectés par le VIH âgés entre 6 semaines et 12 mois, les " +
+ "enfants infectés par le VIH âgés entre 1 et 4 ans présentant un stade OMS II, III " +
+ "ou IV, et les enfants infectés âgés entre 5 ans et 10 ans ayant effectués au moins " +
+ "une visite lors des 6 mois précédents.<BR/><BR/>"
+)]]></textFieldExpression>
+						<hyperlinkTooltipExpression><![CDATA["Click Me"]]></hyperlinkTooltipExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="599"
+						y="0"
+						width="590"
+						height="338"
+						forecolor="#000000"
+						key="textField-18"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" isStyledText="true">
+						<font fontName="Arial"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[(
+"en".equals ($P{lang}) ?
+ "<BR/>" +
+ "<B>Adherence Assessment:</B><BR/> - Numerator: All patients on ART for > 3 months " +
+ "with completed adherence form in the preceding 3 months.<BR/> - Denominator: All " +
+ "patients on ART for > 3 months with at least one visit in preceding 3 months.<BR/><BR/>" +
+ "<B>TB Assessment:</B><BR/> - Numerator: All patients enrolled 3-9 months prior to " +
+ "end of period of analysis who've had a PPD test within 3 months of enrollment.<BR/>" +
+ " - Denominator: All patients enrolled 3-9 months prior to end of period of analysis." +
+ "<BR/><BR/>" +
+ "<B>Nutritional Assessment:</B><BR/> - Numerator: All patients with data necessary to " +
+ "calculate BMI.<BR/> - Denominator: All patients with at least one visit in the " +
+ "preceding 6 months.<BR/><BR/>" +
+ "<B>PMTCT:</B><BR/> - Numerator: All pregnant women at least 28 weeks pregnant " +
+ "who've started ART in the preceding 6 months.<BR/> - Denominator: All pregnant women " +
+ "at least 28 weeks pregnant in the preceding 6 months and not previously on ART.<BR/><BR/>" +
+ "<B>Immunization:</B><BR/> - Numerator: All HIV-exposed and infected children less " +
+ "than 5 years old followed in the clinic in the preceding 18 months with all recommended vaccinations " +
+ "for age.<BR/> - Denominator: All HIV-exposed and infected children less than 5 years old with at least " +
+ "two visits in preceding 18 months.<BR/><BR/>"
+:
+ "<BR/>" +
+ "<B>Évaluation d'adhérence:</B><BR/> - Numérateur: Les patients sous ARV depuis &gt; 3 " +
+ "mois dont une fiche d'adhérence a été complétée dans les 3 mois précédents.<BR/> - " +
+ "Dénominateur: Les patients sous ARV depuis &gt; 3 mois ayant effectué au moins une " +
+ "visite dans les 3 derniers mois.<BR/><BR/>" +
+ "<B>Évaluation TB:</B><BR/> - Numérateur: Les patients enrôlés entre 3 et 9 mois " +
+ "avant la fin de la période d'analyse et qui n'ont pas effectués de test PPD dans les " +
+ "3 mois de leur enrôlement.<BR/> - Dénominateur: Les patients enrôlés entre 3 et 9 " +
+ "mois avant la fin de la période d'analyse.<BR/><BR/>" +
+ "<B>Évaluation nutritionnelle:</B><BR/> - Numérateur: Les patients dont les données " +
+ "sont nécessaires pour calculer le IMC : Indice de Masse Corporelle.<BR/> - " +
+ "Dénominateur: Les patients qui ont effectué au moins une visite dans les 6 mois " +
+ "précédents.<BR/><BR/>" +
+ "<B>PTME:</B><BR/> - Numérateur: Les femmes enceintes qui etaient au moins à leur " +
+ "28ème semaine d'aménorrhée et qui ont démarré les ARV lors des 6 derniers mois.<BR/> " +
+ "- Dénominateur: Les patientes enceintes qui etaient au moins à leur 28ème semaine d'aménorrhée " +
+ "au cours des derniers 6 mois, qui n'étaient pas au " +
+ "préalable sous ARV.<BR/><BR/>" +
+ "<B>Immunisation:</B><BR/> - Numérateur: Les enfants de moins de 5 ans exposés et infectés par le VIH, " +
+ "suivis dans un établissement lors de 18 mois derniers qui ont reçu tous les vaccins " +
+ "indiqués en fonction de leur âge.<BR/> - Dénominateur: Les enfants de moins de 5 ans exposés et " +
+ "infectés par le VIH, qui ont effectué au moins 2 visites lors des 18 mois précédents." +
+ "<BR/><BR/>"
+)]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

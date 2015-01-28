@@ -1,0 +1,158 @@
+
+	<slice id="clinics_slice">
+	  <dimension concept="clinic"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="clinics_slice_table"/>
+	</slice>
+	
+	<slice id="clinics_sex_slice">
+	  <dimension concept="clinic"/>
+	  <dimension concept="sex"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="clinics_sex_slice_table"/>
+	</slice>
+	
+	<slice id="clinics_hiv_slice">
+	  <dimension concept="clinic"/>
+	  <dimension concept="hiv"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="clinics_hiv_slice_table"/>
+	</slice>
+	
+	<slice id="clinics_status_slice">
+	  <dimension concept="clinic"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="clinics_status_slice_table"/>
+	</slice>
+	
+	<slice id="clinics_hiv_status_slice">
+	  <dimension concept="clinic"/>
+	  <dimension concept="hiv"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="clinics_hiv_status_slice_table"/>
+	</slice>
+	
+	<slice id="clinics_sex_status_slice">
+	  <dimension concept="clinic"/>
+	  <dimension concept="sex"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="clinics_sex_status_slice_table"/>
+	</slice>
+	
+	<slice id="clinics_sex_hiv_slice">
+	  <dimension concept="clinic"/>
+	  <dimension concept="sex"/>
+	  <dimension concept="hiv"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="clinics_sex_hiv_slice_table"/>
+	</slice>
+	
+	<slice id="clinics_sex_hiv_status_slice">
+	  <dimension concept="clinic"/>
+	  <dimension concept="sex"/>
+	  <dimension concept="hiv"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="clinics_sex_hiv_status_slice_table"/>
+	</slice>
+	
+==============================================================
+==============================================================
+==============================================================
+
+
+	<table id="clinics_slice_table">
+	  <column id="clinic" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">clinics_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="clinics_sex_slice_table">
+	  <column id="clinic" type="string"/>
+	  <column id="sex" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">clinics_sex_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="clinics_hiv_slice_table">
+	  <column id="clinic" type="string"/>
+	  <column id="hiv" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">clinics_hiv_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="clinics_status_slice_table">
+	  <column id="clinic" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">clinics_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="clinics_hiv_status_slice_table">
+	  <column id="clinic" type="string"/>
+	  <column id="hiv" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">clinics_hiv_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="clinics_sex_status_slice_table">
+	  <column id="clinic" type="string"/>
+	  <column id="sex" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">clinics_sex_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="clinics_sex_hiv_slice_table">
+	  <column id="clinic" type="string"/>
+	  <column id="sex" type="string"/>
+	  <column id="hiv" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">clinics_sex_hiv_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="clinics_sex_hiv_status_slice_table">
+	  <column id="clinic" type="string"/>
+	  <column id="sex" type="string"/>
+	  <column id="hiv" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">clinics_sex_hiv_status_slice.csv</file>
+	  </data>
+	</table>
+	

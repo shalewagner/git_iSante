@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-xs-12" style="text-align: center;">
+        <h4>Run Custom Indicators for {{subjectName}}</h4>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-4">
+        <h5>Indicators To Run:</h5>
+        <select multiple ng-model="selectedUserIndicators" ng-options="userIndicator.userIndicatorName for userIndicator in userIndicators" style="height: 300px; width: 220px; overflow-y: auto; overflow-x: auto; "></select>
+    </div>
+    <div class="col-xs-3">
+        <form>
+            <p>
+                <h5>Time Interval:</h5>
+                <select ng-model="selectedTimeLevel" ng-options="timeLevel.name for timeLevel in timeLevels"></select>
+            </p>
+            <p>
+                <h5>Geography Level:</h5>
+                <select ng-model="selectedGeographyLevel" ng-options="geoLevel.name for geoLevel in geographyLevels"></select>
+            </p>
+            <br />
+            <p>
+                <button ng-click="processForm()">Update Grid</button>
+            </p>
+        </form>
+    </div>
+    <div class="col-xs-5">
+        <p>
+            <table ng-table="tableParamsData" class="table ng-table-responsive">
+                <tr ng-repeat="row in $data">
+                    <td data-title="'Indicator Name'">
+                        {{row.name}}
+                    </td>
+                    <td data-title="interval0Name" width="20px">
+                        {{row.interval0}}
+                    </td>
+                    <td data-title="interval1Name" width="20px">
+                        {{row.interval1}}
+                    </td>
+                    <td data-title="interval2Name" width="20px">
+                        {{row.interval2}}
+                    </td>
+                    <td data-title="interval3Name" width="20px">
+                        {{row.interval3}}
+                    </td>
+                    <td data-title="interval4Name" width="20px">
+                        {{row.interval4}}
+                    </td>
+                    <td data-title="interval5Name" width="20px">
+                        {{row.interval5}}
+                    </td>
+                    <td data-title="interval6Name" width="20px">
+                        {{row.interval6}}
+                    </td>
+                    <td data-title="interval7Name" width="20px">
+                        {{row.interval7}}
+                    </td>
+                    <td data-title="interval8Name" width="20px">
+                        {{row.interval8}}
+                    </td>
+                    <td data-title="interval9Name" width="20px">
+                        {{row.interval9}}
+                    </td>
+                </tr>
+            </table>
+        </p>
+    </div>
+</div>

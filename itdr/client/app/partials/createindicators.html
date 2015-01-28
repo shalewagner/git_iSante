@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col-xs-10" style="text-align:center;">
+        <h4>Create Indicators for {{subjectName}}</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-3">
+        <h4>New Indicator</h4>
+        <p>
+            <h5>Indicator Name:</h5>
+            <input ng-model="userIndicatorName" />
+        </p>
+        <p>
+            <h5>Age Group:</h5>
+            <select ng-model="selectedAgeLevel" ng-options="ageLevel.name for ageLevel in ageLevels"></select>
+        </p>
+        <p>
+            <h5>Gender:</h5>
+            <select ng-model="selectedGenderLevel" ng-options="genderLevel.name for genderLevel in genderLevels"></select>
+        </p>
+    </div>
+
+    <div class="col-xs-2">
+        <h4>Diagnosis</h4>
+        <div class="field" ng-repeat="obj in draggableFieldObjects1" ng-drag="true" ng-drag-data="obj">
+            {{obj.fieldDisplayName}}
+        </div>
+        <br />
+        <br />
+        <h4>Treatment</h4>
+        <div class="field" ng-repeat="obj in draggableFieldObjects2" ng-drag="true" ng-drag-data="obj">
+            {{obj.fieldDisplayName}}
+        </div>
+    </div>
+    <div class="col-xs-2">
+        <h4>Operators</h4>
+        <div class="operator" ng-repeat="obj in draggableOperatorObjects" ng-drag="true" ng-drag-data="obj">
+            {{obj.fieldDisplayName}}
+        </div>
+        <br />
+        <br />
+        <h4>Denominator</h4>
+        <div class="field" ng-repeat="obj in draggableFieldObjects4" ng-drag="true" ng-drag-data="obj">
+            {{obj.fieldDisplayName}}
+        </div>
+        <br/>
+        <br/>
+        <h4>Testing</h4>
+        <div class="field" ng-repeat="obj in draggableFieldObjects3" ng-drag="true" ng-drag-data="obj">
+            {{obj.fieldDisplayName}}
+        </div>
+    </div>
+    <div class="col-xs-5">
+        <div class="row">
+            <div style="text-align: center;"><h4>Equation</h4></div>
+            <div ng-drop="true" ng-drop-success="onDropComplete($data,$event,'firstNumeratorField')" style="width:120px;">
+                <div ng-repeat="obj in firstNumeratorField" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccess($data,$event,'firstNumeratorField')">
+                    <div class="field">
+                        {{obj.fieldDisplayName}}
+                    </div>
+                </div>
+            </div>
+            <div ng-drop="true" ng-drop-success="onDropComplete($data,$event,'numeratorOperator')" style="width:40px;">
+                <div ng-repeat="obj in numeratorOperator" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccess($data,$event,'numeratorOperator')">
+                    <div class="operator">
+                        {{obj.fieldDisplayName}}
+                    </div>
+                </div>
+            </div>
+            <div ng-drop="true" ng-drop-success="onDropComplete($data,$event,'secondNumeratorField')" style="width:120px;">
+                <div ng-repeat="obj in secondNumeratorField" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccess($data,$event,'secondNumeratorField')">
+                    <div class="field">
+                        {{obj.fieldDisplayName}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="border-top-color: black; border-top-width: 3px;" />
+        <div class="row">
+            <div ng-drop="true" ng-drop-success="onDropComplete($data,$event,'firstDenominatorField')" style="width:120px;">
+                <div ng-repeat="obj in firstDenominatorField" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccess($data,$event,'firstDenominatorField')">
+                    <div class="field">
+                        {{obj.fieldDisplayName}}
+                    </div>
+                </div>
+            </div>
+            <div ng-drop="true" ng-drop-success="onDropComplete($data,$event,'denominatorOperator')" style="width:40px;">
+                <div ng-repeat="obj in denominatorOperator" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccess($data,$event,'denominatorOperator')">
+                    <div class="operator">
+                        {{obj.fieldDisplayName}}
+                    </div>
+                </div>
+            </div>
+            <div ng-drop="true" ng-drop-success="onDropComplete($data,$event,'secondDenominatorField')" style="width:120px;">
+                <div ng-repeat="obj in secondDenominatorField" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccess($data,$event,'secondDenominatorField')">
+                    <div class="field">
+                        {{obj.fieldDisplayName}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row" style="text-align:center">
+            <p><small>*To create your equation, drop fields on the large boxes and operators on the small boxes.</small></p>
+        </div>
+        <div class="row" style="text-align:center">
+            <button ng-click="createIndicator()">Create</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-5">
+            <h5>Numerator Equation:</h5>
+            <input ng-model="numeratorEquation" style="width:300px; height:50px;" />            
+            <h5>Denominator Equation:</h5>
+            <input ng-model="denominatorEquation" style="width:300px; height:50px;" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+#################################
+########## !WARNING! ############
+#################################
+#This file is created by setup-isante.pl and will be overwritten during upgrades of iSante.
+
+
+ISANTE_SOURCE=/usr/share/isante/htdocs
+
+@reboot		  root  /usr/bin/perl $ISANTE_SOURCE/support/cron.pl reboot
+@midnight  	  root  /usr/bin/perl $ISANTE_SOURCE/support/cron.pl midnight
+5 13  	   * * *  root  /usr/bin/perl $ISANTE_SOURCE/support/cron.pl afterNoon
+0 8,12,16  * * *  root  /usr/bin/perl $ISANTE_SOURCE/support/cron.pl discontinuation
+*/10 *     * * *  root  /usr/bin/perl $ISANTE_SOURCE/support/cron.pl 10minute

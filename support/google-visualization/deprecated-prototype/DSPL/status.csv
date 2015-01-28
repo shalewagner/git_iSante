@@ -1,0 +1,12 @@
+status,name_en,name_fr
+0,""Unknown"",""Inconnu""
+1,""Discontinued On ARVs"",""Cessé sous TARs""
+2,""New on ARVs"",""Nouveau sous TARs""
+3,""New in clinic"",""Nouveau en soins palliatifs""
+4,""At risk of discontinuation on ARVs"",""Risque de discontinuation sous TARs""
+5,""At risk of discontinuation in clinic"",""Risque de discontinuation en soins palliatifs""
+6,""Active on ARVs"",""Actif sous TARs""
+7,""Active in clinic"",""Actif en soins palliatifs""
+8,""Inactive On ARVs"",""Inactif sous TARs""
+9,""Discontinued in clinic"",""Cessé en soins palliatifs""
+10,""Inactive in clinic"",""Inactif en soins palliatifs""

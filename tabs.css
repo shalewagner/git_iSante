@@ -1,0 +1,17 @@
+/* 
+  Based on code located at: http://jon.hedley.net/html-tabbed-dialog-widget
+  URL last visited date: June 2006
+ */
+.tabs {margin: 0; padding: 0; height: 27px; background-color:#6D99B6;}
+.tabs a:hover, 
+  .tabs a.tab-active {background-color:#FFFFFF;
+    font:12px verdana, helvetica, sans-serif;font-weight:bold;
+    border-top: 2px solid #6D99B6; border-right: 2px solid #6D99B6;
+    border-left: 2px solid #6D99B6;}
+.tabs a.first-tab {border-left: 2px solid #6D99B6;}
+.tabs a {font:10px verdana, helvetica, sans-serif;font-weight:bold; color:#2B4353;
+  text-decoration:none; padding:6px 10px 10px 10px; height: 27px;}
+.tab-container {background-color: #FFFFFF;}
+.tab-panes {margin-top:0px;margin-left:2px; 
+  border-left:2px solid #6D99B6; border-right:2px solid #6D99B6; 
+  border-bottom:2px solid #6D99B6; padding: 2px}

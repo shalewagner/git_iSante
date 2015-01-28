@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="ppr_prevscr"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="556"
+		 pageHeight="28"
+		 columnWidth="556"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 isIgnorePagination="true">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select l . result , l . result2 , l . result3 , l . result4 , l . units , ifnull(nullif(ltrim(l . resultDateDd) , '') , l . visitDateDd) as dd , ifnull(nullif(ltrim(l . resultDateMm) , '') , l . visitDateMm) as mm , ifnull(nullif(ltrim(l . resultDateYy) , '') , l . visitDateYy) as yy , l . resultAbnormal , l . resultRemarks , k . testNameEn , k . testNameFr , k . resultType , k . resultLabelEn1 , k . resultLabelFr1 , k . resultLabelEn2 , k . resultLabelFr2 , k . resultLabelEn3 , k . resultLabelFr3 , k . resultLabelEn4 , k . resultLabelFr4 , k . resultLabelEn5 , k . resultLabelFr5 , k . resultLabelEn6 , k . resultLabelFr6 from labs l , lablookup k , encounter e where l . patientid = $P{pid} and l . labID = k . labID and l . labID not in (102 , 103 , 176) and ((e . formVersion = 0 and k . version0 = 1) or (e . formVersion = 1 and k . version1 = 1)) and e . encStatus &lt; 255 and e . siteCode = l . siteCode and e . patientID = l . patientID and e . visitDateDd = l . visitDateDd and e . visitDateMm = l . visitDateMm and e . visitDateYy = l . visitDateYy and e . seqNum = l . seqNum and l . visitDateDd is not NULL and ltrim(l . visitDateDd) != '' and l . visitDateMm is not NULL and ltrim(l . visitDateMm) != '' and l . visitDateYy is not NULL and ltrim(l . visitDateYy) != '' order by k . testNameEn asc; 
+</queryString>
+
+	<field name="result" class="java.lang.String"/>
+	<field name="result2" class="java.lang.String"/>
+	<field name="result3" class="java.lang.String"/>
+	<field name="result4" class="java.lang.String"/>
+	<field name="units" class="java.lang.String"/>
+	<field name="dd" class="java.lang.String"/>
+	<field name="mm" class="java.lang.String"/>
+	<field name="yy" class="java.lang.String"/>
+	<field name="resultAbnormal" class="java.lang.Integer"/>
+	<field name="resultRemarks" class="java.lang.String"/>
+	<field name="testNameEn" class="java.lang.String"/>
+	<field name="testNameFr" class="java.lang.String"/>
+	<field name="resultType" class="java.lang.Integer"/>
+	<field name="resultLabelEn1" class="java.lang.String"/>
+	<field name="resultLabelFr1" class="java.lang.String"/>
+	<field name="resultLabelEn2" class="java.lang.String"/>
+	<field name="resultLabelFr2" class="java.lang.String"/>
+	<field name="resultLabelEn3" class="java.lang.String"/>
+	<field name="resultLabelFr3" class="java.lang.String"/>
+	<field name="resultLabelEn4" class="java.lang.String"/>
+	<field name="resultLabelFr4" class="java.lang.String"/>
+	<field name="resultLabelEn5" class="java.lang.String"/>
+	<field name="resultLabelFr5" class="java.lang.String"/>
+	<field name="resultLabelEn6" class="java.lang.String"/>
+	<field name="resultLabelFr6" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="213"
+						height="13"
+						key="textField-1"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{testNameEn}.length() > 40 ? $F{testNameEn}.substring(0, 40) : $F{testNameEn} )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="226"
+						y="0"
+						width="69"
+						height="13"
+						key="textField-2"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{dd} + "/" + $F{mm} + "/" + $F{yy}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="300"
+						y="0"
+						width="158"
+						height="13"
+						key="textField-3"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{resultType}.intValue() == 1 ?
+  ( "1".equals($F{result}) ?
+    ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) :
+    ( "2".equals($F{result}) ?
+      ( "".equals($F{resultLabelEn2}) || $F{resultLabelEn2} == null ? "" : $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) :
+      ( "4".equals($F{result}) ?
+        ( "".equals($F{resultLabelEn3}) || $F{resultLabelEn3} == null ? "" : $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) :
+        ( "8".equals($F{result}) ?
+          ( "".equals($F{resultLabelEn4}) || $F{resultLabelEn4} == null ? "" : $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) :
+          ( "16".equals($F{result}) ?
+            ( "".equals($F{resultLabelEn5}) || $F{resultLabelEn5} == null ? "" : $F{resultLabelEn5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) :
+            ( "32".equals($F{result}) ?
+              ( "".equals($F{resultLabelEn6}) || $F{resultLabelEn6} == null ? "" : $F{resultLabelEn6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) : "No result."
+            )
+          )
+        )
+      )
+    )
+  ) :
+  ( $F{resultType}.intValue() == 2 ?
+    ( "".equals($F{result}) || $F{result} == null ? "No result." : $F{result} + " " + ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) ) :
+    ( $F{resultType}.intValue() == 3 ?
+      ( ( ( "".equals($F{result}) || $F{result} == null ) &&
+        ( "".equals($F{result2}) || $F{result2} == null ) &&
+        ( "".equals($F{result3}) || $F{result3} == null ) &&
+        ( "".equals($F{result4}) || $F{result4} == null ) ) ?
+          "No result." :
+          (
+            ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : ( "".equals($F{result}) || $F{result} == null ? "N/A" : $F{result} ) + " " + $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") + " " ) + 
+            ( "".equals($F{resultLabelEn2}) || $F{resultLabelEn2} == null ? "" : ( "".equals($F{result2}) || $F{result2} == null ? "N/A" : $F{result2} ) + " " + $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") + " " ) +
+            ( "".equals($F{resultLabelEn3}) || $F{resultLabelEn3} == null ? "" : ( "".equals($F{result3}) || $F{result3} == null ? "N/A" : $F{result3} ) + " " + $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") + " " ) +
+            ( "".equals($F{resultLabelEn4}) || $F{resultLabelEn4} == null ? "" : ( "".equals($F{result4}) || $F{result4} == null ? "N/A" : $F{result4} ) + " " + $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") )
+          )
+      ) :
+      ( $F{resultType}.intValue() == 4 ?
+        ( "1".equals($F{result}) ?
+          ( $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") + " " + ( "".equals($F{result2}) || $F{result2} == null ? "N/A" : $F{result2} ) + " " + $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) :
+          ( "2".equals($F{result}) ?
+            $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") : "No result."
+          )
+        ) :
+        ( $F{resultType}.intValue() == 5 ?
+          ( ( "".equals($F{result}) || $F{result} == null ? "N/A" : $F{result} ) + " " +
+            ( "1".equals($F{result2}) ?
+              ( $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) :
+              ( "2".equals($F{result2}) ?
+                ( $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) :
+                ( "4".equals($F{result2}) ?
+                  ( $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) :
+                  ( "8".equals($F{result2}) ?
+                    ( $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) :
+                    ( "16".equals($F{result2}) ?
+                      ( $F{resultLabelEn5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) :
+                      ( "32".equals($F{result2}) ?
+                        ( $F{resultLabelEn6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "^3").replaceAll("&eacute;", "é").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", "").replaceAll("&aacute;", "á") ) : "(no units)"
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          ) :
+          ( $F{resultType}.intValue() == 6 ? "Malaria" : "No Malaria"
+          )
+        )
+      )    
+    )
+  )
+)]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

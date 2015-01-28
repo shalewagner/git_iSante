@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html lang="en" ng-app="iSanteReportingApp">
+<head>
+    <meta charset="utf-8">
+    <title>ISante Reporting</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/ng-table.css">
+    <link rel="stylesheet" href="css/ngDraggable.css">
+    
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.min.css" rel="stylesheet" type="text/css" />    <script src="bower_components/angular/angular.js"></script>-->
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="js/ngextensions/ng-table.js"></script>
+    <!--<script src="bower_components/angular-resource/angular-resource.js"></script>-->
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="js/jsextensions/json2.js"></script>
+    <script src="js/jsextensions/underscore-min.js"></script>
+    <script src="js/ngextensions/ngDraggable.js"></script>
+    <script src="js/referencedata/lookups.js"></script>
+    <script src="js/helpers/httpHelper.js"></script>
+    <script src="js/helpers/indicatorHelper.js"></script>
+    <script src="js/app.js.php"></script>
+    <script src="js/controllers/dataoverviewcontroller.js"></script>
+    <script src="js/controllers/indicatorlistcontroller.js"></script>
+    <script src="js/controllers/runindicatorscontroller.js"></script>
+    <script src="js/controllers/createindicatorscontroller.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/services.js"></script>
+</head>
+    <body>
+        
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">ISante Reporting</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.html">Data Overview</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <select class="form-control">
+                            <option value="0">Choose Subject...</option>
+                            <option value="1" selected>Malaria</option>
+                            <option value="2">Data Quality</option>
+                            <option value="3">Birth Outcomes</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-1 sidebar">
+                    <ul class="nav nav-sidebar">
+                        <li class="active"><a href="#">Data Overview</a></li>
+                        <li><a href="index.html#/indicatorlist">List of Indicators</a></li>
+                        <li><a href="index.html#/runindicators">Run Indicators</a></li>
+                        <li><a href="index.html#/createindicators">Create Indicators</a></li>
+                        <li><a href="malaria.csv">Download Raw Data</a></li>
+                    </ul>
+                </div>
+                <div ng-view class="col-xs-9" style="margin-left:50px;"></div>
+            </div>
+        </div>
+    </body>
+</html>

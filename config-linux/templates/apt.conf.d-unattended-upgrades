@@ -1,0 +1,16 @@
+
+// allowed (origin, archive) pairs
+Unattended-Upgrade::Allowed-Origins {
+        "volatile.debian.org oldstable";
+        "Debian oldstable";
+//      "Debian testing";
+};
+
+// never update the packages in this list
+Unattended-Upgrade::Package-Blacklist {
+//      "vim";
+};
+
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+APT::Periodic::RandomSleep "0";

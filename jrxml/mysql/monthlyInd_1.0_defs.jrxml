@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="monthlyInd_1.0_defs"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="1009"
+		 pageHeight="520"
+		 columnWidth="1009"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="BlueText"
+		isDefault="false"
+		forecolor="#0033FF"
+		fontName="Arial"
+	/>
+
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select 1 as 'true'; 
+</queryString>
+
+	<field name="true" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="338"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="500"
+						height="338"
+						forecolor="#000000"
+						key="textField-17"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" isStyledText="true">
+						<font fontName="Arial"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[(
+"en".equals ($P{lang}) ?
+ "<B><U>Monthly Quality of Care Indicator Report definitions version 1.0 (09/30/10)</U></B><BR/><BR/>" +
+ "<B>CD4 Monitoring:</B><BR/> - Numerator: All patients on ART and a visit in the past " +
+ "30 days who have had a CD4 count within the last 8 months.<BR/> - Denominator: All " +
+ "patients on ART with >= one provider visit in past 30 days.<BR/><BR/>" +
+ "<B>PCP Prophylaxis Adult:</B><BR/> - Numerator: All patients age > 14 years who " +
+ "received cotrimoxazole or dapsone in the past 30 days.<BR/> - Denominator: All " +
+ "patients age > 14 years with >= one visit in past 30 days.<BR/><BR/>" +
+ "<B>PCP Prophylaxis Pediatric:</B><BR/> - Numerator: All HIV-infected and exposed " +
+ "children age 6 wks-12 mo, all HIV-infected children age 1-4 yrs with WHO stage II, " +
+ "III or IV, and all HIV-infected children age 5-14 yrs who received cotrimoxazole or " +
+ "Dapsone in the previous 30 days.<BR/> - Denominator: All HIV-infected and exposed " +
+ "children age 6 wks-12 mo, all HIV-infected children age 1-4 yrs and WHO stage II, III " +
+ "or IV, and all HIV-infected children age 5-14 yrs, with no sulfa allergy and >= one " +
+ "visit in the past 30 days.<BR/><BR/>" +
+ "<B>TB Assessment:</B><BR/> - Numerator: All adults and adolescents who received a TST " +
+ "or screening for symptoms of cough, fever and weight loss in the past 30 days.<BR/> - " +
+ "Denominator: All adults and adolescents with >= one provider visit in past 30 days and " +
+ "not receiving TB treatment.<BR/><BR/>"
+:
+ "<B><U>Définitions des indicateurs mensuel de qualité des soins version 1.0 (30/09/10)</U></B><BR/><BR/>" +
+ "<B>Surveillance CD4:</B><BR/> - Numérateur: Tous les patients sur TAR et une visite au " +
+ "cours des 30 derniers jours qui ont eu un compte de CD4 au cours des 8 derniers mois.<BR/> - " +
+ "Dénominateur: Tous les patients sous TAR avec >= une visite chez le prestataire de soin " +
+ "dans les 30 derniers jours.<BR/><BR/>" +
+ "<B>Prophylaxie à la PCP adulte:</B><BR/> - Numérateur: Tous les patients âgés de > 14 " +
+ "ans qui reçoivent la cotrimoxazole ou la Dapsone dans les 30 derniers jours.<BR/> - " +
+ "Dénominateur: Tous les patients âgés de > 14 ans avec >= une visite dans les 30 " +
+ "derniers jours.<BR/><BR/>" +
+ "<B>Prophylaxie à la PCP pédiatrique:</B><BR/> - Numérateur: Tous les enfants exposés " +
+ "au VIH et infectés âgés de 6 semaines-12 mois, tous les enfants infectés par le VIH " +
+ "âgés de 1-4 ans au stade II, III, ou IV de l’OMS, et tous les enfants infectés par le " +
+ "VIH âgés de 5-14 ans qui ont reçu de la cotrimoxazole ou Dapsone dans les 30 jours " +
+ "antérieurs.<BR/> - Dénominateur: Tous les enfants exposés au VIH et infectés âgés de 6 " +
+ "semaines-12 mois, tous les enfants infectés par le VIH âgés de 1-4 ans au stade II, III, " +
+ "ou IV de l’OMS, et tous les enfants infectés par le VIH âgés de 5-14 ans, non allergique " +
+ "au sulfamide et >= une visite au cours des 30 derniers jours.<BR/><BR/>" +
+ "<B>Évaluation TB:</B><BR/> - Numérateur: Tous les adultes et adolescents qui ont reçu " +
+ "un TST ou le dépistage des symptômes pour toux, fièvre et perte de poids dans les 30 " +
+ "derniers jours.<BR/> - Dénominateur: Tous les adultes et adolescents avec >= une visite " +
+ "chez un prestataire de soins au cours des 30 derniers jours et ne reçoivent pas de " +
+ "traitement TB.<BR/><BR/>"
+)]]></textFieldExpression>
+						<hyperlinkTooltipExpression><![CDATA["Click Me"]]></hyperlinkTooltipExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="509"
+						y="0"
+						width="500"
+						height="338"
+						forecolor="#000000"
+						key="textField-18"
+						positionType="Float"
+						isPrintRepeatedValues="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" isStyledText="true">
+						<font fontName="Arial"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[(
+"en".equals ($P{lang}) ?
+ "<BR/><BR/><B>PMTCT:</B><BR/> - Numerator: All eligible pregnant women who received ART " +
+ "medications in past 30 days.<BR/> - Denominator: All pregnant women with >= 1 visit " +
+ "in past 30 days and 1) eligible for ART prophylaxis or treatment and 2) not " +
+ "previously on ART.<BR/><BR/>" +
+ "<B>ART Enrollment:</B><BR/> - Numerator: All pts who received a prescription for ART " +
+ "in the past 30 days.<BR/> - Denominator: All pts eligible for ART4 and not previously " +
+ "receiving ART, and with >= one provider visit in the past 30 days.<BR/><BR/>" +
+ "<B>Continuity of Care:</B><BR/> - Numerator: All active pts on ART with at least one " +
+ "visit in the preceding 3 months.<BR/> - Denominator: All active and inactive pts on " +
+ "ART enrolled in the program > 3 months prior to the end of the period of analysis.<BR/><BR/>" +
+ "<B>Immunization</B><BR/> - Numerator: All HIV-exposed and infected children &lt; 5 yrs " +
+ "who've received all recommended vaccinations for their age with a visit in the past 30 " +
+ "days.<BR/> - Denominator: All HIV-exposed and infected children &lt; 5 yrs with a visit " +
+ "in the past 30 days."
+:
+ "<BR/><BR/><B>PTME:</B><BR/> - Numérateur: Toutes les femmes enceintes eligibles qui ont " +
+ "reçues une médication TAR au cours des 30 derniers jours.<BR/> - Dénominateur: Toutes " +
+ "les femmes enceintes avec >= une visite dans les 30 derniers jours et : 1) éligibles " +
+ "pour la prophylaxie TAR ou le traitement, et 2) n’étaient pas antérieurement sur TAR.<BR/><BR/>" +
+ "<B>Enrôlement ART:</B><BR/> - Numérateur: Tous les patients qui ont reçu une " +
+ "prescription pour le TAR au cours des 30 derniers jours.<BR/> - Dénominateur: Tous " +
+ "les patients éligibles pour le TAR et qui ne recevaient pas antérieurement le TAR, et " +
+ "avec >= une visite avec un prestataire de soins au cours des 30 derniers jours.<BR/><BR/>" +
+ "<B>Continuité des soins:</B><BR/> - Numérateur: Les patients actifs sous ARV qui " +
+ "ont effectué au moins une visite dans les 3 mois précédents.<BR/> - Dénominateur: " +
+ "Les patients actifs et inactifs sous ARV enrôlés dans le programme > 3 mois avant la " +
+ "fin de la période d'analyse.<BR/><BR/>" +
+ "<B>Immunisation</B><BR/> - Numérateur: Tous les enfants exposés et infectés par le " +
+ "VIH &lt; 5 ans qui ont reçu tous les vaccins recommandés pour leur âge avec une " +
+ "visite au cours des 30 derniers jours.<BR/> - Dénominateur: Tous les enfants exposés " +
+ "et infectés par le VIH &lt; 5 ans avec une visite au cours des 30 derniers jours."
+)]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

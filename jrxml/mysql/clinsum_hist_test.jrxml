@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_hist_test"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="540"
+		 pageHeight="39"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="isPediatric" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select v . firstTestDd , v . firstTestMm , v . firstTestYy , v . firstTestThisFac , v . firstTestOtherFac , v . firstTestOtherFacText from v_vitals v where v . patientID = $P{pid} and (isnumeric(v . firstTestDd) = 1 or upper(v . firstTestDd) = 'XX') and (isnumeric(v . firstTestMm) = 1 or upper(v . firstTestMm) = 'XX') and (isnumeric(v . firstTestYy) = 1 or upper(v . firstTestYy) = 'XX') and v . encounterType in (1) order by v . visitdate desc limit 1; 
+</queryString>
+
+	<field name="firstTestDd" class="java.lang.String"/>
+	<field name="firstTestMm" class="java.lang.String"/>
+	<field name="firstTestYy" class="java.lang.String"/>
+	<field name="firstTestThisFac" class="java.lang.Integer"/>
+	<field name="firstTestOtherFac" class="java.lang.Integer"/>
+	<field name="firstTestOtherFacText" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="39"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="275"
+						y="13"
+						width="60"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-7"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? 
+  ( $F{firstTestMm}.trim().length() == 1 ? "0" + $F{firstTestMm}.trim() : $F{firstTestMm}.trim() ) + "/" +
+  ( $F{firstTestDd}.trim().length() == 1 ? "0" + $F{firstTestDd}.trim() : $F{firstTestDd}.trim() ) + "/" +
+  ( $F{firstTestYy}.trim().length() == 1 ? "0" + $F{firstTestYy}.trim() : $F{firstTestYy}.trim() )
+:
+  ( $F{firstTestDd}.trim().length() == 1 ? "0" + $F{firstTestDd}.trim() : $F{firstTestDd}.trim() ) + "/" +
+  ( $F{firstTestMm}.trim().length() == 1 ? "0" + $F{firstTestMm}.trim() : $F{firstTestMm}.trim() ) + "/" +
+  ( $F{firstTestYy}.trim().length() == 1 ? "0" + $F{firstTestYy}.trim() : $F{firstTestYy}.trim() )
+)
+]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="275"
+						y="26"
+						width="265"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-9"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( ( ( $F{firstTestThisFac}.intValue() == 0 || $F{firstTestThisFac} == null ) &&
+    ( $F{firstTestOtherFac}.intValue() == 0 || $F{firstTestOtherFac} == null ) ) ? 
+  ( "en".equals($P{lang}) ? "Unknown" : "Inconnu" ) :
+  ( $F{firstTestThisFac}.intValue() == 1 ?
+    ( "en".equals($P{lang}) ? "This Facility" : "Cet établissement" ) :
+    ( $F{firstTestOtherFac}.intValue() == 1 ?
+      ( ( "en".equals($P{lang}) ? "Other: " : "Autre: " ) +
+        ( !"".equals($F{firstTestOtherFacText}) && $F{firstTestOtherFacText} != null ?
+          $F{firstTestOtherFacText} : "" ) ) : ""
+    )
+  )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="13"
+						width="260"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-10"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals ($P{lang}) ? "Date of first HIV antibody test:" : "Date du premier test anticorps VIH positif:" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="26"
+						width="260"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-11"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals ($P{lang}) ? "Facility where test performed:" : "Etablissement où le test a été réalisé:" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="540"
+						height="13"
+						key="textField-12"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier-Bold" isBold="true" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "HIV Antibody Test" : "Test Anticorps VIH" )]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

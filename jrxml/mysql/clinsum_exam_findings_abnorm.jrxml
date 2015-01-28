@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_exam_findings_abnorm"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="540"
+		 pageHeight="39"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="isPediatric" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select v . visitdate , v . physicalGeneral , v . physicalSkin , v . physicalOral , v . physicalEarsNose , v . physicalLymph , v . physicalLungs , v . physicalCardio , v . physicalAbdomen , v . physicalUro , v . physicalMusculo , v . physicalNeuro , v . physicalOther , v . pedExamEyes , v . pedExamHeadNeck , v . pedExamLimbs , v . pedExamBreast from v_vitals v where v . patientID = $P{pid} and v . encounterType in (1 , 2 , 16 , 17) and (v . physicalGeneral in (2 , 3 , 6 , 7) or v . physicalSkin in (2 , 3 , 6 , 7) or v . physicalOral in (2 , 3 , 6 , 7) or v . physicalEarsNose in (2 , 3 , 6 , 7) or v . physicalLymph in (2 , 3 , 6 , 7) or v . physicalLungs in (2 , 3 , 6 , 7) or v . physicalCardio in (2 , 3 , 6 , 7) or v . physicalAbdomen in (2 , 3 , 6 , 7) or v . physicalUro in (2 , 3 , 6 , 7) or v . physicalMusculo in (2 , 3 , 6 , 7) or v . physicalNeuro in (2 , 3 , 6 , 7) or v . physicalOther in (2 , 3 , 6 , 7) or v . pedExamEyes in (2 , 3 , 6 , 7) or v . pedExamHeadNeck in (2 , 3 , 6 , 7) or v . pedExamLimbs in (2 , 3 , 6 , 7) or v . pedExamBreast in (2 , 3 , 6 , 7)) order by v . visitdate desc; 
+</queryString>
+
+	<field name="visitdate" class="java.lang.String"/>
+	<field name="physicalGeneral" class="java.lang.Integer"/>
+	<field name="physicalSkin" class="java.lang.Integer"/>
+	<field name="physicalOral" class="java.lang.Integer"/>
+	<field name="physicalEarsNose" class="java.lang.Integer"/>
+	<field name="physicalLymph" class="java.lang.Integer"/>
+	<field name="physicalLungs" class="java.lang.Integer"/>
+	<field name="physicalCardio" class="java.lang.Integer"/>
+	<field name="physicalAbdomen" class="java.lang.Integer"/>
+	<field name="physicalUro" class="java.lang.Integer"/>
+	<field name="physicalMusculo" class="java.lang.Integer"/>
+	<field name="physicalNeuro" class="java.lang.Integer"/>
+	<field name="physicalOther" class="java.lang.Integer"/>
+	<field name="pedExamEyes" class="java.lang.Integer"/>
+	<field name="pedExamHeadNeck" class="java.lang.Integer"/>
+	<field name="pedExamLimbs" class="java.lang.Integer"/>
+	<field name="pedExamBreast" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="39"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="69"
+						y="0"
+						width="471"
+						height="39"
+						key="textField-1"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier" isBold="false" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( ( $F{physicalGeneral} != null && ($F{physicalGeneral}.intValue() == 2 || $F{physicalGeneral}.intValue() == 3 ||
+  $F{physicalGeneral}.intValue() == 6 || $F{physicalGeneral}.intValue() == 7) ?
+  ( "en".equals($P{lang}) ? "General, " : "général, " ) : "" ) 
+  +
+  ( $F{physicalSkin} != null && ($F{physicalSkin}.intValue() == 2 || $F{physicalSkin}.intValue() == 3 ||
+    $F{physicalSkin}.intValue() == 6 || $F{physicalSkin}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Skin, " : "peau, " ) : "" )
+  +
+  ( $F{physicalOral} != null && ($F{physicalOral}.intValue() == 2 || $F{physicalOral}.intValue() == 3 ||
+    $F{physicalOral}.intValue() == 6 || $F{physicalOral}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Oral, " : "bouche, " ) : "" )
+  +
+  ( $F{physicalEarsNose} != null && ($F{physicalEarsNose}.intValue() == 2 || $F{physicalEarsNose}.intValue() == 3 ||
+    $F{physicalEarsNose}.intValue() == 6 || $F{physicalEarsNose}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Ears/Nose, " : "oreilles/nez, " ) : "" )
+  +
+  ( $F{pedExamEyes} != null && ($F{pedExamEyes}.intValue() == 2 || $F{pedExamEyes}.intValue() == 3 ||
+    $F{pedExamEyes}.intValue() == 6 || $F{pedExamEyes}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Eyes, " : "yeux, " ) : "" )
+  +
+  ( $F{pedExamHeadNeck} != null && ($F{pedExamHeadNeck}.intValue() == 2 || $F{pedExamHeadNeck}.intValue() == 3 ||
+    $F{pedExamHeadNeck}.intValue() == 6 || $F{pedExamHeadNeck}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Head/Neck, " : "tête/cou, " ) : "" )
+  +
+  ( $F{physicalLymph} != null && ($F{physicalLymph}.intValue() == 2 || $F{physicalLymph}.intValue() == 3 ||
+    $F{physicalLymph}.intValue() == 6 || $F{physicalLymph}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Lymph Nodes, " : "ganglions lymphatiques, " ) : "" )
+  +
+  ( $F{physicalLungs} != null && ($F{physicalLungs}.intValue() == 2 || $F{physicalLungs}.intValue() == 3 ||
+    $F{physicalLungs}.intValue() == 6 || $F{physicalLungs}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Lungs, " : "poumons, " ) : "" )
+  +
+  ( $F{physicalCardio} != null && ($F{physicalCardio}.intValue() == 2 || $F{physicalCardio}.intValue() == 3 ||
+    $F{physicalCardio}.intValue() == 6 || $F{physicalCardio}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Cardiovascular, " : "cardiovasculaire, " ) : "" )
+  +
+  ( $F{physicalAbdomen} != null && ($F{physicalAbdomen}.intValue() == 2 || $F{physicalAbdomen}.intValue() == 3 ||
+    $F{physicalAbdomen}.intValue() == 6 || $F{physicalAbdomen}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Abdominal, " : "abdomen, " ) : "" )
+  +
+  ( $F{pedExamLimbs} != null && ($F{pedExamLimbs}.intValue() == 2 || $F{pedExamLimbs}.intValue() == 3 ||
+    $F{pedExamLimbs}.intValue() == 6 || $F{pedExamLimbs}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Limbs, " : "extremités, " ) : "" )
+  +
+  ( $F{pedExamBreast} != null && ($F{pedExamBreast}.intValue() == 2 || $F{pedExamBreast}.intValue() == 3 ||
+    $F{pedExamBreast}.intValue() == 6 || $F{pedExamBreast}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Breasts, " : "seins, " ) : "" )
+  +
+  ( $F{physicalUro} != null && ($F{physicalUro}.intValue() == 2 || $F{physicalUro}.intValue() == 3 ||
+    $F{physicalUro}.intValue() == 6 || $F{physicalUro}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Urogenital, " : "système génito-urinaire, " ) : "" )
+  +
+  ( $F{physicalMusculo} != null && ($F{physicalMusculo}.intValue() == 2 || $F{physicalMusculo}.intValue() == 3 ||
+    $F{physicalMusculo}.intValue() == 6 || $F{physicalMusculo}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Musculoskeletal, " : "système musculo-squelettique, " ) : "" )
+  +
+  ( $F{physicalNeuro} != null && ($F{physicalNeuro}.intValue() == 2 || $F{physicalNeuro}.intValue() == 3 ||
+    $F{physicalNeuro}.intValue() == 6 || $F{physicalNeuro}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Neurologic, " : "système nerveux, " ) : "" )
+  +
+  ( $F{physicalOther} != null && ($F{physicalOther}.intValue() == 2 || $F{physicalOther}.intValue() == 3 ||
+    $F{physicalOther}.intValue() == 6 || $F{physicalOther}.intValue() == 7) ?
+    ( "en".equals($P{lang}) ? "Other, " : "autre, " ) : "" )
+).replaceAll(", $", "")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="69"
+						height="13"
+						key="textField-2"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier" isBold="false" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ?
+  ( $F{visitdate} != null && $F{visitdate}.trim().length() > 0 ?
+    $F{visitdate}.substring(5, 7) + "/" + $F{visitdate}.substring(8, 10) + "/" +
+    $F{visitdate}.substring(2, 4) : "" ) :
+  ( $F{visitdate} != null && $F{visitdate}.trim().length() > 0 ?
+    $F{visitdate}.substring(8, 10) + "/" + $F{visitdate}.substring(5, 7) + "/" +
+    $F{visitdate}.substring(2, 4) : "" )
+)]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

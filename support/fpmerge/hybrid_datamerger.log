@@ -1,0 +1,55 @@
+=== Mon 02/06/2012 === 
+Started hybrid_datamerger.exe  8:10:51.10 
+Ended hybrid_datamerger.exe  8:10:53.91 
+--- 
+Started sending file  8:10:54.17 
+sent iSanteMergers_todo\DuplicateTemplateFound-20120206.log  
+Ended sending file  8:11:18.47 
+=== Mon 02/06/2012 === 
+Started hybrid_datamerger.exe  8:18:32.19 
+Ended hybrid_datamerger.exe  8:18:34.41 
+--- 
+Started sending file  8:18:34.61 
+=== Mon 02/06/2012 === 
+Started hybrid_datamerger.exe  8:19:59.06 
+Ended hybrid_datamerger.exe  8:20:01.28 
+--- 
+Started sending file  8:20:01.47 
+=== Mon 02/06/2012 === 
+Started hybrid_datamerger.exe  8:21:21.89 
+Ended hybrid_datamerger.exe  8:21:24.14 
+--- 
+Started sending file  8:21:24.33 
+=== Mon 02/06/2012 === 
+Started hybrid_datamerger.exe  8:22:34.51 
+Ended hybrid_datamerger.exe  8:22:36.74 
+--- 
+Started sending file  8:22:36.79 
+=== Mon 02/06/2012 === 
+Started hybrid_datamerger.exe  8:23:30.23 
+Ended hybrid_datamerger.exe  8:23:32.40 
+--- 
+Started sending file  8:23:32.44 
+=== Mon 02/06/2012 === 
+Started hybrid_datamerger.exe  8:27:33.62 
+Ended hybrid_datamerger.exe  8:27:35.81 
+--- 
+Started sending file  8:27:35.85 
+=== Mon 02/06/2012 === 
+Started hybrid_datamerger.exe  8:28:22.17 
+Ended hybrid_datamerger.exe  8:28:24.42 
+--- 
+Started sending file  8:28:24.61 
+=== Mon 02/06/2012 === 
+Started hybrid_datamerger.exe  8:29:54.68 
+Ended hybrid_datamerger.exe  8:29:56.91 
+--- 
+Started sending file  8:29:57.10 
+=== Mon 02/06/2012 === 
+Started hybrid_datamerger.exe  8:30:21.95 
+Ended hybrid_datamerger.exe  8:30:24.15 
+--- 
+Started sending file  8:30:24.33 
+ERROR trying to send iSanteMergers_todo\DuplicateTemplateFound-20120206.log   
+returned value is   
+Ended sending file  8:30:26.94 

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="ppr_initvisit"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="556"
+		 pageHeight="28"
+		 columnWidth="556"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 isIgnorePagination="true">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select distinct r . riskAnswer , l . riskDescEn , l . riskID from riskAssessments r , riskLookup l , encounter e where r . patientid = $P{pid} and r . riskID = l . riskID and r . riskAnswer is not NULL and r . riskAnswer != 0 and e . encStatus &lt; 255 and e . siteCode = r . siteCode and e . patientID = r . patientID and e . visitDateDd = r . visitDateDd and e . visitDateMm = r . visitDateMm and e . visitDateYy = r . visitDateYy and e . seqNum = r . seqNum and r . visitDateDd is not NULL and ltrim(r . visitDateDd) != '' and r . visitDateMm is not NULL and ltrim(r . visitDateMm) != '' and r . visitDateYy is not NULL and ltrim(r . visitDateYy) != '' order by l . riskID asc; 
+</queryString>
+
+	<field name="riskAnswer" class="java.lang.Integer"/>
+	<field name="riskDescEn" class="java.lang.String"/>
+	<field name="riskID" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="326"
+						height="13"
+						key="textField-1"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["- " + ( $F{riskDescEn}.length() > 50 ?
+  $F{riskDescEn}.substring(0, 50).replaceAll("<br />", "").replaceAll("&nbsp;", "") :
+  $F{riskDescEn}.replaceAll("<br />", "").replaceAll("&nbsp;", " ") )
+]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="362"
+						y="0"
+						width="158"
+						height="13"
+						key="textField-3"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{riskAnswer}.intValue() == 1 ? "X" : " " ) +
+"]  [" +
+( $F{riskAnswer}.intValue() == 2 ? "X" : " " ) +
+"]  [" +
+( $F{riskAnswer}.intValue() == 4 ? "X" : " " ) +
+"]"]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

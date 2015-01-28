@@ -1,0 +1,641 @@
+<?xml version="1.0" ?><dspl xmlns="http://schemas.google.com/dspl/2010" xmlns:entity="http://www.google.com/publicdata/dataset/google/entity" xmlns:geo="http://www.google.com/publicdata/dataset/google/geo" xmlns:geo_us="http://www.google.com/publicdata/dataset/google/geo/us" xmlns:quantity="http://www.google.com/publicdata/dataset/google/quantity" xmlns:time="http://www.google.com/publicdata/dataset/google/time" xmlns:unit="http://www.google.com/publicdata/dataset/google/unit">
+  <import namespace="http://www.google.com/publicdata/dataset/google/entity"/>
+  <import namespace="http://www.google.com/publicdata/dataset/google/geo"/>
+  <import namespace="http://www.google.com/publicdata/dataset/google/geo/us"/>
+  <import namespace="http://www.google.com/publicdata/dataset/google/quantity"/>
+  <import namespace="http://www.google.com/publicdata/dataset/google/time"/>
+  <import namespace="http://www.google.com/publicdata/dataset/google/unit"/>
+  <info>
+    <name>
+      <value xml:lang="en">iSanté Patient Statistics V2</value>
+    <value xml:lang="fr">Statistiques patients iSanté V2</value></name>
+    <description>
+      <value xml:lang="en">Statistics about patients from the iSanté Haiti database from pentaho pipeline</value>
+    <value xml:lang="fr">Statistiques sur les patients inclus dans la base de données d'iSanté pour Haiti from pentaho pipeline</value></description>
+    <url>
+      <value xml:lang="en">http://code.google.com/p/isante/</value>
+    <value xml:lang="fr">http://code.google.com/p/isante/</value></url>
+  </info>
+  <provider>
+    <name>
+      <value xml:lang="en">iSanté</value>
+    <value xml:lang="fr">iSanté</value></name>
+    <url>
+      <value xml:lang="en">http://code.google.com/p/isante/</value>
+    <value xml:lang="fr">http://code.google.com/p/isante/</value></url>
+  </provider>
+  <concepts>
+    <concept extends="geo:location" id="clinic">
+      <info>
+        <name>
+          <value xml:lang="en">Clinics</value>
+        <value xml:lang="fr">Cliniques</value></name>
+        <description>
+          <value xml:lang="en">List of clinics followed by the program.</value>
+        <value xml:lang="fr">Liste des cliniques suivies par le programme.</value></description>
+      </info>
+      <type ref="string"/>
+      <property concept="department" isParent="true"/>
+      <table ref="clinic_table"/>
+    </concept>
+    <concept extends="entity:entity" id="department">
+      <info>
+        <name>
+          <value xml:lang="en">Department</value>
+        <value xml:lang="fr">Département</value></name>
+        <description>
+          <value xml:lang="en">List of clinics followed by the program.</value>
+        <value xml:lang="fr">Liste des cliniques suivies par le programme.</value></description>
+      </info>
+      <type ref="string"/>
+      <table ref="department_table"/>
+    </concept>
+    <concept extends="entity:entity" id="sex">
+      <info>
+        <name>
+          <value xml:lang="en">Gender</value>
+        <value xml:lang="fr">Sexe</value></name>
+        <description>
+          <value xml:lang="en">Gender, Male or Female</value>
+        <value xml:lang="fr">Sexe, Homme ou Femme</value></description>
+      </info>
+      <type ref="string"/>
+      <table ref="sex_table"/>
+    </concept>
+    <concept extends="entity:entity" id="patientStatus">
+      <info>
+        <name>
+          <value xml:lang="en">Status</value>
+        <value xml:lang="fr">Statut</value></name>
+        <description>
+          <value xml:lang="en">Status of the patient in iSanté</value>
+        <value xml:lang="fr">Statut du patient dans iSanté</value></description>
+      </info>
+      <type ref="string"/>
+      <table ref="patientStatus_table"/>
+    </concept>
+    <concept extends="entity:entity" id="pregnant">
+      <info>
+        <name>
+          <value xml:lang="en">Pregnancy</value>
+        <value xml:lang="fr">Grossesse</value></name>
+        <description>
+          <value xml:lang="en">Pregnant patients</value>
+        <value xml:lang="fr">Patientes enceintes</value></description>
+      </info>
+      <type ref="string"/>
+      <table ref="pregnant_table"/>
+    </concept>
+    <concept id="population">
+      <info>
+        <name>
+          <value xml:lang="en">Number of patients</value>
+        <value xml:lang="fr">Nombre de patients</value></name>
+        <description>
+          <value xml:lang="en">Total number of patients for the selected dimensions</value>
+        <value xml:lang="fr">Nombre total de patients répondant aux critères sélectionnés</value></description>
+      </info>
+      <type ref="integer"/>
+    </concept>
+  </concepts>
+  <slices>
+    <slice id="slice_0">
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+      <table ref="slice_0_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_1">
+      <dimension concept="time:day"/>
+      <dimension concept="clinic"/>
+      <metric concept="population"/>
+      <table ref="slice_1_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_2">
+      <dimension concept="time:day"/>
+      <dimension concept="department"/>
+      <metric concept="population"/>
+      <table ref="slice_2_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_3">
+      <dimension concept="time:day"/>
+      <dimension concept="sex"/>
+      <metric concept="population"/>
+      <table ref="slice_3_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_4">
+      <dimension concept="time:day"/>
+      <dimension concept="patientStatus"/>
+      <metric concept="population"/>
+      <table ref="slice_4_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_5">
+      <dimension concept="time:day"/>
+      <dimension concept="pregnant"/>
+      <metric concept="population"/>
+      <table ref="slice_5_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_6">
+      <dimension concept="time:day"/>
+      <dimension concept="clinic"/>
+      <dimension concept="sex"/>
+      <metric concept="population"/>
+      <table ref="slice_6_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_7">
+      <dimension concept="time:day"/>
+      <dimension concept="clinic"/>
+      <dimension concept="patientStatus"/>
+      <metric concept="population"/>
+      <table ref="slice_7_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_8">
+      <dimension concept="time:day"/>
+      <dimension concept="clinic"/>
+      <dimension concept="pregnant"/>
+      <metric concept="population"/>
+      <table ref="slice_8_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_9">
+      <dimension concept="time:day"/>
+      <dimension concept="department"/>
+      <dimension concept="sex"/>
+      <metric concept="population"/>
+      <table ref="slice_9_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_10">
+      <dimension concept="time:day"/>
+      <dimension concept="department"/>
+      <dimension concept="patientStatus"/>
+      <metric concept="population"/>
+      <table ref="slice_10_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_11">
+      <dimension concept="time:day"/>
+      <dimension concept="department"/>
+      <dimension concept="pregnant"/>
+      <metric concept="population"/>
+      <table ref="slice_11_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_12">
+      <dimension concept="time:day"/>
+      <dimension concept="sex"/>
+      <dimension concept="patientStatus"/>
+      <metric concept="population"/>
+      <table ref="slice_12_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_13">
+      <dimension concept="time:day"/>
+      <dimension concept="sex"/>
+      <dimension concept="pregnant"/>
+      <metric concept="population"/>
+      <table ref="slice_13_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_14">
+      <dimension concept="time:day"/>
+      <dimension concept="patientStatus"/>
+      <dimension concept="pregnant"/>
+      <metric concept="population"/>
+      <table ref="slice_14_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_15">
+      <dimension concept="time:day"/>
+      <dimension concept="clinic"/>
+      <dimension concept="sex"/>
+      <dimension concept="patientStatus"/>
+      <metric concept="population"/>
+      <table ref="slice_15_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_16">
+      <dimension concept="time:day"/>
+      <dimension concept="clinic"/>
+      <dimension concept="sex"/>
+      <dimension concept="pregnant"/>
+      <metric concept="population"/>
+      <table ref="slice_16_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_17">
+      <dimension concept="time:day"/>
+      <dimension concept="clinic"/>
+      <dimension concept="patientStatus"/>
+      <dimension concept="pregnant"/>
+      <metric concept="population"/>
+      <table ref="slice_17_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_18">
+      <dimension concept="time:day"/>
+      <dimension concept="department"/>
+      <dimension concept="sex"/>
+      <dimension concept="patientStatus"/>
+      <metric concept="population"/>
+      <table ref="slice_18_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_19">
+      <dimension concept="time:day"/>
+      <dimension concept="department"/>
+      <dimension concept="sex"/>
+      <dimension concept="pregnant"/>
+      <metric concept="population"/>
+      <table ref="slice_19_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_20">
+      <dimension concept="time:day"/>
+      <dimension concept="department"/>
+      <dimension concept="patientStatus"/>
+      <dimension concept="pregnant"/>
+      <metric concept="population"/>
+      <table ref="slice_20_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_21">
+      <dimension concept="time:day"/>
+      <dimension concept="sex"/>
+      <dimension concept="patientStatus"/>
+      <dimension concept="pregnant"/>
+      <metric concept="population"/>
+      <table ref="slice_21_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_22">
+      <dimension concept="time:day"/>
+      <dimension concept="clinic"/>
+      <dimension concept="sex"/>
+      <dimension concept="patientStatus"/>
+      <dimension concept="pregnant"/>
+      <metric concept="population"/>
+      <table ref="slice_22_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+    <slice id="slice_23">
+      <dimension concept="time:day"/>
+      <dimension concept="department"/>
+      <dimension concept="sex"/>
+      <dimension concept="patientStatus"/>
+      <dimension concept="pregnant"/>
+      <metric concept="population"/>
+      <table ref="slice_23_table">
+        <mapDimension concept="time:day" toColumn="date"/>
+      </table>
+    </slice>
+  </slices>
+  <tables>
+    <table id="clinic_table">
+      <column id="clinic" type="string"/>
+      <column id="department" type="string"/>
+      <column id="name" type="string"/>
+      <column id="latitude" type="float"/>
+      <column id="longitude" type="float"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          clinic_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="department_table">
+      <column id="department" type="string"/>
+      <column id="name" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          department_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="sex_table">
+      <column id="sex" type="string"/>
+      <column id="name" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          sex_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="patientStatus_table">
+      <column id="patientStatus" type="string"/>
+      <column id="name" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          patientStatus_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="pregnant_table">
+      <column id="pregnant" type="string"/>
+      <column id="name" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          pregnant_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_0_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_0_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_1_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="clinic" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_1_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_2_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="department" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_2_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_3_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="sex" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_3_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_4_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="patientStatus" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_4_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_5_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="pregnant" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_5_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_6_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="clinic" type="string"/>
+      <column id="sex" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_6_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_7_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="clinic" type="string"/>
+      <column id="patientStatus" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_7_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_8_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="clinic" type="string"/>
+      <column id="pregnant" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_8_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_9_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="department" type="string"/>
+      <column id="sex" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_9_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_10_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="department" type="string"/>
+      <column id="patientStatus" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_10_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_11_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="department" type="string"/>
+      <column id="pregnant" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_11_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_12_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="sex" type="string"/>
+      <column id="patientStatus" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_12_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_13_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="sex" type="string"/>
+      <column id="pregnant" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_13_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_14_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="patientStatus" type="string"/>
+      <column id="pregnant" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_14_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_15_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="clinic" type="string"/>
+      <column id="sex" type="string"/>
+      <column id="patientStatus" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_15_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_16_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="clinic" type="string"/>
+      <column id="sex" type="string"/>
+      <column id="pregnant" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_16_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_17_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="clinic" type="string"/>
+      <column id="patientStatus" type="string"/>
+      <column id="pregnant" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_17_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_18_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="department" type="string"/>
+      <column id="sex" type="string"/>
+      <column id="patientStatus" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_18_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_19_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="department" type="string"/>
+      <column id="sex" type="string"/>
+      <column id="pregnant" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_19_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_20_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="department" type="string"/>
+      <column id="patientStatus" type="string"/>
+      <column id="pregnant" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_20_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_21_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="sex" type="string"/>
+      <column id="patientStatus" type="string"/>
+      <column id="pregnant" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_21_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_22_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="clinic" type="string"/>
+      <column id="sex" type="string"/>
+      <column id="patientStatus" type="string"/>
+      <column id="pregnant" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_22_table.csv
+        </file>
+      </data>
+    </table>
+    <table id="slice_23_table">
+      <column format="yyyy-MM-dd" id="date" type="date"/>
+      <column id="population" type="integer"/>
+      <column id="department" type="string"/>
+      <column id="sex" type="string"/>
+      <column id="patientStatus" type="string"/>
+      <column id="pregnant" type="string"/>
+      <data>
+        <file encoding="utf-8" format="csv">
+          slice_23_table.csv
+        </file>
+      </data>
+    </table>
+  </tables>
+</dspl>

@@ -1,0 +1,22 @@
+
+input, textarea { margin-top : 5px; margin-left : 10px;}
+
+div.header { background-color: #e1d4c0; padding-bottom: 10px; padding-top : 5px; margin-bottom : 5px; border-bottom : thin solid #C0C0C0;
+	font-family : Verdana,Arial,Helvetica,Geneva,sans-serif;font-size: 10pt; font-weight: bold; color: #192f6f; line-height: 1.3em;}
+
+div#message { margin-top : 15px;}
+
+body { background-color: #ebeadb; width: 100%; margin: 0px;}
+
+img { padding-left : 5px; padding-right: 10px; float: left;}
+
+label { padding-left : 15px; color: #192f6f;}
+
+em { font-style: normal; font-size: 7pt;}
+
+p.info, select.info { margin-left: 10px; margin-top: 5px; margin-bottom: 0px; color: #192f6f;}
+span.info, span#response { color: #8A0F28;}
+
+p#response { width: 90%; position: relative; margin-left: 5%;}
+
+input#close { position: relative; margin-left: 5%;}

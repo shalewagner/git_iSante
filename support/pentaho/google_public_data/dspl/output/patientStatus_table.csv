@@ -1,0 +1,12 @@
+patientStatus,name
+0,""Unknown""
+1,""Discontinued On ARVs""
+2,""New on ARVs""
+3,""New in clinic""
+4,""At risk of discontinuation on ARVs""
+5,""At risk of discontinuation in clinic""
+6,""Active on ARVs""
+7,""Active in clinic""
+8,""Inactive On ARVs""
+9,""Discontinued in clinic""
+10,""Inactive in clinic""

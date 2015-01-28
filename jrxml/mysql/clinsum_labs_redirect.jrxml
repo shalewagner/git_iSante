@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_labs_redirect"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="540"
+		 pageHeight="78"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="reportDir" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="isPediatric" isForPrompting="true" class="java.lang.String"/>
+	<queryString><![CDATA[select (select count(*) from v_labs l , labLookup k where l . patientid = $P{pid} and l . labID = k . labID and l . labID not in (102 , 176) and ((l . encounterType = 6 and l . formVersion = 0 and k . version0 = 1) or (l . encounterType = 6 and l . formVersion = 1 and k . version1 = 1) or (l . encounterType = 19 and l . formVersion = 0 and k . version1 = 1)) and k . labGroup in ('Sérologie VIH' , 'Hematologie' , 'Chimie sanguine' , 'Bilan hépatique' , 'Lipides (à jeün)' , 'Hépatite virale' , 'Autres') and (isnumeric(l . resultDateDd) = 1 or upper(ltrim(rtrim(l . resultDateDd))) = 'XX') and (isnumeric(l . visitDateMm) = 1 or upper(ltrim(rtrim(l . resultDateMm))) = 'XX') and (isnumeric(l . visitDateYy) = 1 or upper(ltrim(rtrim(l . resultDateYy))) = 'XX') and isdate(ymdToDate(ifnull(nullif(upper(ltrim(rtrim(l . resultDateYy))) , 'XX') , '25') , ifnull(nullif(upper(ltrim(rtrim(l . resultDateMm))) , 'XX') , '06') , ifnull(nullif(upper(ltrim(rtrim(l . resultDateDd))) , 'XX') , '15'))) = 1) as data1 , (select count(*) from otherLabs l , encValid e where l . patientid = $P{pid} and l . labName is not NULL and ltrim(rtrim(l . labName)) != '' and e . siteCode = l . siteCode and e . patientID = l . patientID and e . visitDateDd = l . visitDateDd and e . visitDateMm = l . visitDateMm and e . visitDateYy = l . visitDateYy and e . seqNum = l . seqNum and (isnumeric(l . resultDateDd) = 1 or upper(ltrim(rtrim(l . resultDateDd))) = 'XX') and (isnumeric(l . visitDateMm) = 1 or upper(ltrim(rtrim(l . resultDateMm))) = 'XX') and (isnumeric(l . visitDateYy) = 1 or upper(ltrim(rtrim(l . resultDateYy))) = 'XX') and isdate(ymdToDate(ifnull(nullif(upper(ltrim(rtrim(l . resultDateYy))) , 'XX') , '25') , ifnull(nullif(upper(ltrim(rtrim(l . resultDateMm))) , 'XX') , '06') , ifnull(nullif(upper(ltrim(rtrim(l . resultDateDd))) , 'XX') , '15'))) = 1) as data2 , (select count(*) from v_labs l , labLookup k where l . patientid = $P{pid} and l . labID = k . labID and l . labID not in (102 , 176) and ((l . encounterType = 6 and l . formVersion = 0 and k . version0 = 1) or (l . encounterType = 6 and l . formVersion = 1 and k . version1 = 1) or (l . encounterType = 19 and l . formVersion = 0 and k . version1 = 1)) and k . labGroup = 'Interpréter' and (isnumeric(l . resultDateDd) = 1 or upper(ltrim(rtrim(l . resultDateDd))) = 'XX') and (isnumeric(l . visitDateMm) = 1 or upper(ltrim(rtrim(l . resultDateMm))) = 'XX') and (isnumeric(l . visitDateYy) = 1 or upper(ltrim(rtrim(l . resultDateYy))) = 'XX') and isdate(ymdToDate(ifnull(nullif(upper(ltrim(rtrim(l . resultDateYy))) , 'XX') , '25') , ifnull(nullif(upper(ltrim(rtrim(l . resultDateMm))) , 'XX') , '06') , ifnull(nullif(upper(ltrim(rtrim(l . resultDateDd))) , 'XX') , '15'))) = 1) as data3;]]></queryString>
+
+	<field name="data1" class="java.lang.Integer"/>
+	<field name="data2" class="java.lang.Integer"/>
+	<field name="data3" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="78"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="39"
+						width="540"
+						height="39"
+						key="textField-1"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( $F{data1}.intValue() >= 1 || $F{data2}.intValue() >= 1 || $F{data3}.intValue() >= 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier-Bold" size="10" isBold="true" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[("en".equals($P{lang}) ?
+  "To view/print the complete lab results for this patient, please visit the cover page " +
+  "and click on the 'Lab Results' tab."
+: "Pour afficher / imprimer les résultats de laboratoire complètes pour ce patient, s'il " +
+  "vous plaît visitez la page de couverture et cliquez sur l'onglet « Résultats de " +
+  "laboratoire »."
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="12"
+						width="540"
+						height="14"
+						key="textField-6"
+						positionType="Float">
+							<printWhenExpression><![CDATA[( $F{data1}.intValue() >= 1 || $F{data2}.intValue() >= 1 || $F{data3}.intValue() >= 1 ?
+  Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier-Bold" size="12" isBold="true" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals ($P{lang}) ? "Labs" : "Analyses de laboratoire" )]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

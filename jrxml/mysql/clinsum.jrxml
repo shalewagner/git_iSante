@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="612"
+		 pageHeight="792"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="36"
+		 rightMargin="36"
+		 topMargin="36"
+		 bottomMargin="36"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="queryTable" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="Title" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="reportDir" isForPrompting="true" class="java.lang.String"/>
+	<queryString><![CDATA[$P!{queryTable};]]></queryString>
+
+	<field name="lname" class="java.lang.String"/>
+	<field name="fname" class="java.lang.String"/>
+	<field name="clinicPatientID" class="java.lang.String"/>
+	<field name="siteName" class="java.lang.String"/>
+	<field name="siteCode" class="java.lang.String"/>
+	<field name="isPediatric" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="35"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="310"
+						y="13"
+						width="230"
+						height="13"
+						key="textField-2"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{lname} != null && $F{lname}.trim().length() > 0 &&
+  $F{fname} != null && $F{fname}.trim().length() > 0 ?
+  ( ($F{lname}.trim() + ", " + $F{fname}.trim()).length() > 38 ?
+    ( $F{lname}.trim().length() > 18 ?
+      $F{lname}.trim().substring(0, 18)
+    :
+      $F{lname}.trim()
+    )
+    + ", "
+    +
+    ( $F{fname}.trim().length() > 18 ?
+      $F{fname}.trim().substring(0, 18)
+    :
+      $F{fname}.trim()
+    ) 
+  :
+    $F{lname}.trim() + ", " + $F{fname}.trim()
+  )
+:
+  ( $F{lname} != null && $F{lname}.trim().length() > 0 ?
+    ( ($F{lname}.trim() + ", ").length() > 38 ?
+      $F{lname}.trim().substring(0, 36) + ","
+    :
+      $F{lname}.trim() + ","
+    )
+  :
+    ( (", " + $F{fname}.trim()).length() > 38 ?
+      ", " + $F{fname}.trim().substring(0, 36)
+    :
+      ", " + $F{fname}.trim()
+    )    
+  )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="110"
+						y="13"
+						width="120"
+						height="13"
+						key="textField-3"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{clinicPatientID} != null && $F{clinicPatientID}.trim().length() > 0 ?
+  ( $F{clinicPatientID}.trim().length() > 20 ?
+    $F{clinicPatientID}.trim().substring(0, 20)
+  :
+    $F{clinicPatientID}.trim()
+  )
+:
+  ""
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="13"
+						width="110"
+						height="13"
+						key="textField-4"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ?
+  ( Integer.toString(new GregorianCalendar().get(Calendar.MONTH) + 1).length() < 2 ?
+    "0" + Integer.toString(new GregorianCalendar().get(Calendar.MONTH) + 1)
+  :
+    Integer.toString(new GregorianCalendar().get(Calendar.MONTH) + 1)
+  ) + "/" +
+  ( Integer.toString(new GregorianCalendar().get(Calendar.DATE)).length() < 2 ?
+    "0" + Integer.toString(new GregorianCalendar().get(Calendar.DATE))
+  :
+    Integer.toString(new GregorianCalendar().get(Calendar.DATE))
+  ) + "/" +
+  Integer.toString(new GregorianCalendar().get(Calendar.YEAR)).substring(2) + " " +
+  ( Integer.toString(new GregorianCalendar().get(Calendar.HOUR_OF_DAY)).length() < 2 ?
+    "0" + Integer.toString(new GregorianCalendar().get(Calendar.HOUR_OF_DAY))
+  :
+    Integer.toString(new GregorianCalendar().get(Calendar.HOUR_OF_DAY))
+  ) + ":" +
+  ( Integer.toString(new GregorianCalendar().get(Calendar.MINUTE)).length() < 2 ?
+    "0" + Integer.toString(new GregorianCalendar().get(Calendar.MINUTE))
+  :
+    Integer.toString(new GregorianCalendar().get(Calendar.MINUTE))
+  ) + ":" +
+  ( Integer.toString(new GregorianCalendar().get(Calendar.SECOND)).length() < 2 ?
+    "0" + Integer.toString(new GregorianCalendar().get(Calendar.SECOND))
+  :
+    Integer.toString(new GregorianCalendar().get(Calendar.SECOND))
+  )
+:
+  ( Integer.toString(new GregorianCalendar().get(Calendar.DATE)).length() < 2 ?
+    "0" + Integer.toString(new GregorianCalendar().get(Calendar.DATE))
+  :
+    Integer.toString(new GregorianCalendar().get(Calendar.DATE))
+  ) + "/" +
+  ( Integer.toString(new GregorianCalendar().get(Calendar.MONTH) + 1).length() < 2 ?
+    "0" + Integer.toString(new GregorianCalendar().get(Calendar.MONTH) + 1)
+  :
+    Integer.toString(new GregorianCalendar().get(Calendar.MONTH) + 1)
+  ) + "/" +
+  Integer.toString(new GregorianCalendar().get(Calendar.YEAR)).substring(2) + " " +
+  ( Integer.toString(new GregorianCalendar().get(Calendar.HOUR_OF_DAY)).length() < 2 ?
+    "0" + Integer.toString(new GregorianCalendar().get(Calendar.HOUR_OF_DAY))
+  :
+    Integer.toString(new GregorianCalendar().get(Calendar.HOUR_OF_DAY))
+  ) + ":" +
+  ( Integer.toString(new GregorianCalendar().get(Calendar.MINUTE)).length() < 2 ?
+    "0" + Integer.toString(new GregorianCalendar().get(Calendar.MINUTE))
+  :
+    Integer.toString(new GregorianCalendar().get(Calendar.MINUTE))
+  ) + ":" +
+  ( Integer.toString(new GregorianCalendar().get(Calendar.SECOND)).length() < 2 ?
+    "0" + Integer.toString(new GregorianCalendar().get(Calendar.SECOND))
+  :
+    Integer.toString(new GregorianCalendar().get(Calendar.SECOND))
+  )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="225"
+						height="13"
+						key="textField-5"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{siteName} != null && $F{siteName}.trim().length() > 30 ?
+  $F{siteName}.trim().substring(0, 30) :
+  $F{siteName}.trim() ) + " (" + $F{siteCode}.trim() + ")"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="225"
+						y="0"
+						width="67"
+						height="13"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left">
+						<font fontName="Lucida Console" pdfFontName="Courier" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + ( "en".equals ($P{lang}) ? " of" : " sur" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="296"
+						y="0"
+						width="14"
+						height="13"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="310"
+						y="0"
+						width="230"
+						height="13"
+						key="textField-6"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right">
+						<font fontName="Lucida Console" pdfFontName="Courier" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals ($P{lang}) ? "Patient Summary for:" : "Sommaire du patient pour:" )]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="170"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="540"
+						height="17"
+						key="textField-7"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier-Bold" size="14" isBold="true" isPdfEmbedded ="false" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals ($P{lang}) ? "Patient Care Summary" : "Resumé du Dossier Médical" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="26"
+						width="540"
+						height="14"
+						key="textField-8"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier-Bold" size="12" isBold="true" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals ($P{lang}) ? "Demographics" : "Informations Démographiques" )]]></textFieldExpression>
+				</textField>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="40"
+						width="540"
+						height="13"
+						key="subreport-1"
+						positionType="Float"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_demog.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="53"
+						width="540"
+						height="13"
+						key="subreport-2"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="reportDir">
+						<subreportParameterExpression><![CDATA[$P{reportDir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_forms.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="144"
+						width="540"
+						height="13"
+						key="subreport-14"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$F{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="reportDir">
+						<subreportParameterExpression><![CDATA[$P{reportDir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_labs_redirect.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="157"
+						width="540"
+						height="13"
+						key="subreport-15"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$F{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_eof.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="131"
+						width="540"
+						height="13"
+						key="subreport-16"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$F{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="reportDir">
+						<subreportParameterExpression><![CDATA[$P{reportDir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_exam.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="118"
+						width="540"
+						height="13"
+						key="subreport-17"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$F{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="reportDir">
+						<subreportParameterExpression><![CDATA[$P{reportDir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_arvs_prev.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="105"
+						width="540"
+						height="13"
+						key="subreport-18"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$F{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="reportDir">
+						<subreportParameterExpression><![CDATA[$P{reportDir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_arvs.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="92"
+						width="540"
+						height="13"
+						key="subreport-19"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$F{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="reportDir">
+						<subreportParameterExpression><![CDATA[$P{reportDir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_aller.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="79"
+						width="540"
+						height="13"
+						key="subreport-20"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$F{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="reportDir">
+						<subreportParameterExpression><![CDATA[$P{reportDir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_hist.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="66"
+						width="540"
+						height="13"
+						key="subreport-21"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="isPediatric">
+						<subreportParameterExpression><![CDATA[$F{isPediatric}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="reportDir">
+						<subreportParameterExpression><![CDATA[$P{reportDir}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_probs.jasper")]]></subreportExpression>
+				</subreport>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="540"
+						height="13"
+						key="textField-17"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="8" isBold="false" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals ($P{lang}) ? "Patient Care Summary (version 1.1)" : "Resumé du Dossier Médical (version 1.1)" )]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

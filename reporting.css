@@ -1,0 +1,378 @@
+/*** CSS specific to new report UI. 
+ *   Currently used in reports-malaria. Based on Bootstrap framework.
+***/
+
+/*** Overrides to current iSante CSS ***/
+h1, h2, h3 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;  
+}
+h1.page-header {
+  font-size: 18px;
+  text-align: left;
+  margin: 0 0 4px 0;
+  padding: 0 0 4px 0;
+  border-bottom: 1px solid #194278;
+}
+h3 { 
+  font-size: 14px;
+}
+/*** End Overrides for iSante ***/
+
+/*** Overrides of Bootstrap CSS to customize for our UI.
+ *   TODO: Use less to generate Bootstrap CSS and include these there.
+***/
+.modal {
+  width: 800px;
+  margin-left: -400px;
+}
+.contentArea div.row-fluid {
+  min-width: 940px;
+  max-width: 1300px;
+}
+.modal-header h3 {
+  line-height: 18px;
+}
+/*** End Bootstrap overrides ***/
+
+/*** Styles for main report table ***/
+.report-table th {
+  background-color: #CADFF9;
+}
+.report-table th.result-header {
+  text-align: center;
+}
+.report-table th.result-header.header-small {
+  font-size: 11px;
+  white-space: nowrap;
+}
+.view-details span:hover i.icon-blue {
+  background-image: url('images/glyphicons-halflings-blue-hover.png');
+}
+.report-table td, .symptom-table td {
+  text-align: right;
+}
+.report-table .report-row-info, .report-table .report-row-info-short, .symptom-table tbody tr td:first-child {
+  text-align: left;
+  vertical-align: middle;
+}
+.report-table .report-row-info i {
+  margin-left: 5px;
+}
+.report-table tbody tr i, .report-table tbody tr img, .symptom-table tbody tr td i {
+  visibility: hidden;  
+}
+.report-table tbody tr:hover i, .report-table tbody tr:hover img, .symptom-table tbody tr td:hover i {
+  visibility: visible;
+}
+.report-table tr.report-row-open i.icon-chevron-up, .symptom-table tr.report-row-open i.icon-chevron-up {
+  visibility: visible;
+}
+.report-table .report-row-title {
+  line-height: 16px;
+}
+.report-table tbody tr:hover .view-details {
+  color: #08C;
+}
+/* Avoid changing color on popovers */
+.report-table tbody tr:hover .view-details .popover {
+  color: #444;
+}
+.report-table .report-totalrow {
+  color: #0AC;
+}
+.report-table tbody tr:hover .view-details i.icon-gray {
+  background-image: url('images/glyphicons-halflings-blue.png');
+}
+.report-table tbody tr:hover .view-details span:hover i.icon-gray {
+  background-image: url('images/glyphicons-halflings-blue-hover.png');
+}
+.table-bordered, .report-table tr.report-subrow td.report-row-info  {
+  border-left: 1px solid #ddd;
+}
+.report-row-open, table tbody tr.report-row-open:hover td {
+  background-color: #ddd;
+}
+.table-hover tbody tr:hover td.subrows-chart {
+  background-color: inherit;
+}
+.report-subrow {
+  display: none;
+}
+.view-details span:hover, span.view-details:hover {
+  color: #005580;
+}
+.view-details:hover, .graph-icon:hover, .report-icon:hover {
+  cursor: pointer;
+}
+.view-details:hover .popover {
+  cursor: auto;
+}
+.report-table tr td.subrows-chart {
+  vertical-align: middle;
+  text-align: center;
+  /*width: 50px; Avoid setting width b/c it causes other columns to change 
+    when opening and closing subrows */
+}
+tr td.subrows-chart i {
+  visibility: visible;
+  display: inline-block;
+  height: 18px;
+  width: 18px;
+  background-image: url('images/icon-stats-many.png');
+  line-height: 18px;
+  vertical-align: text-top;
+  opacity:0.8;
+  filter:alpha(opacity=80); /* For IE8 and earlier */
+}
+tr td.subrows-chart i:hover {
+  background-image: url('images/icon-stats-many-blue-hover.png');
+}
+.report-icon {
+  opacity:0.6;
+  filter:alpha(opacity=60); /* For IE8 and earlier */
+}
+.report-icon:hover {
+  background-image: url('images/glyphicons-halflings-blue-hover.png');
+}
+.chart-launch i {
+  display: inline-block;
+  height: 14px;
+  width: 15px;
+  margin-top: 1px;
+  background-image: url('images/icon-stats.png');
+  line-height: 14px;
+  vertical-align: text-top;
+  opacity:0.8;
+  filter:alpha(opacity=80); /* For IE8 and earlier */
+}
+.chart-launch i:hover {
+  background-image: url('images/icon-stats-blue-hover.png');
+}
+.launch-list {
+  margin-top: 2px;
+  margin-bottom: 3px;
+}
+/* chart-bar not currently in use */
+.chart-bar-launch i {
+  display: inline-block;
+  height: 14px;
+  width: 15px;
+  margin-top: 1px;
+  background-image: url('images/icon-stats-bar.png');
+  line-height: 14px;
+  vertical-align: text-top;
+  opacity:0.8;
+  filter:alpha(opacity=80); /* For IE8 and earlier */
+}
+.chart-bar-launch i:hover {
+  background-image: url('images/icon-stats-bar-blue-hover.png');
+}
+.report-table i.view-toggle {
+  visibility: visible;
+}
+/* Used for popovers within table */
+.detail-container .popover {
+  max-width: 500px;
+  width: auto;
+}
+
+.report-table td.cell-no-bl {
+  border-left: none;
+  /*mso-number-format:"\#\ ???\/???";/*force text when outputting to excel*/
+}
+
+.report-table .cell-detail {
+  border-left: none;
+  padding: 0 2px;
+}
+.report-table .cell-detail.bl {
+  border-left: 1px solid #ddd;
+}
+.report-table .small-detail {
+  font-size: 10px;
+  color: #999;
+  line-height: 14px;
+  /*border-top: 1px solid #eee;*/
+}
+.report-table .gender-detail td {
+  border-top: none;
+  border-left: none;
+  padding: 1px 2px;
+  font-size: 10px;
+  color: #bbb;
+  line-height: 16px;
+}
+.report-table .gender-detail td.gender {
+  border-left: 1px solid #dddddd;
+}
+.popover .count-gender {
+  margin: 0 0 1em 1em;
+}
+.popover .count-gender div {
+  display: table-cell;
+  padding-left: 2em;
+}
+.popover .count-gender div:first-child {
+  font-weight: bold;
+}
+/*** End styles for main report table ***/
+
+/*** Styles for filter area where display options are selected ***/
+.filter-title {
+  margin: 8px 0 4px 0;
+  font-size: 1.3em
+}
+.filter-box {
+  width: 100%;
+  padding: 4px 0;
+  font-size: 12px;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+  -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+  background-color: #FFF2DD;
+  margin: 0 0 1em 0;
+}
+.filter-box div.span {
+  width: auto;
+}
+.filter-box div.span:first-child {
+  margin-left: 1em;
+}
+/* Similar to Bootstrap select style */
+.filter-box select {
+  height: 26px;
+  line-height: 26px;
+  display: inline-block;
+  padding: 4px 6px;
+  font-size: 11.9px;
+  color: #555555;
+  border: 1px solid #cccccc;
+  vertical-align: middle;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+.filter-button {
+  display: block;
+  margin: 4px auto 4px;
+}
+.filter-header {
+  font-weight: bold;
+}
+.filter-result {
+  font-weight: bold;
+  vertical-align: bottom;
+  line-height: 30px
+}
+/*** End styles for filter area ***/
+
+/*** Animated loader gif for use with jquery when loading datasets ***/
+.loading-box {
+  height: 200px;
+  width: 100%;
+  background: rgba( 255, 255, 255, 1 ) 
+              url('images/ajax-loader-large.gif') 
+              50% 50% 
+              no-repeat;
+}
+
+/*** Styles for datatables and Bootstrap - move to different file? ***/
+.dataTable td em {
+  font-style: italic
+}
+
+div.dataTables_length label {
+	float: left;
+	text-align: left;
+}
+
+div.dataTables_length select {
+	width: 75px;
+}
+
+div.dataTables_filter label {
+	float: right;
+}
+
+div.dataTables_info {
+	padding-top: 8px;
+}
+
+div.dataTables_paginate {
+	float: right;
+	margin: 0;
+}
+
+table.table {
+	clear: both;
+	margin-bottom: 6px !important;
+	max-width: none !important;
+}
+
+table.table thead .sorting,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+	cursor: pointer;
+	*cursor: hand;
+}
+
+table.table thead .sorting { background: url('images/sort_both.png') no-repeat center right; }
+table.table thead .sorting_asc { background: url('images/sort_asc.png') no-repeat center right; }
+table.table thead .sorting_desc { background: url('images/sort_desc.png') no-repeat center right; }
+
+table.table thead .sorting_asc_disabled { background: url('images/sort_asc_disabled.png') no-repeat center right; }
+table.table thead .sorting_desc_disabled { background: url('images/sort_desc_disabled.png') no-repeat center right; }
+
+table.dataTable th:active {
+	outline: none;
+}
+
+/* Scrolling */
+div.dataTables_scrollHead table {
+	margin-bottom: 0 !important;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+div.dataTables_scrollHead table thead tr:last-child th:first-child,
+div.dataTables_scrollHead table thead tr:last-child td:first-child {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+div.dataTables_scrollBody table {
+	border-top: none;
+	margin-bottom: 0 !important;
+}
+
+div.dataTables_scrollBody tbody tr:first-child th,
+div.dataTables_scrollBody tbody tr:first-child td {
+	border-top: none;
+}
+
+div.dataTables_scrollFoot table {
+	border-top: none;
+}
+/*** End styles for datatables and Bootstrap - move to different file? ***/
+
+
+/*** Experimenting with print.css overrides for better displaying printed reports ***/
+
+@media print {
+  .contentArea {
+    padding: 0;
+  }
+  table.report-table, table.report-table div, .filter-result {
+    font-size: 7pt;
+  }
+  .report-table a i {
+    display: none;
+  }
+}

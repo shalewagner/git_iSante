@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_hist_ref_line"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="540"
+		 pageHeight="13"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="isPediatric" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select 'referHosp' as Ref , (referHosp) as Value from v_vitals v where referHosp = 1 and v . patientID = $P{pid} and v . encounterType in (1) union all select 'referVctCenter' as Ref , (referVctCenter) as Value from v_vitals v where referVctCenter = 1 and v . patientID = $P{pid} and v . encounterType in (1) union all select 'referPmtctProg' as Ref , (referPmtctProg) as Value from v_vitals v where referPmtctProg = 1 and v . patientID = $P{pid} and v . encounterType in (1) union all select 'referOutpatStd' as Ref , (referOutpatStd) as Value from v_vitals v where referOutpatStd = 1 and v . patientID = $P{pid} and v . encounterType in (1) union all select 'referCommunityBasedProg' as Ref , (referCommunityBasedProg) as Value from v_vitals v where referCommunityBasedProg = 1 and v . patientID = $P{pid} and v . encounterType in (1) union all select 'transferIn' as Ref , (transferIn) as Value from v_vitals v where transferIn = 1 and v . patientID = $P{pid} and v . encounterType in (1); 
+</queryString>
+
+	<field name="Ref" class="java.lang.String"/>
+	<field name="Value" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="540"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-11"
+						positionType="Float"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "referHosp".equals($F{Ref}) ? ( "en".equals($P{lang}) ? "Hospital (patient hospitalized earlier)" : "Hôpital (patient a été hospitalisé antérieurement)" ) :
+( "referVctCenter".equals($F{Ref}) ? ( "en".equals($P{lang}) ? "Integrated VCT center" : "Centres CDV intégrés" ) :
+( "referPmtctProg".equals($F{Ref}) ? ( "en".equals($P{lang}) ? "PMTCT Program" : "Programme PTME" ) :
+( "referOutpatStd".equals($F{Ref}) ? ( "en".equals($P{lang}) ? "Outpatient Clinic" : "Clinique Externe" ) :
+( "referCommunityBasedProg".equals($F{Ref}) ? ( "en".equals($P{lang}) ? "Community-based programs" : "Programmes communautaires" ) :
+( "transferIn".equals($F{Ref}) ? ( "en".equals($P{lang}) ? "Transfer in from other health institution" : "Transfert d'un autre établissement de santé" ) :
+"" ) ) ) ) ) )]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

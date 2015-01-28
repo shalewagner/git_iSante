@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_labs_prevscr"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="540"
+		 pageHeight="13"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="isPediatric" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="labGroup" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select l . result , l . result2 , l . result3 , l . result4 , l . units , l . resultDateDd , l . resultDateMm , l . resultDateYy , l . resultAbnormal , l . resultRemarks , k . testNameEn , k . testNameFr , l . encounterType , case when (l . encounterType = 19 and isnumeric(k . pedResultType) = 1) then k . pedResultType else k . resultType end as resultType , case when (l . encounterType = 19 and k . pedResultLabelEn1 is not NULL) then k . pedResultLabelEn1 else k . resultLabelEn1 end as resultLabelEn1 , case when (l . encounterType = 19 and k . pedResultLabelFr1 is not NULL) then k . pedResultLabelFr1 else k . resultLabelFr1 end as resultLabelFr1 , case when (l . encounterType = 19 and k . pedResultLabelEn2 is not NULL) then k . pedResultLabelEn2 else k . resultLabelEn2 end as resultLabelEn2 , case when (l . encounterType = 19 and k . pedResultLabelFr2 is not NULL) then k . pedResultLabelFr2 else k . resultLabelFr2 end as resultLabelFr2 , case when (l . encounterType = 19 and k . pedResultLabelEn3 is not NULL) then k . pedResultLabelEn3 else k . resultLabelEn3 end as resultLabelEn3 , case when (l . encounterType = 19 and k . pedResultLabelFr3 is not NULL) then k . pedResultLabelFr3 else k . resultLabelFr3 end as resultLabelFr3 , case when (l . encounterType = 19 and k . pedResultLabelEn4 is not NULL) then k . pedResultLabelEn4 else k . resultLabelEn4 end as resultLabelEn4 , case when (l . encounterType = 19 and k . pedResultLabelFr4 is not NULL) then k . pedResultLabelFr4 else k . resultLabelFr4 end as resultLabelFr4 , case when (l . encounterType = 19 and k . pedResultLabelEn5 is not NULL) then k . pedResultLabelEn5 else k . resultLabelEn5 end as resultLabelEn5 , case when (l . encounterType = 19 and k . pedResultLabelFr5 is not NULL) then k . pedResultLabelFr5 else k . resultLabelFr5 end as resultLabelFr5 , case when (l . encounterType = 19 and k . pedResultLabelEn6 is not NULL) then k . pedResultLabelEn6 else k . resultLabelEn6 end as resultLabelEn6 , case when (l . encounterType = 19 and k . pedResultLabelFr6 is not NULL) then k . pedResultLabelFr6 else k . resultLabelFr6 end as resultLabelFr6 , case when l . encounterType = 19 then k . pedResultLabelEn7 else NULL end as resultLabelEn7 , case when l . encounterType = 19 then k . pedResultLabelFr7 else NULL end as resultLabelFr7 from v_labs l , labLookup k where l . patientid = $P{pid} and l . labID = k . labID and l . labID not in (102 , 176) and ((l . encounterType = 6 and l . formVersion = 0 and k . version0 = 1) or (l . encounterType = 6 and l . formVersion = 1 and k . version1 = 1) or (l . encounterType = 19 and l . formVersion = 0 and k . version1 = 1)) and k . labGroup = $P{labGroup} and (isnumeric(l . resultDateDd) = 1 or upper(ltrim(rtrim(l . resultDateDd))) = 'XX') and (isnumeric(l . visitDateMm) = 1 or upper(ltrim(rtrim(l . resultDateMm))) = 'XX') and (isnumeric(l . visitDateYy) = 1 or upper(ltrim(rtrim(l . resultDateYy))) = 'XX') and isdate(ymdToDate(ifnull(nullif(upper(ltrim(rtrim(l . resultDateYy))) , 'XX') , '25') , ifnull(nullif(upper(ltrim(rtrim(l . resultDateMm))) , 'XX') , '06') , ifnull(nullif(upper(ltrim(rtrim(l . resultDateDd))) , 'XX') , '15'))) = 1 order by k . labName asc , ymdToDate(ifnull(nullif(upper(ltrim(rtrim(l . resultDateYy))) , 'XX') , '25') , ifnull(nullif(upper(ltrim(rtrim(l . resultDateMm))) , 'XX') , '06') , ifnull(nullif(upper(ltrim(rtrim(l . resultDateDd))) , 'XX') , '15')) desc; 
+</queryString>
+
+	<field name="result" class="java.lang.String"/>
+	<field name="result2" class="java.lang.String"/>
+	<field name="result3" class="java.lang.String"/>
+	<field name="result4" class="java.lang.String"/>
+	<field name="units" class="java.lang.String"/>
+	<field name="resultDateDd" class="java.lang.String"/>
+	<field name="resultDateMm" class="java.lang.String"/>
+	<field name="resultDateYy" class="java.lang.String"/>
+	<field name="resultAbnormal" class="java.lang.Integer"/>
+	<field name="resultRemarks" class="java.lang.String"/>
+	<field name="testNameEn" class="java.lang.String"/>
+	<field name="testNameFr" class="java.lang.String"/>
+	<field name="resultType" class="java.lang.Integer"/>
+	<field name="resultLabelEn1" class="java.lang.String"/>
+	<field name="resultLabelFr1" class="java.lang.String"/>
+	<field name="resultLabelEn2" class="java.lang.String"/>
+	<field name="resultLabelFr2" class="java.lang.String"/>
+	<field name="resultLabelEn3" class="java.lang.String"/>
+	<field name="resultLabelFr3" class="java.lang.String"/>
+	<field name="resultLabelEn4" class="java.lang.String"/>
+	<field name="resultLabelFr4" class="java.lang.String"/>
+	<field name="resultLabelEn5" class="java.lang.String"/>
+	<field name="resultLabelFr5" class="java.lang.String"/>
+	<field name="resultLabelEn6" class="java.lang.String"/>
+	<field name="resultLabelFr6" class="java.lang.String"/>
+	<field name="resultLabelEn7" class="java.lang.String"/>
+	<field name="resultLabelFr7" class="java.lang.String"/>
+	<field name="encounterType" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="213"
+						height="13"
+						key="textField-1"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ?
+  ( $F{testNameEn}.length() > 40 ? $F{testNameEn}.substring(0, 40) : $F{testNameEn} ) :
+  ( $F{testNameFr}.replaceAll("&#xe9;", "é").replaceAll("&#xe0;", "à").replaceAll("&#xfb;", "û").replaceAll("&eacute;", "é").replaceAll("&#xc9;", "É").replaceAll("&#xe8;", "è").length() > 40 ? $F{testNameFr}.replaceAll("&#xe9;", "é").replaceAll("&#xe0;", "à").replaceAll("&#xfb;", "û").replaceAll("&eacute;", "é").replaceAll("&#xc9;", "É").replaceAll("&#xe8;", "è").substring(0, 40) : $F{testNameFr}.replaceAll("&#xe9;", "é").replaceAll("&#xe0;", "à").replaceAll("&#xfb;", "û").replaceAll("&eacute;", "é").replaceAll("&#xc9;", "É").replaceAll("&#xe8;", "è") )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="219"
+						y="0"
+						width="49"
+						height="13"
+						key="textField-2"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ?
+ ( $F{resultDateDd} != null && $F{resultDateDd}.trim().length() > 0 &&
+   $F{resultDateMm} != null && $F{resultDateMm}.trim().length() > 0 &&
+   $F{resultDateYy} != null && $F{resultDateYy}.trim().length() > 0 ?
+   ( $F{resultDateMm} != null && $F{resultDateMm}.trim().length() > 0 ?
+     ( $F{resultDateMm}.trim().length() == 1 ? "0" + $F{resultDateMm}.trim() : $F{resultDateMm}.trim() )
+     : "XX" ) + "/" +
+   ( $F{resultDateDd} != null && $F{resultDateDd}.trim().length() > 0 ?
+     ( $F{resultDateDd}.trim().length() == 1 ? "0" + $F{resultDateDd}.trim() : $F{resultDateDd}.trim() )
+     : "XX" ) + "/" +
+   ( $F{resultDateYy} != null && $F{resultDateYy}.trim().length() > 0 ?
+     ( $F{resultDateYy}.trim().length() == 1 ? "0" + $F{resultDateYy}.trim() : $F{resultDateYy}.trim() )
+     : "XX" )
+   : "" )
+ :
+ ( $F{resultDateDd} != null && $F{resultDateDd}.trim().length() > 0 &&
+   $F{resultDateMm} != null && $F{resultDateMm}.trim().length() > 0 &&
+   $F{resultDateYy} != null && $F{resultDateYy}.trim().length() > 0 ?
+   ( $F{resultDateDd} != null && $F{resultDateDd}.trim().length() > 0 ?
+     ( $F{resultDateDd}.trim().length() == 1 ? "0" + $F{resultDateDd}.trim() : $F{resultDateDd}.trim() )
+     : "XX" ) + "/" +
+   ( $F{resultDateMm} != null && $F{resultDateMm}.trim().length() > 0 ?
+     ( $F{resultDateMm}.trim().length() == 1 ? "0" + $F{resultDateMm}.trim() : $F{resultDateMm}.trim() )
+     : "XX" ) + "/" +
+   ( $F{resultDateYy} != null && $F{resultDateYy}.trim().length() > 0 ?
+     ( $F{resultDateYy}.trim().length() == 1 ? "0" + $F{resultDateYy}.trim() : $F{resultDateYy}.trim() )
+     : "XX" )
+   : "" )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="277"
+						y="0"
+						width="205"
+						height="13"
+						key="textField-3"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{encounterType}.intValue() == 19 ?
+  ( $F{resultType}.intValue() == 1 ?
+    ( $F{testNameEn}.matches("Cytomegalovirus .*") || $F{testNameFr}.matches("Cytom&#xe9;galovirus .*") ||
+	  $F{testNameEn}.matches("Measles") || $F{testNameFr}.matches("Rub&#xe9;ole") ?
+	  ( $F{result} == null || "0".equals($F{result}) || Integer.parseInt($F{result}) > 15 ?
+	    ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." ) :
+	    ( "1".equals($F{result}) || "3".equals($F{result}) || "5".equals($F{result}) || "7".equals($F{result}) ?
+	      ( "en".equals($P{lang}) ?
+            ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll(" \\(", "") ) :
+		    ( "".equals($F{resultLabelFr1}) || $F{resultLabelFr1} == null ? "" : $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é").replaceAll(" \\(", "") )
+	      ) : ""
+		) +
+	    ( "2".equals($F{result}) || "3".equals($F{result}) || "6".equals($F{result}) || "7".equals($F{result}) ?
+		  ( "en".equals($P{lang}) ?
+            ( "".equals($F{resultLabelEn2}) || $F{resultLabelEn2} == null ? "" : "    " + $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		    ( "".equals($F{resultLabelFr2}) || $F{resultLabelFr2} == null ? "" : "    " + $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	      ) : ""
+		) +
+	    ( "4".equals($F{result}) || "5".equals($F{result}) || "6".equals($F{result}) || "7".equals($F{result}) ?
+		  ( "en".equals($P{lang}) ?
+            ( "".equals($F{resultLabelEn3}) || $F{resultLabelEn3} == null ? "" : "    " + $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("\\)", "") ) :
+		    ( "".equals($F{resultLabelFr3}) || $F{resultLabelFr3} == null ? "" : "    " + $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é").replaceAll("\\)", "") )
+	      ) : ""
+		) + 
+	    ( Integer.parseInt($F{result}) > 7 ?
+		  ( "en".equals($P{lang}) ?
+            ( "".equals($F{resultLabelEn4}) || $F{resultLabelEn4} == null ? "" : "    " + $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		    ( "".equals($F{resultLabelFr4}) || $F{resultLabelFr4} == null ? "" : "    " + $F{resultLabelFr4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	      ) : ""
+		)
+      ) :
+      ( $F{testNameEn}.matches("Hepatitis [ABC], .*") || $F{testNameFr}.matches("H&eacute;patite [ABC], .*") ?
+	    ( $F{result} == null || "0".equals($F{result}) || Integer.parseInt($F{result}) > 7 ?
+	      ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." ) :
+	      ( "1".equals($F{result}) || "3".equals($F{result}) || "5".equals($F{result}) || "7".equals($F{result}) ?
+	        ( "en".equals($P{lang}) ?
+              ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		      ( "".equals($F{resultLabelFr1}) || $F{resultLabelFr1} == null ? "" : $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	        ) : ""
+		  ) +
+	      ( "2".equals($F{result}) || "3".equals($F{result}) || "6".equals($F{result}) || "7".equals($F{result}) ?
+		    ( "en".equals($P{lang}) ?
+              ( "".equals($F{resultLabelEn2}) || $F{resultLabelEn2} == null ? "" : "    " + $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		      ( "".equals($F{resultLabelFr2}) || $F{resultLabelFr2} == null ? "" : "    " + $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	        ) : ""
+		  ) +
+	      ( "4".equals($F{result}) || "5".equals($F{result}) || "6".equals($F{result}) || "7".equals($F{result}) ?
+		    ( "en".equals($P{lang}) ?
+              ( "".equals($F{resultLabelEn3}) || $F{resultLabelEn3} == null ? "" : "    " + $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		      ( "".equals($F{resultLabelFr3}) || $F{resultLabelFr3} == null ? "" : "    " + $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	        ) : ""
+		  )
+        ) :
+        ( "1".equals($F{result}) ?
+	      ( "en".equals($P{lang}) ?
+            ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+ 		    ( "".equals($F{resultLabelFr1}) || $F{resultLabelFr1} == null ? "" : $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	      ) :
+          ( "2".equals($F{result}) ?
+	        ( "en".equals($P{lang}) ?
+              ( "".equals($F{resultLabelEn2}) || $F{resultLabelEn2} == null ? "" : $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		      ( "".equals($F{resultLabelFr2}) || $F{resultLabelFr2} == null ? "" : $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	        ) :
+            ( "4".equals($F{result}) ?
+	          ( "en".equals($P{lang}) ?
+                ( "".equals($F{resultLabelEn3}) || $F{resultLabelEn3} == null ? "" : $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		        ( "".equals($F{resultLabelFr3}) || $F{resultLabelFr3} == null ? "" : $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	          ) :
+              ( "8".equals($F{result}) ?
+	            ( "en".equals($P{lang}) ?
+                  ( "".equals($F{resultLabelEn4}) || $F{resultLabelEn4} == null ? "" : $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		          ( "".equals($F{resultLabelFr4}) || $F{resultLabelFr4} == null ? "" : $F{resultLabelFr4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	            ) :
+                ( "16".equals($F{result}) ?
+	              ( "en".equals($P{lang}) ?
+                    ( "".equals($F{resultLabelEn5}) || $F{resultLabelEn5} == null ? "" : $F{resultLabelEn5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		            ( "".equals($F{resultLabelFr5}) || $F{resultLabelFr5} == null ? "" : $F{resultLabelFr5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	              ) :
+                  ( "32".equals($F{result}) ?
+	                ( "en".equals($P{lang}) ?
+                      ( "".equals($F{resultLabelEn6}) || $F{resultLabelEn6} == null ? "" : $F{resultLabelEn6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		              ( "".equals($F{resultLabelFr6}) || $F{resultLabelFr6} == null ? "" : $F{resultLabelFr6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                ) :
+				    ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." )
+				  )
+				)
+              )
+            )
+          )
+        )
+	  )
+    ) :
+    ( $F{resultType}.intValue() == 2 ?
+      ( "".equals($F{result}) || $F{result} == null ?
+	    ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." ) :
+		$F{result} + " " +
+	    ( "en".equals($P{lang}) ?
+          ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		  ( "".equals($F{resultLabelFr1}) || $F{resultLabelFr1} == null ? "" : $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	    )
+      ) :
+      ( $F{resultType}.intValue() == 3 ?
+        ( ( ( "".equals($F{result}) || $F{result} == null ) &&
+          ( "".equals($F{result2}) || $F{result2} == null ) &&
+          ( "".equals($F{result3}) || $F{result3} == null ) &&
+          ( "".equals($F{result4}) || $F{result4} == null ) ) ?
+            ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." ) :
+            (
+  		      ( "en".equals($P{lang}) ?
+			    ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ?
+				  "" :
+				  ( "".equals($F{result}) || $F{result} == null ? "__" : $F{result} ) + " " + $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ")
+				) :
+			    ( "".equals($F{resultLabelFr1}) || $F{resultLabelFr1} == null ?
+				  "" :
+				  ( "".equals($F{result}) || $F{result} == null ? "__" : $F{result} ) + " " + $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é")
+                )
+              ) + " " +
+			  ( "en".equals($P{lang}) ?
+			    ( "".equals($F{resultLabelEn2}) || $F{resultLabelEn2} == null ?
+				  "" :
+				  ( "".equals($F{result2}) || $F{result2} == null ? "__" : $F{result2} ) + " " + $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ")
+				) :
+			    ( "".equals($F{resultLabelFr2}) || $F{resultLabelFr2} == null ?
+				  "" :
+				  ( "".equals($F{result2}) || $F{result2} == null ? "__" : $F{result2} ) + " " + $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é")
+                )	  
+              ) + " " +
+			  ( "en".equals($P{lang}) ?
+			    ( "".equals($F{resultLabelEn3}) || $F{resultLabelEn3} == null ?
+				  "" :
+				  ( "".equals($F{result3}) || $F{result3} == null ? "__" : $F{result3} ) + " " + $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ")
+				) :
+			    ( "".equals($F{resultLabelFr3}) || $F{resultLabelFr3} == null ?
+				  "" :
+				  ( "".equals($F{result3}) || $F{result3} == null ? "__" : $F{result3} ) + " " + $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é")
+                ) 
+              ) + " " +
+			  ( "en".equals($P{lang}) ?
+			    ( "".equals($F{resultLabelEn4}) || $F{resultLabelEn4} == null ?
+				  "" :
+				  ( "".equals($F{result4}) || $F{result4} == null ? "__" : $F{result4} ) + " " + $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ")
+				) :
+			    ( "".equals($F{resultLabelFr4}) || $F{resultLabelFr4} == null ?
+				  "" :
+				  ( "".equals($F{result4}) || $F{result4} == null ? "__" : $F{result4} ) + " " + $F{resultLabelFr4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é")
+                )
+              )				
+            )
+        ) :
+        ( $F{resultType}.intValue() == 4 ?
+          ( "1".equals($F{result}) ?
+		    ( "en".equals($P{lang}) ?
+              ( $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") + " " + ( "".equals($F{result2}) || $F{result2} == null ? "N/A" : $F{result2} ) + " " + $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			  ( $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") + " " + ( "".equals($F{result2}) || $F{result2} == null ? "N/A" : $F{result2} ) + " " + $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			) :
+            ( "2".equals($F{result}) ?
+              ( "en".equals($P{lang}) ?
+                ( $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			    ( $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			  ) : ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." )
+            )
+          ) :
+          ( $F{resultType}.intValue() == 5 ?
+            ( "".equals($F{result}) || $F{result} == null ?
+			  ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." ) :
+			  ( $F{result} + " " +
+                ( "1".equals($F{result2}) ?
+			      ( "en".equals($P{lang}) ?
+                    ( $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			        ( $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			      ) :
+                  ( "2".equals($F{result2}) ?
+                    ( "en".equals($P{lang}) ?
+                      ( $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			          ( $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			        ) :
+                    ( "4".equals($F{result2}) ?
+                      ( "en".equals($P{lang}) ?
+                        ( $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			            ( $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			          ) :
+                      ( "8".equals($F{result2}) ?
+                        ( "en".equals($P{lang}) ?
+                          ( $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			              ( $F{resultLabelFr4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			            ) :
+                        ( "16".equals($F{result2}) ?
+                          ( "en".equals($P{lang}) ?
+                            ( $F{resultLabelEn5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			                ( $F{resultLabelFr5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			              ) :
+                          ( "32".equals($F{result2}) ?
+                            ( "en".equals($P{lang}) ?
+                              ( $F{resultLabelEn6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			                  ( $F{resultLabelFr6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			                ) :
+						    ( "en".equals($P{lang}) ? "(no units)" : "(aucun unité)" )
+						  )
+                        )
+                      )
+                    )
+                  )
+                )
+		      )
+            ) :
+            ( $F{resultType}.intValue() == 6 ?
+              ( "1".equals($F{result}) ?
+		        ( "en".equals($P{lang}) ?
+                  ( $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") + " " +
+				  ( "1".equals($F{result2}) ?
+				    $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") :
+					( "2".equals($F{result2}) ?
+					  $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") :
+					  "(no units)"
+					)
+			      )
+				  + " " + ( "".equals($F{result3}) || $F{result3} == null ? "" : $F{result3} ) ) :
+			      ( $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") + " " +
+			      ( "1".equals($F{result2}) ?
+				    $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") :
+					( "2".equals($F{result2}) ?
+					  $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") :
+					  "(aucun unité)"
+					)
+				  )
+				  + " " + ( "".equals($F{result3}) || $F{result3} == null ? "" : $F{result3} ) )
+			    ) :
+                ( "2".equals($F{result}) ?
+                  ( "en".equals($P{lang}) ?
+                    ( $F{resultLabelEn5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			        ( $F{resultLabelFr5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			      ) : ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." )
+                )
+              ) :
+			  ( $F{resultType}.intValue() == 7 ?
+                ( "1".equals($F{result}) ?
+	              ( "en".equals($P{lang}) ?
+                    ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		            ( "".equals($F{resultLabelFr1}) || $F{resultLabelFr1} == null ? "" : $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	              ) :
+                  ( "2".equals($F{result}) ?
+	                ( "en".equals($P{lang}) ?
+                      ( "".equals($F{resultLabelEn2}) || $F{resultLabelEn2} == null ? "" : $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		              ( "".equals($F{resultLabelFr2}) || $F{resultLabelFr2} == null ? "" : $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                ) :
+                    ( "4".equals($F{result}) ?
+	                  ( "en".equals($P{lang}) ?
+                        ( "".equals($F{resultLabelEn3}) || $F{resultLabelEn3} == null ? "" : $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		                ( "".equals($F{resultLabelFr3}) || $F{resultLabelFr3} == null ? "" : $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                  ) :
+                      ( "8".equals($F{result}) ?
+	                    ( "en".equals($P{lang}) ?
+                          ( "".equals($F{resultLabelEn4}) || $F{resultLabelEn4} == null ? "" : $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		                  ( "".equals($F{resultLabelFr4}) || $F{resultLabelFr4} == null ? "" : $F{resultLabelFr4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                    ) :
+                        ( "16".equals($F{result}) ?
+	                      ( "en".equals($P{lang}) ?
+                            ( "".equals($F{resultLabelEn5}) || $F{resultLabelEn5} == null ? "" : $F{resultLabelEn5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("<br>", "") ) :
+		                    ( "".equals($F{resultLabelFr5}) || $F{resultLabelFr5} == null ? "" : $F{resultLabelFr5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é").replaceAll("<br>", "") )
+	                      ) :
+                          ( "32".equals($F{result}) ?
+	                        ( "en".equals($P{lang}) ?
+                              ( "".equals($F{resultLabelEn6}) || $F{resultLabelEn6} == null ? "" : $F{resultLabelEn6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		                      ( "".equals($F{resultLabelFr6}) || $F{resultLabelFr6} == null ? "" : $F{resultLabelFr6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                        ) +
+							( "".equals($F{result2}) || $F{result2} == null ? "" : ": " + $F{result2} ) :
+				            ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." )
+                          )
+                        )
+                      )
+                    )
+                  )
+                ) :
+				( $F{resultType}.intValue() == 8 ?
+	              ( $F{result} == null || "0".equals($F{result}) || Integer.parseInt($F{result}) > 63 ?
+	                ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." ) :
+	                (
+		              ( "1".equals($F{result}) || "17".equals($F{result}) || "33".equals($F{result}) ?
+	                    ( "en".equals($P{lang}) ?
+                          ( "".equals($F{resultLabelEn2}) || $F{resultLabelEn2} == null ? "" : $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		                  ( "".equals($F{resultLabelFr2}) || $F{resultLabelFr2} == null ? "" : $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                    ) : 
+		                ( "2".equals($F{result}) || "18".equals($F{result}) || "34".equals($F{result}) ?
+		                  ( "en".equals($P{lang}) ?
+                            ( "".equals($F{resultLabelEn3}) || $F{resultLabelEn3} == null ? "" : $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		                    ( "".equals($F{resultLabelFr3}) || $F{resultLabelFr3} == null ? "" : $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                      ) :
+	                      ( "4".equals($F{result}) || "20".equals($F{result}) || "36".equals($F{result}) ?
+		                    ( "en".equals($P{lang}) ?
+                              ( "".equals($F{resultLabelEn4}) || $F{resultLabelEn4} == null ? "" : $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("<br>", "") ) :
+		                      ( "".equals($F{resultLabelFr4}) || $F{resultLabelFr4} == null ? "" : $F{resultLabelFr4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é").replaceAll("<br>", "") )
+	                        ) :
+			                ( "8".equals($F{result}) || "24".equals($F{result}) || "40".equals($F{result}) ?
+		                      ( "en".equals($P{lang}) ?
+                                ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		                        ( "".equals($F{resultLabelFr1}) || $F{resultLabelFr1} == null ? "" : $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                          ) : ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." )
+				            )
+			              )
+		                )
+			          ) + " " +
+			          ( "en".equals($P{lang}) ?
+                        ( "".equals($F{resultLabelEn5}) || $F{resultLabelEn5} == null ? "" : $F{resultLabelEn5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		                ( "".equals($F{resultLabelFr5}) || $F{resultLabelFr5} == null ? "" : $F{resultLabelFr5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                  ) + " " +
+		              ( Integer.parseInt($F{result}) >= 16 && Integer.parseInt($F{result}) < 32 ?
+	                    ( "en".equals($P{lang}) ?
+                          ( "".equals($F{resultLabelEn6}) || $F{resultLabelEn6} == null ? "" : $F{resultLabelEn6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		                  ( "".equals($F{resultLabelFr6}) || $F{resultLabelFr6} == null ? "" : $F{resultLabelFr6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                    ) : 
+		                ( Integer.parseInt($F{result}) >= 32 && Integer.parseInt($F{result}) < 64 ?
+		                  ( "en".equals($P{lang}) ?
+                            ( "".equals($F{resultLabelEn7}) || $F{resultLabelEn7} == null ? "" :  $F{resultLabelEn7}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		                    ( "".equals($F{resultLabelFr7}) || $F{resultLabelFr7} == null ? "" : $F{resultLabelFr7}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                      ) : ( "en".equals($P{lang}) ? "No rhesus." : "Aucun rhésus." )
+		                )
+			          )
+		            )
+                  ) :
+				  ( $F{resultType}.intValue() == 9 ?
+                    ( ("".equals($F{result}) || $F{result} == null) && ("".equals($F{result2}) || $F{result2} == null) ?
+			          ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." ) :
+			          ( ( "2".equals($F{result3}) ? $F{result2} : $F{result} ) + " " +
+                        ( "1".equals($F{result3}) ?
+			              ( "en".equals($P{lang}) ?
+                            ( $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			                ( $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			              ) :
+                          ( "2".equals($F{result3}) ?
+                            ( "en".equals($P{lang}) ?
+                              ( $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			                  ( $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			                ) :
+                            ( "4".equals($F{result3}) ?
+                              ( "en".equals($P{lang}) ?
+                                ( $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			                    ( $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			                  ) :
+                              ( "8".equals($F{result3}) ?
+                                ( "en".equals($P{lang}) ?
+                                  ( $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			                      ( $F{resultLabelFr4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			                    ) :
+                                ( "16".equals($F{result3}) ?
+                                  ( "en".equals($P{lang}) ?
+                                    ( $F{resultLabelEn5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			                        ( $F{resultLabelFr5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			                      ) :
+                                  ( "32".equals($F{result3}) ?
+                                    ( "en".equals($P{lang}) ?
+                                      ( $F{resultLabelEn6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			                          ( $F{resultLabelFr6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			                        ) :
+						            ( "en".equals($P{lang}) ? "(no units)" : "(aucun unité)" )
+						          )
+                                )
+                              )
+                            )
+                          )
+                        )
+		              )
+                    ) : ( "en".equals($P{lang}) ? "Bad result type." : "Erreur avec le type du résultat." )
+				  )
+				)
+			  )
+			)
+          )
+        )    
+      )
+    )
+  ) :
+  ( $F{resultType}.intValue() == 1 ?
+    ( $F{testNameEn}.matches("Hepatitis [ABC], .*") || $F{testNameFr}.matches("H&eacute;patite [ABC], .*") ?
+	  ( $F{result} == null || "0".equals($F{result}) || Integer.parseInt($F{result}) > 7 ?
+	    ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." ) :
+	    ( "1".equals($F{result}) || "3".equals($F{result}) || "5".equals($F{result}) || "7".equals($F{result}) ?
+	      ( "en".equals($P{lang}) ?
+            ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		    ( "".equals($F{resultLabelFr1}) || $F{resultLabelFr1} == null ? "" : $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	      ) : ""
+		) +
+	    ( "2".equals($F{result}) || "3".equals($F{result}) || "6".equals($F{result}) || "7".equals($F{result}) ?
+		  ( "en".equals($P{lang}) ?
+            ( "".equals($F{resultLabelEn2}) || $F{resultLabelEn2} == null ? "" : "    " + $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		    ( "".equals($F{resultLabelFr2}) || $F{resultLabelFr2} == null ? "" : "    " + $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	      ) : ""
+		) +
+	    ( "4".equals($F{result}) || "5".equals($F{result}) || "6".equals($F{result}) || "7".equals($F{result}) ?
+		  ( "en".equals($P{lang}) ?
+            ( "".equals($F{resultLabelEn3}) || $F{resultLabelEn3} == null ? "" : "    " + $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		    ( "".equals($F{resultLabelFr3}) || $F{resultLabelFr3} == null ? "" : "    " + $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	      ) : ""
+		)
+      ) :
+      ( $F{testNameEn}.matches("Blood Type") || $F{testNameFr}.matches("Groupe Sanguin") ?
+	    ( $F{result} == null || "0".equals($F{result}) || Integer.parseInt($F{result}) > 63 ?
+	      ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." ) :
+	      (
+		    ( "1".equals($F{result}) || "17".equals($F{result}) || "33".equals($F{result}) ?
+	          ( "en".equals($P{lang}) ?
+                ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		        ( "".equals($F{resultLabelFr1}) || $F{resultLabelFr1} == null ? "" : $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	          ) : 
+		      ( "2".equals($F{result}) || "18".equals($F{result}) || "34".equals($F{result}) ?
+		        ( "en".equals($P{lang}) ?
+                  ( "".equals($F{resultLabelEn2}) || $F{resultLabelEn2} == null ? "" : $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		          ( "".equals($F{resultLabelFr2}) || $F{resultLabelFr2} == null ? "" : $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	            ) :
+	            ( "4".equals($F{result}) || "20".equals($F{result}) || "36".equals($F{result}) ?
+		          ( "en".equals($P{lang}) ?
+                    ( "".equals($F{resultLabelEn3}) || $F{resultLabelEn3} == null ? "" : $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		            ( "".equals($F{resultLabelFr3}) || $F{resultLabelFr3} == null ? "" : $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	              ) :
+			      ( "8".equals($F{result}) || "24".equals($F{result}) || "40".equals($F{result}) ?
+		            ( "en".equals($P{lang}) ?
+                      ( "".equals($F{resultLabelEn4}) || $F{resultLabelEn4} == null ? "" : $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		              ( "".equals($F{resultLabelFr4}) || $F{resultLabelFr4} == null ? "" : $F{resultLabelFr4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                ) : ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." )
+				  )
+			    )
+		      )
+			) + " " +
+		    ( Integer.parseInt($F{result}) >= 16 && Integer.parseInt($F{result}) < 32 ?
+	          ( "en".equals($P{lang}) ?
+                ( "".equals($F{resultLabelEn5}) || $F{resultLabelEn5} == null ? "" : $F{resultLabelEn5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		        ( "".equals($F{resultLabelFr5}) || $F{resultLabelFr5} == null ? "" : $F{resultLabelFr5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	          ) : 
+		      ( Integer.parseInt($F{result}) >= 32 && Integer.parseInt($F{result}) < 64 ?
+		        ( "en".equals($P{lang}) ?
+                  ( "".equals($F{resultLabelEn6}) || $F{resultLabelEn6} == null ? "" :  $F{resultLabelEn6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		          ( "".equals($F{resultLabelFr6}) || $F{resultLabelFr6} == null ? "" : $F{resultLabelFr6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	            ) : ( "en".equals($P{lang}) ? "No rhesus." : "Aucun rhésus." )
+		      )
+			)
+		  )
+        ) :
+        ( "1".equals($F{result}) ?
+	      ( "en".equals($P{lang}) ?
+            ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+ 		    ( "".equals($F{resultLabelFr1}) || $F{resultLabelFr1} == null ? "" : $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	      ) :
+          ( "2".equals($F{result}) ?
+	        ( "en".equals($P{lang}) ?
+              ( "".equals($F{resultLabelEn2}) || $F{resultLabelEn2} == null ? "" : $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		      ( "".equals($F{resultLabelFr2}) || $F{resultLabelFr2} == null ? "" : $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	        ) :
+            ( "4".equals($F{result}) ?
+	          ( "en".equals($P{lang}) ?
+                ( "".equals($F{resultLabelEn3}) || $F{resultLabelEn3} == null ? "" : $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		        ( "".equals($F{resultLabelFr3}) || $F{resultLabelFr3} == null ? "" : $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	          ) :
+              ( "8".equals($F{result}) ?
+	            ( "en".equals($P{lang}) ?
+                  ( "".equals($F{resultLabelEn4}) || $F{resultLabelEn4} == null ? "" : $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		          ( "".equals($F{resultLabelFr4}) || $F{resultLabelFr4} == null ? "" : $F{resultLabelFr4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	            ) :
+                ( "16".equals($F{result}) ?
+	              ( "en".equals($P{lang}) ?
+                    ( "".equals($F{resultLabelEn5}) || $F{resultLabelEn5} == null ? "" : $F{resultLabelEn5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		            ( "".equals($F{resultLabelFr5}) || $F{resultLabelFr5} == null ? "" : $F{resultLabelFr5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	              ) :
+                  ( "32".equals($F{result}) ?
+	                ( "en".equals($P{lang}) ?
+                      ( "".equals($F{resultLabelEn6}) || $F{resultLabelEn6} == null ? "" : $F{resultLabelEn6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		              ( "".equals($F{resultLabelFr6}) || $F{resultLabelFr6} == null ? "" : $F{resultLabelFr6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	                ) :
+				    ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." )
+				  )
+                )
+              )
+            )
+          )
+        )
+	  )
+    ) :
+    ( $F{resultType}.intValue() == 2 ?
+      ( "".equals($F{result}) || $F{result} == null ?
+	    ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." ) :
+		$F{result} + " " +
+	    ( "en".equals($P{lang}) ?
+          ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ? "" : $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+		  ( "".equals($F{resultLabelFr1}) || $F{resultLabelFr1} == null ? "" : $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+	    )
+      ) :
+      ( $F{resultType}.intValue() == 3 ?
+        ( ( ( "".equals($F{result}) || $F{result} == null ) &&
+          ( "".equals($F{result2}) || $F{result2} == null ) &&
+          ( "".equals($F{result3}) || $F{result3} == null ) &&
+          ( "".equals($F{result4}) || $F{result4} == null ) ) ?
+            ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." ) :
+            (
+  		      ( "en".equals($P{lang}) ?
+			    ( "".equals($F{resultLabelEn1}) || $F{resultLabelEn1} == null ?
+				  "" :
+				  ( "".equals($F{result}) || $F{result} == null ? "__" : $F{result} ) + " " + $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ")
+				) :
+			    ( "".equals($F{resultLabelFr1}) || $F{resultLabelFr1} == null ?
+				  "" :
+				  ( "".equals($F{result}) || $F{result} == null ? "__" : $F{result} ) + " " + $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é")
+                )
+              ) + " " +
+			  ( "en".equals($P{lang}) ?
+			    ( "".equals($F{resultLabelEn2}) || $F{resultLabelEn2} == null ?
+				  "" :
+				  ( "".equals($F{result2}) || $F{result2} == null ? "__" : $F{result2} ) + " " + $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ")
+				) :
+			    ( "".equals($F{resultLabelFr2}) || $F{resultLabelFr2} == null ?
+				  "" :
+				  ( "".equals($F{result2}) || $F{result2} == null ? "__" : $F{result2} ) + " " + $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é")
+                )	  
+              ) + " " +
+			  ( "en".equals($P{lang}) ?
+			    ( "".equals($F{resultLabelEn3}) || $F{resultLabelEn3} == null ?
+				  "" :
+				  ( "".equals($F{result3}) || $F{result3} == null ? "__" : $F{result3} ) + " " + $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ")
+				) :
+			    ( "".equals($F{resultLabelFr3}) || $F{resultLabelFr3} == null ?
+				  "" :
+				  ( "".equals($F{result3}) || $F{result3} == null ? "__" : $F{result3} ) + " " + $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é")
+                ) 
+              ) + " " +
+			  ( "en".equals($P{lang}) ?
+			    ( "".equals($F{resultLabelEn4}) || $F{resultLabelEn4} == null ?
+				  "" :
+				  ( "".equals($F{result4}) || $F{result4} == null ? "__" : $F{result4} ) + " " + $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ")
+				) :
+			    ( "".equals($F{resultLabelFr4}) || $F{resultLabelFr4} == null ?
+				  "" :
+				  ( "".equals($F{result4}) || $F{result4} == null ? "__" : $F{result4} ) + " " + $F{resultLabelFr4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é")
+                )
+              )				
+            )
+        ) :
+        ( $F{resultType}.intValue() == 4 ?
+          ( "1".equals($F{result}) ?
+		    ( "en".equals($P{lang}) ?
+              ( $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") + " " + ( "".equals($F{result2}) || $F{result2} == null ? "N/A" : $F{result2} ) + " " + $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			  ( $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") + " " + ( "".equals($F{result2}) || $F{result2} == null ? "N/A" : $F{result2} ) + " " + $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			) :
+            ( "2".equals($F{result}) ?
+              ( "en".equals($P{lang}) ?
+                ( $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			    ( $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			  ) : ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." )
+            )
+          ) :
+          ( $F{resultType}.intValue() == 5 ?
+            ( "".equals($F{result}) || $F{result} == null ?
+			  ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." ) :
+			  ( $F{result} + " " +
+                ( "1".equals($F{result2}) ?
+			      ( "en".equals($P{lang}) ?
+                    ( $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			        ( $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			      ) :
+                  ( "2".equals($F{result2}) ?
+                    ( "en".equals($P{lang}) ?
+                      ( $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			          ( $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			        ) :
+                    ( "4".equals($F{result2}) ?
+                      ( "en".equals($P{lang}) ?
+                        ( $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			            ( $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			          ) :
+                      ( "8".equals($F{result2}) ?
+                        ( "en".equals($P{lang}) ?
+                          ( $F{resultLabelEn4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			              ( $F{resultLabelFr4}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			            ) :
+                        ( "16".equals($F{result2}) ?
+                          ( "en".equals($P{lang}) ?
+                            ( $F{resultLabelEn5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			                ( $F{resultLabelFr5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			              ) :
+                          ( "32".equals($F{result2}) ?
+                            ( "en".equals($P{lang}) ?
+                              ( $F{resultLabelEn6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			                  ( $F{resultLabelFr6}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			                ) :
+						    ( "en".equals($P{lang}) ? "(no units)" : "(aucun unité)" )
+						  )
+                        )
+                      )
+                    )
+                  )
+                )
+		      )
+            ) :
+            ( $F{resultType}.intValue() == 6 ?
+  			  ( "1".equals($F{result}) ?
+		        ( "en".equals($P{lang}) ?
+                  ( $F{resultLabelEn1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") + " " +
+				  ( "1".equals($F{result2}) ?
+				    $F{resultLabelEn2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") :
+					( "2".equals($F{result2}) ?
+					  $F{resultLabelEn3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") :
+					  "(no units)"
+					)
+			      )
+				  + " " + ( "".equals($F{result3}) || $F{result3} == null ? "" : $F{result3} ) ) :
+			      ( $F{resultLabelFr1}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") + " " +
+			      ( "1".equals($F{result2}) ?
+				    $F{resultLabelFr2}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") :
+					( "2".equals($F{result2}) ?
+					  $F{resultLabelFr3}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") :
+					  "(aucun unité)"
+					)
+				  )
+				  + " " + ( "".equals($F{result3}) || $F{result3} == null ? "" : $F{result3} ) )
+			    ) :
+                ( "2".equals($F{result}) ?
+                  ( "en".equals($P{lang}) ?
+                    ( $F{resultLabelEn5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ") ) :
+			        ( $F{resultLabelFr5}.replaceAll("<sup>9</sup>", "^9").replaceAll("<sup>3</sup>", "³").replaceAll("<[/]?i>", "").replaceAll("&nbsp;", " ").replaceAll("&#xe9;", "é").replaceAll("&eacute;", "é") )
+			      ) : ( "en".equals($P{lang}) ? "No result." : "Aucun résultat." )
+                )
+              ) : ( "en".equals($P{lang}) ? "Bad result type." : "Erreur avec le type du résultat." )
+			)
+          )
+        )    
+      )
+    )
+  )
+)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="498"
+						y="0"
+						width="30"
+						height="13"
+						key="textField-4"
+						positionType="Float"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{resultAbnormal} != null ?
+  ( $F{resultAbnormal}.intValue() == 1 ? "[X]" : "[ ]" ) : "[ ]" )]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

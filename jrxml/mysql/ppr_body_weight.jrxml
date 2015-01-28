@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="ppr_body_weight"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="157"
+		 pageHeight="13"
+		 columnWidth="157"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 isIgnorePagination="true">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select distinct v . vitalweight , v . vitalweightunits , v . visitdatedd , v . visitdatemm , v . visitdateyy from vitals v , encounter e where e . patientid = $P{pid} and e . encstatus &lt; 255 and e . encountertype in (1 , 2) and e . sitecode = v . sitecode and e . patientid = v . patientid and e . visitdatedd = v . visitdatedd and e . visitdatemm = v . visitdatemm and e . visitdateyy = v . visitdateyy and e . seqnum = v . seqnum and v . vitalweight is not NULL and ltrim(v . vitalweight) != '' and v . vitalweightunits is not NULL and v . visitdatedd is not NULL and ltrim(v . visitdatedd) != '' and v . visitdatemm is not NULL and ltrim(v . visitdatemm) != '' and v . visitdateyy is not NULL and ltrim(v . visitdateyy) != '' order by v . visitdateyy desc , v . visitdatemm desc , v . visitdatedd desc limit 10; 
+</queryString>
+
+	<field name="visitDateMm" class="java.lang.String"/>
+	<field name="visitDateDd" class="java.lang.String"/>
+	<field name="visitDateYy" class="java.lang.String"/>
+	<field name="vitalWeight" class="java.lang.String"/>
+	<field name="vitalWeightUnits" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="59"
+						height="13"
+						key="textField-1"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{visitDateDd}+"/"+$F{visitDateMm}+"/"+$F{visitDateYy}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="66"
+						y="0"
+						width="42"
+						height="13"
+						key="textField-2"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( "2".equals ($F{vitalWeightUnits}.toString ()) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{vitalWeight}.trim().matches ("[\\d\\.,/-]+") ?
+  ( $F{vitalWeight}.trim().length() > 6 ?
+    $F{vitalWeight}.trim().substring (0, 6) : $F{vitalWeight}.trim() )
+  : "NaN" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="111"
+						y="0"
+						width="42"
+						height="13"
+						key="textField-3"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( "1".equals ($F{vitalWeightUnits}.toString ()) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center">
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{vitalWeight}.matches ("[\\d\\.,/-]+") ?
+  ( $F{vitalWeight}.length () > 6 ? $F{vitalWeight}.substring (0, 6) : $F{vitalWeight} )
+  : "NaN" )]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

@@ -1,0 +1,294 @@
+
+	<slice id="departments_slice">
+	  <dimension concept="department"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="departments_slice_table"/>
+	</slice>
+	
+	<slice id="departments_sex_slice">
+	  <dimension concept="department"/>
+	  <dimension concept="sex"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="departments_sex_slice_table"/>
+	</slice>
+	
+	<slice id="departments_hiv_slice">
+	  <dimension concept="department"/>
+	  <dimension concept="hiv"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="departments_hiv_slice_table"/>
+	</slice>
+	
+	<slice id="departments_status_slice">
+	  <dimension concept="department"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="departments_status_slice_table"/>
+	</slice>
+	
+	<slice id="departments_hiv_status_slice">
+	  <dimension concept="department"/>
+	  <dimension concept="hiv"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="departments_hiv_status_slice_table"/>
+	</slice>
+	
+	<slice id="departments_sex_status_slice">
+	  <dimension concept="department"/>
+	  <dimension concept="sex"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="departments_sex_status_slice_table"/>
+	</slice>
+	
+	<slice id="departments_sex_hiv_slice">
+	  <dimension concept="department"/>
+	  <dimension concept="sex"/>
+	  <dimension concept="hiv"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="departments_sex_hiv_slice_table"/>
+	</slice>
+	
+	<slice id="departments_sex_hiv_status_slice">
+	  <dimension concept="department"/>
+	  <dimension concept="sex"/>
+	  <dimension concept="hiv"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="departments_sex_hiv_status_slice_table"/>
+	</slice>
+	
+	<slice id="national_slice">
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="national_slice_table"/>
+	</slice>
+	
+	<slice id="national_sex_slice">
+	  <dimension concept="sex"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="national_sex_slice_table"/>
+	</slice>
+	
+	<slice id="national_hiv_slice">
+	  <dimension concept="hiv"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="national_hiv_slice_table"/>
+	</slice>
+	
+	<slice id="national_status_slice">
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="national_status_slice_table"/>
+	</slice>
+	
+	<slice id="national_hiv_status_slice">
+	  <dimension concept="hiv"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="national_hiv_status_slice_table"/>
+	</slice>
+	
+	<slice id="national_sex_status_slice">
+	  <dimension concept="sex"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="national_sex_status_slice_table"/>
+	</slice>
+	
+	<slice id="national_sex_hiv_slice">
+	  <dimension concept="sex"/>
+	  <dimension concept="hiv"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="national_sex_hiv_slice_table"/>
+	</slice>
+	
+	<slice id="national_sex_hiv_status_slice">
+	  <dimension concept="sex"/>
+	  <dimension concept="hiv"/>
+	  <dimension concept="status"/>
+      <dimension concept="time:day"/>
+      <metric concept="population"/>
+	  <table ref="national_sex_hiv_status_slice_table"/>
+	</slice>
+	
+==============================================================
+==============================================================
+==============================================================
+
+
+	<table id="departments_slice_table">
+	  <column id="department" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">departments_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="departments_sex_slice_table">
+	  <column id="department" type="string"/>
+	  <column id="sex" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">departments_sex_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="departments_hiv_slice_table">
+	  <column id="department" type="string"/>
+	  <column id="hiv" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">departments_hiv_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="departments_status_slice_table">
+	  <column id="department" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">departments_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="departments_hiv_status_slice_table">
+	  <column id="department" type="string"/>
+	  <column id="hiv" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">departments_hiv_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="departments_sex_status_slice_table">
+	  <column id="department" type="string"/>
+	  <column id="sex" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">departments_sex_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="departments_sex_hiv_slice_table">
+	  <column id="department" type="string"/>
+	  <column id="sex" type="string"/>
+	  <column id="hiv" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">departments_sex_hiv_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="departments_sex_hiv_status_slice_table">
+	  <column id="department" type="string"/>
+	  <column id="sex" type="string"/>
+	  <column id="hiv" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">departments_sex_hiv_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="national_slice_table">
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">national_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="national_sex_slice_table">
+	  <column id="sex" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">national_sex_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="national_hiv_slice_table">
+	  <column id="hiv" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">national_hiv_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="national_status_slice_table">
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">national_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="national_hiv_status_slice_table">
+	  <column id="hiv" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">national_hiv_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="national_sex_status_slice_table">
+	  <column id="sex" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">national_sex_status_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="national_sex_hiv_slice_table">
+	  <column id="sex" type="string"/>
+	  <column id="hiv" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">national_sex_hiv_slice.csv</file>
+	  </data>
+	</table>
+	
+	<table id="national_sex_hiv_status_slice_table">
+	  <column id="sex" type="string"/>
+	  <column id="hiv" type="string"/>
+	  <column id="status" type="string"/>
+      <column id="day" type="date" format="yyyy-MM-dd"/>
+      <column id="population" type="integer"/>
+	  <data>
+		<file format="csv" encoding="utf-8">national_sex_hiv_status_slice.csv</file>
+	  </data>
+	</table>
+	

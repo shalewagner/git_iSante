@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_hist_elig_more"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="540"
+		 pageHeight="39"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="isPediatric" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select m . currentHivStage , m . cd4LT200 , m . WHOIII , m . PMTCT , m . tlcLT1200 , m . WHOIV , m . medEligHAART , m . formerARVtherapy , m . PEP , m . pedMedEligCd4Cnt , m . pedMedEligWho3 , m . pedMedEligWho4 , m . pedMedEligTlc , m . pedMedEligPmtct , m . pedMedEligFormerTherapy , m . expFromDt , m . expFromMm , m . expFromYy , m . formVersion , m . encounterType from v_medicalEligARVs m where m . patientID = $P{pid} and m . encounterType in (1 , 2 , 16 , 17) order by m . visitdate desc , m . encounterType desc limit 1; 
+</queryString>
+
+	<field name="currentHivStage" class="java.lang.Integer"/>
+	<field name="cd4LT200" class="java.lang.Integer"/>
+	<field name="WHOIII" class="java.lang.Integer"/>
+	<field name="PMTCT" class="java.lang.Integer"/>
+	<field name="tlcLT1200" class="java.lang.Integer"/>
+	<field name="WHOIV" class="java.lang.Integer"/>
+	<field name="medEligHAART" class="java.lang.Integer"/>
+	<field name="formerARVtherapy" class="java.lang.Integer"/>
+	<field name="PEP" class="java.lang.Integer"/>
+	<field name="pedMedEligCd4Cnt" class="java.lang.Integer"/>
+	<field name="pedMedEligWho3" class="java.lang.Integer"/>
+	<field name="pedMedEligWho4" class="java.lang.Integer"/>
+	<field name="pedMedEligTlc" class="java.lang.Integer"/>
+	<field name="pedMedEligPmtct" class="java.lang.Integer"/>
+	<field name="pedMedEligFormerTherapy" class="java.lang.Integer"/>
+	<field name="expFromDt" class="java.lang.String"/>
+	<field name="expFromMm" class="java.lang.String"/>
+	<field name="expFromYy" class="java.lang.String"/>
+	<field name="formVersion" class="java.lang.Integer"/>
+	<field name="encounterType" class="java.lang.Integer"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="39"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="340"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-39"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{formerARVtherapy}.intValue() == 1 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Former ARV Therapy" : "ARV trithérapie antérieure" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="0"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-40"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{formerARVtherapy}.intValue() == 1 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{formerARVtherapy}.intValue() == 1 ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+( $F{formerARVtherapy} == null || $F{formerARVtherapy}.intValue() == 0 ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "No " : "Non" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="13"
+						width="340"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-41"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{PEP}.intValue() == 1 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "Disease Prevention Post-exposure (PEP)" : "Prophylaxie post-exposition (PEP)" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="344"
+						y="13"
+						width="196"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-42"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{PEP}.intValue() == 1 ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["[" +
+( $F{PEP}.intValue() == 1 ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "Yes" : "Oui" ) + "  [" +
+( $F{PEP} == null || $F{PEP}.intValue() == 0 ? "X" : " " ) +
+"] " + ( "en".equals($P{lang}) ? "No " : "Non" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="26"
+						width="170"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-43"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{expFromDt} != null && ("XX".equals($F{expFromDt}.toUpperCase()) ||
+  $F{expFromDt}.trim().matches("[\\d]{1,2}")) &&
+  $F{expFromMm} != null && ("XX".equals($F{expFromMm}.toUpperCase()) ||
+  $F{expFromMm}.trim().matches("[\\d]{1,2}")) &&
+  $F{expFromYy} != null && ("XX".equals($F{expFromYy}.toUpperCase()) ||
+  $F{expFromYy}.trim().matches("[\\d]{1,2}")) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ? "    Date of Exposure: " : "    Date de l'exposition: " )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="170"
+						y="26"
+						width="370"
+						height="13"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-44"
+						positionType="Float"
+						isRemoveLineWhenBlank="true">
+							<printWhenExpression><![CDATA[( $F{expFromDt} != null && ("XX".equals($F{expFromDt}.toUpperCase()) ||
+  $F{expFromDt}.trim().matches("[\\d]{1,2}")) &&
+  $F{expFromMm} != null && ("XX".equals($F{expFromMm}.toUpperCase()) ||
+  $F{expFromMm}.trim().matches("[\\d]{1,2}")) &&
+  $F{expFromYy} != null && ("XX".equals($F{expFromYy}.toUpperCase()) ||
+  $F{expFromYy}.trim().matches("[\\d]{1,2}")) ? Boolean.TRUE : Boolean.FALSE )]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" size="10" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( $F{expFromDt} != null && $F{expFromDt}.trim().length() > 0 &&
+  $F{expFromMm} != null && $F{expFromMm}.trim().length() > 0 &&
+  $F{expFromYy} != null && $F{expFromYy}.trim().length() > 0 ?
+  ( $F{expFromDt} != null && $F{expFromDt}.trim().length() > 0 ?
+    ( $F{expFromDt}.trim().length() == 1 ? "0" + $F{expFromDt}.trim() : $F{expFromDt}.trim() )
+    : "XX" ) + "/" +
+  ( $F{expFromMm} != null && $F{expFromMm}.trim().length() > 0 ?
+    ( $F{expFromMm}.trim().length() == 1 ? "0" + $F{expFromMm}.trim() : $F{expFromMm}.trim() )
+    : "XX" ) + "/" +
+  ( $F{expFromYy} != null && $F{expFromYy}.trim().length() > 0 ?
+    ( $F{expFromYy}.trim().length() == 1 ? "0" + $F{expFromYy}.trim() : $F{expFromYy}.trim() )
+    : "XX" )
+  : "" )]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

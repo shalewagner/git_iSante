@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="monthlyInd_1.0_line"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="1009"
+		 pageHeight="26"
+		 columnWidth="1009"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="BlueText"
+		isDefault="false"
+		forecolor="#0033FF"
+		fontName="Arial"
+	/>
+
+	<parameter name="siteList" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="endDate" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="startDate" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="user" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="jasperRenderer" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select l . department , l . clinic , i .* from clinicLookup l , hivQual i where l . siteCode = i . siteCode and i . siteCode in ($P!{siteList}) and i . endDate = '$P!{endDate}' and i . startDate = '$P!{startDate}' and i . row_type = 1 order by l . department , i . siteCode; 
+</queryString>
+
+	<field name="siteCode" class="java.lang.String"/>
+	<field name="department" class="java.lang.String"/>
+	<field name="clinic" class="java.lang.String"/>
+	<field name="ind1_num" class="java.lang.String"/>
+	<field name="ind1_den" class="java.lang.String"/>
+	<field name="ind1_ratio" class="java.lang.String"/>
+	<field name="ind2_num" class="java.lang.String"/>
+	<field name="ind2_den" class="java.lang.String"/>
+	<field name="ind2_ratio" class="java.lang.String"/>
+	<field name="ind3_num" class="java.lang.String"/>
+	<field name="ind3_den" class="java.lang.String"/>
+	<field name="ind3_ratio" class="java.lang.String"/>
+	<field name="ind4A_num" class="java.lang.String"/>
+	<field name="ind4A_den" class="java.lang.String"/>
+	<field name="ind4A_ratio" class="java.lang.String"/>
+	<field name="ind5_num" class="java.lang.String"/>
+	<field name="ind5_den" class="java.lang.String"/>
+	<field name="ind5_ratio" class="java.lang.String"/>
+	<field name="ind6_num" class="java.lang.String"/>
+	<field name="ind6_den" class="java.lang.String"/>
+	<field name="ind6_ratio" class="java.lang.String"/>
+	<field name="ind7_num" class="java.lang.String"/>
+	<field name="ind7_den" class="java.lang.String"/>
+	<field name="ind7_ratio" class="java.lang.String"/>
+	<field name="startDate" class="java.lang.String"/>
+	<field name="endDate" class="java.lang.String"/>
+	<field name="cases" class="java.lang.String"/>
+	<field name="ind8_num" class="java.lang.String"/>
+	<field name="ind8_den" class="java.lang.String"/>
+	<field name="ind8_ratio" class="java.lang.String"/>
+	<field name="ind4B_num" class="java.lang.String"/>
+	<field name="ind4B_den" class="java.lang.String"/>
+	<field name="ind4B_ratio" class="java.lang.String"/>
+	<field name="ind9_num" class="java.lang.String"/>
+	<field name="ind9_den" class="java.lang.String"/>
+	<field name="ind9_ratio" class="java.lang.String"/>
+	<field name="ind10_num" class="java.lang.String"/>
+	<field name="ind10_den" class="java.lang.String"/>
+	<field name="ind10_ratio" class="java.lang.String"/>
+
+	<variable name="cases_total" class="java.lang.Integer" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[Integer.valueOf($F{cases})]]></variableExpression>
+	</variable>
+	<variable name="startDate" class="java.lang.String" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[$F{startDate}]]></variableExpression>
+	</variable>
+	<variable name="endDate" class="java.lang.String" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[$F{endDate}]]></variableExpression>
+	</variable>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="26"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="0"
+						y="0"
+						width="83"
+						height="26"
+						key="textField-1"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isUnderline="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{department}]]></textFieldExpression>
+						<anchorNameExpression><![CDATA[$F{department}]]></anchorNameExpression>
+						<hyperlinkReferenceExpression><![CDATA[$P{jasperRenderer} + "?report=222&lang=" + $P{lang} + "&format=html&user=" + $P{user} +
+"&siteName=" + $F{siteCode}.trim() + "&site=" + $F{siteCode}.trim()]]></hyperlinkReferenceExpression>
+						<hyperlinkTooltipExpression><![CDATA[( "en".equals($P{lang}) ? "Click for department graph" : "Cliquer pour histogramme du département" )]]></hyperlinkTooltipExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="83"
+						y="0"
+						width="158"
+						height="26"
+						key="textField-63"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isUnderline="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{clinic}]]></textFieldExpression>
+						<anchorNameExpression><![CDATA[$F{siteCode}]]></anchorNameExpression>
+						<hyperlinkReferenceExpression><![CDATA[$P{jasperRenderer} + "?report=220&lang=" + $P{lang} + "&format=html&user=" + $P{user} +
+"&siteName=" + $F{siteCode}.trim() + "&site=" + $F{siteCode}.trim()]]></hyperlinkReferenceExpression>
+						<hyperlinkTooltipExpression><![CDATA[( "en".equals($P{lang}) ? "Click for clinic graph" : "Cliquer pour histogramme de la clinique" )]]></hyperlinkTooltipExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="241"
+						y="0"
+						width="48"
+						height="26"
+						key="textField-64"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{cases}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="289"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-65"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isUnderline="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind2_num}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=2&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=num&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="319"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-66"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind2_den}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=2&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=den&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="349"
+						y="0"
+						width="30"
+						height="26"
+						key="textField-67"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind2_ratio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="379"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-68"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind4A_num}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=4A&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=num&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="409"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-69"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind4A_den}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=4A&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=den&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="439"
+						y="0"
+						width="30"
+						height="26"
+						key="textField-70"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind4A_ratio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="469"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-71"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind4B_num}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=4B&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=num&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="499"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-72"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind4B_den}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=4B&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=den&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="529"
+						y="0"
+						width="30"
+						height="26"
+						key="textField-73"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind4B_ratio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="559"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-74"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind6_num}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=6&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=num&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="589"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-75"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind6_den}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=6&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=den&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="619"
+						y="0"
+						width="30"
+						height="26"
+						key="textField-76"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind6_ratio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="649"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-77"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind9_num}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=9&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=num&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="679"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-78"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind9_den}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=9&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=den&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="709"
+						y="0"
+						width="30"
+						height="26"
+						key="textField-79"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind9_ratio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="739"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-80"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind3_num}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=3&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=num&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="769"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-81"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind3_den}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=3&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=den&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="799"
+						y="0"
+						width="30"
+						height="26"
+						key="textField-82"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind3_ratio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="829"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-83"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind1_num}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=1&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=num&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="859"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-84"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind1_den}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=1&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=den&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="889"
+						y="0"
+						width="30"
+						height="26"
+						key="textField-85"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind1_ratio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="919"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-86"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind10_num}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=10&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=num&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="Reference"  hyperlinkTarget="Blank" >
+					<reportElement
+						x="949"
+						y="0"
+						width="30"
+						height="26"
+						forecolor="#0033FF"
+						key="textField-87"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="None" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind10_den}]]></textFieldExpression>
+						<hyperlinkReferenceExpression><![CDATA["hivQualPatientID.php?index=10&site="+ $F{siteCode}+ "&endDate="+$P{endDate} + "&startDate="+$P{startDate} + "&lang="+$P{lang}+"&type=den&group=all"]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="979"
+						y="0"
+						width="30"
+						height="26"
+						key="textField-88"
+						positionType="Float"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="1" rightBorder="Thin" rightBorderColor="#000000" rightPadding="1" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{ind10_ratio}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

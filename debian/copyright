@@ -1,0 +1,28 @@
+This package was debianized by Svend Sorensen <svends@u.washington.edu> on
+Mon,  4 Aug 2008 12:55:02 -0700.
+
+It was downloaded from the internal CIRG Subversion repository.
+
+Upstream Author: Clinical Informatics Research Group
+
+Copyright: no license (for CIRG internal use only)
+
+License:
+
+no license (for CIRG internal use only)
+
+
+The Debian packaging is (C) 2008, Clinical Informatics Research Group.
+
+
+# Please also look if there are files or directories which have a
+# different copyright/license attached and list them here.
+
+Ext JS - JavaScript Library
+Copyright (c) 2006-2008, Ext JS, LLC
+All rights reserved.
+licensing@extjs.com
+
+JasperSoft (Jasper & iReport) use GNU licencing
+Highcharts
+

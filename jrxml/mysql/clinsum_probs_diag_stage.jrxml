@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC  "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="clinsum_probs_diag_stage"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="540"
+		 pageHeight="13"
+		 columnWidth="540"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="pid" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="lang" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="reportDir" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="ids" isForPrompting="true" class="java.lang.String"/>
+	
+  <queryString>select distinct case when $P{lang} = 'en' then l . conditionNameEn else l . conditionNameFr end as label , l . conditionID , l . conditionComment from v_conditions l where l . patientid = $P{pid} and l . whoStage = $P{ids} and l . encounterType in (1 , 2 , 16 , 17) order by label asc; 
+</queryString>
+
+	<field name="label" class="java.lang.String"/>
+	<field name="conditionID" class="java.lang.Integer"/>
+	<field name="conditionComment" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="13"  isSplitAllowed="true" >
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="274"
+						y="0"
+						width="48"
+						height="13"
+						key="subreport-2"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="conditionsID">
+						<subreportParameterExpression><![CDATA[$F{conditionID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ids">
+						<subreportParameterExpression><![CDATA[$P{ids}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="comment">
+						<subreportParameterExpression><![CDATA[( $F{conditionComment} != null ? $F{conditionComment} : "" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_probs_diag_stage_startdt.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="331"
+						y="0"
+						width="99"
+						height="13"
+						key="subreport-3"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="conditionsID">
+						<subreportParameterExpression><![CDATA[$F{conditionID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ids">
+						<subreportParameterExpression><![CDATA[$P{ids}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="comment">
+						<subreportParameterExpression><![CDATA[( $F{conditionComment} != null ? $F{conditionComment} : "" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_probs_diag_stage_lastdt.jasper")]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="439"
+						y="0"
+						width="101"
+						height="13"
+						key="subreport-4"/>
+					<subreportParameter  name="pid">
+						<subreportParameterExpression><![CDATA[$P{pid}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="lang">
+						<subreportParameterExpression><![CDATA[$P{lang}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="conditionsID">
+						<subreportParameterExpression><![CDATA[$F{conditionID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="ids">
+						<subreportParameterExpression><![CDATA[$P{ids}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter  name="comment">
+						<subreportParameterExpression><![CDATA[( $F{conditionComment} != null ? $F{conditionComment} : "" )]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.io.File"><![CDATA[new File($P{reportDir} + "clinsum_probs_diag_stage_status.jasper")]]></subreportExpression>
+				</subreport>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="270"
+						height="13"
+						key="textField-1"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="Lucida Console" pdfFontName="Courier" pdfEncoding ="Cp1252"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[( "en".equals($P{lang}) ?
+  ( $F{label}.replaceAll("<i>", "").replaceAll("</i>", "").replaceAll
+    ("<sup>", "^").replaceAll("</sup>", "").length() > 45 ?
+    $F{label}.replaceAll("<i>", "").replaceAll("</i>", "").replaceAll
+    ("<sup>", "^").replaceAll("</sup>", "").substring(0, 45) :
+    $F{label}.replaceAll("<i>", "").replaceAll("</i>", "").replaceAll
+    ("<sup>", "^").replaceAll("</sup>", "") ) :
+  ( $F{label}.replaceAll("&#xe9;", "é").replaceAll("&#xe8;", "è").replaceAll
+    ("&#xf4;", "ô").replaceAll("&#xe0;", "à").replaceAll("&ecirc;", "ê").replaceAll
+    ("&eacute;", "é").replaceAll("&egrave;", "è").replaceAll
+    ("&#xef;", "ï").replaceAll("<i>", "").replaceAll("</i>", "").replaceAll
+    ("&#224;", "à").replaceAll("&#251;", "û").replaceAll("&#146;", "'").replaceAll
+    ("&#xc9;", "É").replaceAll("&#xeb;", "ë").replaceAll("&#xfb;", "û").length() > 45 ?
+    $F{label}.replaceAll("&#xe9;", "é").replaceAll("&#xe8;", "è").replaceAll
+    ("&#xf4;", "ô").replaceAll("&#xe0;", "à").replaceAll("&ecirc;", "ê").replaceAll
+    ("&eacute;", "é").replaceAll("&egrave;", "è").replaceAll
+    ("&#xef;", "ï").replaceAll("<i>", "").replaceAll("</i>", "").replaceAll
+    ("&#224;", "à").replaceAll("&#251;", "û").replaceAll("&#146;", "'").replaceAll
+    ("&#xc9;", "É").replaceAll("&#xeb;", "ë").replaceAll("&#xfb;", "û").substring(0, 45) :
+    $F{label}.replaceAll("&#xe9;", "é").replaceAll("&#xe8;", "è").replaceAll
+    ("&#xf4;", "ô").replaceAll("&#xe0;", "à").replaceAll("&ecirc;", "ê").replaceAll
+    ("&eacute;", "é").replaceAll("&egrave;", "è").replaceAll
+    ("&#xef;", "ï").replaceAll("<i>", "").replaceAll("</i>", "").replaceAll
+    ("&#224;", "à").replaceAll("&#251;", "û").replaceAll("&#146;", "'").replaceAll
+    ("&#xc9;", "É").replaceAll("&#xeb;", "ë").replaceAll("&#xfb;", "û")
+  )
+)]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>
