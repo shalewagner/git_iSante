@@ -187,7 +187,7 @@ function generatePercents ($indKey) {
 function extendSlices($indKey) {
 	$orgs = array( 
 		'Haiti' => '1',
-		'Dept' => 'c.department',
+		'Department' => 'c.department',
 		'Commune' => 'concat(c.department,?,c.commune)',
 		'Network' => 'c.network'  
 	);
