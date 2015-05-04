@@ -73,7 +73,7 @@ WHEN ISNUMERIC(dobYy) = 1 AND ISNUMERIC(dobMm) = 1 AND ISNUMERIC(dobDd) = 1 AND 
 ELSE 'inconnu'
 END");
 
-$tables = array ("adherenceCounseling", "allergies", "allowedDisclosures", "arvAndPregnancy", "arvEnrollment", "buddies", "comprehension", "conditions", "discEnrollment", "drugs", "followupTreatment", "homeCareVisits", "householdComp", "immunizations", "labs", "medicalEligARVs", "needsAssessment", "otherDrugs", "otherLabs", "otherPrescriptions", "patientEducation", "pedHistory", "pedLabs", "prescriptions", "referrals", "tbStatus", "vitals", "riskAssessment", "riskAssessments", "prescriptionOtherFields", "otherImmunizations");
+$tables = array ("adherenceCounseling", "allergies", "allowedDisclosures", "arvAndPregnancy", "arvEnrollment", "buddies", "comprehension", "conditions", "discEnrollment", "drugs", "followupTreatment", "homeCareVisits", "householdComp", "immunizations", "labs", "medicalEligARVs", "needsAssessment", "otherDrugs", "otherLabs", "otherPrescriptions", "patientEducation", "pedHistory", "pedLabs", "prescriptions", "referrals", "tbStatus", "vitals", "riskAssessments", "prescriptionOtherFields", "otherImmunizations");
 
 $norm_tables = array ("allergies", "allowedDisclosures", "conditions", "drugs", "householdComp", "immunizations", "labs", "otherDrugs", "otherLabs", "otherPrescriptions", "pedLabs", "prescriptions", "referrals", "riskAssessments", "obs", "otherImmunizations");
 
