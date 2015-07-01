@@ -254,13 +254,15 @@ select straight_join t.siteCode, t.patientID,
 ' . $replacePrefix . 't.result' . $replaceSuffix . ',
 e.encounterType, e.encounter_id, e.formVersion 
 from labs t
- join encValid e using (siteCode, patientID, visitDatedd, visitDatemm, visitDateyy, seqNum)
+ join encounter e using (siteCode, patientID, visitDatedd, visitDatemm, visitDateyy, seqNum)
+ join patient p using (patientID)
  join labLookup l
-where t.result is not null
- and ((t.labID = l.labID and t.labID <= 1000) or (t.labID > 1000 and lcase(t.testNameFr) = lcase(l.testNameFr) and lcase(t.sampleType) = lcase(l.sampleType)))
+where  t.result is not null 
+ and e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1
+ and ((t.labID = l.labID and t.labID <= 1000) or (t.labID > 1000 and lcase(t.testNameFr) = lcase(l.testNameFr) and (lcase(t.sampleType) = lcase(l.sampleType) or lcase(t.sampleType) = ?)))
  and isnumeric(' . $replacePrefix . 't.result' . $replaceSuffix . ') = 1
  and lower(l.labName) in (?, ?);',
-		    array_merge($replaceParams, $replaceParams, array ('cd4', 'cd4 en mm3')));
+		    array_merge($replaceParams, $replaceParams, array ('isante', 'cd4', 'cd4 en mm3')));
 
   database()->query('
 insert into cd4TableTemp 
@@ -1369,11 +1371,11 @@ from labs t /* v_labsCompleted too slow */
  join patient p using (patientID)
  join labLookup l
 where e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1
- and ((t.labID = l.labID and t.labID <= 1000) or (t.labID > 1000 and lcase(t.testNameFr) = lcase(l.testNameFr) and lcase(t.sampleType) = lcase(l.sampleType)))
+ and ((t.labID = l.labID and t.labID <= 1000) or (t.labID > 1000 and lcase(t.testNameFr) = lcase(l.testNameFr) and (lcase(t.sampleType) = lcase(l.sampleType) or t.sampleType = ?)))
  and l.labName in (?, ?)
  and t.result in (?, ?, ?, ?)
  and isdate(" . $labResultDateCaseClause . ") = 1
- and " . $labResultDateCaseClause . " <= ?;", array('06', '15', '06', '15', '15', '15', 'Detecte', 'Non Detecte', 'pcr', 'ADN VIH-1', '1', '2', 'Detecte', 'Non Detecte', '06', '15', '06', '15', '15', '15', '06', '15', '06', '15', '15', '15', $endDate));
+ and " . $labResultDateCaseClause . " <= ?;", array('06', '15', '06', '15', '15', '15', 'Detecte', 'Non Detecte', 'isante', 'pcr', 'ADN VIH-1', '1', '2', 'Detecte', 'Non Detecte', '06', '15', '06', '15', '15', '15', '06', '15', '06', '15', '15', '15', $endDate));
 
   // Temp table to hold HIV statuses of ped. patients
   database()->exec('
@@ -1918,13 +1920,13 @@ from labs t /* v_labsCompleted too slow */
  join patient p using (patientID)
  join labLookup l
 where e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1
- and ((t.labID = l.labID and t.labID <= 1000) or (t.labID > 1000 and lcase(t.testNameFr) = lcase(l.testNameFr) and lcase(t.sampleType) = lcase(l.sampleType)))
+ and ((t.labID = l.labID and t.labID <= 1000) or (t.labID > 1000 and lcase(t.testNameFr) = lcase(l.testNameFr) and (lcase(t.sampleType) = lcase(l.sampleType) or t.sampleType = ?)))
  and lower(l.labName) = ?
  and t.result <> 0
  and t.result is not null
  and ltrim(rtrim(t.result)) != ?
  and isdate(" . $labResultDateCaseClause . ") = 1
- and " . $labResultDateCaseClause . " <= ?;", array('06', '15', '06', '15', '15', '15', 'lymphocytes', '', '06', '15', '06', '15', '15', '15', '06', '15', '06', '15', '15', '15', $endDate));
+ and " . $labResultDateCaseClause . " <= ?;", array('06', '15', '06', '15', '15', '15', 'isante', 'lymphocytes', '', '06', '15', '06', '15', '15', '15', '06', '15', '06', '15', '15', '15', $endDate));
 
   // Temp table to hold TLC lab result dates relative to max WHO stage
   database()->exec('
