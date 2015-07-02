@@ -41,9 +41,9 @@ backupArchiveFileName=isante-backup-$timestamp-d$(getConfig dbsite)s$(getConfig 
 #generate the files
 mkdir $tempDir/$backupDir
 
-#mysql
-mysqldump --defaults-file=$conffile \
---add-drop-table --skip-extended-insert --skip-quick $database 2> /dev/null \
+#mysql (don't back up tables that are recomputed every day/do the biggest tables first in the backup)
+TABLES="eventLog prescriptions arvEnrollment arvAndPregnancy encounter patientEducation labs comprehension tbStatus pedHistory buddies prescriptionOtherFields needsAssessment discEnrollment followupTreatment homeCareVisits vitals medicalEligARVs drugs riskAssessments otherPrescriptions eligibility otherDrugs conditions patient allowedDisclosures householdComp bloodeval1 cohortTable immunizations labMessageStorage encounterQueue symptoms pedLabs siteAccess otherLabs concept_name otherImmunizations concept dw_measureForAgeLookup isanteConcepts staticReportData allergies clinicLookup labLookup dw_weightForHeightLookup bloodeval2 conditionLookup userPrivilege conditionOrder referrals dw_malariaReportLookup pepfarRecords regimen healthQual drugLookup riskOrder drugVersionOrder nastadLookup dw_tbReportLookup labPanelLookup networkLookup riskLookup announcements encTypeLookup immunizationRendering dw_dataqualityReportLookup cohortAsort referralLookup concept_class dw_obgynReportLookup schemaVersion discReasonLookup dw_nutritionReportLookup labGroupLookup immunizationLookup concept_datatype patientStatusLookup drugGroupLookup queueStatusLookup config pedLabsLookup pedLabsRendering lastJobRun encounterOtherFields validVitals validations isanteForms hivQual labelLookup drugGroupVersionOrder dw_hivstatusReportLookup startARV cohort formErrors maxPatientID"
+mysqldump --defaults-file=$conffile --add-drop-table --skip-extended-insert --skip-quick $database $TABLES 2> /dev/null \
 | gzip > $tempDir/$backupDir/mysql-backup.sql.gz
 
 #ldap
