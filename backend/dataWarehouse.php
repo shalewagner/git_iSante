@@ -7,6 +7,7 @@ require_once ("tb.php");
 require_once ("nutrition.php"); 
 require_once ("obgyn.php");
 require_once ("dataquality.php");
+require_once ("mer.php");
 
 $tempTableNames = array ();
 
@@ -68,6 +69,9 @@ function refreshSlices($key) {
 		break;
 		case "dataquality":
 		dataqualitySlices($key, $orgType, $time_period);
+		break;
+        case "mer":
+		merSlices($key, $orgType, $time_period);
 		break;
 		
 	}
@@ -195,7 +199,7 @@ function extendSlices($indKey) {
 	foreach ($orgs as $key => $value) {
 		$rc = database()->query("drop table if exists xxx");
 		$sql = "create table xxx 
-		select ? as org_unit, " . $value . " as org_value, p.indicator, p.time_period, p.year, p.period, p.gender, sum(value), sum(denominator)
+		select ? as org_unit, " . $value . " as org_value, p.indicator, p.time_period, p.year, p.period, p.gender, sum(value) as value1, sum(denominator) denominator1
 		from dw_" . $indKey . "_slices p, clinicLookup c
 		where p.org_unit = ? and p.org_value = c.sitecode
 		group by 3,4,1,2,5,6,7";
@@ -203,7 +207,7 @@ function extendSlices($indKey) {
 		if ($key == 'Commune') $qArray = array($key, '-', 'Sitecode');  
 		echo "\n" . $indKey . "/" . $key . " : " . $sql;
 		$rc = database()->query($sql, $qArray)->rowCount();
-		$rc = database()->query("insert into dw_" . $indKey . "_slices select * from xxx")->rowCount();
+		$rc = database()->query("insert into dw_" . $indKey . "_slices select * from xxx on duplicate key update value=value1,denominator=denominator1")->rowCount();
 		echo "\n" . $indKey . "/" . $key . ": " . $rc . " slices inserted.";
 	}
 } 
