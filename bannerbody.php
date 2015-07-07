@@ -189,6 +189,8 @@ echo "<li class=\"dropdown\"><a class=\"dropdown-toggle\" href=\"#\" data-toggle
 		<li><a class=\"submenu-item\" id=\"" . $cmdList[40] . "\" href=\"./reports-generator.php?rpt=tb&" . $menustring . "\">" . $cmdLabel[$lang][40] . "</a></li>
 		<li><a class=\"submenu-item\" id=\"" . $cmdList[42] . "\" href=\"./reports-generator.php?rpt=obgyn&" . $menustring . "\">" . $cmdLabel[$lang][43] . "</a></li>
 		<li><a class=\"submenu-item\" id=\"" . $cmdList[43] . "\" href=\"./reports-generator.php?rpt=dataquality&" . $menustring . "\">" . $cmdLabel[$lang][44] . "</a></li>
+		<li><a class=\"submenu-item\" id=\"" . $cmdList[43] . "\" href=\"./reports-generator.php?rpt=mer&" . $menustring . "\">" . $cmdLabel[$lang][45] . "</a></li>
+		
            </ul>
         </li>";
         if (OB_AUTH) {
