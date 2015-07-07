@@ -387,6 +387,7 @@ given ($tableSet) {
 	    'drugGroupLookup',
 	    'drugLookup',
 	    'drugVersionOrder',
+	    'dw_merReportLookup',
 	    'dw_dataqualityReportLookup',
 	    'dw_malariaReportLookup',
 	    'dw_nutritionReportLookup',
