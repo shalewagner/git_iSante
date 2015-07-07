@@ -11,7 +11,7 @@ $indicatorType = $_POST['indicatorType'];
 $limitIndicators = "";
 $limitIndicatorsDisplay = $reportFilteringLabels[$lang][50]." ";
 // limitIndicators currently for TB and malaria only
-if ($indicatorType != "" && ($reportType == 'tb' || $reportType == 'malaria' || $reportType == 'dataquality')) {
+if ($indicatorType != "" && ($reportType == 'tb' || $reportType == 'malaria' || $reportType == 'dataquality'|| $reportType == 'mer')) {
   $limitIndicators = "AND l.subGroup$lang = '$indicatorType'";
   $limitIndicatorsDisplay = $indicatorType." ";
 }
@@ -134,7 +134,7 @@ for ($k = 0; $k < $reportByTimeCount; $k++) {
 $periodsInQuery = substr($periodsInQuery, 0, -1); // Remove trailing comma
 
 $findDenom = "";
-if ($reportType == 'tb' || $reportType == 'nutrition' || $reportType == 'malaria' || $reportType == 'hivstatus' || $reportType == 'dataquality' || $reportType == 'obgyn') {
+if ($reportType == 'tb' || $reportType == 'nutrition'|| $reportType == 'mer' || $reportType == 'malaria' || $reportType == 'hivstatus' || $reportType == 'dataquality' || $reportType == 'obgyn') {
   $findDenom = "l.indicatorDenominator, ";
 }
 // The main query - uses left join to show all potential indicators
@@ -173,7 +173,7 @@ if ( $orgUnit != 'Haiti') {
     </div>
     <div class="filter-result"><?php
     echo $reportFilteringLabels[$lang][7] . ": ";
-    if ($reportType == 'tb' || $reportType == 'malaria' || $reportType == 'dataquality') {
+    if ($reportType == 'tb' || $reportType == 'malaria' || $reportType == 'dataquality'|| $reportType == 'mer') {
       echo $limitIndicatorsDisplay;
     }
     echo $reportTitleShow . " ";
