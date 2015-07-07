@@ -104,7 +104,8 @@ $cmdLabel = array (
 		"Register or Update Smartcard",
 		"HIV Status",
 		"OB/GYN Surveillance",
-		"Data quality Surveillance"
+		"Data quality Surveillance",
+		"MER Indicator"
 	),
 	"fr" => array (
 		"R&eacute;capitulatif",
@@ -151,7 +152,8 @@ $cmdLabel = array (
 		"Écriture de smartcard",
 		"VIH Status",
 		"Surveillance de l'OB/GYN",
-		"Surveillance de la Qualité de données"
+		"Surveillance de la Qualité de données",
+		"Indicateur MER"
 	)
 );
 // pages mapped to labels. Also used to define IDs in navigation structure
