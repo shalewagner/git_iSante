@@ -8,7 +8,7 @@ $reportRequest = 'malaria';
 if (isset ($_REQUEST['rpt'])) $reportRequest = $_REQUEST['rpt'];
 
 // The main query - uses left join to show all potential indicators
-if ($reportRequest == 'tb' || $reportRequest == 'malaria' || $reportRequest == 'dataquality') {
+if ($reportRequest == 'tb' || $reportRequest == 'malaria' || $reportRequest == 'dataquality'|| $reportRequest =='mer') {
   $sqlByType = "select distinct subGroup$lang from dw_".$reportRequest."ReportLookup";
   $resultByType = databaseSelect()->query($sqlByType)->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -30,6 +30,9 @@ switch ($reportRequest) {
   break;
    case "dataquality":
   $reportTranslateName = 14;
+  break;
+     case "mer":
+  $reportTranslateName = 15;
   break;
 }
 
@@ -78,7 +81,7 @@ require_once 'backendAddon.php';
           <?php 
           $filterCount = 1;
           // Add indicator type selection for TB. Could expand to all report types
-          if ($reportRequest == 'tb' || $reportRequest == 'malaria' || $reportRequest == 'dataquality') { ?>
+          if ($reportRequest == 'tb' || $reportRequest == 'malaria' || $reportRequest == 'dataquality'|| $reportRequest == 'mer') { ?>
           <div class="span">
             <div class="filter-header"><?php 
               echo $filterCount.'. '.$reportFilteringLabels[$lang][51];
