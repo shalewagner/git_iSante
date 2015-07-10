@@ -282,7 +282,7 @@ $indicatorQueries = array(
 " 1"=> array(1, "where pregnancy=1 and HIVStatus in (1,2)", array(-1)), 
 " 2"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)= month(Date(concat(firstTestYy,firstTestMm,firstTestDd))))", array(-1)),
 " 3"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)> month(Date(concat(firstTestYy,firstTestMm,firstTestDd))))", array(-1)),
-" 4"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where Date(concat(firstTestYy,firstTestMm,firstTestDd)) is null or month(s.visitDate)< month(Date(concat(firstTestYy,firstTestMm,firstTestDd)))) ", array(-1)),
+" 4"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)< month(Date(concat(firstTestYy,firstTestMm,firstTestDd)))) ", array(-1)),
 
 "-2"=> array(0, "where pregnancy=1 and HIVStatus=1",NULL), 
 " 5"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=1", array(-2)),
