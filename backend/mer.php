@@ -33,12 +33,14 @@ function updateMerSnapshot($lastModified) {
 
 
         $qry = 'insert into dw_mer_snapshot(patientID,visitDate,HIVStatus)
-select distinct patientID,visitDate,case when o.value_numeric=2 then 1 when o.value_numeric=4 then 2 else 0 end HIVStatus
+select * from (		
+select distinct patientID,visitDate,case when o.value_numeric=2 then 1 when o.value_numeric=4 then 2 else 0 end as HIVStatus1
 from encValidAll e,obs o where o.encounter_id=e.encounter_id and o.concept_id=? 
 union all 
-select distinct patientID,visitDate,result from a_labs where labID in (?,?) and result is not null 
-on duplicate key update HIVStatus=case when o.value_numeric=2 then 1 when o.value_numeric=4 then 2 else 0 end';
-		$rc = database()->query($qry,array('71205','1567','1568'))->rowCount();
+select distinct patientID,visitDate,case when upper(result) like ? then 1 when upper(result) like ? then 2 else 0 end as HIVStatus1 from a_labs where labID in (?,?) and result is not null and result <>?
+) p
+on duplicate key update HIVStatus=HIVStatus1';
+		$rc = database()->query($qry,array('71205','POSI%','NEGA%','1567','1568',''))->rowCount();
 		echo "\n HIVStatus" . date('h:i:s') . "\n";
 	
         $qry = 'insert into dw_mer_snapshot(patientID,visitDate,ARVPatient)
@@ -88,8 +90,28 @@ on duplicate key update virologicTest=case when labID=181 then result else null 
 viralLoad=case when labID=103 then result else null end ';
 		$rc = database()->query($qry)->rowCount();
 		echo "\n virologicTest" . date('h:i:s') . "\n";
-			
-			
+		
+		 $qry = 'insert into dw_mer_snapshot(patientID,visitDate,pedVirologicTest)
+select patientID,visitDate,1 as pedVirologic from a_labs where labID in (181,182) and result=2
+on duplicate key update pedVirologicTest=pedVirologic';
+		$rc = database()->query($qry)->rowCount();
+		echo "\n pedVirologicTest " . date('h:i:s') . "\n";
+		
+	$qry = 'insert into dw_mer_snapshot(patientID,visitDate,breastfeeding)
+SELECT patientID,visitDate,case when pedFeedBreast=1 or pedFeedMixed=1 then 1
+	                           when pedFeedBreast=4 or pedFeedMixed=4 then 2
+							   when pedFeedBreast=8 and pedFeedMixed=8 then 3
+							   else 0 end as breastfeeding
+	 FROM `a_vitals` WHERE pedFeedBreast (1,4,8) or pedFeedMixed (1,4,8)
+on duplicate key update breastfeeding=case when pedFeedBreast=1 or pedFeedMixed=1 then 1
+	                           when pedFeedBreast=4 or pedFeedMixed=4 then 2
+							   when pedFeedBreast=8 and pedFeedMixed=8 then 3
+							   else 0 end';
+		$rc = database()->query($qry)->rowCount();
+		echo "\n breastfeeding " . date('h:i:s') . "\n";
+	
+	
+					
 	   $qry = ' insert into dw_mer_snapshot(patientID,visitDate,stagingCd4Viralload)
 select patientID,visitDate,1 as stagingCd4Viralload 
 from (
@@ -257,10 +279,10 @@ function merSlices($key, $orgType, $time_period) {
 
 $indicatorQueries = array( 
 "-1"=> array(0, "where pregnancy=1 or accouchement=1", NULL), 
-" 1"=> array(1, "where pregnancy=1 and HIVStatus is not null", array(-1)), 
-" 2"=> array(1, "where pregnancy=1 and HIVStatus is not null and patientID in (select patientID from a_vitals  where month(s.visitDate)=month(Date(concat(firstTestYy,firstTestMm,firstTestDd))))", array(-1)),
-" 3"=> array(1, "where pregnancy=1 and HIVStatus is not null and patientID in (select patientID from a_vitals  where month(s.visitDate)>month(Date(concat(firstTestYy,firstTestMm,firstTestDd))))", array(-1)),
-" 4"=> array(1, "where pregnancy=1 and HIVStatus is not null and patientID in (select patientID from a_vitals  where Date(concat(firstTestYy,firstTestMm,firstTestDd)) is null ) ", array(-1)),
+" 1"=> array(1, "where pregnancy=1 and HIVStatus in (1,2)", array(-1)), 
+" 2"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)= month(Date(concat(firstTestYy,firstTestMm,firstTestDd))))", array(-1)),
+" 3"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)> month(Date(concat(firstTestYy,firstTestMm,firstTestDd))))", array(-1)),
+" 4"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where Date(concat(firstTestYy,firstTestMm,firstTestDd)) is null or month(s.visitDate)< month(Date(concat(firstTestYy,firstTestMm,firstTestDd)))) ", array(-1)),
 
 "-2"=> array(0, "where pregnancy=1 and HIVStatus=1",NULL), 
 " 5"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=1", array(-2)),
@@ -269,27 +291,27 @@ $indicatorQueries = array(
 " 8"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=3", array(-2)), 
 
 
-" 9"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-2)), 
-" 10"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=61", array(-2)), 
-"11"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 62 and 365", array(-2)), 
-"12"=> array(1, ",patient p where statutVihActuel=1 and virologicTest=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=61", array(-2)), 
-"13"=> array(1, ",patient p where statutVihActuel=1 and virologicTest=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 62 and 365", array(-2)), 
+" 9"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>0 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-2)), 
+" 10"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>0 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=61", array(-2)), 
+"11"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>0 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 62 and 365", array(-2)), 
+"12"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>0 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=61", array(-2)), 
+"13"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>0 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 62 and 365", array(-2)), 
 
 /* HIV-infected linked to ART/ not linked to ART/ unknown linked to ART*/
 "-3"=> array(0, ",patient p where HIVForm=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", NULL), 
 "14"=> array(1, ",patient p where HIVForm=1 and linkToArv=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-3)), 
 "15"=> array(1, ",patient p where HIVForm=1 and linkToArv=2 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-3)), 
 "16"=> array(1, ",patient p where HIVForm=1 and linkToArv=0 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-3)), 
+// labID=182 for antigenemie UP24; 181 for pcr 
+/* HIV-uninfected not breastfeeding */ 
+"17"=> array(1, ",patient p where HIVForm=1 and pedVirologicTest=1 and breastfeeding=2 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-3)), 
+"18"=> array(1, ",patient p where HIVForm=1 and pedVirologicTest=1 and breastfeeding=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-3)),
+"19"=> array(1, ",patient p where HIVForm=1 and pedVirologicTest=1 and breastfeeding=3 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-3)),
 
 /* HIV-uninfected not breastfeeding */ 
-"17"=> array(1, "where 1=2", array(-3)), 
-"18"=> array(1, "where 1=2", array(-3)),
-"19"=> array(1, "where 1=2", array(-3)),
-
-/* HIV-uninfected not breastfeeding */ 
-"20"=> array(1, "where 1=2", array(-3)), 
-"21"=> array(1, "where 1=2", array(-3)),
-"22"=> array(1, "where 1=2", array(-3)),
+"20"=> array(1, ",patient p where HIVForm=1 and pedVirologicTest=0 and statutVihActuel=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-3)), 
+"21"=> array(1, ",patient p where HIVForm=1 and noFollowup=1 and statutVihActuel=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-3)),
+"22"=> array(1, ",patient p where HIVForm=1 and isDeath=1 and statutVihActuel=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-3)),
 
 
 "23"=> array(1, ",patient p where HIVStatus=1 and cotrimoxazole=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-2)), 
@@ -318,15 +340,15 @@ $indicatorQueries = array(
 "43"=>array(0, ", patient p  where HIVStatus=1 and stagingCd4Viralload=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 >=15 ", NULL), 
 
 "-4"=> array(0, " where TBRegistered=1", NULL),
-"44"=> array(1, " where HIVForm is not null and TBRegistered=1", array(-4)),
-"45"=>array(1, ", patient p  where HIVForm is not null and TBRegistered=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 < 1 ", array(-4)),
-"46"=>array(1, ", patient p  where HIVForm is not null and TBRegistered=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 1 and 4 ", array(-4)),
-"47"=>array(1, ", patient p  where HIVForm is not null and TBRegistered=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 5 and 9 ", array(-4)),
-"48"=>array(1, ", patient p  where HIVForm is not null and TBRegistered=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 10 and 14 ", array(-4)),
-"49"=>array(1, ", patient p  where HIVForm is not null and TBRegistered=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 15 and 19 ", array(-4)),
-"50"=>array(1, ", patient p  where HIVForm is not null and TBRegistered=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 >19 ", array(-4)), 
-"51"=> array(1, " where HIVForm=1 and TBRegistered=1", array(-4)),
-"52"=> array(1, " where HIVForm=2 and TBRegistered=1", array(-4)),
+"44"=> array(1, " where HIVForm=1 and TBRegistered=1", array(-4)),
+"45"=>array(1, ", patient p  where HIVStatus in (1,2) and TBRegistered=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 < 1 ", array(-4)),
+"46"=>array(1, ", patient p  where HIVStatus in (1,2) and TBRegistered=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 1 and 4 ", array(-4)),
+"47"=>array(1, ", patient p  where HIVStatus in (1,2) and TBRegistered=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 5 and 9 ", array(-4)),
+"48"=>array(1, ", patient p  where HIVStatus in (1,2) and TBRegistered=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 10 and 14 ", array(-4)),
+"49"=>array(1, ", patient p  where HIVStatus in (1,2) and TBRegistered=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 15 and 19 ", array(-4)),
+"50"=>array(1, ", patient p  where HIVStatus in (1,2) and TBRegistered=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 >19 ", array(-4)), 
+"51"=> array(1, " where HIVStatus=1 and TBRegistered=1", array(-4)),
+"52"=> array(1, " where HIVStatus=2 and TBRegistered=1", array(-4)),
 
 
 
@@ -351,7 +373,7 @@ $indicatorQueries = array(
 "68"=>array(1, ", patient p  where newHIV=1 and stagingCd4Viralload=1 and ipt=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 10 and 14 ", array(-6)),
 "69"=>array(1, ", patient p  where newHIV=1 and stagingCd4Viralload=1 and ipt=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 15 and 19 ", array(-6)),
 "70"=>array(1, ", patient p  where newHIV=1 and stagingCd4Viralload=1 and ipt=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 >19 ", array(-6)), 
-"71"=>array(1, ", patient p  where newHIV=1 and stagingCd4Viralload=1 and ipt=11 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 < 15 ", array(-6)), 
+"71"=>array(1, ", patient p  where newHIV=1 and stagingCd4Viralload=1 and ipt=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 < 15 ", array(-6)), 
 "72"=>array(1, ", patient p  where newHIV=1 and stagingCd4Viralload=1 and ipt=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 >=15 ", array(-6)), 
 
 
@@ -410,7 +432,7 @@ $indicatorQueries = array(
 "117"=>array(0, ", patient p  where HIVForm=1 and AntiRetroViral>=1 and newEnrollArt=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 25 and 49 ", NULL),
 "118"=>array(0, ", patient p  where HIVForm=1 and AntiRetroViral>=1 and newEnrollArt=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 > 49 ", NULL),
 
-"-8"=> array(1, " where HIVForm=1 and patientID in (select patientID from pepfarTable p where p.visitDate<=DATE_ADD(s.visitDate, interval -12 month))", NULL),
+"-8"=> array(0, " where HIVForm=1 and patientID in (select patientID from pepfarTable p where p.visitDate<=DATE_ADD(s.visitDate, interval -12 month))", NULL),
 "119"=> array(1, " where HIVForm=1 and arvPatient=1 and isdeath=0 and s.patientID in (select patientID from pepfarTable p where p.visitDate<=DATE_ADD(s.visitDate, interval -12 month))", array(-8)),
 "120"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1 and isdeath=0 and s.patientID in (select patientID from pepfarTable p where p.visitDate<=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 < 1 ", array(-8)),
 "121"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1 and isdeath=0 and s.patientID in (select patientID from pepfarTable p where p.visitDate<=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 1 and 4 ", array(-8)),
@@ -419,16 +441,16 @@ $indicatorQueries = array(
 "124"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1 and isdeath=0 and s.patientID in (select patientID from pepfarTable p where p.visitDate<=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 15 and 19 ", array(-8)),
 "125"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1 and isdeath=0 and s.patientID in (select patientID from pepfarTable p where p.visitDate<=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 >19 ", array(-8)),
 
-"-9"=> array(1, " where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad=1 and p.visitDate>=DATE_ADD(s.visitDate, interval -6 month))", NULL),
-"126"=> array(1, " where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad=1 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month))", array(-9)),
-"127"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad=1 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 < 1 ", array(-9)),
-"128"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad=1 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 1 and 4 ", array(-9)),
-"129"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad=1 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 5 and 9 ", array(-9)),
-"130"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad=1 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 10 and 14 ", array(-9)),
-"131"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad=1 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 15 and 19 ", array(-9)),
-"132"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad=1 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 >19 ", array(-9)),
+"-9"=> array(0, " where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad>0 and p.visitDate>=DATE_ADD(s.visitDate, interval -6 month))", NULL),
+"126"=> array(1, " where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad>0 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month))", array(-9)),
+"127"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad>0 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 < 1 ", array(-9)),
+"128"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad>0 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 1 and 4 ", array(-9)),
+"129"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad>0 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 5 and 9 ", array(-9)),
+"130"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad>0 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 10 and 14 ", array(-9)),
+"131"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad>0 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 15 and 19 ", array(-9)),
+"132"=>array(1, ", patient p  where HIVForm=1 and arvPatient=1  and s.patientID in (select patientID from dw_mer_snapshot p where viralLoad>0 and p.visitDate>=DATE_ADD(s.visitDate, interval -12 month)) and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 >19 ", array(-9)),
 
-"-10"=> array(1, " where TX_UNDETECT_D=1", NULL),
+"-10"=> array(0, " where TX_UNDETECT_D=1", NULL),
 "133"=> array(1, " where TX_UNDETECT_N=1", array(-10)),
 "134"=>array(1, ", patient p  where TX_UNDETECT_N=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 < 1 ", array(-10)),
 "135"=>array(1, ", patient p  where TX_UNDETECT_N=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 1 and 4 ", array(-10)),
