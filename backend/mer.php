@@ -93,7 +93,7 @@ viralLoad=case when labID=103 then result else null end ';
 		
 		 $qry = 'insert into dw_mer_snapshot(patientID,visitDate,pedVirologicTest)
 select patientID,visitDate,1 as pedVirologic from a_labs where labID in (181,182) and result=2
-on duplicate key update pedVirologicTest=pedVirologic';
+on duplicate key update pedVirologicTest=1';
 		$rc = database()->query($qry)->rowCount();
 		echo "\n pedVirologicTest " . date('h:i:s') . "\n";
 		
