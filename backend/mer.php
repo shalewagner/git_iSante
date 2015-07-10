@@ -102,7 +102,7 @@ SELECT patientID,visitDate,case when pedFeedBreast=1 or pedFeedMixed=1 then 1
 	                           when pedFeedBreast=4 or pedFeedMixed=4 then 2
 							   when pedFeedBreast=8 and pedFeedMixed=8 then 3
 							   else 0 end as breastfeeding
-	 FROM `a_vitals` WHERE pedFeedBreast (1,4,8) or pedFeedMixed (1,4,8)
+	 FROM `a_vitals` WHERE pedFeedBreast in (1,4,8) or pedFeedMixed in (1,4,8)
 on duplicate key update breastfeeding=case when pedFeedBreast=1 or pedFeedMixed=1 then 1
 	                           when pedFeedBreast=4 or pedFeedMixed=4 then 2
 							   when pedFeedBreast=8 and pedFeedMixed=8 then 3
