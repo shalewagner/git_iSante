@@ -180,13 +180,15 @@ on duplicate key update TX_UNDETECT_D=1';
 
 
 	 $qry = 'insert into dw_mer_snapshot(patientID,visitDate,AntiRetroViral)
-SELECT distinct patientID,visitDate,count(drugID) as AntiRetroViral FROM `a_drugs` WHERE drugID in (1,8,10,12,20,29,31,33,34,11,23,5,17,21) group by 1,2
-on duplicate key update AntiRetroViral=1';
+	 select * from (
+SELECT distinct patientID,visitDate,count(drugID) as AntiRetroViral1 FROM `a_drugs` WHERE drugID in (1,8,10,12,20,29,31,33,34,11,23,5,17,21) group by 1,2
+) P
+on duplicate key update AntiRetroViral=AntiRetroViral1';
 		$rc = database()->query($qry)->rowCount();
 		echo "\n ipt" . date('h:i:s') . "\n";			
 		
 	 $qry = 'insert into dw_mer_snapshot(patientID,visitDate,statutVihActuel)
-SELECT distinct patientID,visitDate,1 as AntiRetroViral FROM `a_vitals` WHERE pedCurrHiv=1
+SELECT distinct patientID,visitDate,1 as statutVihActuel FROM `a_vitals` WHERE pedCurrHiv=1
 on duplicate key update statutVihActuel=1';
 		$rc = database()->query($qry)->rowCount();
 		echo "\n ipt" . date('h:i:s') . "\n";			
@@ -288,14 +290,14 @@ $indicatorQueries = array(
 " 5"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=1", array(-2)),
 " 6"=> array(1, "where pregnancy=1 and HIVStatus=1 and PatientID in(select p.patientID from dw_pregnancy_ranges p,dw_mer_snapshot p1 where p.patientID=p1.patientID and p1.AntiRetroViral>=1 and p1.visitDate between DATE_ADD(startdate,INTERVAL -1 month) and stopdate)", array(-2)), 
 " 7"=> array(1, "where pregnancy=1 and HIVStatus=1 and patientID in(select p.patientID from dw_pregnancy_ranges p,dw_mer_snapshot p1 where p.patientID=p1.patientID and p1.AntiRetroViral>=1 and p1.visitDate not between DATE_ADD(startdate,INTERVAL -1 month) and stopdate)", array(-2)), 
-" 8"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=3", array(-2)), 
+" 8"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=2", array(-2)), 
 
 
-" 9"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>0 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-2)), 
-" 10"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>0 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=61", array(-2)), 
-"11"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>0 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 62 and 365", array(-2)), 
-"12"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>0 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=61", array(-2)), 
-"13"=> array(1, ",patient p where statutVihActuel=1 and virologicTest>0 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 62 and 365", array(-2)), 
+" 9"=> array(1, ",patient p where statutVihActuel=1 and virologicTest is not null and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-2)), 
+" 10"=> array(1, ",patient p where statutVihActuel=1 and virologicTest is not null and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=61", array(-2)), 
+"11"=> array(1, ",patient p where statutVihActuel=1 and virologicTest is not null and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 62 and 365", array(-2)), 
+"12"=> array(1, ",patient p where statutVihActuel=1 and virologicTest is not null and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=61", array(-2)), 
+"13"=> array(1, ",patient p where statutVihActuel=1 and virologicTest is not null and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 62 and 365", array(-2)), 
 
 /* HIV-infected linked to ART/ not linked to ART/ unknown linked to ART*/
 "-3"=> array(0, ",patient p where HIVForm=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", NULL), 
@@ -546,4 +548,3 @@ function genAgeGpQueries1 ($i, $qualifier) {
 }
 */
 ?>
-
