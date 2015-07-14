@@ -1,24 +1,34 @@
 <? 
+
 function updateMerSnapshot($lastModified) {
-        $qry = 'insert into dw_mer_snapshot(patientID,visitDate,TBRegistered,tbTraetementStart,tbTestVih,tbArvDate,vitalPb,tbOnArv,tbTraetment)
+        $qry = 'insert into dw_mer_snapshot(patientID,visitDate,TBRegistered,vitalPb,tbOnArv,tbTraetment)
                 SELECT DISTINCT patientID, visitDate, case when o.concept_id IN (71174,71177) then  1 else 0 end AS TBRegistered,
-				case when o.concept_id IN (71193) then  o.value_datetime else null end AS tbTraetementStart,
-				case when o.concept_id IN (71206) then  o.value_datetime else null end AS tbTestVih,
-				case when o.concept_id IN (71211) then  o.value_datetime else null end AS tbArvDate,
 				case when o.concept_id IN (70823) then  o.value_numeric else null end AS vitalPb,
 				case when o.concept_id IN (71209) then  1 else null end AS tbOnArv,
 				case when concept_id in (71218,71196,71199,71197,71432,71433,71220,71198,71434) then 1 else 0 end as tbTraetment
                 FROM encValidAll e, obs o
                 WHERE e.encounter_id = o.encounter_id AND o.concept_id IN (71174,71177,71211,71193,71206,71211,71218,71196,71199,71197,71432,71433,71220,71198,71434,70823,71209) 
 				      on duplicate key update TBRegistered=1,
-					  tbTraetementStart=case when o.concept_id IN (71193) then  o.value_datetime else null end,
-					  tbTestVih=case when o.concept_id IN (71206) then  o.value_datetime else null end,
-					  tbArvDate=case when o.concept_id IN (71211) then  o.value_datetime else null end,
 					  tbTraetment=case when concept_id in (71218,71196,71199,71197,71432,71433,71220,71198,71434) then 1 else 0 end,
 					  vitalPb=case when o.concept_id IN (70823) then  o.value_numeric else null end,
 					  tbOnArv=case when o.concept_id IN (71209) then  1 else null end';
 		$rc = database()->query($qry)->rowCount();
 		echo "\n TBRegistered" . date('h:i:s') . "\n";
+		
+		
+		 $qry = 'insert into dw_mer_snapshot(patientID,visitDate,tbTraetementStart,tbTestVih,tbArvDate)
+select distinct patientID,o.value_datetime as vistitDate,
+case when o.concept_id IN (71193) then  1 else 0 end AS tbTraetementStart,
+case when o.concept_id IN (71206) then  1 else 0 end AS tbTestVih,
+case when o.concept_id IN (71211) then  1 else 0 end AS tbArvDate
+FROM encValidAll e, obs o
+ WHERE e.encounter_id = o.encounter_id AND o.concept_id IN (71193,71206,71211)
+ on duplicate key update tbTraetementStart=case when o.concept_id IN (71193) then  1 else 0 end,
+					  tbTestVih=case when o.concept_id IN (71206) then  1 else 0 end,
+					  tbArvDate=case when o.concept_id IN (71211) then  1 else 0 end';
+		$rc = database()->query($qry)->rowCount();
+		echo "\n tbArvDate" . date('h:i:s') . "\n";
+				
 	
         $qry = 'insert into dw_mer_snapshot(patientID,visitDate,pregnancy)
                 select distinct patientID,visitDate,1 as pregnancy from a_vitals where pregnant =1
@@ -284,7 +294,7 @@ $indicatorQueries = array(
 " 1"=> array(1, "where pregnancy=1 and HIVStatus in (1,2)", array(-1)), 
 " 2"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)= month(Date(concat(firstTestYy,firstTestMm,firstTestDd))))", array(-1)),
 " 3"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)> month(Date(concat(firstTestYy,firstTestMm,firstTestDd))))", array(-1)),
-" 4"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)< month(Date(concat(firstTestYy,firstTestMm,firstTestDd)))) ", array(-1)),
+" 4"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)< month(Date(concat(firstTestYy,firstTestMm,firstTestDd))))", array(-1)),
 
 "-2"=> array(0, "where pregnancy=1 and HIVStatus=1",NULL), 
 " 5"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=1", array(-2)),
@@ -362,10 +372,10 @@ $indicatorQueries = array(
 "57"=>array(1, ", patient p  where HIVForm=1 and TBRegistered=1 and ARVPatient=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 10 and 14 ", array(-5)),
 "58"=>array(1, ", patient p  where HIVForm=1 and TBRegistered=1 and ARVPatient=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 between 15 and 19 ", array(-5)),
 "59"=>array(1, ", patient p  where HIVForm=1 and TBRegistered=1 and ARVPatient=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 >19 ", array(-5)), 
-"60"=> array(1, " where HIVForm=1 and TBRegistered=1 and ARVPatient=1 and month(tbTestVih)=month(visitDate)", array(-5)),
-"61"=> array(1, " where HIVForm=1 and TBRegistered=1 and ARVPatient=1 and DATE_ADD(visitDate,INTERVAL -1 month)>=tbTestVih", array(-5)),
-"62"=> array(1, " where HIVForm=1 and TBRegistered=1 and ARVPatient=1 and tbArvDate<DATE_ADD(tbTraetementStart,INTERVAL 8 week)", array(-5)),
-"63"=> array(1, " where HIVForm=1 and TBRegistered=1 and ARVPatient=1 and tbArvDate>=DATE_ADD(tbTraetementStart,INTERVAL 8 week)", array(-5)),
+"60"=> array(1, " where HIVForm=1 and TBRegistered=1 and ARVPatient=1 and patientID in (select patientID from dw_mer_snapshot p where month(p.visitDate)=month(s.visitDate) and tbTestVih=1)", array(-5)),
+"61"=> array(1, " where HIVForm=1 and TBRegistered=1 and ARVPatient=1 and patientID in (select patientID from dw_mer_snapshot p where DATE_ADD(s.visitDate,INTERVAL -1 month)>=month(p.visitDate) and tbTestVih=1)", array(-5)),
+"62"=> array(1, " where HIVForm=1 and TBRegistered=1 and tbArvDate=1 and patientID in (select patientID from dw_mer_snapshot p where s.visitDate<DATE_ADD(p.visitDate,INTERVAL 8 week) and tbTraetementStart=1)", array(-5)),
+"63"=> array(1, " where HIVForm=1 and TBRegistered=1 and tbArvDate=1 and patientID in (select patientID from dw_mer_snapshot p where s.visitDate>=DATE_ADD(p.visitDate,INTERVAL 8 week) and tbTraetementStart=1)", array(-5)),
 
 "-6"=> array(0, " where newHIV=1 and stagingCd4Viralload=1", NULL),
 "64"=> array(1, " where newHIV=1 and stagingCd4Viralload=1 and ipt=1", array(-6)),
