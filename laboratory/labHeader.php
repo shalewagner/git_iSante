@@ -87,7 +87,7 @@ function showPatientIdentifier ($pid, $text, $identifier) {
 var patientInfo = {
 	border: false,
 	style: { margin: '0 3px 3px'},
-	html: '<div class="print-break-before">PATIENT <span><? echo $GLOBALS['existingData']['lname'].', '.$GLOBALS['existingData']['fname'].'</span> <span>'.$labLoc['dob'][$lang].' : ' . getDob().'</span><span>'.$labLoc['sex'][$lang].' : '.getGender().'</span><span>'.$labLoc['fnameMother'][$lang].' : '.$GLOBALS['existingData']['fnameMother'].'</span>'; ?>&nbsp;</div><div class="print-break-before"><?=$labLoc['identifiers'][$lang]?> <?=showPatientIdentifier($pid, 'Code national', $GLOBALS['existingData']['nationalID']).showPatientIdentifier($pid, 'Code PC', 'pc').showPatientIdentifier($pid, 'Code OG', 'ob').showPatientIdentifier($pid, 'Code ST', 'st')?></div>'
+	html: '<div class="print-break-before">PATIENTs <span><? echo htmlspecialchars($GLOBALS['existingData']['lname'],ENT_QUOTES).', '.htmlspecialchars($GLOBALS['existingData']['fname'],ENT_QUOTES).'</span> <span>'.$labLoc['dob'][$lang].' : ' . getDob().'</span><span>'.$labLoc['sex'][$lang].' : '.getGender().'</span><span>'.$labLoc['fnameMother'][$lang].' : '.htmlspecialchars($GLOBALS['existingData']['fnameMother'],ENT_QUOTES).'</span>'; ?>&nbsp;</div><div class="print-break-before"><?=$labLoc['identifiers'][$lang]?> <?=showPatientIdentifier($pid, 'Code national', $GLOBALS['existingData']['nationalID']).showPatientIdentifier($pid, 'Code PC', 'pc').showPatientIdentifier($pid, 'Code OG', 'ob').showPatientIdentifier($pid, 'Code ST', 'st')?></div>'
 }
 
 var orderNumber = {
