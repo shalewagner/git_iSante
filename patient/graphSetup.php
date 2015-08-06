@@ -233,6 +233,7 @@ where concept.short_name = ?
   }
 
   
+   
   //collect cd4 data
   $cd4DataOutput = array();
   foreach (database()->query('
@@ -241,6 +242,7 @@ from cd4Table
 where patientid = cast(? as char(11))', array($pid))->fetchAll() as $row) {
     $cd4DataOutput[] = array($row['displayDate'], $row['value'] + 0);
   }
+
 
 
   //collect height data
@@ -266,6 +268,11 @@ from a_vitals
 where not (vitalHeight is null and vitalHeightCm is null)
  and not (vitalHeight = ? and vitalHeightCm = ?)
  and patientid = cast(? as char(11))', array('', '', $pid))->fetchAll();
+ 
+
+  
+  //////////////////////////////////////////////////////////////
+ 
 
   $heightDataOutput = array();
   foreach (array_merge($vitalsTableBirthHeightRows,
@@ -287,6 +294,8 @@ where not (vitalHeight is null and vitalHeightCm is null)
       $heightDataOutput[] = array($row['displayDate'], $height + 0);
     }
   }
+
+
 
 
   //collect head circumference data
@@ -332,12 +341,32 @@ where concept.short_name = ?
     }
   }
 
+
+
+
+$bmiDataOutput=array();
+foreach ($weightDataOutput as $weightData)
+{ 
+$height=0;
+foreach ($heightDataOutput as $heigtData)
+  {
+	 $height=$heigtData['1']/100;
+	//if($weightData['0']==$heigtData['0']&&$heigtData['1']>0)
+	//{ $bmiDataOutput[]=array($weightData['0'], $weightData[1]/($heigtData['1']/100)/($heigtData['1']/100));}
+  }
+  if($height>0)
+  $bmiDataOutput[]=array($weightData['0'], $weightData[1]/($height)/($height));
+}
+
+
+
   //write out JSON arrays for all the collected data
 ?>
 CoverSheetGraph.data = {};
 CoverSheetGraph.data.weight = CoverSheetGraph.dataArrayFormat(<?= json_encode($weightDataOutput) ?>);
 CoverSheetGraph.data.cd4 = CoverSheetGraph.dataArrayFormat(<?= json_encode($cd4DataOutput) ?>);
 CoverSheetGraph.data.height = CoverSheetGraph.dataArrayFormat(<?= json_encode($heightDataOutput) ?>);
+CoverSheetGraph.data.bmi = CoverSheetGraph.dataArrayFormat(<?= json_encode($bmiDataOutput) ?>);
 CoverSheetGraph.data.headCircumference =
     CoverSheetGraph.dataArrayFormat(<?= json_encode($headCircumferenceDataOutput) ?>);
 /** Removing for now - combinedHeightWeight isn't being used & GrowthChart is
@@ -345,6 +374,22 @@ CoverSheetGraph.data.headCircumference =
     CoverSheetGraph.data.combinedHeightWeight = 
     GrowthChart.DataInput.matchDate(CoverSheetGraph.data.height,
 				    CoverSheetGraph.data.weight); 
+                    
+                    
+                    
+                    
+CoverSheetBMI.data = {};
+CoverSheetBMI.data.weight = CoverSheetBMI.dataArrayFormat(<?= json_encode($weightDataOutput) ?>);
+CoverSheetBMI.data.cd4 = CoverSheetBMI.dataArrayFormat(<?= json_encode($cd4DataOutput) ?>);
+CoverSheetBMI.data.height = CoverSheetBMI.dataArrayFormat(<?= json_encode($heightDataOutput) ?>);
+CoverSheetBMI.data.bmi = CoverSheetBMI.dataArrayFormat(<?= json_encode($bmiDataOutput) ?>);
+CoverSheetBMI.data.headCircumference =
+    CoverSheetBMI.dataArrayFormat(<?= json_encode($headCircumferenceDataOutput) ?>);
+/** Removing for now - combinedHeightWeight isn't being used & GrowthChart is
+    no longer being calculated. **/
+                    
+                                     
+                    
 <?php
 }
 ?>
