@@ -1,11 +1,25 @@
 
 var CoverSheetGraph = CoverSheetGraph || {};
+var CoverSheetBMI = CoverSheetBMI ||{};
 
 CoverSheetGraph.dataDateFormat = function (element) {
     return [Date.parseDate(element[0], 'Y-m-d'), element[1]];
 };
 
+
+CoverSheetBMI.dataDateFormat = function (element) {
+    return [Date.parseDate(element[0], 'Y-m-d'), element[1]];
+};
+
+
 CoverSheetGraph.dataSort = function (left, right) {
+    if (left[0] > right[0]) return 1;
+    if (left[0] < right[0]) return -1;
+    return 0;
+};
+
+
+CoverSheetBMI.dataSort = function (left, right) {
     if (left[0] > right[0]) return 1;
     if (left[0] < right[0]) return -1;
     return 0;
@@ -17,10 +31,20 @@ CoverSheetGraph.dataArrayFormat = function (data) {
     return data;
 };
 
+
+CoverSheetBMI.dataArrayFormat = function (data) {
+    data = data.map(CoverSheetBMI.dataDateFormat);
+    data.sort(CoverSheetBMI.dataSort);
+    return data;
+};
+
+
 CoverSheetGraph.dataCrop = function (theArray) {
-    var lastDate = theArray.slice(-1)[0][0];
-    var maximum = lastDate.add(Date.MONTH, 1);
-    var minimum = maximum.add(Date.YEAR, -2);
+   var lastDate = theArray.slice(-1)[0][0];
+    var maximum;
+    if(lastDate!= null) maximum = lastDate.add(Date.MONTH, 1);
+    var minimum;
+    if(lastDate!= null) minimum = maximum.add(Date.YEAR, -2);
     var returnData = [];
     for (var i = 0; i < theArray.length; ++i) {
 	thisDate = theArray[i][0];
@@ -30,6 +54,25 @@ CoverSheetGraph.dataCrop = function (theArray) {
     }
     return returnData;
 };
+
+
+CoverSheetBMI.dataCrop = function (theArray) {
+    var lastDate = theArray.slice(-1)[0][0];
+    var maximum;
+    if(lastDate!= null) maximum = lastDate.add(Date.MONTH, 1);
+    var minimum;
+    if(lastDate!= null) minimum = maximum.add(Date.YEAR, -2);
+    var returnData = [];
+    for (var i = 0; i < theArray.length; ++i) {
+	thisDate = theArray[i][0];
+	if (thisDate >= minimum && thisDate <= maximum) {
+	    returnData.push(theArray[i]);
+	}
+    }
+    return returnData;
+};
+
+
 
 CoverSheetGraph.genSeries = function (namePrefix, dataArray, xTitle, yTitle) {
     var formatedData = CoverSheetGraph.dataCrop(dataArray).map(function (data) {
@@ -44,12 +87,23 @@ CoverSheetGraph.genSeries = function (namePrefix, dataArray, xTitle, yTitle) {
 	    radius: 5,
 	    yAxis: 1
 	};
+    
     } else {
+    
+    if (namePrefix == "bmi") {
+	var seriesStyle = {
+	    color: "#888aff",
+	    radius: 3,
+	    yAxis: 0
+	};
+    }
+    else {
 	var seriesStyle = {
 	    color: "#555555",
 	    radius: 3,
 	    yAxis: 0
 	};
+    }
     }
 
     return {
@@ -73,7 +127,74 @@ CoverSheetGraph.genSeries = function (namePrefix, dataArray, xTitle, yTitle) {
     };
 };
 
+
+
+
+
+
+CoverSheetBMI.genSeries = function (namePrefix, dataArray, xTitle, yTitle) {
+    var formatedData = CoverSheetBMI.dataCrop(dataArray).map(function (data) {
+	    return {x: data[0].getTime(),
+		    y: data[1],
+		    dataDate: data[0]};
+	});
+
+    if (namePrefix == "cd4") {
+	var seriesStyle = {
+	    color: "#ff8888",
+	    radius: 5,
+	    yAxis: 1
+	};
+    
+    } else {
+    
+    if (namePrefix == "bmi") {
+	var seriesStyle = {
+	    color: "#888aff",
+	    radius: 3,
+	    yAxis: 0
+	};
+    }
+    else {
+	var seriesStyle = {
+	    color: "#555555",
+	    radius: 3,
+	    yAxis: 0
+	};
+    }
+    }
+
+    return {
+	animation: false,
+	connectNulls: false,
+	data: formatedData,
+	color: seriesStyle.color,
+	lineWidth: 3,
+	name: yTitle,
+	shadow: false,
+	yAxis: seriesStyle.yAxis,
+	marker: {
+	    radius: seriesStyle.radius,
+	    symbol: "circle"
+	},
+	events: {
+	    legendItemClick: function(event) {
+		return false;
+	    }
+	}
+    };
+};
+
+
+
+
+
+
+
+
+
 CoverSheetGraph.gen3 = function (series, maxDate) {
+if(maxDate!= null) maxDate=maxDate.add(Date.MONTH, 1).getTime();
     var chartRender = function(el) {
 	new Highcharts.Chart({
 		chart: {
@@ -112,8 +233,14 @@ CoverSheetGraph.gen3 = function (series, maxDate) {
 			if (this.series.name == '<?= $coverHeaders[$lang][11] ?>') {
 			    return this.y + ' kg (' + displayDate + ')';
 			} else {
+            
+            if (this.series.name == '<?= $coverHeaders[$lang][14] ?>') {
+			    return 'BMI ' + this.y + ' (' + displayDate + ')';
+			}
+            else {
 			    return 'CD4 ' + this.y + ' (' + displayDate + ')';
 			}
+            }
 		    },
 		    backgroundColor: "rgba(218, 231, 246, .9)",
 		    borderColor: "#99bbe8",
@@ -134,7 +261,7 @@ CoverSheetGraph.gen3 = function (series, maxDate) {
 		    tickLength: 0,
 		    startOnTick: true,
 		    minPadding: 0,
-		    max: maxDate.add(Date.MONTH, 1).getTime(),
+		    max: maxDate,
 		    labels: {
 			align: "right",
 			rotation: -45,
@@ -209,6 +336,151 @@ CoverSheetGraph.gen3 = function (series, maxDate) {
      };
 };
 
+
+
+
+
+CoverSheetBMI.gen4 = function (series, maxDate) {
+if(maxDate!= null) maxDate=maxDate.add(Date.MONTH, 1).getTime();
+    var chartRender = function(el) {
+	new Highcharts.Chart({
+		chart: {
+		    renderTo: el.el.first().first().id,
+		    type: 'line'
+		    //spacingTop: 0,
+		    //spacingBottom: 14,
+		    //spacingLeft: 14,
+		    //spacingRIght: 30
+		},
+		credits: {
+		    enabled: false
+		},
+		title: {text: null},
+		plotOptions: {
+		    line: {
+			states: {
+			    hover: {
+				lineWidth: 3
+			    }
+			}
+		    }
+		},
+		legend: {
+		    enabled: false,
+		    verticalAlign: "top",
+		    borderWidth: 0,
+		    itemStyle: {cursor: 'default'},
+		    itemHoverStyle: {cursor: 'default'}
+		},
+		tooltip: {
+		    formatter: function () {
+			var displayDate = this.point.dataDate.getDate() + '/'
+			    + (this.point.dataDate.getMonth() + 1) + '/'
+			    + this.point.dataDate.getFullYear();            
+            if (this.series.name == '<?= $coverHeaders[$lang][14] ?>') {
+			    return 'BMI ' + this.y + ' (' + displayDate + ')';
+			}
+		    },
+		    backgroundColor: "rgba(218, 231, 246, .9)",
+		    borderColor: "#99bbe8",
+		    borderWidth: 1,
+		    borderRadius: 0,
+		    shadow: false,
+		    style: {"font-family": "Tahoma",
+			    "font-size": "10px",
+			    "font-weight": "bold",
+			    "color": "#15428B"}
+		},
+		xAxis: {
+		    type: 'datetime',
+		    lineColor: "#69aBc8",
+		    gridLineColor: "#eeeeee",
+		    gridLineWidth: 1,
+		    tickPixelInterval: 35,
+		    tickLength: 0,
+		    startOnTick: true,
+		    minPadding: 0,
+		    max: maxDate,
+		    labels: {
+			align: "right",
+			rotation: -45,
+			style: {"font-family": "Tahoma",
+				"font-size": "11px"},
+			formatter: function () {
+			    return Highcharts.dateFormat('%e/%m/%y', this.value);
+			}
+		    }
+		},
+		yAxis: [{
+			min: 0,
+			lineColor: "#69aBc8",
+			lineWidth: 1,
+			gridLineColor: "#dfe8f6",
+			minorGridLineWidth: 0,
+			tickColor: "#69aBc8",
+			tickLength: 2,
+			tickWidth: 1,
+			title: {
+			    text: '<?= $coverHeaders[$lang][14] ?>',
+			    style: {
+				color: "#555555"
+			    }
+			},
+			labels: {
+			    formatter : function() {
+				return this.value;
+			    },
+			    style: {"font-family": "Tahoma",
+				    "font-size": "11px"}
+			}
+		    },{
+			opposite: true,
+			min: 0,
+			lineColor: "#69aBc8",
+			lineWidth: 1,
+			gridLineColor: "#dfe8f6",
+			minorGridLineWidth: 0,
+			tickColor: "#69aBc8",
+			tickLength: 2,
+			tickWidth: 1,
+			title: {
+			    text: '',
+			    style: {
+				color: "#ff8888"
+			    }
+			},
+			labels: {
+			    formatter : function() {
+				return this.value;
+			    },
+			    style: {"font-family": "Tahoma",
+				    "font-size": "11px"}
+			}
+		    }],
+		series: series
+	    });
+    };
+
+    return {xtype: 'panel',
+	    id: 'coverBMI',
+	    layout: 'fit',
+	    height: 350,
+	    border: false,
+	    listeners:{
+	        afterrender: {
+		    delay: 100,
+		    fn: chartRender
+		}
+	    }
+     };
+};
+
+
+
+
+
+
+
 CoverSheetGraph.ext2 = function () {
     var coverGraphItems = [];
     if (CoverSheetGraph.data.weight.length == 0 && CoverSheetGraph.data.cd4.length == 0) {
@@ -238,10 +510,46 @@ CoverSheetGraph.ext2 = function () {
 	    series.push(CoverSheetGraph.genSeries('cd4', CoverSheetGraph.data.cd4,
 						  '<?= $coverHeaders[$lang][8] ?>',
 						  '<?= $coverLabels[$lang][10] ?>'));
-	} 
+	}     
+        
 	coverGraphItems.push(CoverSheetGraph.gen3(series, commonMaxDate));
     }
     return coverGraphItems;
+};
+
+
+
+CoverSheetBMI.ext3 = function () {
+    var coverBMIItems = [];
+    if (CoverSheetBMI.data.bmi.length == 0 && CoverSheetBMI.data.weight.length == 0) {
+	coverBMIItems.push({
+	        xtype: 'panel',
+		title: '<?= $coverHeaders[$lang][3] ?>',
+		html: '<div style="padding: 40px 20px"><?= $coverHeaders[$lang][10] ?></div>'
+	    });
+    } else {
+	if (CoverSheetBMI.data.weight.length == 0) {
+	    var commonMaxDate = CoverSheetBMI.data.bmi[CoverSheetBMI.data.bmi.length-1][0];
+	} else if (CoverSheetBMI.data.bmi.length == 0) {
+	    var commonMaxDate = CoverSheetBMI.data.weight[CoverSheetBMI.data.weight.length-1][0];
+	} else if (CoverSheetBMI.data.weight[CoverSheetBMI.data.weight.length-1][0] > CoverSheetBMI.data.bmi[CoverSheetBMI.data.bmi.length-1][0]) {
+	    var commonMaxDate = CoverSheetBMI.data.weight[CoverSheetBMI.data.weight.length-1][0];
+	} else {
+	    var commonMaxDate = CoverSheetBMI.data.bmi[CoverSheetBMI.data.bmi.length-1][0];
+	}
+
+	var series = [];    
+    
+    if (CoverSheetBMI.data.bmi.length != 0) {
+	    series.push(CoverSheetBMI.genSeries('bmi', CoverSheetBMI.data.bmi,
+						  '<?= $coverHeaders[$lang][13] ?>',
+						  '<?= $coverHeaders[$lang][14] ?>'));
+	} 
+    
+    
+	coverBMIItems.push(CoverSheetBMI.gen4(series, commonMaxDate));
+    }
+    return coverBMIItems;
 };
 
 
