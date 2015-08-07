@@ -240,30 +240,23 @@ where Cd4 is not null
  and Cd4 <> ?
  and isnumeric(' . $replacePrefix . 'cd4' . $replaceSuffix . ') = 1
  and (isdate(ymdToDate(CD4DateYY, CD4DateMM, CD4DateDD)) = 1
-      or isdate(ymdToDate(CD4DateYY, CD4DateMM, 15)) = 1);',
-		    array_merge($replaceParams, array(''), $replaceParams));
+      or isdate(ymdToDate(CD4DateYY, CD4DateMM, 15)) = 1);', array_merge($replaceParams, array(''), $replaceParams));
 
   database()->query('
-insert into cd4TableTemp 
-select straight_join t.siteCode, t.patientID,
- case
-  when isdate(ymdToDate(t.resultDateYy, t.resultDateMm, t.resultDateDd)) = 1
-  then ymdToDate(t.resultDateYy, t.resultDateMm, t.resultDateDd)
-  else e.visitDate
- end as visitDate,
-' . $replacePrefix . 't.result' . $replaceSuffix . ',
-e.encounterType, e.encounter_id, e.formVersion 
-from labs t
- join encounter e using (siteCode, patientID, visitDatedd, visitDatemm, visitDateyy, seqNum)
- join patient p using (patientID)
- join labLookup l
-where  t.result is not null 
- and e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1
- and ((t.labID = l.labID and t.labID <= 1000) or (t.labID > 1000 and lcase(t.testNameFr) = lcase(l.testNameFr) and (lcase(t.sampleType) = lcase(l.sampleType) or lcase(t.sampleType) = ?)))
- and isnumeric(' . $replacePrefix . 't.result' . $replaceSuffix . ') = 1
- and lower(l.labName) in (?, ?);',
-		    array_merge($replaceParams, $replaceParams, array ('isante', 'cd4', 'cd4 en mm3')));
-
+insert into cd4TableTemp
+select straight_join distinct t.siteCode, t.patientID,
+  case
+   when isdate(ymdToDate(t.resultDateYy, t.resultDateMm, t.resultDateDd)) = 1
+   then ymdToDate(t.resultDateYy, t.resultDateMm, t.resultDateDd)
+   else e.visitDate
+  end as visitDate,
+ ' . $replacePrefix . 't.result' . $replaceSuffix . ',
+ e.encounterType, e.encounter_id, e.formVersion
+ from labs t
+  join encValid e using (siteCode, patientID, visitDatedd, visitDatemm, visitDateyy, seqNum)
+ where isnumeric(' . $replacePrefix . 't.result' . $replaceSuffix . ') = 1
+  and t.labid in (102,176,1212,1214,1561)', array_merge($replaceParams, $replaceParams));
+        
   database()->query('
 insert into cd4TableTemp 
 select straight_join siteCode, patientID, visitDate,
@@ -274,8 +267,7 @@ join obs using (concept_id)
 join encValid on obs.encounter_id = encValid.encounter_id and obs.location_id = encValid.siteCode
 where concept.short_name = ?
  and value_text is not null
- and isnumeric(' . $replacePrefix . 'value_text' . $replaceSuffix . ') = 1;',
-		    array_merge($replaceParams, array('evalplanCD4Count'), $replaceParams));
+ and isnumeric(' . $replacePrefix . 'value_text' . $replaceSuffix . ') = 1;', array_merge($replaceParams, array('evalplanCD4Count'), $replaceParams));
 
   database()->exec('truncate table cd4Table;');
   database()->exec('lock tables cd4Table write;');
@@ -1369,13 +1361,11 @@ select distinct t.patientID, " . $labResultDateCaseClause . ",
 from labs t /* v_labsCompleted too slow */
  join encounter e using (siteCode, patientID, visitDatedd, visitDatemm, visitDateyy, seqNum)
  join patient p using (patientID)
- join labLookup l
 where e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1
- and ((t.labID = l.labID and t.labID <= 1000) or (t.labID > 1000 and lcase(t.testNameFr) = lcase(l.testNameFr) and (lcase(t.sampleType) = lcase(l.sampleType) or t.sampleType = ?)))
- and l.labName in (?, ?)
+ and lower(t.testnamefr) in (?, ?)
  and t.result in (?, ?, ?, ?)
  and isdate(" . $labResultDateCaseClause . ") = 1
- and " . $labResultDateCaseClause . " <= ?;", array('06', '15', '06', '15', '15', '15', 'Detecte', 'Non Detecte', 'isante', 'pcr', 'ADN VIH-1', '1', '2', 'Detecte', 'Non Detecte', '06', '15', '06', '15', '15', '15', '06', '15', '06', '15', '15', '15', $endDate));
+ and " . $labResultDateCaseClause . " <= ?;", array('06', '15', '06', '15', '15', '15', 'Detecte', 'Non Detecte', 'pcr', 'ADN VIH-1', '1', '2', 'Detecte', 'Non Detecte', '06', '15', '06', '15', '15', '15', '06', '15', '06', '15', '15', '15', $endDate));
 
   // Temp table to hold HIV statuses of ped. patients
   database()->exec('
@@ -1918,15 +1908,13 @@ select distinct t.patientID, " . $labResultDateCaseClause . ",
 from labs t /* v_labsCompleted too slow */
  join encounter e using (siteCode, patientID, visitDatedd, visitDatemm, visitDateyy, seqNum)
  join patient p using (patientID)
- join labLookup l
 where e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1
- and ((t.labID = l.labID and t.labID <= 1000) or (t.labID > 1000 and lcase(t.testNameFr) = lcase(l.testNameFr) and (lcase(t.sampleType) = lcase(l.sampleType) or t.sampleType = ?)))
- and lower(l.labName) = ?
+ and lower(t.testnamefr) = ?
  and t.result <> 0
  and t.result is not null
  and ltrim(rtrim(t.result)) != ?
  and isdate(" . $labResultDateCaseClause . ") = 1
- and " . $labResultDateCaseClause . " <= ?;", array('06', '15', '06', '15', '15', '15', 'isante', 'lymphocytes', '', '06', '15', '06', '15', '15', '15', '06', '15', '06', '15', '15', '15', $endDate));
+ and " . $labResultDateCaseClause . " <= ?;", array('06', '15', '06', '15', '15', '15', 'lymphocytes', '', '06', '15', '06', '15', '15', '15', '06', '15', '06', '15', '15', '15', $endDate));
 
   // Temp table to hold TLC lab result dates relative to max WHO stage
   database()->exec('
