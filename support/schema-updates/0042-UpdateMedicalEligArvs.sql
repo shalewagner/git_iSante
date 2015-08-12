@@ -6,3 +6,5 @@ ADD  `pregnantWomen` TINYINT( 3 ) UNSIGNED NULL DEFAULT NULL COMMENT  'add for a
 ADD  `breastfeedingWomen` TINYINT( 3 ) UNSIGNED NULL DEFAULT NULL COMMENT  'add for arv eligibility reason' AFTER  `pregnant` ,
 ADD  `patientGt50ans` TINYINT( 3 ) UNSIGNED NULL DEFAULT NULL COMMENT  'add for arv eligibility reason' AFTER  `breastfeeding`,
 ADD  `nephropathieVih` TINYINT( 3 ) UNSIGNED NULL DEFAULT NULL COMMENT  'add for arv eligibility reason' AFTER  `breastfeeding`;
+
+go
