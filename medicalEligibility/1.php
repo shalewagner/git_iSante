@@ -82,14 +82,47 @@ echo "
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;". $PEP[$lang][2] . "
          </td>
         </tr>
-        <tr>
-         <td id=\"expFromD1Title\">
-		  &nbsp;
+		 <tr>
+         <td id=\"expFromD1Title\">&nbsp;
+		  
          </td>
          <td class=\"left_pad\">
 		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<table><tr><td><input tabindex=\"" . ($tabIndex + 20) . "\" id=\"expFromD1\" class=\"medicalElig\"   name=\"expFromD1\" value=\"" . getData ("expFromDt", "textarea") . "/". getData ("expFromMm", "textarea") ."/". getData ("expFromYy", "textarea") . "\" type=\"text\" size=\"8\" maxlength=\"8\"></td><td><i>" . $PEP[$lang][0] . "</i><input type=\"hidden\"  id=\"expFromDt\" class=\"medicalElig\"   name=\"expFromDt\"><input type=\"hidden\" tabindex=\"" . ($tabIndex + 21) . "\" id=\"expFromMm\" class=\"medicalElig\"   name=\"expFromMm\"><input type=\"hidden\" tabindex=\"" . ($tabIndex + 22) . "\" id=\"expFromYy\"  class=\"medicalElig\"   name=\"expFromYy\" ></td></tr></table>
 		 </td>
         </tr>
+        <tr>
+          <td id=\&quot;expFromD1Title\&quot;2>&nbsp;</td>
+          <td class=\"left_pad\"><table width=\"100%\" border=\"0\">
+            <tr>
+              <td><input tabindex=\"" . ($tabIndex + 24) . "\" class=\"medicalElig\"   name=\"coinfectionTbHiv\" " . getData ("coinfectionTbHiv", "checkbox") . " type=\"checkbox\" value=\"On\">".$coinfectionTbHiv[$lang][1]."</td>
+            </tr>
+            <tr>
+              <td><input tabindex=\"" . ($tabIndex + 25) . "\" class=\"medicalElig\"   name=\"coinfectionHbvHiv\" " . getData ("coinfectionHbvHiv", "checkbox") . " type=\"checkbox\" value=\"On\">
+              ".$coinfectionHbvHiv[$lang][1]."</td>
+            </tr>
+            <tr>
+              <td><input tabindex=\"" . ($tabIndex + 26) . "\" class=\"medicalElig\"   name=\"coupleSerodiscordant\" " . getData ("coupleSerodiscordant", "checkbox") . " type=\"checkbox\" value=\"On\">
+".$coupleSerodiscordant[$lang][1]."</td>
+            </tr>
+            <tr>
+              <td><input tabindex=\"" . ($tabIndex + 27) . "\" class=\"medicalElig\"   name=\"pregnantWomen\" " . getData ("pregnantWomen", "checkbox") . " type=\"checkbox\" value=\"On\">
+".$pregnantWomen[$lang][1]."</td>
+            </tr>
+            <tr>
+              <td><input tabindex=\"" . ($tabIndex + 28) . "\" class=\"medicalElig\"   name=\"breastfeedingWomen\" " . getData ("breastfeedingWomen", "checkbox") . " type=\"checkbox\" value=\"On\">
+".$breastfeedingWomen[$lang][1]."</td>
+            </tr>
+            <tr>
+              <td><input tabindex=\"" . ($tabIndex + 29) . "\" class=\"medicalElig\"   name=\"patientGt50ans\" " . getData ("patientGt50ans", "checkbox") . " type=\"checkbox\" value=\"On\">
+".$patientGt50ans[$lang][1]."</td>
+            </tr>
+			<tr>
+              <td><input tabindex=\"" . ($tabIndex + 29) . "\" class=\"medicalElig\"   name=\"nephropathieVih\" " . getData ("nephropathieVih", "checkbox") . " type=\"checkbox\" value=\"On\">
+".$nephropathieVih[$lang][1]."</td>
+            </tr>
+          </table></td>
+        </tr>
+       
 	  </table>
     </td>
    </tr>
