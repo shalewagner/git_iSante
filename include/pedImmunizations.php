@@ -2,10 +2,13 @@
 
 $imms_list = generatePedImmunizationList ($lang, $encType, $version);
 //print_r ($imms_list);
-foreach ($imms_list as $imm) {
+$s=0;
+foreach ($imms_list as $imm) { 
   if (!empty ($followup) && $followup === 1) {
+	  
+	  if($s%2==0) echo "<tr class=\"alt\">";
+	     else echo "<tr>";
     echo "
-      <tr>
        <td width=\"45%\"><table><tr><td id=\"" . $imm['code'] . "Given1Title\"></td><td><input class=\"pedImmVacc\" tabindex=\"" . $tabIndex++ . "\" id=\"" . $imm['code'] . "Given1\" name=\"" . $imm['code'] . "Given1\" " . getData ($imm['code'] . "Given1", "checkbox") . " type=\"checkbox\" value=\"On\">"
 
       . $imm['label'];
@@ -27,9 +30,10 @@ foreach ($imms_list as $imm) {
       </tr>
 ";
   } else {
-    echo "
-      <tr>
-       <td width=\"25%\">" . $imm['label'] . "</td>
+    	  if($s%2==0) echo "<tr class=\"alt\">";
+	     else echo "<tr>";
+     echo "
+	        <td width=\"25%\">" . $imm['label'] . "</td>
 ";
     if (strpos ($imm['code'], "immunOther") === 0) {
       echo "
@@ -60,7 +64,7 @@ foreach ($imms_list as $imm) {
       </tr>
 ";
     } else {
-      for ($i = 1; $i <= 3; $i++) {
+      for ($i = 1; $i <= 4; $i++) {
         if ($i <= $imm['cnt']) {
           echo "
       <td ";
@@ -84,19 +88,21 @@ foreach ($imms_list as $imm) {
       </tr>
 ";
 
-      if ($imm['cnt'] >= 4) {
+      if ($imm['cnt'] >= 5) {
+		  	  if($s%2==0) echo "<tr class=\"alt\">";
+	     else echo "<tr>";
         echo "
-      <tr>
+		
        <td width=\"25%\">&nbsp;</td>
 ";
 
-        for ($i = 4; $i <= 6; $i++) {
+        for ($i = 5; $i <= 6; $i++) {
           if ($i <= $imm['cnt']) {
             echo "
        <td ";
 
-            if ($i == 4 && $imm['cnt'] == 4) echo " colspan=\"3\" width=\"75%\">";
-            else if ($i == 5 && $imm['cnt'] == 5) echo " colspan=\"2\" width=\"50%\">";
+            if ($i == 5  && $imm['cnt'] == 5) echo " colspan=\"3\" width=\"75%\">";
+            else if ($i == 6 && $imm['cnt'] == 6) echo " colspan=\"2\" width=\"50%\">";
             else echo " width=\"25%\">";
 
             echo "
@@ -116,6 +122,7 @@ foreach ($imms_list as $imm) {
       }
     }
   }
+  $s=$s+1;
 }
 
 ?>
