@@ -15,6 +15,14 @@ $ARVreason = array (
 		'estPrev' => "&eacute;ligibilit&eacute; m&eacute;dicale &eacute;tablie &aacute; la visite ant&eacute;rieure",
 		'former' => "ARV trith&eacute;rapie ant&eacute;rieure",
 		'PEP' => "Prophylaxie post-exposition (PEP)"),
+		'coinfectionTbHiv' => "Coinfection TB/HIV",
+		'coinfectionHbvHiv' => "Coinfection HBV/HIV",
+		'coupleSerodiscordant' => "Couple sÃ©rodiscordant",
+		'pregnantWomen' => "Femme enceinte (Grossesse)",
+		'breastfeedingWomen' => "Femme allaitante",
+		'ChildLT5ans' => "Enfant avec Ã¢ge < 5ans",
+		'patientGt50ans' => "Patient avec Ã¢ge  > 50 ans",
+		'nephropathieVih' => "NÃ©phropathie Ã  VIH",
 	"en" => array(
 		'cd4LT200' => "CD4 below threshold",
 		'tlcLT1200' => "TLC < 1200",
@@ -24,7 +32,15 @@ $ARVreason = array (
 		'medEligHAART' => "Eligibility established ",
 		'estPrev' => "Eligibility established in a previous visit",
 		'former' => "Prior ARV therapy",
-		'PEP' => "Prophylaxis post-exposition (PEP)")
+		'PEP' => "Prophylaxis post-exposition (PEP)",
+		'coinfectionTbHiv' => "Coinfection TB/HIV",
+		'coinfectionHbvHiv' => "Coinfection HBV/HIV",
+		'coupleSerodiscordant' => "HIV negative stable partner",
+		'pregnantWomen' => "pregnant women",
+		'breastfeedingWomen' => "breastfeeding women",
+		'ChildLT5ans' => "Child < 5 years",
+		'patientGt50ans' => "Adult > 50 years",
+		'nephropathieVih' => "NÃ©phropathie Ã  VIH")
 );
 
 $line = array(
@@ -629,8 +645,16 @@ if(empty($_GET['ac']) && empty($_GET['regType'])){
 			when formerARVtherapy = 1 then 'former'
 			when PEP = 1 then 'PEP'
 			when medEligHAART = 1 then 'estPrev'
+			when ChildLT5ans=1 then 'ChildLT5ans'
+            when coinfectionTbHiv=1 then 'coinfectionTbHiv'
+            when coinfectionHbvHiv=1 then 'coinfectionHbvHiv'
+            when coupleSerodiscordant=1 then 'coupleSerodiscordant'
+            when pregnantWomen=1 then 'pregnantWomen'
+            when breastfeeding=1 then 'breastfeeding'
+            when patientGt50ans=1 then 'patientGt50ans'
+			when nephropathieVih=1 then 'nephropathieVih'
 			end as result, visitdate, patientid from v_medicalEligARVs
-			where  (cd4LT200 = 1 or tlcLT1200 = 1 or WHOIII = 1 or WHOIV = 1 or PMTCT = 1 or formerARVtherapy = 1 or PEP = 1  or medEligHAART = 1) and patientid in (".$pids.")
+			where  (cd4LT200 = 1 or tlcLT1200 = 1 or WHOIII = 1 or WHOIV = 1 or PMTCT = 1 or formerARVtherapy = 1 or PEP = 1  or medEligHAART = 1 or ChildLT5ans=1 or coinfectionTbHiv=1 or  coinfectionHbvHiv=1 or coupleSerodiscordant=1 or pregnantWomen=1 or breastfeeding=1 or patientGt50ans=1 or nephropathieVih=1) and patientid in (".$pids.")
 		)
 		order by 2 desc";
 	//echo $qryART;
