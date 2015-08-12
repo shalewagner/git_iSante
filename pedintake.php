@@ -624,7 +624,7 @@ echo "
     <td colspan=\"3\">
      <table class=\"b_header_nb\">
       <tr>
-       <td class=\"s_header\" colspan=\"4\">" . $pedImm[$lang][0] . "</td>
+       <td class=\"s_header\" colspan=\"5\">" . $pedImm[$lang][0] . "</td>
       </tr>
       <tr>
        <td colspan=\"4\" width=\"100%\">" . $pedImm[$lang][1] . " <input id=\"pedImmVaccY\" tabindex=\"3201\" name=\"pedImmVacc[]\" " . getData ("pedImmVacc", "checkbox", 1) . " type=\"radio\" value=\"1\">" . $ynu[$lang][0] . " <input  id=\"pedImmVaccN\" tabindex=\"3202\" name=\"pedImmVacc[]\" " . getData ("pedImmVacc", "checkbox", 2) . " type=\"radio\" value=\"2\">" . $ynu[$lang][1] . " <input id=\"pedImmVaccU\"  tabindex=\"3203\" name=\"pedImmVacc[]\" " . getData ("pedImmVacc", "checkbox", 4) . " type=\"radio\" value=\"4\">" . $ynu[$lang][2] . "</td>
