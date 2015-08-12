@@ -128,13 +128,13 @@ $formStatus = array (
 	"Compl&egrave;te",
 	"Pour la revue",
 	"Incompl&egrave;te",
-	"Supprimé",
+	"SupprimÃ©",
 	"S",
-	"Ordre n’a pas été envoyé", 
-	"Envoi échoué ou ordre rejeté",
-	"Envoyé avec succès et accepté",
-	"Résultats reçus",
-	"Ordre supprimé"
+	"Ordre nâ€™a pas Ã©tÃ© envoyÃ©", 
+	"Envoi Ã©chouÃ© ou ordre rejetÃ©",
+	"EnvoyÃ© avec succÃ¨s et acceptÃ©",
+	"RÃ©sultats reÃ§us",
+	"Ordre supprimÃ©"
   )
 );
 $visitType_header = array (
@@ -4883,13 +4883,115 @@ $medicalEligARVs_subhead2 = array (
 $cd4LT200 = array (
    "en" => array (
 	"",
-	"CD4 below threshold",
+	"CD4 below threshold (500)",
 	""),
    "fr" => array (
 	"",
-	"CD4 inf&#xe9;rieur au seuil",
+	"CD4 inf&#xe9;rieur au seuil (500)",
 	"")
 );
+
+
+$coinfectionTbHiv = array (
+   "en" => array (
+	"",
+	"Coinfection TB/HIV",
+	""),
+   "fr" => array (
+	"",
+	"Coinfection TB/HIV",
+	"")
+);
+
+
+$coinfectionHbvHiv = array (
+   "en" => array (
+	"",
+	"Coinfection HBV/HIV",
+	""),
+   "fr" => array (
+	"",
+	"Coinfection HBV/HIV",
+	"")
+);
+
+
+$coupleSerodiscordant = array (
+   "en" => array (
+	"",
+	"HIV negative stable partner",
+	""),
+   "fr" => array (
+	"",
+	"Couple sÃ©rodiscordant ",
+	"")
+);
+
+
+$pregnantWomen = array (
+   "en" => array (
+	"",
+	"Pregnant Women",
+	""),
+   "fr" => array (
+	"",
+	"Femme enceinte (Grossesse) ",
+	"")
+);
+
+$breastfeedingWomen =array (
+   "en" => array (
+	"",
+	"Breastfeeding Women",
+	""),
+   "fr" => array (
+	"",
+	"Femme allaitante  ",
+	"")
+);
+
+
+$ChildLT5ans =array (
+   "en" => array (
+	"",
+	"Child < 5 years",
+	""),
+   "fr" => array (
+	"",
+	"Enfant avec Ã¢ge < 5ans ",
+	"")
+);
+
+
+$patientGt50ans =array (
+   "en" => array (
+	"",
+	"Adult > 50 years",
+	""),
+   "fr" => array (
+	"",
+	"Patient avec Ã¢ge  > 50 ans  ",
+	"")
+);
+
+$nephropathieVih =array (
+   "en" => array (
+	"",
+	"NÃ©phropathie Ã  VIH ",
+	""),
+   "fr" => array (
+	"",
+	"NÃ©phropathie Ã  VIH ",
+	"")
+);
+
+
+
+
+
+
+
+
 $WHOIII = array (
    "en" => array (
 	"",
@@ -5164,7 +5266,7 @@ $newprescription_subhead91 = array (
 	""),
    "fr" => array (
 	"",
-	"Nombre de pillules distribuées",
+	"Nombre de pillules distribuÃ©es",
 	"")
 );
 $newprescription_subhead101 = array (
@@ -6090,7 +6192,7 @@ $imagingFormVersion= array (
 	""),
    "fr" => array (
 	"",
-	"MSPP FICHE D'IMAGERIE ET AUTRES (VERSION FÉVRIER 2014)",
+	"MSPP FICHE D'IMAGERIE ET AUTRES (VERSION FÃ‰VRIER 2014)",
 	"")
 );
 $discontinuationFormTitle = array (
@@ -8746,7 +8848,7 @@ $laborFormVersion = array (
 	""),
    "fr" => array (
 	"",
-	"MSPP / FICHE DE TRAVAIL ET D’ACCOUCHEMENT (VERSION MARS 2011)",
+	"MSPP / FICHE DE TRAVAIL ET Dâ€™ACCOUCHEMENT (VERSION MARS 2011)",
 	"")
 );
 
@@ -8768,20 +8870,20 @@ $alreadyRunning = array (
     "The report was successfully stopped. You may now return and run the report normally.",
     "Are you sure?"),
   "fr" => array (
-    "Rapport en cours d'exécution",
-    "Vous avez déjà un rapport sur le système qui doit remplir avant de pouvoir exécuter ce rapport.",
-    "Les détails du rapport en cours d'exécution sont les suivants : ",
+    "Rapport en cours d'exÃ©cution",
+    "Vous avez dÃ©jÃ  un rapport sur le systÃ¨me qui doit remplir avant de pouvoir exÃ©cuter ce rapport.",
+    "Les dÃ©tails du rapport en cours d'exÃ©cution sont les suivants : ",
     "Nom du rapport : ",
-    "En cours d'exécution depuis : ",
-    "Date de début : ",
+    "En cours d'exÃ©cution depuis : ",
+    "Date de dÃ©but : ",
     "Date de fin : ",
     "Liste des cliniques : ",
-    "S'il vous plaît essayer de nouveau après le rapport est terminé.",
-    "Si vous souhaitez arrêter le rapport qui est actuellement en cours d'exécution, cliquez sur « Arrêt rapport en cours » ci-dessous.",
-    "Arrêt rapport en cours",
-    "Revenir en arrière.",
-    "Rapport s'est arrêté",
-    "Le rapport a été arrêté avec succès. Vous pouvez maintenant retourner et d'exécuter le rapport normalement.",
+    "S'il vous plaÃ®t essayer de nouveau aprÃ¨s le rapport est terminÃ©.",
+    "Si vous souhaitez arrÃªter le rapport qui est actuellement en cours d'exÃ©cution, cliquez sur Â« ArrÃªt rapport en cours Â» ci-dessous.",
+    "ArrÃªt rapport en cours",
+    "Revenir en arriÃ¨re.",
+    "Rapport s'est arrÃªtÃ©",
+    "Le rapport a Ã©tÃ© arrÃªtÃ© avec succÃ¨s. Vous pouvez maintenant retourner et d'exÃ©cuter le rapport normalement.",
     "\\312tes-vous s\\373r(e)?")
 );
 $formVisitDatePanel = array (
@@ -8825,27 +8927,27 @@ $topAlert = array (
         "This release is for testing only."
     ), "fr" => array(
         "<span style=\"font-weight: bold\">Version ",
-        "</span> : changements aux données saisis seront réserver à la base de données ‘test’",
-        "<span style=\"font-weight: bold\">Version de démonstration</span> : données saisies (ou modifiés) en utilisant cette version seront réserver à la base de données ‘démonstration’",
+        "</span> : changements aux donnÃ©es saisis seront rÃ©server Ã  la base de donnÃ©es â€˜testâ€™",
+        "<span style=\"font-weight: bold\">Version de dÃ©monstration</span> : donnÃ©es saisies (ou modifiÃ©s) en utilisant cette version seront rÃ©server Ã  la base de donnÃ©es â€˜dÃ©monstrationâ€™",
         "Cette version est seulement pour les tests."
     )
 );
 
 $primCareSummaryLabels = array (
   "fr" => array (
-    "Resumé du Dossier Médical",
+    "ResumÃ© du Dossier MÃ©dical",
     "Sommaire du patient pour",
-    "Ce résumé a été généré le",
-    "à partir de données",
-    "collecté à:",
-    "demandé par:",
-    "Informations Démographiques",
+    "Ce rÃ©sumÃ© a Ã©tÃ© gÃ©nÃ©rÃ© le",
+    "Ã  partir de donnÃ©es",
+    "collectÃ© Ã :",
+    "demandÃ© par:",
+    "Informations DÃ©mographiques",
     "Visites/Fiches",
-    "(Première visite et 6 dernières visites)",
-    "Médications à cette institution",
-    "Historique de l’IMC/Poids",
-    "Antécédents obstétricaux-gynecologiques",
-    "Antécédents d'immunisations pédiatriques",
+    "(PremiÃ¨re visite et 6 derniÃ¨res visites)",
+    "MÃ©dications Ã  cette institution",
+    "Historique de lâ€™IMC/Poids",
+    "AntÃ©cÃ©dents obstÃ©tricaux-gynecologiques",
+    "AntÃ©cÃ©dents d'immunisations pÃ©diatriques",
 	"Signes vitaux",
 	"Resultats de laboratoire",
 	"Antecedents heredo-collateraux",
