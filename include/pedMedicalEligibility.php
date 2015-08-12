@@ -65,7 +65,30 @@ echo "
         <tr>
           <td width=\"55%\">
            <input tabindex=\"" . ($tabIndex + 5) . "\" id=\"medEligY\" name=\"medElig[]\" " . getData ("medElig", "checkbox", 1) . " type=\"radio\" value=\"1\">" . $pedMedElig[$lang][16] . " <i>" . $pedMedElig[$lang][17] . "</i></td>
-          <td width=\"45%\">&nbsp;</td>
+          <td width=\"45%\"><table width=\"100%\">
+            <tr>
+              <td><input class=\"pedMedElig\" tabindex=\"" . ($tabIndex + 14) . "\" name=\"ChildLT5ans\" " . getData ("ChildLT5ans", "checkbox") . " type=\"checkbox\" value=\"On\">".$ChildLT5ans[$lang][1]."</td>
+            </tr>
+            <tr>
+              <td><input tabindex=\"" . ($tabIndex + 15) . "\" class=\"pedMedElig\"   name=\"coinfectionTbHiv\" " . getData ("coinfectionTbHiv", "checkbox") . " type=\"checkbox\" value=\"On\">".$coinfectionTbHiv[$lang][1]."</td>
+            </tr>
+            <tr>
+              <td><input tabindex=\"" . ($tabIndex + 15) . "\" class=\"pedMedElig\"   name=\"coinfectionHbvHiv\" " . getData ("coinfectionHbvHiv", "checkbox") . " type=\"checkbox\" value=\"On\">
+              ".$coinfectionHbvHiv[$lang][1]."</td>
+            </tr>
+			<tr>
+              <td><input tabindex=\"" . ($tabIndex + 15) . "\" class=\"pedMedElig\"   name=\"pregnantWomen\" " . getData ("pregnantWomen", "checkbox") . " type=\"checkbox\" value=\"On\">
+              ".$pregnantWomen[$lang][1]."</td>
+            </tr>
+			<tr>
+              <td><input tabindex=\"" . ($tabIndex + 15) . "\" class=\"pedMedElig\"   name=\"breastfeedingWomen\" " . getData ("breastfeedingWomen", "checkbox") . " type=\"checkbox\" value=\"On\">
+              ".$breastfeedingWomen[$lang][1]."</td>
+            </tr>
+			<tr>
+              <td><input tabindex=\"" . ($tabIndex + 15) . "\" class=\"pedMedElig\"   name=\"nephropathieVih\" " . getData ("nephropathieVih", "checkbox") . " type=\"checkbox\" value=\"On\">
+              ".$nephropathieVih[$lang][1]."</td>
+            </tr>
+          </table></td>
         </tr>
         <tr>
          <td width=\"55%\">
@@ -78,6 +101,7 @@ echo "
 		   <input tabindex=\"" . ($tabIndex + 7) . "\" id=\"medEligU\" name=\"medElig[]\" " . getData ("medElig", "checkbox", 8) . " type=\"radio\" value=\"8\">" . $pedMedElig[$lang][20] . "
          </td>
          <td width=\"45%\">&nbsp;</td>
+
         </tr>
      </table>
     </td>
