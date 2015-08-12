@@ -2414,7 +2414,16 @@ and ymdToDate(visitDateYy, visitDateMm, visitDateDd) <= ?;', array('medEligHAART
 			'pedMedEligWho3' => 'WHOIII',
 			'pedMedEligWho4' => 'WHOIV',
 			'pedMedEligPmtct' => 'PMTCT',
-			'pedMedEligFormerTherapy' => 'former');
+			'pedMedEligFormerTherapy' => 'former',
+			'coinfectionTbHiv' => 'coinfectionTbHiv',
+		    'coinfectionHbvHiv' => 'coinfectionHbvHiv',
+		    'coupleSerodiscordant' => 'coupleSerodiscordant',
+		    'pregnantWomen' => 'pregnantWomen',
+		    'breastfeedingWomen' => 'breastfeedingWomen',
+		    'ChildLT5ans' => 'ChildLT5ans',
+		    'patientGt50ans' => 'patientGt50ans',
+		    'nephropathieVih' => 'nephropathieVih',
+			);
   database()->query('
 create temporary table medicalEligARVsTemp
 select straight_join t.*, e.encounter_id, e.encountertype, e.formVersion, ymdToDate(visitDateYy, visitDateMm, visitDateDd) fixedVisitDate
