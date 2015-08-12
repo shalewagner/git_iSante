@@ -9,7 +9,7 @@ CREATE TABLE schemaVersion (
  whenUpgraded timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
  PRIMARY KEY  (version)
 );
-insert into schemaVersion set version=41, scriptName='support/schema-updates/0041-Add_mer.sql';
+insert into schemaVersion set version=42, scriptName='support/schema-updates/0042-UpdateMedicalEligArvs.sql';
 
 DROP TABLE IF EXISTS adherenceCounseling;
 CREATE TABLE adherenceCounseling (
@@ -1247,6 +1247,14 @@ CREATE TABLE medicalEligARVs (
   tlcLT1200 tinyint unsigned NULL,
   WHOIV tinyint unsigned NULL,
   medEligHAART tinyint unsigned NULL,
+  ChildLT5ans tinyint(3) unsigned default NULL COMMENT 'add for arv eligibility reason',
+  coinfectionTbHiv tinyint(3) unsigned default NULL COMMENT 'add for arv eligibility reason',
+  coinfectionHbvHiv tinyint(3) unsigned default NULL COMMENT 'add for arv eligibility reason',
+  coupleSerodiscordant tinyint(3) unsigned default NULL COMMENT 'add for arv eligibility reason',
+  pregnantWomen tinyint(3) unsigned default NULL COMMENT 'add for arv eligibility reason',
+  breastfeedingWomen tinyint(3) unsigned default NULL COMMENT 'add for arv eligibility reason',
+  patientGt50ans tinyint(3) unsigned default NULL COMMENT 'add for arv eligibility reason',
+  nephropathieVih tinyint(3) default NULL COMMENT 'for eligibility reason ',
   CD4DateDD CHAR(2) NULL,
   TLCDateDD CHAR(2) NULL,
   ViralLoadDD CHAR(2) NULL,
