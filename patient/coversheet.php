@@ -5,9 +5,9 @@ $ARVreason = array (
 	'fr' => array (
     'WHOIII-2' => 'OMS Stade III',
     'WHOIIICond' => 'OMS Stade III & condition actif',
-    'eligByAge' => 'L’âge',
+    'eligByAge' => 'Lâ€™Ã¢ge',
     'eligByCond' => 'Condition actif',
-    'eligPcr' => 'Résultat positif de test PCR',
+    'eligPcr' => 'RÃ©sultat positif de test PCR',
     'cd4LT200' => 'CD4 inf&#xe9;rieur au seuil',
     'tlcLT1200' => 'TLC < 1200',
     'WHOIII' => 'OMS Stade III + CD4 inf&#xe9;rieur au seuil',
@@ -85,9 +85,9 @@ $coverLabels = array(
 		'Pas d&rsquo;&#xe9;ligibilit&eacute; m&eacute;dicale &eacute;tablie',
     'Traitement',
     'R&#xe9;action',
-    'Pas de visites signalées.',
-    'Pas d&rsquo;allergies signalées.',
-    'Aucun compte CD4 rapporté'
+    'Pas de visites signalÃ©es.',
+    'Pas d&rsquo;allergies signalÃ©es.',
+    'Aucun compte CD4 rapportÃ©'
 	)
 );
 
@@ -108,7 +108,9 @@ $coverHeaders = array(
 		'Weight Graph',
 		'No graphs are available for this patient.',
 		'Weight (kg)',
-    'and'
+    'and',
+	'BMI Graph',
+	'BMI'
 	),
 	'fr' => array(
 		'ARV',
@@ -117,13 +119,15 @@ $coverHeaders = array(
 		'Vue d&#39;ensemble des graphiques',
 		'Sympt&ocirc;mes',
 		'Analyses',
-		'Visites Récentes',
+		'Visites RÃ©centes',
 		'Diagnostics',
 		'Graphique CD4',
 		'Graphique de poids',
 		'Aucun graphique disponible pour ce patient.',
 		'Poids (kg)',
-    'et'
+    'et',
+	'IMC Graph',
+	'IMC'
 	)
 );
 $pedGrowthLabels = array(
@@ -147,22 +151,22 @@ $pedGrowthLabels = array(
     16 => 'Print'
   ),
   "fr" => array (
-    0 => 'Croissance de pédiatrie',
+    0 => 'Croissance de pÃ©diatrie',
     1 => 'Date de visite',
     2 => 'Taille',
     3 => 'Poids',
     4 => 'IMC',
-    5 => 'IMC pour l’Âge',
-    6 => 'Poids pour l’Âge',
-    7 => 'Longueur de l’Âge',
+    5 => 'IMC pour lâ€™Ã‚ge',
+    6 => 'Poids pour lâ€™Ã‚ge',
+    7 => 'Longueur de lâ€™Ã‚ge',
     8 => 'Poids pour la Longueur',
     9 => 'Mesure',
     10 => 'Pour cent',
     11 => 'Z-score',
-    12 => 'Âge',
+    12 => 'Ã‚ge',
     13 => 'Mois',
     14 => 'Ans',
-    15 => 'Attention! Patient est plus de deux écarts types de la moyenne en: ',
+    15 => 'Attention! Patient est plus de deux Ã©carts types de la moyenne en: ',
     16 => 'Imprimer'
   )
 ); 
@@ -194,14 +198,14 @@ $adultGrowthLabels = array(
     2 => 'Taille',
     3 => 'Poids',
     4 => 'IMC',
-    5 => 'IMC pour l’Âge',
-    6 => 'Poids pour l’Âge',
-    7 => 'Longueur de l’Âge',
+    5 => 'IMC pour lâ€™Ã‚ge',
+    6 => 'Poids pour lâ€™Ã‚ge',
+    7 => 'Longueur de lâ€™Ã‚ge',
     8 => 'Poids pour la Longueur',
     9 => 'Mesure',
     10 => 'Classification',
     11 => 'Z-score',
-    12 => 'Âge',
+    12 => 'Ã‚ge',
     13 => 'Mois',
     14 => 'Ans',
     15 => 'Attention! Ce patient est anormale : ',
@@ -264,7 +268,11 @@ if (count($encs) > 0) {
 $forms .= "</div>";
 
 // ------------------------ CD4 PANEL-----------------------------------
-$qry = "SELECT * from cd4Table where patientid = '".$pid."'";
+$qry = "select * from cd4Table where patientid ='".$pid."' union (select siteCode,patientID, v.visitDate,case when (encounterType in (6,19) and formVersion = 3) or resulttimestamp is not null then result else case when resultType = 1 and result != '' then case when result = '1' then resultLabelFr1  when result = '2' then resultLabelFr2  when result = '4' then resultLabelFr3 when result = '8' then resultLabelFr4 when result = '16' then resultLabelFr5 end when resultType = 2 and result != '' then concat(result,' ',resultLabelFr1) when resultType = 3 and result != '' then concat(result,' ',resultLabelFr1) when resultType = 4 and result != '' then case when result = '1' then resultLabelFr1  when result = '2' then resultLabelFr3 when result = '4' then resultLabelFr4 end when resultType = 5 and result IS NOT NULL then case when result2 = '1' then concat(result,' ',resultLabelFr1) when result2 = '2' then concat(result,' ',resultLabelFr2) end  when resultType = 6 and result != '' then case when result = '1' then resultLabelFr1  when result = '2' then resultLabelFr5 end else ''  end end*1 as result,encounter_id,encounterType,formVersion  from a_labs v where ((result is not null and result <> '') or isdate(ymdToDate(resultDateYy,resultDateMm, resultDateDd)) = 1) and patientid ='".$pid."')";
+
+
+
+
 //echo $qry;
 $result = dbQuery($qry);
 $cd4 = array();

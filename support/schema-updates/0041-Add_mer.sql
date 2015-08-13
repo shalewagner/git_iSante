@@ -1,5 +1,6 @@
 
 drop table if exists dw_mer_snapshot;
+go
 
 CREATE TABLE IF NOT EXISTS `dw_mer_snapshot` (
   `patientID` varchar(11) NOT NULL default '',
@@ -40,8 +41,11 @@ CREATE TABLE IF NOT EXISTS `dw_mer_snapshot` (
   PRIMARY KEY  (`patientID`,`visitDate`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+go
 
 drop table if exists dw_mer_slices;
+
+go
 
 CREATE TABLE `dw_mer_slices` (
   `org_unit` varchar(64) NOT NULL,
@@ -56,8 +60,12 @@ CREATE TABLE `dw_mer_slices` (
   PRIMARY KEY  (`org_unit`,`org_value`,`indicator`,`time_period`,`year`,`period`,`gender`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+go
+
 
 drop table if exists dw_mer_patients;
+
+go
 
 CREATE TABLE `dw_mer_patients` (
   `indicator` smallint(10) NOT NULL,
@@ -68,7 +76,11 @@ CREATE TABLE `dw_mer_patients` (
   PRIMARY KEY  (`indicator`,`patientid`,`time_period`,`year`,`period`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+go
+
 drop table if exists dw_merReportLookup;
+
+go
 
 CREATE TABLE `dw_merReportLookup` (
   `indicator` smallint(6) NOT NULL,
@@ -82,3 +94,5 @@ CREATE TABLE `dw_merReportLookup` (
   `indicatorDenominator` smallint(6) default '0',
   PRIMARY KEY  (`indicator`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+go
