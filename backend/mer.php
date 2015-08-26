@@ -292,9 +292,9 @@ function merSlices($key, $orgType, $time_period) {
 $indicatorQueries = array( 
 "-1"=> array(0, "where pregnancy=1 or accouchement=1", NULL), 
 " 1"=> array(1, "where pregnancy=1 and HIVStatus in (1,2)", array(-1)), 
-" 2"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)= month(Date(concat(firstTestYy,firstTestMm,firstTestDd))))", array(-1)),
-" 3"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)> month(Date(concat(firstTestYy,firstTestMm,firstTestDd))))", array(-1)),
-" 4"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)< month(Date(concat(firstTestYy,firstTestMm,firstTestDd))))", array(-1)),
+" 2"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where month(s.visitDate)= firstTestMm and year(s.visitDate)=firstTestYy)", array(-1)),
+" 3"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID in (select patientID from a_vitals  where (year(s.visitDate)>firstTestYy or (month(s.visitDate)> firstTestMm and year(s.visitDate)=firstTestYy)))", array(-1)),
+" 4"=> array(1, "where pregnancy=1 and HIVStatus in (1,2) and patientID not in (select patientID from a_vitals  where (year(s.visitDate)>firstTestYy or (month(s.visitDate)>= firstTestMm and year(s.visitDate)=firstTestYy)))", array(-1)),
 
 "-2"=> array(0, "where pregnancy=1 and HIVStatus=1",NULL), 
 " 5"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=1", array(-2)),
@@ -303,11 +303,11 @@ $indicatorQueries = array(
 " 8"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=2", array(-2)), 
 
 
-" 9"=> array(1, ",patient p where statutVihActuel=1 and virologicTest is not null and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", array(-2)), 
-" 10"=> array(1, ",patient p where statutVihActuel=1 and virologicTest is not null and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=61", array(-2)), 
+" 9"=> array(1, ",patient p where statutVihActuel=1 and virologicTest is not null and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 0 and 365", array(-2)), 
+" 10"=> array(1, ",patient p where statutVihActuel=1 and virologicTest is not null and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 0 and 61", array(-2)), 
 "11"=> array(1, ",patient p where statutVihActuel=1 and virologicTest is not null and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 62 and 365", array(-2)), 
-"12"=> array(1, ",patient p where statutVihActuel=1 and virologicTest is not null and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=61", array(-2)), 
-"13"=> array(1, ",patient p where statutVihActuel=1 and virologicTest is not null and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 62 and 365", array(-2)), 
+"12"=> array(1, ",patient p where statutVihActuel=1 and (virologicTest=2 or pedVirologicTest=1) and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 0 and 61", array(-2)), 
+"13"=> array(1, ",patient p where statutVihActuel=1 and (virologicTest=2 or pedVirologicTest=1) and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd)) between 62 and 365", array(-2)), 
 
 /* HIV-infected linked to ART/ not linked to ART/ unknown linked to ART*/
 "-3"=> array(0, ",patient p where HIVForm=1 and s.patientID=p.patientID and DATEDIFF(visitdate,ymdtodate(dobyy,dobmm,dobDd))<=547", NULL), 
