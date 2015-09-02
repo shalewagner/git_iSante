@@ -87,6 +87,55 @@ echo "
 		{" . genExtWidget('penta3','textfield',0) . ", readOnly: true},
 		{" . genExtWidget('penta4','textfield',0) . ", readOnly: true},
 		{" . genExtWidget('penta5','textfield',0) . ", readOnly: true}]],
+		[{xtype: 'label', text: '" . _('Varicelle') . "', ctCls: 'powerUpColumnHeader'},
+		[{" . genExtWidget('varicelle0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('varicelle1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('varicelle2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('varicelle3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('varicelle4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('varicelle5','textfield',0) . ", readOnly: true}]],
+		[{xtype: 'label', text: '" . _('Rotavirus') . "', ctCls: 'powerUpColumnHeader'},
+		[{" . genExtWidget('rotavirus0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('rotavirus1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('rotavirus2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('rotavirus3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('rotavirus4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('rotavirus5','textfield',0) . ", readOnly: true}]],
+		[{xtype: 'label', text: '" . _('Typhimvi') . "', ctCls: 'powerUpColumnHeader'},
+		[{" . genExtWidget('typhimvi0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('typhimvi1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('typhimvi2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('typhimvi3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('typhimvi4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('typhimvi5','textfield',0) . ", readOnly: true}]],
+		[{xtype: 'label', text: '" . _('Pneumocoque') . "', ctCls: 'powerUpColumnHeader'},
+		[{" . genExtWidget('pneumocoque0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('pneumocoque1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('pneumocoque2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('pneumocoque3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('pneumocoque4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('pneumocoque5','textfield',0) . ", readOnly: true}]],
+        [{xtype: 'label', text: '" . _('Hepatite A') . "', ctCls: 'powerUpColumnHeader'},
+		[{" . genExtWidget('hepatiteA0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('hepatiteA1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('hepatiteA2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('hepatiteA3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('hepatiteA4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('hepatiteA5','textfield',0) . ", readOnly: true}]],   
+        [{xtype: 'label', text: '" . _('Menengo AC') . "', ctCls: 'powerUpColumnHeader'},
+		[{" . genExtWidget('menengoAc0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('menengoAc1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('menengoAc2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('menengoAc3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('menengoAc4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('menengoAc5','textfield',0) . ", readOnly: true}]], 
+        [{xtype: 'label', text: '" . _('Cholera') . "', ctCls: 'powerUpColumnHeader'},
+		[{" . genExtWidget('cholera0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('cholera1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('cholera2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('cholera3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('cholera4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('cholera5','textfield',0) . ", readOnly: true}]], 
 		[{xtype: 'fieldset', layout:'column', 
 		ctCls: 'powerUpColumnHeader',
 		border: false,
@@ -219,7 +268,14 @@ function loadVaccinations ($pid) {
 	'pneumovax' => 0,
 	'penta' => 0,
 	'hx' => 0,
-	'rr' => 0
+	'rr' => 0,
+	'rotavirus'=>0,
+	'varicel'=>0,
+	'typhimvi'=>0,
+	'pneumocoque'=>0,
+	'hepatiteA'=>0,
+	'menengoAc'=>0,
+	'cholera'=>0,
     );
     $qry = "(select distinct 'immunization' as 'vtype', case
 		when immunizationID = 1 then 'bcg'
@@ -232,7 +288,13 @@ function loadVaccinations ($pid) {
 		when immunizationID = 8 then 'dt'
 		when immunizationID = 9 then 'other'
 		when immunizationID = 10 then 'tetanos'
-		when immunizationID = 11 then 'pneumovax'
+		when immunizationID = 13 then 'rotavirus'
+		when immunizationID = 14 then 'pneumocoque'
+		when immunizationID = 15 then 'varicel'
+		when immunizationID = 16 then 'typhimvi'
+		when immunizationID = 17 then 'menengoAC'
+		when immunizationID = 18 then 'hepatiteA'
+		when immunizationID = 19 then 'cholera'		
 		when immunizationID = 12 then 'hx' else 'other' end as 'icode', ymdToDate(immunizationYy,immunizationMm,immunizationDd) as 'idate', immunizationComment 
 		from immunizations 
 		where patientid = '" . $pid . "' and isdate(ymdToDate(immunizationYy,immunizationMm,immunizationDd)) = 1
@@ -248,13 +310,22 @@ function loadVaccinations ($pid) {
 		when short_name like 'pnuemovaxDt%' or short_name like 'pneumovax_Dt' then 'pneumovax'
 		when short_name like 'rrDt%' then 'rr'
 		when short_name like 'actHib%' then 'hib'
-		when short_name like 'pentavDt%' then 'penta' 
+		when short_name like 'pentavDt%' then 'penta'
+		when short_name like 'rotavirusDt%' then 'rotavirus' 
+		when short_name like 'pneumocoqueDt%' then 'pneumocoque' 
+		when short_name like 'varicelDt%' then 'varicel' 
+		when short_name like 'typhimviDt%' then 'typhimvi' 
+		when short_name like 'menengoACDt%' then 'menengoAC' 
+		when short_name like 'hepatiteADt%' then 'hepatiteA' 
+		when short_name like 'choleraDt%' then 'cholera' 		 
 		else 'xxxx' end, value_datetime, '' 
 		from obs o, concept c 
 		where concat(location_id, person_id) = '" . $pid . "' and o.concept_id = c.concept_id and value_datetime is not null and (
 		c.short_name like 'bcgDt%' or c.short_name like 'hepbDt%' or c.short_name like 'polioDt%' or c.short_name like 'dtperDt%' or 
 		c.short_name like 'rougeoleDt%' or c.short_name like 'rrDt%' or c.short_name like 'dtDt%' or short_name like 'tetanosDt%' or 
-		short_name like 'pnuemovaxDt%' or short_name like 'pneumovax_Dt%' or short_name like 'actHibDt%' or short_name like 'pentavDt%')
+		short_name like 'pnuemovaxDt%' or short_name like 'pneumovax_Dt%' or short_name like 'actHibDt%' or short_name like 'pentavDt%' or
+		short_name like 'rotavirusDt%'  or short_name like 'pneumocoqueDt%'  or short_name like 'varicelDt%'  or short_name like 'typhimviDt%' or
+		short_name like 'menengoACDt%'  or short_name like 'hepatiteADt%'  or short_name like 'choleraDt%')
 	) union
 	(select distinct 'otherconcept', a.short_name, oa.value_datetime, ob.value_text 
 		from concept a, concept b, obs oa, obs ob 
