@@ -88,12 +88,12 @@ echo "
 		{" . genExtWidget('penta4','textfield',0) . ", readOnly: true},
 		{" . genExtWidget('penta5','textfield',0) . ", readOnly: true}]],
 		[{xtype: 'label', text: '" . _('Varicelle') . "', ctCls: 'powerUpColumnHeader'},
-		[{" . genExtWidget('varicelle0','textfield',0) . ", readOnly: true},
-		{" . genExtWidget('varicelle1','textfield',0) . ", readOnly: true},
-		{" . genExtWidget('varicelle2','textfield',0) . ", readOnly: true},
-		{" . genExtWidget('varicelle3','textfield',0) . ", readOnly: true},
-		{" . genExtWidget('varicelle4','textfield',0) . ", readOnly: true},
-		{" . genExtWidget('varicelle5','textfield',0) . ", readOnly: true}]],
+		[{" . genExtWidget('varicel0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('varicel1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('varicel2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('varicel3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('varicel4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('varicel5','textfield',0) . ", readOnly: true}]],
 		[{xtype: 'label', text: '" . _('Rotavirus') . "', ctCls: 'powerUpColumnHeader'},
 		[{" . genExtWidget('rotavirus0','textfield',0) . ", readOnly: true},
 		{" . genExtWidget('rotavirus1','textfield',0) . ", readOnly: true},
@@ -292,7 +292,7 @@ function loadVaccinations ($pid) {
 		when immunizationID = 14 then 'pneumocoque'
 		when immunizationID = 15 then 'varicel'
 		when immunizationID = 16 then 'typhimvi'
-		when immunizationID = 17 then 'menengoAC'
+		when immunizationID = 17 then 'menengoAc'
 		when immunizationID = 18 then 'hepatiteA'
 		when immunizationID = 19 then 'cholera'		
 		when immunizationID = 12 then 'hx' else 'other' end as 'icode', ymdToDate(immunizationYy,immunizationMm,immunizationDd) as 'idate', immunizationComment 
@@ -315,7 +315,7 @@ function loadVaccinations ($pid) {
 		when short_name like 'pneumocoqueDt%' then 'pneumocoque' 
 		when short_name like 'varicelDt%' then 'varicel' 
 		when short_name like 'typhimviDt%' then 'typhimvi' 
-		when short_name like 'menengoACDt%' then 'menengoAC' 
+		when short_name like 'menengoACDt%' then 'menengoAc' 
 		when short_name like 'hepatiteADt%' then 'hepatiteA' 
 		when short_name like 'choleraDt%' then 'cholera' 		 
 		else 'xxxx' end, value_datetime, '' 
