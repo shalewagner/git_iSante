@@ -9,6 +9,15 @@ var vaccineTableData = [
 	[{xtype: 'label', text: '" . _('DT') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('dtDtD1','datefield',0) . "}],[{" . genExtWidget('dtDose','numberfield',0) . "}]],
 	[{xtype: 'label', text: '" . _('Hépatite B') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('hepbDtD1','datefield',0) . "}],[{" . genExtWidget('hepbDose','numberfield',0) . "}]],
 	[{xtype: 'label', text: '" . _('Pentavalent') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('pentavDtD1','datefield',0) . "}],[{" . genExtWidget('pentavDose','numberfield',0) . "}]],
+	
+	[{xtype: 'label', text: '" . _('Varicelle') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('varicelDtD1','datefield',0) . "}],[{" . genExtWidget('varicelDose','numberfield',0) . "}]],
+	[{xtype: 'label', text: '" . _('Rotavirus') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('rotavirusDtD1','datefield',0) . "}],[{" . genExtWidget('rotavirusDose','numberfield',0) . "}]],
+	[{xtype: 'label', text: '" . _('Typhimvi') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('typhimviDtD1','datefield',0) . "}],[{" . genExtWidget('typhimviDose','numberfield',0) . "}]],
+	[{xtype: 'label', text: '" . _('Pneumocoque') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('pneumocoqueDtD1','datefield',0) . "}],[{" . genExtWidget('pneumocoqueDose','numberfield',0) . "}]],
+	[{xtype: 'label', text: '" . _('Hepatite A') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('hepatiteADtD1','datefield',0) . "}],[{" . genExtWidget('hepatiteADose','numberfield',0) . "}]],
+	[{xtype: 'label', text: '" . _('Menengo AC') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('menengoAcDtD1','datefield',0) . "}],[{" . genExtWidget('menengoAcDose','numberfield',0) . "}]],
+	[{xtype: 'label', text: '" . _('Cholera') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('choleraDtD1','datefield',0) . "}],[{" . genExtWidget('choleraDose','numberfield',0) . "}]],
+	
 	[{
 	xtype: 'fieldset', layout:'column',
 	ctCls: 'powerUpColumnHeader',
