@@ -53,7 +53,7 @@ function laboratorySummary ($eid, $pid, $site, $lang) {
   <td style="width: 100%; padding:15px;"  align="center">
    <div><span style="font-family: Lucida Console; font-size: 15.0px;">
    <strong>$siteName</strong></span></div>
-   <div><span style="font-family: Lucida Console; font-size: 12.0px;"><strong>Liste des Ordres de laboration </strong></span></div>
+   <div><span style="font-family: Lucida Console; font-size: 12.0px;"><strong>Liste des Ordres de laboratoire </strong></span></div>
   </td>
 </tr>
 </table>
