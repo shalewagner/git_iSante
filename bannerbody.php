@@ -232,27 +232,19 @@ echo "<li class=\"dropdown\"><a class=\"dropdown-toggle\" href=\"#\" data-toggle
 ";
 }
 
-// Help
+// Help 
+$newIn = ($lang == 'en') ? 'New in ':'Nouveau dans la ';
 echo '<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" id="' . $topLabelsId[6] . '">' . $topLabels[$lang][6] . ' <b class="caret"></b></a>
     <ul class="dropdown-menu">
-        <li><a id="' . $cmdList[19] . ' href="./helpfile.php?file=report_definitions_1.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&' . $menustring . '">' . $cmdLabel[$lang][19] . '</a></li>
-        <li><a id="14.1"  href="helpfiles/ChangeDocument14.2' . $lang . '.pdf" target="_blank">' . _('Nouveau dans la 14.2') .    '</a></li>
-        <li><a id="14.1"  href="helpfiles/ChangeDocument14.1' . $lang . '.pdf" target="_blank">' . _('Nouveau dans la 14.1') .    '</a></li> 
-        <li><a id="13.2"  href="http://isante.googlecode.com/files/ChangeDocument13.2' . $lang . '.pdf" target="_blank">' . _('Nouveau dans la 13.2') .    '</a></li>
-        <li><a id="13.1"  href="http://isante.googlecode.com/files/ChangeDocument13.1' . $lang . '.pdf" target="_blank">' . _('Nouveau dans la 13.1') .    '</a></li>
-        <li><a id="12.3"  href="http://isante.googlecode.com/files/ChangeDocument12.3' . $lang . '.pdf" target="_blank">' . _('Nouveau dans la 12.3') .    '</a></li>
-        <li><a id="12.2"  href="http://isante.googlecode.com/files/ChangeDocument12.2' . $lang . '.pdf" target="_blank">' . _('Nouveau dans la 12.2') .    '</a></li>
-        <li><a id="' . $cmdList[26] . '" href="https://isante.googlecode.com/files/';
-        if ($lang == 'en') {
-            echo 'recordsRequestUserGuide.docx';
-        } else {
-            echo 'RecordsRequestUserGuide_Fr.docx';
-        }
-        echo "\" target=\"_blank\">" . $cmdLabel[$lang][26] . "</a></li>
-        <li><a id=\"" . $cmdList[21] . "\" href=\"./helpfile.php?file=reportFAQ&titleen=Frequently%20Asked%20Questions&titlefr=Questions%20Fr%e9quemment%20Pos%e9es&" . $menustring . "\">" . $cmdLabel[$lang][21] . "</a></li>
+        <li><a id="' . $cmdList[19] . '" href="./helpfile.php?file=report_definitions_1.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&' . $menustring . '">' . $cmdLabel[$lang][19] . '</a></li>
+        <li><a id="15.1"  href="helpfiles/ChangeDocument15.1' . $lang . '.pdf" target="_blank">' . $newIn . '15.1' .    '</a></li>
+        <li><a id="14.2"  href="helpfiles/ChangeDocument14.2' . $lang . '.pdf" target="_blank">' . $newIn . '14.2' .    '</a></li>
+        <li><a id="14.1"  href="helpfiles/ChangeDocument14.1' . $lang . '.pdf" target="_blank">' . $newIn . '14.1' .    '</a></li> 
+        <li><a id="' . $cmdList[26] . '" href="helpfiles/recordsRequestUserGuide' . $lang . '.docx" target="_blank">' . $cmdLabel[$lang][26] . '</a></li>
+        <li><a id="' . $cmdList[21] . '" href="./helpfile.php?file=reportFAQ&titleen=Frequently%20Asked%20Questions&titlefr=Questions%20Fr%e9quemment%20Pos%e9es&"' . $menustring . '">' . $cmdLabel[$lang][21] . '</a></li>
     </ul>
 </li>
-";
+';
 // End main menu items
 echo "<li><span id=\"searchbox\"></span></li>
 ";

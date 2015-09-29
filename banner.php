@@ -78,9 +78,6 @@ function onSubmenuClick (item){
 		   stuff = 'width=1200,height=700,toolbar=no,location=no,directories=no,scrollbars=yes,menubar=no,resizable=yes';
 		   page = 'https://" . CONSOLIDATED_SERVER . "?lang=$lang';
 	   	   currWindow = window.open(page, 'SiteConsolide', stuff); 
-		} else if (item.id == 'changedoc' || item.id == 'changedoc9' || item.id == 'changedoc8' || item.id == 'about' || item.id == 'recordRequest') {
-			stuff = 'width=1200,height=700,toolbar=no,location=no,directories=no,scrollbars=yes,menubar=no,resizable=yes';
-			currWindow = window.open('http://isante.googlecode.com/files/' + page, 'Documentation', stuff); 
 		} else {
 			//var url = page;
 			var url = page + 'lang=$lang&site=$site&lastPid=$lastPid';
