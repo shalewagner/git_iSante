@@ -28,8 +28,6 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71623,'choleraDtD1','Cholera','Cholera','fr','1','2014-08-18');
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71624,'choleraDtD2','Cholera','Cholera','en','1','2014-08-18');
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71624,'choleraDtD2','Cholera','Cholera','fr','1','2014-08-18');
-
-
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71625,'varicelDose','varicelDose','varicelDose','fr','1','2014-08-18');
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71625,'varicelDose','varicelDose','varicelDose','en','1','2014-08-18');
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71626,'rotavirusDose','rotavirusDose','rotavirusDose','fr','1','2014-08-18');
