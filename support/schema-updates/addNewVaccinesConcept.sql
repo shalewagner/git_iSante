@@ -69,34 +69,3 @@ insert into concept (concept_id,retired,short_name,description,form_text,datatyp
 insert into concept (concept_id,retired,short_name,description,form_text,datatype_id,class_id,is_set,creator,date_created) values ('71629','0','hepatiteADose','hepatiteADose','hepatiteADose','3','5','0','1','2014-08-18');
 insert into concept (concept_id,retired,short_name,description,form_text,datatype_id,class_id,is_set,creator,date_created) values ('71630','0','menengoAcDose','menengoAcDose','menengoAcDose','3','5','0','1','2014-08-18');
 insert into concept (concept_id,retired,short_name,description,form_text,datatype_id,class_id,is_set,creator,date_created) values ('71631','0','choleraDose','choleraDose','choleraDose','3','5','0','1','2014-08-18');
-
-
-INSERT INTO `immunizationLookup` (`immunizationLookup_id`, `immunizationID`, `immunizationCode`, `immunizationNameEn`, `immunizationNameFr`) VALUES
-(49, 13, 'Rotavirus', 'Rotavirus', 'Rotavirus'),
-(50, 14, 'Pneumocoque', 'Pneumocoque', 'Pneumocoque'),
-(51, 15, 'Varicel', 'Varicela', 'Varicel'),
-(52, 16, 'Typhimvi', 'Typhimvi', 'Typhimvi'),
-(53, 17, 'Menengo', 'Menengo AC', 'Menengo AC'),
-(54, 18, 'Hepatite', 'Hepatite A', 'Hepatite A'),
-(55, 19, 'Cholera', 'Cholera', 'Cholera');
-
-
-INSERT INTO `immunizationRendering` (`immunizationRendering_id`, `immunizationID`, `immunizationEncounterType`, `immunizationFormVersion`, `immunizationGroup`, `immunizationOrderEn`, `immunizationOrderFr`, `immunizationCnt`) VALUES
-(24, 13, 16, 0, 1, 9, 9, 2),
-(25, 14, 16, 0, 1, 10, 10, 3),
-(26, 15, 16, 0, 1, 11, 11, 2),
-(27, 16, 16, 0, 1, 12, 12, 2),
-(28, 17, 16, 0, 1, 13, 13, 2),
-(29, 18, 16, 0, 1, 14, 14, 2),
-(30, 19, 16, 0, 1, 15, 15, 2),
-(31, 13, 17, 0, 1, 9, 9, 2),
-(32, 14, 17, 0, 1, 10, 10, 3),
-(33, 15, 17, 0, 1, 11, 11, 2),
-(34, 16, 17, 0, 1, 12, 12, 2),
-(35, 17, 17, 0, 1, 13, 13, 2),
-(36, 18, 17, 0, 1, 14, 14, 2),
-(37, 19, 17, 0, 1, 15, 15, 2);
-
-update `immunizationRendering` set `immunizationOrderEn`=16,`immunizationOrderFr`=16 WHERE `immunizationRendering_id` in (9,18);
-update `immunizationRendering` set `immunizationOrderEn`=5,`immunizationOrderFr`=5 WHERE `immunizationRendering_id`=23;
-
