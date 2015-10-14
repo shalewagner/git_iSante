@@ -1044,7 +1044,7 @@ function caseNotifCDA ($dom, $pid, $dt, $sData, $pData) {
       $item = $dom->createElement ("item", "Enceinte: Oui");
       if ($pData["adult"] == 1) {
         if (!empty ($pData["dpa"])) {
-          $item2 = $dom->createElement ("item", "DPA: " . substr ($pData["dpa"], 4, 2) . "/" . substr ($pData["dpa"], 0, 4));
+          $item2 = $dom->createElement ("item", "DPA: " . substr ($pData["dpa"], 0, 4). substr ($pData["dpa"], 4, 2) . substr ($pData["dpa"], 6, 2) );
         } else {
           $item2 = $dom->createElement ("item", "DPA: N/A");
         }
