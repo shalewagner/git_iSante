@@ -978,8 +978,7 @@ from drugTableAll d1
 join patient using (patientID)
 join (select distinct drugID1 from regimen) r
  on r.drugID1 = d1.drugID
-where hivPositive = 1
- and ' . $extraPatientIdWhere . ';', $extraPatientIdParam);
+where ' . $extraPatientIdWhere . ';', $extraPatientIdParam);
 
   /* put single drug regimens into pepfarTable */
   database()->exec('
@@ -991,7 +990,7 @@ join regimen r
 where r.drugID2 = 0
  and r.drugID3 = 0;');
 
-  /* Hold all two drug regimen prefixes. Used to find two drug regemens and speed up finding three drug regemins. */
+  /* Hold all two drug regimen prefixes. Used to find two drug regimens and speed up finding three drug regimens. */
   database()->exec('
 create temporary table twoDrugRegimenPrefixTemp (
  sitecode mediumint(8) unsigned default NULL,
