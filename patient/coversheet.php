@@ -86,7 +86,7 @@ $coverLabels = array(
     'Traitement',
     'R&#xe9;action',
     'Pas de visites signalÃ©es.',
-    'Pas d&rsquo;allergies signalÃ©es.',
+    'Pas d&rsquo;allergies signalés.',
     'Aucun compte CD4 rapportÃ©'
 	)
 );
@@ -119,7 +119,7 @@ $coverHeaders = array(
 		'Vue d&#39;ensemble des graphiques',
 		'Sympt&ocirc;mes',
 		'Analyses',
-		'Visites RÃ©centes',
+		'Visites Récentes',
 		'Diagnostics',
 		'Graphique CD4',
 		'Graphique de poids',
