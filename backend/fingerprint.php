@@ -27,7 +27,7 @@ function newFingerprintSoapClient() {
  */
 function getFingerprintServerStatus() {
 	if (is_null(getConfig('fingerprintURL'))) {
-		return array(null, _('en:Fingerprint URL NOT DEFINED'));
+		return array(null, _('Fingerprint URL NOT DEFINED'));
 	}
 	try {
 		$objSOAPClient = newFingerprintSoapClient();
