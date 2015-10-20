@@ -102,20 +102,36 @@ on duplicate key update accouchement=1';
 		echo "\n accouchement" . date('h:i:s') . "\n";		
 
 
-        $qry = 'insert into dw_mer_snapshot(patientID,visitDate,virologicTest,viralLoad)
-select distinct p.patientID,visitDate,case when labID=181 then result else null end as virologicTest,
+        $qry = 'insert into dw_mer_snapshot(patientID,visitDate,viralLoad)
+select distinct p.patientID,visitDate,
 case when labID=103 then result else null end as viralLoad 
-from a_labs p where   labID in (181,103)
-on duplicate key update virologicTest=case when labID=181 then result else null end,
-viralLoad=case when labID=103 then result else null end ';
+from a_labs p where   labID in (103)
+on duplicate key update viralLoad=case when labID=103 then result else null end ';
 		$rc = database()->query($qry)->rowCount();
-		echo "\n virologicTest" . date('h:i:s') . "\n";
+		echo "\n viralLoad" . date('h:i:s') . "\n";
 		
 		 $qry = 'insert into dw_mer_snapshot(patientID,visitDate,pedVirologicTest)
 select patientID,visitDate,1 as pedVirologic from a_labs where labID in (181,182) and result=2
 on duplicate key update pedVirologicTest=1';
 		$rc = database()->query($qry)->rowCount();
 		echo "\n pedVirologicTest " . date('h:i:s') . "\n";
+		
+		
+ $qry = 'insert into dw_mer_snapshot(patientID,visitDate,virologicTest)		
+SELECT DISTINCT a.p.patientID, a.visitDate, CASE WHEN labID =181 THEN result ELSE NULL END AS virologicTest
+FROM a_labs a, (
+SELECT patientID, MIN( visitDate ) AS visitDate
+FROM a_labs p
+WHERE labID =181
+GROUP BY 1
+)p
+WHERE a.visitDate = p.visitDate 
+on duplicate key update virologicTest=case when labID=181 then result else null end';
+$rc = database()->query($qry)->rowCount();
+echo "\n virologicTest" . date('h:i:s') . "\n";
+		
+		
+		
 		
 	$qry = 'insert into dw_mer_snapshot(patientID,visitDate,breastfeeding)
 SELECT patientID,visitDate,case when pedFeedBreast=1 or pedFeedMixed=1 then 1
@@ -308,8 +324,8 @@ $indicatorQueries = array(
 
 "-2"=> array(0, "where pregnancy=1 and HIVStatus=1",NULL), 
 " 5"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=1", array(-2)),
-" 6"=> array(1, "where pregnancy=1 and HIVStatus=1 and PatientID in(select p.patientID from dw_pregnancy_ranges p,dw_mer_snapshot p1 where p.patientID=p1.patientID and p1.AntiRetroViral>=1 and p1.visitDate between DATE_ADD(startdate,INTERVAL -1 month) and stopdate)", array(-2)), 
-" 7"=> array(1, "where pregnancy=1 and HIVStatus=1 and patientID in(select p.patientID from dw_pregnancy_ranges p,dw_mer_snapshot p1 where p.patientID=p1.patientID and p1.AntiRetroViral>=1 and p1.visitDate not between DATE_ADD(startdate,INTERVAL -1 month) and stopdate)", array(-2)), 
+" 6"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=1 and PatientID in(select p.patientID from dw_pregnancy_ranges p,dw_mer_snapshot p1 where p.patientID=p1.patientID and p1.AntiRetroViral>=1 and p1.visitDate between DATE_ADD(startdate,INTERVAL -1 month) and stopdate)", array(-2)), 
+" 7"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=1 and patientID not in(select p.patientID from dw_pregnancy_ranges p,dw_mer_snapshot p1 where p.patientID=p1.patientID and p1.AntiRetroViral>=1 and p1.visitDate between DATE_ADD(startdate,INTERVAL -1 month) and stopdate)", array(-2)), 
 " 8"=> array(1, "where pregnancy=1 and HIVStatus=1 and AntiRetroViral>=2", array(-2)), 
 
 
@@ -362,7 +378,7 @@ $indicatorQueries = array(
 "43"=>array(0, ", patient p  where HIVStatus=1 and stagingCd4Viralload=1 and  p.patientid = s.patientid and datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365 >=15 ", NULL), 
 
 "-4"=> array(0, " where TBRegistered=1", NULL),
-"44"=> array(1, " where HIVStatus=1=1 and TBRegistered=1", array(-4)),
+"44"=> array(1, " where HIVStatus in (1,2) and TBRegistered=1", array(-4)),
 "45"=>array(1, ", patient p  where HIVStatus in (1,2) and TBRegistered=1 and  p.patientid = s.patientid and round(datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365,2) < 1 ", array(-4)),
 "46"=>array(1, ", patient p  where HIVStatus in (1,2) and TBRegistered=1 and  p.patientid = s.patientid and round(datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365,2) between 1 and 4.99 ", array(-4)),
 "47"=>array(1, ", patient p  where HIVStatus in (1,2) and TBRegistered=1 and  p.patientid = s.patientid and round(datediff(s.visitdate, ymdtodate(p.dobyy,6,15))/365,2) between 5 and 9.99 ", array(-4)),
