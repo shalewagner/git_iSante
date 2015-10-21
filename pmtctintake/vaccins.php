@@ -14,7 +14,7 @@ function obVaccinPanel() {
                        {<?=genExtWidget('tetanosDtUnknown','checkbox',0)?>},
                        {<?=genExtWidget('tetanosNever','checkbox',0)?>}]
 		      ],
-		     [{xtype:'label', text:'<?=_('pneumocoque')?>', ctCls: 'obVaccineColumnHeader'},
+		     [{xtype:'label', text:'<?=_('Pneumocoque')?>', ctCls: 'obVaccineColumnHeader'},
 		      [{<?=genExtWidget('pneumocoqueDtD1','datefield',0)?>},
                        {<?=genExtWidget('ppneumocoqueDtD2','datefield',0)?>},
                        {<?=genExtWidget('pneumocoqueDtD3','datefield',0)?>},
