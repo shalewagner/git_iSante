@@ -1,17 +1,17 @@
 Most recent change: 1970-01-01 00:00:00
 Application version: 14.2.1 ()
 Schema version: 42
-Seconds elapsed: 4
-Total records read: 13401
-Records per second: 3350.25
+Seconds elapsed: 5
+Total records read: 13429
+Records per second: 2685.8
 
 Record counts by table:
 announcements                36
 clinicLookup                756
-concept                    2406
+concept                    2408
 concept_class                18
 concept_datatype             11
-concept_name               4812
+concept_name               4815
 conditionLookup             205
 conditionOrder              166
 cohortAsort                  19
@@ -28,8 +28,8 @@ dw_measureForAgeLookup      582
 dw_tbReportLookup            63
 dw_weightForHeightLookup    484
 encTypeLookup                30
-immunizationLookup           12
-immunizationRendering        23
+immunizationLookup           21
+immunizationRendering        37
 isanteConcepts              879
 labelLookup                   0
 labGroupLookup               14
