@@ -5,9 +5,9 @@ $ARVreason = array (
 	'fr' => array (
     'WHOIII-2' => 'OMS Stade III',
     'WHOIIICond' => 'OMS Stade III & condition actif',
-    'eligByAge' => 'Lâ€™Ã¢ge',
+    'eligByAge' => 'L’âge',
     'eligByCond' => 'Condition actif',
-    'eligPcr' => 'RÃ©sultat positif de test PCR',
+    'eligPcr' => 'Résultat positif de test PCR',
     'cd4LT200' => 'CD4 inf&#xe9;rieur au seuil',
     'tlcLT1200' => 'TLC < 1200',
     'WHOIII' => 'OMS Stade III + CD4 inf&#xe9;rieur au seuil',
@@ -85,9 +85,9 @@ $coverLabels = array(
 		'Pas d&rsquo;&#xe9;ligibilit&eacute; m&eacute;dicale &eacute;tablie',
     'Traitement',
     'R&#xe9;action',
-    'Pas de visites signalÃ©es.',
-    'Pas d&rsquo;allergies signalés.',
-    'Aucun compte CD4 rapportÃ©'
+    'Pas de visites signalées.',
+    'Pas d&rsquo;allergies signalées.',
+    'Aucun compte CD4 rapporté'
 	)
 );
 
