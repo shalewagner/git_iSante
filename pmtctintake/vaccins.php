@@ -1,5 +1,3 @@
-
-
 function obVaccinPanel() {
     var dataTable = [
 		     [{xtype:'label', text:'<?=_('Hépatite B')?>', ctCls: 'obVaccineColumnHeader'},
@@ -16,12 +14,12 @@ function obVaccinPanel() {
                        {<?=genExtWidget('tetanosDtUnknown','checkbox',0)?>},
                        {<?=genExtWidget('tetanosNever','checkbox',0)?>}]
 		      ],
-		     [{xtype:'label', text:'<?=_('Pneumovax')?>', ctCls: 'obVaccineColumnHeader'},
-		      [{<?=genExtWidget('pnuemovaxDtD1','datefield',0)?>},
-                       {<?=genExtWidget('pnuemovaxDtD2','datefield',0)?>},
-                       {<?=genExtWidget('pnuemovaxDtD3','datefield',0)?>},
-                       {<?=genExtWidget('pnuemovaxDtUnknown','checkbox',0)?>},
-                       {<?=genExtWidget('pnuemovaxNever','checkbox',0)?>}]
+		     [{xtype:'label', text:'<?=_('Pneumocoque')?>', ctCls: 'obVaccineColumnHeader'},
+		      [{<?=genExtWidget('pneumocoqueDtD1','datefield',0)?>},
+                       {<?=genExtWidget('ppneumocoqueDtD2','datefield',0)?>},
+                       {<?=genExtWidget('pneumocoqueDtD3','datefield',0)?>},
+                       {<?=genExtWidget('pneumocoqueDtUnknown','checkbox',0)?>},
+                       {<?=genExtWidget('pneumocoqueNever','checkbox',0)?>}]
 		      ],
 		     [{
 			ctCls: 'obVaccineColumnHeader',

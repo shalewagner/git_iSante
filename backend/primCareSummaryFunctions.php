@@ -32,6 +32,7 @@ function generatePrimCareSummary ($pid, $site, $lang) {
   $pedVitaTitle = $GLOBALS['primCareSummaryLabels'][$lang][25];
   $pedPsychoDevTitle = $GLOBALS['primCareSummaryLabels'][$lang][26];
   $tpedAlimTitle = $GLOBALS['primCareSummaryLabels'][$lang][27];
+  $obGynVaccTitle	= $GLOBALS['primCareSummaryLabels'][$lang][28];
   
   $queryArray = array(
        "demographics" => "select concat(fname, ' ', lname) as Nom, concat(addrDistrict,' ',addrSection) as 'Adresse, Commune',  addrTown as Localite, birthDistrict as 'Lieu de naissance',telephone, case when sex='1' then 'F' when sex='2' then 'M' end as sexe, maritalStatus as 'Statut marital', concat(dobDd,'/', dobMm,'/', dobYy) as 'Date de naissance', fnameMother as 'Prenom de la mere', occupation as 'Profession du patient', contact, addrContact as 'Adresse du contact', phoneContact as 'Telephone du contact' from patient where patientID =  '" . $pid . "'",
@@ -234,6 +235,15 @@ when short_name = 'pnuemovaxDtD2'     then concat('Pneumovax : ', cast(value_dat
 when short_name = 'pnuemovaxDtD3'     then concat('Pneumovax : ', cast(value_datetime as date))
 when short_name = 'pnuemovaxDtUnknown'     then 'Pneumovax : Recu, date inconnue'
 when short_name = 'pnuemovaxNever'     then 'Pneumovax : Jamais recu'
+when short_name = 'pneumocoqueDtD1'		 then concat('Pneumocoque : ', cast(value_datetime as date)) 
+when short_name = 'pneumocoqueDtD2'		 then concat('Pneumocoque : ', cast(value_datetime as date)) 
+when short_name = 'pneumocoqueDtD3'		 then concat('Pneumocoque : ', cast(value_datetime as date)) 
+when short_name = 'pneumocoqueDtUnknown'	 then 'Pneumocoque : Recu, date inconnue' 
+when short_name = 'pneumocoqueNever'     then 'Pneumocoque : Jamais recu'
+when short_name = 'hepatiteADtD1'		 then concat('Hepatite A : ', cast(value_datetime as date)) 
+when short_name = 'hepatiteADtD2'		 then concat('Hepatite A : ', cast(value_datetime as date)) 
+when short_name = 'hepatiteADtUnknown'	 then 'Hepatite A : Recu, date inconnue' 
+when short_name = 'hepatiteANever'     then 'Hepatite A : Jamais recu'
 when short_name = 'otherVaccinDtD1'      then concat('Autre : ', cast(value_datetime as date)) 
 when short_name = 'otherVaccinDtD2'     then concat('Autre : ', cast(value_datetime as date))
 when short_name = 'otherVaccinDtD3'     then concat('Autre : ', cast(value_datetime as date))
@@ -241,7 +251,7 @@ when short_name = 'otherVaccinDtUnknown'     then 'Autre : Recu, date inconnue'
 when short_name = 'otherVaccinNever'     then 'Autre : Jamais recu' else 'xxx'
 /*otherVaccinText*/
 end as vaccins 
-FROM `obs` o, concept c, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id and encounterType = 24 and short_name in('hepbDtD1','hepbDtD2','hepbDtD3','hepbDtUnknown','hepbNever','tetanosDtD1','tetanosDtD2','tetanosDtD3', 'tetanosDtUnknown','tetanosNever','pnuemovaxDtD1','pnuemovaxDtD2','pnuemovaxDtD3','pnuemovaxDtUnknown','pnuemovaxNever','otherVaccinDtD1','otherVaccinDtD2','otherVaccinDtD3','otherVaccinDtUnknown','otherVaccinNever') and e.patientid = '".$pid."' order by 1 desc
+FROM `obs` o, concept c, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id and encounterType = 24 and short_name in('hepbDtD1','hepbDtD2','hepbDtD3','hepbDtUnknown','hepbNever','tetanosDtD1','tetanosDtD2','tetanosDtD3', 'tetanosDtUnknown','tetanosNever','pnuemovaxDtD1','pnuemovaxDtD2','pnuemovaxDtD3','pnuemovaxDtUnknown','pnuemovaxNever','pneumocoqueDtD1','pneumocoqueDtD2','pneumocoqueDtD3','pneumocoqueDtUnknown','pneumocoqueNever','hepatiteADtD1','hepatiteADtD2','hepatiteADtUnknown','hepatiteANever','otherVaccinDtD1','otherVaccinDtD2','otherVaccinDtD3','otherVaccinDtUnknown','otherVaccinNever') and e.patientid = '".$pid."' order by 1 desc
 ",
 	   "pedAlim" => "SELECT visitdate as 'Date de visite', case 
 when c.short_name = 'prepPour'		and o.value_numeric = 2 then 'Preparation pour nourissons(LM) : non'
@@ -332,6 +342,35 @@ when c.short_name = 'hepbDtD2'	then concat('Hepatite B, dose 2 : ', cast(o.value
 when c.short_name = 'hepbDtD3'	then concat('Hepatite B, dose 3 : ', cast(o.value_datetime as date))
 when c.short_name = 'hepbDtR1'	then concat('Hepatite B, rappel 1 : ', cast(o.value_datetime as date))
 when c.short_name = 'hepbDtR2'	then concat('Hepatite B, rappel 2 : ', cast(o.value_datetime as date))
+when c.short_name = 'pneumocoqueDtD1'		 then concat('Pneumocoque, dose 1 : ', cast(o.value_datetime as date)) 
+when c.short_name = 'pneumocoqueDtD2'		 then concat('Pneumocoque, dose 2 : ', cast(o.value_datetime as date)) 
+when c.short_name = 'pneumocoqueDtD3'		 then concat('Pneumocoque, dose 3 : ', cast(o.value_datetime as date)) 
+when c.short_name = 'pneumocoqueDtUnknown'	 then 'Pneumocoque : Recu, date inconnue' 
+when c.short_name = 'pneumocoqueNever'     then 'Pneumocoque : Jamais recu'
+when c.short_name = 'hepatiteADtD1'		 then concat('Hepatite A , dose 1: ', cast(o.value_datetime as date)) 
+when c.short_name = 'hepatiteADtD2'		 then concat('Hepatite A , dose 2: ', cast(o.value_datetime as date)) 
+when c.short_name = 'hepatiteADtUnknown'	 then 'Hepatite A : Recu, date inconnue' 
+when c.short_name = 'hepatiteANever'     then 'Hepatite A : Jamais recu'
+when c.short_name = 'rotavirusDtD1'		 then concat('Rotavirus ,dose 1: ', cast(o.value_datetime as date)) 
+when c.short_name = 'rotavirusDtD2'		 then concat('Rotavirus , dose 2: ', cast(o.value_datetime as date)) 
+when c.short_name = 'rotavirusDtUnknown'	 then 'Rotavirus : Recu, date inconnue' 
+when c.short_name = 'rotavirusNever'     then 'Rotavirus : Jamais recu'
+when c.short_name = 'varicelDtD1'		 then concat('Varicelle , dose 1: ', cast(o.value_datetime as date)) 
+when c.short_name = 'varicelDtD2'		 then concat('Varicelle , dose 2: ', cast(o.value_datetime as date)) 
+when c.short_name = 'varicelDtUnknown'	 then 'Varicelle : Recu, date inconnue' 
+when c.short_name = 'varicelNever'     then 'Varicelle : Jamais recu'
+when c.short_name = 'typhimviDtD1'		 then concat('Typhimvi , dose 1: ', cast(o.value_datetime as date)) 
+when c.short_name = 'typhimviDtD2'		 then concat('Typhimvi , dose 2: ', cast(o.value_datetime as date)) 
+when c.short_name = 'vtyphimviDtUnknown'	 then 'Typhimvi : Recu, date inconnue' 
+when c.short_name = 'typhimviNever'     then 'Typhimvi : Jamais recu'
+when c.short_name = 'menengoAcDtD1'		 then concat('MenengoAc , dose 1: ', cast(o.value_datetime as date)) 
+when c.short_name = 'menengoAcDtD2'		 then concat('MenengoAc , dose 2: ', cast(o.value_datetime as date)) 
+when c.short_name = 'menengoAcDtUnknown'	 then 'MenengoAc : Recu, date inconnue' 
+when c.short_name = 'menengoAcNever'     then 'MenengoAc : Jamais recu'
+when c.short_name = 'choleraDtD1'		 then concat('Cholera , dose 1 : ', cast(o.value_datetime as date)) 
+when c.short_name = 'choleraDtD2'		 then concat('Cholera , dose 2: ', cast(o.value_datetime as date)) 
+when c.short_name = 'choleraDtUnknown'	 then 'Cholera : Recu, date inconnue' 
+when c.short_name = 'choleraNever'     then 'Cholera : Jamais recu'
 when c.short_name = 'actHibDtD1'	then concat('Act Hib, dose 1 : ', cast(o.value_datetime as date))
 when c.short_name = 'actHibDtD2'	then concat('Act Hib, dose 2 : ', cast(o.value_datetime as date))
 when c.short_name = 'actHibDtD3'	then concat('Act Hib, dose 3 : ', cast(o.value_datetime as date))
@@ -342,6 +381,10 @@ when c.short_name = 'pentavDtD2'	then concat('Pentavalent (MSPP), dose 2 : ', ca
 when c.short_name = 'pentavDtD3'	then concat('Pentavalent (MSPP), dose 3 : ', cast(o.value_datetime as date))
 when c.short_name = 'pentavDtR1'	then concat('Pentavalent (MSPP), rappel 1 : ', cast(o.value_datetime as date))
 when c.short_name = 'pentavDtR2'	then concat('Pentavalent (MSPP), rappel 2 : ', cast(o.value_datetime as date))
+end as vaccins 
+FROM `obs` o, concept c, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id  and encounterType = 29 and c.short_name in('bcgDt1','polioDtD0','polioDtD1','polioDtD2','polioDtD3','polioDtR1','polioDtR2','dtperDtD1','dtperDtD2','dtperDtD3','dtperDtR1','dtperDtR2','rougeoleDtD1','rougeoleDtD2','rougeoleDtD3','rougeoleDtR1','rougeoleDtR2','rrDtD1','rrDtD2','rrDtD3','rrDtR1','rrDtR2','dtDtD1','dtDtD2','dtDtD3','dtDtR1','dtDtR2','hepbDtD1','hepbDtD2','hepbDtD3','hepbDtR1','hepbDtR2','pneumocoqueDtD1','pneumocoqueDtD2','pneumocoqueDtD3','pneumocoqueDtUnknown','pneumocoqueNever','hepatiteADtD1','hepatiteADtD2','hepatiteADtUnknown','hepatiteANever','rotavirusDtD1','rotavirusDtD2','rotavirusDtUnknown','rotavirusNever','varicelDtD1','varicelDtD2','varicelDtUnknown','varicelNever','typhimviDtD1','typhimviDtD2','typhimviDtUnknown','typhimviNever','menengoAcDtD1','menengoAcDtD2','menengoAcDtUnknown','menengoAcNever','choleraDtD1','choleraDtD2','choleraDtUnknown','choleraNever','actHibDtD1','actHibDtD2','actHibDtD3','actHibDtR1','actHibDtR2','pentavDtD1','pentavDtD2','pentavDtD3','pentavDtR1','pentavDtR2') and o.value_datetime is not null and e.patientid = '" . $pid . "'
+union
+SELECT visitdate as 'Date de visite', case
 when c.short_name = 'vOther1DtD1'	and o.value_datetime is not null and p.value_text is not null and d.short_name = 'vOther1desc' then concat(p.value_text , ' ', cast(o.value_datetime as date))
 when c.short_name = 'vOther1DtD2'	and o.value_datetime is not null and p.value_text is not null and d.short_name = 'vOther1desc' then concat(p.value_text , ' ', cast(o.value_datetime as date))
 when c.short_name = 'vOther1DtD3'	and o.value_datetime is not null and p.value_text is not null and d.short_name = 'vOther1desc' then concat(p.value_text , ' ', cast(o.value_datetime as date)) 
@@ -353,7 +396,7 @@ when c.short_name = 'vOther2DtD3'	and o.value_datetime is not null and p.value_t
 when c.short_name = 'vOther2DtD4'	and o.value_datetime is not null and p.value_text is not null and d.short_name = 'vOther2desc' then concat(p.value_text , ' ', cast(o.value_datetime as date))
 when c.short_name = 'vOther2DtD5'	and o.value_datetime is not null and p.value_text is not null and d.short_name = 'vOther2desc' then concat(p.value_text , ' ', cast(o.value_datetime as date)) else 'xxx'
 end as vaccins 
-FROM `obs` o, concept c, obs p, concept d, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id  and o.encounter_id = p.encounter_id and o.location_id = p.location_id and p.concept_id = d.concept_id and encounterType = 29 and c.short_name in('bcgDt1','polioDtD0','polioDtD1','polioDtD2','polioDtD3','polioDtR1','polioDtR2','dtperDtD1','dtperDtD2','dtperDtD3','dtperDtR1','dtperDtR2','rougeoleDtD1','rougeoleDtD2','rougeoleDtD3','rougeoleDtR1','rougeoleDtR2','rrDtD1','rrDtD2','rrDtD3','rrDtR1','rrDtR2','dtDtD1','dtDtD2','dtDtD3','dtDtR1','dtDtR2','hepbDtD1','hepbDtD2','hepbDtD3','hepbDtR1','hepbDtR2','actHibDtD1','actHibDtD2','actHibDtD3','actHibDtR1','actHibDtR2','pentavDtD1','pentavDtD2','pentavDtD3','pentavDtR1','pentavDtR2','vOther1DtD1','vOther1DtD2','vOther1DtD3','vOther1DtD4','vOther1DtD5','vOther2DtD1','vOther2DtD2','vOther2DtD3','vOther2DtD4','vOther2DtD5') and d.short_name in ('vOther1desc', 'vOther2desc') and o.value_datetime is not null and p.value_text is not null and e.patientid = '" . $pid . "' order by o.value_datetime 
+FROM `obs` o, concept c, obs p, concept d, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id  and o.encounter_id = p.encounter_id and o.location_id = p.location_id and p.concept_id = d.concept_id and encounterType = 29 and c.short_name in('vOther1DtD1','vOther1DtD2','vOther1DtD3','vOther1DtD4','vOther1DtD5','vOther2DtD1','vOther2DtD2','vOther2DtD3','vOther2DtD4','vOther2DtD5') and d.short_name in ('vOther1desc', 'vOther2desc') and o.value_datetime is not null and p.value_text is not null and e.patientid = '" . $pid . "' 
 ",
 	   "tpedVacc" => "SELECT visitdate as 'Date de visite', case
 when c.short_name = 'bcgDose'	and o.value_text is not null then concat('BCG, dose ', o.value_text, ': ',cast(p.value_datetime as date)) else 'xxx'
@@ -389,6 +432,43 @@ SELECT visitdate as 'Date de visite', case
 when c.short_name = 'hepbDose'	and o.value_text is not null then concat('Hepatite B, dose ', o.value_text, ': ',cast(p.value_datetime as date)) else 'xxx'
 end as vaccins 
 FROM `obs` o, concept c, obs p, concept d, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id  and o.encounter_id = p.encounter_id and o.location_id = p.location_id and p.concept_id = d.concept_id and encounterType = 31 and c.short_name = 'hepbDose' and d.short_name = 'hepbDtD1' and p.value_datetime is not null and o.value_text is not null and e.patientid = '" . $pid . "'
+
+/*ajout de nouveaux vaccins*/
+union
+SELECT visitdate as 'Date de visite', case
+when c.short_name = 'pneumocoqueDose'	and o.value_text is not null then concat('Pneumocoque, dose ', o.value_text, ': ',cast(p.value_datetime as date)) else 'xxx'
+end as vaccins 
+FROM `obs` o, concept c, obs p, concept d, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id  and o.encounter_id = p.encounter_id and o.location_id = p.location_id and p.concept_id = d.concept_id and encounterType = 31 and c.short_name = 'pneumocoqueDose' and d.short_name = 'pneumocoqueDtD1' and p.value_datetime is not null and o.value_text is not null and e.patientid = '" . $pid . "'
+union
+SELECT visitdate as 'Date de visite', case
+when c.short_name = 'hepatiteADose'	and o.value_text is not null then concat('Hepatite A, dose ', o.value_text, ': ',cast(p.value_datetime as date)) else 'xxx'
+end as vaccins 
+FROM `obs` o, concept c, obs p, concept d, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id  and o.encounter_id = p.encounter_id and o.location_id = p.location_id and p.concept_id = d.concept_id and encounterType = 31 and c.short_name = 'hepatiteADose' and d.short_name = 'hepatiteADtD1' and p.value_datetime is not null and o.value_text is not null and e.patientid = '" . $pid . "'
+union
+SELECT visitdate as 'Date de visite', case
+when c.short_name = 'rotavirusDose'	and o.value_text is not null then concat('Rotavirus, dose ', o.value_text, ': ',cast(p.value_datetime as date)) else 'xxx'
+end as vaccins 
+FROM `obs` o, concept c, obs p, concept d, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id  and o.encounter_id = p.encounter_id and o.location_id = p.location_id and p.concept_id = d.concept_id and encounterType = 31 and c.short_name = 'rotavirusDose' and d.short_name = 'rotavirusDtD1' and p.value_datetime is not null and o.value_text is not null and e.patientid = '" . $pid . "'
+union
+SELECT visitdate as 'Date de visite', case
+when c.short_name = 'varicelDose'	and o.value_text is not null then concat('Varicelle, dose ', o.value_text, ': ',cast(p.value_datetime as date)) else 'xxx'
+end as vaccins 
+FROM `obs` o, concept c, obs p, concept d, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id  and o.encounter_id = p.encounter_id and o.location_id = p.location_id and p.concept_id = d.concept_id and encounterType = 31 and c.short_name = 'varicelDose' and d.short_name = 'varicelDtD1' and p.value_datetime is not null and o.value_text is not null and e.patientid = '" . $pid . "'
+union
+SELECT visitdate as 'Date de visite', case
+when c.short_name = 'typhimviDose'	and o.value_text is not null then concat('Typhimvi, dose ', o.value_text, ': ',cast(p.value_datetime as date)) else 'xxx'
+end as vaccins 
+FROM `obs` o, concept c, obs p, concept d, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id  and o.encounter_id = p.encounter_id and o.location_id = p.location_id and p.concept_id = d.concept_id and encounterType = 31 and c.short_name = 'typhimviDose' and d.short_name = 'typhimviDtD1' and p.value_datetime is not null and o.value_text is not null and e.patientid = '" . $pid . "'
+union
+SELECT visitdate as 'Date de visite', case
+when c.short_name = 'menengoAcDose'	and o.value_text is not null then concat('MenengoAc, dose ', o.value_text, ': ',cast(p.value_datetime as date)) else 'xxx'
+end as vaccins 
+FROM `obs` o, concept c, obs p, concept d, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id  and o.encounter_id = p.encounter_id and o.location_id = p.location_id and p.concept_id = d.concept_id and encounterType = 31 and c.short_name = 'menengoAcDose' and d.short_name = 'menengoAcDtD1' and p.value_datetime is not null and o.value_text is not null and e.patientid = '" . $pid . "'
+union
+SELECT visitdate as 'Date de visite', case
+when c.short_name = 'choleraDose'	and o.value_text is not null then concat('Cholera, dose ', o.value_text, ': ',cast(p.value_datetime as date)) else 'xxx'
+end as vaccins 
+FROM `obs` o, concept c, obs p, concept d, encValidAll e WHERE e.sitecode = o.location_id and e.encounter_id = o.encounter_id and o.concept_id = c.concept_id  and o.encounter_id = p.encounter_id and o.location_id = p.location_id and p.concept_id = d.concept_id and encounterType = 31 and c.short_name = 'choleraDose' and d.short_name = 'choleraDtD1' and p.value_datetime is not null and o.value_text is not null and e.patientid = '" . $pid . "'
 union
 SELECT visitdate as 'Date de visite', case
 when c.short_name = 'pentavDose'	and o.value_numeric is not null then concat('Pentavalent, dose ', cast(o.value_numeric as UNSIGNED), ': ',cast(p.value_datetime as date)) else 'xxx'
@@ -2155,7 +2235,7 @@ if (isObgyn($pid)) {
 $obVacc = '
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr valign="top">
- <td style="width:100%;text-align: center;padding-top:12px;"><span style="font-family: Lucida Console; font-size: 14.0px; font-weight: bold;">'.$pedVaccTitle.'</span></td>
+ <td style="width:100%;text-align: center;padding-top:12px;"><span style="font-family: Lucida Console; font-size: 14.0px; font-weight: bold;">'.$obGynVaccTitle.'</span></td>
 </tr>
 </table>
 
