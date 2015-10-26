@@ -1,7 +1,10 @@
 Apply a patch like this:
 
-cd /var/www
-sudo tar zxvf isante_version_xx.x.x_patch.tgz isante
+as itech, copy file to /home/itech
+sudo sh
+mv <file> /var/www/isante/
+cd /var/www/isante
+tar -xvf <file>
 
 Contents of various patches:
 
@@ -24,4 +27,14 @@ OpenElisSchemaPatch.sql
 	Smartcard integration and updates to fingerprinting
 
 13.2.4 
-	Replication patch so sites replicate directly to PaP consolidated server
+	Replication patch so sites replicate directly to PaP consolidated server 
+	
+14.2.1
+	Corrects the print function for the lab form – when you click on the "print order" button, you are redirected to a new page with the list of lab tests for the current order.
+
+15.1
+	[Patch file 15.1.tar.gz] implements 15.1. After running the tar file, execute the following :
+	
+	sh support/upgrade-database.sh
+	cd support/
+	php setTargets.php
