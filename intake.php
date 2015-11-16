@@ -15,7 +15,7 @@ echo '
  <title>' . ${$typeArray[$type] . 'FormTitle'}[$lang][1] . '</title>
  </head>
  <body>
- <form name="mainForm" target="mainWindow" action="patienttabs.php?pid=$pid&lang=$lang&site=$site" method="post">
+ <form name="mainForm" target="mainWindow" action="patienttabs.php" method="post">
  <input id="registVisitDt" name="registVisitDt" type="hidden" value="' . $registVisitDt .'" />
  <input id="sex1" name="sex1" type="hidden" value="' . $mf. '">
  <input id="errorSave" name="errorSave" type="hidden" />
