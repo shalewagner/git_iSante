@@ -55,13 +55,16 @@ use File::Path 'mkpath';
 
 	5. Make sure the permissions on the directory /home/itech/replication/data are set correctly: 
 	
-	        cd /home/itech/replication/
+	        cd /home/itech/
+	        mkdir replication
+	        cd replication
+	        mkdir data
 		chmod g+w data
 		chown itech.www-data data
 
 	6. Reload apache:
 	
-		sudo /etc/init.d/apache2 force-reload
+		/etc/init.d/apache2 force-reload
 
 	7. Add the following entry to the isante cron (/etc/cron.d/isante):
 

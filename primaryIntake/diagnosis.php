@@ -108,93 +108,94 @@ function dxIndentItem($item) {
 $dxAll = array(
 	'abscess' => _('Abcès [682.9]'),
 	'acuteglomerulonephritis' => _('Glomérulonéphrite aiguë [580.9]'),
-	'adfActive' => _('Adénofibrome (ADF) du sein [610.3]'),
+	'adfActive' => _('Adénofibrome (ADF) du sein [N60.39]'),
 	'allergicrhinitis' => _('Rhinite allergique [477]'),
-	'amygdalite' => _('Amygdalite') . ' [463.00]',
+	'amygdalite' => _('Amygdalite') . ' [J03.90]',
 	'anemia' => _('Anémie'),
-	'asthmaDx' => _('Asthme [493.9]'),
+	'asthmaDx' => _('Asthme [J45]'),
 	'asthmeattack' => _('Crise d’asthme [J45]'),
 	'atopicdermatitis' => _('Dermatite atopique [691]'),
-	'avortement' => _('Avortement [634.9]'),
-	'boneFracture' => _('Fracture osseuse [829.0]'),
+	'avortement' => _('Avortement [O03.9]'),
+	'boneFracture' => _('Fracture osseuse [T14.8]'),
 	'bronchitis' => _('Bronchite [490]'),
-	'burns' => _('Brûlure [949.0]'),
+	'burns' => _('Brûlure [T30.0]'),
 	'cancer' => _('Cancer'),
-	'cancerBreastActive' => _('Cancer de sein [174.9]'),
-	'cancercervical' => _('Cancer du col [180.9]'),
+	'cancerBreastActive' => _('Cancer de sein [C50.919]'),
+	'cancercervical' => _('Cancer du col [C53.9]'),
 	'cancercervix' => _('Cancer du col cervical'),
-	'cancerEndoActive' => _('Cancer de l’endomètre [182.0]'),
-	'cancerOvaryActive' => _('Cancer de l’ovaire [183.0]'),
-	'cancerprostate' => _('Cancer de la prostate [185]'),
-	'candidVulvoActive' => _('Vulvo vaginite [616.1]'),
-	'cardiopathy' => _('Cardiopathie [429.9]'),
-	'charbon' => _('Charbon [022.9]'),
-	'cholera' => _('Choléra [001.9]'),
-	'chorioamniotite' => _('Chorioamniotite [658.4]'),
-	'conjunctivitis' => _('Conjonctivite [372.30]'),
-	'cystOvaryActive' => _('Kyste de l’ovaire [620.2]'),
-	'dengue' => _('Dengue [061]'),
-	'diabete1' => _('Diabète Type 1 [250.01]'),
-	'diabete2' => _('Diabète Type 2 [250.00]'),
-	'diabetespregnancy' => _('Diabète + grossesse [648.8]'),
-	'diarrheeAqueuse' => _('Diarrhée aigue aqueuse [787.91]'),
-	'diarrheeIndeter' => _('Diarrhée cause indéterminée [787.91]'),
-	'diarrheeSanguin' => _('Diarrhée aigue sanguinolente [787.91]'),
-	'diptheria' => _('Diphtérie [032]'),
+	'cancerEndoActive' => _('Cancer de l’endomètre [C54.1]'),
+	'cancerOvaryActive' => _('Cancer de l’ovaire [C56.9]'),
+	'cancerprostate' => _('Cancer de la prostate [C61]'),
+	'candidVulvoActive' => _('Vulvo vaginite [N76.0]'),
+	'cardiopathy' => _('Cardiopathie [I51.9]'),
+	'charbon' => _('Charbon [A22.9]'),
+	'cholera' => _('Choléra [A00.9]'),
+	'chorioamniotite' => _('Chorioamniotite [O41.129]'),
+	'conjunctivitis' => _('Conjonctivite [H10.9]'),
+	'cystOvaryActive' => _('Kyste de l’ovaire [N83.29]'),
+	'dengue' => _('Dengue [A90]'),
+	'diabete1' => _('Diabète Type 1 [E10.9]'),
+	'diabete2' => _('Diabète Type 2 [E11.9]'),
+	'diabetespregnancy' => _('Diabète + grossesse [O99.810]'),
+	'diarrheeAqueuse' => _('Diarrhée aigue aqueuse [R19.7]'),
+	'diarrheeIndeter' => _('Diarrhée cause indéterminée [R19.7]'),
+	'diarrheeSanguin' => _('Diarrhée aigue sanguinolente [R19.7]'),
+	'diptheria' => _('Diphtérie [A36]'),
 	'dislocation' => _('Luxation [839.8]'),
-	'dxMDRtb' => _('MDR TB remplir la section Tuberculose ci-dessous'),
-	'dxTB' => _('Tuberculose [014.9] remplir la section Tuberculose ci-dessous'),
-	'dysOvaryActive' => _('Dystrophie ovarienne [620.8]'),
-	'eclampsia' => _('Eclampsie [642.6]'),
+	'dxMDRtb' => _('MDR TB remplir la section Tuberculose ci-dessous [Z16.24]'),
+	'dxTB' => _('Tuberculose [A15.0] remplir la section Tuberculose ci-dessous'),
+	'dysOvaryActive' => _('Dystrophie ovarienne [N83.8]'),
+	'eclampsia' => _('Eclampsie [O15.9]'),
 	'emergencySurgery' => _('Urgence Chirurgicale'),
-	'endometriosisActive' => _('Endométriose [617.9]'),
-	'epilepsy' => _('Epilepsie [345.9]'),
+	'bonneSanteApparente' => _('Bonne Sante Apparente [Z00.129]'),
+	'endometriosisActive' => _('Endométriose [N80.9]'),
+	'epilepsy' => _('Epilepsie [G40.901]'),
 	'febrileseizures' => _('Crises convulsives fébriles [780.31]'),
-	'febrileSyndrome' => _('Syndrome ictérique fébrile [070.1]'),
-	'fetalDeathActive' => _('Mort fœtale [656.4]'),
-	'feverHemorrhagicacute' => _('Fièvre hémorragique aiguë [065]'),
-	'feverIndeter' => _('Fièvre, cause indéterminée [780.60]'),
-	'feverTyphoid' => _('Fièvre Typhoïde * confirmé [002]'),
-	'feverTyphoidSuspected' => _('Fièvre Typhoïde * suspect [002]'), 
-	'fibroidUterineActive' => _('Fibrome utérin [219.9]'),
+	'febrileSyndrome' => _('Syndrome ictérique fébrile [B15.9]'),
+	'fetalDeathActive' => _('Mort fœtale [O36.4XX0]'),
+	'feverHemorrhagicacute' => _('Fièvre hémorragique aiguë [N/A]'),
+	'feverIndeter' => _('Fièvre, cause indéterminée [R50.9]'),
+	'feverTyphoid' => _('Fièvre Typhoïde * confirmé [Z22.0]'),
+	'feverTyphoidSuspected' => _('Fièvre Typhoïde * suspect [A01.00]'), 
+	'fibroidUterineActive' => _('Fibrome utérin [D26.9]'),
 	'fungalskin' => _('Mycose cutanée [111.9]'),
 	'gastroenteritiswithdehydrationmild' => _('déshydratation légère'),
 	'gastroenteritiswithdehydrationmoderate' => _('déshydratation modérée'),
 	'gastroenteritiswithdehydrationsevere' => _('déshydratation sévère'),
 	'gastroesophagealreflux' => _('Reflux gastro-œsophagien [530.81]'),
-	'grossesse' => _('Grossesse [V22.2]'),
-	'grossesseEctopique' => _('Grossesse ectopique [633.00]'),
-	'grossesseUterine' => _('Grossesse intra utérine [V22.2]'),
-	'hemorragie' => _('Hémorragie troisième trimestre [641.9]'),
-	'hivPositive' => _('VIH/SIDA [042]'),
-	'htapregnancy' => _('HTA + grossesse [642.9]'),
-	'hyperGravi' => _('Hyperémèse gravidique [643.0]'),
-	'hypertensionArtery' => _('Hypertension artérielle [401.9]'),
+	'grossesse' => _('Grossesse [Z33.1]'),
+	'grossesseEctopique' => _('Grossesse ectopique [O0.00]'),
+	'grossesseUterine' => _('Grossesse intra utérine [Z33.1]'),
+	'hemorragie' => _('Hémorragie troisième trimestre [O46.90]'),
+	'hivPositive' => _('VIH/SIDA [B20]'),
+	'htapregnancy' => _('HTA + grossesse [O16.9]'),
+	'hyperGravi' => _('Hyperémèse gravidique [O21.0]'),
+	'hypertensionArtery' => _('Hypertension artérielle [I10]'),
 	'ili' => _('Syndrome Grippal'),
 	'impetigo' => _('Impétigo [684]'),
-	'infectionAcuteRespiratory' => _('Infection respiratoire aiguë [465.9]'),
+	'infectionAcuteRespiratory' => _('Infection respiratoire aiguë [J06.9]'),
 	'infectionTissue' => _('Infection des tissus mous'),
 	'irondeficiencyanemia' => _('Anémie Carentielle [281.0]'),
 	'ist' => _('IST'),
-	'lepra' => _('Lèpre [030]'),
-	'lesionCervicale' => _('Lésion cervicale [219.0]'),
-	'lymphaticFilariasis' => _('Filariose lymphatique [125.9]'),
-	'maladiePelvienne' => _('Maladie inflammatoire pelvienne [614.9]'), 
-	'malariaDx' => _('Malaria (paludisme) confirmé [084]'),
-	'malariaDxSevere' => _('Malaria (paludisme) Grave [084]'),
-	'malariaDxSuspected' => _('Malaria (paludisme) suspect [084]'),
+	'lepra' => _('Lèpre [A30]'),
+	'lesionCervicale' => _('Lésion cervicale [D26.0]'),
+	'lymphaticFilariasis' => _('Filariose lymphatique [B74.9]'),
+	'maladiePelvienne' => _('Maladie inflammatoire pelvienne [N73.9]'), 
+	'malariaDx' => _('Malaria (paludisme) confirmé [B52.9]'),
+	'malariaDxSevere' => _('Malaria (paludisme) Grave [B52.9]'),
+	'malariaDxSuspected' => _('Malaria (paludisme) suspect [B52.9]'),
 	'malnutrition' => _('Malnutrition [E40]'),
 	'malnutritionmild' => _('Malnutrition aigue légère [263.1]'),
 	'malnutritionmoderate' => _('Malnutrition aigue modérée [263]'),
 	'malnutritionsevere' => _('Malnutrition aigue sévère [261] (compl.)'),
 	'malnutritionsevereSS' => _('Malnutrition aigue sévère [261] (SS compl.)'),
-	'malnutritionweightloss' => _('Malnutrition/Perte de poids [263.9]'),
-	'membraneRupture' => _('Rupture prématurée des membranes [658.1]'),
-	'menacePrema' => _('Menace d’accouchement prématurée [658.1]'),
-	'meningitis' => _('Méningites [322]'),
+	'malnutritionweightloss' => _('Malnutrition/Perte de poids [E46]'),
+	'membraneRupture' => _('Rupture prématurée des membranes [O42.00]'),
+	'menacePrema' => _('Menace d’accouchement prématurée [O42.00]'),
+	'meningitis' => _('Méningites [G03.9]'),
 	'nephroticsyndrome' => _('Syndrome néphrotique [581]'),
 	'obesity' => _('Obésité [278.00]'),
-	'oligoamnios' => _('Oligoamnios [658.0]'),
+	'oligoamnios' => _('Oligoamnios [O41.00X0]'),
 	'otherDx' => _('Autre'),
 	'otherDx1' => _('Autre'),
 	'otherDx2' => _('Autre'),
@@ -204,40 +205,40 @@ $dxAll = array(
 	'otherDx6' => _('X'),
 	'otherDx7' => _('X'),       
 	'otitis' => _('Otite'),
-	'parasitose' => _('Parasitose [136.9]'),
-	'pertusis' => _('Coqueluche [033.9]'),
-	'pneumonie' => _('Pneumonie [486]'),
-	'polio' => _('Poliomyélite [045.90]'),
+	'parasitose' => _('Parasitose [B89]'),
+	'pertusis' => _('Coqueluche [A37.90]'),
+	'pneumonie' => _('Pneumonie [J18.9]'),
+	'polio' => _('Poliomyélite [A80.9]'),
 	'polytrauma' => _('Poly traumatisme [869.0]'),
-	'preEclampsie' => _('Pré éclampsie [642.4]'),
-	'psychiatriqueDisorder' => _('Trouble psychiatrique d’étiologie à investiguer'),  
+	'preEclampsie' => _('Pré éclampsie [O14.90]'),
+'psychiatriqueDisorder' => _('Trouble psychiatrique d’étiologie à investiguer [F99]'),  
 	'raa' => _('Rhumatisme articulaire aigu [714.30]'),
-	'rage' => _('Rage [071]'),
-	'retardCroissanceIU' => _('Retard croissance Intrautérin [p05]'),
-	'rougeole' => _('Rougeole [055]'),
-	'rubella' => _('Rubéole [056]'),
-	'scabies' => _('Gale [133.0]'),
+	'rage' => _('Rage [A82.9]'),
+	'retardCroissanceIU' => _('Retard croissance Intrautérin [P05.9]'),
+	'rougeole' => _('Rougeole [B05.89]'),
+	'rubella' => _('Rubéole [B06.89]'),
+	'scabies' => _('Gale [B86]'),
 	'scd' => _('Anémie Falciforme [282.6]'),
-	'sexAggression' => _('Agression sexuelle [995.83]'),
-	'sicklecell' => _('Drépanocytose : SS/SC [282.6]'),
+	'sexAggression' => _('Agression sexuelle [T74.21XA]'),
+	'sicklecell' => _('Drépanocytose : SS/SC [D57.1]'),
 	'sprain' => _('Entorse [848.9]'),
-	'stress' => _('Stress post traumatique [309.81]'),
-	'stroke' => _('Accident cérébro-vasculaire [434.91]'),
-	'syphilis' => _('Syphilis [097.9]'),
-	'teigne' => _('Teigne [110.9]'),
-	'tetanus' => _('Tétanos [037]'),
-	'thrombopenie' => _('Thrombopénie [287.5]'),
+	'stress' => _('Stress post traumatique [F43.10]'),
+	'stroke' => _('Accident cérébro-vasculaire [I63.50]'),
+	'syphilis' => _('Syphilis [A53.9]'),
+	'teigne' => _('Teigne [B35.9]'),
+	'tetanus' => _('Tétanos [A35]'),
+	'thrombopenie' => _('Thrombopénie [D69.6]'),
 	'thrombose' => _('Thromboses'),
-	'traumaHead' => _('Trauma crânien [959.01]'),
+	'traumaHead' => _('Trauma crânien [S09.90XA]'),
 	'travailActive' => _('Travail, Actif'),
 	'travailLatent' => _('Travail, Latent'),	 
-	'vaginalBleedingAbn' => _('Saignement utérin anormal [626.8]'),
-	'varicelle' => _('Varicelle [052.9]'), 
+	'vaginalBleedingAbn' => _('Saignement utérin anormal [N93.8]'),
+	'varicelle' => _('Varicelle [B01.9]'), 
 	'wound' => _('Plaie'),
         'pathRenale' => _('Pathologie rénale, précisez:')
 );
 if ($isObgynEncounter) {
-  $dxAll['genUriInfectionDx'] = _('Infection génito-urinaire (IGU) [614.9]');
+  $dxAll['genUriInfectionDx'] = _('Infection génito-urinaire (IGU) [N73.9]');
 } else {
   $dxAll['genUriInfectionDx'] = _('Infection génito-urinaire');
 }
@@ -252,7 +253,7 @@ else $nag = '';
 if ($isAdultEncounter) {
   $dxThisItems = array();
   // concept, t for textbox, n for notification asterisk
-  $dxThisItems[] = dxMakeCategory($nag . _('Générales    [Code CIM 9]'));
+  $dxThisItems[] = dxMakeCategory($nag . _('Générales    [Code CIM 10]'));
   $dxThisItems[] = array('concept' => 'stroke', 't' => false , 'n' => false);
   $dxThisItems[] = array('concept' => 'anemia', 't' => true , 'n' => false);
   $dxThisItems[] = array('concept' => 'asthmaDx', 't' => false , 'n' => false);
@@ -279,7 +280,7 @@ if ($isAdultEncounter) {
   $dxThisItems[] = dxMakeEmpty();
  
 // column 2
-  $dxThisItems[] = dxMakeCategory($nag . _('Maladies Infectieuses    [Code CIM 9]'));
+  $dxThisItems[] = dxMakeCategory($nag . _('Maladies Infectieuses    [Code CIM 10]'));
   $dxThisItems[] = array('concept' => 'dengue', 't' => true , 'n' => true);  
   $dxThisItems[] = array('concept' => 'diptheria', 't' => false, 'n' => true);
   $dxThisItems[] = array('concept' => 'feverHemorrhagicacute', 't' => false , 'n' => false);
@@ -294,7 +295,7 @@ if ($isAdultEncounter) {
   $dxThisItems[] = array('concept' => 'lepra', 't' => false, 'n' => false);  
 //  $dxThisItems[] = "{
 //	  xtype: 'label', ctCls: 'diagnosisPanel',
-//	  html: '" . _('Malaria (paludiame) * [084]') . ":'
+//	  html: '" . _('Malaria (paludiame) * [B52.9]') . ":'
 //	}";
   $dxThisItems[] = array('concept' => 'malariaDxSuspected', 't' => false , 'n' => true);
   $dxThisItems[] = array('concept' => 'malariaDx', 't' => false , 'n' => true); 
@@ -312,7 +313,7 @@ if ($isAdultEncounter) {
   $dxThisItems[] = array('concept' => 'febrileSyndrome', 't' => false, 'n' => true);
 
 // column 3
-  $dxThisItems[] = dxMakeCategory($nag . _('Maladies Infectieuses    [Code CIM 9]'));
+  $dxThisItems[] = dxMakeCategory($nag . _('Maladies Infectieuses    [Code CIM 10]'));
   $dxThisItems[] = array('concept' => 'teigne', 't' => false , 'n' => false);
   $dxThisItems[] = array('concept' => 'tetanus', 't' => false , 'n' => true);
   $dxThisItems[] = array('concept' => 'dxTB', 't' => false , 'n' => false); 
@@ -340,7 +341,7 @@ if ($isAdultEncounter) {
 
 if ($isObgynEncounter) {
     $dxThisItems = array (
-      dxMakeCategory($nag . _('Pathologies    [Code CIM 9]')),
+      dxMakeCategory($nag . _('Pathologies    [Code CIM 10]')),
       array('concept' => 'sexAggression', 't' => false , 'n' => false), 
       array('concept' => 'adfActive', 't' => false , 'n' => false), 
       array('concept' => 'anemia', 't' => false , 'n' => false),
@@ -358,7 +359,7 @@ if ($isObgynEncounter) {
       dxMakeEmpty(),
       dxMakeEmpty(),
 
-      dxMakeCategory($nag . _('Pathologies    [Code CIM 9]')),
+      dxMakeCategory($nag . _('Pathologies    [Code CIM 10]')),
       array('concept' => 'endometriosisActive', 't' => true , 'n' => false),
       array('concept' => 'fibroidUterineActive', 't' => true , 'n' => false),
       array('concept' => 'grossesseEctopique', 't' => true , 'n' => false), 
@@ -374,7 +375,7 @@ if ($isObgynEncounter) {
       array('concept' => 'malariaDxSuspected', 't' => false , 'n' => true),
       array('concept' => 'malariaDx', 't' => false , 'n' => true),
 
-      dxMakeCategory($nag . _('Pathologies    [Code CIM 9]')),
+      dxMakeCategory($nag . _('Pathologies    [Code CIM 10]')),
       array('concept' => 'menacePrema', 't' => false , 'n' => false), 
       array('concept' => 'fetalDeathActive', 't' => false, 'n' => false),
       array('concept' => 'oligoamnios', 't' => false , 'n' => false),
@@ -400,7 +401,7 @@ if ($isObgynEncounter) {
 
 if ($isPediatricEncounter) {
   $dxThisItems = array(
-    dxMakeCategory($nag . _('Générale    [Code CIM 9]')),
+    dxMakeCategory($nag . _('Générale    [Code CIM 10]')),
     array('concept' => 'irondeficiencyanemia', 't' => false , 'n' => false), 
     array('concept' => 'scd', 't' => false , 'n' => false), 
     array('concept' => 'asthmaDx', 't' => false , 'n' => false),  
@@ -430,13 +431,14 @@ if ($isPediatricEncounter) {
     array('concept' => 'gastroesophagealreflux', 't' => false , 'n' => false), 
     array('concept' => 'nephroticsyndrome', 't' => false , 'n' => false), 
     array('concept' => 'emergencySurgery', 't' => true , 'n' => false),
-    dxMakeEmpty(), 
+    array('concept' => 'bonneSanteApparente', 't' => false , 'n' => false),
+	dxMakeEmpty(), 
     dxMakeEmpty(),
     dxMakeEmpty(),
     dxMakeEmpty(),
 
     // 2nd column starts here
-    dxMakeCategory($nag . _('Maladies infectieuses    [Code CIM 9]')),
+    dxMakeCategory($nag . _('Maladies infectieuses    [Code CIM 10]')),
     array('concept' => 'abscess', 't' => true , 'n' => false), 
     array('concept' => 'amygdalite', 't' => false , 'n' => false),
     array('concept' => 'charbon', 't' => true , 'n' => true), 
@@ -465,7 +467,7 @@ if ($isPediatricEncounter) {
     array('concept' => 'pneumonie', 't' => false , 'n' => false),
  
     // 3rd column starts here 
-    dxMakeCategory($nag . _('Maladies infectieuses    [Code CIM 9]')),
+    dxMakeCategory($nag . _('Maladies infectieuses    [Code CIM 10]')),
     array('concept' => 'polio', 't' => false , 'n' => true), 
     array('concept' => 'rage', 't' => false , 'n' => true), 
     array('concept' => 'rougeole', 't' => false , 'n' => true), 
