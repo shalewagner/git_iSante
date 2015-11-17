@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <reports>
 	<reportSet rtype="clinicalCare">   <!--   Type 1: Active and inactive patient reports -->
 	<title lang="en">Type 1: Active and inactive patient reports</title>
@@ -1824,7 +1824,7 @@
 				<reportFile>monthlyInd_main.jasper</reportFile>
 				<groupLevel>2</groupLevel>
 				<otherLevel>0</otherLevel>
-				<menuSelection>dateSelect</menuSelection>
+                                <menuSelection>dateSelect</menuSelection>
 				<query>
 				  select username, value1 as startDate, value2 as endDate, value3 as siteList
 				  from staticReportData
@@ -1837,7 +1837,7 @@
 				<reportFile></reportFile>
 				<groupLevel>1</groupLevel>
 				<otherLevel>0</otherLevel>
-				<menuSelection>dateSelect</menuSelection>
+                                <menuSelection>dateSelect</menuSelection>
 				<query>
 				  select * 
 				  from #tempRpt5401$user
@@ -1849,24 +1849,52 @@
 				<reportFile></reportFile>
 				<groupLevel>1</groupLevel>
 				<otherLevel>0</otherLevel>
- 				<menuSelection>dateSelect</menuSelection>
+                                <menuSelection>dateSelect</menuSelection>
+				
 			</report>
+
+                       <report id="547" patientStatus="0" treatmentStatus="0" testType="0">
+				<title lang="en">OE Evaluation</title>
+				<title lang="fr">Evaluation OE</title>
+				<reportFile></reportFile>
+				<groupLevel>1</groupLevel>
+				<otherLevel>0</otherLevel>
+                                <menuSelection>dateSelect</menuSelection>
+				
+			</report>
+			
 			<report id="545" patientStatus="0" treatmentStatus="0" testType="0">
-				<title lang="en">frequenting of the institution for  VIH patients per User</title>
-				<title lang="fr">Frequentation de l'institution Classé par Utilisateur</title>
-				<reportFile></reportFile>
-				<groupLevel>1</groupLevel>
-				<otherLevel>0</otherLevel>
-				<menuSelection>dateSelect</menuSelection>
-			</report>
+				  <title lang="en">frequenting of the institution for  VIH patients per User</title>
+				  <title lang="fr">Frequentation de l'institution Classé par Utilisateur</title>
+				   <reportFile></reportFile>
+				     <groupLevel>1</groupLevel>
+				             <otherLevel>0</otherLevel>
+                                <menuSelection>dateSelect</menuSelection>
+				
+			    </report>
+				
 			<report id="546" patientStatus="0" treatmentStatus="0" testType="0">
-				<title lang="en">Frequenting of the institution </title>
-				<title lang="fr">Frequentation de l'institution </title>
-				<reportFile></reportFile>
-				<groupLevel>1</groupLevel>
-				<otherLevel>0</otherLevel>
-				<menuSelection>dateSelect</menuSelection>
-			</report>
+				  <title lang="en">Frequenting of the institution </title>
+				  <title lang="fr">Frequentation de l'institution </title>
+				   <reportFile></reportFile>
+				     <groupLevel>1</groupLevel>
+				             <otherLevel>0</otherLevel>
+                                <menuSelection>dateSelect</menuSelection>
+				
+			    </report>
+				
+			<report id="547" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Consultations per days</title>
+				  <title lang="fr">Consultation par jours</title>
+				   <reportFile></reportFile>
+				     <groupLevel>1</groupLevel>
+				             <otherLevel>0</otherLevel>
+                                <menuSelection>dateSelect</menuSelection>
+				
+			    </report>	
+				
+					
+			
 		</reportSubSet>
 		<reportSubSet><!--  patient demographics -->
 		<title lang="en">Patient Demographics</title>
