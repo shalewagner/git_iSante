@@ -4985,7 +4985,16 @@ $nephropathieVih =array (
 	"")
 );
 
-
+$protocoleTestTraitement=array (
+   "en" => array (
+	"",
+	"Testing and treatment protocol ",
+	""),
+   "fr" => array (
+	"",
+	"Protocole Test et Traitement ",
+	"")
+);
 
 
 
