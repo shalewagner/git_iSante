@@ -52,8 +52,8 @@ echo "
 		  <input tabindex=\"" . ($tabIndex + 4) . "\" name=\"currentHivStage[]\" " . getData ("currentHivStage", "checkbox", 8) . " type=\"radio\" value=\"8\">&nbsp;"
 		  . $pedMedElig[$lang][11] .
 		 "</td>
-         <td width=\"45%\"><input class=\"pedMedElig\" tabindex=\"" . ($tabIndex + 11) . "\" name=\"pedMedEligTlc\" " . getData ("pedMedEligTlc", "checkbox") . " type=\"checkbox\" value=\"On\">" . $pedMedElig[$lang][12] . "</td>
-        </tr>
+         <td><input tabindex=\"" . ($tabIndex + 4) . "\" class=\"medicalElig\"   name=\"tlcLT1200\" " . getData ("tlcLT1200", "checkbox") . " type=\"checkbox\" value=\"On\">" . showValidationIcon ($encType, "tlcLT1200") . " " . $tlcLT1200[$lang][1] . "</td>
+                </tr>
         <tr>
           <td width=\"55%\" >&nbsp;</td>
 		   <td width=\"45%\"><input class=\"pedMedElig\" tabindex=\"" . ($tabIndex + 12) . "\" name=\"pedMedEligPmtct\" " . getData ("pedMedEligPmtct", "checkbox") . " type=\"checkbox\" value=\"On\">" . $pedMedElig[$lang][13] . "</td>
@@ -88,6 +88,14 @@ echo "
               <td><input tabindex=\"" . ($tabIndex + 15) . "\" class=\"pedMedElig\"   name=\"nephropathieVih\" " . getData ("nephropathieVih", "checkbox") . " type=\"checkbox\" value=\"On\">
               ".$nephropathieVih[$lang][1]."</td>
             </tr>
+
+           <tr>
+              <td><input tabindex=\"" . ($tabIndex + 15) . "\" class=\"pedMedElig\"   name=\"protocoleTestTraitement\" " . getData ("protocoleTestTraitement", "checkbox") . " type=\"checkbox\" value=\"On\">
+              ".$protocoleTestTraitement[$lang][1]."</td>
+            </tr>
+
+
+
           </table></td>
         </tr>
         <tr>

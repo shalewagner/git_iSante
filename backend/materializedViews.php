@@ -978,7 +978,8 @@ from drugTableAll d1
 join patient using (patientID)
 join (select distinct drugID1 from regimen) r
  on r.drugID1 = d1.drugID
-where ' . $extraPatientIdWhere . ';', $extraPatientIdParam);
+where hivPositive = 1
+ and ' . $extraPatientIdWhere . ';', $extraPatientIdParam);
 
   /* put single drug regimens into pepfarTable */
   database()->exec('
@@ -990,7 +991,7 @@ join regimen r
 where r.drugID2 = 0
  and r.drugID3 = 0;');
 
-  /* Hold all two drug regimen prefixes. Used to find two drug regimens and speed up finding three drug regimens. */
+  /* Hold all two drug regimen prefixes. Used to find two drug regemens and speed up finding three drug regemins. */
   database()->exec('
 create temporary table twoDrugRegimenPrefixTemp (
  sitecode mediumint(8) unsigned default NULL,
@@ -1571,7 +1572,7 @@ where encounterType in (1, 2, 16, 17)
  and conditionID in (15, 202)
  and conditionActive != 2
  and conditionActive is not null;", array('06', '15', '06', '15', '15', '15', 'hairyoral'));
-  // ThrombocytopÃ©nie
+  // Thrombocytopénie
   database()->query("
 insert into tempActiveCond
 select distinct patientID,
@@ -1659,7 +1660,7 @@ from v_conditions
 where encounterType in (1, 2, 16, 17)
  and conditionID in (15, 202)
  and conditionActive = 2;", array('hairyoral'));
-  // ThrombocytopÃ©nie
+  // Thrombocytopénie
   database()->query("
 insert into tempInactiveCond
 select distinct patientID, visitDate, ?
@@ -1732,7 +1733,7 @@ from cd4Table c
 where c.visitdate <= ?
  and a.condName = ?
 group by 1, 2, 3;", array($endDate, 'hairyoral'));
-  // ThrombocytopÃ©nie
+  // Thrombocytopénie
   database()->query("
 insert into tempCondMaxActive
 select c.patientID,
@@ -1808,7 +1809,7 @@ from cd4Table c
 where c.visitdate <= ?
  and a.condName = ?
 group by 1, 2, 3;", array($endDate, 'hairyoral'));
-  // ThrombocytopÃ©nie
+  // Thrombocytopénie
   database()->query("
 insert into tempCondMaxInactive
 select c.patientID,
@@ -2092,7 +2093,7 @@ where c.condDate <= ?
  and i.condDate <= ?
  and c.condName = ?
 group by 1, 2, 3;", array($endDate, $endDate, 'hairyoral'));
-  // ThrombocytopÃ©nie
+  // Thrombocytopénie
   database()->query("
 insert into tempCondMinInactive
 select c.patientid,
@@ -2422,6 +2423,7 @@ and ymdToDate(visitDateYy, visitDateMm, visitDateDd) <= ?;', array('medEligHAART
 		    'ChildLT5ans' => 'ChildLT5ans',
 		    'patientGt50ans' => 'patientGt50ans',
 		    'nephropathieVih' => 'nephropathieVih',
+                    'protocoleTestTraitement'=> 'protocoleTestTraitement',
 			);
   database()->query('
 create temporary table medicalEligARVsTemp

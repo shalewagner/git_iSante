@@ -17,12 +17,13 @@ $ARVreason = array (
 		'PEP' => "Prophylaxie post-exposition (PEP)"),
 		'coinfectionTbHiv' => "Coinfection TB/HIV",
 		'coinfectionHbvHiv' => "Coinfection HBV/HIV",
-		'coupleSerodiscordant' => "Couple sÃ©rodiscordant",
+		'coupleSerodiscordant' => "Couple sérodiscordant",
 		'pregnantWomen' => "Femme enceinte (Grossesse)",
 		'breastfeedingWomen' => "Femme allaitante",
-		'ChildLT5ans' => "Enfant avec Ã¢ge < 5ans",
-		'patientGt50ans' => "Patient avec Ã¢ge  > 50 ans",
-		'nephropathieVih' => "NÃ©phropathie Ã  VIH",
+		'ChildLT5ans' => "Enfant avec âge < 5ans",
+		'patientGt50ans' => "Patient avec âge  > 50 ans",
+		'nephropathieVih' => "Néphropathie à VIH",
+                'protocoleTestTraitement' => 'Protocole Test et traitement')
 	"en" => array(
 		'cd4LT200' => "CD4 below threshold",
 		'tlcLT1200' => "TLC < 1200",
@@ -40,7 +41,8 @@ $ARVreason = array (
 		'breastfeedingWomen' => "breastfeeding women",
 		'ChildLT5ans' => "Child < 5 years",
 		'patientGt50ans' => "Adult > 50 years",
-		'nephropathieVih' => "NÃ©phropathie Ã  VIH")
+		'nephropathieVih' => "Néphropathie à VIH",
+                'protocoleTestTraitement' => 'Testing and treatment protocol' )
 );
 
 $line = array(
@@ -652,9 +654,10 @@ if(empty($_GET['ac']) && empty($_GET['regType'])){
             when pregnantWomen=1 then 'pregnantWomen'
             when breastfeeding=1 then 'breastfeeding'
             when patientGt50ans=1 then 'patientGt50ans'
-			when nephropathieVih=1 then 'nephropathieVih'
+	    when nephropathieVih=1 then 'nephropathieVih'
+            when protocoleTestTraitement=1 then 'protocoleTestTraitement'
 			end as result, visitdate, patientid from v_medicalEligARVs
-			where  (cd4LT200 = 1 or tlcLT1200 = 1 or WHOIII = 1 or WHOIV = 1 or PMTCT = 1 or formerARVtherapy = 1 or PEP = 1  or medEligHAART = 1 or ChildLT5ans=1 or coinfectionTbHiv=1 or  coinfectionHbvHiv=1 or coupleSerodiscordant=1 or pregnantWomen=1 or breastfeeding=1 or patientGt50ans=1 or nephropathieVih=1) and patientid in (".$pids.")
+			where  (cd4LT200 = 1 or tlcLT1200 = 1 or WHOIII = 1 or WHOIV = 1 or PMTCT = 1 or formerARVtherapy = 1 or PEP = 1  or medEligHAART = 1 or ChildLT5ans=1 or coinfectionTbHiv=1 or  coinfectionHbvHiv=1 or coupleSerodiscordant=1 or pregnantWomen=1 or breastfeeding=1 or patientGt50ans=1 or nephropathieVih=1 or protocoleTestTraitement=1) and patientid in (".$pids.")
 		)
 		order by 2 desc";
 	//echo $qryART;
