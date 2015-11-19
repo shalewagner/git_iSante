@@ -1255,6 +1255,7 @@ CREATE TABLE medicalEligARVs (
   breastfeedingWomen tinyint(3) unsigned default NULL COMMENT 'add for arv eligibility reason',
   patientGt50ans tinyint(3) unsigned default NULL COMMENT 'add for arv eligibility reason',
   nephropathieVih tinyint(3) default NULL COMMENT 'for eligibility reason ',
+  protocoleTestTraitement tinyint(3) default NULL COMMENT 'for eligibility reason ',
   CD4DateDD CHAR(2) NULL,
   TLCDateDD CHAR(2) NULL,
   ViralLoadDD CHAR(2) NULL,
