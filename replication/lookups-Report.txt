@@ -1,17 +1,17 @@
 Most recent change: 1970-01-01 00:00:00
 Application version: 14.2.1 ()
-Schema version: 42
-Seconds elapsed: 5
-Total records read: 13429
-Records per second: 2685.8
+Schema version: 43
+Seconds elapsed: 6
+Total records read: 13463
+Records per second: 2243.83333333333
 
 Record counts by table:
 announcements                36
-clinicLookup                756
-concept                    2408
+clinicLookup                757
+concept                    2409
 concept_class                18
 concept_datatype             11
-concept_name               4815
+concept_name               4817
 conditionLookup             205
 conditionOrder              166
 cohortAsort                  19
@@ -19,7 +19,7 @@ discReasonLookup             16
 drugGroupLookup              10
 drugLookup                   85
 drugVersionOrder             65
-dw_merReportLookup          139
+dw_merReportLookup          169
 dw_dataqualityReportLookup    40
 dw_malariaReportLookup      144
 dw_nutritionReportLookup     14

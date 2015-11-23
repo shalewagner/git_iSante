@@ -116,9 +116,14 @@ echo "
               <td><input tabindex=\"" . ($tabIndex + 29) . "\" class=\"medicalElig\"   name=\"patientGt50ans\" " . getData ("patientGt50ans", "checkbox") . " type=\"checkbox\" value=\"On\">
 ".$patientGt50ans[$lang][1]."</td>
             </tr>
-			<tr>
+	<tr>
               <td><input tabindex=\"" . ($tabIndex + 29) . "\" class=\"medicalElig\"   name=\"nephropathieVih\" " . getData ("nephropathieVih", "checkbox") . " type=\"checkbox\" value=\"On\">
 ".$nephropathieVih[$lang][1]."</td>
+            </tr>
+
+             <tr>
+              <td><input tabindex=\"" . ($tabIndex + 15) . "\" class=\"pedMedElig\"   name=\"protocoleTestTraitement\" " . getData ("protocoleTestTraitement", "checkbox") . " type=\"checkbox\" value=\"On\">
+              ".$protocoleTestTraitement[$lang][1]."</td>
             </tr>
           </table></td>
         </tr>

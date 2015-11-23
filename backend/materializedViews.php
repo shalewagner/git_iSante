@@ -1572,7 +1572,7 @@ where encounterType in (1, 2, 16, 17)
  and conditionID in (15, 202)
  and conditionActive != 2
  and conditionActive is not null;", array('06', '15', '06', '15', '15', '15', 'hairyoral'));
-  // ThrombocytopÃ©nie
+  // Thrombocytopénie
   database()->query("
 insert into tempActiveCond
 select distinct patientID,
@@ -1660,7 +1660,7 @@ from v_conditions
 where encounterType in (1, 2, 16, 17)
  and conditionID in (15, 202)
  and conditionActive = 2;", array('hairyoral'));
-  // ThrombocytopÃ©nie
+  // Thrombocytopénie
   database()->query("
 insert into tempInactiveCond
 select distinct patientID, visitDate, ?
@@ -1733,7 +1733,7 @@ from cd4Table c
 where c.visitdate <= ?
  and a.condName = ?
 group by 1, 2, 3;", array($endDate, 'hairyoral'));
-  // ThrombocytopÃ©nie
+  // Thrombocytopénie
   database()->query("
 insert into tempCondMaxActive
 select c.patientID,
@@ -1809,7 +1809,7 @@ from cd4Table c
 where c.visitdate <= ?
  and a.condName = ?
 group by 1, 2, 3;", array($endDate, 'hairyoral'));
-  // ThrombocytopÃ©nie
+  // Thrombocytopénie
   database()->query("
 insert into tempCondMaxInactive
 select c.patientID,
@@ -2093,7 +2093,7 @@ where c.condDate <= ?
  and i.condDate <= ?
  and c.condName = ?
 group by 1, 2, 3;", array($endDate, $endDate, 'hairyoral'));
-  // ThrombocytopÃ©nie
+  // Thrombocytopénie
   database()->query("
 insert into tempCondMinInactive
 select c.patientid,
