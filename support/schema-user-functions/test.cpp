@@ -516,12 +516,12 @@ int main(int argc, const char* argv[]) {
   passedTests &= testStringFunction(0, bTests, "2009-07-06", &udfArgs,
 				    "ymdToDate(2009,7,6)",
 				    &ymdToDate, &ymdToDate_init, &ymdToDate_deinit);
-  intValue = 9;
+  intValue = 17;
   arg_type[0] = INT_RESULT;
   args[0] = (char*)&intValue;
   lengths[0] = 1;
-  passedTests &= testStringFunction(0, bTests, "2009-07-06", &udfArgs,
-				    "ymdToDate(9,7,6)",
+  passedTests &= testStringFunction(0, bTests, "2017-07-06", &udfArgs,
+				    "ymdToDate(17,7,6)",
 				    &ymdToDate, &ymdToDate_init, &ymdToDate_deinit);
   intValue2 = 0;
   arg_type[2] = INT_RESULT;
