@@ -1,2 +1,2 @@
-ALTER TABLE  `medicalEligARVs` ADD  `protocoleTestTraitement` TINYINT( 3 ) UNSIGNED NULL DEFAULT NULL COMMENT  'add for arv eligibility reason' AFTER  `nephropathieVih`;
+call AddColumnUnlessExists(Database(), 'medicalEligARVs', 'protocoleTestTraitement', 'tinyint unsigned null default null comment "add for arv eligibility reason" after nephropathieVih');
 go
