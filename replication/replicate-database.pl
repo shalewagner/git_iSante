@@ -62,8 +62,8 @@ my $serverId = 'd' . $dbSite . 's' . $siteCode;
 
 my $replicationTargets = getConfig('replicationTargets');
 if (! defined($replicationTargets)) {
-#   modified in 13.1 to only send to arsenic by default; use the replicationTargets config item to modify this behavior
-    $replicationTargets = 'itechUWfailover,https://isante-consolidated.cirg.washington.edu/receiver/receive-file.pl,identified';
+#   modified in 15.1 to send to I-TECH consolidated and UGP consolidated by default; use the replicationTargets config item to modify this behavior
+    $replicationTargets = 'itechConsolidated,https://isante-consolidated.cirg.washington.edu/receiver/receive-file.pl,identified,papConsolidated,https://isante.ugp.ht/consolidatedId/receiver/receive-file.pl,identified';
 }
 my @replicationTargetParts = split(/,/, $replicationTargets);
 if (@replicationTargetParts % 3 != 0) {
