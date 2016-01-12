@@ -31,10 +31,10 @@ FROM encValidAll e, obs o
 				
 	
         $qry = 'insert into dw_mer_snapshot(patientID,visitDate,pregnancy)
-                select distinct patientID,visitDate,1 as pregnancy from a_vitals a,patient p where a.pregnant =1 and p.patientID=a.patientID and p.sex=1
+                select distinct a.patientID,visitDate,1 as pregnancy from a_vitals a,patient p where a.pregnant =1 and p.patientID=a.patientID and p.sex=1
                 union all
-                select distinct patientID,visitDate,1 as pregnancy from encValidAll e,obs o , patient p
-                where o.encounter_id=e.encounter_id and p.patientID=a.patientID and p.sex=1 and o.concept_id in 
+                select distinct e.patientID,visitDate,1 as pregnancy from encValidAll e,obs o , patient p
+                where o.encounter_id=e.encounter_id and p.patientID=e.patientID and p.sex=1 and o.concept_id in 
                  (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)  on duplicate key update pregnancy =1';
 		$rc = database()->query($qry,array('71262','7959','7098','7051','7053','7052','70118','70132','70150','70144','70130','70148','71140','70128','71398','70084','70069','70082','70078',
 '70086','70066','70103','70624','70068','70087','70733','7958','71068','70732','7960','71070','7967','70730','70591','70731','70750','7957','70126',
@@ -72,7 +72,7 @@ on duplicate key update ARVPatient=1';
 
 
         $qry = 'insert into dw_mer_snapshot(patientID,visitDate,ARVStart)
-select distinct p.patientID,min(p.visitDate) as visitDate,1 AS ARVPatient from pepfarTable p group by 1
+select distinct p.patientID,min(p.visitDate) as visitDate,1 AS ARVStart from pepfarTable p group by 1
 on duplicate key update ARVStart=1';
 		$rc = database()->query($qry)->rowCount();
 		echo "\n ARVStart" . date('h:i:s') . "\n";			
