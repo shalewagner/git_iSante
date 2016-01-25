@@ -5,16 +5,18 @@ var vaccineTableData = [
 	[{xtype: 'label', text: '" . _('Hépatite B') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('hepbDtD1','datefield',0) . "}],[{" . genExtWidget('hepbDose','textfield',0) . "}]],
 	[{xtype: 'label', text: '" . _('Polio') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('polioDtD1','datefield',0) . "}],[{" . genExtWidget('polioDose','textfield',0) . "}]],
 	[{xtype: 'label', text: '" . _('DTPer') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('dtperDtD1','datefield',0) . "}],[{" . genExtWidget('dtperDose','textfield',0) . "}]],
+	[{xtype: 'label', text: '" . _('HIB') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('hibDtD1','datefield',0) . "}],[{" . genExtWidget('hibDose','textfield',0) . "}]],
 	[{xtype: 'label', text: '" . _('Pentavalent') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('pentavDtD1','datefield',0) . "}],[{" . genExtWidget('pentavDose','textfield',0) . "}]],
 	[{xtype: 'label', text: '" . _('Pneumocoque') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('pneumocoqueDtD1','datefield',0) . "}],[{" . genExtWidget('pneumocoqueDose','textfield',0) . "}]],
 	[{xtype: 'label', text: '" . _('Rotavirus') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('rotavirusDtD1','datefield',0) . "}],[{" . genExtWidget('rotavirusDose','textfield',0) . "}]],
 	[{xtype: 'label', text: '" . _('RR') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('rrDtD1','datefield',0) . "}],[{" . genExtWidget('rrDose','textfield',0) . "}]],
+	[{xtype: 'label', text: '" . _('ROR') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('rorDtD1','datefield',0) . "}],[{" . genExtWidget('rorDose','textfield',0) . "}]],
 	[{xtype: 'label', text: '" . _('DT') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('dtDtD1','datefield',0) . "}],[{" . genExtWidget('dtDose','textfield',0) . "}]],	
 	[{xtype: 'label', text: '" . _('Varicelle') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('varicelDtD1','datefield',0) . "}],[{" . genExtWidget('varicelDose','textfield',0) . "}]],
 	
 	[{xtype: 'label', text: '" . _('Typhimvi') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('typhimviDtD1','datefield',0) . "}],[{" . genExtWidget('typhimviDose','textfield',0) . "}]],
 	[{xtype: 'label', text: '" . _('Meningo AC') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('menengoAcDtD1','datefield',0) . "}],[{" . genExtWidget('menengoAcDose','textfield',0) . "}]],
-	[{xtype: 'label', text: '" . _('Hépatite A') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('hepatiteADtD1','datefield',0) . "}],[{" . genExtWidget('hepatiteADose','textfield',0) . "}]],	
+	[{xtype: 'label', text: '" . _('Hepatite A') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('hepatiteADtD1','datefield',0) . "}],[{" . genExtWidget('hepatiteADose','textfield',0) . "}]],	
 	[{xtype: 'label', text: '" . _('Cholera') . "', ctCls: 'powerUpColumnHeader'},[{" . genExtWidget('choleraDtD1','datefield',0) . "}],[{" . genExtWidget('choleraDose','textfield',0) . "}]],
 	
 	[{
