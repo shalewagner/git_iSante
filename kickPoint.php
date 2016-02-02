@@ -196,7 +196,7 @@ function ymdToDate (year,month,day) {
 		if( tempYear >= 1000) {
 			outYear = tempYear;
 		} else {
-			if(tempYear <= 15) {
+			if(tempYear <= 20) {
 				outYear = 2000 + tempYear;
 			} else {
 				outYear = 1900 + tempYear;
@@ -243,17 +243,32 @@ function formatStartEndDates () {
 	eMonth = document.forms['mainForm'].endMm.value; 
 	if (eMonth.length == 1) eMonth = '0'+ eMonth;
 	eYear = document.forms['mainForm'].endYy.value; 
-	if (eYear.length == 1) eYear = '0'+ eYear; 
+	if (eYear.length == 1) eYear = '0'+ eYear;
+	if (eYear.length==2) { 
 	lastDd = daysInMonth(eMonth,'20' + eYear);
 	sDate = new Date(sMonth+'/01/20'+sYear);
-	eDate = new Date(eMonth+'/'+lastDd+'/20' +eYear);  
+	eDate = new Date(eMonth+'/'+lastDd+'/20' +eYear); 
+	}
+	else
+	{
+	lastDd = daysInMonth(eMonth, eYear);
+	sDate = new Date(sMonth+'/01/'+sYear);
+	eDate = new Date(eMonth+'/'+lastDd+'/' +eYear); 
+	}
 }
 function sendParameters () {
 	formatStartEndDates();
 	var runFlag = true;
 	if (document.forms['mainForm'].reportNumber.value == '903') {
+		if (eYear.length==2) { 
 		start = '20' + sYear + sMonth;
 		end = '20' + eYear + eMonth;
+		}
+		else { 
+		start = sYear + sMonth;
+		end = eYear + eMonth;
+		}
+		
 	} else if (document.forms['mainForm'].reportNumber.value == '540') {	
                 sDay = document.forms['mainForm'].startDd.value;
                 if (sDay.length == 1) sDay = '0'+ sDay;
@@ -261,8 +276,15 @@ function sendParameters () {
                 eDay = document.forms['mainForm'].endDd.value;
                 if (eDay.length == 1) eDay = '0'+ eDay;
 		end = ymdToDate (eYear , eMonth , eDay); 
+		if (eYear.length==2) { 
 	        sDate = new Date(sMonth + '/' + sDay + '/20' + sYear);
-	        eDate = new Date(eMonth + '/' + eDay + '/20' + eYear);  
+	        eDate = new Date(eMonth + '/' + eDay + '/20' + eYear); 
+		}
+		else { 
+	        sDate = new Date(sMonth + '/' + sDay + '/' + sYear);
+	        eDate = new Date(eMonth + '/' + eDay + '/' + eYear); 
+		}
+		
 	} else {	
 		start = ymdToDate(sYear , sMonth , document.forms['mainForm'].startDd.value );
 		end = ymdToDate(eYear , eMonth , lastDd); 
@@ -692,7 +714,7 @@ if ($repNum >= 2000 && $repNum <= 3999) { // use prim. care & ob/gyn report layo
 ?>
 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 </table>
-<input id="kickPoint" type="button" value="<?=$buttonLbls[$lang][0];?>" onclick="sendParameters()" />&nbsp;
+<input id="kickPoint" type="button" value="<?=$buttonLbls[$lang][0];?>" onClick="sendParameters()" />&nbsp;
 <input type="reset" value="<?=$buttonLbls[$lang][1];?>" />
 </div>
 </div>
