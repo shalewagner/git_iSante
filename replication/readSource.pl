@@ -374,7 +374,7 @@ given ($tableSet) {
 	    );
     } when ('lookups') {
 	@tables = (
-	    'announcements',
+#	    'announcements',
 	    'clinicLookup',
 	    'concept',
 	    'concept_class',
@@ -398,13 +398,13 @@ given ($tableSet) {
 	    'encTypeLookup',
 	    'immunizationLookup',
 	    'immunizationRendering',
-	    'isanteConcepts',
+#	    'isanteConcepts',
 	    'labelLookup',
 	    'labGroupLookup',
 	    'labLookup',
 	    'labPanelLookup',
-	    'nastadLookup',
-	    'networkLookup',
+#	    'nastadLookup',
+#	    'networkLookup',
 	    'patientStatusLookup',
 	    'pedLabsLookup',
 	    'pedLabsRendering',
@@ -413,7 +413,7 @@ given ($tableSet) {
 	    'regimen',
 	    'riskLookup',
 	    'riskOrder',
-	    'staticConcepts'
+#	    'staticConcepts'
 	    );
     } when ('clinicLookup') {
 	@tables = (

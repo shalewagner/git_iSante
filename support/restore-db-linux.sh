@@ -48,11 +48,7 @@ if [ "$eKey" = "" ]; then
 	echo " "
 	eKey=$(getConfig backupEncryptionKey)
 fi 
-#if [ "$eKey" = "" ]; then
-#	echo "Encryption key is not available locally, try to fetch it from the consolidated database (this will take some time)..."
-#	echo " "
-#	eKey=`perl /var/www/isante/support/fetchKey.pl` 
-#fi 
+ 
 if [ "$eKey" = "" ]; then
 	echo "Encryption key not automatically fetched; Please obtain it manually by running this query on a consolidated database:"
 	echo "--------------------------------------------------------------------------------------------" 
@@ -146,7 +142,7 @@ chown openldap:openldap /var/lib/ldap/*
 
 
 #need access to the database for the rest of the script so force mysql to start
-/etc/init.d/mysql start
+invoke-rc.d mysql start
 
 #restore MySql database
 echo "Restoring MySql database (will take a long time)..."
@@ -161,6 +157,11 @@ else
 	< $tempDir/itech-backup/mysql-backup.sql
 fi
 
+#add back data warehouse tables and recreate views
+echo "Restoring empty data warehouse tables and recreating views..."
+mysql --defaults-file=$conffile itech < /var/www/isante/support/recoveryTables.sql
+mysql --defaults-file=$conffile itech < /var/www/isante/support/schema-views.sql
+
 #upgrade database if needed
 echo "Reconfiguring server for this backup (will take a long time)..."
 setup-isante.pl &> $oldRestoreBackupLocation/setup-isante.pl.log
@@ -168,7 +169,6 @@ setup-isante.pl &> $oldRestoreBackupLocation/setup-isante.pl.log
 
 #start services
 invoke-rc.d slapd start
-invoke-rc.d mysql start
 invoke-rc.d cron start
 invoke-rc.d apache2 start
 

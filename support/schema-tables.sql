@@ -325,7 +325,7 @@ CREATE TABLE clinicLookup (
   clinic VARCHAR(100) NULL,
   category VARCHAR(100) NULL,
   type VARCHAR(100) NULL,
-  siteCode mediumint unsigned NULL,
+  siteCode mediumint unsigned,
   network VARCHAR(100) NULL,
   inCPHR tinyint unsigned NULL,
   dbSite int unsigned NULL DEFAULT 0,
