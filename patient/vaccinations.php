@@ -204,9 +204,9 @@ echo "
 		var tableTitleText = '<?=_('Vaccin')?>';
 		var dataTable = vaccineTableData; 
 		var extDataTableItems = [tableTitleText,
-					 '<?=_('Dose 1')?>','<?=_('Dose 2')?>',
-					 '<?=_('Dose 3')?>','<?=_('Dose 4')?>',
-					 '<?=_('Dose 5')?>','<?=_('Dose 6')?>'].map(function(label) {
+					 '<?=_('Dose 0')?>','<?=_('Dose 1')?>',
+					 '<?=_('Dose 2')?>','<?=_('Dose 3')?>',
+					 '<?=_('Dose 4')?>','<?=_('Dose 5')?>'].map(function(label) {
 					 	return {xtype:'label', text:label, ctCls: 'powerUpHeader'};
 					 }); 
 
