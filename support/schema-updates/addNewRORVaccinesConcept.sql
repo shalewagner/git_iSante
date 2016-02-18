@@ -1,11 +1,11 @@
-insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71635,'pneumocoqueDtD1','rorDtD1','ROR','en','1','2016-02-18');
-insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71635,'pneumocoqueDtD1','rorDtD1','ROR','fr','1','2016-02-18');
-insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71636,'pneumocoqueDtD2','rorDtD2','ROR','en','1','2016-02-18');
-insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71636,'pneumocoqueDtD2','rorDtD2','ROR','fr','1','2016-02-18');
-insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71637,'pneumocoqueDtD3','rorDtD3','ROR','en','1','2016-02-18');
-insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71637,'pneumocoqueDtD3','rorDtD3','ROR','fr','1','2016-02-18');
-insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71638,'pneumocoqueDtD3','rorDtD4','ROR','en','1','2016-02-18');
-insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71638,'pneumocoqueDtD3','rorDtD4','ROR','fr','1','2016-02-18');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71635,'rorDtD1','rorDtD1','ROR','en','1','2016-02-18');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71635,'rorDtD1','rorDtD1','ROR','fr','1','2016-02-18');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71636,'rorDtD2','rorDtD2','ROR','en','1','2016-02-18');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71636,'rorDtD2','rorDtD2','ROR','fr','1','2016-02-18');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71637,'rorDtD3','rorDtD3','ROR','en','1','2016-02-18');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71637,'rorDtD3','rorDtD3','ROR','fr','1','2016-02-18');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71638,'rorDtD4','rorDtD4','ROR','en','1','2016-02-18');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71638,'rorDtD4','rorDtD4','ROR','fr','1','2016-02-18');
 
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71639,'rorDose','rorDose','rorDose','fr','1','2016-02-18');
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71639,'rorDose','rorDose','rorDose','en','1','2016-02-18');
