@@ -14,7 +14,7 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71640,'rorDtIncom','rorDtIncom','ROR Unknown','en','1','2016-02-18');
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71640,'rorDtIncom','rorDtIncom','ROR Unknown','fr','1','2016-02-18');
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71641,'rorNeverRecd','rorNeverRecd','ROR Never','en','1','2016-02-18');
-insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71641,'rorNeverRecd','rorNeverRecd','ROR Never','en','1','2016-02-18');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (71641,'rorNeverRecd','rorNeverRecd','ROR Never','fr','1','2016-02-18');
 
 insert into concept (concept_id,retired,short_name,description,form_text,datatype_id,class_id,is_set,creator,date_created) values ('71635','0','rorDtD1','ROR','ROR','8','5','0','1','2016-02-18');
 insert into concept (concept_id,retired,short_name,description,form_text,datatype_id,class_id,is_set,creator,date_created) values ('71636','0','rorDtD2','ROR','ROR','8','5','0','1','2016-02-18');
