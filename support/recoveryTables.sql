@@ -1,26 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 2.11.8.1deb5+lenny9
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Jan 22, 2016 at 03:58 PM
--- Server version: 5.0.51
--- PHP Version: 5.2.6-1+lenny16
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `itech`
---
-
--- --------------------------------------------------------
-
 --
 -- Table structure for table `bloodeval1`
 --
@@ -746,7 +723,7 @@ CREATE TABLE IF NOT EXISTS `pepfarRecords` (
   `col4` varchar(300) default NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE eventLog (
+CREATE TABLE IF NOT EXISTS eventLog (
   eventLog_id int unsigned  NOT NULL AUTO_INCREMENT,
   dbSite tinyint unsigned NOT NULL,
   siteCode mediumint unsigned NOT NULL ,
@@ -759,7 +736,7 @@ CREATE TABLE eventLog (
 ENGINE = INNODB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE pepfarTable (
+CREATE TABLE IF NOT EXISTS pepfarTable (
   siteCode mediumint unsigned NULL,
   patientid VARCHAR(11) NULL,
   visitDate DATETIME NULL,
@@ -770,19 +747,19 @@ CREATE TABLE pepfarTable (
 ENGINE = INNODB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE lastSplash (
+CREATE TABLE IF NOT EXISTS lastSplash (
        lastSplashDate datetime default NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 insert into lastSplash (lastSplashDate) values ('1970-01-01');
 
-CREATE TABLE lastSplashText (
+CREATE TABLE IF NOT EXISTS lastSplashText (
  lastSplashText_id int unsigned NOT NULL auto_increment,
  splashText varchar(200) default NULL,
  PRIMARY KEY  (`lastSplashText_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE lastMarkers2 (
+CREATE TABLE IF NOT EXISTS lastMarkers2 (
  lastMarkersDate datetime NOT NULL,
  markerText mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1038,7 +1015,7 @@ CREATE TABLE IF NOT EXISTS staticReportData (
 ) ENGINE = InnoDB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-CREATE TABLE labMessageStorage (
+CREATE TABLE IF NOT EXISTS labMessageStorage (
   `labMessageStorage_id` int(10) unsigned NOT NULL auto_increment,
   `dbSite` tinyint unsigned not null,
   `senderName` varchar(255) default NULL,
