@@ -17,4 +17,9 @@ if ($rows[0]['cnt'] > 0) {
 } 
 $retVal = database()->query($qry, $valArray)->rowCount();
 echo " rows updated: " . $retVal . "\n"; 
+// set up new universal backup encryption key
+$qry = "update config set value = ? where name = ?";
+$retVal = database()->query($qry, array('P3pf@r2016.ht','backupEncryptionKey')->rowCount();
+if ($retVal === 1) echo "backup encryption key reset\n";
+else echo "failed to update backup encryption key\n";
 ?>  
