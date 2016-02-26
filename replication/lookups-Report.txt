@@ -1,17 +1,16 @@
 Most recent change: 1970-01-01 00:00:00
 Application version: 15.1 test (1f88a5c)
 Schema version: 43
-Seconds elapsed: 4
-Total records read: 13462
-Records per second: 3365.5
+Seconds elapsed: 1
+Total records read: 11138
+Records per second: 11138
 
 Record counts by table:
-announcements                36
 clinicLookup                756
-concept                    2409
+concept                    2416
 concept_class                18
 concept_datatype             11
-concept_name               4817
+concept_name               4831
 conditionLookup             205
 conditionOrder              166
 cohortAsort                  19
@@ -30,13 +29,10 @@ dw_weightForHeightLookup    484
 encTypeLookup                30
 immunizationLookup           21
 immunizationRendering        37
-isanteConcepts              879
 labelLookup                   0
 labGroupLookup               14
 labLookup                   617
 labPanelLookup               40
-nastadLookup                 54
-networkLookup                39
 patientStatusLookup          11
 pedLabsLookup                 4
 pedLabsRendering              4
@@ -45,4 +41,3 @@ referralLookup               19
 regimen                     106
 riskLookup                   37
 riskOrder                    80
-staticConcepts             1337
