@@ -10,7 +10,7 @@ echo "
 		{" . genExtWidget('bcg3','textfield',0) . ", readOnly: true},
 		{" . genExtWidget('bcg4','textfield',0) . ", readOnly: true},
 		{" . genExtWidget('bcg5','textfield',0) . ", readOnly: true}]],
-		[{xtype: 'label', text: '" . _('Hépatite B') . "', ctCls: 'powerUpColumnHeader'},
+		[{xtype: 'label', text: '" . _('HÃ©patite B') . "', ctCls: 'powerUpColumnHeader'},
 		[{" . genExtWidget('hepb0','textfield',0) . ", readOnly: true}, 
 		{" . genExtWidget('hepb1','textfield',0) . ", readOnly: true},
 		{" . genExtWidget('hepb2','textfield',0) . ", readOnly: true},
@@ -317,7 +317,8 @@ function loadVaccinations ($pid) {
 		when short_name like 'typhimviDt%' then 'typhimvi' 
 		when short_name like 'menengoACDt%' then 'menengoAc' 
 		when short_name like 'hepatiteADt%' then 'hepatiteA' 
-		when short_name like 'choleraDt%' then 'cholera' 		 
+		when short_name like 'choleraDt%' then 'cholera' 
+                when short_name like 'rorD%' then 'ror'		 
 		else 'xxxx' end, value_datetime, '' 
 		from obs o, concept c 
 		where concat(location_id, person_id) = '" . $pid . "' and o.concept_id = c.concept_id and value_datetime is not null and (
@@ -325,7 +326,7 @@ function loadVaccinations ($pid) {
 		c.short_name like 'rougeoleDt%' or c.short_name like 'rrDt%' or c.short_name like 'dtDt%' or short_name like 'tetanosDt%' or 
 		short_name like 'pnuemovaxDt%' or short_name like 'pneumovax_Dt%' or short_name like 'actHibDt%' or short_name like 'pentavDt%' or
 		short_name like 'rotavirusDt%'  or short_name like 'pneumocoqueDt%'  or short_name like 'varicelDt%'  or short_name like 'typhimviDt%' or
-		short_name like 'menengoACDt%'  or short_name like 'hepatiteADt%'  or short_name like 'choleraDt%')
+		short_name like 'menengoACDt%'  or short_name like 'hepatiteADt%'  or short_name like 'choleraDt%' or short_name like 'rorD%')
 	) union
 	(select distinct 'otherconcept', a.short_name, oa.value_datetime, ob.value_text 
 		from concept a, concept b, obs oa, obs ob 
