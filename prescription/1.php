@@ -34,6 +34,26 @@ echo"</div>
    <td valign=\"top\" colspan=\"4\"><table><tr><td id=\"forPepPmtctTitle\"><b><i>" . $forPepPmtct[$lang][0] . "</td><td>&nbsp;&nbsp; </td><td><input tabindex=\"1106\" id=\"forPepPmtct1\" name=\"forPepPmtct[]\" " . getData ("forPepPmtct", "checkbox", 1) . " type=\"radio\" value=\"1\">" . $forPepPmtct[$lang][1] . " <input tabindex=\"1107\" id=\"forPepPmtct2\" name=\"forPepPmtct[]\" " . getData ("forPepPmtct", "checkbox", 2) . " type=\"radio\" value=\"2\">" . $forPepPmtct[$lang][2] . " </i></td></tr></table></td>
      </tr>**/
    
+   
+   echo '<tr><td colspan="11" class="top_line" style="padding:5px;"><b>(-) Regimen </b>
+<select name="regimen" id="regimen" style="height:25px">';
+$options="";
+$qry = "select r.shortName,(select drugName from drugLookup where drugID=r.drugID1)  as drug1, 
+                  (select drugName from drugLookup where drugID=r.drugID2)  as drug2,
+                  (select drugName from drugLookup where drugID=r.drugID3)  as drug3
+ from regimen r ";
+	$result = dbQuery ($qry);
+	if (!$result)
+		die("Could not query.");
+	else {
+		while ($row = psRowFetch ($result))
+			$options=$options."<option value=\"".$row[1].":".$row[2].":".$row[3]."\">".$row[0]."</option>";
+	}
+    echo $options;
+echo "</select> <p> </p></td></tr>";
+   
+   
+   
    echo "<tr>
     <td class=\"top_line\" colspan=\"6\" width=\"45%\"><b>
       <a class=\"toggle_display\"
@@ -63,14 +83,40 @@ echo"</div>
     <td class=\"sm_header_lt_pd bottom_line\" width=\"8%\">" . $newprescription_subhead7[$lang][1] . "</td>
     <td class=\"sm_header_lt_pd bottom_line\" width=\"8%\">" . $newprescription_subhead7[$lang][2] . "</td>
 	<td class=\"sm_header_lt_pd bottom_line\" width=\"8%\">" . $newprescription_subhead91[$lang][1] ."</td>
-   </tr>" . $rxOtherRows["full"] . "
+   </tr>";
 
+echo  $rxOtherRows["full"] . "
   </table>
-  </div>
 ";
 
-$tabIndex = 5000;
 
+
+$tabIndex = 5000;
+echo '
+ <script type="text/javascript" charset="utf8-default">
+   $(document)
+     .ready(function () {
+         // On change of the dropdown do the ajax
+         $("#regimen").change(function () {               
+			   $drug=$("#regimen").val().split(":");
+			   $druglist=$drug[0]+","+$drug[1]+ ","+ $drug[2];
+               $r = confirm("Confirmer que vous voulez choisir le régime: "+ $druglist);
+              if ($r == true) {
+               $("#"+$drug[0]+"forPepPmtctRx").attr("checked", "checked");
+			   $("#"+$drug[1]+"forPepPmtctRx").attr("checked", "checked");
+			   $("#"+$drug[2]+"forPepPmtctRx").attr("checked", "checked");
+			   
+			   $("#"+$drug[0]+"StdDosage").attr("checked", "checked");
+			   $("#"+$drug[1]+"StdDosage").attr("checked", "checked");
+			   $("#"+$drug[2]+"StdDosage").attr("checked", "checked");
+			   alert("Les drugs correspondant ont été sélectionnés");	
+} else {
+    alert("Veuillez sélectionner un nouveau régime ");
+}
+		
+             });
+     });
+</script> ';
 
 echo "
 <!-- ******************************************************************** -->
