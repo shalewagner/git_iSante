@@ -35,7 +35,7 @@ echo"</div>
      </tr>**/
    
    
-   echo '<tr><td colspan="11" class="top_line" style="padding:5px;"><b>(-) Regimen </b>
+   echo '<tr><td colspan="11" class="top_line" style="padding:5px;"><b>(-) Regime ARV les plus courant </b>
 <select name="regimen" id="regimen" style="height:25px">';
 $options="";
 $qry = "select r.shortName,(select drugName from drugLookup where drugID=r.drugID1)  as drug1, 
