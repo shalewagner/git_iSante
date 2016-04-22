@@ -80,28 +80,33 @@ $norm_tables = array ("allergies", "allowedDisclosures", "conditions", "drugs", 
 $arvs = array (
   "abacavir", "combivir", "didanosine", "emtricitabine", "lamivudine", "stavudine", "tenofovir", "trizivir", "zidovudine",
   "subhead5", "efavirenz", "nevirapine",
-  "subhead16", "atazanavir", "atazanavirPlusBostRtv", "indinavir", "indinavirPlusBostRtv", "lopinavirPlusBostRtv", "other1", "other2");
+  "subhead16", "atazanavir", "atazanavirPlusBostRtv", "indinavir", "indinavirPlusBostRtv", "lopinavirPlusBostRtv", "Darunavir", "other1", "other2");
 
 //no of elements in each arv section/subhead. Has to be reviewed/updated when arvs array is updated
-$arvSubHeadElems = array(9,2,7);
+$arvSubHeadElems = array(9,2,8);
 
 $pedArvList = array ("abacavir", "combivir", "didanosine", "emtricitabine", "lamivudine", "stavudine", "tenofovir", "trizivir", "zidovudine",
-	"subhead5", "efavirenz", "nevirapine", "subhead16", "atazanavir", "atazanavirPlusBostRtv", "indinavir", "indinavirPlusBostRtv", "lopinavirPlusBostRtv", "other1");
+	"subhead5", "efavirenz", "nevirapine", 
+	"subhead16", "atazanavir", "atazanavirPlusBostRtv", "indinavir", "indinavirPlusBostRtv", "lopinavirPlusBostRtv", "Darunavir", "other1");
 
 //no of elements in each arv section/subhead. Has to be reviewed/updated when arvs array is updated
-$pedArvSubHeadElems = array(9,2,6);
+$pedArvSubHeadElems = array(9,2,7);
 
 $rxs = array ("abacavir", "combivir", "didanosine", "emtricitabine", "lamivudine", "stavudine", "trizivir", "zidovudine", "tenofovir",
   "subhead4", "efavirenz", "nevirapine",
-  "subhead5", "atazanavir", "atazanavirPlusBostRtv", "indinavir", "indinavirPlusBostRtv", "lopinavirPlusBostRtv");
+  "subhead5", "atazanavir", "atazanavirPlusBostRtv", "indinavir", "indinavirPlusBostRtv", "lopinavirPlusBostRtv", "Darunavir",
+  "subhead6", "Raltegravir");
 $rxs_1 = array ("abacavir", "combivir", "didanosine", "emtricitabine", "lamivudine", "stavudine", "tenofovir", "trizivir", "zidovudine",
   "subhead4", "efavirenz", "nevirapine",
-  "subhead5", "atazanavir", "atazanavirPlusBostRtv", "indinavir", "indinavirPlusBostRtv", "lopinavirPlusBostRtv");
+  "subhead5", "atazanavir", "atazanavirPlusBostRtv", "indinavir", "indinavirPlusBostRtv", "lopinavirPlusBostRtv", "Darunavir",
+  "subhead6", "Raltegravir");
 
 //no of elements in each rx section/subhead. Has to be reviewed/updated when rxs array is updated
-$rxSubHeadElems = array(9,2,5);
+$rxSubHeadElems = array(9,2,6,1);
 
-$pedRxs = array ("abacavir", "combivir", "didanosine", "emtricitabine", "lamivudine", "stavudine", "trizivir", "zidovudine", "tenofovir", "subhead4", "efavirenz", "nevirapine", "subhead16", "lopinavirPlusBostRtv", "nelfinavir", "saquinavir", "ritonavir2");
+$pedRxs = array ("abacavir", "combivir", "didanosine", "emtricitabine", "lamivudine", "stavudine", "trizivir", "zidovudine", "tenofovir", 
+  "subhead4", "efavirenz", "nevirapine", 
+  "subhead16", "lopinavirPlusBostRtv", "nelfinavir", "saquinavir", "ritonavir2");
 
 //no of elements in each rx section/subhead. Has to be reviewed/updated when rxs array is updated
 $pedRxSubHeadElems = array(14,4,7);

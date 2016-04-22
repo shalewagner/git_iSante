@@ -1433,6 +1433,26 @@ $tipranavirStartMm = array (
         "",
         "")
 );
+$DarunavirStartMm = array (
+   "en" => array (
+        "Darunavir",
+        "",
+        ""),
+   "fr" => array (
+        "Darunavir",
+        "",
+        "")
+);
+$RaltegravirStartMm = array (
+   "en" => array (
+        "Raltegravir",
+        "",
+        ""),
+   "fr" => array (
+        "Raltegravir",
+        "",
+        "")
+);
 $trizivirStartMm = array (
    "en" => array (
         "Trizivir (ABC+AZT+3TC)",
