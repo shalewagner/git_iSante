@@ -32,13 +32,13 @@ echo"
 	<td class=\"sm_header_lt_pd\" width=\"8%\">" . $newprescription_subhead91[$lang][1] ."</td>
    </tr>";
    
-      echo '<tr><td colspan="11" class="top_line" style="padding:5px;"><b>(-) Regimen </b>
+      echo '<tr><td colspan="11" class="top_line" style="padding:5px;"><b>(-) Regime ARV les plus courant</b>
 <select name="regimen" id="regimen" style="height:25px">';
 $options="";
 $qry = "select r.shortName,(select drugName from drugLookup where drugID=r.drugID1)  as drug1, 
                   (select drugName from drugLookup where drugID=r.drugID2)  as drug2,
                   (select drugName from drugLookup where drugID=r.drugID3)  as drug3
- from regimen r ";
+ from regimen r where regID in (3,6,80,81,90,100,101,103,109,110)";
 	$result = dbQuery ($qry);
 	if (!$result)
 		die("Could not query.");
@@ -78,14 +78,14 @@ echo  $rxOtherRows["full"] . "
 $tabIndex = 4000;
 
 echo '
- <script type="text/javascript" charset="utf8-default">
+ <script type="text/javascript" charset="utf8">
    $(document)
      .ready(function () {
          // On change of the dropdown do the ajax
          $("#regimen").change(function () {               
 			   $drug=$("#regimen").val().split(":");
 			   $druglist=$drug[0]+","+$drug[1]+ ","+ $drug[2];
-               $r = confirm("Confirmer que vous voulez choisir le régime : "+ $druglist);
+               $r = confirm("Confirmer que vous voulez choisir le regime : "+ $druglist);
               if ($r == true) {
                $("#"+$drug[0]+"forPepPmtctRx").attr("checked", "checked");
 			   $("#"+$drug[1]+"forPepPmtctRx").attr("checked", "checked");
@@ -94,9 +94,8 @@ echo '
 			   $("#"+$drug[0]+"StdDosage").attr("checked", "checked");
 			   $("#"+$drug[1]+"StdDosage").attr("checked", "checked");
 			   $("#"+$drug[2]+"StdDosage").attr("checked", "checked");
-			   alert("Les drugs correspondant ont été sélectionnés ");	
 } else {
-    alert("Veuillez sélectionner un nouveau régime");
+    alert("Choisir un nouveau régime");
 }
 		
              });
