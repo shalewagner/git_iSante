@@ -1051,6 +1051,30 @@ $arv_subhead16 = array (
 	"")
 )
 );
+
+$arv_subhead18 = array (
+"0" => array (
+   "en" => array (
+	"",
+	"II",
+	""),
+   "fr" => array (
+	"",
+	"II",
+	"")
+	),
+"1" => array (
+   "en" => array (
+	"",
+	"II",
+	""),
+   "fr" => array (
+	"",
+	"II",
+	"")
+)
+);
+
 $arv_subhead17 = array (
    "en" => array (
 	"",
@@ -5380,6 +5404,32 @@ $newprescription_subhead16 = array (
 	"")
 	)
 );
+
+$newprescription_subhead17 = array (
+"0" => array (
+   "en" => array (
+	"",
+	"II",
+	""),
+   "fr" => array (
+	"",
+	"II",
+	"")
+	),
+"1" => array (
+   "en" => array (
+	"",
+	"II",
+	""),
+   "fr" => array (
+	"",
+	"II",
+	"")
+	)
+);
+
+
+
 $newprescription_subhead100 = array (
    "en" => array (
 	"",
