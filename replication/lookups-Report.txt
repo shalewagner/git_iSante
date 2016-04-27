@@ -1,12 +1,12 @@
 Most recent change: 1970-01-01 00:00:00
 Application version: 15.1 test (1f88a5c)
 Schema version: 43
-Seconds elapsed: 1
-Total records read: 11138
-Records per second: 11138
+Seconds elapsed: 2
+Total records read: 11152
+Records per second: 5576
 
 Record counts by table:
-clinicLookup                756
+clinicLookup                759
 concept                    2416
 concept_class                18
 concept_datatype             11
@@ -15,8 +15,8 @@ conditionLookup             205
 conditionOrder              166
 cohortAsort                  19
 discReasonLookup             16
-drugGroupLookup              10
-drugLookup                   85
+drugGroupLookup              11
+drugLookup                   87
 drugVersionOrder             65
 dw_merReportLookup          169
 dw_dataqualityReportLookup    40
@@ -38,6 +38,6 @@ pedLabsLookup                 4
 pedLabsRendering              4
 queueStatusLookup             6
 referralLookup               19
-regimen                     106
+regimen                     114
 riskLookup                   37
 riskOrder                    80
