@@ -35,7 +35,7 @@ echo"
       echo '<tr><td colspan="11" class="top_line" style="padding:5px;"><b>(-) Regime ARV les plus courant</b>
 <select name="regimen" id="regimen" style="height:25px">';
 $options="";
-$qry = "select r.shortName,(select drugName from drugLookup where drugID=r.drugID1)  as drug1, 
+$qry = "select REPLACE(REPLACE(r.shortName, 'ZDV', 'AZT'),'TNF','TDF') as shortName,(select drugName from drugLookup where drugID=r.drugID1)  as drug1, 
                   (select drugName from drugLookup where drugID=r.drugID2)  as drug2,
                   (select drugName from drugLookup where drugID=r.drugID3)  as drug3
  from regimen r where regID in (3,6,80,81,90,100,101,103,109,110)";
@@ -85,19 +85,20 @@ echo '
          $("#regimen").change(function () {               
 			   $drug=$("#regimen").val().split(":");
 			   $druglist=$drug[0]+","+$drug[1]+ ","+ $drug[2];
-               $r = confirm("Confirmer que vous voulez choisir le regime : "+ $druglist);
-              if ($r == true) {
-               $("#"+$drug[0]+"forPepPmtctRx").attr("checked", "checked");
-			   $("#"+$drug[1]+"forPepPmtctRx").attr("checked", "checked");
-			   $("#"+$drug[2]+"forPepPmtctRx").attr("checked", "checked");
 			   
-			   $("#"+$drug[0]+"StdDosage").attr("checked", "checked");
-			   $("#"+$drug[1]+"StdDosage").attr("checked", "checked");
-			   $("#"+$drug[2]+"StdDosage").attr("checked", "checked");
-} else {
-    alert("Choisir un nouveau régime");
-}
-		
+			   Ext.Msg.confirm("Confirmation", "Confirmer que vous voulez choisir le regime: "+ $druglist, function(btnText){
+               if(btnText === "no"){ Ext.Msg.alert("Alert", "Choisir un nouveau régime.");}
+               else 
+			     if(btnText === "yes"){
+				 $("#"+$drug[0]+"forPepPmtctRx").attr("checked", "checked");
+			     $("#"+$drug[1]+"forPepPmtctRx").attr("checked", "checked");
+			     $("#"+$drug[2]+"forPepPmtctRx").attr("checked", "checked");
+			   
+			     $("#"+$drug[0]+"StdDosage").attr("checked", "checked");
+			     $("#"+$drug[1]+"StdDosage").attr("checked", "checked");
+			     $("#"+$drug[2]+"StdDosage").attr("checked", "checked");
+				 }
+               }, this);		
              });
      });
 </script> ';
