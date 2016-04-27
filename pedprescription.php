@@ -33,8 +33,8 @@ echo"
    </tr>";
    
       echo '<tr><td colspan="11" class="top_line" style="padding:5px;"><b>(-) Regime ARV les plus courant</b>
-<select name="regimen" id="regimen" style="height:25px">';
-$options="";
+<select name="regimen" id="regimen" style="height:25px;">';
+$options='<option value=""> </option>';
 $qry = "select REPLACE(REPLACE(r.shortName, 'ZDV', 'AZT'),'TNF','TDF') as shortName,(select drugName from drugLookup where drugID=r.drugID1)  as drug1, 
                   (select drugName from drugLookup where drugID=r.drugID2)  as drug2,
                   (select drugName from drugLookup where drugID=r.drugID3)  as drug3
@@ -44,10 +44,10 @@ $qry = "select REPLACE(REPLACE(r.shortName, 'ZDV', 'AZT'),'TNF','TDF') as shortN
 		die("Could not query.");
 	else {
 		while ($row = psRowFetch ($result))
-			$options=$options."<option value=\"".$row[1].":".$row[2].":".$row[3]."\">".$row[0]."</option>";
+			$options=$options.'<option value="'.$row[1].':'.$row[2].':'.$row[3].'">'.$row[0].'</option>';
 	}
     echo $options;
-echo "</select> <p> </p></td></tr>";
+echo '</select> <p> </p></td></tr>';
    
    
    
@@ -85,11 +85,9 @@ echo '
          $("#regimen").change(function () {               
 			   $drug=$("#regimen").val().split(":");
 			   $druglist=$drug[0]+","+$drug[1]+ ","+ $drug[2];
-			   
+			    if ($drug.length>1){
 			   Ext.Msg.confirm("Confirmation", "Confirmer que vous voulez choisir le regime: "+ $druglist, function(btnText){
-               if(btnText === "no"){ Ext.Msg.alert("Alert", "Choisir un nouveau régime.");}
-               else 
-			     if(btnText === "yes"){
+                if(btnText === "yes"){
 				 $("#"+$drug[0]+"forPepPmtctRx").attr("checked", "checked");
 			     $("#"+$drug[1]+"forPepPmtctRx").attr("checked", "checked");
 			     $("#"+$drug[2]+"forPepPmtctRx").attr("checked", "checked");
@@ -98,7 +96,8 @@ echo '
 			     $("#"+$drug[1]+"StdDosage").attr("checked", "checked");
 			     $("#"+$drug[2]+"StdDosage").attr("checked", "checked");
 				 }
-               }, this);		
+               }, this);
+              }			   
              });
      });
 </script> ';
