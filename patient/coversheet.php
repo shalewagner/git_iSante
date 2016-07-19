@@ -89,7 +89,7 @@ $coverLabels = array(
     'Pas de visites signalées.',
     'Pas d&rsquo;allergies signalées.',
     'Aucun compte CD4 rapporté',
-	'Pas d&rsquo;allertes signalées.'
+	'Pas d&rsquo;alertes signalées.'
 	)
 );
 
@@ -502,17 +502,17 @@ and patientid = '" . $pid . "' order by a.priority limit 1";
   if ($lang == "fr") $kk = 0;
   else $kk = 1;
   $retVar = ""; 
-  $allertesTable = array();
+  $alertesTable = array();
   while ($row = psRowFetch($result)) {
-  			$allertesTable[] = $row[$kk];
+  			$alertesTable[] = $row[$kk];
   		}
   
-  $allertes = "<h2>Allertes</h2>";
-  $allertes .= "<div class=\"cover-list-inner allertes\" style=\"color:red;\">";
-  if (count($allertesTable) > 0 ) {
-    $allertes .= makeHTMLRows($allertesTable,1);//, array ($coverLabels[$lang][0], $coverLabels[$lang][18], $coverLabels[$lang][19]) );
+  $alertes = "<h2>Alertes</h2>";
+  $alertes .= "<div class=\"cover-list-inner alertes\" style=\"color:red;\">";
+  if (count($alertesTable) > 0 ) {
+    $alertes .= makeHTMLRows($alertesTable,1);//, array ($coverLabels[$lang][0], $coverLabels[$lang][18], $coverLabels[$lang][19]) );
   } else {
-    $allertes .= "<p>".$coverLabels[$lang][23]."</p>";
+    $alertes .= "<p>".$coverLabels[$lang][23]."</p>";
   }
-  $allertes .= "</div>";
+  $alertes .= "</div>";
 ?> 
