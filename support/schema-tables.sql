@@ -3535,3 +3535,24 @@ CREATE TABLE `dw_merReportLookup` (
   `indicatorDenominator` smallint(6) default '0',
   PRIMARY KEY  (`indicator`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+drop table if exists alertLookup;
+create table alertLookup(id int primary key auto_increment,
+                         alertId int,
+                         alertName varchar(150) character set utf8 collate utf8_unicode_ci  NOT NULL,
+                         descriptionFr varchar(1024) character set utf8 collate utf8_unicode_ci  NOT NULL,
+                         descriptionEn varchar(1024) character set utf8 collate utf8_unicode_ci  NOT NULL,
+                         messageFr varchar(1024) character set utf8 collate utf8_unicode_ci  NOT NULL,
+                         messageEn varchar(1024) character set utf8 collate utf8_unicode_ci  NOT NULL,
+                         alertGroup varchar(20) character set utf8 collate utf8_unicode_ci  NOT NULL,
+                         priority int
+                         )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
+                         
+drop table if exists patientAlert;
+create table patientAlert(siteCode int,
+                          patientID varchar(11),
+                          alertId int,
+                          insertDate date
+                          )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
+                          
