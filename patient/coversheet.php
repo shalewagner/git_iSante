@@ -62,7 +62,8 @@ $coverLabels = array(
     'Reaction',
     'No visits reported.',
     'No allergies reported.',
-    'No CD4 counts reported.'
+    'No CD4 counts reported.',
+	'No allertes reported.'
 	),
 	'fr' => array(
 		'Date de visite',
@@ -87,7 +88,8 @@ $coverLabels = array(
     'R&#xe9;action',
     'Pas de visites signalées.',
     'Pas d&rsquo;allergies signalées.',
-    'Aucun compte CD4 rapporté'
+    'Aucun compte CD4 rapporté',
+	'Pas d&rsquo;allertes signalées.'
 	)
 );
 
@@ -489,4 +491,28 @@ if (count($arvs) > 0 ) {
     $allergies .= "<p>".$coverLabels[$lang][21]."</p>";
   }
   $allergies .= "</div>";
+  
+  
+  
+  /* ------------------------ ALERTES PANEL----------------------------------*/
+  $query = "select distinct messageFr,messageEn from patientAlert p, alertLookup a where p.alertId=a.alertId 
+and patientid = '" . $pid . "' order by a.priority limit 1";
+  if (DEBUG_FLAG) FB::log($query);
+  $result = dbQuery ($query);
+  if ($lang == "fr") $kk = 0;
+  else $kk = 1;
+  $retVar = ""; 
+  $allertesTable = array();
+  while ($row = psRowFetch($result)) {
+  			$allertesTable[] = $row[$kk];
+  		}
+  
+  $allertes = "<h2>Allertes</h2>";
+  $allertes .= "<div class=\"cover-list-inner allertes\" style=\"color:red;\">";
+  if (count($allertesTable) > 0 ) {
+    $allertes .= makeHTMLRows($allertesTable,1);//, array ($coverLabels[$lang][0], $coverLabels[$lang][18], $coverLabels[$lang][19]) );
+  } else {
+    $allertes .= "<p>".$coverLabels[$lang][23]."</p>";
+  }
+  $allertes .= "</div>";
 ?> 
