@@ -23,7 +23,7 @@ coverpageUi = new Ext.Container({
             flex: 1,
             autoScroll: true,
 			border: false,
-			html: '<div class="cover-list-box"><?=$allergies;?></div><div class="cover-list-box"><?=$vitals;?></div><div class="cover-list-box"><?=$anthro;?></div><div class="cover-list-box"><?=$forms;?></div><?php if (getHivPositive($pid)) { ?><div class="cover-list-box"><?=$arvInfo.$regtable;?></div><div class="cover-list-box"><?=$cd4info.$cd4table;?></div><?php } ?>'
+			html: '<div class="cover-list-box"><?=$allertes;?></div><div class="cover-list-box"><?=$allergies;?></div><div class="cover-list-box"><?=$vitals;?></div><div class="cover-list-box"><?=$anthro;?></div><div class="cover-list-box"><?=$forms;?></div><?php if (getHivPositive($pid)) { ?><div class="cover-list-box"><?=$arvInfo.$regtable;?></div><div class="cover-list-box"><?=$cd4info.$cd4table;?></div><?php } ?>'
 		}] 
 	},{
 		xtype: 'form',
