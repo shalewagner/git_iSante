@@ -106,6 +106,12 @@ printLog('generateMarkerArray() started');
 generateMarkerArray();
 printLog('generateMarkerArray() finished (' . getTimer() . ' seconds elapsed)');
 
+#adding for the alert.
+startTimer();
+printLog('generatePatientAlert() started');
+generatePatientAlert();
+printLog('generatePatientAlert() finished (' . getTimer() . ' seconds elapsed)');
+
 #Record the time that this job was run.
 dbQuery("update lastJobRun set lastRun = '$dbStartDate'");
 
