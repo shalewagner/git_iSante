@@ -2,14 +2,15 @@ drop table if exists  alertLookup ;
 
 create table alertLookup(id int primary key auto_increment,
                          alertId int,
-                         alertName varchar(150),
-                         descriptionFr varchar(1024),
-                         descriptionEn varchar(1024),
-                         messageFr varchar(1024),
-                         messageEn varchar(1024),
-                         alertGroup varchar(20),
+                         alertName varchar(150) character set utf8 collate utf8_unicode_ci  NOT NULL,
+                         descriptionFr varchar(1024) character set utf8 collate utf8_unicode_ci  NOT NULL,
+                         descriptionEn varchar(1024) character set utf8 collate utf8_unicode_ci  NOT NULL,
+                         messageFr varchar(1024) character set utf8 collate utf8_unicode_ci  NOT NULL,
+                         messageEn varchar(1024) character set utf8 collate utf8_unicode_ci  NOT NULL,
+                         alertGroup varchar(20) character set utf8 collate utf8_unicode_ci  NOT NULL,
                          priority int
-                         );
+                         )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
+                         
 insert into alertLookup(alertId,alertName,descriptionFr,descriptionEn,messageFr,messageEn,alertGroup,priority)
 values (1,'noViralLoadArv_6months','patients 6 months after ART initiation','patients 6 months after ART initiation','Le patient est sous ARV depuis 6 mois sans un résultat de charge virale','Le patient est sous ARV depuis 6 mois sans un résultat de charge virale',1,1),
        (2,'noViralLoadArv_5months','patients 5 months after ART initiation','patients 5 months after ART initiation','Le patient est sous ARV depuis 5 mois sans un résultat de charge virale','Le patient est sous ARV depuis 5 mois sans un résultat de charge virale',1,2),
