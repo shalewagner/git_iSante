@@ -496,7 +496,7 @@ if (count($arvs) > 0 ) {
   
   /* ------------------------ ALERTES PANEL----------------------------------*/
   $query = "select distinct messageFr,messageEn from patientAlert p, alertLookup a where p.alertId=a.alertId 
-and patientid = '" . $pid . "' order by a.priority limit 1";
+and patientid = '" . $pid . "' order by a.priority limit 3";
   if (DEBUG_FLAG) FB::log($query);
   $result = dbQuery ($query);
   if ($lang == "fr") $kk = 0;
