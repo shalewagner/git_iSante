@@ -2844,57 +2844,57 @@ function generatePatientAlert() {
 /*Any patients 6 months after ART initiation NB. we also remove patient that are a viral load after six months of arv initiation. */
 	
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-select  distinct A.siteCode,A.patientID ,? as alertId,now() as insertDate from 
+select  distinct A.siteCode,A.patientID ,1 as alertId,now() as insertDate from 
 (SELECT siteCode, patientID, MIN( visitDate ) AS arvDate
 FROM  `pepfarTable` GROUP BY 1 , 2) A left outer join  (SELECT distinct patientID,visitDate FROM  `v_labs` WHERE  `labID` IN ( 103, 1257 )) B 
 on (A.patientID=B.patientID and visitDate>=arvDate)
-where arvDate<= DATE_ADD(now(), INTERVAL -6 MONTH);',array('1'));
+where arvDate<= DATE_ADD(now(), INTERVAL -6 MONTH);');
 
 /*Any patients 5 months after ART initiation */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-select distinct A.siteCode,A.patientID ,? as alertId,now() as insertDate from 
+select distinct A.siteCode,A.patientID ,2 as alertId,now() as insertDate from 
 (SELECT siteCode, patientID, MIN( visitDate ) AS arvDate
 FROM  `pepfarTable` GROUP BY 1 , 2) A left outer join  (SELECT * FROM  `v_labs` WHERE  `labID` IN ( 103, 1257 )) B 
 on (A.patientID=B.patientID and visitDate>=arvDate)
-where arvDate> DATE_ADD(now(), INTERVAL -6 MONTH) and arvDate<= DATE_ADD(now(), INTERVAL -5 MONTH);',array('2'));
+where arvDate> DATE_ADD(now(), INTERVAL -6 MONTH) and arvDate<= DATE_ADD(now(), INTERVAL -5 MONTH);');
 
 /* Any pregnant woman 4 months after ART initiation */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-select distinct A.siteCode,A.patientID,? as alertId,now() as insertDate from 
+select distinct A.siteCode,A.patientID,3 as alertId,now() as insertDate from 
 (SELECT siteCode, patientID, MIN( visitDate ) AS arvDate
 FROM  `pepfarTable` GROUP BY 1 , 2) A  join 
 (select a.patientID,visitDate from a_vitals a,patient p where a.pregnant =1 and p.patientID=a.patientID and p.sex=1
 union all
 select e.patientID,visitDate from encValidAll e,obs o , patient p
 where o.encounter_id=e.encounter_id and p.patientID=e.patientID and p.sex=1 and o.concept_id in 
-(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+(71262,7959,7098,7051,7053,7052,70118,70132,70150,70144,70130,70148,71140,70128,71398,70084,70069,70082,70078,
+70086,70066,70103,70624,70068,70087,70733,7958,71068,70732,7960,71070,7967,70730,70591,70731,70750,7957,70126,
+7955,71067,70729,7806,70067,70826,7805,70827,7804,70465,70018)
 ) B  on (A.patientID=B.patientID and A.arvDate<=B.visitDate) 
 left outer join  (SELECT * FROM  `v_labs` WHERE  `labID` IN ( 103, 1257 )) C 
 on (A.patientID=C.patientID and C.visitDate>=A.arvDate)
-where arvDate<= DATE_ADD(now(), INTERVAL -4 MONTH);',array('3','71262','7959','7098','7051','7053','7052','70118','70132','70150','70144','70130','70148','71140','70128','71398','70084','70069','70082','70078',
-'70086','70066','70103','70624','70068','70087','70733','7958','71068','70732','7960','71070','7967','70730','70591','70731','70750','7957','70126',
-'7955','71067','70729','7806','70067','70826','7805','70827','7804','70465','70018'));	
+where arvDate<= DATE_ADD(now(), INTERVAL -4 MONTH);');	
 
 /* Any patient whose last viral load test was performed 12 months’ prior */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-select distinct  A.location_id,A.patientID,? as alertId,now() as insertDate from v_patients A join 
+select distinct  A.location_id,A.patientID,4 as alertId,now() as insertDate from v_patients A join 
 (SELECT siteCode,patientID,max(visitDate) as lastDate FROM  `v_labs` WHERE  `labID` IN ( 103, 1257 ) group by 1,2) B 
 on (A.patientID=B.patientID)
-where lastDate <=DATE_ADD(now(), INTERVAL -12 MONTH);',array('4'));	
+where lastDate <=DATE_ADD(now(), INTERVAL -12 MONTH);');	
 
 
 /* Any patient including pregnant women whose viral test result was greater than 1000 copies and was performed 3 months ago */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-SELECT DISTINCT A.siteCode, A.patientID,? as alertId,now() as insertDate 
+SELECT DISTINCT A.siteCode, A.patientID,5 as alertId,now() as insertDate 
 FROM v_labs A JOIN (SELECT siteCode,patientID,MAX(visitDate) AS lastDate FROM  `v_labs` WHERE  `labID` IN (103,1257) GROUP BY 1,2)B ON (A.patientID = B.patientID AND A.visitDate = B.lastDate) 
 WHERE lastDate <= DATE_ADD(NOW() , INTERVAL -3 MONTH ) 
-AND CASE WHEN LENGTH(result)>=9 THEN SUBSTRING(result,1, LENGTH(result) -9) ELSE result END >1000;',array('5'));
+AND CASE WHEN LENGTH(result)>=9 THEN SUBSTRING(result,1, LENGTH(result) -9) ELSE result END >1000;');
 
 /* Any patient  whose viral test result was greater than 1000 copies */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-SELECT DISTINCT A.siteCode, A.patientID,? as alertId,now() as insertDate 
+SELECT DISTINCT A.siteCode, A.patientID,6 as alertId,now() as insertDate 
 FROM v_labs A JOIN (SELECT siteCode,patientID,MAX(visitDate) AS lastDate FROM  `v_labs` WHERE  `labID` IN (103,1257) GROUP BY 1,2)B ON (A.patientID = B.patientID AND A.visitDate = B.lastDate) 
-WHERE  CASE WHEN LENGTH(result)>=9 THEN SUBSTRING(result,1, LENGTH(result) -9) ELSE result END >1000;',array('6'));
+WHERE  CASE WHEN LENGTH(result)>=9 THEN SUBSTRING(result,1, LENGTH(result) -9) ELSE result END >1000;');
 
 }
 
