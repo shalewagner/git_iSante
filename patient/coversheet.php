@@ -510,7 +510,7 @@ and patientid = '" . $pid . "' order by a.priority limit 3";
   $alertes = "<h2>Alertes</h2>";
   $alertes .= "<div class=\"cover-list-inner alertes\" style=\"color:red;\">";
   if (count($alertesTable) > 0 ) {
-    $alertes .= makeHTMLRows($alertesTable,1);//, array ($coverLabels[$lang][0], $coverLabels[$lang][18], $coverLabels[$lang][19]) );
+    $alertes .= makeHTMLRows($alertesTable,1,null,null);
   } else {
     $alertes .= "<p>".$coverLabels[$lang][23]."</p>";
   }
