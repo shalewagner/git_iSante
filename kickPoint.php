@@ -632,7 +632,7 @@ if ($repNum >= 2000 && $repNum <= 3999) { // use prim. care & ob/gyn report layo
 				</td>
 				<td width=\"29%\">" . genRadioControl ($kickLabel, $lang, "treatmentStatus", $i, $tStatus, $repNum) . "</td>";
 			}
-			if ($i == 4) {
+			if ($i >= 4) {
 				echo "
 				<td colspan=\"2\" width=\"50%\">&nbsp;</td>
 				<td width=\"29%\">" . genRadioControl ($kickLabel, $lang, "treatmentStatus", $i, $tStatus, $repNum) . "</td>";
