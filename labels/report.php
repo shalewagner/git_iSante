@@ -244,22 +244,17 @@ $kickLabel = array (
 	"patientStatus" => array (
 		"en" => array (
 			"0" => "Patient Status ",
-			"1" => "New <span class=\"small_cnt\">(first visit in the last 30 days)</span>",
-			"2" => "Active <span class=\"small_cnt\">(visit in the last: 90 days if on ART; 180 days if in palliative care)</span>",
-			"3" => "At risk of discontinuation <span class=\"small_cnt\">(missed last scheduled visit by: 8 days if on ART; 30 days if in palliative care)</span>",
-			"4" => "Inactive <span class=\"small_cnt\">(no visits in the last: 90 days if on ART; 180 days if in palliative care)</span>",
-			"5" => "Discontinued <span class=\"small_cnt\">(Declared discontinued via the discontinuation form)</span>"
+			"1" => "Active <span class=\"small_cnt\">(visit in the last: 90 days if on ART; 180 days if in palliative care)</span>",
+			"2" => "Inactive <span class=\"small_cnt\">(no visits in the last: 90 days if on ART; 180 days if in palliative care)</span>",
+			"3" => "Discontinued <span class=\"small_cnt\">(Declared discontinued via the discontinuation form)</span>"
 		),
 		"fr" => array (
 			"0" => "Statut du patient",
-			"1" => "Nouveaux <span class=\"small_cnt\">(premi&#xe8;re visite dans les derniers 30 jours)</span>",
-			"2" => "Actifs <span class=\"small_cnt\">(visite dans les derniers 90 jours si sous TAR; dans
+			"1" => "Actifs <span class=\"small_cnt\">(visite dans les derniers 90 jours si sous TAR; dans
 			les derniers 180 jours si soins palliatifs)</span>",
-			"3" => "Risque de discontinuation <span class=\"small_cnt\">(rendez-vous manqu&#xe9; dans les derniers 8 jours si sous
-			TAR; dans les derniers 30 jours si soins palliatifs)</span>",
-			"4" => "Inactifs <span class=\"small_cnt\">(aucune visite les derniers 90 jours si sous TAR; dans les
+			"2" => "Inactifs <span class=\"small_cnt\">(aucune visite les derniers 90 jours si sous TAR; dans les
 			derniers 180 jours si soins palliatifs)</span>",
-			"5" => "Discontinu&eacute;s <span class=\"small_cnt\">(d&eacute;clar&eacute;s comme tels dans la fiche de discontinuation)</span>"
+			"3" => "Discontinu&eacute;s <span class=\"small_cnt\">(d&eacute;clar&eacute;s comme tels dans la fiche de discontinuation)</span>"
 		)
 	),
 	"treatmentStatus" => array (
