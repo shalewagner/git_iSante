@@ -49,25 +49,25 @@ Ext.onReady(function() {
 	hivStore.loadData(myData);
 
 	var spcm = new Ext.grid.ColumnModel([
-		{header: '<?=_('Établissement');?>', dataIndex: 'clinic', type: 'string',  width: 250, sortable: true, fixed: true, hideable: false},
+		{header: '<?=_('Établissement');?>', dataIndex: 'clinic', type: 'string',  width: 250, sortable: true, fixed: true, hideable: true},
 		{header: '<?=$splashLabels[$lang]["sitecode"];?>', dataIndex: 'sitecode', type: 'string',  width: 300, sortable: true, fixed: true, hideable: true, hidden: true},
-		{header: 'Version', dataIndex: 'dbVersion', type: 'string',  width: 75, fixed: true, align: 'right', hideable: false},
-		{header: '<?=$splashLabels[$lang]["dbSite"];?>', dataIndex: 'local', type: 'string',  width: 75, sortable: false, fixed: true, align: 'right', hideable: false},
-		{header: '<?=$splashLabels[$lang]["recent"];?>', dataIndex: 'modifyDate', type: 'date',  width: 100, sortable: true,  align: 'right', renderer: formatDate, fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["new"];?>', dataIndex: 'ccNew', type: 'string',  width: 55, sortable: false, align: 'right', fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["active"];?>', dataIndex: 'ccActive', type: 'string',  width: 55, sortable: false, align: 'right', fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["atRisk"];?>', dataIndex: 'ccAtRisk', type: 'string',  width: 55, sortable: false, align: 'right', fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["inactive"];?>', dataIndex: 'ccInactive', type: 'string',  width: 55, sortable: false, align: 'right', fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["disc"];?>', dataIndex: 'ccDisc', type: 'string',  width: 55, sortable: false, align: 'right', fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["total"];?>', dataIndex: 'ccTotal', type: 'string',  width: 65, sortable: true, align: 'right', fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["new"];?>', dataIndex: 'artNew', type: 'string',  width: 55, sortable: false, align: 'right', fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["active"];?>', dataIndex: 'artActive', type: 'string',  width: 55, sortable: false, align: 'right', fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["atRisk"];?>', dataIndex: 'artAtRisk', type: 'string',  width: 55, sortable: false,  align: 'right', fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["inactive"];?>', dataIndex: 'artInactive', type: 'string',  width: 55, sortable: false,  align: 'right', fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["disc"];?>', dataIndex: 'artDisc', type: 'string',  width: 55, sortable: false,  align: 'right', fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["total"];?>', dataIndex: 'artTotal', type: 'string',  width: 65, sortable: true,align: 'right', fixed: true, hideable: false},
-		{header: '', dataIndex: 'hivNegative', type: 'string',  width: 60, sortable: true,align: 'right', fixed: true, hideable: false},
-		{header: '<?=$splashLabels[$lang]["grandTotals2"];?>', dataIndex: 'Total', type: 'string',  width: 90, sortable: true, align: 'right', fixed: true, hideable: false}
+		{header: 'Version', dataIndex: 'dbVersion', type: 'string',  width: 75, fixed: true, align: 'right', hideable: true},
+		{header: '<?=$splashLabels[$lang]["dbSite"];?>', dataIndex: 'local', type: 'string',  width: 75, sortable: false, fixed: true, align: 'right', hideable: true},
+		{header: '<?=$splashLabels[$lang]["recent"];?>', dataIndex: 'modifyDate', type: 'date',  width: 100, sortable: true,  align: 'right', renderer: formatDate, fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang]["new"];?>', dataIndex: 'ccNew', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true, hidden: true},
+		{header: '<?=$splashLabels[$lang]["active"];?>', dataIndex: 'ccActive', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang]["atRisk"];?>', dataIndex: 'ccAtRisk', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true, hidden: true},
+		{header: '<?=$splashLabels[$lang]["inactive"];?>', dataIndex: 'ccInactive', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang]["disc"];?>', dataIndex: 'ccDisc', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang]["total"];?>', dataIndex: 'ccTotal', type: 'string',  width: 65, sortable: true, align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang]["new"];?>', dataIndex: 'artNew', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true, hidden: true},
+		{header: '<?=$splashLabels[$lang]["active"];?>', dataIndex: 'artActive', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang]["atRisk"];?>', dataIndex: 'artAtRisk', type: 'string',  width: 75, sortable: false,  align: 'right', fixed: true, hideable: true, hidden: true},
+		{header: '<?=$splashLabels[$lang]["inactive"];?>', dataIndex: 'artInactive', type: 'string',  width: 75, sortable: false,  align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang]["disc"];?>', dataIndex: 'artDisc', type: 'string',  width: 75, sortable: false,  align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang]["total"];?>', dataIndex: 'artTotal', type: 'string',  width: 65, sortable: true,align: 'right', fixed: true, hideable: true},
+		{header: '', dataIndex: 'hivNegative', type: 'string',  width: 60, sortable: true,align: 'right', fixed: true, hideable: true, hidden: true},
+		{header: '<?=$splashLabels[$lang]["grandTotals2"];?>', dataIndex: 'Total', type: 'string',  width: 90, sortable: true, align: 'right', fixed: true, hideable: true}
 	]);
 
 	function copyText(text) {
@@ -124,10 +124,10 @@ Ext.onReady(function() {
 		frame: true,
 		//footer: true,
 		tbar: [
-			{ xtype: 'field',id: 'xxx', name: 'xxx', width: 500, readOnly: true},
-			{ xtype: 'field',id: 'yyy', name: 'yyy', width: 340, value: '<?=$splashLabels[$lang]["inClinic"];?>', style: 'text-align: center', readOnly: true},
-			{ xtype: 'field',id: 'zzz', name: 'zzz', width: 340, value: '<?=$splashLabels[$lang]["onART"];?>', style: 'text-align: center', readOnly: true},
-			{ xtype: 'field',id: 'xx2',name: 'xx2', width: 65, value: '<?=_('Autre *');?>', style: 'text-align: center', readOnly: true},
+			{ xtype: 'field',id: 'xxx', name: 'xxx', width: 520, readOnly: true},
+			{ xtype: 'field',id: 'yyy', name: 'yyy', width: 250, value: '<?=$splashLabels[$lang]["inClinic"];?>', style: 'text-align: center', readOnly: true},
+			{ xtype: 'field',id: 'zzz', name: 'zzz', width: 250, value: '<?=$splashLabels[$lang]["onART"];?>', style: 'text-align: center', readOnly: true},
+			{ xtype: 'field',id: 'xx2',name: 'xx2', width: 65, value: '<?=_('Autre *');?>', style: 'text-align: center', readOnly: true, hideable: true, hidden: true},
 			{ xtype: 'field',id: 'xx3',name: 'xx3', width: 105, value: '<?=$splashLabels[$lang]["grandTotals"];?>', style: 'text-align: center', readOnly: true}
 		],
 		bbar: [
@@ -154,7 +154,7 @@ Ext.onReady(function() {
 			{ xtype: 'field',id: 'ainactive', name: 'ainactive', type: 'string',  width: 55, style: 'text-align: right', value: totalVector[13]},
 			{ xtype: 'field',id: 'adisc', name: 'adisc', type: 'string',  width: 55, style: 'text-align: right', value: totalVector[14]},
 			{ xtype: 'field',id: 'atotal', name: 'atotal', type: 'string',  width: 65, style: 'text-align: right', value: totalVector[15]},
-			{ xtype: 'field',id: 'ntotal', name: 'ntotal', type: 'string',  width: 65, style: 'text-align: right', value: totalVector[16]},
+			{ xtype: 'field',id: 'ntotal', name: 'ntotal', type: 'string',  width: 65, style: 'text-align: right', value: totalVector[16], hideable: true, hidden: true},
 			{ xtype: 'field',id: 'gTotal', name: 'gTotal', type: 'string',  width: 105, readOnly: true, style: 'text-align: right', value: totalVector[17]}
 		]
 	});
