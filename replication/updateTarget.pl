@@ -2,6 +2,7 @@
 
 BEGIN {
     $main::isanteSource = $ENV{ISANTE_SOURCE} || '/usr/share/isante/htdocs';
+    $main::isanteSource = '/Volumes/halfTera/Users/dad/git_iSante';
     if (!scalar(stat($main::isanteSource))) {
         die('can not find iSanté source directory');
     }

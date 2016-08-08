@@ -374,6 +374,7 @@ given ($tableSet) {
 	    );
     } when ('lookups') {
 	@tables = (
+		'alertLookup',
 #	    'announcements',
 	    'clinicLookup',
 	    'concept',

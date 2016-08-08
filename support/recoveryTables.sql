@@ -1025,3 +1025,9 @@ CREATE TABLE IF NOT EXISTS labMessageStorage (
   `message` mediumblob,
   PRIMARY KEY  (`labMessageStorage_id`, `dbSite`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS patientAlert(siteCode int,
+  patientID varchar(11),
+  alertId int,
+  insertDate date
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
