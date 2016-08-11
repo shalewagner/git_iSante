@@ -1,12 +1,13 @@
 Most recent change: 1970-01-01 00:00:00
 Application version: 15.1 test (1f88a5c)
-Schema version: 43
-Seconds elapsed: 2
-Total records read: 11152
-Records per second: 5576
+Schema version: 44
+Seconds elapsed: 1
+Total records read: 11159
+Records per second: 11159
 
 Record counts by table:
-clinicLookup                759
+alertLookup                   6
+clinicLookup                760
 concept                    2416
 concept_class                18
 concept_datatype             11
