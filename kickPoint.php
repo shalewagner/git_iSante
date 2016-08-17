@@ -294,9 +294,9 @@ function sendParameters () {
         if (document.forms['mainForm'].reportNumber.value >= 2000 &&
             document.forms['mainForm'].reportNumber.value <= 3999) {
         } else {
-	  if (document.forms['mainForm'].patientStatus0.checked) pStatus = pStatus + 2;
-	  if (document.forms['mainForm'].patientStatus1.checked) pStatus = pStatus + 4;
-	  if (document.forms['mainForm'].patientStatus2.checked) pStatus = pStatus + 8;
+	  if (document.forms['mainForm'].patientStatus0.checked) pStatus = pStatus + 4;
+	  if (document.forms['mainForm'].patientStatus1.checked) pStatus = pStatus + 16;
+	  if (document.forms['mainForm'].patientStatus2.checked) pStatus = pStatus + 32;
 	  tStatus = getCheckedValue(document.forms['mainForm'].treatmentStatus);
 	  tType = getCheckedValue(document.forms['mainForm'].testType);
 	  gLevel  = getCheckedValue(document.forms['mainForm'].groupLevel);
