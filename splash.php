@@ -66,7 +66,7 @@ Ext.onReady(function() {
 		{header: '<?=$splashLabels[$lang]["inactive"];?>', dataIndex: 'artInactive', type: 'string',  width: 75, sortable: false,  align: 'right', fixed: true, hideable: true},
 		{header: '<?=$splashLabels[$lang]["disc"];?>', dataIndex: 'artDisc', type: 'string',  width: 75, sortable: false,  align: 'right', fixed: true, hideable: true},
 		{header: '<?=$splashLabels[$lang]["total"];?>', dataIndex: 'artTotal', type: 'string',  width: 65, sortable: true,align: 'right', fixed: true, hideable: true},
-		{header: '', dataIndex: 'hivNegative', type: 'string',  width: 60, sortable: true,align: 'right', fixed: true, hideable: true, hidden: true},
+		{header: '<?=_('Autre *');?>', dataIndex: 'hivNegative', type: 'string',  width: 60, sortable: true,align: 'right', fixed: true, hideable: true, hidden: false},
 		{header: '<?=$splashLabels[$lang]["grandTotals2"];?>', dataIndex: 'Total', type: 'string',  width: 90, sortable: true, align: 'right', fixed: true, hideable: true}
 	]);
 
@@ -125,10 +125,10 @@ Ext.onReady(function() {
 		//footer: true,
 		tbar: [
 			{ xtype: 'field',id: 'xxx', name: 'xxx', width: 520, readOnly: true},
-			{ xtype: 'field',id: 'yyy', name: 'yyy', width: 250, value: '<?=$splashLabels[$lang]["inClinic"];?>', style: 'text-align: center', readOnly: true},
-			{ xtype: 'field',id: 'zzz', name: 'zzz', width: 250, value: '<?=$splashLabels[$lang]["onART"];?>', style: 'text-align: center', readOnly: true},
+			{ xtype: 'field',id: 'yyy', name: 'yyy', width: 265, value: '<?=$splashLabels[$lang]["inClinic"];?>', style: 'text-align: center', readOnly: true},
+			{ xtype: 'field',id: 'zzz', name: 'zzz', width: 265, value: '<?=$splashLabels[$lang]["onART"];?>', style: 'text-align: center', readOnly: true},
 			{ xtype: 'field',id: 'xx2',name: 'xx2', width: 65, value: '<?=_('Autre *');?>', style: 'text-align: center', readOnly: true, hideable: true, hidden: true},
-			{ xtype: 'field',id: 'xx3',name: 'xx3', width: 105, value: '<?=$splashLabels[$lang]["grandTotals"];?>', style: 'text-align: center', readOnly: true}
+			{ xtype: 'field',id: 'xx3',name: 'xx3', width: 170, value: '<?=$splashLabels[$lang]["grandTotals"];?>', style: 'text-align: center', readOnly: true}
 		],
 		bbar: [
 			{
@@ -141,21 +141,21 @@ Ext.onReady(function() {
 			{ xtype: 'field',id: 'bbb', name: 'bbb', type: 'string',  width: 160,readOnly: true, style: 'text-align: right', value: '<?=$splashLabels[$lang]["grandTotals"];?>:'},
 			{ xtype: 'field',id: 'ccc', name: 'ccc', type: 'string',  width:  50, readOnly: true, style: 'text-align: right', value: totalVector[3]},
 			{ xtype: 'field',id: 'ddd', name: 'ddd', type: 'string',  width: 50, style: 'text-align: right', value: totalVector[2]},
-			{ xtype: 'field',id: 'eee', name: 'eee', type: 'string',  width: 100, readOnly: true},
-			{ xtype: 'field',id: 'cnew', name: 'cnew', type: 'string',  width: 55, readOnly: true, style: 'text-align: right;', value: totalVector[4]},
-			{ xtype: 'field',id: 'cactive', name: 'cactive', type: 'string',  width: 55, readOnly: true, style: 'text-align: right', value: totalVector[5]},
-			{ xtype: 'field',id: 'catRisk', name: 'catRisk', type: 'string',  width: 55, readOnly: true, style: 'text-align: right', value: totalVector[6]},
-			{ xtype: 'field',id: 'cinactive', name: 'cinactive', type: 'string',  width: 55, readOnly: true, style: 'text-align: right', value: totalVector[7]},
-			{ xtype: 'field',id: 'cdisc', name: 'cdisc', type: 'string',  width: 55, readOnly: true, style: 'text-align: right', value: totalVector[8]},
-			{ xtype: 'field',id: 'ctotal', name: 'ctotal', type: 'string',  width: 65, readOnly: true, style: 'text-align: right', value: totalVector[9]},
-			{ xtype: 'field',id: 'anew', name: 'anew', type: 'string',  width: 55, readOnly: true, style: 'text-align: right', value: totalVector[10]},
-			{ xtype: 'field',id: 'aactive', name: 'aactive', type: 'string',  width: 55, style: 'text-align: right', value: totalVector[11]},
-			{ xtype: 'field',id: 'aatRisk', name: 'aatRisk', type: 'string',  width: 55, style: 'text-align: right', value: totalVector[12]},
-			{ xtype: 'field',id: 'ainactive', name: 'ainactive', type: 'string',  width: 55, style: 'text-align: right', value: totalVector[13]},
-			{ xtype: 'field',id: 'adisc', name: 'adisc', type: 'string',  width: 55, style: 'text-align: right', value: totalVector[14]},
-			{ xtype: 'field',id: 'atotal', name: 'atotal', type: 'string',  width: 65, style: 'text-align: right', value: totalVector[15]},
-			{ xtype: 'field',id: 'ntotal', name: 'ntotal', type: 'string',  width: 65, style: 'text-align: right', value: totalVector[16], hideable: true, hidden: true},
-			{ xtype: 'field',id: 'gTotal', name: 'gTotal', type: 'string',  width: 105, readOnly: true, style: 'text-align: right', value: totalVector[17]}
+			{ xtype: 'field',id: 'eee', name: 'eee', type: 'string',  width: 135, readOnly: true},
+			{ xtype: 'field',id: 'cnew', name: 'cnew', type: 'string',  width: 55, readOnly: true, style: 'text-align: right;', value: totalVector[4], hideable: true, hidden: true},
+			{ xtype: 'field',id: 'cactive', name: 'cactive', type: 'string',  width: 70, readOnly: true, style: 'text-align: right', value: totalVector[5]},
+			{ xtype: 'field',id: 'catRisk', name: 'catRisk', type: 'string',  width: 55, readOnly: true, style: 'text-align: right', value: totalVector[6], hideable: true, hidden: true},
+			{ xtype: 'field',id: 'cinactive', name: 'cinactive', type: 'string',  width: 70, readOnly: true, style: 'text-align: right', value: totalVector[7]},
+			{ xtype: 'field',id: 'cdisc', name: 'cdisc', type: 'string',  width: 70, readOnly: true, style: 'text-align: right', value: totalVector[8]},
+			{ xtype: 'field',id: 'ctotal', name: 'ctotal', type: 'string',  width: 70, readOnly: true, style: 'text-align: right', value: totalVector[9]},
+			{ xtype: 'field',id: 'anew', name: 'anew', type: 'string',  width: 55, readOnly: true, style: 'text-align: right', value: totalVector[10], hideable: true, hidden: true},
+			{ xtype: 'field',id: 'aactive', name: 'aactive', type: 'string',  width: 70, style: 'text-align: right', value: totalVector[11]},
+			{ xtype: 'field',id: 'aatRisk', name: 'aatRisk', type: 'string',  width: 55, style: 'text-align: right', value: totalVector[12], hideable: true, hidden: true},
+			{ xtype: 'field',id: 'ainactive', name: 'ainactive', type: 'string',  width: 70, style: 'text-align: right', value: totalVector[13]},
+			{ xtype: 'field',id: 'adisc', name: 'adisc', type: 'string',  width: 70, style: 'text-align: right', value: totalVector[14]},
+			{ xtype: 'field',id: 'atotal', name: 'atotal', type: 'string',  width: 70, style: 'text-align: right', value: totalVector[15]},
+			{ xtype: 'field',id: 'ntotal', name: 'ntotal', type: 'string',  width: 70, style: 'text-align: right', value: totalVector[16], hideable: true, hidden: false},
+			{ xtype: 'field',id: 'gTotal', name: 'gTotal', type: 'string',  width: 100, readOnly: true, style: 'text-align: right', value: totalVector[17]}
 		]
 	});
 
