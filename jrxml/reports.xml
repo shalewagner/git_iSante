@@ -1893,13 +1893,13 @@
 				
 			    </report>	
 				
-			<report id="548" patientStatus="0" treatmentStatus="0" testType="0">
+                           <report id="548" patientStatus="0" treatmentStatus="0" testType="0">
 				  <title lang="en">Alert viral load </title>
 				  <title lang="fr">Alerte charge viral</title>
-				   <reportFile></reportFile>
-				     <groupLevel>1</groupLevel>
-				             <otherLevel>0</otherLevel>
-				
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <query>select descriptionFr as Alerte,count(distinct patientID) as cnt from patientAlert p, alertLookup a ,clinicLookup c where p.alertId=a.alertId and p.siteCode=c.siteCode and c.siteCode='$site' group by 1 order by a.alertId </query>
 			    </report>			
 			
 		</reportSubSet>
