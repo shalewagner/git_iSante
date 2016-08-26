@@ -39,115 +39,28 @@ par ces 2 groupes de patients sont diff&eacute;rents, et doivent &ecirc;tre
 	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.1">4.1.1
 	Patients actifs sous ARV</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>&nbsp;:&nbsp;</I></FONT><FONT FACE="Arial, sans-serif"><SPAN STYLE="font-style: normal">
 	 </SPAN></FONT><FONT FACE="Arial, sans-serif">
-Tous les patients qui ont re&ccedil;u au pr&eacute;alable
-des ARV dans l&rsquo;&eacute;tablissement qui effectue le rapport, &agrave;
-l&rsquo;exception des patients qui ont re&ccedil;u des ARV pour PTME
-ou PEP, avec au moins une visite dans les 90 jours pr&eacute;c&eacute;dents.</FONT></P>
+Patients recevant des ARV, ‡ l'exclusion des patients dispensès ARV pour la PTME ou PEP, o˘ l'un ou l'autre des conditions suivantes: 1) patient a au moins une visite de toute nature dans les 90 derniers jours. Les visites peuvent inclure une èvaluation clinique, laboratoire, ou des services de pharmacie. 2) les patients dont la date actuelle est <= attendue date de la prochaine visite de la derniëre visite de pharmacie o˘ ART mèdicaments ont ètè distribuès. Nombre d'Active comprend le nombre de ´Nouveauª et le nombre de ´‡ risqueª.</FONT></P>
 	<P CLASS="western" STYLE="margin-bottom: 0in; font-style: normal"><BR>
 	</P>
 	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.2">4.1.2
 	Patients actifs sous soins palliatifs (non sous ARV)</A>&nbsp;:&nbsp;</I></FONT></FONT><FONT FACE="Arial, sans-serif">
-        Tous les
-patients qui n&rsquo;ont jamais re&ccedil;u de ARV dans
-l&rsquo;&eacute;tablissement qui effectue le rapport et qui ont
-effectu&eacute; au moins une visite dans les 180 jours pr&eacute;c&eacute;dents.
-Les visites peuvent consister en une &eacute;valuation clinique, des
-prestations de laboratoires ou pharmaceutiques. Les patients pour
-lesquels une fiche de discontinuation a &eacute;t&eacute; remplie ne
-sont pas consid&eacute;r&eacute;s comme des patients actifs, m&ecirc;me
-s&rsquo;ils ont effectu&eacute; une visite dans les 180 jours
-pr&eacute;c&eacute;dents.
-	          </FONT>
-	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in; font-style: normal"><BR>
-	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.3">4.1.3
-	Nouveaux patients sous ARV</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>&nbsp;:&nbsp;</I></FONT><FONT FACE="Arial, sans-serif"><SPAN STYLE="font-style: normal">
-        Tous les patients
-actifs sous ARV qui ont d&eacute;marr&eacute; les ARV dans
-l&rsquo;&eacute;tablissement qui effectue le rapport et dont la
-premi&egrave;re visite a eu lieu dans les 30 jours pr&eacute;c&eacute;dents.
-Les patients pour lesquels une fiche de discontinuation a &eacute;t&eacute;
-remplie ne sont pas consid&eacute;r&eacute;s comme de nouveaux
-patients, m&ecirc;me s&rsquo;ils ont commenc&eacute; les ARV dans les
-30 jours pr&eacute;c&eacute;dents.
-	</SPAN></FONT></P>
-	<P CLASS="western" STYLE="margin-bottom: 0in; font-style: normal"><BR>
-	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.4">4.1.4
-	Nouveaux patients sous soins palliatifs (non sous ARV)</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><SPAN STYLE="font-style: normal">&nbsp;:&nbsp;
-        Tous
-les patients actifs qui n'ont jamais re&ccedil;u d'ARV dans
-l&rsquo;&eacute;tablissement qui effectue le rapport et dont la
-premi&egrave;re visite a lieu dans les 30 derniers jours. Les visites
-peuvent inclure l'&eacute;valuation clinique, les prestations de
-laboratoire, ou de pharmacie. Les patients pour lesquels la fiche de
-discontinuation a &eacute;t&eacute; remplie ne sont pas consid&eacute;r&eacute;s
-comme de nouveaux patients, m&ecirc;me si leur premi&egrave;re visite
-a lieu dans les 30 jours pr&eacute;c&eacute;dents.
-	</SPAN></FONT></P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
-	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.5">4.1.5
-	Patients sous ARV &agrave; risque de discontinuation</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>&nbsp;:&nbsp;
-	 </I></FONT><FONT FACE="Arial, sans-serif">
-        Tous
-les nouveaux patients ou patients actifs qui ont d&eacute;j&agrave;
-re&ccedil;u des m&eacute;dicaments ARV dans l&rsquo;&eacute;tablissement
-qui effectue le rapport et qui ont plus de 8 jours de retard dans le
-retrait de leurs m&eacute;dicaments. Les patients pour lesquels la
-fiche de discontinuation a &eacute;t&eacute; remplie ne sont pas
-consid&eacute;r&eacute;s comme des patients &agrave; risque de
-discontinuation, m&ecirc;me s&rsquo;ils ont plus de 8 jours de retard
-dans le retrait de leurs m&eacute;dicaments.
-	</FONT>
-	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
-	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.6">4.1.6 
-        Patients sous soins palliatifs (non sous ARV) &agrave; risque de
-discontinuation</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>&nbsp;:&nbsp;</I></FONT><FONT FACE="Arial, sans-serif">
-        Tous
-les nouveaux patients ou patients actifs qui n&rsquo;ont jamais re&ccedil;u
-des m&eacute;dicaments ARV dans l&rsquo;&eacute;tablissement qui
-effectue le rapport et qui ont manqu&eacute; leur prochain
-rendez-vous programm&eacute; de plus de 30 jours. Les patients pour
-lesquels une fiche de discontinuation a &eacute;t&eacute; remplie ne
-sont pas consid&eacute;r&eacute;s comme des patients en danger de
-discontinuation, m&ecirc;me s&rsquo;ils ont manqu&eacute; leur
-prochain rendez-vous programm&eacute; de plus de 30 jours.
+        Patients qui n'ont jamais reáu d'ARV et qui ont eu au moins une visite au cours des 180 derniers jours. Les visites peuvent inclure une èvaluation clinique, laboratoire, ou des services de pharmacie. Comte de "Active" comprend "Nouveau" et "‡ risque".
 	</FONT></P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+	<P CLASS="western" STYLE="margin-bottom: 0in; font-style: normal"><BR>
 	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.7">4.1.7
+	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.7">4.1.3
 	Patients inactifs sous ARV</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>&nbsp;:&nbsp;</I></FONT><FONT FACE="Arial, sans-serif">
-        Tous
-les patients qui ont d&eacute;j&agrave; re&ccedil;u des m&eacute;dicaments
-ARV dans l&rsquo;&eacute;tablissement qui effectue le rapport et qui
-n&rsquo;ont eu aucun type de visite dans les 90 jours pr&eacute;c&eacute;dents.
-Les visites peuvent consister en une &eacute;valuation
-clinique, des prestations de laboratoire ou pharmaceutiques.
-        Les patients pour lesquels une fiche de discontinuation a &eacute;t&eacute;
-remplie ne sont pas consid&eacute;r&eacute;s comme des patients
-inactifs, m&ecirc;me s&rsquo;ils n&rsquo;ont pas eu de visite dans
-les 90 jours pr&eacute;c&eacute;dents.
+Patients n'ayant jamais recues d'ARV, ‡ l'exclusion des patients ayant recue des ARV pour la PTME ou PEP, o˘ les deux conditions suivantes: 1) le patient n'a pas de visite de toute nature dans les 90 derniers jours. Les visites peuvent inclure une èvaluation clinique, laboratoire, ou des services de pharmacie. 2) les patients dont la date actuelle est> attendue date de la prochaine visite de la derniëre visite de pharmacie o˘ ARV mèdicaments ont ètè distribuès. "Inactif" ne comprend pas la categorie "abandonnè".
 	</FONT></P>
 	<P CLASS="western" STYLE="margin-bottom: 0in; font-style: normal"><BR>
 	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.8">4.1.8
+	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.8">4.1.4
 	Patients inactifs sous soins palliatifs (non sous ARV)</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>&nbsp;:&nbsp;</I></FONT><FONT FACE="Arial, sans-serif"><SPAN STYLE="font-style: normal">
-        Tous
-les patients qui n&rsquo;ont jamais re&ccedil;u des m&eacute;dicaments
-ARV dans l&rsquo;&eacute;tablissement qui effectue le rapport et qui
-n&rsquo;ont eu aucune visite de suivi dans les 180 jours pr&eacute;c&eacute;dents.
-Les patients pour lesquels une fiche de discontinuation a &eacute;t&eacute;
-remplie ne sont pas consid&eacute;r&eacute;s comme des patients
-inactifs, m&ecirc;me s&rsquo;ils n&rsquo;ont pas eu de visite de
-suivi dans les 180 jours pr&eacute;c&eacute;dents.
+        Patients qui n'ont jamais reáu d'ARV et qui n'ont pas eu de visites dans les 180 derniers jours. Les visites peuvent inclure une èvaluation clinique, laboratoire, ou des services de pharmacie. "Inactif" ne comprend pas "abandonnè".
 	</SPAN></FONT></P>
 	<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
 	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.9">4.1.9
+	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.9">4.1.5
 	Patients discontinu&eacute;s sous ARV</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>&nbsp;:&nbsp;</I></FONT><FONT FACE="Arial, sans-serif">
         Tous
 les patients qui ont d&eacute;j&agrave; re&ccedil;u des m&eacute;dicaments
@@ -156,7 +69,7 @@ lesquels une fiche de discontinuation a &eacute;t&eacute; remplie.
 	</FONT></P>
 	<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
 	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.10">4.1.10
+	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.10">4.1.6
 	Patients discontinu&eacute;s sous soins palliatifs (non sous ARV)</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>&nbsp;:&nbsp;</I></FONT><FONT FACE="Arial, sans-serif">
         Tous les patients
 qui n&rsquo;ont jamais re&ccedil;u des m&eacute;dicaments ARV dans

@@ -31,98 +31,35 @@ Report Definitions</B></FONT></FONT></FONT></P>
 	Relevant Definitions</A></B></FONT></FONT></P>
 	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.1">4.1.1
 	Active patients on ART</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>:</I></FONT><FONT FACE="Arial, sans-serif"><SPAN STYLE="font-style: normal">
-	 </SPAN></FONT><FONT FACE="Arial, sans-serif">All patients ever
-	dispensed ART medications at the reporting clinic site, excluding
-        patients dispensed ART for PMTCT or PEP, with at least one visit
-	of any kind in the last 90 days.  Visits may include clinical
-	evaluation, laboratory, or pharmacy services.  Patients for whom a
-	discontinuation form has been completed are not considered active
-	patients, even if they have had a visit in the last 90 days.</FONT></P>
+	 </SPAN></FONT><FONT FACE="Arial, sans-serif">Patients ever dispensed ART medications, excluding patients dispensed ART for PMTCT or PEP, where one or both of the following conditions apply: 1)  patient has at least one visit of any kind in the last 90 days. Visits may include clinical evaluation, laboratory, or pharmacy services.  2) patients where current date is less than or equal to expected next visit date from last pharmacy visit where ART medications were dispensed.  Count of Active includes count of new and count of at risk. Active patients for whom a discontinuation form has been completed are not considered active patients, even if they have had a visit in the last 90 days.</FONT></P>
 	<P CLASS="western" STYLE="margin-bottom: 0in; font-style: normal"><BR>
 	</P>
 	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.2">4.1.2
 	Active patients in palliative care (not on ART)</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>:</I></FONT><FONT FACE="Arial, sans-serif">
-	All patients who have never received ART medications at the reporting
-        clinic site who have had
-	at least one visit in the last 180 days.  Visits may include clinical
-        evaluation, laboratory, or pharmacy services. Patients for
-	whom a discontinuation form has been completed are not considered
-	active patients, even if they have had a visit in the last 180 days.
-	          </FONT>
-	</P>
+	Patients who have never received ART medications who have had at least one visit in the last 180 days. Visits may include clinical evaluation, laboratory, or pharmacy services.  Count of active includes new and at risk. Patients for whom a discontinuation form has been completed are not considered active patients, even if they have had a visit in the last 180 days.</FONT></P>
 	<P CLASS="western" STYLE="margin-bottom: 0in; font-style: normal"><BR>
 	</P>
 	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.3">4.1.3
-	New patients on ART</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>:</I></FONT><FONT FACE="Arial, sans-serif"><SPAN STYLE="font-style: normal">
-	All active patients on ART who initiated ART at the reporting clinic
-	site within the last 30 days.  Patients for
-	whom a discontinuation form has been completed are not considered
-	new patients, even if they have started on ART within the last 30
+	 Inactive patients on ART</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>:</I></FONT><FONT FACE="Arial, sans-serif"><SPAN STYLE="font-style: normal">
+	Patients ever dispensed ART medications, excluding patients dispensed ART for PMTCT or PEP, where both of the following conditions apply: 1)  patient has no visit of any kind in the last 90 days. Visits may include clinical evaluation, laboratory, or pharmacy services.  2) patients where current date is > expected next visit date from last pharmacy visit where ART medications were dispensed.  "Inactive" does not include "discontinued".
 	days.</SPAN></FONT></P>
 	<P CLASS="western" STYLE="margin-bottom: 0in; font-style: normal"><BR>
 	</P>
 	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.4">4.1.4
-	New patients in palliative care (not on ART)</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><SPAN STYLE="font-style: normal">:
-	All active patients who have never received ART medications at the
-        reporting clinic site whose first visit is within the last 30 days.
-        Visits may include clinical evaluation, laboratory, or pharmacy services. 
-	Patients for whom a discontinuation form has been completed are not
-	considered new patients, even if their first visit is within the
-	last 30 days.</SPAN></FONT></P>
+	Inactive patients in palliative care (not on ART)</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><SPAN STYLE="font-style: normal">:
+	Patients who have never received ART medications with no visits of any kind in the last 180 days. Visits may include clinical evaluation, laboratory, or pharmacy services.†"Inactive" does not include "discontinued".</SPAN></FONT></P>
 	<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
 	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.5">4.1.5
-	Patients on ART at risk of discontinuation</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>:
-	 </I></FONT><FONT FACE="Arial, sans-serif">All new or active patients
-	ever dispensed ART medications at the reporting clinic site who have
-        missed
-	their next scheduled prescription pickup by more than 8 days. 
-	Patients for whom a discontinuation form has been completed are not
-	considered as at risk patients, even if they have missed their next
-	scheduled prescription pickup by more than 8 days.  </FONT>
-	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
-	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.6">4.1.6
-	Patients</A></I></FONT></FONT><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif">
-	</FONT></FONT><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I>in
-	palliative care (not on ART) at risk of discontinuation</I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>:</I></FONT><FONT FACE="Arial, sans-serif">
-	All new or active patients who have never received ART medications
-        at the reporting clinic site who have missed their next scheduled appointment  by
-	more than 30 days.  Patients for whom a discontinuation form has
-	been completed are not considered as at risk patients, even if they
-	have missed their next scheduled appointment  by more than 30 days.</FONT></P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
-	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.7">4.1.7
-	Inactive patients on ART</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>:</I></FONT><FONT FACE="Arial, sans-serif">
-	 All patients ever dispensed ART medications at the reporting clinic site with
-	</FONT><FONT FACE="Arial, sans-serif">no visits of any kind in the
-	last 90 days.  Visits may include clinical evaluation, laboratory,
-	or pharmacy services.  Patients for whom a discontinuation form has
-	been completed are not considered inactive patients, even if they
-	have not had a visit in the last 90 days.</FONT></P>
-	<P CLASS="western" STYLE="margin-bottom: 0in; font-style: normal"><BR>
-	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.8">4.1.8
-	Inactive patients in palliative care (not on ART)</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>:</I></FONT><FONT FACE="Arial, sans-serif"><SPAN STYLE="font-style: normal">
-	All patients who have never received ART medications at the reporting clinic site with
-	no visits of any kind in the last 180 days.  Visits may include clinical evaluation, laboratory, or pharmacy services.  Patients for whom a
-	discontinuation form has been completed are not considered inactive
-	patients, even if they have not had a visit in the last
-	180 days.</SPAN></FONT></P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
-	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.9">4.1.9
+	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.9">4.1.5
 	Discontinued patients on ART</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>:</I></FONT><FONT FACE="Arial, sans-serif">
 	All patients ever dispensed ART medications at the reporting clinic site for
-	whom a discontinuation form has been completed.</FONT></P>
+	whom a discontinuation form has been completed, and no clinical, pharmacy, or laboratory visit has occurred following completion of the discontinuation report.</FONT></P>
 	<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
 	</P>
-	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.10">4.1.10
+	<P CLASS="western" STYLE="margin-bottom: 0in"><FONT COLOR="#000080"><FONT FACE="Arial, sans-serif"><I><A NAME="4.1.10">4.1.6
 	Discontinued patients in palliative care (not on ART)</A></I></FONT></FONT><FONT FACE="Arial, sans-serif"><I>:</I></FONT><FONT FACE="Arial, sans-serif">
 	All patients who have never received ART medications at the reporting clinic site for
-	whom a discontinuation form has been completed.</FONT></P>
+	whom a discontinuation form has been completed, and no clinical, pharmacy, or laboratory visit has occurred following completion of the discontinuation report.</FONT></P>
 	<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
 	</P>
 </TD></TR>
