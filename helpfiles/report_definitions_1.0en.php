@@ -24,21 +24,13 @@ Report Definitions</B></FONT></FONT></FONT></P>
 	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
 	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.2">4.1.2 Active patients in palliative care (not on ART)</A></P>
 	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.3">4.1.3 New patients on ART</A></P>
+	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.7">4.1.3 Inactive patients on ART</A></P>
 	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.4">4.1.4 New patients in palliative care (not on ART)</A></P>
+	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.8">4.1.4 Inactive patients in palliative care (not on ART)</A></P>
 	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.5">4.1.5 Patients on ART at risk of discontinuation</A></P>
+	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.9">4.1.5 Discontinued patients on ART</A></P>
 	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.6">4.1.6 Patients in palliative care (not on ART) at risk of discontinuation</A></P>
-	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.7">4.1.7 Inactive patients on ART</A></P>
-	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.8">4.1.8 Inactive patients in palliative care (not on ART)</A></P>
-	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.9">4.1.9 Discontinued patients on ART</A></P>
-	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.10">4.1.10 Discontinued patients in palliative care (not on ART)</A></P>
+	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>#4.1.10">4.1.6 Discontinued patients in palliative care (not on ART)</A></P>
 	<P STYLE="margin-left: 0.08in; margin-right: 0.08in; margin-bottom: 0in; background: transparent">
 	<SPAN STYLE="background: transparent"><A HREF="helpfile.php?file=report_definitions_5.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20D%e9finitions&lang=<?php echo $lang;?>&">5.0 Report Parameters Page</A></SPAN></P>
 	<P STYLE="margin-left: 0.28in; margin-right: 0.08in; margin-bottom: 0in">

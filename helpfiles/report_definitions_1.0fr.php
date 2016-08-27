@@ -23,22 +23,13 @@
 	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
 	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.2">4.1.2 Patients actifs sous soins palliatifs (non sous ARV)</A></P>
 	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.3">4.1.3 Nouveaux patients sous ARV</A></P>
+	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.4">4.1.3 Patients inactifs sous ARV</A></P>
 	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.4">4.1.4 Nouveaux patients sous soins palliatifs (non sous ARV)</A></P>
+	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.5">4.1.4 Patients inactifs sous soins palliatifs (non sous ARV)</A></P>
 	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.5">4.1.5 Patients sous ARV &agrave; risque de discontinuation</A></P>
+	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.9">4.1.5 Patients discontinu&eacute;s sous ARV</A></P>
 	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.6">4.1.6 Patients sous soins palliatifs (non sous ARV) &agrave; risque de
-        discontinuation</A></P>
-	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.7">4.1.7 Patients inactifs sous ARV</A></P>
-	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.8">4.1.8 Patients inactifs sous soins palliatifs (non sous ARV)</A></P>
-	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.9">4.1.9 Patients discontinu&eacute;s sous ARV</A></P>
-	<P STYLE="margin-left: 0.48in; margin-right: 0.08in; margin-bottom: 0in">
-	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.10">4.1.10 Patients discontinu&eacute;s sous soins palliatifs (non sous ARV)</A></P>
+	<A HREF="helpfile.php?file=report_definitions_4.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>#4.1.10">4.1.6 Patients discontinu&eacute;s sous soins palliatifs (non sous ARV)</A></P>
 	<P STYLE="margin-left: 0.08in; margin-right: 0.08in; margin-bottom: 0in; background: transparent">
 	<SPAN STYLE="background: transparent"><A HREF="helpfile.php?file=report_definitions_5.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&lang=<?php echo $lang;?>&">5.0 Page de param&egrave;tres de rapport</A></SPAN></P>
 	<P STYLE="margin-left: 0.28in; margin-right: 0.08in; margin-bottom: 0in">

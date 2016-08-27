@@ -66,7 +66,7 @@ function getConfigParameters() {
 		'enumerations' => null),  
 	'replicationTargets' => array(
 		'name' => _('Replication Targets'),
-		'description' => _('This is a list of target information for where replicated data should be sent. Its value is a list that looks like : targetName,targetUrl,identified,targetName,targetUrl,identified... Every set of three values represents one replication target. ‘targetName’ is a unique name for each replication. ‘targetUrl’ is the URL where the read files will be sent. ‘identified’ has a value of either ‘identified’ or ‘deidentified’ [only identified is valid beginning with 15.1]. By default, identified data will be sent to isante-consolidated.cirg.washington.edu (I-TECH) and to isante.ugp.ht (UGP) with this target list : itechConsolidated,https://isante-consolidated.cirg.washington.edu/receiver/receive-file.pl,identified,papConsolidated,https://isante.ugp.ht/consolidatedId/receiver/receive-file.pl,identified'),
+		'description' => _('This is a list of target information for where replicated data should be sent. Its value is a list that looks like : targetName,targetUrl,identified,targetName,targetUrl,identified... Every set of three values represents one replication target. ‘targetName’ is a unique name for each replication. ‘targetUrl’ is the URL where the read files will be sent. ‘identified’ has a value of either ‘identified’ or ‘deidentified’ [only identified is valid beginning with 15.1]. By default, identified data will be sent to isante.ugp.ht (UGP) with this target list : papConsolidated,https://isante.ugp.ht/consolidatedId/receiver/receive-file.pl,identified'),
 		'required' => false,
 		'changeable' => true,
 		'validationRegexp' => null,
