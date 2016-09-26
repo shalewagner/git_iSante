@@ -2727,7 +2727,7 @@ function mergeFingerprintData($file) {
 
 
 function generatePatientAlert() {
-	dbQuery("truncate table patientAlert;");
+database()->exec('truncate table patientAlert;');
 
 /*Any patients 6 months after ART initiation NB. we also remove patient that are a viral load after six months of arv initiation. */
 	
