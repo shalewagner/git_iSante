@@ -2761,7 +2761,7 @@ where o.encounter_id=e.encounter_id and p.patientID=e.patientID and p.sex=1 and 
 ) B  on (A.patientID=B.patientID and A.arvDate<=B.visitDate) 
 left outer join  (SELECT * FROM  `v_labs` WHERE  `labID` IN ( 103, 1257 )) C 
 on (A.patientID=C.patientID and C.visitDate>=A.arvDate)
-where arvDate<= DATE_ADD(now(), INTERVAL -4 MONTH);');	
+where arvDate<= DATE_ADD(now(), INTERVAL -4 MONTH);') and C.patientID is null;	
 
 /* Any patient whose last viral load test was performed 12 months’ prior */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
