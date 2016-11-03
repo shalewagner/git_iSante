@@ -2747,8 +2747,8 @@ on (A.patientID=B.patientID and visitDate>=arvDate)
 where arvDate> DATE_ADD(now(), INTERVAL -6 MONTH) and arvDate<= DATE_ADD(now(), INTERVAL -5 MONTH);');
 
 /* Any pregnant woman 4 months after ART initiation */
-database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-select distinct A.siteCode,A.patientID,3 as alertId,now() as insertDate from 
+  database()->exec('create temporary table tmpAlert
+  select distinct A.siteCode,A.patientID,3 as alertId,now() as insertDate from 
 (SELECT siteCode, patientID, MIN( visitDate ) AS arvDate
 FROM  `pepfarTable` GROUP BY 1 , 2) A  join 
 (select a.patientID,visitDate from a_vitals a,patient p where a.pregnant =1 and p.patientID=a.patientID and p.sex=1
@@ -2761,7 +2761,9 @@ where o.encounter_id=e.encounter_id and p.patientID=e.patientID and p.sex=1 and 
 ) B  on (A.patientID=B.patientID and A.arvDate<=B.visitDate) 
 left outer join  (SELECT * FROM  `v_labs` WHERE  `labID` IN ( 103, 1257 )) C 
 on (A.patientID=C.patientID and C.visitDate>=A.arvDate)
-where arvDate<= DATE_ADD(now(), INTERVAL -4 MONTH);') and C.patientID is null;	
+where arvDate<= DATE_ADD(now(), INTERVAL -4 MONTH);') and C.patientID is null;
+database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
+select * from tmpAlert;');
 
 /* Any patient whose last viral load test was performed 12 months’ prior */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
