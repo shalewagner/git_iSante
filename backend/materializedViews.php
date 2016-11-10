@@ -2731,7 +2731,7 @@ function generatePatientAlert() {
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
 select  distinct A.siteCode,A.patientID ,1 as alertId,now() as insertDate from 
 (SELECT siteCode, patientID, MIN( visitDate ) AS arvDate
-FROM  `pepfarTable` GROUP BY 1 , 2) A left outer join  (SELECT distinct patientID,visitDate FROM  `v_labs` WHERE  `labID` IN ( 103, 1257 )) B 
+FROM  `pepfarTable` GROUP BY 1 , 2) A left outer join  (SELECT distinct patientID,ymdToDate(visitdateyy,visitDateMm,visitDateDd) as visitDate FROM  `labs` WHERE  `labID` IN ( 103, 1257 )) B 
 on (A.patientID=B.patientID and visitDate>=arvDate)
 where arvDate<= DATE_ADD(now(), INTERVAL -6 MONTH);');
 
@@ -2739,7 +2739,7 @@ where arvDate<= DATE_ADD(now(), INTERVAL -6 MONTH);');
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
 select distinct A.siteCode,A.patientID ,2 as alertId,now() as insertDate from 
 (SELECT siteCode, patientID, MIN( visitDate ) AS arvDate
-FROM  `pepfarTable` GROUP BY 1 , 2) A left outer join  (SELECT * FROM  `v_labs` WHERE  `labID` IN ( 103, 1257 )) B 
+FROM  `pepfarTable` GROUP BY 1 , 2) A left outer join  (SELECTl.*,ymdToDate(visitdateyy,visitDateMm,visitDateDd) as visitDate FROM  `labs` l  WHERE  `labID` IN ( 103, 1257 )) B 
 on (A.patientID=B.patientID and visitDate>=arvDate)
 where arvDate> DATE_ADD(now(), INTERVAL -6 MONTH) and arvDate<= DATE_ADD(now(), INTERVAL -5 MONTH);');
 
