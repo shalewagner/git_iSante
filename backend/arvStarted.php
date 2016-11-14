@@ -15,7 +15,7 @@ function generatearvStarted ($startdate, $enddate,$site, $lang) {
 "arvStarted" => "select startDate,p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate
 from 
 (select patientID,min(visitDate) as startDate from pepfarTable group by 1) c , patient p
-where c.patientID=p.patientID and    '".$startdate."' AND '".$enddate."'"); 
+where c.patientID=p.patientID and   startDate between '".$startdate."' AND '".$enddate."'"); 
   
   $arvStarted = outputQueryRows($queryArray["arvStarted"]); 
  
