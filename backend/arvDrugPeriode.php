@@ -6,18 +6,31 @@ require_once 'backend/database.php';
 require_once 'backend/materializedViews.php';
 require_once "include/standardHeaderExt.php";
 
-function generatearvStarted ($startdate, $enddate,$site, $lang) {
+function generatearvPatient ($startdate, $enddate,$site, $lang) {
   $dateTime = $lang == "fr" ? date ("d/m/y H:i:s") : date ("m/d/y H:i:s");
   $siteName = getSiteName ($site, $lang);
   $period=date("d-M-Y", strtotime($startdate)).' To '.date("d-M-Y", strtotime($enddate));
  
   $queryArray = array(
-"arvStarted" => "select startDate,p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate
-from 
-(select patientID,min(visitDate) as startDate from pepfarTable group by 1) c , patient p
-where c.patientID=p.patientID and  startDate between  '".$startdate."' AND '".$enddate."'"); 
+"arvDrug" => "SELECT count(distinct e . patientID) as patientCount , 
+concat('<a href=\"arvDrugPeriodeList.php?rank=30&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )<=30  then e.patientID else null end),'</a>') as '0-30',
+concat('<a href=\"arvDrugPeriodeList.php?rank=60&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )>30 and  
+	      DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )<=60 then e.patientID else null end) ,'</a>') as  '31-60',
+concat('<a href=\"arvDrugPeriodeList.php?rank=90&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )>60 and  
+	      DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )<=90 then e.patientID else null end) ,'</a>') as  '61-90',	
+concat('<a href=\"arvDrugPeriodeList.php?rank=120&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )>90 and  
+	      DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )<=120 then e.patientID else null end) ,'</a>') as '91-120',
+concat('<a href=\"arvDrugPeriodeList.php?rank=130&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )>120  then e.patientID else null end) ,'</a>') as  '121 +'	 
+FROM  `encounter` e, prescriptions d, drugLookup l
+WHERE e.encounterType IN (5,18) 
+and d.seqNum=e.seqNum
+and e.patientID=d.patientID
+and ymdToDate(d.visitDateYy,d.visitDateMm,d.visitDateDd)=ymdToDate(e.visitDateYy,e.visitDateMm,e.visitDateDd)
+and d.drugID = l.drugID 
+and l.drugGroup in ('NRTIs', 'NNRTIs', 'Pls','II')
+and ymdToDate(e.visitDateYy,e.visitDateMm,e.visitDateDd) between  '".$startdate."' AND '".$enddate."'"); 
   
-  $arvStarted = outputQueryRows($queryArray["arvStarted"]); 
+  $arvDrug = outputQueryRows($queryArray["arvDrug"]); 
  
   $summary = <<<EOF
   
@@ -55,7 +68,7 @@ where c.patientID=p.patientID and  startDate between  '".$startdate."' AND '".$e
 	<p>&nbsp;</p>
 	<div><strong> Liste des patients ayant démarré les ARVs durant la période </strong></div>
 	<div>&nbsp;</div>
-	<div>$arvStarted</div>
+	<div>$arvDrug</div>
 	<p>&nbsp;</p>	
 	</td>
   </tr>

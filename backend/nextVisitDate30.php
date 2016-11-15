@@ -44,14 +44,7 @@ group by 1,2,3,4
 
 
 <body text="#000000" link="#000000" alink="#000000" vlink="#000000" align="center">
-<center><table width="90%" cellpadding="0" cellspacing="0" border="0">
-<tr valign="top" >
-  <td style="width: 30%;text-align: right; padding:15px;">
-  <div><span style="font-family: Lucida Console; font-size: 12.0px;"><strong>Periode :</strong>   $period </span></div>
-  </td>  
-</tr>
-</table>
-
+<center>
 <div>&nbsp;</div>
 <div>&nbsp;</div>
 
