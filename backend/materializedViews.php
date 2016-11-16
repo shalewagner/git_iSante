@@ -2876,7 +2876,7 @@ select * from tmpAlert;');
 /* Any patient whose last viral load test was performed 12 months’ prior */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
 select distinct  A.location_id,A.patientID,4 as alertId,date(now()) as insertDate from patient A join 
-(SELECT siteCode,patientID,max(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as lastDate FROM  `labs` WHERE  `labID` IN ( 103, 1257 ) group by 1,2) B 
+(SELECT siteCode,patientID,max(visitDate) as lastDate FROM  viralLoadTemp group by 1,2) B 
 on (A.patientID=B.patientID)
 where A.hivPositive = 1
 and lastDate <=DATE_ADD(now(), INTERVAL -12 MONTH);');	
@@ -2885,15 +2885,15 @@ and lastDate <=DATE_ADD(now(), INTERVAL -12 MONTH);');
 /* Any patient including pregnant women whose viral test result was greater than 1000 copies and was performed 3 months ago */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT A.siteCode, A.patientID,5 as alertId,date(now()) as insertDate 
-FROM labs A JOIN (SELECT siteCode,patientID,MAX(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) AS lastDate FROM  `labs` WHERE  `labID` IN (103,1257) GROUP BY 1,2)B ON (A.patientID = B.patientID AND ymdToDate(A.visitdateyy,A.visitDateMm,A.visitDateDd) = B.lastDate) 
+FROM viralLoadTemp A JOIN (SELECT siteCode,patientID,MAX(visitDate) AS lastDate FROM  viralLoadTemp GROUP BY 1,2)B ON (A.patientID = B.patientID AND A.visitDate = B.lastDate) 
 WHERE lastDate <= DATE_ADD(NOW() , INTERVAL -3 MONTH ) 
-AND CASE WHEN LENGTH(result)>=9 THEN SUBSTRING(result,1, LENGTH(result) -9) ELSE result END >1000;');
+AND result >1000;');
 
 /* Any patient  whose viral test result was greater than 1000 copies */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT A.siteCode, A.patientID,6 as alertId,now() as insertDate 
-FROM labs A JOIN (SELECT siteCode,patientID,MAX(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) AS lastDate FROM  `labs` WHERE  `labID` IN (103,1257) GROUP BY 1,2)B ON (A.patientID = B.patientID AND ymdToDate(A.visitdateyy,A.visitDateMm,A.visitDateDd) = B.lastDate) 
-WHERE  CASE WHEN LENGTH(result)>=9 THEN SUBSTRING(result,1, LENGTH(result) -9) ELSE result END >1000;');
+FROM viralLoadTemp A JOIN (SELECT siteCode,patientID,MAX(visitDate) AS lastDate FROM  viralLoadTemp GROUP BY 1,2)B ON (A.patientID = B.patientID AND A.visitDate = B.lastDate) 
+WHERE  result >1000;');
 
 }
 
