@@ -2841,9 +2841,9 @@ dbQuery("truncate table patientAlert;");
   
 /*Any patients 6 months after ART initiation NB. we also remove patient that are a viral load after six months of arv initiation. */
   database()->exec('DROP TABLE IF EXISTS viralLoadTemp;');
-  database()->exec('CREATE TABLE viralLoadTemp SELECT LEFT(patientid,5) as sitecode, patientid, ymdToDate(visitdateyy,visitDateMm,visitDateDd) as visitDate, result+0 as result, max(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as maxDate FROM labs a WHERE labID IN (103, 1257) and isNumeric(result) = 1 group by 2,3;');
-  database()->exec('ALTER TABLE viralLoadTemp ADD PRIMARY KEY (patientid,visitdate);');	
-  
+  database()->exec('CREATE TABLE viralLoadTemp SELECT LEFT(patientid,5) as sitecode, patientid, ymdToDate(visitdateyy,visitDateMm,visitDateDd) as visitDate, result+0 as result, max(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as maxDate FROM labs a WHERE labID IN (103, 1257) and isNumeric(result) = 1 group by 2,3;');	
+  database()->exec('update viralLoadTemp A , (select max(visitDate) maxDate,patientID from viralLoadTemp B group by 2) B set A.maxDate=B.maxDate where  A.patientID=B.patientID');
+  database()->exec('ALTER TABLE viralLoadTemp ADD PRIMARY KEY (patientid,visitdate);');
   database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
 select  distinct A.siteCode,A.patientID ,1 as alertId,date(now()) as insertDate from 
 (SELECT siteCode, patientID, MIN( visitDate ) AS arvDate
@@ -2875,25 +2875,24 @@ select * from tmpAlert;');
 
 /* Any patient whose last viral load test was performed 12 months’ prior */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-select distinct  A.location_id,A.patientID,4 as alertId,date(now()) as insertDate from patient A join 
-(SELECT siteCode,patientID,max(visitDate) as lastDate FROM  viralLoadTemp group by 1,2) B 
+select distinct  A.location_id,A.patientID,4 as alertId,date(now()) as insertDate from patient A join viralLoadTemp B
 on (A.patientID=B.patientID)
 where A.hivPositive = 1
-and lastDate <=DATE_ADD(now(), INTERVAL -12 MONTH);');	
+and B.maxDate <=DATE_ADD(now(), INTERVAL -12 MONTH);');	
 
 
 /* Any patient including pregnant women whose viral test result was greater than 1000 copies and was performed 3 months ago */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT A.siteCode, A.patientID,5 as alertId,date(now()) as insertDate 
-FROM viralLoadTemp A JOIN (SELECT siteCode,patientID,MAX(visitDate) AS lastDate FROM  viralLoadTemp GROUP BY 1,2)B ON (A.patientID = B.patientID AND A.visitDate = B.lastDate) 
-WHERE lastDate <= DATE_ADD(NOW() , INTERVAL -3 MONTH ) 
+FROM viralLoadTemp A 
+WHERE A.maxDate=A.visitDate and A.maxDate <= DATE_ADD(NOW() , INTERVAL -3 MONTH ) 
 AND result >1000;');
 
 /* Any patient  whose viral test result was greater than 1000 copies */
 database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT A.siteCode, A.patientID,6 as alertId,now() as insertDate 
-FROM viralLoadTemp A JOIN (SELECT siteCode,patientID,MAX(visitDate) AS lastDate FROM  viralLoadTemp GROUP BY 1,2)B ON (A.patientID = B.patientID AND A.visitDate = B.lastDate) 
-WHERE  result >1000;');
+FROM viralLoadTemp A  
+WHERE A.maxDate=A.visitDate and result >1000;');
 
 }
 
