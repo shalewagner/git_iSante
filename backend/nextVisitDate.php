@@ -13,17 +13,11 @@ function generatenextVisit($startdate, $enddate,$site, $lang) {
  
   $queryArray = array(
 "nextVisit" => "select * from (
-SELECT p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`)) as maxDate
-FROM  `encValid` e, v_prescriptions d, drugLookup l,patient p
-WHERE e.encounterType IN ( 5, 18 ) 
-and d.encounter_id=e.encounter_id
-and e.patientID=d.patientID
-and d.visitDate=e.visitDate
-and p.patientID=e.patientID
-and d.drugID = l.drugID 
-and l.drugGroup in ('NRTIs', 'NNRTIs', 'Pls','II')
+SELECT p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt_dispd) as dispenseDate
+from patient p, patientDispenses p1
+where p1.patientID=p.patientID 
 group by 1,2,3,4
-) c  where DATEDIFF( maxDate, now())<=0"); 
+) A where DATEDIFF(dispenseDate, now()) <=0"); 
   
   $nextVisit = outputQueryRows($queryArray["nextVisit"]); 
  
