@@ -2731,18 +2731,17 @@ function generatePatientAlert() {
 database()->exec('truncate table patientAlert');
 
 /* Generate viralLoadTemp */
-database()->exec('
-DROP TABLE IF EXISTS viralLoadTemp;
-CREATE TABLE viralLoadTemp SELECT distinct patientid, date(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as visitDate, result+0 as result, date("2016-01-01") as maxDate 
-FROM labs a WHERE labID IN (103, 1257) and isNumeric(result) = 1 AND result+0 > 0;
-CREATE INDEX iViral ON viralLoadTemp (patientid,visitdate);UPDATE viralLoadTemp A, (select patientID, max(visitDate) as maxDate FROM viralLoadTemp B GROUP BY 1) B set A.maxDate = B.maxDate where A.patientID = B.patientID');
+database()->exec('DROP TABLE IF EXISTS viralLoadTemp');
+database()->query('CREATE TABLE viralLoadTemp SELECT distinct patientid, date(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as visitDate, result+0 as result, date(?) as maxDate 
+FROM labs WHERE labID IN (103, 1257) and isNumeric(result) = 1 AND result+0 > 0',array("2016-01-01"));
+database()->exec('CREATE INDEX iViral ON viralLoadTemp (patientid,visitdate)');
+database()->exec('UPDATE viralLoadTemp A, (select patientID, max(visitDate) as maxDate FROM viralLoadTemp B GROUP BY 1) B set A.maxDate = B.maxDate where A.patientID = B.patientID');
 
 /* Generate arvStartedTemp */
-database()->exec('
-DROP TABLE IF EXISTS arvStartedTemp;
-CREATE TABLE arvStartedTemp SELECT patientID, DATE(MIN(visitDate)) AS arvDate
-FROM pepfarTable GROUP BY 1;
-ALTER TABLE arvStartedTemp ADD PRIMARY KEY (patientID)');
+database()->exec('DROP TABLE IF EXISTS arvStartedTemp');
+database()->exec('CREATE TABLE arvStartedTemp SELECT patientID, DATE(MIN(visitDate)) AS arvDate
+FROM pepfarTable GROUP BY 1');
+database()->exec('ALTER TABLE arvStartedTemp ADD PRIMARY KEY (patientID)');
 
 /* Any patients 6 months after ART initiation NB. we also remove patient that are a viral load after six months of arv initiation. */
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
