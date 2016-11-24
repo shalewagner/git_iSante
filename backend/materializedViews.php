@@ -1460,7 +1460,7 @@ where encounterType in (1, 2, 16, 17)
  and conditionID in (15, 202)
  and conditionActive != 2
  and conditionActive is not null;", array('06', '15', '06', '15', '15', '15', 'hairyoral'));
-  // Thrombocytopénie
+  // ThrombocytopÃ©nie
   database()->query("
 insert into tempActiveCond
 select distinct patientID,
@@ -1548,7 +1548,7 @@ from v_conditions
 where encounterType in (1, 2, 16, 17)
  and conditionID in (15, 202)
  and conditionActive = 2;", array('hairyoral'));
-  // Thrombocytopénie
+  // ThrombocytopÃ©nie
   database()->query("
 insert into tempInactiveCond
 select distinct patientID, visitDate, ?
@@ -1621,7 +1621,7 @@ from cd4Table c
 where c.visitdate <= ?
  and a.condName = ?
 group by 1, 2, 3;", array($endDate, 'hairyoral'));
-  // Thrombocytopénie
+  // ThrombocytopÃ©nie
   database()->query("
 insert into tempCondMaxActive
 select c.patientID,
@@ -1697,7 +1697,7 @@ from cd4Table c
 where c.visitdate <= ?
  and a.condName = ?
 group by 1, 2, 3;", array($endDate, 'hairyoral'));
-  // Thrombocytopénie
+  // ThrombocytopÃ©nie
   database()->query("
 insert into tempCondMaxInactive
 select c.patientID,
@@ -1981,7 +1981,7 @@ where c.condDate <= ?
  and i.condDate <= ?
  and c.condName = ?
 group by 1, 2, 3;", array($endDate, $endDate, 'hairyoral'));
-  // Thrombocytopénie
+  // ThrombocytopÃ©nie
   database()->query("
 insert into tempCondMinInactive
 select c.patientid,
@@ -2725,65 +2725,57 @@ function mergeFingerprintData($file) {
 
 
 
+
 function generatePatientAlert() {
-dbQuery("truncate table patientAlert;");
-  
-/*Any patients 6 months after ART initiation NB. we also remove patient that are a viral load after six months of arv initiation. */
-  database()->exec('DROP TABLE IF EXISTS viralLoadTemp;');
-  database()->exec('CREATE TABLE viralLoadTemp SELECT LEFT(patientid,5) as sitecode, patientid, ymdToDate(visitdateyy,visitDateMm,visitDateDd) as visitDate, result+0 as result, max(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as maxDate FROM labs a WHERE labID IN (103, 1257) and isNumeric(result) = 1 group by 2,3;');	
-  database()->exec('update viralLoadTemp A , (select max(visitDate) maxDate,patientID from viralLoadTemp B group by 2) B set A.maxDate=B.maxDate where  A.patientID=B.patientID');
-  database()->exec('ALTER TABLE viralLoadTemp ADD PRIMARY KEY (patientid,visitdate);');
-  database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-select  distinct A.siteCode,A.patientID ,1 as alertId,date(now()) as insertDate from 
-(SELECT siteCode, patientID, MIN( visitDate ) AS arvDate
-FROM  `pepfarTable` GROUP BY 1 , 2) A left outer join viralLoadTemp B 
-on (A.patientID=B.patientID and visitDate>=arvDate)
-where arvDate<= DATE_ADD(now(), INTERVAL -6 MONTH);');
+
+database()->exec('truncate table patientAlert');
+
+/* Generate viralLoadTemp */
+database()->exec('DROP TABLE IF EXISTS viralLoadTemp');
+database()->query('CREATE TABLE viralLoadTemp SELECT distinct patientid, date(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as visitDate, result+0 as result, date(?) as maxDate 
+FROM labs WHERE labID IN (103, 1257) and isNumeric(result) = 1 AND result+0 > 0',array("2016-01-01"));
+database()->exec('CREATE INDEX iViral ON viralLoadTemp (patientid,visitdate)');
+database()->exec('UPDATE viralLoadTemp A, (select patientID, max(visitDate) as maxDate FROM viralLoadTemp B GROUP BY 1) B set A.maxDate = B.maxDate where A.patientID = B.patientID');
+
+/* Generate arvStartedTemp */
+database()->exec('DROP TABLE IF EXISTS arvStartedTemp');
+database()->exec('CREATE TABLE arvStartedTemp SELECT patientID, DATE(MIN(visitDate)) AS arvDate
+FROM pepfarTable GROUP BY 1');
+database()->exec('ALTER TABLE arvStartedTemp ADD PRIMARY KEY (patientID)');
+
+/* Any patients 6 months after ART initiation NB. we also remove patient that are a viral load after six months of arv initiation. */
+database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
+SELECT DISTINCT LEFT(A.patientid,5), A.patientID, 1, date(now()) FROM arvStartedTemp A LEFT JOIN viralLoadTemp B
+ON A.patientID=B.patientID and visitDate >= arvDate 
+where arvDate <= DATE_ADD(now(), INTERVAL -6 MONTH)');
 
 /*Any patients 5 months after ART initiation */
-database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-select distinct A.siteCode,A.patientID ,2 as alertId,date(now()) as insertDate from 
-(SELECT siteCode, patientID, MIN( visitDate ) AS arvDate
-FROM  `pepfarTable` GROUP BY 1 , 2) A left outer join  viralLoadTemp B 
-on (A.patientID=B.patientID and visitDate>=arvDate)
-where arvDate> DATE_ADD(now(), INTERVAL -6 MONTH) and arvDate<= DATE_ADD(now(), INTERVAL -5 MONTH);');
+database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
+SELECT DISTINCT LEFT(A.patientid,5), A.patientID, 2, date(now()) FROM arvStartedTemp A LEFT JOIN viralLoadTemp B
+on A.patientID = B.patientID and visitDate >= arvDate
+where arvDate > DATE_ADD(now(), INTERVAL -6 MONTH) and arvDate<= DATE_ADD(now(), INTERVAL -5 MONTH)');
 
 /* Any pregnant woman 4 months after ART initiation */
-  database()->exec('DROP TABLE IF EXISTS arvStartedTemp;');
-  database()->exec('create temporary table arvStartedTemp SELECT siteCode, patientID, MIN( visitDate ) AS arvDate
-FROM  `pepfarTable` GROUP BY 1 , 2;');
+database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
+SELECT DISTINCT LEFT(A.patientid,5), A.patientID, 3, date(now()) FROM arvStartedTemp A JOIN dw_pregnancy_ranges B ON A.patientID=B.patientID and A.arvDate between B.startDate and B.stopDate
+LEFT JOIN viralLoadTemp C ON A.patientID=C.patientID and C.visitDate >= A.arvDate
+where arvDate <= DATE_ADD(now(), INTERVAL -4 MONTH) and C.patientID is null');	
 
-  database()->exec('create temporary table tmpAlert
-  select distinct A.siteCode,A.patientID,3 as alertId,date(now()) as insertDate from 
-arvStartedTemp A  join dw_pregnancy_ranges B  on (A.patientID=B.patientID and A.arvDate between B.startDate and B.stopDate) 
-left outer join  viralLoadTemp C on (A.patientID=C.patientID and C.visitDate>=A.arvDate)
-where arvDate<= DATE_ADD(now(), INTERVAL -4 MONTH)  and C.patientID is null;');
-
-database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-select * from tmpAlert;');	
-
-/* Any patient whose last viral load test was performed 12 months’ prior */
-database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-select distinct  A.location_id,A.patientID,4 as alertId,date(now()) as insertDate from patient A join viralLoadTemp B
-on (A.patientID=B.patientID)
-where A.hivPositive = 1
-and B.maxDate <=DATE_ADD(now(), INTERVAL -12 MONTH);');	
-
+/* Any patient whose last viral load test was performed 12 monthsâ€™ prior */
+database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
+SELECT DISTINCT A.location_id, A.patientID, 4, date(now()) from patient A join viralLoadTemp B ON A.patientID = B.patientID 
+WHERE A.hivPositive = 1 AND B.maxDate <= DATE_ADD(now(), INTERVAL -12 MONTH)');	
 
 /* Any patient including pregnant women whose viral test result was greater than 1000 copies and was performed 3 months ago */
-database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-SELECT DISTINCT A.siteCode, A.patientID,5 as alertId,date(now()) as insertDate 
-FROM viralLoadTemp A 
-WHERE A.maxDate=A.visitDate and A.maxDate <= DATE_ADD(NOW() , INTERVAL -3 MONTH ) 
-AND result >1000;');
+database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
+SELECT DISTINCT left(patientid,5), patientID, 5, date(now())
+FROM viralLoadTemp 
+WHERE maxDate = visitDate AND maxDate <= DATE_ADD(NOW() , INTERVAL -3 MONTH ) AND result > 1000');
 
-/* Any patient  whose viral test result was greater than 1000 copies */
-database()->exec('insert into patientAlert(siteCode,patientID,alertId,insertDate)
-SELECT DISTINCT A.siteCode, A.patientID,6 as alertId,now() as insertDate 
-FROM viralLoadTemp A  
-WHERE A.maxDate=A.visitDate and result >1000;');
-
+/* Any patient whose viral test result was greater than 1000 copies */
+database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
+SELECT DISTINCT left(patientid,5), patientID, 6, now()
+FROM viralLoadTemp WHERE maxDate = visitDate AND result > 1000');
 }
-
 
 ?>
