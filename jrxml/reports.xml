@@ -1904,8 +1904,8 @@
 			    </report>		
 				
 				<report id="549" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Patient who started ART</title>
-				  <title lang="fr">Liste des patients ayant démarré les ARVs</title>
+				  <title lang="en">List of patients who started an HAART regimen</title>
+				  <title lang="fr">Liste des patients ayant démarré un régime ARV</title>
 				   <reportFile></reportFile>
 				    <groupLevel>0</groupLevel>
 				    <otherLevel>0</otherLevel>
@@ -1913,24 +1913,23 @@
 			    </report>
 				
 				<report id="550" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Patients whose date of drug bailout happens in the next 30 days</title>
-				  <title lang="fr">La liste des patients dont la date de renflouement de médicaments arrive dans les 30 prochains jours</title>
+				  <title lang="en">The list of patients whose ARV refill date is expected within the next 30 days</title>
+				  <title lang="fr">La liste des patients dont la date de renflouement des ARV est prévue dans les 30 prochains jours</title>
 				   <reportFile></reportFile>
 				     <groupLevel>0</groupLevel>
 				             <otherLevel>0</otherLevel>			
 			    </report>
 					
 				<report id="551" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Patients whose date of drug bailout has arrived</title>
-				  <title lang="fr">La liste des patients dont la date de renflouement de médicaments est arrive</title>
+				  <title lang="en">The list of patients whose ARV refill date has expired</title>
+				  <title lang="fr">La liste des patients dont la date de renflouement des ARV est arrivée à terme</title>
 				   <reportFile></reportFile>
 				     <groupLevel>0</groupLevel>
-				             <otherLevel>0</otherLevel>
-				
+				             <otherLevel>0</otherLevel>			
 			    </report>	
 			<report id="552" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Patients who received drug per periode</title>
-				  <title lang="fr">Patients ayant reçu des médicaments par periode</title>
+				  <title lang="en">Number of patients receiving ARVs by period</title>
+				  <title lang="fr">Nombre de patients ayant reçu des ARV par période</title>
 				   <reportFile></reportFile>
 				    <groupLevel>0</groupLevel>
 				    <otherLevel>0</otherLevel>

@@ -18,7 +18,7 @@ concat('<a href=\"arvDrugPeriodeList.php?rank=60&site=".$site."&endDate=".$endda
 concat('<a href=\"arvDrugPeriodeList.php?rank=90&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) BETWEEN 60 AND 90 then patientID else null end),'</a>') as '61-90',
 concat('<a href=\"arvDrugPeriodeList.php?rank=120&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) BETWEEN 90 AND 120 then patientID else null end),'</a>') as '91-120',
 concat('<a href=\"arvDrugPeriodeList.php?rank=130&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) > 120 then patientID else null end),'</a>') as '>120', 
-count(distinct patientid) as uniquePatientCount,
+count(distinct patientid) as uniquePatientCount
 from patientDispenses
 where dispd between '".$startdate."' AND '".$enddate."'"); 
   
