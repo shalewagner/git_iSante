@@ -30,7 +30,7 @@ $drugPeriod=' And 1=1';
  }
  
 $queryArray = array(
-"arvDrug" => "SELECT p1.dispd as DispensesDate,p. patientID ,p.lname,p.fname 
+"arvDrug" => "SELECT p1.dispd as 'Date de dispensation',p. patientID ,p.lname as 'Prenom',p.fname as 'Nom'
 FROM   patientDispenses p1,patient p 
 WHERE  p1.patientID=p.patientID". $drugPeriod."
 and p1.dispd between  '".$startDate."' AND '".$endDate."' group by 2,3,4"); 
@@ -41,7 +41,7 @@ and p1.dispd between  '".$startDate."' AND '".$endDate."' group by 2,3,4");
   <tr>
     <td width="70%">
 	<p>&nbsp;</p>
-	<div><strong> Liste des patients ayant démarré les ARVs durant la période </strong></div>
+	<div><strong> Liste de patients ayant reçu des ARV pour une période  </strong></div>
 	<div>&nbsp;</div>
 	<div>'.$arvDrug.'</div>
 	<p>'.$queryArray["arvDrug"].'</p>	
