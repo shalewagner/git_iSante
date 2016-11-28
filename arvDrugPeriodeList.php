@@ -19,13 +19,14 @@ $startDate = trim($_GET["startDate"]);
 $rank = trim($_GET["rank"]);	
 $siteName = getSiteName ($site, $lang);
 $drugPeriod=' And 1=1';
+$message='Liste de patients ayant reçu des ARV pour la période allant de ';
  switch ($rank)
  {
-	 case '30' :$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)<=30'; break;
-	 case '60' :$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>30'. ' And DATEDIFF(nxt_dispd, dispd)<=60';break;
-	 case '90' :$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>60'. ' And DATEDIFF(nxt_dispd, dispd)<=90';break;
-	 case '120':$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>90'. ' And DATEDIFF(nxt_dispd, dispd)<=120';break;
-	 case '130':$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>120';break;
+	 case '30' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)<=30'; $message.=' 0 a 30 jours'; break;}
+	 case '60' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>30'. ' And DATEDIFF(nxt_dispd, dispd)<=60'; $message.=' 31 a 60 jours';break;}
+	 case '90' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>60'. ' And DATEDIFF(nxt_dispd, dispd)<=90'; $message.=' 61 a 90 jours';break;}
+	 case '120':{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>90'. ' And DATEDIFF(nxt_dispd, dispd)<=120'; $message.=' 91 a 120 jours';break;}
+	 case '130':{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>120'; $message=' Liste de patients ayant reçu des ARV pour plus de 120 jours'; break;}
 	 default: $drugPeriod.='';
  }
  
@@ -41,7 +42,7 @@ and p1.dispd between  '".$startDate."' AND '".$endDate."' group by 2,3,4");
   <tr>
     <td width="70%">
 	<p>&nbsp;</p>
-	<div><strong> Liste de patients ayant reçu des ARV pour une période  </strong></div>
+	<div><strong> '.$message.'  </strong></div>
 	<div>&nbsp;</div>
 	<div>'.$arvDrug.'</div>
 	<p>'.$queryArray["arvDrug"].'</p>	
