@@ -12,7 +12,7 @@ function generatenextVisit($startdate, $enddate,$site, $lang) {
   $period=date("d-M-Y", strtotime($startdate)).' To '.date("d-M-Y", strtotime($enddate));
  
   $queryArray = array(
-"nextVisit" => "select * from (
+"nextVisit" => "select patientID,lname as Prenom,fname as Nom,birthDate as 'Date de naissance',dispenseDate as 'Date de dispensation' from (
 SELECT p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt_dispd) as dispenseDate
 from patient p, patientDispenses p1
 where p1.patientID=p.patientID 
@@ -44,7 +44,7 @@ group by 1,2,3,4
   <tr>
     <td width="70%">
 	<p>&nbsp;</p>
-	<div><strong>La liste des patients dont la date de renflouement de médicaments arrive dans les 30 prochains jours </strong></div>
+	<div><strong>La liste des patients dont la date de renflouement des ARV est arrivée à terme</strong></div>
 	<div>&nbsp;</div>
 	<div>$nextVisit</div>
 	<p>&nbsp;</p>	

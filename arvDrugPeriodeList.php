@@ -21,25 +21,19 @@ $siteName = getSiteName ($site, $lang);
 $drugPeriod=' And 1=1';
  switch ($rank)
  {
-	 case '30' :$drugPeriod.=' And DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )<=30'; break;
-	 case '60' :$drugPeriod.=' And DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )>30'. ' And DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )<=60';break;
-	 case '90' :$drugPeriod.=' And DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )>60'. ' And DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )<=90';break;
-	 case '120':$drugPeriod.=' And DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )>90'. ' And DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )<=120';break;
-	 case '130':$drugPeriod.=' And DATEDIFF( ymdToDate(`nxtVisitYy` ,  `nxtVisitMm` ,  `nxtVisitDd`), e.visitDate )>120';break;
+	 case '30' :$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)<=30'; break;
+	 case '60' :$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>30'. ' And DATEDIFF(nxt_dispd, dispd)<=60';break;
+	 case '90' :$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>60'. ' And DATEDIFF(nxt_dispd, dispd)<=90';break;
+	 case '120':$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>90'. ' And DATEDIFF(nxt_dispd, dispd)<=120';break;
+	 case '130':$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>120';break;
 	 default: $drugPeriod.='';
  }
  
 $queryArray = array(
-"arvDrug" => "SELECT max(ymdToDate(e.visitDateYy,e.visitDateMm,e.visitDateDd)) as visitDAte,e . patientID ,p.lname,p.fname 
-FROM  `encounter` e, prescriptions d, patient p,drugLookup l
-WHERE e.encounterType IN (5,18) 
-and d.seqNum=e.seqNum
-and e.patientID=d.patientID
-and e.patientID=p.patientID
-and ymdToDate(d.visitDateYy,d.visitDateMm,d.visitDateDd)=ymdToDate(e.visitDateYy,e.visitDateMm,e.visitDateDd)
-and d.drugID = l.drugID". $drugPeriod."
-and l.drugGroup in ('NRTIs', 'NNRTIs', 'Pls','II')
-and ymdToDate(e.visitDateYy,e.visitDateMm,e.visitDateDd) between  '".$startDate."' AND '".$endDate."' group by 2,3,4"); 
+"arvDrug" => "SELECT p1.dispd as 'Date de dispensation',p. patientID ,p.lname as 'Prenom',p.fname as 'Nom'
+FROM   patientDispenses p1,patient p 
+WHERE  p1.patientID=p.patientID". $drugPeriod."
+and p1.dispd between  '".$startDate."' AND '".$endDate."' group by 2,3,4"); 
   
   $arvDrug = outputQueryRows($queryArray["arvDrug"]); 
  
@@ -47,7 +41,7 @@ and ymdToDate(e.visitDateYy,e.visitDateMm,e.visitDateDd) between  '".$startDate.
   <tr>
     <td width="70%">
 	<p>&nbsp;</p>
-	<div><strong> Liste des patients ayant démarré les ARVs durant la période </strong></div>
+	<div><strong> Liste de patients ayant reçu des ARV pour une période  </strong></div>
 	<div>&nbsp;</div>
 	<div>'.$arvDrug.'</div>
 	<p>'.$queryArray["arvDrug"].'</p>	

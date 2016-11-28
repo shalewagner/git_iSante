@@ -12,7 +12,7 @@ function generatearvStarted ($startdate, $enddate,$site, $lang) {
   $period=date("d-M-Y", strtotime($startdate)).' To '.date("d-M-Y", strtotime($enddate));
  
   $queryArray = array(
-"arvStarted" => "select startDate,p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate
+"arvStarted" => "select startDate as 'Date de visite',p.patientID,lname as 'Prenom',fname as 'Nom',ymdToDate(dobYy,dobMm,dobDd) as 'Date de naissance'
 from 
 (select patientID,min(visitDate) as startDate from pepfarTable group by 1) c , patient p
 where c.patientID=p.patientID and  startDate between  '".$startdate."' AND '".$enddate."'"); 
@@ -53,7 +53,7 @@ where c.patientID=p.patientID and  startDate between  '".$startdate."' AND '".$e
   <tr>
     <td width="70%">
 	<p>&nbsp;</p>
-	<div><strong> Liste des patients ayant démarré les ARVs durant la période </strong></div>
+	<div><strong>Liste des patients ayant démarré un régime ARV</strong></div>
 	<div>&nbsp;</div>
 	<div>$arvStarted</div>
 	<p>&nbsp;</p>	
