@@ -20,7 +20,8 @@ function applyDbUpgrade() {
 
   // add mysql procedures for dropping and adding indexes and adding columns to tables into db unless they are already there 
   system($mysqlCommandPrefix . ' < support/schema-procedures.sql');
-
+  system($mysqlCommandPrefix . ' < support/schema-functions.sql');
+  
   $currentSchemaVersion = getCurrentSchemaVersion();
   $schemaUpgradeFileAndVersion = getDatabaseSchemaUpgradeFiles();
 
