@@ -2732,8 +2732,8 @@ database()->exec('truncate table patientAlert');
 
 /* Generate viralLoadTemp */
 database()->exec('DROP TABLE IF EXISTS viralLoadTemp');
-database()->query('CREATE TABLE viralLoadTemp SELECT distinct patientid, date(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as visitDate, result+0 as result, date(?) as maxDate 
-FROM labs WHERE labID IN (103, 1257) and isNumeric(result) = 1 AND result+0 > 0',array("2016-01-01"));
+database()->query('CREATE TABLE viralLoadTemp SELECT distinct patientid, date(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as visitDate, result, date(?) as maxDate 
+FROM labs WHERE labID IN (103, 1257) and result IS NOT NULL',array("2016-01-01"));
 database()->exec('CREATE INDEX iViral ON viralLoadTemp (patientid,visitdate)');
 database()->exec('UPDATE viralLoadTemp A, (select patientID, max(visitDate) as maxDate FROM viralLoadTemp B GROUP BY 1) B set A.maxDate = B.maxDate where A.patientID = B.patientID');
 
@@ -2770,12 +2770,12 @@ WHERE A.hivPositive = 1 AND B.maxDate <= DATE_ADD(now(), INTERVAL -12 MONTH)');
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT left(patientid,5), patientID, 5, date(now())
 FROM viralLoadTemp 
-WHERE maxDate = visitDate AND maxDate <= DATE_ADD(NOW() , INTERVAL -3 MONTH ) AND result > 1000');
+WHERE maxDate = visitDate AND maxDate <= DATE_ADD(NOW() , INTERVAL -3 MONTH ) AND digits(result)+0 > 1000');
 
 /* Any patient whose viral test result was greater than 1000 copies */
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT left(patientid,5), patientID, 6, now()
-FROM viralLoadTemp WHERE maxDate = visitDate AND result > 1000');
+FROM viralLoadTemp WHERE maxDate = visitDate AND digits(result)+0 > 1000');
 }
 
 ?>
