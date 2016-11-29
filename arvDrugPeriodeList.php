@@ -33,7 +33,7 @@ $message='Liste de patients ayant reçu des ARV pour la période allant de ';
 $queryArray = array(
 "arvDrug" => "SELECT p1.dispd as 'Date de dispensation',p. patientID ,p.lname as 'Prenom',p.fname as 'Nom'
 FROM   patientDispenses p1,patient p 
-WHERE  p1.patientID=p.patientID". $drugPeriod."
+WHERE  p1.patientID=p.patientID". $drugPeriod."   and p.location_id=".$site."
 and p1.dispd between  '".$startDate."' AND '".$endDate."' group by 2,3,4"); 
   
   $arvDrug = outputQueryRows($queryArray["arvDrug"]); 

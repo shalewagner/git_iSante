@@ -15,7 +15,7 @@ function generatenextVisit30D ($startdate, $enddate,$site, $lang) {
 "nextVisit30D" => "select patientID,lname as Prenom,fname as Nom,birthDate as 'Date de naissance',dispenseDate as 'Date de dispensation' from (
 SELECT p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt_dispd) as dispenseDate
 from patient p, patientDispenses p1
-where p1.patientID=p.patientID 
+where p1.patientID=p.patientID   and p.location_id=".$site."
 group by 1,2,3,4
 ) A where DATEDIFF(dispenseDate, now()) between 0 and 30"); 
   

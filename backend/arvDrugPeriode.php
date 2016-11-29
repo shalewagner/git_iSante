@@ -20,7 +20,7 @@ concat('<a href=\"arvDrugPeriodeList.php?rank=120&site=".$site."&endDate=".$endd
 concat('<a href=\"arvDrugPeriodeList.php?rank=130&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) > 120 then patientID else null end),'</a>') as '>120 jours', 
 count(distinct patientid) as 'Patient Unique '
 from patientDispenses
-where dispd between '".$startdate."' AND '".$enddate."'"); 
+where dispd between '".$startdate."' AND '".$enddate."' and  LEFT(patientid,5)=".$site); 
   
   $arvDrug = outputQueryRows($queryArray["arvDrug"]); 
  
