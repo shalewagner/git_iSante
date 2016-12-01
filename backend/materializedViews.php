@@ -2778,4 +2778,22 @@ SELECT DISTINCT left(patientid,5), patientID, 6, now()
 FROM viralLoadTemp WHERE maxDate = visitDate AND digits(result)+0 > 1000');
 }
 
+
+database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
+select LEFT(patientid,5),patientid,7,date(now()) from (
+SELECT p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt_dispd) as dispenseDate
+from patient p, patientDispenses p1
+where p1.patientID=p.patientID  
+group by 1,2,3,4
+) A where DATEDIFF(dispenseDate, now()) between 0 and 30');
+
+database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
+select LEFT(patientid,5),patientid,8,date(now()) from (
+SELECT p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt_dispd) as dispenseDate
+from patient p, patientDispenses p1
+where p1.patientID=p.patientID 
+group by 1,2,3,4
+) A where DATEDIFF(dispenseDate, now())<0');
+
+
 ?>
