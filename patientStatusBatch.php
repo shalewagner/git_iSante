@@ -52,7 +52,7 @@ for ($i=1; $i <= $times; $i++) {
 
 #adding for the alert.
 printLog('generatePatientAlert() started');
-generatePatientAlert();
+if (getConfig('serverRole') != 'consolidated') generatePatientAlert();
 printLog('generatePatientAlert() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)')
 
 
