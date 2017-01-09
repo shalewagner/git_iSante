@@ -50,6 +50,12 @@ for ($i=1; $i <= $times; $i++) {
   updatePatientStatus(2, $endDate);
 } 
 
+#adding for the alert.
+printLog('generatePatientAlert() started');
+generatePatientAlert();
+printLog('generatePatientAlert() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)')
+
+
 printLog('Patient status update finished (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 
 recordEvent('patientStatusBatchFi', array('duration' => $stopwatch->elapsed()));  
