@@ -60,10 +60,9 @@ if ( isset($_GET['type']) && (($_GET['type'] == 5 && $version == 1) || $_GET['ty
             <input type=\"radio\" id=\"startedArv1\" name=\"startedArv\" value=\"1\" " . $arvStartSelect . " tabindex=\"" . ($tabIndex + 3) ."\"/>" . $ARVexcl[$lang][1] . "
             <input type=\"radio\" id=\"startedArv0\" name=\"startedArv\" value=\"0\" " . $arvStartNot . " tabindex=\"" . ($tabIndex + 3) ."\"/>" . $ARVexcl[$lang][2] . "
          </td>
-		 
-		 <td width=\"20%\">" .
+	 <td width=\"20%\">" .
             ((isset ($_GET['type']) && $_GET['type'] == 18) ? $dispcomm[1][$lang][0] : $dispcomm[$version][$lang][0]) . "
-            <input type=\"checkbox\" id=\"dispComm\" name=\"dispComm\"  tabindex=\"" . ($tabIndex + 5) ."\"/>
+            <input type=\"checkbox\" id=\"dispComm\" name=\"dispComm\"  tabindex=\"" . ($tabIndex + 5) . "\" " . getData ("dispComm", "checkbox", 1) . " />
          </td>
        </tr>
        <tr>
