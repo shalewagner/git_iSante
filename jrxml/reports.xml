@@ -989,7 +989,7 @@
 					<title lang="fr">Visite clinique planifiée dans les 7 jours à venir</title>
 					<reportFile groupLevel="0" otherLevel="0">visitScheduledRpt.jasper</reportFile> 
 					<menuSelection>dateToday</menuSelection>
-					<query>select distinct p.clinicPatientID, t.encounter_id, t.encountertype as 'encountertype', p.patientID, nationalID, ltrim(rtrim(fname)) as fName, ltrim(rtrim(lname)) as lName, $computed_age AS age, $localized_gender as 'sex', case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc, t.visitdate as NxtVisitDate from a_patients p,(select encounter_id, patientid, dbo.ymdToDate(nxtVisitYy,nxtVisitMm,nxtVisitDd) as visitdate, encounterType from encValidAll where isdate(dbo.ymdToDate(nxtVisitYy, nxtVisitMm, nxtVisitDd)) = 1 and sitecode = '$site') as t, patientStatusLookup l where p.patientid = t.patientid and t.visitdate between getDate() and dateadd(dd,7,getdate()) and l.statusValue = p.patientStatus order by 2</query>
+					<query>select distinct p.clinicPatientID, t.encounter_id, t.encountertype as 'encountertype', p.patientID, nationalID, ltrim(rtrim(fname)) as fName, ltrim(rtrim(lname)) as lName, $computed_age AS age, $localized_gender as 'sex', case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc, t.visitdate as NxtVisitDate,p.telephone from a_patients p,(select encounter_id, patientid, dbo.ymdToDate(nxtVisitYy,nxtVisitMm,nxtVisitDd) as visitdate, encounterType from encValidAll where isdate(dbo.ymdToDate(nxtVisitYy, nxtVisitMm, nxtVisitDd)) = 1 and sitecode = '$site') as t, patientStatusLookup l where p.patientid = t.patientid and t.visitdate between getDate() and dateadd(dd,7,getdate()) and l.statusValue = p.patientStatus order by 2</query>
 					<description>Patients with next clinic visit date recorded and falling within the next 7 days. Does not display patients who are more than one week overdue for a clinic visit.</description>
 			</report>
 			<report id="5002" patientStatus="0" treatmentStatus="0" testType="0">
@@ -997,7 +997,7 @@
 					<title lang="fr">Visite clinique planifiée dans les 14 jours à venir</title>
 					<reportFile groupLevel="0" otherLevel="0">test.jasper</reportFile> 
 					<menuSelection>dateToday</menuSelection>					
-					<query>select distinct p.clinicPatientID, t.encounter_id, t.encountertype as 'encountertype', p.patientID, nationalID, ltrim(rtrim(fname)) as fName, ltrim(rtrim(lname)) as lName, $computed_age AS age, $localized_gender as 'sex', case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc, t.visitdate as NxtVisitDate from a_patients p,(select encounter_id, patientid, dbo.ymdToDate(nxtVisitYy,nxtVisitMm,nxtVisitDd) as visitdate, encounterType from encValidAll where isdate(dbo.ymdToDate(nxtVisitYy, nxtVisitMm, nxtVisitDd)) = 1 and sitecode = '$site') as t, patientStatusLookup l where p.patientid = t.patientid and t.visitdate between getDate() and dateadd(dd,14,getdate()) and l.statusValue = p.patientStatus order by 2</query>
+					<query>select distinct p.clinicPatientID, t.encounter_id, t.encountertype as 'encountertype', p.patientID, nationalID, ltrim(rtrim(fname)) as fName, ltrim(rtrim(lname)) as lName, $computed_age AS age, $localized_gender as 'sex', case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc, t.visitdate as NxtVisitDate,p.telephone from a_patients p,(select encounter_id, patientid, dbo.ymdToDate(nxtVisitYy,nxtVisitMm,nxtVisitDd) as visitdate, encounterType from encValidAll where isdate(dbo.ymdToDate(nxtVisitYy, nxtVisitMm, nxtVisitDd)) = 1 and sitecode = '$site') as t, patientStatusLookup l where p.patientid = t.patientid and t.visitdate between getDate() and dateadd(dd,14,getdate()) and l.statusValue = p.patientStatus order by 2</query>
 					<description>Patients with next clinic visit date recorded and falling within the next 14 days. Does not display patients who are more than two weeks overdue for a clinic visit.</description>
 			</report>
 		</reportSubSet>
@@ -1935,6 +1935,15 @@
 				    <otherLevel>0</otherLevel>
 				    <menuSelection>dateSelect</menuSelection>
 			    </report>
+						<report id="553" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Retention </title>
+				  <title lang="fr">Retention des patients</title>
+				   <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <menuSelection>dateSelect</menuSelection>
+			    </report>	
+				
 		</reportSubSet>
 		<reportSubSet><!--  patient demographics -->
 		<title lang="en">Patient Demographics</title>
