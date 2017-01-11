@@ -8831,6 +8831,23 @@ $arvVisitInfo = array (
 )
 );
 
+$dispcomm = array (
+"0" => array (
+
+),
+"1" => array (
+    "en" => array (
+        "Community dispensation"
+        ),
+    "fr" => array (
+        "Dispensation communautaire"
+       )
+)
+);
+
+
+
+
 $badDateMessage = array (
    "en" => array (
   "Please enter a valid visit date."
