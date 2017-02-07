@@ -575,26 +575,17 @@ function updatePatientStatus($mode = 1, $endDate = null) {
   #compute some lists of patients that will be used multiple times later on
   database()->query('DROP TABLE IF EXISTS patientDispenses');
   database()->query('CREATE TABLE patientDispenses (keycol INT UNSIGNED NOT NULL AUTO_INCREMENT, patientid varchar(11) not null, dispd date not null, nxt_dispd date null, 
-		PRIMARY KEY (keycol,patientid), UNIQUE INDEX iDisp (patientid,dispd))');
-  database()->query('INSERT INTO patientDispenses (patientid, dispd) SELECT DISTINCT e.patientid, 
-		CASE WHEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) IS NOT NULL THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) 
-		ELSE ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) end as dispd
+  		PRIMARY KEY (keycol,patientid,dispd), UNIQUE INDEX iDisp (patientid,dispd))');
+  database()->query('INSERT INTO patientDispenses (patientid, dispd, nxt_dispd) SELECT DISTINCT e.patientid,
+		CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm != ? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
+		ELSE ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) END,
+		MIN(CASE WHEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) IS NOT NULL and e.nxtVisityy != ? and e.nxtvisitmm != ? THEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) ELSE NULL END)
 		FROM prescriptions p, encounter e WHERE e.encountertype in (5,18) AND encStatus < 255 AND 
 		p.patientid = e.patientid AND p.sitecode = e.sitecode AND p.visitdateyy = e.visitdateyy AND p.visitdatemm = e.visitdatemm AND p.visitdatedd = e.visitdatedd AND p.seqNum = e.seqNum AND 
 		drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88) AND 
 		(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR dispAltDosage IS NOT NULL) AND 
 		(forPepPmtct = 2 OR forPepPmtct IS NULL) AND CASE WHEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) IS NOT NULL THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) ELSE
-		ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) end <= ? ORDER BY 1,2 DESC', array($endDate));
-  # add nxt_disp
-  database()->query('UPDATE patientDispenses t, prescriptions p, encounter e 
-		SET t.nxt_dispd = CASE WHEN ymdtodate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) IS NOT NULL THEN ymdtodate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) ELSE NULL END
-		WHERE t.patientid = e.patientid AND e.encountertype in (5,18) AND e.encStatus < 255 AND 
-		p.patientid = e.patientid AND p.sitecode = e.sitecode AND p.visitdateyy = e.visitdateyy AND p.visitdatemm = e.visitdatemm AND p.visitdatedd = e.visitdatedd AND p.seqNum = e.seqNum AND 
-		drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88) AND 
-		(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR dispAltDosage IS NOT NULL) AND 
-		(forPepPmtct = 2 OR forPepPmtct IS NULL) AND
-		t.dispd = CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL THEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) ELSE
-		ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) end');
+		ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) end <= ? GROUP BY 1,2 ORDER BY 1,2 DESC', array('un','un','un','un',$endDate));
   # adjust nxt_disp when null and patient has multiple dispense in the past 
   database()->query('DROP TABLE IF EXISTS lastDispense');
   database()->query('CREATE TABLE lastDispense SELECT patientid, MIN(keycol) as rank, count(*) as cnt FROM patientDispenses GROUP BY 1; ALTER TABLE lastDispense ADD PRIMARY KEY (patientid)');
