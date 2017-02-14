@@ -53,8 +53,7 @@ for ($i=1; $i <= $times; $i++) {
 #adding for the alert.
 printLog('generatePatientAlert() started');
 if (getConfig('serverRole') != 'consolidated') generatePatientAlert();
-printLog('generatePatientAlert() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)')
-
+printLog('generatePatientAlert() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 
 printLog('Patient status update finished (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 

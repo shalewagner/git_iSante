@@ -2520,7 +2520,7 @@ Ext.util.validateNextVisitDt = function(_nextVistDt, _visitDt, _eid, _iconLoc)
 					if(tempDate.getFullYear() == curDate.getFullYear())
 					{
 
-						if((tempDate.getMonth() - curDate.getMonth() >3) || ((tempDate.getMonth() - curDate.getMonth() ==3) && (tempDate.getDate() > curDate.getDate()))) 
+						if((tempDate.getMonth() - curDate.getMonth() >12) || ((tempDate.getMonth() - curDate.getMonth() ==12) && (tempDate.getDate() > curDate.getDate()))) 
 						{
 							errMsg = '71';
 						}
@@ -2529,7 +2529,7 @@ Ext.util.validateNextVisitDt = function(_nextVistDt, _visitDt, _eid, _iconLoc)
 					
 					else if(tempDate.getFullYear() - 1 == curDate.getFullYear())
 					{
-						if((tempDate.getMonth() - curDate.getMonth() > -9) || ((tempDate.getMonth() - curDate.getMonth() == -9) && (tempDate.getDate() > curDate.getDate())))
+						if((tempDate.getMonth() - curDate.getMonth() > 0) || ((tempDate.getMonth() - curDate.getMonth() == 0) && (tempDate.getDate() > curDate.getDate())))
 						{
 							errMsg = '71';
 						}
@@ -2581,14 +2581,14 @@ Ext.util.validateNextPickupDt = function(_nextVistDt, _visitDt, _eid, _iconLoc)
 				{
 					if(tempDate.getFullYear() == curDate.getFullYear())
 					{
-						if((tempDate.getMonth() - curDate.getMonth() >3) || ((tempDate.getMonth() - curDate.getMonth() ==3) && (tempDate.getDate() > curDate.getDate()))) 
+						if((tempDate.getMonth() - curDate.getMonth() >12) || ((tempDate.getMonth() - curDate.getMonth() ==12) && (tempDate.getDate() > curDate.getDate()))) 
 						{
 							errMsg = '71';
 						}
 					}
 					else if(tempDate.getFullYear() - 1 == curDate.getFullYear())
 					{
-						if((tempDate.getMonth() - curDate.getMonth() > -9) || ((tempDate.getMonth() - curDate.getMonth() == -9) && (tempDate.getDate() > curDate.getDate())))
+						if((tempDate.getMonth() - curDate.getMonth() > 0) || ((tempDate.getMonth() - curDate.getMonth() == 0) && (tempDate.getDate() > curDate.getDate())))
 						{
 							errMsg = '71';
 						}

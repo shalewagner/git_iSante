@@ -17,7 +17,7 @@ SELECT p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt
 from patient p, patientDispenses p1
 where p1.patientID=p.patientID   and p.location_id=".$site."
 group by 1,2,3,4
-) A where DATEDIFF(dispenseDate, now()) between 0 and 30"); 
+) A where DATEDIFF(dispenseDate, now()) between 0 and 30 order by 5"); 
   
   $nextVisit30D = outputQueryRows($queryArray["nextVisit30D"]); 
  
