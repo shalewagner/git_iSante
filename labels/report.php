@@ -244,16 +244,14 @@ $kickLabel = array (
 	"patientStatus" => array (
 		"en" => array (
 			"0" => "Patient Status ",
-			"1" => "Active <span class=\"small_cnt\">(visit in the last: 90 days if on ART; 180 days if in palliative care)</span>",
-			"2" => "Inactive <span class=\"small_cnt\">(no visits in the last: 90 days if on ART; 180 days if in palliative care)</span>",
+			"1" => "Active <span class=\"small_cnt\">An active patient on ART is a patient who had a clinic visit within the last 90 days or who still uses ARVs pills during the analysis period (date of next prescription in the future). A patient active in palliative care is a patient not yet under ART and who has had a visit in the last 180 days.</span>",
+			"2" => "Inactive <span class=\"small_cnt\">Inactive patient on ART is a patient whose last clinic visit was more than 90 days or who has no more ARV pills during the analysis period (date of last prescription in the past). A patient inactive in palliative care is a patient not yet under ART and who has not had a visit in the last 180 days.</span>",
 			"3" => "Discontinued <span class=\"small_cnt\">(Declared discontinued via the discontinuation form)</span>"
 		),
 		"fr" => array (
 			"0" => "Statut du patient",
-			"1" => "Actifs <span class=\"small_cnt\">(visite dans les derniers 90 jours si sous TAR; dans
-			les derniers 180 jours si soins palliatifs)</span>",
-			"2" => "Inactifs <span class=\"small_cnt\">(aucune visite les derniers 90 jours si sous TAR; dans les
-			derniers 180 jours si soins palliatifs)</span>",
+			"1" => "Actifs <span class=\"small_cnt\">Un patient actif sous ARV est un patient qui a eu une visite clinique dans les 90 derniers jours ou qui a encore des ARV en main pendant la période d’analyse (date de prochaine prescription dans le futur). Un patient actif en soins palliatifs est un patient pas encore sous ARV et qui a eu une visite dans les derniers 180 jours.</span>",
+			"2" => "Inactifs <span class=\"small_cnt\">Un patient inactif sous ARV est un patient dont la dernière visite clinique remonte à plus de 90 jours ou qui n’a plus d’ARV en main pendant la période d’analyse (date de dernière prescription dans le passé). Un patient actif en soins palliatifs est un patient pas encore sous ARV et qui a eu une visite dans les derniers 180 jours</span>",
 			"3" => "Discontinu&eacute;s <span class=\"small_cnt\">(d&eacute;clar&eacute;s comme tels dans la fiche de discontinuation)</span>"
 		)
 	),
