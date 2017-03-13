@@ -2774,7 +2774,7 @@ SELECT p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt
 from patient p, patientDispenses p1
 where p1.patientID=p.patientID  
 group by 1,2,3,4
-) A where DATEDIFF(dispenseDate, now()) between 0 and 30');
+) A where dispenseDate is not null and DATEDIFF(dispenseDate, now()) between 0 and 30');
 
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 select LEFT(patientid,5),patientid,8,date(now()) from (
@@ -2782,7 +2782,7 @@ SELECT p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt
 from patient p, patientDispenses p1
 where p1.patientID=p.patientID 
 group by 1,2,3,4
-) A where DATEDIFF(dispenseDate, now())<0');
+) A where dispenseDate is not null and DATEDIFF(dispenseDate, now())<0');
 
 }
 ?>

@@ -1927,9 +1927,26 @@
 				     <groupLevel>0</groupLevel>
 				             <otherLevel>0</otherLevel>			
 			    </report>	
-			<report id="552" patientStatus="0" treatmentStatus="0" testType="0">
+			    <report id="552" patientStatus="0" treatmentStatus="0" testType="0">
 				  <title lang="en">Number of patients receiving ARVs by period</title>
 				  <title lang="fr">Nombre de patients ayant reçu des ARV par période</title>
+				   <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <menuSelection>dateSelect</menuSelection>
+			    </report>	
+            
+            	<report id="553" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Community distribution of ARVs</title>
+				  <title lang="fr">Distribution des ARVs en communauté (DAC)</title>
+				   <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <menuSelection>dateSelect</menuSelection>
+			    </report>
+            	<report id="554" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Viral load by number of copies/ml</title>
+				  <title lang="fr">Charge virale en fonction du nombre de copies/ml</title>
 				   <reportFile></reportFile>
 				    <groupLevel>0</groupLevel>
 				    <otherLevel>0</otherLevel>

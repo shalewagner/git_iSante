@@ -6,20 +6,20 @@ require_once 'backend/database.php';
 require_once 'backend/materializedViews.php';
 require_once "include/standardHeaderExt.php";
 
-function generatenextVisit($startdate, $enddate,$site, $lang) {
+function generateViral($startdate, $enddate,$site, $lang) {
   $dateTime = $lang == "fr" ? date ("d/m/y H:i:s") : date ("m/d/y H:i:s");
   $siteName = getSiteName ($site, $lang);
   $period=date("d-M-Y", strtotime($startdate)).' To '.date("d-M-Y", strtotime($enddate));
  
   $queryArray = array(
-"nextVisit" => "select clinicPatientID as ST,lname as Prenom,fname as Nom,telephone,birthDate as 'Date de naissance',dispenseDate as 'Date de dispensation' from (
-SELECT p.patientID,clinicPatientID,lname,fname,telephone,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt_dispd) as dispenseDate
-from patient p, patientDispenses p1
-where p1.patientID=p.patientID  and p.location_id=".$site."
-group by 1,2,3,4,5,6
-) A where DATEDIFF(dispenseDate, now()) <=0   order by 5"); 
+"viralLoad" => "select 
+concat('<a href=\"viralLoadList.php?viral=0&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when ifnull(result,0)+0<1000 then patientID else null end),'</a>') as 'Patient avec un resultat de charge viral < 1000 copies/ml',
+concat('<a href=\"viralLoadList.php?viral=1&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when ifnull(result,0)+0>=1000 then patientID else null end),'</a>')as 'Patient avec un resultat de charge viral >= 1000 copies/ml',
+count(distinct patientID) as 'Patient Unique'
+FROM labs WHERE labID IN (103, 1257) and result IS NOT NULL
+and date(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) between '".$startdate."' AND '".$enddate."' and  LEFT(patientid,5)=".$site); 
   
-  $nextVisit = outputQueryRows($queryArray["nextVisit"]); 
+  $viralLoad = outputQueryRows($queryArray["viralLoad"]); 
  
   $summary = <<<EOF
   
@@ -38,15 +38,26 @@ group by 1,2,3,4,5,6
 
 
 <body text="#000000" link="#000000" alink="#000000" vlink="#000000" align="center">
-<center><div>&nbsp;</div><div>&nbsp;</div>
+<table width="90%" cellpadding="0" cellspacing="0" border="0">
+<tr valign="top" >
+  <td style="width: 30%;text-align: right; padding:15px;">
+  <div><span style="font-family: Lucida Console; font-size: 12.0px;"><strong>Periode :</strong>   $period </span></div>
+  </td>  
+</tr>
+</table>
+
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+
 <form >
 <table width="100%" >
   <tr>
     <td width="70%">
 	<p>&nbsp;</p>
-	<div><strong>La liste des patients dont la date de renflouement des ARV est arrivée à terme</strong></div>
+	<div ><strong> Charge virale en fonction du nombre de copies </strong></div>
 	<div>&nbsp;</div>
-	<div>$nextVisit</div>
+	<div>$viralLoad</div>
 	<p>&nbsp;</p>	
 	</td>
   </tr>
@@ -74,23 +85,23 @@ function outputQueryRows($qry) {
         $arr = databaseSelect()->query($qry)->fetchAll(PDO::FETCH_ASSOC); 
         if (count($arr) == 0) return '<p><center><font color="red"><bold>Aucuns résultats trouvés</bold></font></center><p>';
         // set up the table
-        $output = '<center><table class="" width="90%" border="1" cellpadding="0" cellspacing="0">';
+        $output = '<table class="" width="90%" border="1" cellpadding="0" cellspacing="0">';
         // loop on the results 
         $i = 0;
         foreach($arr as $row) {
                if ($i == 0) { 
                        // output the column header 
                        $output .= '<tr>';
-                       foreach($row as $key => $value) $output .= '<th>' . $key . '</th>';
+                       foreach($row as $key => $value) $output .= '<th style="float:center;">' . $key . '</th>';
                        $output .= '</tr>'; 
                        $i++;
                } 
                $output .= '<tr>';
-               foreach($row as $key => $value) $output .= '<td style="font-family: Lucida Console; font-size: 12.0px; padding:3px;">' . $value . '</td>';
+               foreach($row as $key => $value) $output .= '<td style="font-family: Lucida Console; font-size: 12.0px; padding:3px; float:center;">' . $value . '</td>';
                $output .= '</tr>';
         }
         // close the table 
-        $output .= '</table></center>';
+        $output .= '</table>';
         return $output;
 }
 

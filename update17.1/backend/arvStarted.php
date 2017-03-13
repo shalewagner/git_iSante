@@ -6,20 +6,18 @@ require_once 'backend/database.php';
 require_once 'backend/materializedViews.php';
 require_once "include/standardHeaderExt.php";
 
-function generatenextVisit($startdate, $enddate,$site, $lang) {
+function generatearvStarted ($startdate, $enddate,$site, $lang) {
   $dateTime = $lang == "fr" ? date ("d/m/y H:i:s") : date ("m/d/y H:i:s");
   $siteName = getSiteName ($site, $lang);
   $period=date("d-M-Y", strtotime($startdate)).' To '.date("d-M-Y", strtotime($enddate));
  
   $queryArray = array(
-"nextVisit" => "select clinicPatientID as ST,lname as Prenom,fname as Nom,telephone,birthDate as 'Date de naissance',dispenseDate as 'Date de dispensation' from (
-SELECT p.patientID,clinicPatientID,lname,fname,telephone,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt_dispd) as dispenseDate
-from patient p, patientDispenses p1
-where p1.patientID=p.patientID  and p.location_id=".$site."
-group by 1,2,3,4,5,6
-) A where DATEDIFF(dispenseDate, now()) <=0   order by 5"); 
+"arvStarted" => "select startDate as 'Date de visite',p.patientID,lname as 'Prenom',fname as 'Nom',ymdToDate(dobYy,dobMm,dobDd) as 'Date de naissance'
+from 
+(select siteCode,patientID,min(visitDate) as startDate from pepfarTable group by 1,2) c , patient p
+where c.patientID=p.patientID and  startDate between  '".$startdate."' AND '".$enddate."' And c.siteCode=".$site." order by 1"); 
   
-  $nextVisit = outputQueryRows($queryArray["nextVisit"]); 
+  $arvStarted = outputQueryRows($queryArray["arvStarted"]); 
  
   $summary = <<<EOF
   
@@ -38,15 +36,26 @@ group by 1,2,3,4,5,6
 
 
 <body text="#000000" link="#000000" alink="#000000" vlink="#000000" align="center">
-<center><div>&nbsp;</div><div>&nbsp;</div>
+<center><table width="90%" cellpadding="0" cellspacing="0" border="0">
+<tr valign="top" >
+  <td style="width: 30%;text-align: right; padding:15px;">
+  <div><span style="font-family: Lucida Console; font-size: 12.0px;"><strong>Periode :</strong>   $period </span></div>
+  </td>  
+</tr>
+</table>
+
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+
 <form >
 <table width="100%" >
   <tr>
     <td width="70%">
 	<p>&nbsp;</p>
-	<div><strong>La liste des patients dont la date de renflouement des ARV est arrivée à terme</strong></div>
+	<div><strong>Liste des patients ayant démarré un régime ARV</strong></div>
 	<div>&nbsp;</div>
-	<div>$nextVisit</div>
+	<div>$arvStarted</div>
 	<p>&nbsp;</p>	
 	</td>
   </tr>

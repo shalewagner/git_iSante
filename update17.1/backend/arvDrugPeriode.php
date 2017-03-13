@@ -6,20 +6,23 @@ require_once 'backend/database.php';
 require_once 'backend/materializedViews.php';
 require_once "include/standardHeaderExt.php";
 
-function generatenextVisit($startdate, $enddate,$site, $lang) {
+function generatearvPatient ($startdate, $enddate,$site, $lang) {
   $dateTime = $lang == "fr" ? date ("d/m/y H:i:s") : date ("m/d/y H:i:s");
   $siteName = getSiteName ($site, $lang);
   $period=date("d-M-Y", strtotime($startdate)).' To '.date("d-M-Y", strtotime($enddate));
  
   $queryArray = array(
-"nextVisit" => "select clinicPatientID as ST,lname as Prenom,fname as Nom,telephone,birthDate as 'Date de naissance',dispenseDate as 'Date de dispensation' from (
-SELECT p.patientID,clinicPatientID,lname,fname,telephone,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt_dispd) as dispenseDate
-from patient p, patientDispenses p1
-where p1.patientID=p.patientID  and p.location_id=".$site."
-group by 1,2,3,4,5,6
-) A where DATEDIFF(dispenseDate, now()) <=0   order by 5"); 
+"arvDrug" => "select 
+concat('<a href=\"arvDrugPeriodeList.php?rank=30&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) <= 30 then patientID else null end),'</a>') as  '0-30 jours',
+concat('<a href=\"arvDrugPeriodeList.php?rank=60&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) BETWEEN 30 AND 60 then patientID else null end),'</a>') as '31-60 jours',
+concat('<a href=\"arvDrugPeriodeList.php?rank=90&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) BETWEEN 60 AND 90 then patientID else null end),'</a>') as '61-90 jours',
+concat('<a href=\"arvDrugPeriodeList.php?rank=120&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) BETWEEN 90 AND 120 then patientID else null end),'</a>') as '91-120 jours',
+concat('<a href=\"arvDrugPeriodeList.php?rank=130&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) > 120 then patientID else null end),'</a>') as '>120 jours', 
+count(distinct patientid) as 'Patient Unique '
+from patientDispenses
+where dispd between '".$startdate."' AND '".$enddate."' and  LEFT(patientid,5)=".$site); 
   
-  $nextVisit = outputQueryRows($queryArray["nextVisit"]); 
+  $arvDrug = outputQueryRows($queryArray["arvDrug"]); 
  
   $summary = <<<EOF
   
@@ -38,15 +41,26 @@ group by 1,2,3,4,5,6
 
 
 <body text="#000000" link="#000000" alink="#000000" vlink="#000000" align="center">
-<center><div>&nbsp;</div><div>&nbsp;</div>
+<center><table width="90%" cellpadding="0" cellspacing="0" border="0">
+<tr valign="top" >
+  <td style="width: 30%;text-align: right; padding:15px;">
+  <div><span style="font-family: Lucida Console; font-size: 12.0px;"><strong>Periode :</strong>   $period </span></div>
+  </td>  
+</tr>
+</table>
+
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+
 <form >
 <table width="100%" >
   <tr>
     <td width="70%">
 	<p>&nbsp;</p>
-	<div><strong>La liste des patients dont la date de renflouement des ARV est arrivée à terme</strong></div>
+	<div><strong> Nombre de patients ayant reçu des ARV par période </strong></div>
 	<div>&nbsp;</div>
-	<div>$nextVisit</div>
+	<div>$arvDrug</div>
 	<p>&nbsp;</p>	
 	</td>
   </tr>

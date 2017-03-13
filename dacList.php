@@ -9,32 +9,30 @@ require_once "include/standardHeaderExt.php";
 
 
 
-function generatearvDrug()
+function generatedacList()
 {
 	
 $lang = trim($_GET["lang"]);
 $site = trim($_GET["site"]);
 $endDate = trim($_GET["endDate"]);
 $startDate = trim($_GET["startDate"]);
-$rank = trim($_GET["rank"]);	
+$disp = trim($_GET["disp"]);	
 $siteName = getSiteName ($site, $lang);
-$drugPeriod=' And 1=1';
-$message='Liste de patients ayant reçu des ARV pour la période allant de ';
- switch ($rank)
+$dispClause=' And 1=1';
+$message='Liste de patients ayant reçu des ARVs ';
+ switch ($disp)
  {
-	 case '30' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)<=30'; $message.=' 0 a 30 jours'; break;}
-	 case '60' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>30'. ' And DATEDIFF(nxt_dispd, dispd)<=60'; $message.=' 31 a 60 jours';break;}
-	 case '90' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>60'. ' And DATEDIFF(nxt_dispd, dispd)<=90'; $message.=' 61 a 90 jours';break;}
-	 case '120':{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>90'. ' And DATEDIFF(nxt_dispd, dispd)<=120'; $message.=' 91 a 120 jours';break;}
-	 case '130':{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>120'; $message=' Liste de patients ayant reçu des ARV pour plus de 120 jours'; break;}
-	 default: $drugPeriod.='';
+	 case '0' :{$dispClause.=' And ifnull(o.value_boolean,0)=0'; $message.=' en communauté :'; break;}
+	 case '1' :{$dispClause.=' And ifnull(o.value_boolean,0)=1'; $message.=' dans l`Institution :';break;}
+	 default: $dispClause.='';
  }
  
 $queryArray = array(
-"arvDrug" => "SELECT p1.dispd as 'Date de dispensation',p. patientID ,p.lname as 'Prenom',p.fname as 'Nom'
-FROM   patientDispenses p1,patient p 
-WHERE  p1.patientID=p.patientID". $drugPeriod."   and p.location_id=".$site."
-and p1.dispd between  '".$startDate."' AND '".$endDate."' group by 2,3,4"); 
+"arvDrug" => "select  distinct p.clinicPatientID as ST,p.lname as 'Prenom',p.fname as 'Nom',telephone
+from patient p, a_prescriptions e left outer join obs o  on (e.encounter_id=o.encounter_id and o.concept_id='71642' and o.value_boolean=1)
+where drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88)
+and e.dispensed=1 and p.patientID=e.patientID".$dispClause."
+and e.visitDate between '".$startDate."' AND '".$endDate."' and  LEFT(p.patientid,5)=".$site); 
   
   $arvDrug = outputQueryRows($queryArray["arvDrug"]); 
  
@@ -44,7 +42,8 @@ and p1.dispd between  '".$startDate."' AND '".$endDate."' group by 2,3,4");
 	<p>&nbsp;</p>
 	<div><strong> '.$message.'  </strong></div>
 	<div>&nbsp;</div>
-	<div>'.$arvDrug.'</div>	
+	<div>'.$arvDrug.'</div>
+	<p>'.$queryArray["arvDrug"].'</p>	
 	</td>
   </tr>
 </table>';
@@ -100,6 +99,6 @@ function outputQueryRows($qry) {
 <center>
 <div>&nbsp;</div>
 <div>&nbsp;</div>
-<?php echo generatearvDrug(); ?>
+<?php echo generatedacList(); ?>
 </body>
 </html>

@@ -9,34 +9,32 @@ require_once "include/standardHeaderExt.php";
 
 
 
-function generatearvDrug()
+function generateviralList()
 {
 	
 $lang = trim($_GET["lang"]);
 $site = trim($_GET["site"]);
 $endDate = trim($_GET["endDate"]);
 $startDate = trim($_GET["startDate"]);
-$rank = trim($_GET["rank"]);	
+$viral = trim($_GET["viral"]);	
 $siteName = getSiteName ($site, $lang);
-$drugPeriod=' And 1=1';
-$message='Liste de patients ayant reçu des ARV pour la période allant de ';
- switch ($rank)
+$viralClause=' And 1=1';
+$message='Liste de patients avec un resultat de charge viral';
+ switch ($viral)
  {
-	 case '30' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)<=30'; $message.=' 0 a 30 jours'; break;}
-	 case '60' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>30'. ' And DATEDIFF(nxt_dispd, dispd)<=60'; $message.=' 31 a 60 jours';break;}
-	 case '90' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>60'. ' And DATEDIFF(nxt_dispd, dispd)<=90'; $message.=' 61 a 90 jours';break;}
-	 case '120':{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>90'. ' And DATEDIFF(nxt_dispd, dispd)<=120'; $message.=' 91 a 120 jours';break;}
-	 case '130':{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>120'; $message=' Liste de patients ayant reçu des ARV pour plus de 120 jours'; break;}
-	 default: $drugPeriod.='';
+	 case '0' :{$viralClause.=' And ifnull(result,0)+0<1000'; $message.=' < 1000 copies/ml '; break;}
+	 case '1' :{$viralClause.=' And ifnull(result,0)+0>=1000'; $message.=' >= 1000 copies/ml  :';break;}
+	 default: $viralClause.='';
  }
  
 $queryArray = array(
-"arvDrug" => "SELECT p1.dispd as 'Date de dispensation',p. patientID ,p.lname as 'Prenom',p.fname as 'Nom'
-FROM   patientDispenses p1,patient p 
-WHERE  p1.patientID=p.patientID". $drugPeriod."   and p.location_id=".$site."
-and p1.dispd between  '".$startDate."' AND '".$endDate."' group by 2,3,4"); 
+"viralLoad" => "select  distinct clinicPatientID as ST,p.lname as 'Prenom',p.fname as 'Nom',telephone
+from patient p, (SELECT distinct patientid, date(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as visitDate, result
+FROM labs WHERE labID IN (103, 1257) and result IS NOT NULL) e
+where e.patientid=p.patientID ".$viralClause."
+and e.visitDate between '".$startDate."' AND '".$endDate."' and  LEFT(p.patientid,5)=".$site); 
   
-  $arvDrug = outputQueryRows($queryArray["arvDrug"]); 
+  $viralLoad = outputQueryRows($queryArray["viralLoad"]); 
  
   $summary ='<table width="100%" >
   <tr>
@@ -44,7 +42,7 @@ and p1.dispd between  '".$startDate."' AND '".$endDate."' group by 2,3,4");
 	<p>&nbsp;</p>
 	<div><strong> '.$message.'  </strong></div>
 	<div>&nbsp;</div>
-	<div>'.$arvDrug.'</div>	
+	<div>'.$viralLoad.'</div>
 	</td>
   </tr>
 </table>';
@@ -100,6 +98,6 @@ function outputQueryRows($qry) {
 <center>
 <div>&nbsp;</div>
 <div>&nbsp;</div>
-<?php echo generatearvDrug(); ?>
+<?php echo generateviralList(); ?>
 </body>
 </html>

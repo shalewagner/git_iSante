@@ -12,11 +12,11 @@ function generatenextVisit($startdate, $enddate,$site, $lang) {
   $period=date("d-M-Y", strtotime($startdate)).' To '.date("d-M-Y", strtotime($enddate));
  
   $queryArray = array(
-"nextVisit" => "select clinicPatientID as ST,lname as Prenom,fname as Nom,telephone,birthDate as 'Date de naissance',dispenseDate as 'Date de dispensation' from (
-SELECT p.patientID,clinicPatientID,lname,fname,telephone,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt_dispd) as dispenseDate
+"nextVisit" => "select patientID,lname as Prenom,fname as Nom,birthDate as 'Date de naissance',dispenseDate as 'Date de dispensation' from (
+SELECT p.patientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt_dispd) as dispenseDate
 from patient p, patientDispenses p1
 where p1.patientID=p.patientID  and p.location_id=".$site."
-group by 1,2,3,4,5,6
+group by 1,2,3,4
 ) A where DATEDIFF(dispenseDate, now()) <=0   order by 5"); 
   
   $nextVisit = outputQueryRows($queryArray["nextVisit"]); 
