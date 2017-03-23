@@ -618,11 +618,11 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 /* PATIENTS ON ART */
 
   # Decedes (Death) = 1
-  database()->exec(' insert into tpatient select distinct patientid, 1 from patient p join patientsInPepfarTable using (patientid) join patientsInDiscTable using (patientid) where discType=12;');
+  database()->exec(' insert into tpatient select distinct patientid, 1 from patient p join patientsInPepfarTable using (patientid) join DiscTable using (patientid) where discType=12;');
   # Transferes (Transfert)= 2
-  database()->exec(' insert into tpatient select distinct patientid, 2 from patient p join patientsInPepfarTable using (patientid) join patientsInDiscTable using (patientid) where discType=11;');
+  database()->exec(' insert into tpatient select distinct patientid, 2 from patient p join patientsInPepfarTable using (patientid) join DiscTable using (patientid) where discType=11;');
   # Arretes (Stopped) = 3
-  database()->exec(' insert into tpatient select distinct patientid, 3 from patient p join patientsInPepfarTable using (patientid) join patientsInDiscTable using (patientid) where discType=13;');
+  database()->exec(' insert into tpatient select distinct patientid, 3 from patient p join patientsInPepfarTable using (patientid) join DiscTable using (patientid) where discType=13;');
 
   
   # Regulier (active) = 6
