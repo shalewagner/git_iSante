@@ -570,7 +570,8 @@ function updatePatientStatus($mode = 1, $endDate = null) {
   }
 
   #hold the new patient status information that will be used to update the patient or patientStatusTemp tables
-  database()->exec('create temporary table tpatient (patientid varchar(11), patientStatus int unsigned, primary key (patientid))');
+  database()->query('DROP TABLE IF EXISTS tpatient');
+  database()->exec('create table tpatient (patientid varchar(11), patientStatus int unsigned, primary key (patientid))');
 
   #compute some lists of patients that will be used multiple times later on
   database()->query('DROP TABLE IF EXISTS patientDispenses');
@@ -618,11 +619,11 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 /* PATIENTS ON ART */
 
   # Decedes (Death) = 1
-  database()->exec(' insert into tpatient select distinct patientid, 1 from patient p join patientsInPepfarTable using (patientid) join DiscTable using (patientid) where discType=12;');
+  database()->exec(' insert into tpatient select distinct patientid, 1 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=12;');
   # Transferes (Transfert)= 2
-  database()->exec(' insert into tpatient select distinct patientid, 2 from patient p join patientsInPepfarTable using (patientid) join DiscTable using (patientid) where discType=11;');
+  database()->exec(' insert into tpatient select distinct patientid, 2 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=11;');
   # Arretes (Stopped) = 3
-  database()->exec(' insert into tpatient select distinct patientid, 3 from patient p join patientsInPepfarTable using (patientid) join DiscTable using (patientid) where discType=13;');
+  database()->exec(' insert into tpatient select distinct patientid, 3 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=13;');
 
   
   # Regulier (active) = 6
@@ -705,13 +706,13 @@ function updatePatientStatus($mode = 1, $endDate = null) {
     database()->query('delete from patientStatusTemp where endDate = ?', array($endDate));
     database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from tpatient;', array($endDate));
     database()->exec('unlock tables');
-    database()->exec('drop temporary table tpatient');
+    //database()->exec('drop temporary table tpatient');
     return getPatientStatusTemp($endDate);
   } else {
     database()->exec('lock tables patient p write');
     database()->exec('update patient p left join tpatient t using (patientid) set p.patientStatus = t.patientStatus'); 
 	database()->exec('unlock tables;'); 
-	database()->exec('drop temporary table tpatient');
+	//database()->exec('drop temporary table tpatient');
   }
 }
 function updateAges() {
