@@ -642,8 +642,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 		join patient p using (patientid)
 		join encounter e using (patientid)
 		where (encountertype in (' . $encTypeListMod . ') and e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1 and 
-		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?) OR
-		? < patientsInPepfarTable.nxt_dispd 
+		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?)
 		group by e.patientid having datediff(?, max(ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd))) between 0 and 90;', array($endDate, $endDate, $endDate));
 		
 		
@@ -653,8 +652,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 		join patient p using (patientid)
 		join encounter e using (patientid)
 		where (encountertype in (' . $encTypeListMod . ') and e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1 and 
-		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?) OR
-		? < patientsInPepfarTable.nxt_dispd 
+		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?)
 		group by e.patientid having datediff(?, max(ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd)))>90;', array($endDate, $endDate, $endDate));
 
   
