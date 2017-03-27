@@ -706,7 +706,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
     database()->exec('drop table tpatient');
     return getPatientStatusTemp($endDate);
   } else {
-    database()->exec('lock tables patient p write');
+    database()->exec('lock tables patient p write,tpatient t read');
     database()->exec('update patient p left join tpatient t using (patientid) set p.patientStatus = t.patientStatus'); 
     database()->exec('unlock tables;'); 
     database()->exec('drop table tpatient');
