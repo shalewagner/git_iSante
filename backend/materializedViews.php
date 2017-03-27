@@ -699,7 +699,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
   database()->exec('drop temporary table patientsNotInDiscTable;');
 
   if ($mode == 2) {
-    database()->exec('lock tables patientStatusTemp write;');
+    database()->exec('lock tables patientStatusTemp write,tpatient t read;');
     database()->query('delete from patientStatusTemp where endDate = ?', array($endDate));
     database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from tpatient;', array($endDate));
     database()->exec('unlock tables');
