@@ -703,13 +703,13 @@ function updatePatientStatus($mode = 1, $endDate = null) {
     database()->query('delete from patientStatusTemp where endDate = ?', array($endDate));
     database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from tpatient;', array($endDate));
     database()->exec('unlock tables');
-    //database()->exec('drop temporary table tpatient');
+    database()->exec('drop table tpatient');
     return getPatientStatusTemp($endDate);
   } else {
     database()->exec('lock tables patient p write');
     database()->exec('update patient p left join tpatient t using (patientid) set p.patientStatus = t.patientStatus'); 
-	database()->exec('unlock tables;'); 
-	//database()->exec('drop temporary table tpatient');
+    database()->exec('unlock tables;'); 
+    database()->exec('drop table tpatient');
   }
 }
 function updateAges() {
