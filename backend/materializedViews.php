@@ -633,7 +633,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 		join encounter e using (patientid)
 		where (encountertype in (' . $encTypeListMod . ') and e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1 and 
 		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?)
-		group by e.patientid having datediff(?, max(ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd))) <0;', array($endDate, $endDate, $endDate));
+		group by e.patientid having datediff(?, max(ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd))) <0;', array($endDate, $endDate));
 
   # Randez vous rate (active) = 8
   database()->query(' insert into tpatient select straight_join e.patientid, 8 from patientsInPepfarTable
