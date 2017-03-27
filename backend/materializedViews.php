@@ -619,11 +619,11 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 /* PATIENTS ON ART */
 
   # Decedes (Death) = 1
-  database()->exec(' insert into tpatient select distinct patientid, 1 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=12;');
+  database()->exec(' insert into tpatient select distinct patientid, 1 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=12 and discDate<?;', array($endDate));
   # Transferes (Transfert)= 2
-  database()->exec(' insert into tpatient select distinct patientid, 2 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=11;');
+  database()->exec(' insert into tpatient select distinct patientid, 2 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=11 and discDate<?;', array($endDate));
   # Arretes (Stopped) = 3
-  database()->exec(' insert into tpatient select distinct patientid, 3 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=13;');
+  database()->exec(' insert into tpatient select distinct patientid, 3 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=13 and discDate<?;', array($endDate));
 
   
   # Regulier (active) = 6
@@ -658,9 +658,9 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 /* PRE-ART PATIENTS */
 
     # Decedes (Death) = 4
-  database()->exec(' insert into tpatient select distinct patientid, 4 from patientsNotInPepfarTable join discTable using (patientid) where discType=12;');
+  database()->exec(' insert into tpatient select distinct patientid, 4 from patientsNotInPepfarTable join discTable using (patientid) where discType=12 and discDate<?;', array($endDate));
     # transfere (Transfert) = 5
-  database()->exec(' insert into tpatient select distinct patientid, 5 from patientsNotInPepfarTable join discTable using (patientid) where discType=11;');
+  database()->exec(' insert into tpatient select distinct patientid, 5 from patientsNotInPepfarTable join discTable using (patientid) where discType=11 and discDate<?;', array($endDate));
   
   # Recent(active) = 7
   database()->query(' insert into tpatient select straight_join distinct patientid, 7 from patientsNotInDiscTable
