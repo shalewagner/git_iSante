@@ -623,7 +623,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
   # Transferes (Transfert)= 2
   database()->exec(' insert into tpatient select distinct patientid, 2 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=11 and discDate<?;', array($endDate));
   # Arretes (Stopped) = 3
-  database()->exec(' insert into tpatient select distinct patientid, 3 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=13 and discDate<?;', array($endDate));
+  database()->exec(' insert into tpatient select distinct patientid, 3 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType not in (11,12) and discDate<?;', array($endDate));
 
   
   # Regulier (active) = 6
