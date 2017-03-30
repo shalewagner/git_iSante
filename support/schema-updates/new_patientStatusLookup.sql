@@ -13,4 +13,5 @@ INSERT INTO `patientStatusLookup` (`statusValue`, `statusDescEn`, `statusDescFr`
 (1,'Deceased ART','Décédés sous ARV',4),
 (3,'Discontinued on ART','Arrêtés sous ARV',5),
 (2,'Transferred on ART','Transférés sous ARV',6),
-(11,'Actif on Pre-Art','Actifs en Pré-ARV',11);
+(11,'Actif on Pre-Art','Actifs en Pré-ARV',11),
+(12,'Discontinued on PRE- ART','Arrêtés en PRE - ARV',12);
