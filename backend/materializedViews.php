@@ -568,11 +568,9 @@ function updatePatientStatus($mode = 1, $endDate = null) {
   if (is_null($endDate) || strtotime($endDate) > strtotime(date('Y-m-d'))) {
     $endDate = date('Y-m-d');
   }
-
   #hold the new patient status information that will be used to update the patient or patientStatusTemp tables
-  database()->query('DROP TABLE IF EXISTS tpatient');
-  database()->exec('create table tpatient (patientid varchar(11), patientStatus int unsigned, primary key (patientid))');
-
+  database()->query('DROP TABLE IF EXISTS allHIV;');
+  database()->exec('CREATE TABLE allHIV (patientid varchar(11), patientStatus int null, PRIMARY KEY (patientid));');
   #compute some lists of patients that will be used multiple times later on
   database()->query('DROP TABLE IF EXISTS patientDispenses');
   database()->query('CREATE TABLE patientDispenses (keycol INT UNSIGNED NOT NULL AUTO_INCREMENT, patientid varchar(11) not null, dispd date not null, nxt_dispd date null, 
@@ -588,130 +586,83 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 		(forPepPmtct = 2 OR forPepPmtct IS NULL) AND CASE WHEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) IS NOT NULL THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) ELSE
 		ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) end <= ? GROUP BY 1,2 ORDER BY 1,2 DESC', array('un','un','un','un',$endDate));
   # adjust nxt_disp when null and patient has multiple dispense in the past 
-  database()->query('DROP TABLE IF EXISTS lastDispense');
-  database()->query('CREATE TABLE lastDispense SELECT patientid, MIN(keycol) as rank, count(*) as cnt FROM patientDispenses GROUP BY 1; ALTER TABLE lastDispense ADD PRIMARY KEY (patientid)');
-  database()->query('CREATE TEMPORARY TABLE patientsInPepfarTable select l.patientid, l.dispd,
-		CASE WHEN l.nxt_dispd IS NOT NULL THEN l.nxt_dispd ELSE DATE_ADD(l.dispd, INTERVAL DATEDIFF(l.dispd, p.dispd) DAY) END AS nxt_dispd 
-		FROM patientDispenses l, patientDispenses p, lastDispense a
-		WHERE l.patientid = p.patientid AND l.patientid = a.patientid AND p.keycol = a.rank + 1 and DATEDIFF(l.dispd, p.dispd) > 0; 
-		ALTER TABLE patientsInPepfarTable ADD PRIMARY KEY (patientid)');
+  database()->query('INSERT INTO allHIV SELECT distinct p.patientid, NULL FROM patient p, encounter e 
+           WHERE p.patientid = e.patientid AND
+           p.patStatus < 255 AND 
+           p.hivPositive = 1 AND
+           e.encStatus < 255 AND
+           e.encounterType IN (1,2,5,7,10,14,15,16,17,18,20,24,25,26,27,28,29,31) AND
+           ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?;', array($endDate));
+
+  database()->query('DELETE FROM allHIV WHERE patientid IN (SELECT DISTINCT p.patientID 
+           FROM  labs l, patient p
+           WHERE labID = ? AND result = 2 AND p.patientID = l.patientID AND 
+           ymdToDate(p.dobYy, CASE WHEN UPPER(p.dobMm)=? OR p.dobMm = ? THEN ? ELSE IFNULL(p.dobMm,?) end,?)/12 < 18 AND ymdToDate(l.visitDateYy, l.visitDateMm, l.visitDateDd) <= ?);', array('181','XX','','01','01','01',$endDate));
+
+  database()->query('DROP TABLE IF EXISTS art;');
   # add patients with only one dispense   
-  database()->query('insert into patientsInPepfarTable select l.patientid, l.dispd, DATE_ADD(l.dispd,INTERVAL 30 DAY) 
-		FROM patientDispenses l, lastDispense a where l.patientid = a.patientid and a.cnt = 1'); 
+  database()->query('CREATE TABLE art 
+SELECT e.patientid, 
+MAX(CASE WHEN ISDATE(ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd)) = 1 THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) ELSE ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) END) as maxDispDt, 
+MIN(CASE WHEN ISDATE(ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd)) = 1 THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) ELSE ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) END) as minDispDt
+FROM prescriptions p, encounter e, allHIV h 
+WHERE h.patientid = e.patientid AND 
+e.encountertype in (5,18) AND
+encStatus < 255 AND 
+p.patientid = e.patientid AND 
+p.sitecode = e.sitecode AND 
+p.visitdateyy = e.visitdateyy AND p.visitdatemm = e.visitdatemm AND p.visitdatedd = e.visitdatedd AND 
+p.seqNum = e.seqNum AND 
+drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88) AND 
+(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR dispAltDosage IS NOT NULL) AND 
+CASE WHEN isdate(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) ELSE ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) END <= ? 
+GROUP BY 1;', array($endDate)); 
 
-  database()->query('create temporary table patientsNotInPepfarTable select distinct p.patientid from patient p
-		left join patientsInPepfarTable on patientsInPepfarTable.patientid = p.patientid
-		join encounter e on e.patientid = p.patientid
-		where e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1 and patientsInPepfarTable.patientid is null and 
-		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?;', array($endDate));
-  database()->exec('alter table patientsNotInPepfarTable add primary key (patientid)');
 
-  database()->query('create temporary table patientsInDiscTable select distinct patientid from discTable where discDate <= ?;', array($endDate));
-  database()->exec('alter table patientsInDiscTable add primary key (patientid)');
-
-  database()->query('create temporary table patientsNotInDiscTable select distinct p.patientid from patient p
-		left join patientsInDiscTable on patientsInDiscTable.patientid = p.patientid
-		join encounter e on e.patientid = p.patientid
-		where e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1 and patientsInDiscTable.patientid is null and 
-		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?', array($endDate));
-  database()->exec('alter table patientsNotInDiscTable add primary key (patientid);');
-
-/* PATIENTS ON ART */
-
-  # Decedes (Death) = 1
-  database()->exec(' insert into tpatient select distinct patientid, 1 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=12 and discDate<?;', array($endDate));
-  # Transferes (Transfert)= 2
-  database()->exec(' insert into tpatient select distinct patientid, 2 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType=11 and discDate<?;', array($endDate));
-  # Arretes (Stopped) = 3
-  database()->exec(' insert into tpatient select distinct patientid, 3 from patient p join patientsInPepfarTable using (patientid) join discTable using (patientid) where discType not in (11,12) and discDate<?;', array($endDate));
-
+  database()->query('ALTER TABLE art ADD PRIMARY KEY (patientid);');  
+  database()->exec('DROP TABLE IF EXISTS allEnc;');
   
-  # Regulier (active) = 6
-  database()->query(' insert into tpatient select straight_join e.patientid, 6 from patientsInPepfarTable
-		join patientsNotInDiscTable using (patientid)
-		join patient p using (patientid)
-		join encounter e using (patientid)
-		where (encountertype in (' . $encTypeListMod . ') and e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1 and 
-		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?)
-		group by e.patientid having datediff(?, max(ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd))) <0;', array($endDate, $endDate));
+  database()->query('CREATE TABLE allEnc	
+SELECT e.patientid, 
+MIN(ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd)) as minDt,
+MAX(ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd)) as maxDt, 
+MAX(CASE WHEN ISDATE(ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd)) = 1 THEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) ELSE DATE_ADD(ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd),INTERVAL 1 MONTH) END) AS nextDt 
+FROM encounter e, allHIV h
+WHERE e.patientid = h.patientid AND  
+e.encountertype in (1,2,5,7,10,14,15,16,17,18,20,24,25,26,27,28,29,31) AND 
+e.encStatus < 255 AND badvisitdate = 0 AND
+ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ? group by 1;', array($endDate));
 
-  # Randez vous rate (active) = 8
-  database()->query(' insert into tpatient select straight_join e.patientid, 8 from patientsInPepfarTable
-		join patientsNotInDiscTable using (patientid)
-		join patient p using (patientid)
-		join encounter e using (patientid)
-		where (encountertype in (' . $encTypeListMod . ') and e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1 and 
-		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?)
-		group by e.patientid having datediff(?, max(ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd))) between 0 and 90;', array($endDate, $endDate));
-		
-		
-  # perdu de vu (inactive) = 9
-  database()->query(' insert into tpatient select straight_join e.patientid, 9 from patientsInPepfarTable
-		join patientsNotInDiscTable using (patientid)
-		join patient p using (patientid)
-		join encounter e using (patientid)
-		where (encountertype in (' . $encTypeListMod . ') and e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1 and 
-		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?)
-		group by e.patientid having datediff(?, max(ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd)))>90;', array($endDate, $endDate));
 
-  
-/* PRE-ART PATIENTS */
-
-    # Decedes (Death) = 4
-  database()->exec(' insert into tpatient select distinct patientid, 4 from patientsNotInPepfarTable join discTable using (patientid) where discType=12 and discDate<?;', array($endDate));
-    # transfere (Transfert) = 5
-  database()->exec(' insert into tpatient select distinct patientid, 5 from patientsNotInPepfarTable join discTable using (patientid) where discType=11 and discDate<?;', array($endDate));
-  
-  # Recent(active) = 7
-  database()->query(' insert into tpatient select straight_join distinct patientid, 7 from patientsNotInDiscTable
-		join patientsNotInPepfarTable using (patientid)
-		join patient p using (patientid)
-		join encounter e using (patientid)
-		where encountertype in (1,16) and e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1 and 
-		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?
-		group by patientid having datediff(?, max(ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd))) <= 365;', array($endDate, $endDate));
-
-  # perdu de vue (inactive) = 10
-  database()->query(' insert into tpatient select straight_join distinct patientid, 10 from patientsNotInDiscTable
-		join patientsNotInPepfarTable using (patientid)
-		join patient p using (patientid)
-		left outer join encounter e using (patientid)
-		where encounterType in (' . $encTypeList . ') and e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1 and 
-		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ? and e.patientID is null
-		group by patientid having datediff(?, max(ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd))) > 365;', array($endDate, $endDate));
-
-		
- # Actif sur ARV = 11
- database()->query(' insert into tpatient select straight_join distinct patientid, 11 from patientsNotInDiscTable
-		join patientsNotInPepfarTable using (patientid)
-		join patient p using (patientid)
-		join encounter e using (patientid)
-		where encountertype in (' . $encTypeList . ') and e.encStatus < 255 and p.patStatus = 0 and badvisitdate = 0 and p.hivPositive = 1 and 
-		ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?
-		and patientID not in (select patientID from tpatient where patientStatus=7)
-		group by patientid having datediff(?, max(ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd))) <= 365;', array($endDate, $endDate));
-
+  database()->exec('ALTER TABLE allEnc ADD PRIMARY KEY (patientid);');  
+  database()->query('UPDATE allEnc e, art a SET e.maxDt = a.maxDispDt WHERE e.patientid = a.patientid and a.maxDispDt > e.maxDt;');
    
-  //clean up
-  database()->exec('drop temporary table patientsInPepfarTable;');
-  database()->exec('drop temporary table patientsNotInPepfarTable;');
-  database()->exec('drop temporary table patientsInDiscTable;');
-  database()->exec('drop temporary table patientsNotInDiscTable;');
+ $query= "UPDATE allHIV a, (
+select case when ? between e.maxDt and e.nextDt then 6 when datediff(?,e.maxDT) between 0 and 90 then 8 else 9 end as patientStatus,l.patientid fromart l, allEnc e WHERE l.patientid = e.patientid AND l.patientid NOT IN (SELECT patientID from discTable where discDate <=?))
+UNION 
+(SELECT CASE WHEN discType = 12 THEN 1 WHEN discType = 11 THEN 2 ELSE 3 END AS patientStatus, d.patientid FROM discTable d,art l WHERE l.patientid = d.patientid AND discDate <=?)
+UNION 
+(SELECT CASE WHEN e.minDt BETWEEN date_add(?,INTERVAL -12 MONTH) AND ? THEN 7 WHEN e.minDt<date_add(?,INTERVAL -12 MONTH) AND e.maxDt BETWEEN date_add(?,INTERVAL -12 MONTH) AND ? THEN 11 ELSE 10 END AS patientStatus, e.patientid FROM allEnc e WHERE patientid NOT IN (SELECT patientID from discTable WHERE discDate <=?) AND patientid NOT IN (SELECT patientID FROM art))
+UNION 
+(SELECT CASE WHEN discType = 12 THEN 4 WHEN discType = 11 THEN 5 ELSE 10 END  AS patientStatus, d.patientid FROM discTable d, allHIV h WHERE d.patientid = h.patientid AND 
+d.patientid NOT IN (SELECT patientid FROM art) AND discDate <=?)
+) b SET a.patientStatus=b.patientStatus WHERE a.patientid=b.patientid;";
+database()->exec($query,array($endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate));
 
   if ($mode == 2) {
-    database()->exec('lock tables patientStatusTemp write,tpatient t read;');
+    database()->exec('lock tables patientStatusTemp write,allHIV t read;');
     database()->query('delete from patientStatusTemp where endDate = ?', array($endDate));
-    database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from tpatient t;', array($endDate));
+    database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from allHIV t;', array($endDate));
     database()->exec('unlock tables');
-    database()->exec('drop table tpatient');
     return getPatientStatusTemp($endDate);
   } else {
-    database()->exec('lock tables patient p write,tpatient t read');
-    database()->exec('update patient p left join tpatient t using (patientid) set p.patientStatus = t.patientStatus'); 
+    database()->exec('lock tables patient p write,allHIV t read');
+    database()->exec('update patient p left join allHIV t using (patientid) set p.patientStatus = t.patientStatus'); 
     database()->exec('unlock tables;'); 
-    database()->exec('drop table tpatient');
   }
 }
+
+
 function updateAges() {
   //two digit years greater then this are considered from the 1900s
   $y2kCutOff = 9;
