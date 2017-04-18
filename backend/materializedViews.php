@@ -638,14 +638,14 @@ ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ? group by 1;', array(
   database()->query('UPDATE allEnc e, art a SET e.maxDt = a.maxDispDt WHERE e.patientid = a.patientid and a.maxDispDt > e.maxDt;');
    
  $query= "UPDATE allHIV a, (
-select case when ? between e.maxDt and e.nextDt then 6 when datediff(?,e.maxDT) between 0 and 90 then 8 else 9 end as patientStatus,l.patientid fromart l, allEnc e WHERE l.patientid = e.patientid AND l.patientid NOT IN (SELECT patientID from discTable where discDate <=?))
+select case when ? between e.maxDt and e.nextDt then 6 when datediff(?,e.maxDT) between 0 and 90 then 8 else 9 end as patientStatus,l.patientid fromart l, allEnc e WHERE l.patientid = e.patientid AND l.patientid NOT IN (SELECT patientID from discTable where discDate <=?)
 UNION 
-(SELECT CASE WHEN discType = 12 THEN 1 WHEN discType = 11 THEN 2 ELSE 3 END AS patientStatus, d.patientid FROM discTable d,art l WHERE l.patientid = d.patientid AND discDate <=?)
+SELECT CASE WHEN discType = 12 THEN 1 WHEN discType = 11 THEN 2 ELSE 3 END AS patientStatus, d.patientid FROM discTable d,art l WHERE l.patientid = d.patientid AND discDate <=?
 UNION 
-(SELECT CASE WHEN e.minDt BETWEEN date_add(?,INTERVAL -12 MONTH) AND ? THEN 7 WHEN e.minDt<date_add(?,INTERVAL -12 MONTH) AND e.maxDt BETWEEN date_add(?,INTERVAL -12 MONTH) AND ? THEN 11 ELSE 10 END AS patientStatus, e.patientid FROM allEnc e WHERE patientid NOT IN (SELECT patientID from discTable WHERE discDate <=?) AND patientid NOT IN (SELECT patientID FROM art))
+SELECT CASE WHEN e.minDt BETWEEN date_add(?,INTERVAL -12 MONTH) AND ? THEN 7 WHEN e.minDt<date_add(?,INTERVAL -12 MONTH) AND e.maxDt BETWEEN date_add(?,INTERVAL -12 MONTH) AND ? THEN 11 ELSE 10 END AS patientStatus, e.patientid FROM allEnc e WHERE patientid NOT IN (SELECT patientID from discTable WHERE discDate <=?) AND patientid NOT IN (SELECT patientID FROM art)
 UNION 
-(SELECT CASE WHEN discType = 12 THEN 4 WHEN discType = 11 THEN 5 ELSE 10 END  AS patientStatus, d.patientid FROM discTable d, allHIV h WHERE d.patientid = h.patientid AND 
-d.patientid NOT IN (SELECT patientid FROM art) AND discDate <=?)
+SELECT CASE WHEN discType = 12 THEN 4 WHEN discType = 11 THEN 5 ELSE 10 END  AS patientStatus, d.patientid FROM discTable d, allHIV h WHERE d.patientid = h.patientid AND 
+d.patientid NOT IN (SELECT patientid FROM art) AND discDate <=?
 ) b SET a.patientStatus=b.patientStatus WHERE a.patientid=b.patientid;";
 database()->exec($query,array($endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate));
 
