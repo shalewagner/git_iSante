@@ -658,8 +658,7 @@ SELECT CASE WHEN discType = 12 THEN 4
 			ELSE 10 END  AS patientStatus, d.patientid FROM discTable d, allHIV h 
 WHERE d.patientid = h.patientid AND d.patientid NOT IN (SELECT patientid FROM art) AND discDate <=?
 ) b SET a.patientStatus=b.patientStatus WHERE a.patientid=b.patientid;';
-	
-database()->exec($query,array($endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate));
+database()->query($query,array($endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate));
 
   if ($mode == 2) {
     database()->exec('lock tables patientStatusTemp write,allHIV t read;');
