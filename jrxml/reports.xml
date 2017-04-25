@@ -1951,7 +1951,15 @@
 				    <groupLevel>0</groupLevel>
 				    <otherLevel>0</otherLevel>
 				    <menuSelection>dateSelect</menuSelection>
-			    </report>				
+			    </report>
+		<report id="555" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Eligible for viral load but not done yet </title>
+				  <title lang="fr">Liste des patients eligibles pour la charge virale mais n'en ayant pas</title>
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <query>select distinct p.patientID as IdPatient, lname as Nom, fname as Prenom, telephone from patientAlert p, patient q where p.patientId=q.patientID and (alertId=1 or alertId=4)</query> 
+			    </report>
 		</reportSubSet>
 		<reportSubSet><!--  patient demographics -->
 		<title lang="en">Patient Demographics</title>
