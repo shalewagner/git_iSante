@@ -28,8 +28,8 @@ $result =databaseSelect()->query($siteInfo);
 $info='
 <tr style="text-align:left; background-color:#C7D0D3;border-collapse: collapse; border: 1px solid #C0D8DA">
 <th>Etablissement</th><th>sitecode</th><th>Server local</th><th>Version</th><th>Date recente</th>
-<th>Regulier</th><th>Rendez-vous Rate</th><th>perdu de vu</th><th>Arrete</th><th>Transferer</th><th>Decede</th><th>Total ART</th>
 <th>Recent</th><th>Actif</th><th>perdu de vu</th><th>Transferer</th><th>Decede</th><th>Total PRE-ART</th>
+<th>Regulier</th><th>Rendez-vous Rate</th><th>perdu de vu</th><th>Arrete</th><th>Transferer</th><th>Decede</th><th>Total ART</th>
 <th>Autres patients VIH</th><th>Total General</th></tr>';
 $i=0;
 while ($statusRow = $result->fetch()) {
@@ -42,6 +42,34 @@ while ($statusRow = $result->fetch()) {
 	else $i=1;
 	
     $info=$info.'<tr '.$style.'><td>'.$statusRow['clinic'].'</td><td>'. $statusRow['sitecode'].'</td><td>'. $statusRow['local'].'</td><td>'.$statusRow['dbVersion'].'</td><td>'.$statusRow['maxDate'].'</td>';
+
+/* patient Status PRE ART */
+		$patStatuspreArt="select 
+                    count(distinct case when t.patientStatus=4 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtDeathChild,
+                    count(distinct case when t.patientStatus=5 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtTransfertChild,
+                    count(distinct case when t.patientStatus=7 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtRecentChild,
+                    count(distinct case when t.patientStatus=10 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtLostChild,
+                    count(distinct case when t.patientStatus=11 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtActifChild,
+					count(distinct case when t.patientStatus=4 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtDeathAdl,
+                    count(distinct case when t.patientStatus=5 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtTransfertAdl,
+                    count(distinct case when t.patientStatus=7 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtRecentAdl,
+                    count(distinct case when t.patientStatus=10 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtLostAdl,
+                    count(distinct case when t.patientStatus=11 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtActifAdl,
+					count(distinct case when t.hivPositive=1 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtTotalChild,
+					count(distinct case when t.hivPositive=1 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtTotalAdl
+            from patient t,clinicLookup c,encounter e 
+                where c.sitecode=LEFT(t.patientid,5) and t.patientStatus in (4,5,7,10,11) and e.patientID=t.patientid and c.sitecode=". $statusRow['sitecode'];
+ $result2 =database()->query($patStatuspreArt);
+
+
+while ($statusRow2 = $result2->fetch()) {
+       $info=$info.'<td>'.$statusRow2['preArtRecentChild'].'/'.$statusRow2['preArtRecentAdl'].'</td>
+	                <td>'.$statusRow2['preArtActifChild'].'/'.$statusRow2['preArtActifAdl'].'</td>
+	                <td>'.$statusRow2['preArtLostChild'].'/'.$statusRow2['preArtLostAdl'].'</td>
+					<td>'.$statusRow2['preArtTransfertChild'].'/'.$statusRow2['preArtTransfertAdl'].'</td>
+					<td>'.$statusRow2['preArtDeathChild'].'/'.$statusRow2['preArtDeathAdl'].'</td>					
+					<td>'.$statusRow2['preArtTotalChild'].'/'.$statusRow2['preArtTotalAdl'].'</td>';
+}
 
 /* patient Status ART */
 		$patStatusart="select 
@@ -73,35 +101,6 @@ while ($statusRow1 = $result1->fetch()) {
 					<td>'.$statusRow1['artTotalChild'].'/'.$statusRow1['artTotalAdl'].'</td>';
 }
 
-/* patient Status PRE ART */
-		$patStatuspreArt="select 
-                    count(distinct case when t.patientStatus=4 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtDeathChild,
-                    count(distinct case when t.patientStatus=5 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtTransfertChild,
-                    count(distinct case when t.patientStatus=7 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtRecentChild,
-                    count(distinct case when t.patientStatus=10 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtLostChild,
-                    count(distinct case when t.patientStatus=11 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtActifChild,
-					count(distinct case when t.patientStatus=4 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtDeathAdl,
-                    count(distinct case when t.patientStatus=5 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtTransfertAdl,
-                    count(distinct case when t.patientStatus=7 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtRecentAdl,
-                    count(distinct case when t.patientStatus=10 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtLostAdl,
-                    count(distinct case when t.patientStatus=11 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtActifAdl,
-					count(distinct case when t.hivPositive=1 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtTotalChild,
-					count(distinct case when t.hivPositive=1 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtTotalAdl
-            from patient t,clinicLookup c,encounter e 
-                where c.sitecode=LEFT(t.patientid,5) and t.patientStatus in (4,5,7,10,11) and e.patientID=t.patientid and c.sitecode=". $statusRow['sitecode'];
- $result2 =database()->query($patStatuspreArt);
-
-
-while ($statusRow2 = $result2->fetch()) {
-       $info=$info.'<td>'.$statusRow2['preArtRecentChild'].'/'.$statusRow2['preArtRecentAdl'].'</td>
-	                <td>'.$statusRow2['preArtActifChild'].'/'.$statusRow2['preArtActifAdl'].'</td>
-	                <td>'.$statusRow2['preArtLostChild'].'/'.$statusRow2['preArtLostAdl'].'</td>
-					<td>'.$statusRow2['preArtTransfertChild'].'/'.$statusRow2['preArtTransfertAdl'].'</td>
-					<td>'.$statusRow2['preArtDeathChild'].'/'.$statusRow2['preArtDeathAdl'].'</td>					
-					<td>'.$statusRow2['preArtTotalChild'].'/'.$statusRow2['preArtTotalAdl'].'</td>';
-}
-
-
 /* patient status total */
 		$patStatustotal="select 
                     count(distinct case when t.patientStatus in (4,5,7,10,11,1,2,3,6,8,9) then t.patientID else null end) as TotalGeneral,
@@ -122,8 +121,8 @@ $info=$info.'</tr>';
   <table width="1800" border="0">
   <tr style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">
     <th colspan="5" style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">&nbsp;</th>
-    <th colspan="7" style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Sous TAR</th>
-    <th colspan="6" style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Soins palliatifs</th>
+	<th colspan="6" style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">PRE-ARV</th>
+    <th colspan="7" style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Sous TAR</th>    
     <th colspan="2" style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Totaux generaux</th>
   </tr>
   <tr>
