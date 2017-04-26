@@ -615,9 +615,10 @@ if ($repNum >= 2000 && $repNum <= 3999) { // use prim. care & ob/gyn report layo
 	</tr>
   ";
 } else { // use HIV report layout
-  echo "
+   echo "
 	<tr>
-		<th align=\"left\" colspan=\"2\">" . setLabelDisabled($kickLabel['patientStatus'][$lang][0], $pStatus) . "</th>
+		<th align=\"left\">" . setLabelDisabled($kickLabel['patientStatus'][$lang][-1], $pStatus) . "</th>
+		<th align=\"left\">" . setLabelDisabled($kickLabel['patientStatus'][$lang][0], $pStatus) . "</th>
 		<td class=\"vert_line\" rowspan=\"16\" width=\"1%\">&nbsp;</td>
 		<th align=\"left\">" . setLabelDisabled($kickLabel['treatmentStatus'][$lang][0], $tStatus) . "</th>
 		<td class=\"vert_line\" rowspan=\"7\" width=\"1%\">&nbsp;</td>
@@ -626,20 +627,30 @@ if ($repNum >= 2000 && $repNum <= 3999) { // use prim. care & ob/gyn report layo
   ";
 
 	$j = 1;
-	for ($i = 1; $i <= 8; $i++) {
+	for ($i = 1; $i <= 6; $i++) {
 		echo "
 		<tr>";
-			if ($i <= 6) {
+			if ($i <= 3) {
 				echo "
-				<td colspan=\"2\" width=\"50%\">" . genCheckboxControl ($kickLabel, $lang, "patientStatus", $i-1, $pStatus) . "
+				<td width=\"25%\">" . genCheckboxControl ($kickLabel, $lang, "patientStatus", $i-1, $pStatus) . "
 				</td>
-				<td width=\"29%\">" . genRadioControl ($kickLabel, $lang, "treatmentStatus", $i, $tStatus, $repNum) . "</td>";
+				<td width=\"25%\">" . genCheckboxControl ($kickLabel, $lang, "patientStatus", $i+5, $pStatus) . "
+				</td>
+				<td width=\"29%\">" . genRadioControl ($kickLabel, $lang, "treatmentStatus", $i+3, $tStatus, $repNum) . "</td>";
 			}
-			if ($i >= 7) {
+			if ($i <=6&&$i>3) {
 				echo "
-				<td colspan=\"2\" width=\"50%\">" . genCheckboxControl ($kickLabel, $lang, "patientStatus", $i-1, $pStatus) . "</td>
+				<td width=\"25%\">" . genCheckboxControl ($kickLabel, $lang, "patientStatus", $i-1, $pStatus) . "
+				</td>";
+				if($i <6)
+				echo "
+				<td width=\"25%\">" . genCheckboxControl ($kickLabel, $lang, "patientStatus", $i+5, $pStatus) . "
+				</td>";
+				
+				echo "
 				<td width=\"29%\">&nbsp;</td>";
 			}
+			
 			if ($j <= 8) {
 				echo "
 				<td width=\"22%\">
