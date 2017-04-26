@@ -297,6 +297,11 @@ function sendParameters () {
 	  if (document.forms['mainForm'].patientStatus0.checked) pStatus = pStatus + 4;
 	  if (document.forms['mainForm'].patientStatus1.checked) pStatus = pStatus + 16;
 	  if (document.forms['mainForm'].patientStatus2.checked) pStatus = pStatus + 32;
+	  if (document.forms['mainForm'].patientStatus3.checked) pStatus = pStatus + 64;
+	  if (document.forms['mainForm'].patientStatus4.checked) pStatus = pStatus + 128;
+	  if (document.forms['mainForm'].patientStatus5.checked) pStatus = pStatus + 256;
+	  if (document.forms['mainForm'].patientStatus6.checked) pStatus = pStatus + 516;
+	  if (document.forms['mainForm'].patientStatus7.checked) pStatus = pStatus + 1032;		
 	  tStatus = getCheckedValue(document.forms['mainForm'].treatmentStatus);
 	  tType = getCheckedValue(document.forms['mainForm'].testType);
 	  gLevel  = getCheckedValue(document.forms['mainForm'].groupLevel);
@@ -621,19 +626,19 @@ if ($repNum >= 2000 && $repNum <= 3999) { // use prim. care & ob/gyn report layo
   ";
 
 	$j = 1;
-	for ($i = 1; $i <= 6; $i++) {
+	for ($i = 1; $i <= 8; $i++) {
 		echo "
 		<tr>";
-			if ($i <= 3) {
+			if ($i <= 6) {
 				echo "
 				<td colspan=\"2\" width=\"50%\">" . genCheckboxControl ($kickLabel, $lang, "patientStatus", $i-1, $pStatus) . "
 				</td>
 				<td width=\"29%\">" . genRadioControl ($kickLabel, $lang, "treatmentStatus", $i, $tStatus, $repNum) . "</td>";
 			}
-			if ($i >= 4) {
+			if ($i >= 7) {
 				echo "
-				<td colspan=\"2\" width=\"50%\">&nbsp;</td>
-				<td width=\"29%\">" . genRadioControl ($kickLabel, $lang, "treatmentStatus", $i, $tStatus, $repNum) . "</td>";
+				<td colspan=\"2\" width=\"50%\">" . genCheckboxControl ($kickLabel, $lang, "patientStatus", $i-1, $pStatus) . "</td>
+				<td width=\"29%\">&nbsp;</td>";
 			}
 			if ($j <= 8) {
 				echo "
