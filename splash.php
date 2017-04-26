@@ -26,17 +26,17 @@ Ext.onReady(function() {
 			{name: 'dbVersion', type: 'string'},
 			{name: 'local', type: 'string'},
 			{name: 'modifyDate', type: 'date', format: 'Y-m-d'},
-			{name: 'ccNew', type: 'string'},
-			{name: 'ccActive', type: 'string'},
-			{name: 'ccAtRisk', type: 'string'},
-			{name: 'ccInactive', type: 'string'},
-			{name: 'ccDisc', type: 'string'},
+			{name: /*'ccNew'*/'partArrete', type: 'string'},
+			{name: /*'ccActive'*/'partRecent', type: 'string'},
+			{name: /*'ccAtRisk'*/'partTransfere', type: 'string'},
+			{name: /*'ccInactive'*/'partInactive', type: 'string'},
+			{name: /*'ccDisc'*/'artInactive', type: 'string'},
 			{name: 'ccTotal', type: 'string'},
-			{name: 'artNew', type: 'string'},
-			{name: 'artActive', type: 'string'},
-			{name: 'artAtRisk', type: 'string'},
-			{name: 'artInactive', type: 'string'},
-			{name: 'artDisc', type: 'string'},
+			{name: /*'artNew'*/'artTransfere', type: 'string'},
+			{name: /*'artActive'*/'regulier', type: 'string'},
+			{name: /*'artAtRisk'*/'partDcd', type: 'string'},
+			{name: /*'artInactive'*/'artActive', type: 'string'},
+			{name: /*'artDisc'*/'artDcd', type: 'string'},
 			{name: 'artTotal', type: 'string'},
 			{name: 'hivNegative', type: 'string'},
 			{name: 'Total', type: 'string'}
@@ -50,21 +50,21 @@ Ext.onReady(function() {
 
 	var spcm = new Ext.grid.ColumnModel([
 		{header: '<?=_('Établissement');?>', dataIndex: 'clinic', type: 'string',  width: 250, sortable: true, fixed: true, hideable: true},
-		{header: '<?=$splashLabels[$lang]["sitecode"];?>', dataIndex: 'sitecode', type: 'string',  width: 300, sortable: true, fixed: true, hideable: true, hidden: true},
+		{header: '<?=$splashLabels[$lang]["sitecode"];?>', dataIndex: 'sitecode', type: 'string',  width: 300, sortable: true, fixed: true, hideable: true, hidden: false},
 		{header: 'Version', dataIndex: 'dbVersion', type: 'string',  width: 75, fixed: true, align: 'right', hideable: true},
 		{header: '<?=$splashLabels[$lang]["dbSite"];?>', dataIndex: 'local', type: 'string',  width: 75, sortable: false, fixed: true, align: 'right', hideable: true},
 		{header: '<?=$splashLabels[$lang]["recent"];?>', dataIndex: 'modifyDate', type: 'date',  width: 100, sortable: true,  align: 'right', renderer: formatDate, fixed: true, hideable: true},
-		{header: '<?=$splashLabels[$lang]["new"];?>', dataIndex: 'ccNew', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true, hidden: true},
-		{header: '<?=$splashLabels[$lang]["active"];?>', dataIndex: 'ccActive', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true},
-		{header: '<?=$splashLabels[$lang]["atRisk"];?>', dataIndex: 'ccAtRisk', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true, hidden: true},
-		{header: '<?=$splashLabels[$lang]["inactive"];?>', dataIndex: 'ccInactive', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true},
-		{header: '<?=$splashLabels[$lang]["disc"];?>', dataIndex: 'ccDisc', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang][/*"new"*/"arrete"];?>', dataIndex: /*'ccNew'*/'partArrete', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true, hidden: false},
+		{header: '<?=$splashLabels[$lang][/*"active"*/"pRecent"];?>', dataIndex: /*'ccActive'*/'partRecent', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang][/*"atRisk"*/"transfere"];?>', dataIndex: /*'ccAtRisk'*/'partTransfere', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true, hidden: false},
+		{header: '<?=$splashLabels[$lang][/*"inactive"*/"perduVue"];?>', dataIndex: /*'ccInactive'*/'partInactive', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang][/*"disc"*/"perduVue"];?>', dataIndex: /*'ccDisc'*/'artInactive', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true},
 		{header: '<?=$splashLabels[$lang]["total"];?>', dataIndex: 'ccTotal', type: 'string',  width: 65, sortable: true, align: 'right', fixed: true, hideable: true},
-		{header: '<?=$splashLabels[$lang]["new"];?>', dataIndex: 'artNew', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true, hidden: true},
-		{header: '<?=$splashLabels[$lang]["active"];?>', dataIndex: 'artActive', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true},
-		{header: '<?=$splashLabels[$lang]["atRisk"];?>', dataIndex: 'artAtRisk', type: 'string',  width: 75, sortable: false,  align: 'right', fixed: true, hideable: true, hidden: true},
-		{header: '<?=$splashLabels[$lang]["inactive"];?>', dataIndex: 'artInactive', type: 'string',  width: 75, sortable: false,  align: 'right', fixed: true, hideable: true},
-		{header: '<?=$splashLabels[$lang]["disc"];?>', dataIndex: 'artDisc', type: 'string',  width: 75, sortable: false,  align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang][/*"new"*/"transfere"];?>', dataIndex: /*'artNew'*/'artTransfere', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true, hidden: false},
+		{header: '<?=$splashLabels[$lang][/*"active"*/"regulier"];?>', dataIndex: /*'artActive'*/'regulier', type: 'string',  width: 75, sortable: false, align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang][/*"atRisk"*/"decede"];?>', dataIndex: /*'artAtRisk'*/'partDcd', type: 'string',  width: 75, sortable: false,  align: 'right', fixed: true, hideable: true, hidden: false},
+		{header: '<?=$splashLabels[$lang][/*"inactive"*/"rate"];?>', dataIndex: /*'artInactive'*/'artActive', type: 'string',  width: 75, sortable: false,  align: 'right', fixed: true, hideable: true},
+		{header: '<?=$splashLabels[$lang][/*"disc"*/"decede"];?>', dataIndex: /*'artDisc'*/'artDcd', type: 'string',  width: 75, sortable: false,  align: 'right', fixed: true, hideable: true},
 		{header: '<?=$splashLabels[$lang]["total"];?>', dataIndex: 'artTotal', type: 'string',  width: 65, sortable: true,align: 'right', fixed: true, hideable: true},
 		{header: '<?=_('Autre *');?>', dataIndex: 'hivNegative', type: 'string',  width: 60, sortable: true,align: 'right', fixed: true, hideable: true, hidden: false},
 		{header: '<?=$splashLabels[$lang]["grandTotals2"];?>', dataIndex: 'Total', type: 'string',  width: 90, sortable: true, align: 'right', fixed: true, hideable: true}
@@ -227,22 +227,14 @@ Ext.onReady(function() {
 	$statusMessage2 = array ("fr" => "<font color=\"red\">Rouge</font>--Sites dont le transfert des donnees n\'a pas ete fait depuis au moins deux semaines.", "en" => "<font color=\"red\">Red</font>--Sites with no forms entered in the last two weeks.");
 	?>
 	
-	var hiv = {
-		xtype: 'panel',
-		title: 'Dashboard VIH',
-		layout: 'vbox',
-		items: [
-			spgrid,
-			{ xtype: 'panel',
-			 	title: 'Légende',
-				items: [
-					{xtype: 'label', html: '<?=$statusMessage1[$lang];?><br />'},
-					{xtype: 'label', html: '<?=$statusMessage2[$lang];?><br />'},
-					{xtype: 'label', html: '<?=_('* Autre : Patients en soins de santé primaires (adulte, pédiatrique, ob-gyn) et les patients avec fiche d’enregistrement seulement');?>'}
-				]
-		        }]
-		
-	};
+	var statusTab = Ext.DomHelper.append(document.body,{tag: 'iframe',name:'statusTab',id:'statusTab', layout:'fit',frameBorder: 0, src: 'statusTab.php',width: '100%', height: '100%'});
+    var hiv = {
+      xtype: 'panel',
+      title: 'Dashboard VIH',
+      layout: 'vbox',
+      items: [statusTab]
+  };
+
 	
 	var primary = {
 		xtype: 'panel', 
