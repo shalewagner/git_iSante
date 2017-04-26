@@ -10,7 +10,7 @@ function applyCriteria ($rtype, $repNum, $site, $pType, $tType, $ttType,
 			$start, $end, $patientID, $menuSelection, $gLevel = "") {
 
 	$pArray = getPatientStatusArray ($pType);
-	$strpType = array ("", "all","new","active","atrisk", "inactive", "discontinued");
+	$strpType = array ("", "all","artregular","artmissing","lost", "death", "tranfert","artstopped","preartactif","preartrecent");
 	$strtType = array ("", "any","art","notart", "inh", "cot", "tb", "notenrolled");
 	$strttType = array ("", "cd4", "ppd", "radiographie", "crachat", "liver", "blood", "rpr", "hepatit", "pap");
 	// run a loop for all the ON values of pType
@@ -79,7 +79,7 @@ function applyCriteria ($rtype, $repNum, $site, $pType, $tType, $ttType,
           $siteClause = "siteCode = '$site'";
 
 	$pCounter = true;
-	for ($i = 0; $i < 5; $i++) {
+	for ($i = 0; $i < 9; $i++) {
 		if ($pArray[$i] == 1) {
 			$type = $strpType[$i+2];
 			$type2 = $strtType[$tType];
@@ -113,8 +113,8 @@ function applyCriteria ($rtype, $repNum, $site, $pType, $tType, $ttType,
 #			$query .= 'patientid in (';
 		     	$qquery = "insert into " . $tempTableNames[1] . " (pid) values ";
 
-			if ($type == "discontinued" && count (array_merge (array_keys ($patStatus, 1), array_keys ($patStatus, 9))) > 0) {						   
-                                $qvals = array_merge(array_keys($patStatus, 1), array_keys($patStatus, 9));
+			if ($type == "artregular" && count (array_merge (array_keys ($patStatus, 6))) > 0) {						   
+                                $qvals = array_merge(array_keys($patStatus, 6));
 #				$query .= '\'' . join('\', \'', array_merge(array_keys($patStatus, 1), array_keys($patStatus, 9))) . '\'';
 				//$query .= " select patientID from #tpatient where patientStatus = 1 or patientStatus = 9";
 			} else if ($type == "all" && count (array_keys ($patStatus)) > 0) {
@@ -122,23 +122,35 @@ function applyCriteria ($rtype, $repNum, $site, $pType, $tType, $ttType,
                                 $qvals = array_keys ($patStatus);
 #				$query .= '\'' . join ('\', \'', array_keys ($patStatus)) . '\'';
 				//$query .= " select patientID from #tpatient";
-			} else if ($type == "inactive" && count (array_merge (array_keys ($patStatus, 8), array_keys ($patStatus, 10))) > 0) {
-                                $qvals = array_merge(array_keys($patStatus, 8), array_keys($patStatus, 10));
+			} else if ($type == "artmissing" && count (array_merge (array_keys ($patStatus, 8))) > 0) {
+                                $qvals = array_merge(array_keys($patStatus, 8));
 #				$query .= '\'' . join ('\', \'', array_merge (array_keys ($patStatus, 8), array_keys ($patStatus, 10))) . '\'';
 				//$query .= " select patientID from #tpatient where patientStatus = 8 or patientStatus = 10";				 
-			} else if ($type == "new" && count (array_merge (array_keys ($patStatus, 2), array_keys ($patStatus, 3))) > 0) {
-                                $qvals = array_merge(array_keys($patStatus, 2), array_keys($patStatus, 3));
+			} else if ($type == "lost" && count (array_merge (array_keys ($patStatus, 9),array_keys ($patStatus, 10))) > 0) {
+                                $qvals = array_merge(array_keys($patStatus, 9),array_keys($patStatus, 10));
 #				$query .= '\'' . join ('\', \'', array_merge (array_keys ($patStatus, 2), array_keys ($patStatus, 3))) . '\'';
 				//$query .= " select patientID from #tpatient where patientStatus = 2 or patientStatus = 3";
-			} else if ($type == "active" && count (array_merge (array_keys ($patStatus, 6), array_keys ($patStatus, 7))) > 0) {
-                                $qvals = array_merge(array_keys($patStatus, 6), array_keys($patStatus, 7));
+			} else if ($type == "death" && count (array_merge (array_keys ($patStatus, 1), array_keys ($patStatus, 4))) > 0) {
+                                $qvals = array_merge(array_keys($patStatus, 1), array_keys($patStatus, 4));
 #				$query .= '\'' . join ('\', \'', array_merge (array_keys ($patStatus, 6), array_keys ($patStatus, 7))) . '\'';
 				//$query .= " select patientID from #tpatient where patientStatus = 6 or patientStatus = 7";
-			} else if ($type == "atrisk" && count (array_merge (array_keys ($patStatus, 4), array_keys ($patStatus, 5))) > 0) {
-                                $qvals = array_merge(array_keys($patStatus, 4), array_keys($patStatus, 5));
+			} else if ($type == "tranfert" && count (array_merge (array_keys ($patStatus, 2), array_keys ($patStatus, 5))) > 0) {
+                                $qvals = array_merge(array_keys($patStatus, 2), array_keys($patStatus, 5));
 #				$query .= '\'' . join ('\', \'', array_merge (array_keys ($patStatus, 4), array_keys ($patStatus, 5))) . '\'';
 				//$query .= " select patientID from #tpatient where patientStatus = 4 or patientStatus = 5";
-			} else {
+			} else if ($type == "artstopped" && count (array_merge (array_keys ($patStatus, 3))) > 0) {
+                                $qvals = array_merge(array_keys($patStatus, 3));
+#				$query .= '\'' . join ('\', \'', array_merge (array_keys ($patStatus, 4), array_keys ($patStatus, 5))) . '\'';
+				//$query .= " select patientID from #tpatient where patientStatus = 4 or patientStatus = 5";
+			} else if ($type == "preartactif" && count (array_merge (array_keys ($patStatus, 11))) > 0) {
+                                $qvals = array_merge(array_keys($patStatus, 11));
+#				$query .= '\'' . join ('\', \'', array_merge (array_keys ($patStatus, 4), array_keys ($patStatus, 5))) . '\'';
+				//$query .= " select patientID from #tpatient where patientStatus = 4 or patientStatus = 5";
+			} else if ($type == "preartrecent" && count (array_merge (array_keys ($patStatus, 7))) > 0) {
+                                $qvals = array_merge(array_keys($patStatus, 7));
+#				$query .= '\'' . join ('\', \'', array_merge (array_keys ($patStatus, 4), array_keys ($patStatus, 5))) . '\'';
+				//$query .= " select patientID from #tpatient where patientStatus = 4 or patientStatus = 5";
+			}else {
 				continue;
 			}
 #			$query .= ')';
