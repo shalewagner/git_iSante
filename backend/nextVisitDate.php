@@ -15,9 +15,9 @@ function generatenextVisit($startdate, $enddate,$site, $lang) {
 "nextVisit" => "select clinicPatientID as ST,lname as Prenom,fname as Nom,telephone,birthDate as 'Date de naissance',dispenseDate as 'Date de dispensation' from (
 SELECT p.patientID,clinicPatientID,lname,fname,telephone,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt_dispd) as dispenseDate
 from patient p, patientDispenses p1
-where p1.patientID=p.patientID  and p.location_id=".$site."
+where p1.patientID=p.patientID and p.patientStatus in (6,7,8)  and p.location_id=".$site."
 group by 1,2,3,4,5,6
-) A where DATEDIFF(dispenseDate, now()) <=0   order by 5"); 
+) A where DATEDIFF(dispenseDate, CURDATE()) between -90 and 0   order by 5"); 
   
   $nextVisit = outputQueryRows($queryArray["nextVisit"]); 
  
