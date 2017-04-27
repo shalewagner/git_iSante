@@ -28,8 +28,8 @@ $result =databaseSelect()->query($siteInfo);
 $info='
 <tr style="text-align:left; background-color:#C7D0D3;border-collapse: collapse; border: 1px solid #C0D8DA">
 <th>Etablissement</th><th>sitecode</th><th>Server local</th><th>Version</th><th>Date recente</th>
-<th>Recent</th><th>Actif</th><th>perdu de vu</th><th>Transferer</th><th>Decede</th><th>Total PRE-ART</th>
-<th>Regulier</th><th>Rendez-vous Rate</th><th>perdu de vu</th><th>Arrete</th><th>Transferer</th><th>Decede</th><th>Total ART</th>
+<th>Recent</th><th>Actif</th><th>perdu de vue</th><th>Transferer</th><th>Decede</th><th>Total PRE-ART</th>
+<th>Regulier</th><th>Rendez-vous Rate</th><th>perdu de vue</th><th>Arrete</th><th>Transferer</th><th>Decede</th><th>Total ART</th>
 <th>Autres patients VIH</th><th>Total General</th></tr>';
 $i=0;
 while ($statusRow = $result->fetch()) {
