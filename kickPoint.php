@@ -291,17 +291,21 @@ function sendParameters () {
 	}
 	pStatus = tStatus = tType = gLevel = oLevel = 0;
         ddValue = "";
+	pstatus='';
         if (document.forms['mainForm'].reportNumber.value >= 2000 &&
             document.forms['mainForm'].reportNumber.value <= 3999) {
         } else {
-	  if (document.forms['mainForm'].patientStatus0.checked) pStatus = pStatus + 4;
-	  if (document.forms['mainForm'].patientStatus1.checked) pStatus = pStatus + 16;
-	  if (document.forms['mainForm'].patientStatus2.checked) pStatus = pStatus + 32;
-	  if (document.forms['mainForm'].patientStatus3.checked) pStatus = pStatus + 64;
-	  if (document.forms['mainForm'].patientStatus4.checked) pStatus = pStatus + 128;
-	  if (document.forms['mainForm'].patientStatus5.checked) pStatus = pStatus + 256;
-	  if (document.forms['mainForm'].patientStatus6.checked) pStatus = pStatus + 516;
-	  if (document.forms['mainForm'].patientStatus7.checked) pStatus = pStatus + 1032;		
+	  if (document.forms['mainForm'].patientStatus0.checked) { if(pStatus=='') pStatus = pStatus +'1'; else pStatus = pStatus +',1';}
+	  if (document.forms['mainForm'].patientStatus1.checked) { if(pStatus=='') pStatus = pStatus +'2'; else pStatus = pStatus +',2';}
+	  if (document.forms['mainForm'].patientStatus2.checked) { if(pStatus=='') pStatus = pStatus +'3'; else pStatus = pStatus +',3';}
+	  if (document.forms['mainForm'].patientStatus3.checked) { if(pStatus=='') pStatus = pStatus +'4'; else pStatus = pStatus +',4';}
+	  if (document.forms['mainForm'].patientStatus4.checked) { if(pStatus=='') pStatus = pStatus +'5'; else pStatus = pStatus +',5';}
+	  if (document.forms['mainForm'].patientStatus5.checked) { if(pStatus=='') pStatus = pStatus +'6'; else pStatus = pStatus +',6';}
+	  if (document.forms['mainForm'].patientStatus6.checked) { if(pStatus=='') pStatus = pStatus +'7'; else pStatus = pStatus +',7';}
+	  if (document.forms['mainForm'].patientStatus7.checked) { if(pStatus=='') pStatus = pStatus +'8'; else pStatus = pStatus +',8';}
+	  if (document.forms['mainForm'].patientStatus8.checked) { if(pStatus=='') pStatus = pStatus +'9'; else pStatus = pStatus +',9';}
+	  if (document.forms['mainForm'].patientStatus9.checked) { if(pStatus=='') pStatus = pStatus +'10'; else pStatus = pStatus +',10';}
+	  if (document.forms['mainForm'].patientStatus10.checked) { if(pStatus=='') pStatus = pStatus +'11'; else pStatus = pStatus +',11';}		
 	  tStatus = getCheckedValue(document.forms['mainForm'].treatmentStatus);
 	  tType = getCheckedValue(document.forms['mainForm'].testType);
 	  gLevel  = getCheckedValue(document.forms['mainForm'].groupLevel);
