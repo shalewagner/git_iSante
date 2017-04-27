@@ -13,14 +13,16 @@ function generatearvPatient ($startdate, $enddate,$site, $lang) {
  
   $queryArray = array(
 "arvDrug" => "select 
-concat('<a href=\"arvDrugPeriodeList.php?rank=30&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) <= 30 then patientID else null end),'</a>') as  '0-30 jours',
-concat('<a href=\"arvDrugPeriodeList.php?rank=60&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) BETWEEN 30 AND 60 then patientID else null end),'</a>') as '31-60 jours',
-concat('<a href=\"arvDrugPeriodeList.php?rank=90&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) BETWEEN 60 AND 90 then patientID else null end),'</a>') as '61-90 jours',
-concat('<a href=\"arvDrugPeriodeList.php?rank=120&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) BETWEEN 90 AND 120 then patientID else null end),'</a>') as '91-120 jours',
-concat('<a href=\"arvDrugPeriodeList.php?rank=130&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, dispd) > 120 then patientID else null end),'</a>') as '>120 jours', 
-count(distinct patientid) as 'Patient Unique '
-from patientDispenses
-where dispd between '".$startdate."' AND '".$enddate."' and  LEFT(patientid,5)=".$site); 
+concat('<a href=\"arvDrugPeriodeList.php?rank=35&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, p1.dispd) BETWEEN 0 and 35 then p1.patientID else null end),'</a>') as  '0-35 jours',
+concat('<a href=\"arvDrugPeriodeList.php?rank=90&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, p1.dispd) BETWEEN 36 AND 89 then p1.patientID else null end),'</a>') as '36-89 jours',
+concat('<a href=\"arvDrugPeriodeList.php?rank=120&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, p1.dispd) BETWEEN 90 AND 120 then p1.patientID else null end),'</a>') as '90-120 jours',
+concat('<a href=\"arvDrugPeriodeList.php?rank=180&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, p1.dispd) BETWEEN 121 AND 180 then p1.patientID else null end),'</a>') as '121-180 jours',
+concat('<a href=\"arvDrugPeriodeList.php?rank=200&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when DATEDIFF(nxt_dispd, p1.dispd) > 180 then p1.patientID else null end),'</a>') as '>180 jours', 
+count(distinct p1.patientid) as 'Patient Unique '
+from patientDispenses p1,clinicLookup l, 
+(SELECT patientID,max(dispd) as dispd FROM  patientDispenses  p  where dispd between '".$startdate."' AND '".$enddate."'  group by 1) p2
+where p1.patientID=p2.patientID and p1.dispd=p2.dispd 
+and p1.dispd<p1.nxt_dispd and l.siteCode=LEFT(p1.patientid,5) and  LEFT(p1.patientid,5)=".$site); 
   
   $arvDrug = outputQueryRows($queryArray["arvDrug"]); 
  
