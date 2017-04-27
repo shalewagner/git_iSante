@@ -22,20 +22,22 @@ $drugPeriod=' And 1=1';
 $message='Liste de patients ayant reçu des ARV pour la période allant de ';
  switch ($rank)
  {
-	 case '30' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)<=30'; $message.=' 0 a 30 jours'; break;}
-	 case '60' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>30'. ' And DATEDIFF(nxt_dispd, dispd)<=60'; $message.=' 31 a 60 jours';break;}
-	 case '90' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>60'. ' And DATEDIFF(nxt_dispd, dispd)<=90'; $message.=' 61 a 90 jours';break;}
-	 case '120':{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>90'. ' And DATEDIFF(nxt_dispd, dispd)<=120'; $message.=' 91 a 120 jours';break;}
-	 case '130':{$drugPeriod.=' And DATEDIFF(nxt_dispd, dispd)>120'; $message=' Liste de patients ayant reçu des ARV pour plus de 120 jours'; break;}
+	 case '35' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, p1.dispd) BETWEEN 0 and 35'; $message.=' 0 a 35 jours'; break;}
+	 case '90' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, p1.dispd) BETWEEN 36 AND 89'; $message.=' 36 a 89 jours';break;}
+	 case '120' :{$drugPeriod.=' And DATEDIFF(nxt_dispd, p1.dispd) BETWEEN 90 AND 120'; $message.=' 90 a 120 jours';break;}
+	 case '180':{$drugPeriod.=' And DATEDIFF(nxt_dispd, p1.dispd) BETWEEN 121 AND 180'; $message.=' 121 a 180 jours';break;}
+	 case '200':{$drugPeriod.=' And DATEDIFF(nxt_dispd, p1.dispd) > 180'; $message=' Liste de patients ayant reçu des ARV pour plus de 180 jours'; break;}
 	 default: $drugPeriod.='';
  }
  
 $queryArray = array(
-"arvDrug" => "SELECT p1.dispd as 'Date de dispensation',p. patientID ,p.lname as 'Prenom',p.fname as 'Nom'
-FROM   patientDispenses p1,patient p 
-WHERE  p1.patientID=p.patientID". $drugPeriod."   and p.location_id=".$site."
-and p1.dispd between  '".$startDate."' AND '".$endDate."' group by 2,3,4"); 
-  
+"arvDrug" => "SELECT p1.dispd as 'Date de dispensation',p.clinicPatientID as ST,p.lname as 'Prenom',p.fname as 'Nom',telephone as Telephone
+from patientDispenses p1,clinicLookup l,patient p, 
+(SELECT patientID,max(dispd) as dispd FROM  patientDispenses  p  where dispd between '".$startDate."' AND '".$endDate."'  group by 1) p2
+where p1.patientID=p2.patientID and p1.dispd=p2.dispd and p.patientID=p1.patientID
+and p1.dispd<p1.nxt_dispd and l.siteCode=LEFT(p1.patientid,5)". $drugPeriod."   and p.location_id=".$site."
+group by 2,3,4 order by 1 desc"); 
+
   $arvDrug = outputQueryRows($queryArray["arvDrug"]); 
  
   $summary ='<table width="100%" >
