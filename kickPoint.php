@@ -196,7 +196,7 @@ function ymdToDate (year,month,day) {
 		if( tempYear >= 1000) {
 			outYear = tempYear;
 		} else {
-			if(tempYear <= 20) {
+			if(tempYear <= 18) {
 				outYear = 2000 + tempYear;
 			} else {
 				outYear = 1900 + tempYear;
@@ -243,32 +243,17 @@ function formatStartEndDates () {
 	eMonth = document.forms['mainForm'].endMm.value; 
 	if (eMonth.length == 1) eMonth = '0'+ eMonth;
 	eYear = document.forms['mainForm'].endYy.value; 
-	if (eYear.length == 1) eYear = '0'+ eYear;
-	if (eYear.length==2) { 
+	if (eYear.length == 1) eYear = '0'+ eYear; 
 	lastDd = daysInMonth(eMonth,'20' + eYear);
 	sDate = new Date(sMonth+'/01/20'+sYear);
-	eDate = new Date(eMonth+'/'+lastDd+'/20' +eYear); 
-	}
-	else
-	{
-	lastDd = daysInMonth(eMonth, eYear);
-	sDate = new Date(sMonth+'/01/'+sYear);
-	eDate = new Date(eMonth+'/'+lastDd+'/' +eYear); 
-	}
+	eDate = new Date(eMonth+'/'+lastDd+'/20' +eYear);  
 }
 function sendParameters () {
 	formatStartEndDates();
 	var runFlag = true;
 	if (document.forms['mainForm'].reportNumber.value == '903') {
-		if (eYear.length==2) { 
 		start = '20' + sYear + sMonth;
 		end = '20' + eYear + eMonth;
-		}
-		else { 
-		start = sYear + sMonth;
-		end = eYear + eMonth;
-		}
-		
 	} else if (document.forms['mainForm'].reportNumber.value == '540') {	
                 sDay = document.forms['mainForm'].startDd.value;
                 if (sDay.length == 1) sDay = '0'+ sDay;
@@ -276,36 +261,28 @@ function sendParameters () {
                 eDay = document.forms['mainForm'].endDd.value;
                 if (eDay.length == 1) eDay = '0'+ eDay;
 		end = ymdToDate (eYear , eMonth , eDay); 
-		if (eYear.length==2) { 
 	        sDate = new Date(sMonth + '/' + sDay + '/20' + sYear);
-	        eDate = new Date(eMonth + '/' + eDay + '/20' + eYear); 
-		}
-		else { 
-	        sDate = new Date(sMonth + '/' + sDay + '/' + sYear);
-	        eDate = new Date(eMonth + '/' + eDay + '/' + eYear); 
-		}
-		
+	        eDate = new Date(eMonth + '/' + eDay + '/20' + eYear);  
 	} else {	
 		start = ymdToDate(sYear , sMonth , document.forms['mainForm'].startDd.value );
 		end = ymdToDate(eYear , eMonth , lastDd); 
 	}
 	pStatus = tStatus = tType = gLevel = oLevel = 0;
         ddValue = "";
-	pstatus='';
         if (document.forms['mainForm'].reportNumber.value >= 2000 &&
             document.forms['mainForm'].reportNumber.value <= 3999) {
         } else {
-	  if (document.forms['mainForm'].patientStatus0.checked) { if(pStatus=='') pStatus = pStatus +'1'; else pStatus = pStatus +',1';}
-	  if (document.forms['mainForm'].patientStatus1.checked) { if(pStatus=='') pStatus = pStatus +'2'; else pStatus = pStatus +',2';}
-	  if (document.forms['mainForm'].patientStatus2.checked) { if(pStatus=='') pStatus = pStatus +'3'; else pStatus = pStatus +',3';}
-	  if (document.forms['mainForm'].patientStatus3.checked) { if(pStatus=='') pStatus = pStatus +'4'; else pStatus = pStatus +',4';}
-	  if (document.forms['mainForm'].patientStatus4.checked) { if(pStatus=='') pStatus = pStatus +'5'; else pStatus = pStatus +',5';}
-	  if (document.forms['mainForm'].patientStatus5.checked) { if(pStatus=='') pStatus = pStatus +'6'; else pStatus = pStatus +',6';}
-	  if (document.forms['mainForm'].patientStatus6.checked) { if(pStatus=='') pStatus = pStatus +'7'; else pStatus = pStatus +',7';}
-	  if (document.forms['mainForm'].patientStatus7.checked) { if(pStatus=='') pStatus = pStatus +'8'; else pStatus = pStatus +',8';}
-	  if (document.forms['mainForm'].patientStatus8.checked) { if(pStatus=='') pStatus = pStatus +'9'; else pStatus = pStatus +',9';}
-	  if (document.forms['mainForm'].patientStatus9.checked) { if(pStatus=='') pStatus = pStatus +'10'; else pStatus = pStatus +',10';}
-	  if (document.forms['mainForm'].patientStatus10.checked) { if(pStatus=='') pStatus = pStatus +'11'; else pStatus = pStatus +',11';}		
+	  if (document.forms['mainForm'].patientStatus0.checked) pStatus = pStatus + 2;
+	  if (document.forms['mainForm'].patientStatus1.checked) pStatus = pStatus + 4;
+	  if (document.forms['mainForm'].patientStatus2.checked) pStatus = pStatus + 8;
+	  if (document.forms['mainForm'].patientStatus3.checked) pStatus = pStatus + 16;
+	  if (document.forms['mainForm'].patientStatus4.checked) pStatus = pStatus + 32;
+	  if (document.forms['mainForm'].patientStatus5.checked) pStatus = pStatus + 64;
+	  if (document.forms['mainForm'].patientStatus6.checked) pStatus = pStatus + 128;
+	  if (document.forms['mainForm'].patientStatus7.checked) pStatus = pStatus + 256;
+	  if (document.forms['mainForm'].patientStatus8.checked) pStatus = pStatus + 512;
+	  if (document.forms['mainForm'].patientStatus9.checked) pStatus = pStatus + 1024;	
+	  if (document.forms['mainForm'].patientStatus10.checked) pStatus = pStatus + 2048;	  
 	  tStatus = getCheckedValue(document.forms['mainForm'].treatmentStatus);
 	  tType = getCheckedValue(document.forms['mainForm'].testType);
 	  gLevel  = getCheckedValue(document.forms['mainForm'].groupLevel);
@@ -619,10 +596,9 @@ if ($repNum >= 2000 && $repNum <= 3999) { // use prim. care & ob/gyn report layo
 	</tr>
   ";
 } else { // use HIV report layout
-   echo "
+  echo "
 	<tr>
-		<th align=\"left\">" . setLabelDisabled($kickLabel['patientStatus'][$lang][-1], $pStatus) . "</th>
-		<th align=\"left\">" . setLabelDisabled($kickLabel['patientStatus'][$lang][0], $pStatus) . "</th>
+		<th align=\"left\" colspan=\"2\">" . setLabelDisabled($kickLabel['patientStatus'][$lang][0], $pStatus) . "</th>
 		<td class=\"vert_line\" rowspan=\"16\" width=\"1%\">&nbsp;</td>
 		<th align=\"left\">" . setLabelDisabled($kickLabel['treatmentStatus'][$lang][0], $tStatus) . "</th>
 		<td class=\"vert_line\" rowspan=\"7\" width=\"1%\">&nbsp;</td>
@@ -642,16 +618,14 @@ if ($repNum >= 2000 && $repNum <= 3999) { // use prim. care & ob/gyn report layo
 				</td>
 				<td width=\"29%\">" . genRadioControl ($kickLabel, $lang, "treatmentStatus", $i+3, $tStatus, $repNum) . "</td>";
 			}
-			if ($i <=6&&$i>3) {
+			if ($i <= 6 && $i > 3) {
 				echo "
 				<td width=\"25%\">" . genCheckboxControl ($kickLabel, $lang, "patientStatus", $i-1, $pStatus) . "
 				</td>";
-				if($i <6)
+				if($i < 6)
 				echo "
 				<td width=\"25%\">" . genCheckboxControl ($kickLabel, $lang, "patientStatus", $i+5, $pStatus) . "
-				</td>";
-				
-				echo "
+				</td>				
 				<td width=\"29%\">&nbsp;</td>";
 			}
 			
@@ -732,7 +706,7 @@ if ($repNum >= 2000 && $repNum <= 3999) { // use prim. care & ob/gyn report layo
 ?>
 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 </table>
-<input id="kickPoint" type="button" value="<?=$buttonLbls[$lang][0];?>" onClick="sendParameters()" />&nbsp;
+<input id="kickPoint" type="button" value="<?=$buttonLbls[$lang][0];?>" onclick="sendParameters()" />&nbsp;
 <input type="reset" value="<?=$buttonLbls[$lang][1];?>" />
 </div>
 </div>

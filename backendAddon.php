@@ -1792,9 +1792,9 @@ function getPatientStatus ($pid) {
 }
 
 function getPatientStatusArray ($curVal) {
-	$valArray = array (2,4,8,16,32);
+	$valArray = array (2,4,8,16,32,64,128,256,512,1024,2048);
 	$outArray = array();
-	for ($i = 0; $i < 5; $i++) {
+	for ($i = 0; $i < 11; $i++) {
 		$binstring = strrev (decbin ($curVal));
 		if (!empty ($binstring{log ($valArray[$i], 2)}) && $binstring{log ($valArray[$i], 2)} == 1)
 		 	$outArray[$i] = 1;
@@ -1805,7 +1805,7 @@ function getPatientStatusArray ($curVal) {
 }
 
 function genCheckboxControl ($label, $lang, $name, $i, $passedIn) {
-	$valArray = array (2, 4, 8, 16, 32);
+	$valArray = array (2,4,8,16,32,64,128,256,512,1024,2048);
 	$curArray = getPatientStatusArray ($passedIn);
 	$label = $label[$name][$lang][$i+1];
 	if ($passedIn == 14)
