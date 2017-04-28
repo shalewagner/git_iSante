@@ -259,7 +259,7 @@ markers: [{
           this.on('afterrender', this.apiReady, this);
         }else{
           window.gmapapiready = this.apiReady.createDelegate(this);
-          this.buildScriptTag('https://maps.googleapis.com/maps/api/js?v=3&sensor=false&hl=fr&region=HT&callback=gmapapiready');
+          this.buildScriptTag('https://maps.googleapis.com/maps/api/js?v=3&hl=fr&key=AIzaSyCwCaMPv-mC88ObgaWudlVpwZNakSwVTwA&region=HT&callback=gmapapiready');
         }
 
     },
