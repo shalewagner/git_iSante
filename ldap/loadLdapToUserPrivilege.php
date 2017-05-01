@@ -5,7 +5,7 @@
  * @author	Steve Wagner
  * @version	$Id: getLdapArray.php 66 2016-01-19
  */
-
+$_REQUEST['noid'] = 'true';
 require_once ('./include/app.php');
 
 $title = gettext("Account list");
@@ -21,12 +21,12 @@ database()->query($sql,array($tab,'description', $type));
 database()->query($sql,array($tab,      'phone', $type));
 database()->query($sql,array($tab,      'email', $type));
 database()->query($sql,array($tab,    'orgName', $type));
-
+database()->query($sql,array($tab,   'userGuid', $type));
 $list = $accounts->find_all();
 
 $counter = 0;
 foreach ($list as $row) {
-	$sql = 'update userPrivilege set commonName = ?, givenName = ?, surname = ?, description = ?, phone = ?, email = ?, orgName = ? where username = ?';
+	$sql = 'update userPrivilege set commonName = ?, givenName = ?, surname = ?, description = ?, phone = ?, email = ?, orgName = ?, userGuid = UUID() where username = ?';
 	$data = array($row->commonName, $row->givenname, $row->surname , $row->description, $row->telephoneNumber, $row->mail, $row->organizationName, $row->username);
 	database()->query($sql,$data);
 	$counter++;	 
