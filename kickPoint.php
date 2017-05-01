@@ -598,7 +598,8 @@ if ($repNum >= 2000 && $repNum <= 3999) { // use prim. care & ob/gyn report layo
 } else { // use HIV report layout
   echo "
 	<tr>
-		<th align=\"left\" colspan=\"2\">" . setLabelDisabled($kickLabel['patientStatus'][$lang][0], $pStatus) . "</th>
+		<th width=\"25%\">ARV Status</th>
+		<th width=\"25%\">" . setLabelDisabled($kickLabel['patientStatus'][$lang][0], $pStatus) . "</th>
 		<td class=\"vert_line\" rowspan=\"16\" width=\"1%\">&nbsp;</td>
 		<th align=\"left\">" . setLabelDisabled($kickLabel['treatmentStatus'][$lang][0], $tStatus) . "</th>
 		<td class=\"vert_line\" rowspan=\"7\" width=\"1%\">&nbsp;</td>
