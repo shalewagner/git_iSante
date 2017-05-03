@@ -18,9 +18,9 @@ $siteName = getSiteName ($site, $lang);
 $info='
 <tr style="text-align:left; background-color:#C7D0D3;border-collapse: collapse; border: 1px solid #C0D8DA">
 <th>Etablissement</th><th>sitecode</th><th>Server local</th><th>Version</th><th>Date de saisi la plus r&#233;cente</th>
-<th>R&#233;cent</th><th>Actif</th><th>perdu de vue</th><th>Transf&#233;r&#233;</th><th>D&#233;c&#233;d&#233;</th><th>Total PRE-ART</th>
-<th>R&#233;gulier</th><th>Rendez-vous Rat&#233;</th><th>perdu de vue</th><th>Arr&#234;t&#233;</th><th>Transf&#233;r&#233;</th><th>D&#233;c&#233;d&#233;</th><th>Total ART</th>
-<th>Autres patients VIH</th><th>Total G&#233;n&#233;ral</th></tr>';
+<th>R&#233;cent (A/E)</th><th>Actif (A/E)</th><th>Perdu de vue (A/E)</th><th>Transf&#233;r&#233; (A/E)</th><th>D&#233;c&#233;d&#233; (A/E)</th><th>Total (A/E)</th>
+<th>R&#233;gulier (A/E)</th><th>Rendez-vous Rat&#233; (A/E)</th><th>Perdu de vue (A/E)</th><th>Arr&#234;t&#233; (A/E)</th><th>Transf&#233;r&#233; (A/E)</th><th>D&#233;c&#233;d&#233; (A/E)</th><th>Total (A/E)</th>
+<th>Total G&#233;n&#233;ral</th></tr>';
 
 /* patient Status PRE ART AND ART */
 		$patStatuspreArt="select 
@@ -54,8 +54,7 @@ $info='
 					count(distinct case when t.patientStatus=9 and (year(now())-t.dobYy)>14 then t.patientID else null end) as artLostAdl,
 					count(distinct case when t.hivPositive=1 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as artTotalChild,
 					count(distinct case when t.hivPositive=1 and t.patientStatus in (1,2,3,6,8,9) and (year(now())-t.dobYy)>14 then t.patientID else null end) as artTotalAdl,
-					count(distinct case when t.patientStatus in (4,5,7,10,11,1,2,3,6,8,9) then t.patientID else null end) as TotalGeneral,
-                    count(distinct case when t.hivPositive=1 and t.patientStatus not in (4,5,7,10,11,1,2,3,6,8,9) then t.patientID else null end) as autreTotal
+					count(distinct case when t.patientStatus in (4,5,7,10,11,1,2,3,6,8,9) then t.patientID else null end) as TotalGeneral
             from patient t,clinicLookup c,encounter e 
                 where c.sitecode=LEFT(t.patientid,5) and t.hivPositive=1 and e.patientID=t.patientid group by clinic, c.sitecode, case when c.dbSite != 0 then 'Oui' else '' end, dbVersion order by 5 desc";
  $result2 =databaseSelect()->query($patStatuspreArt);
@@ -71,35 +70,36 @@ while ($statusRow2 = $result2->fetch()) {
 	if($i=1) {$style='style="text-align:right; background-color:#E8E8E8;border-collapse: collapse; border: 1px hidden #666;'.$red.'"'; $i=0;}
 	else $i=1;
 	
-    $info=$info.'<tr '.$style.'><td style="text-align: justify;">'.$statusRow2['clinic'].'</td><td>'. $statusRow2['sitecode'].'</td><td>'. $statusRow2['local'].'</td><td>'.$statusRow2['dbVersion'].'</td><td>'.$statusRow2['maxDate'].'</td>';
+    $info=$info.'<tr '.$style.'><td style="text-align: left;">'.$statusRow2['clinic'].'</td><td>'. $statusRow2['sitecode'].'</td><td>'. $statusRow2['local'].'</td><td>'.$statusRow2['dbVersion'].'</td><td>'.$statusRow2['maxDate'].'</td>';
 	$j+=1;
-       $info=$info.'<td>'.$statusRow2['preArtRecentChild'].'/'.$statusRow2['preArtRecentAdl'].'</td>
-	                <td>'.$statusRow2['preArtActifChild'].'/'.$statusRow2['preArtActifAdl'].'</td>
-	                <td>'.$statusRow2['preArtLostChild'].'/'.$statusRow2['preArtLostAdl'].'</td>
-					<td>'.$statusRow2['preArtTransfertChild'].'/'.$statusRow2['preArtTransfertAdl'].'</td>
-					<td>'.$statusRow2['preArtDeathChild'].'/'.$statusRow2['preArtDeathAdl'].'</td>					
-					<td>'.$statusRow2['preArtTotalChild'].'/'.$statusRow2['preArtTotalAdl'].'</td>
-					<td>'.$statusRow2['artRegularChild'].'/'.$statusRow2['artRegularAdl'].'</td>
-	                <td>'.$statusRow2['artMissingChild'].'/'.$statusRow2['artMissingAdl'].'</td>
-	                <td>'.$statusRow2['artLostChild'].'/'.$statusRow2['artLostAdl'].'</td>
-					<td>'.$statusRow2['artStoppedChild'].'/'.$statusRow2['artStoppedAdl'].'</td>
-					<td>'.$statusRow2['artTransfertChild'].'/'.$statusRow2['artTransfertAdl'].'</td>
-	                <td>'.$statusRow2['artDeathChild'].'/'.$statusRow2['artDeathAdl'].'</td>
-					<td>'.$statusRow2['artTotalChild'].'/'.$statusRow2['artTotalAdl'].'</td>
-					<td>'.$statusRow2['autreTotal'].'</td><td>'. $statusRow2['TotalGeneral'].'</td>';
+	//
+       $info=$info.'<td>'.$statusRow2['preArtRecentAdl'].'/'.$statusRow2['preArtRecentChild'].'</td>
+	                <td>'.$statusRow2['preArtActifAdl'].'/'.$statusRow2['preArtActifChild'].'</td>
+	                <td>'.$statusRow2['preArtLostAdl'].'/'.$statusRow2['preArtLostChild'].'</td>
+					<td>'.$statusRow2['preArtTransfertAdl'].'/'.$statusRow2['preArtTransfertChild'].'</td>
+					<td>'.$statusRow2['preArtDeathAdl'].'/'.$statusRow2['preArtDeathChild'].'</td>					
+					<td>'.$statusRow2['preArtTotalAdl'].'/'.$statusRow2['preArtTotalChild'].'</td>
+					<td>'.$statusRow2['artRegularAdl'].'/'.$statusRow2['artRegularChild'].'</td>
+	                <td>'.$statusRow2['artMissingAdl'].'/'.$statusRow2['artMissingChild'].'</td>
+	                <td>'.$statusRow2['artLostAdl'].'/'.$statusRow2['artLostChild'].'</td>
+					<td>'.$statusRow2['artStoppedAdl'].'/'.$statusRow2['artStoppedChild'].'</td>
+					<td>'.$statusRow2['artTransfertAdl'].'/'.$statusRow2['artTransfertChild'].'</td>
+	                <td>'.$statusRow2['artDeathAdl'].'/'.$statusRow2['artDeathChild'].'</td>
+					<td>'.$statusRow2['artTotalAdl'].'/'.$statusRow2['artTotalChild'].'</td>
+					<td>'. $statusRow2['TotalGeneral'].'</td>';
 }
 if($j==0){ $info=$info.'<td>0/0</td><td>0/0</td><td>0/0</td><td>0/0</td><td>0/0</td><td>0/0</td>
-                        <td>0/0</td><td>0/0</td><td>0/0</td><td>0/0</td><td>0/0</td><td>0/0</td><td>0/0</td><td>0</td><td>0</td>';}
+                        <td>0/0</td><td>0/0</td><td>0/0</td><td>0/0</td><td>0/0</td><td>0/0</td><td>0/0</td><td>0</td>';}
 $info=$info.'</tr>';
  
   $summary ='
   <div style="width: 100%; height: 400px; overflow: scroll;">
-  <table width="1800" border="0">
+  <table width="1900" border="0">
   <tr style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">
-    <th colspan="5" style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">&nbsp;</th>
-	<th colspan="6" style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">PRE-ARV</th>
-    <th colspan="7" style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Sous TAR</th>    
-    <th colspan="2" style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Totaux g&#233;n&#233;raux</th>
+    <th colspan="5" style="width:40%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">&nbsp;</th>
+	<th colspan="6" style="width:28%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">PRE-ARV</th>
+    <th colspan="7" style="width:28%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Sous TAR</th>    
+    <th style="width:4%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Totaux g&#233;n&#233;raux</th>
   </tr>
   <tr>
     <td  colspan="20">'.$info .'</td>
