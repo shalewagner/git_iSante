@@ -16,7 +16,7 @@ $siteName = getSiteName ($site, $lang);
 
 /* Site info*/
 $info='<tr style="text-align:left; background-color:#C7D0D3;border-collapse: collapse; border: 1px solid #C0D8DA">
-<th>Etablissement</th><th>sitecode</th><th>Server local</th><th>Version</th><th>Date de saisi la plus r&#233;cente</th>
+<th>Etablissement</th><th>Sitecode</th><th>Server<br>local</th><th>Version</th><th>Date la plus<br>r&#233;cente</th>
 <th>R&#233;cent (A/E)</th><th>Actif (A/E)</th><th>Perdu de vue (A/E)</th><th>Transf&#233;r&#233; (A/E)</th><th>D&#233;c&#233;d&#233; (A/E)</th><th>Total (A/E)</th>
 <th>R&#233;gulier (A/E)</th><th>Rendez-vous Rat&#233; (A/E)</th><th>Perdu de vue (A/E)</th><th>Arr&#234;t&#233; (A/E)</th><th>Transf&#233;r&#233; (A/E)</th><th>D&#233;c&#233;d&#233; (A/E)</th><th>Total (A/E)</th>
 <th>Total G&#233;n&#233;ral</th></tr>';
@@ -187,7 +187,7 @@ $info=$info.'</tr>';
  
   $summary ='
   <div style="width: 100%; height: 400px; overflow: scroll;">
-  <table width="1900" border="0">
+  <table width="1875" border="0">
   <tr style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">
     <th colspan="5" style="width:40%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">&nbsp;</th>
 	<th colspan="6" style="width:28%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">PRE-ARV</th>
