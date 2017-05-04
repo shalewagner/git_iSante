@@ -15,8 +15,7 @@ $startDate = trim($_GET["startDate"]);
 $siteName = getSiteName ($site, $lang);
 
 /* Site info*/
-$info='
-<tr style="text-align:left; background-color:#C7D0D3;border-collapse: collapse; border: 1px solid #C0D8DA">
+$info='<tr style="text-align:left; background-color:#C7D0D3;border-collapse: collapse; border: 1px solid #C0D8DA">
 <th>Etablissement</th><th>sitecode</th><th>Server local</th><th>Version</th><th>Date de saisi la plus r&#233;cente</th>
 <th>R&#233;cent (A/E)</th><th>Actif (A/E)</th><th>Perdu de vue (A/E)</th><th>Transf&#233;r&#233; (A/E)</th><th>D&#233;c&#233;d&#233; (A/E)</th><th>Total (A/E)</th>
 <th>R&#233;gulier (A/E)</th><th>Rendez-vous Rat&#233; (A/E)</th><th>Perdu de vue (A/E)</th><th>Arr&#234;t&#233; (A/E)</th><th>Transf&#233;r&#233; (A/E)</th><th>D&#233;c&#233;d&#233; (A/E)</th><th>Total (A/E)</th>
@@ -162,41 +161,40 @@ foreach($arrayStatus as $key => $status)
 	$style='style="text-align:right; background-color:#FFF;border-collapse: collapse; border: 1px hidden #666;'.$red.'"';
   if($i=1) {$style='style="text-align:right; background-color:#E8E8E8;border-collapse: collapse; border: 1px hidden #666;'.$red.'"'; $i=0;}
 	else $i=1;	
-  $info=$info.'<tr '.$style.'><td style="text-align: left;">'.$status['clinic'].'</td><td>'. $status['sitecode'].'</td>
-                              <td>'.$status['local'].'</td><td>'.$status['dbVersion'].'</td><td>'.$status['maxDate'].'</td>
-							  <td>'.$status['preArtRecentAdl'].'/'.$status['preArtRecentChild'].'</td>
-	                          <td>'.$status['preArtActifAdl'].'/'.$status['preArtActifChild'].'</td>
-	                          <td>'.$status['preArtLostAdl'].'/'.$status['preArtLostChild'].'</td>
-					          <td>'.$status['preArtTransfertAdl'].'/'.$status['preArtTransfertChild'].'</td>
-					          <td>'.$status['preArtDeathAdl'].'/'.$status['preArtDeathChild'].'</td>					
-					          <td>'.$status['preArtTotalAdl'].'/'.$status['preArtTotalChild'].'</td>
-					          <td>'.$status['artRegularAdl'].'/'.$status['artRegularChild'].'</td>
-	                          <td>'.$status['artMissingAdl'].'/'.$status['artMissingChild'].'</td>
-	                          <td>'.$status['artLostAdl'].'/'.$status['artLostChild'].'</td>
-					          <td>'.$status['artStoppedAdl'].'/'.$status['artStoppedChild'].'</td>
-					          <td>'.$status['artTransfertAdl'].'/'.$status['artTransfertChild'].'</td>
-	                          <td>'.$status['artDeathAdl'].'/'.$status['artDeathChild'].'</td>
-					          <td>'.$status['artTotalAdl'].'/'.$status['artTotalChild'].'</td>
-					          <td>'.$status['TotalGeneral'].'</td>';
+	$clinic='';
+	if(strlen($status['clinic'])>50) $clinic=substr($status['clinic'],0,50).' ...';
+	else $clinic=$status['clinic'];
+	
+	
+  $info=$info.'<tr '.$style.'><td style="text-align: left;"><font size="1">'.$clinic.'</font></td><td>'. $status['sitecode'].'</td>
+                              <td><font size="1">'.$status['local'].'</font></td><td>'.$status['dbVersion'].'</td><td><font size="1">'.$status['maxDate'].'</font></td>
+							  <td><font size="1">'.$status['preArtRecentAdl'].'/'.$status['preArtRecentChild'].'</font></td>
+	                          <td><font size="1">'.$status['preArtActifAdl'].'/'.$status['preArtActifChild'].'</font></td>
+	                          <td><font size="1">'.$status['preArtLostAdl'].'/'.$status['preArtLostChild'].'</font></td>
+					          <td><font size="1">'.$status['preArtTransfertAdl'].'/'.$status['preArtTransfertChild'].'</font></td>
+					          <td><font size="1">'.$status['preArtDeathAdl'].'/'.$status['preArtDeathChild'].'</font></td>					
+					          <td><font size="1">'.$status['preArtTotalAdl'].'/'.$status['preArtTotalChild'].'</font></td>
+					          <td><font size="1">'.$status['artRegularAdl'].'/'.$status['artRegularChild'].'</font></td>
+	                          <td><font size="1">'.$status['artMissingAdl'].'/'.$status['artMissingChild'].'</font></td>
+	                          <td><font size="1">'.$status['artLostAdl'].'/'.$status['artLostChild'].'</font></td>
+					          <td><font size="1">'.$status['artStoppedAdl'].'/'.$status['artStoppedChild'].'</font></td>
+					          <td><font size="1">'.$status['artTransfertAdl'].'/'.$status['artTransfertChild'].'</font></font></td>
+	                          <td><font size="1">'.$status['artDeathAdl'].'/'.$status['artDeathChild'].'</td>
+					          <td><font size="1">'.$status['artTotalAdl'].'/'.$status['artTotalChild'].'</font></td>
+					          <td><font size="1">'.$status['TotalGeneral'].'</font></td>';
 }
 $info=$info.'</tr>';
  
   $summary ='
   <div style="width: 100%; height: 400px; overflow: scroll;">
   <table width="1900" border="0">
-  <thead>
   <tr style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">
     <th colspan="5" style="width:40%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">&nbsp;</th>
 	<th colspan="6" style="width:28%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">PRE-ARV</th>
     <th colspan="7" style="width:28%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Sous TAR</th>    
     <th style="width:4%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Totaux g&#233;n&#233;raux</th>
   </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td  colspan="20">'.$info .'</td>
-  </tr>
-  </tbody>
+  '.$info .'
 </table>
 </div>
 <div align="left">
@@ -229,8 +227,8 @@ $info=$info.'</tr>';
   <style type="text/css">
     a {text-decoration: none}
 	input { padding:3px; border:1px solid #F5C5C5; border-radius:2px; width:142px; }
-	thead, tbody {display: block; }
-    tbody {width:100%; overflow-y: auto;overflow-x: auto;}
+	thead, tbody {display: inline-block; }
+    tbody {width:100%; overflow:scroll; overflow:auto;}
   </style>  
 </head>
 
