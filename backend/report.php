@@ -10,7 +10,7 @@ function applyCriteria ($rtype, $repNum, $site, $pType, $tType, $ttType,
 			$start, $end, $patientID, $menuSelection, $gLevel = "") {
         if ($tType == 0) $tType = 1;
 	$pArray = getPatientStatusArray ($pType);
-print_r($pArray);
+	if (DEBUG_FLAG) print_r($pArray);
 	$strpType = array ("regart", "missedart", "lostart", "deadart", "discart", "transart", "recentpre", "actifpre", "lostpre", "deadpre", "transpre");
 	$strtType = array ("", "any","art","notart", "inh", "cot", "tb", "notenrolled");
 	$strttType = array ("", "cd4", "ppd", "radiographie", "crachat", "liver", "blood", "rpr", "hepatit", "pap");
@@ -62,7 +62,7 @@ print_r($pArray);
             $patStatus[$row[0]] = $row[1];
           }
         }
-print_r($patStatus);
+	if (DEBUG_FLAG) print_r($patStatus);
 
         // Some reports should be displaying the patient status as it was at
         // the end date of the report range, not just their current status
@@ -119,17 +119,15 @@ print_r($patStatus);
 			} else if ($type == "lostart" && count (array_merge (array_keys ($patStatus, 9))) > 0) {
                                 $qvals = array_merge(array_keys($patStatus, 9));				 
 			} else if ($type == "deadart" && count (array_merge (array_keys ($patStatus, 1))) > 0) {
-                                $qvals = array_merge(array_keys($patStatus, 9),array_keys($patStatus, 1));
+                                $qvals = array_merge(array_keys($patStatus, 1));
 			} else if ($type == "discart" && count (array_merge (array_keys ($patStatus, 3))) > 0) {
-                                $qvals = array_merge(array_keys($patStatus, 1), array_keys($patStatus, 3));
+                                $qvals = array_merge(array_keys($patStatus, 3));
 			} else if ($type == "transart" && count (array_merge (array_keys ($patStatus, 2))) > 0) {
-                                $qvals = array_merge(array_keys($patStatus, 2), array_keys($patStatus, 2));
+                                $qvals = array_merge(array_keys($patStatus, 2));
 			} else if ($type == "recentpre" && count (array_merge (array_keys ($patStatus, 7))) > 0) {
                                 $qvals = array_merge(array_keys($patStatus, 7));
 			} else if ($type == "actifpre" && count (array_merge (array_keys ($patStatus, 11))) > 0) {
                                 $qvals = array_merge(array_keys($patStatus, 11));
-				echo "XXX" . $i . "XXX";
-				print_r($qvals);
 			} else if ($type == "lostpre" && count (array_merge (array_keys ($patStatus, 10))) > 0) {
                                 $qvals = array_merge(array_keys($patStatus, 10));
 			} else if ($type == "deadpre" && count (array_merge (array_keys ($patStatus, 4))) > 0) {
@@ -139,11 +137,10 @@ print_r($patStatus);
 			} else {
 				continue;
 			}
-			print_r($qvals);
+			if (DEBUG_FLAG) print_r($qvals);
 			$qquery = "insert into " . $tempTableNames[1] . " (pid) values ";
 			foreach ($qvals as $val) {
 				$qry = $qquery . "('" . $val . "')";
-				echo "<br>YYY:" . $i . " " . $type .  " " . $qry . "YYY<br>";
 	                	dbQuery ($qry);
             		}
 
