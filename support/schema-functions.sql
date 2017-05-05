@@ -18,6 +18,8 @@ BEGIN
       SET c = MID( str, i, 1 );
       IF c BETWEEN '0' AND '9' THEN 
         SET ret=CONCAT(ret,c);
+      ELSEIF c = '.' OR c = ',' THEN
+	SET ret=CONCAT(ret,'.');
       END IF;
       SET i = i + 1;
     END;
