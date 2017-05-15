@@ -16,7 +16,7 @@ $siteName = getSiteName ($site, $lang);
 
 /* Site info*/
 $info='<tr style="text-align:left; background-color:#C7D0D3;border-collapse: collapse; border: 1px solid #C0D8DA">
-<th>Etablissement</th><th>Sitecode</th><th>Server<br>local</th><th>Version</th><th>Date la plus<br>r&#233;cente</th>
+<th>Etablissement</th><th>sitecode</th><th>Server local</th><th>Version</th><th>Date de Debut</th><th>Date de saisi la plus r&#233;cente</th>
 <th>R&#233;cent (A/E)</th><th>Actif (A/E)</th><th>Perdu de vue (A/E)</th><th>Transf&#233;r&#233; (A/E)</th><th>D&#233;c&#233;d&#233; (A/E)</th><th>Total (A/E)</th>
 <th>R&#233;gulier (A/E)</th><th>Rendez-vous Rat&#233; (A/E)</th><th>Perdu de vue (A/E)</th><th>Arr&#234;t&#233; (A/E)</th><th>Transf&#233;r&#233; (A/E)</th><th>D&#233;c&#233;d&#233; (A/E)</th><th>Total (A/E)</th>
 <th>Total G&#233;n&#233;ral</th></tr>';
@@ -26,8 +26,9 @@ $arrayStatus=array();
 		            clinic,rtrim(c.sitecode) as sitecode, 
                     case when c.dbSite !=0 then 'Oui' else 'No' end as 'local', 
 				    left(dbVersion,4) as dbVersion, 
-				    case when date(lastmodified) is null then '2000-01-01' else DATE_FORMAT(lastmodified,'%Y-%m-%d') end as 'maxDate'
-                   from  clinicLookup c, (select sitecode, max(lastModified) as lastModified from encounter group by 1) e 
+				    case when date(lastmodified) is null then '2000-01-01' else DATE_FORMAT(lastmodified,'%Y-%m-%d') end as 'maxDate',
+					case when date(mindate) is null then '2000-01-01' else DATE_FORMAT(mindate,'%Y-%m-%d') end as 'minDate'
+                   from  clinicLookup c, (select sitecode,min(lastModified) as mindate,max(lastModified) as lastModified from encounter group by 1) e 
                 where e.sitecode=c.sitecode order by 5 desc";
  $result1 =databaseSelect()->query($patStatus);
  $y=0;
@@ -36,6 +37,7 @@ while ($statusRow1 = $result1->fetch()) {
 	                       "sitecode" => $statusRow1['sitecode'],
 						   "local" => $statusRow1['local'],
 						   "dbVersion" => $statusRow1['dbVersion'],
+						   "minDate" => $statusRow1['minDate'],
 						   "maxDate" => $statusRow1['maxDate'],
 						   "preArtDeathChild" =>'0',
 						   "preArtTransfertChild" =>'0',
@@ -167,8 +169,8 @@ foreach($arrayStatus as $key => $status)
 	
 	
   $info=$info.'<tr '.$style.'><td style="text-align: left;"><font size="1">'.$clinic.'</font></td><td>'. $status['sitecode'].'</td>
-                              <td><font size="1">'.$status['local'].'</font></td><td>'.$status['dbVersion'].'</td><td><font size="1">'.$status['maxDate'].'</font></td>
-							  <td><font size="1">'.$status['preArtRecentAdl'].'/'.$status['preArtRecentChild'].'</font></td>
+                              <td><font size="1">'.$status['local'].'</font></td><td>'.$status['dbVersion'].'</td><td><font size="1">'.$status['minDate'].'</font></td>
+							  <td><font size="1">'.$status['maxDate'].'</font></td><td><font size="1">'.$status['preArtRecentAdl'].'/'.$status['preArtRecentChild'].'</font></td>
 	                          <td><font size="1">'.$status['preArtActifAdl'].'/'.$status['preArtActifChild'].'</font></td>
 	                          <td><font size="1">'.$status['preArtLostAdl'].'/'.$status['preArtLostChild'].'</font></td>
 					          <td><font size="1">'.$status['preArtTransfertAdl'].'/'.$status['preArtTransfertChild'].'</font></td>
@@ -187,9 +189,9 @@ $info=$info.'</tr>';
  
   $summary ='
   <div style="width: 100%; height: 400px; overflow: scroll;">
-  <table width="1875" border="0">
+  <table width="1900" border="0">
   <tr style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">
-    <th colspan="5" style="width:40%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">&nbsp;</th>
+    <th colspan="6" style="width:40%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">&nbsp;</th>
 	<th colspan="6" style="width:28%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">PRE-ARV</th>
     <th colspan="7" style="width:28%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Sous TAR</th>    
     <th style="width:4%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Totaux g&#233;n&#233;raux</th>
@@ -197,10 +199,10 @@ $info=$info.'</tr>';
   '.$info .'
 </table>
 </div>
-<div align="left">
+<div align="left" style="width: 100%;">
 <table width="100%" border="0">
 <tr style="text-align:left; background-color:#C7D0D3;border-collapse: collapse; border: 2px solid #C0D8DA">
-<td> Legendre</td></tr>
+<td style="width: 100%;"> Legendre</td></tr>
 <tr><td>
 <div><span style="color:blue;">Bleu</span>--Sites utilisant iSante pendant moins de 90 jours.</div>
 <div><span style="color:red;">Rouge</span>--Sites dont le transfert des donn&#233;es n\'a pas &#233;t&#233; fait depuis au moins deux semaines.</div>
@@ -209,6 +211,54 @@ $info=$info.'</tr>';
 </table>
 </div>
 
+<table width="100%" border="0">
+<tr style="text-align:left; background-color:#C7D0D3;border-collapse: collapse; border: 2px solid #C0D8DA">
+<td> Definition </td></tr>
+<tr><td>
+<div>
+<div><span style="text-decoration:underline;"><strong>Pr&#233;-ARV</strong></span></div>
+
+<div>
+<span style="font:bold;">R&#233;cents	Pr&#233;-ARV:</span>Tout patient VIH+ non encore mis sous ARV ayant eu sa premi&#232;re visite (clinique "1re visite VIH") au cours des 12 derniers mois tout en excluant tout patient ayant un rapport d\'arr&#234;t avec motifs d&#233;c&#233;d&#233; ou transf&#233;r&#233;.
+</div>
+<div>
+<span style="font:bold;">Perdus de vue en Pr&#233;-ARV :</span> Tout patient VIH+ non encore mis sous ARV n\'ayant eu aucune visite (clinique  "1re visite VIH et suivi VIH	uniquement", pharmacie,labo) au cours des 12 derniers mois et n\'&#233;tant ni d&#233;c&#233;d&#233; ni transf&#233;r&#233;.
+</div>
+<div>
+<span style="font:bold;">D&#233;c&#233;d&#233;s en Pr&#233;-ARV :</span> Tout patient VIH+ non	encore mis sous ARV ayant un rapport d\'arr&#234;t rempli pour cause de d&#233;c&#232;s.
+</div>
+
+<div>
+<span style="font:bold;">Transf&#233;r&#233;s en Pr&#233;-ARV :</span> Tout patient VIH+ non encore mis sous ARV ayant un rapport d\'arr&#234;t rempli pour cause de transfert.
+</div>
+<div>
+<span style="font:bold;">Actifs en Pr&#233;-ARV :</span> Tout patient VIH+ non encore mis sous ARV et ayant eu une visite (clinique	de suivi VIH uniquement, ou de pharmacie ou de labo) au	cours des 12 derniers mois et n\'&#233;tant ni d&#233;c&#233;d&#233; ni transf&#233;r&#233;. NB: pour capturer les patients Pr&#233;-ARV non r&#233;cents qui ont un contact avec l\'institution.
+</div>
+
+<div><span style="font:bold;text-decoration:underline;"><strong>Traitement ARV</strong></span></div>
+
+<div>
+<span style="font:bold;">R&#233;guliers (actifs	sous ARV) :</span> Tout patient mis sous ARV et n\'ayant aucun rapport d\'arr&#234;t rempli pour motifs de d&#233;c&#232;s, de transfert, ni d\'arr&#234;t de traitement. La date de prochain rendez-vous clinique ou de prochaine	collecte de m&#233;dicaments est situ&#233;e dans le futur de la p&#233;riode d\'analyse.(Fiches &#224; ne pas consid&#233;rer, labo et counseling)
+</div>
+
+<div>
+<span style="font:bold;">Rendez-vous rat&#233;s :</span> Tout patient mis sous ARV et n\'ayant aucun rapport d\'arr&#234;t rempli pour motifs de d&#233;c&#232;s, de transfert, ni d\'arr&#234;t de traitement. La date de la p&#233;riode d\'analyse est sup&#233;rieure &#224; la date de rendez-vous clinique ou de collecte de m&#233;dicaments la plus r&#233;cente sans exc&#233;der 90 jours.
+</div>
+<div>
+<span style="font:bold;">Perdus de vue (LTFU, anciennement	inactif) :</span> Tout patient mis sous ARV et n\'ayant aucun rapport d\'arr&#234;t rempli pour motifs de d&#233;c&#232;s, de transfert, ni d\'arr&#234;t de traitement. La date de la p&#233;riode d\'analyse est sup&#233;rieure &#224; la date de rendez-vous clinique ou de collecte de m&#233;dicaments la plus r&#233;cente de plus de 90 jours.
+</div>
+<div>
+<span style="font:bold;">D&#233;c&#233;d&#233;s :</span>Tout patient mis sous ARV et ayant un rapport d\'arr&#234;t rempli pour motif de d&#233;c&#232;s.
+</div>
+<div>
+<span style="font:bold;">Arr&#234;t&#233;s :</span>Tout patient mis sous	ARV	et ayant un rapport d\'arr&#234;t rempli pour motif d\'arr&#234;t de traitement.
+</div>
+<div>
+<span style="font:bold;">Transf&#233;r&#233;s :</span>Tout patient mis sous ARV et ayant un rapport d\'arr&#234;t rempli pour motif de transfert.
+</div>
+
+</td></tr>
+</table>
 ';
 
   return $summary;
