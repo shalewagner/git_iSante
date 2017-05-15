@@ -15,9 +15,14 @@ function generatearvStarted ($startdate, $enddate,$site, $lang) {
 "arvStarted" => "select startDate as 'Date de visite',p.clinicPatientID as ST,lname as 'Prenom',fname as 'Nom',telephone,ymdToDate(dobYy,dobMm,dobDd) as 'Date de naissance'
 from 
 (select siteCode,patientID,min(visitDate) as startDate from pepfarTable group by 1,2) c , patient p
-where c.patientID=p.patientID and  startDate between  '".$startdate."' AND '".$enddate."' And c.siteCode=".$site." order by 1"); 
+where c.patientID=p.patientID and  startDate between  '".$startdate."' AND '".$enddate."' And c.siteCode=".$site." order by 1",
+"arvStartedTotal" =>"select count(distinct p.patientID) as Total
+from 
+(select siteCode,patientID,min(visitDate) as startDate from pepfarTable group by 1,2) c , patient p
+where c.patientID=p.patientID and  startDate between  '".$startdate."' AND '".$enddate."' And c.siteCode=".$site); 
   
-  $arvStarted = outputQueryRows($queryArray["arvStarted"]); 
+  $arvStarted = outputQueryRows($queryArray["arvStarted"]);
+  $arvStartedTotal = outputQueryRows($queryArray["arvStartedTotal"]); 	
  
   $summary = <<<EOF
   
@@ -54,6 +59,7 @@ where c.patientID=p.patientID and  startDate between  '".$startdate."' AND '".$e
     <td width="70%">
 	<p>&nbsp;</p>
 	<div><strong>Liste des patients ayant démarré un régime ARV</strong></div>
+	<div width="50px">$arvStartedTotal</div>
 	<div>&nbsp;</div>
 	<div>$arvStarted</div>
 	<p>&nbsp;</p>	
