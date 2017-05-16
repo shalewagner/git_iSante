@@ -35,12 +35,12 @@ if ($userAccessLevel >= ADMIN && SERVER_ROLE != "consolidated") {
 
 $sumButton = '<button class="button-maker button10" type="button" onclick="launchClinicalSummary(' . getHivPositive ($pid) . ')">' . $sumTitle[$lang] . '</button>';
 
-$hivPositive = (empty ($patientStatus) ? $patStatusLabels[$lang][11] : $patStatusLabels[$lang][$patientStatus]);
+$hivPositive = (empty ($patientStatus) ? $patStatusLabels[$lang][12] : $patStatusLabels[$lang][$patientStatus]);
 $hivPositive = "<em id=\"hivStatusId\">$hivPositive</em></td>";
 $hivInitDate = getARTstart($pid);
 if ($hivInitDate != '') {
 	$hivInitDate = "Début TAR : <em class=\"patInfo\" id=\"hivInitDateId\">" . $hivInitDate . "</em>";
-	$hivPositive .= "<td class=\"sm_patHead\">" . $hivInitDate . " " . $patStatusLabels[$lang][12] . " :<em class=\"patInfo\">" . $patientRegimen . "</em></td>";
+	$hivPositive .= "<td class=\"sm_patHead\">" . $hivInitDate . " " . $patStatusLabels[$lang][13] . " :<em class=\"patInfo\">" . $patientRegimen . "</em></td>";
 } else
 	$hivPositive .= "<td>&nbsp;</td>";
 $hivNegative = (($lang == "en") ? "HIV negative" : "VIH n&eacute;gatif"); 
