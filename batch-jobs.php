@@ -96,10 +96,10 @@ printLog('updatePatientStatus(1, null) started');
 updatePatientStatus(1, null);
 printLog('updatePatientStatus(1, null) finished (' . getTimer() . ' seconds elapsed)');
 
-/*startTimer();
+startTimer();
 printLog('generateSplashArray() started');
 generateSplashArray();
-printLog('generateSplashArray() finished (' . getTimer() . ' seconds elapsed)');*/
+printLog('generateSplashArray() finished (' . getTimer() . ' seconds elapsed)');
 
 startTimer();
 printLog('generateMarkerArray() started');
