@@ -2431,7 +2431,9 @@ function generateSplashArray () {
 	$lang = 'fr';   
 	require_once 'labels/splash.php';
 	dbQuery("truncate table lastSplash");
-	dbQuery("truncate table lastSplashText");
+	dbQuery("DROP TABLE IF EXISTS lastSplashText");
+	dbQuery("CREATE TABLE IF NOT EXISTS lastSplashText (lastSplashText_id int(10) auto_increment,splashText longtext,PRIMARY KEY  (lastSplashText_id));");
+	
 	/* Site info*/
 $info='<tr style="text-align:left; background-color:#C7D0D3;">
 <th>Etablissement</th><th>sitecode</th><th>Server local</th><th>Version</th><th>Date de Debut</th><th>Date de saisi la plus r&#233;cente</th>
