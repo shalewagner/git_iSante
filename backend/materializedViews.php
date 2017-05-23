@@ -2615,8 +2615,8 @@ loadSplash($info);
 	dbQuery ("insert into lastSplash values (getDate())");
 }
 function loadSplash($val) {
-	//$value = str_replace ("'", "''", $val);
-	dbQuery ("insert into lastSplashText (splashText) values ('$val')");
+	$value = str_replace ("'", "''", $val);
+	dbQuery ("insert into lastSplashText (splashText) values ('$value')");
 }
 
 
