@@ -1,125 +1,217 @@
-<?php
-require_once ("backend.php");
-require_once 'backend/config.php';
-require_once 'backend/database.php';
-require_once 'labels/splash.php';
-require_once 'backend/materializedViews.php';
-require_once "include/standardHeaderExt.php";
-
-function generateStatus($lang)
-{
-//$lang = trim($_GET["lang"]);
-$site = trim($_GET["site"]);
-$endDate = trim($_GET["endDate"]);
-$startDate = trim($_GET["startDate"]);	
-$siteName = getSiteName ($site, $lang);
-
-
-$patStatus="select * from lastSplashText";
- $result =databaseSelect()->query($patStatus);
- $info='';
-while ($statusRow = $result->fetch()) {
-	$info=$statusRow['splashText'];
-}
- 
-  $summary ='
-  <div style="width: 100%; height: 400px; overflow: scroll;">
-  <table width="1900" border="1">
-  <tr style="text-align:left; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">
-    <th colspan="6" style="width:40%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">&nbsp;</th>
-	<th colspan="6" style="width:28%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">PRE-ARV</th>
-    <th colspan="7" style="width:28%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Sous TAR</th>    
-    <th style="width:4%;text-align:center; background-color:#CEECF5;border-collapse: collapse; border: 2px solid #C0D8DA">Totaux g&#233;n&#233;raux</th>
-  </tr>
-  '.$info .'
-</table>
-</div>
-<div align="left" style="width: 100%;">
-<table width="100%" border="0">
-<tr style="text-align:left; background-color:#C7D0D3;border-collapse: collapse; border: 2px solid #C0D8DA">
-<td style="width: 100%;"> Legendre</td></tr>
-<tr><td>
-<div><span style="color:blue;">Bleu</span>--Sites utilisant iSante pendant moins de 90 jours.</div>
-<div><span style="color:red;">Rouge</span>--Sites dont le transfert des donn&#233;es n\'a pas &#233;t&#233; fait depuis au moins deux semaines.</div>
-<div><span >(A/E)</span>-- Adulte/Enfant</div>
-</td></tr>
-</table>
-</div>
-
-<table width="100%" border="0">
-<tr style="text-align:left; background-color:#C7D0D3;border-collapse: collapse; border: 2px solid #C0D8DA">
-<td> Definition </td></tr>
-<tr><td>
-<div>
-<div><span style="text-decoration:underline;"><strong>Pr&#233;-ARV</strong></span></div>
-
-<div>
-<span style="font:bold;">R&#233;cents	Pr&#233;-ARV:</span>Tout patient VIH+ non encore mis sous ARV ayant eu sa premi&#232;re visite (clinique "1re visite VIH") au cours des 12 derniers mois tout en excluant tout patient ayant un rapport d\'arr&#234;t avec motifs d&#233;c&#233;d&#233; ou transf&#233;r&#233;.
-</div>
-<div>
-<span style="font:bold;">Perdus de vue en Pr&#233;-ARV :</span> Tout patient VIH+ non encore mis sous ARV n\'ayant eu aucune visite (clinique  "1re visite VIH et suivi VIH	uniquement", pharmacie,labo) au cours des 12 derniers mois et n\'&#233;tant ni d&#233;c&#233;d&#233; ni transf&#233;r&#233;.
-</div>
-<div>
-<span style="font:bold;">D&#233;c&#233;d&#233;s en Pr&#233;-ARV :</span> Tout patient VIH+ non	encore mis sous ARV ayant un rapport d\'arr&#234;t rempli pour cause de d&#233;c&#232;s.
-</div>
-
-<div>
-<span style="font:bold;">Transf&#233;r&#233;s en Pr&#233;-ARV :</span> Tout patient VIH+ non encore mis sous ARV ayant un rapport d\'arr&#234;t rempli pour cause de transfert.
-</div>
-<div>
-<span style="font:bold;">Actifs en Pr&#233;-ARV :</span> Tout patient VIH+ non encore mis sous ARV et ayant eu une visite (clinique	de suivi VIH uniquement, ou de pharmacie ou de labo) au	cours des 12 derniers mois et n\'&#233;tant ni d&#233;c&#233;d&#233; ni transf&#233;r&#233;. NB: pour capturer les patients Pr&#233;-ARV non r&#233;cents qui ont un contact avec l\'institution.
-</div>
-
-<div><span style="font:bold;text-decoration:underline;"><strong>Traitement ARV</strong></span></div>
-
-<div>
-<span style="font:bold;">R&#233;guliers (actifs	sous ARV) :</span> Tout patient mis sous ARV et n\'ayant aucun rapport d\'arr&#234;t rempli pour motifs de d&#233;c&#232;s, de transfert, ni d\'arr&#234;t de traitement. La date de prochain rendez-vous clinique ou de prochaine	collecte de m&#233;dicaments est situ&#233;e dans le futur de la p&#233;riode d\'analyse.(Fiches &#224; ne pas consid&#233;rer, labo et counseling)
-</div>
-
-<div>
-<span style="font:bold;">Rendez-vous rat&#233;s :</span> Tout patient mis sous ARV et n\'ayant aucun rapport d\'arr&#234;t rempli pour motifs de d&#233;c&#232;s, de transfert, ni d\'arr&#234;t de traitement. La date de la p&#233;riode d\'analyse est sup&#233;rieure &#224; la date de rendez-vous clinique ou de collecte de m&#233;dicaments la plus r&#233;cente sans exc&#233;der 90 jours.
-</div>
-<div>
-<span style="font:bold;">Perdus de vue (LTFU, anciennement	inactif) :</span> Tout patient mis sous ARV et n\'ayant aucun rapport d\'arr&#234;t rempli pour motifs de d&#233;c&#232;s, de transfert, ni d\'arr&#234;t de traitement. La date de la p&#233;riode d\'analyse est sup&#233;rieure &#224; la date de rendez-vous clinique ou de collecte de m&#233;dicaments la plus r&#233;cente de plus de 90 jours.
-</div>
-<div>
-<span style="font:bold;">D&#233;c&#233;d&#233;s :</span>Tout patient mis sous ARV et ayant un rapport d\'arr&#234;t rempli pour motif de d&#233;c&#232;s.
-</div>
-<div>
-<span style="font:bold;">Arr&#234;t&#233;s :</span>Tout patient mis sous	ARV	et ayant un rapport d\'arr&#234;t rempli pour motif d\'arr&#234;t de traitement.
-</div>
-<div>
-<span style="font:bold;">Transf&#233;r&#233;s :</span>Tout patient mis sous ARV et ayant un rapport d\'arr&#234;t rempli pour motif de transfert.
-</div>
-
-</td></tr>
-</table>
-';
-
-  return $summary;
-}
-
+<?
+require_once 'include/standardHeaderExt.php';
+require_once 'labels/report.php';
+require_once 'labels/splash.php';  
 ?>
-
+<script type="text/javascript" src="map/Ext.ux.GMapPanel3.js"></script>
+<script type="text/javascript"> 
+var fm = Ext.form;
+function formatDate(value){
+    return value ? value.dateFormat('Y-m-d') : '';
+};
+function formatDateShort(value){
+    return value ? value.dateFormat('y-m') : '';
+};
+Ext.onReady(function() {  
+	function copyText(text) {
+		if (window.clipboardData) { // Internet Explorer
+			window.clipboardData.setData("Text", "" + text);
+		} else if (window.netscape) { // Mozilla 
+			try {
+				netscape.security.PrivilegeManager.enablePrivilege('UniversalXPConnect');
+				var gClipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
+				gClipboardHelper.copyString(text);
+			} catch(e) {
+				return alert(e + 'Please type: "about:config" in your address bar. Then filter by "signed". Change the value of "signed.applets.codebase_principal_support" to true. You should then be able to use this feature.');
+			}
+		} else { 
+			return alert('Your browser may not support this feature');
+		}
+	};
+	
+	function gridToCsv (cm, store) {
+		var gridData = '';
+		for (j = 0; j < cm.getColumnCount(); j++) {
+			if (gridData != '') gridData += ', ';
+			gridData += cm.getColumnHeader(j)
+		} 
+		gridData += '\n';
+		for (i=0; i < store.getCount(); i++) {
+			record = store.getAt(i);
+			flag = false;
+			for (j = 0; j < cm.getColumnCount(); j++) {
+				if (flag) gridData += ', ';
+				flag = true;
+				gridData += record.get(cm.getDataIndex(j));
+			}
+			gridData += '\n';
+		} 
+		Ext.getCmp('copyGrid').setValue(gridData);
+		//document.mainForm.regcsv.value = gridData;
+		//document.mainForm.submit();
+		//localStorage.setItem("gridData", gridData);
+		//document.write(localStorage.getItem("gridData")); 
+		//alert(gridData);
+		//copyText(gridData);
+	}
+	var record = new Ext.data.Record.create([
+		{name: 'clinic', type: 'string'},
+		{name: 'dbVersion', type: 'string'},
+		{name: 'local', type: 'string'}, 
+		{name: 'lastModified', type: 'string'},
+		{name: 'primAdult', type: 'int'},
+		{name: 'primPed', type: 'int'},
+		{name: 'obgyn', type: 'int'},
+		{name: 'primAdultForms', type: 'int'},
+		{name: 'primPedForms', type: 'int'},
+		{name: 'obgynForms', type: 'int'},
+		{name: 'total', type: 'float'},
+		{name: 'totalForms', type: 'float'}
+	]);
+	var reader = new Ext.data.JsonReader({root: 'results',totalProperty: 'total'}, record);
+	var store = new Ext.data.Store({
+		id: 'store',
+		proxy: new Ext.data.HttpProxy({
+			url: 'map/totals-primary.php'
+		}),
+		reader: reader,
+		remoteSort: true
+	}); 
+    	store.load();
   
- <script type="text/javascript">
+	var cm = new Ext.grid.ColumnModel([
+		{header: '<?=_('Ã‰tablissement');?>', dataIndex: 'clinic', type: 'string',  width: 250, sortable: true, fixed: true},
+		{header: 'Version', dataIndex: 'dbVersion', type: 'string',  width: 75, fixed: true, align: 'right'},
+		{header: '<?=$splashLabels[$lang]["dbSite"];?>', dataIndex: 'local', type: 'string',  width: 75, sortable: false, fixed: true, align: 'right', hideable: false},
+		{header: '<?=$splashLabels[$lang]["recent"];?>', dataIndex: 'lastModified', type: 'string',  width: 100, sortable: true,  align: 'right', fixed: true},
+		{header: 'PA', dataIndex: 'primAdult', type: 'int',  width: 60, sortable: false, align: 'right', fixed: true}, 
+		{header: 'VPA', dataIndex: 'primAdultForms', type: 'int',  width: 60, sortable: false, align: 'right', fixed: true},
+		{header: 'PP', dataIndex: 'primPed', type: 'int',  width: 60, sortable: false, align: 'right', fixed: true},
+		{header: 'VPP', dataIndex: 'primPedForms', type: 'int',  width: 60, sortable: false, align: 'right', fixed: true},
+		{header: 'OB', dataIndex: 'obgyn', type: 'int',  width: 60, sortable: false, align: 'right', fixed: true}, 
+		{header: 'VOB', dataIndex: 'obgynForms', type: 'int',  width: 60, sortable: false, align: 'right', fixed: true},
+		{header: 'Patients<br />total', dataIndex: 'total', type: 'float',  width: 100, sortable: false, align: 'right', fixed: true},
+		{header: '<?=_('Fiche<br />total');?>', dataIndex: 'totalForms', type: 'float',  width: 100, sortable: false, align: 'right', fixed: true}
+	]); 
+	var grid = new Ext.grid.GridPanel({
+		id: 'grid',
+		store: store,
+		cm: cm,
+		stripeRows: true,
+		height: 325,
+		width: 1100,  
+		frame: true,
+		bbar: [
+			{
+				text: '<?=$splashLabels[$lang]["toClip"];?>', 
+				id: 'splash-bbar-button',
+				handler: function (){
+					gridToCsv (cm, store);
+				}
+			}
+		]
+	});
+	 
+	<?	
+	// format legend for bottom of hiv panel
+	$statusMessage1 = array ("fr" => "<font color=\"blue\">Bleu</font>--Sites utilisant iSant&eacute; pendant moins de 90 jours.", "en" => "<font color=\"blue\">Blue</font>--Sites who have been using iSant&eacute; for 90 days or less.");
+	$statusMessage2 = array ("fr" => "<font color=\"red\">Rouge</font>--Sites dont le transfert des donnees n\'a pas ete fait depuis au moins deux semaines.", "en" => "<font color=\"red\">Red</font>--Sites with no forms entered in the last two weeks.");
+	?>
+	
+	var statusTab = Ext.DomHelper.append(document.body,{tag: 'iframe',name:'statusTab',id:'statusTab', layout:'fit',frameBorder: 0, src: 'statusTab.php',width: '100%', height: '100%'});
+    var hiv = {
+      xtype: 'panel',
+      title: 'Dashboard VIH',
+      layout: 'vbox',
+      items: [statusTab]
+  };
+	
+	var primary = {
+		xtype: 'panel', 
+		title: 'Dashboard soins de santÃ© primaire',
+		layout: 'vbox',
+		items: [
+			grid,
+			{ xtype: 'panel',
+			 	title: '<?=_('LÃ©gende');?>',
+				items: [
+					{xtype: 'label', html: '<?=_('PA: Patients adultes soins de santÃ© primaires<br>');?>'},
+					{xtype: 'label', html: '<?=_('VPA: Adulte visites soins de santÃ© primaires<br>');?>'},
+					{xtype: 'label', html: '<?=_('PP: Patients pÃ©diatrique soins de santÃ© primaires<br>');?>'},
+					{xtype: 'label', html: '<?=_('VPP: PÃ©diatrique visites soins de santÃ© primaires<br>');?>'},
+					{xtype: 'label', html: '<?=_('OB: Patients ob-gyn<br>');?>'},
+					{xtype: 'label', html: '<?=_('VOB: Visites ob-gyn<br>');?>'},
+					{xtype: 'label', html: '<?=_('Remarques : ');?>'},
+					{xtype: 'label', html: '<?=_('Les totaux sont cumulatifs Ã  partir de 01.04.2011 Ã  la date actuelle.<br>');?>'},
+					{xtype: 'label', html: '<?=_('Totals des patients est infÃ©rieure Ã  la somme de la zone de service totaux en raison de patients communs.');?>'}
+				]
+		        }
+		]      	
+	};
+	
+	var mapPanel = {
+		xtype: 'gmappanel',  
+    		zoomLevel: 8,
+    		gmapType: 'map',
+		height: 350,
+		width: 800,
+    		setCenter: {
+			lat: 19.0,
+			lng: -72.75
+    		},
+                mapConfOpts: ['enableScrollWheelZoom','enableDoubleClickZoom','enableDragging'],
+                mapControls: ['GSmallMapControl','GMapTypeControl','NonExistantControl'],
+    		markers: [ 
+			<?
+			$result = database()->query('select markerText from lastMarkers2 order by lastMarkersDate desc limit 1;');
+			while ($row = $result->fetch()) {
+				echo $row['markerText'];
+			} 
+			?> 
+		]
+	};
+	
+	var map = {
+		xtype: 'panel', 
+		title: 'Format Graphique',
+		layout: 'vbox',
+		items: [
+			mapPanel,
+			{ xtype: 'panel', title: '<?=_('Remarques');?>', 
+				items: [
+					{xtype: 'label', html: '<font color="green"><?=_('Vert');?></font> : <?=_('Serveur local<br>');?>'},
+					{xtype: 'label', html: '<font color="blue"><?=_('Bleu');?></font> : <?=_('Utilisant le serveur dâ€™asp.<br>');?>'},
+					{xtype: 'label', html: '<?=_('Planez au-dessus dâ€™un marqueur pour voir le nom dâ€™emplacement.<br>');?>'},
+					{xtype: 'label', html: '<?=_('Cliquez sur un marqueur pour voir lâ€™information additionnelle dâ€™emplacement.<br>');?>'},
+					{xtype: 'label', html: '<?=_('Drague/baisse/bourdonnement au foyer dedans sur un secteur spÃ©cifique');?>'}
+				]
+		        }
+		]      	
+	};      
+	var layout = new Ext.Viewport ({ 
+		forceFit: true,
+		hideMode: 'offsets',
+		layout: 'border', 
+		items:[
+			{ xtype: 'box', region:'north', el:'banner', height: 67, margins: '<? if (preg_match('/(test|demo)/i', APP_VERSION) > 0) { echo "24 0 0 0"; } // Checks for test version, if yes msg displays via bannerbody ?>'},
+			{ xtype: 'tabpanel', id: 'centerPanel', region: 'center', activeTab: <? if (! HIV_AUTH) echo "1"; else echo "0";?>, defaults: {autoScroll: true},
+				items: [
+					hiv,
+					primary,
+					map
+				]
+			},
+			{ xtype: 'textarea', region: 'south', height: 20, width: 100, id: 'copyGrid', name: 'copyGrid'}
+		] 
+	});
+});
 </script>
-  
-<html>
-<head>
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <style type="text/css">
-    a {text-decoration: none}
-	input { padding:3px; border:1px solid #F5C5C5; border-radius:2px; width:142px; }
-	thead, tbody {display: inline-block; }
-    tbody {width:100%; overflow:scroll; overflow:auto;}
-  </style>  
 </head>
-
-
-<body text="#000000" link="#000000" alink="#000000" vlink="#000000" align="center">
-<center>
-<?php echo generateStatus($lang); ?>
+<body>
+<form name="mainForm" action="#" method="post">
+<? include ("bannerbody.php"); ?>
+<div class="contentArea">
+</div> 
+</form>
 </body>
 </html>
