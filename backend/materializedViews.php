@@ -2587,11 +2587,14 @@ foreach($arrayStatus as $key => $status)
 	if(strlen($status['clinic'])>50) $clinic=substr($status['clinic'],0,50).' ...';
 	else $clinic=$status['clinic'];
 	
-	
+	   $dbVersion = ($status['sitecode'] == DEF_SITE) ? APP_VERSION : $status['dbVersion'];
+		// tweak dbVersion if it uses the new numbering convention
+		if (strpos($dbVersion,'(') > 0) $dbVersion = substr($dbVersion,0,5);
+		
   $info=$info.'<tr '.$style.'><td style="text-align: left;"><font size="1">'.$clinic.'</font></td>
                               <td><font size="1">'. $status['sitecode'].'</font></td>
                               <td><font size="1">'.$status['local'].'</font></td>
-							  <td><font size="1">'.$status['dbVersion'].'</font></td>
+							  <td><font size="1">'.$dbVersion.'</font></td>
 							  <td><font size="1">'.$status['minDate'].'</font></td>
 							  <td><font size="1">'.$status['maxDate'].'</font></td>
 							  <td><font size="1">'.$status['preArtRecentAdl'].'/'.$status['preArtRecentChild'].'</font></td>

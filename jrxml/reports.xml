@@ -1896,7 +1896,7 @@
 				
 			<report id="548" patientStatus="0" treatmentStatus="0" testType="0">
 				  <title lang="en">Alert viral load </title>
-				  <title lang="fr">Alerte charge viral</title>
+				  <title lang="fr">Alerte charge virale</title>
 				    <reportFile></reportFile>
 				    <groupLevel>0</groupLevel>
 				    <otherLevel>0</otherLevel>
