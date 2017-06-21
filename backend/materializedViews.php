@@ -2427,194 +2427,142 @@ from eligibilityTempFinal;');
 
 
 function generateSplashArray () {
-//	return;
+	//return;
 	$lang = 'fr';   
 	require_once 'labels/splash.php';
 	dbQuery("truncate table lastSplash");
-	dbQuery("DROP TABLE IF EXISTS lastSplashText");
-	dbQuery("CREATE TABLE IF NOT EXISTS lastSplashText (lastSplashText_id int(10) auto_increment,splashText longtext,PRIMARY KEY  (lastSplashText_id));");
+	dbQuery("truncate table lastSplashText");
+	$statusArray = array();
+	// index is patientStatus, associative value is column in final report
+	//$statusMap = array (1 => 7, 2 => 11, 3 => 10, 4 => 5 , 5 => 4,  6 => 6,  7 => 8, 8 => 9,  9 => 3, 10 => 2, 11 => 1);
+    $statusMap = array (1 => 11, 2 => 10, 3 => 9, 4 => 5 , 5 => 4,  6 => 6,  7 => 1, 8 => 7,  9 => 8, 10 => 3, 11 => 2);
 	
-	/* Site info*/
-$info='<tr style="text-align:left; background-color:#C7D0D3;">
-<th>Etablissement</th><th>sitecode</th><th>Server local</th><th>Version</th><th>Date de Debut</th><th>Date de saisi la plus r&#233;cente</th>
-<th>R&#233;cent (A/E)</th><th>Actif (A/E)</th><th>Perdu de vue (A/E)</th><th>Transf&#233;r&#233; (A/E)</th><th>D&#233;c&#233;d&#233; (A/E)</th><th>Total (A/E)</th>
-<th>R&#233;gulier (A/E)</th><th>Rendez-vous Rat&#233; (A/E)</th><th>Perdu de vue (A/E)</th><th>Arr&#234;t&#233; (A/E)</th><th>Transf&#233;r&#233; (A/E)</th><th>D&#233;c&#233;d&#233; (A/E)</th><th>Total (A/E)</th>
-<th>Total G&#233;n&#233;ral</th></tr>';
-$arrayStatus=array();
-/* patient Status PRE ART AND ART */
-		$patStatus="select 
-		            clinic,rtrim(c.sitecode) as sitecode, 
-                    case when c.dbSite !=0 then 'Oui' else 'No' end as 'local', 
-				    left(dbVersion,4) as dbVersion, 
-				    case when date(lastmodified) is null then '2000-01-01' else DATE_FORMAT(lastmodified,'%Y-%m-%d') end as 'maxDate',
-					case when date(mindate) is null then '2000-01-01' else DATE_FORMAT(mindate,'%Y-%m-%d') end as 'minDate'
-                   from  clinicLookup c, (select sitecode,min(lastModified) as mindate,max(lastModified) as lastModified from encounter group by 1) e 
-                where e.sitecode=c.sitecode order by 5 desc";
- $result1 =databaseSelect()->query($patStatus);
- $y=0;
-while ($statusRow1 = $result1->fetch()) {
-	$arrayStatus[$statusRow1['sitecode']]=array("clinic" => $statusRow1['clinic'],
-	                       "sitecode" => $statusRow1['sitecode'],
-						   "local" => $statusRow1['local'],
-						   "dbVersion" => $statusRow1['dbVersion'],
-						   "minDate" => $statusRow1['minDate'],
-						   "maxDate" => $statusRow1['maxDate'],
-						   "preArtDeathChild" =>'0',
-						   "preArtTransfertChild" =>'0',
-						   "preArtRecentChild" =>'0',
-						   "preArtLostChild" =>'0',
-						   "preArtActifChild" =>'0',
-						   "preArtTotalChild" =>'0',
-						   "preArtDeathAdl" =>'0',
-						   "preArtTransfertAdl" =>'0',
-						   "preArtRecentAdl" =>'0',
-						   "preArtLostAdl" =>'0',
-						   "preArtActifAdl" =>'0',
-						   "preArtTotalAdl" =>'0',						   
-						   "artDeathChild" =>'0',
-						   "artTransfertChild" =>'0',
-						   "artStoppedChild" =>'0',
-						   "artRegularChild" =>'0',
-						   "artMissingChild" =>'0',
-						   "artLostChild" =>'0',
-						   "artTotalChild" =>'0',
-						   "artDeathAdl" =>'0',
-						   "artTransfertAdl" =>'0',
-						   "artStoppedAdl" =>'0',
-						   "artRegularAdl" =>'0',
-						   "artMissingAdl" =>'0',						   
-						   "artLostAdl" =>'0',
-						   "artTotalAdl" =>'0',
-						   "TotalGeneral" =>'0'
-						   );
-	$y++;
-}
-
-		$patStatus="select 
-		            rtrim(c.sitecode) as sitecode, 
-                    count(distinct case when t.patientStatus=4 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtDeathChild,
-                    count(distinct case when t.patientStatus=5 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtTransfertChild,
-                    count(distinct case when t.patientStatus=7 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtRecentChild,
-                    count(distinct case when t.patientStatus=10 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtLostChild,
-                    count(distinct case when t.patientStatus=11 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtActifChild,
-					count(distinct case when t.patientStatus=4 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtDeathAdl,
-                    count(distinct case when t.patientStatus=5 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtTransfertAdl,
-                    count(distinct case when t.patientStatus=7 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtRecentAdl,
-                    count(distinct case when t.patientStatus=10 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtLostAdl,
-                    count(distinct case when t.patientStatus=11 and (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtActifAdl,
-					count(distinct case when (year(now())-t.dobYy)<=14 then t.patientID else null end) as preArtTotalChild,
-					count(distinct case when (year(now())-t.dobYy)>14 then t.patientID else null end) as preArtTotalAdl
-                   from patient t,clinicLookup c 
-                where c.sitecode=LEFT(t.patientid,5) and t.patientStatus in (4,5,7,10,11)
-				group by 1";
- $result2 =databaseSelect()->query($patStatus);
-while ($statusRow2 = $result2->fetch()) {	
-	$arrayStatus[$statusRow2['sitecode']]['preArtDeathChild']=$statusRow2['preArtDeathChild'];
-	$arrayStatus[$statusRow2['sitecode']]['preArtTransfertChild']=$statusRow2['preArtTransfertChild'];
-	$arrayStatus[$statusRow2['sitecode']]['preArtRecentChild']=$statusRow2['preArtRecentChild'];
-	$arrayStatus[$statusRow2['sitecode']]['preArtLostChild']=$statusRow2['preArtLostChild'];
-	$arrayStatus[$statusRow2['sitecode']]['preArtActifChild']=$statusRow2['preArtActifChild'];
-	$arrayStatus[$statusRow2['sitecode']]['preArtTotalChild']=$statusRow2['preArtTotalChild'];
-	$arrayStatus[$statusRow2['sitecode']]['preArtDeathAdl']=$statusRow2['preArtDeathAdl'];
-	$arrayStatus[$statusRow2['sitecode']]['preArtTransfertAdl']=$statusRow2['preArtTransfertAdl'];
-	$arrayStatus[$statusRow2['sitecode']]['preArtRecentAdl']=$statusRow2['preArtRecentAdl'];
-	$arrayStatus[$statusRow2['sitecode']]['preArtLostAdl']=$statusRow2['preArtLostAdl'];
-	$arrayStatus[$statusRow2['sitecode']]['preArtActifAdl']=$statusRow2['preArtActifAdl'];
-	$arrayStatus[$statusRow2['sitecode']]['preArtTotalAdl']=$statusRow2['preArtTotalAdl'];
-}
-  
-
-
-		$patStatus="select 
-		            rtrim(c.sitecode) as sitecode, 
-					count(distinct case when t.patientStatus=1 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as artDeathChild,
-					count(distinct case when t.patientStatus=1 and (year(now())-t.dobYy)>14 then t.patientID else null end) as artDeathAdl,
-                    count(distinct case when t.patientStatus=2 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as artTransfertChild,
-					count(distinct case when t.patientStatus=2 and (year(now())-t.dobYy)>14 then t.patientID else null end) as artTransfertAdl,
-                    count(distinct case when t.patientStatus=3 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as artStoppedChild,
-                    count(distinct case when t.patientStatus=3 and (year(now())-t.dobYy)>14 then t.patientID else null end) as artStoppedAdl,
-					count(distinct case when t.patientStatus=6 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as artRegularChild,
-                    count(distinct case when t.patientStatus=6 and (year(now())-t.dobYy)>14 then t.patientID else null end) as artRegularAdl,
-					count(distinct case when t.patientStatus=8 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as artMissingChild,
-                    count(distinct case when t.patientStatus=8 and (year(now())-t.dobYy)>14 then t.patientID else null end) as artMissingAdl,
-					count(distinct case when t.patientStatus=9 and (year(now())-t.dobYy)<=14 then t.patientID else null end) as artLostChild,
-					count(distinct case when t.patientStatus=9 and (year(now())-t.dobYy)>14 then t.patientID else null end) as artLostAdl,
-					count(distinct case when (year(now())-t.dobYy)<=14 then t.patientID else null end) as artTotalChild,
-					count(distinct case when (year(now())-t.dobYy)>14 then t.patientID else null end) as artTotalAdl
-					from patient t,clinicLookup c 
-                where c.sitecode=LEFT(t.patientid,5) and t.patientStatus in (1,2,3,6,8,9)
-				group by 1";
- $result2 =databaseSelect()->query($patStatus);
-while ($statusRow2 = $result2->fetch()) {
-	$arrayStatus[$statusRow2['sitecode']]['artDeathChild']=$statusRow2['artDeathChild'];
-	$arrayStatus[$statusRow2['sitecode']]['artTransfertChild']=$statusRow2['artTransfertChild'];
-	$arrayStatus[$statusRow2['sitecode']]['artStoppedChild']=$statusRow2['artStoppedChild'];
-	$arrayStatus[$statusRow2['sitecode']]['artRegularChild']=$statusRow2['artRegularChild'];
-	$arrayStatus[$statusRow2['sitecode']]['artMissingChild']=$statusRow2['artMissingChild'];
-	$arrayStatus[$statusRow2['sitecode']]['artLostChild']=$statusRow2['artLostChild'];
-	$arrayStatus[$statusRow2['sitecode']]['artTotalChild']=$statusRow2['artTotalChild'];
-	$arrayStatus[$statusRow2['sitecode']]['artDeathAdl']=$statusRow2['artDeathAdl'];
-	$arrayStatus[$statusRow2['sitecode']]['artTransfertAdl']=$statusRow2['artTransfertAdl'];
-	$arrayStatus[$statusRow2['sitecode']]['artStoppedAdl']=$statusRow2['artStoppedAdl'];
-	$arrayStatus[$statusRow2['sitecode']]['artRegularAdl']=$statusRow2['artRegularAdl'];
-	$arrayStatus[$statusRow2['sitecode']]['artMissingAdl']=$statusRow2['artMissingAdl'];
-	$arrayStatus[$statusRow2['sitecode']]['artLostAdl']=$statusRow2['artLostAdl'];
-	$arrayStatus[$statusRow2['sitecode']]['artTotalAdl']=$statusRow2['artTotalAdl'];	  
-  }
- 
- 		$patStatus="select 
-		            rtrim(c.sitecode) as sitecode,
-					count(distinct t.patientID) as TotalGeneral
-					from patient t,clinicLookup c 
-                where c.sitecode=LEFT(t.patientid,5) and t.patientStatus in (1,2,3,6,8,9,4,5,7,10,11)
-				group by 1";
- $result3 =databaseSelect()->query($patStatus);
-while ($statusRow3 = $result3->fetch()) {
-	$arrayStatus[$statusRow3['sitecode']]['TotalGeneral']=$statusRow3['TotalGeneral'];
-} 
- 
- 
-$i=0; 
-foreach($arrayStatus as $key => $status) 
-{
-  $red='';	
-  $diff = round(abs(time()-strtotime($status['maxDate']))/(3600*24),0);
-  if($diff>15) $red='color:#F00;';	
-	$style='style="text-align:right; background-color:#FFF;'.$red.'"';
-  if($i=1) {$style='style="text-align:right; background-color:#E8E8E8;'.$red.'"'; $i=0;}
-	else $i=1;	
-	$clinic='';
-	if(strlen($status['clinic'])>50) $clinic=substr($status['clinic'],0,50).' ...';
-	else $clinic=$status['clinic'];
-	
-	   $dbVersion = ($status['sitecode'] == DEF_SITE) ? APP_VERSION : $status['dbVersion'];
+	// this query gets status count information; add pediatric rows by making isPediatric part of the key
+	$qry = "select rtrim(sitecode), case when isPediatric = 1 then 1 else 0 end as isPediatric, 
+		case when patientStatus between 1 and 11 and hivPositive = 1 then patientStatus else 0 end as patientStatus, count(distinct e.patientid)
+		from encounter e, patient p where e.patientid = p.patientid and e.encStatus < 255 and p.patStatus = 0 and e.encounterType in (10, 15)
+		group by sitecode, case when isPediatric = 1 then 1 else 0 end, patientStatus";
+	$result = dbQuery ($qry);
+	while ($row = psRowFetch ($result)) {
+		if (!array_key_exists($row[0] . "|" . $row[1], $statusArray))
+			$statusArray[$row[0] . "|" . $row[1]] = array(0,0,0,0,0,0,0,0,0,0,0);
+		$statusArray[$row[0] . "|" . $row[1]][$statusMap[$row["patientStatus"]]] = $row[3];
+	}
+	// this query gets clinic information
+	$qry2 = "select clinic,
+		rtrim(c.sitecode) as sitecode, case when c.dbSite != 0 then '" . $splashLabels[$lang]['sLocal'] . "' else '' end as 
+'local', dbVersion, case when max(lastmodified) is null then '2000-01-01' else max(lastmodified) end as 'maxDate',
+case when min(createDate) is null then '2000-01-01' else min(createDate) end as 'minDate',
+ datediff(d,max(lastmodified),getDate()) as ddDelta, datediff(d,min(createdate),getDate()) as ddNew
+		from clinicLookup c, encounter e where e.encStatus < 255 and e.sitecode = c.sitecode and c.incphr = 1";
+	$qry2 .= " group by clinic, c.sitecode, case when c.dbSite != 0 then '" . $splashLabels[$lang]['sLocal'] . "' else '' end, dbVersion order by 5 desc";  
+	eval("\$qry2 = \"$qry2\";");
+ 	$result = dbQuery ($qry2);
+	$jj = 0;
+	// format row results
+	loadSplash("var myData = [");
+	$firstFlag = true;
+	$localCnt = 0;
+	while ($row = psRowFetch($result)) {
+		if ($firstFlag) {
+			loadSplash ("[");
+			$firstFlag = false;
+		}
+		else loadSplash (",\n[");
+		$curDate = formatDisplayedDate ("maxDate", $row["maxDate"],"en");
+		$minDate =formatDisplayedDate ("minDate", $row["minDate"],"en");
+		
+		$ddDelta = $row['ddDelta'];
+		$color = "";
+		$ecolor = "";
+		if ($ddDelta > 14) {
+			$color = "<font color=\"red\">";
+			$ecolor = "</font>";
+		} 
+		$curDateArray = explode("/", $curDate);
+		$curDate = $curDateArray[0] . "/" . $curDateArray[1] . "/20" . $curDateArray[2];
+		
+		$minDateArray = explode("/", $minDate);
+		$minDate = $minDateArray[0] . "/" . $minDateArray[1] . "/20" . $minDateArray[2];
+		
+		$ddDelta = $row['ddDelta'];
+		$ddNew = $row['ddNew'];
+		$color = "";
+		$ecolor = "";
+		if ($ddNew < 90) {
+			$color = "<font color=\"blue\">";
+			$ecolor = "</font>";
+		}
+		if ($ddDelta > 14) {
+			$color = "<font color=\"red\">";
+			$ecolor = "</font>";
+		}
+		$clinic = "'" . $color . str_replace("'","X",$row["clinic"]) . $ecolor . "','";
+		// display the local APP_VERSION for the dbVersion if the defsite value matches; otherwise use clinicLookup table value 
+		$dbVersion = ($row["sitecode"] == DEF_SITE) ? APP_VERSION : $row["dbVersion"];
 		// tweak dbVersion if it uses the new numbering convention
 		if (strpos($dbVersion,'(') > 0) $dbVersion = substr($dbVersion,0,5);
-		
-  $info=$info.'<tr '.$style.'><td style="text-align: left;"><font size="1">'.$clinic.'</font></td>
-                              <td><font size="1">'. $status['sitecode'].'</font></td>
-                              <td><font size="1">'.$status['local'].'</font></td>
-							  <td><font size="1">'.$dbVersion.'</font></td>
-							  <td><font size="1">'.$status['minDate'].'</font></td>
-							  <td><font size="1">'.$status['maxDate'].'</font></td>
-							  <td><font size="1">'.$status['preArtRecentAdl'].'/'.$status['preArtRecentChild'].'</font></td>
-	                          <td><font size="1">'.$status['preArtActifAdl'].'/'.$status['preArtActifChild'].'</font></td>
-	                          <td><font size="1">'.$status['preArtLostAdl'].'/'.$status['preArtLostChild'].'</font></td>
-					          <td><font size="1">'.$status['preArtTransfertAdl'].'/'.$status['preArtTransfertChild'].'</font></td>
-					          <td><font size="1">'.$status['preArtDeathAdl'].'/'.$status['preArtDeathChild'].'</font></td>					
-					          <td><font size="1">'.$status['preArtTotalAdl'].'/'.$status['preArtTotalChild'].'</font></td>
-					          <td><font size="1">'.$status['artRegularAdl'].'/'.$status['artRegularChild'].'</font></td>
-	                          <td><font size="1">'.$status['artMissingAdl'].'/'.$status['artMissingChild'].'</font></td>
-	                          <td><font size="1">'.$status['artLostAdl'].'/'.$status['artLostChild'].'</font></td>
-					          <td><font size="1">'.$status['artStoppedAdl'].'/'.$status['artStoppedChild'].'</font></td>
-					          <td><font size="1">'.$status['artTransfertAdl'].'/'.$status['artTransfertChild'].'</font></font></td>
-	                          <td><font size="1">'.$status['artDeathAdl'].'/'.$status['artDeathChild'].'</td>
-					          <td><font size="1">'.$status['artTotalAdl'].'/'.$status['artTotalChild'].'</font></td>
-					          <td><font size="1">'.$status['TotalGeneral'].'</font></td>';
-}
-$info=$info.'</tr>'; 
-loadSplash($info);
-
+		loadSplash ($clinic . $row["sitecode"] . "','" . $dbVersion . "','" . $row["local"] . "','" . $curDate . "','".$minDate."',");
+		$t1 = array();
+		$t2 = array();
+		for ($j = 0; $j < 2; $j++) {
+			if (!array_key_exists($row[1] . "|" . $j, $statusArray)) {
+				$statusArray[$row[1] . "|" . $j] = array(0,0,0,0,0,0,0,0,0,0,0);
+			}
+			// clinical care total
+			$t1[$j] = $statusArray[$row[1] . "|" . $j][1] + $statusArray[$row[1] . "|" . $j][2] + $statusArray[$row[1] . "|" . $j][3] + $statusArray[$row[1] . "|" . $j][4] + $statusArray[$row[1] . "|" . $j][5];
+			// art total
+			$t2[$j] = $statusArray[$row[1] . "|" . $j][6] + $statusArray[$row[1] . "|" . $j][7] + $statusArray[$row[1] . "|" . $j][8] + $statusArray[$row[1] . "|" . $j][9] + $statusArray[$row[1] . "|" . $j][10]+ $statusArray[$row[1] . "|" . $j][11];
+		}
+		for ($k = 1; $k < 6; $k++)
+			loadSplash (str_replace(".", "&nbsp;", "'" . str_pad ($statusArray[$row[1] . "|" . "0"][$k],4,".",STR_PAD_LEFT) . "/" . str_pad($statusArray[$row[1] . "|" . "1"][$k],3,".",STR_PAD_LEFT) . "',"));
+		loadSplash (str_replace(".", "&nbsp;", "'" . str_pad ($t1[0],4,".",STR_PAD_LEFT) . "/" . str_pad ($t1[1],3,".",STR_PAD_LEFT) . "',"));
+		for ($k = 6; $k < 12; $k++)
+			loadSplash (str_replace(".", "&nbsp;", "'" . str_pad ($statusArray[$row[1] . "|" . "0"][$k],4,".",STR_PAD_LEFT) . "/" . str_pad($statusArray[$row[1] . "|" . "1"][$k],3,".",STR_PAD_LEFT) . "',"));
+		loadSplash (str_replace(".", "&nbsp;", "'" . str_pad ($t2[0],4,".",STR_PAD_LEFT) . "/" . str_pad ($t2[1],4,".",STR_PAD_LEFT) . "',"));
+		//loadSplash ("'" . ($statusArray[$row[1] . "|0"][11] + $statusArray[$row[1] . "|1"][11]) . "',");
+		$t3 = $t1[0] + $t1[1] + $t2[0] + $t2[1];// + ($statusArray[$row[1] . "|0"][11] + $statusArray[$row[1] . "|1"][11]);
+		loadSplash ("'" . $t3 . "']");
+	    $jj++;
+	    if ($row[2] != "") $localCnt++;
+	}
+	loadSplash ("];");
+	// totals row
+	$totals[0] = array(0,0,0,0,0,0,0,0,0,0,0);
+	$totals[1] = array(0,0,0,0,0,0,0,0,0,0,0);
+	foreach ($statusArray as $site => $numArray) {
+		$siteParts = explode("|", $site);
+		$j = $siteParts[1];
+		for ($k = 1; $k < 12; $k++)
+			$totals[$j][$k] += $numArray[$k];
+	}
+	$t1 = array();
+	$t2 = array();
+	for ($j = 0; $j < 2; $j++) {
+		$t1[$j] = $totals[$j][1]+$totals[$j][2]+$totals[$j][3]+$totals[$j][4]+$totals[$j][5];
+		$t2[$j] = $totals[$j][6]+$totals[$j][7]+$totals[$j][8]+$totals[$j][9]+$totals[$j][10]+$totals[$j][11];
+	}
+	
+	$arrayVector = array ("'" . $splashLabels[$lang]["grandTotals"] . "'","' '","'" . $localCnt . "'","'" . $jj . "'");
+	for ($k = 1; $k < 6; $k++)
+		array_push ($arrayVector,  "'" . str_pad ($totals[0][$k],4," ",STR_PAD_LEFT) . "/" . str_pad ($totals[1][$k],3," ",STR_PAD_LEFT) . "'");
+	array_push ($arrayVector, "'" . str_pad ($t1[0],4," ",STR_PAD_LEFT) . "/" . str_pad ($t1[1],3," ",STR_PAD_LEFT) . "'");
+	for ($k = 6; $k < 12; $k++)
+		array_push ($arrayVector, "'" . str_pad ($totals[0][$k],4," ",STR_PAD_LEFT) . "/" . str_pad ($totals[1][$k],3," ",STR_PAD_LEFT) . "'");
+	array_push ($arrayVector,  "'" . str_pad ($t2[0],4," ",STR_PAD_LEFT) . "/" . str_pad ($t2[1],3," ",STR_PAD_LEFT) . "'");
+	//array_push ($arrayVector, "'" . ($totals[0][11] + $totals[1][11]) . "'");
+	$t3 = $t1[0] + $t1[1] + $t2[0] + $t2[1];// + $totals[0][11] + $totals[1][11];
+	array_push ($arrayVector, "'" . $t3 . "'");
+	loadSplash("\nvar totalVector = new Array (");
+	$first = true;
+	foreach ($arrayVector as $vectorElement) {
+		if ($first) {
+			loadSplash($vectorElement);
+			$first = false;
+		}
+		else loadSplash("," . $vectorElement);
+	}
+	loadSplash (");");  
 	dbQuery ("insert into lastSplash values (getDate())");
 }
 function loadSplash($val) {
