@@ -105,7 +105,8 @@ $cmdLabel = array (
 		"HIV Status",
 		"OB/GYN Surveillance",
 		"Data quality Surveillance",
-		"MER Indicator"
+		"MER Indicator",
+		"Upload Viral Load"
 	),
 	"fr" => array (
 		"R&eacute;capitulatif",
@@ -153,7 +154,8 @@ $cmdLabel = array (
 		"VIH Status",
 		"Surveillance de l'OB/GYN",
 		"Surveillance de la Qualité de données",
-		"Indicateur MER"
+		"Indicateur MER",
+		"Chargement Charge Virale"
 	)
 );
 // pages mapped to labels. Also used to define IDs in navigation structure
