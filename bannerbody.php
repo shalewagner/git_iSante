@@ -230,6 +230,7 @@ echo "<li class=\"dropdown\"><a class=\"dropdown-toggle\" href=\"#\" data-toggle
                 echo "<li><a id=\"" . $cmdList[17] . "\" href=\"./adhocSetup.php?rtype=adhoc&testType=0&" . $menustring . "\">" . $cmdLabel[$lang][17] . "</a></li>";
             }
             echo "
+	    <li><a id=\"" . $cmdList[16] . "\" href=\"./loadViral.php\">" . $cmdLabel[$lang][46] . "</a></li>
     </ul>
 </li>
 ";
