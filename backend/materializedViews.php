@@ -639,7 +639,7 @@ ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ? group by 1;', array(
    
 $query='UPDATE allHIV a,(
 select case when ? between e.maxDt and e.nextDt then 6 
-            when datediff(?,e.maxDt) between 0 and 90 then 8 
+            when datediff(?,e.nextDt) between 0 and 90 then 8 
 			else 9 end as patientStatus,l.patientid from art l, allEnc e 
 WHERE l.patientid = e.patientid AND l.patientid NOT IN (SELECT patientID from discTable where discDate <=?)
 UNION 
@@ -2738,13 +2738,13 @@ database()->exec('ALTER TABLE arvStartedTemp ADD PRIMARY KEY (patientID)');
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT LEFT(A.patientid,5), A.patientID, 1, date(now()) FROM arvStartedTemp A LEFT JOIN viralLoadTemp B
 ON A.patientID=B.patientID and visitDate >= arvDate 
-where arvDate <= DATE_ADD(now(), INTERVAL -6 MONTH)');
+where arvDate <= DATE_ADD(now(), INTERVAL -6 MONTH)  and B.patientID is null');
 
 /*Any patients 5 months after ART initiation */
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT LEFT(A.patientid,5), A.patientID, 2, date(now()) FROM arvStartedTemp A LEFT JOIN viralLoadTemp B
 on A.patientID = B.patientID and visitDate >= arvDate
-where arvDate > DATE_ADD(now(), INTERVAL -6 MONTH) and arvDate<= DATE_ADD(now(), INTERVAL -5 MONTH)');
+where arvDate > DATE_ADD(now(), INTERVAL -6 MONTH) and arvDate<= DATE_ADD(now(), INTERVAL -5 MONTH)  and B.patientID is null');
 
 /* Any pregnant woman 4 months after ART initiation */
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
