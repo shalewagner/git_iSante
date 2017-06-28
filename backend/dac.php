@@ -16,13 +16,13 @@ function generateDac($startdate, $enddate,$site, $lang) {
 select 
 concat('<a href=\"dacList.php?disp=1&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',dispensation,'</a>') as Communautaire,
 concat('<a href=\"dacList.php?disp=0&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',institution,'</a>') as Institution,
-concat(round((dispensation/institution)*100,2),'%') as Pourcentage,uniquePatient as 'Patient Unique'
+concat(round((dispensation/(dispensation+institution))*100,2),'%') as Pourcentage,uniquePatient as 'Patient Unique'
 from (
 select  e.siteCode,
 count(distinct case when o.value_boolean=1 then e.encounter_id else null end) as dispensation,
 count(distinct case when ifnull(o.value_boolean,0)=0 then e.encounter_id else null end) as institution,
 count(distinct e.patientID) as uniquePatient
-from a_prescriptions e left outer join obs o  on (e.encounter_id=o.encounter_id and o.concept_id='71642' and o.value_boolean=1)
+from v_prescriptions e left outer join obs o  on (e.encounter_id=o.encounter_id and o.concept_id='71642' and o.value_boolean=1)
 where drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88)
 and e.dispensed=1 and e.visitDate between '".$startdate."' AND '".$enddate."' and  LEFT(patientid,5)=".$site."
  group by 1) A" ); 

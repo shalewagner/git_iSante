@@ -639,7 +639,7 @@ ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ? group by 1;', array(
    
 $query='UPDATE allHIV a,(
 select case when ? between e.maxDt and e.nextDt then 6 
-            when datediff(?,e.maxDt) between 0 and 90 then 8 
+            when datediff(?,e.nextDt) between 0 and 90 then 8 
 			else 9 end as patientStatus,l.patientid from art l, allEnc e 
 WHERE l.patientid = e.patientid AND l.patientid NOT IN (SELECT patientID from discTable where discDate <=?)
 UNION 
