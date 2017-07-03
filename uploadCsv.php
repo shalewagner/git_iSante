@@ -41,6 +41,7 @@ if ($_FILES[csv][size] > 0) {
 	
 	if ($result->rowCount()==1)
 	database()->query("update viralLoad set updated=1 where siteCode=? and stCode=? and visitDate=? and resultDate=?",array(addslashes($data[0]),addslashes($data[1]),addslashes($data[2]),addslashes($data[4])));	 
+<<<<<<< HEAD
    
 echo "<script type='text/javascript'>.
 function saveLabOrder() {
@@ -82,6 +83,9 @@ function saveLabOrder() {
 
 
    
+=======
+    	
+>>>>>>> 7bfa833af1c130cec978246341176fb1a2b77401
 	}	
     //redirect 	
 	$output='<br><br><b align="center">Resultat n\'ayant pas ete importe:</b><br><br><table align="center" id="viral_load"><tr><th>Site Code</th><th>Code ST</th><th>Visit Date</th><th>Result </th> <th>Result Date</th></tr>';
@@ -109,6 +113,7 @@ function readInputFromFile($file)
 }
 
 ?>
+<<<<<<< HEAD
 
 
 
@@ -180,3 +185,5 @@ function saveLabOrderItems () {
 		} 
 	});
 } 
+=======
+>>>>>>> 7bfa833af1c130cec978246341176fb1a2b77401

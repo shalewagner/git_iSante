@@ -2737,13 +2737,13 @@ database()->exec('ALTER TABLE arvStartedTemp ADD PRIMARY KEY (patientID)');
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT LEFT(A.patientid,5), A.patientID, 1, date(now()) FROM arvStartedTemp A LEFT JOIN viralLoadTemp B
 ON A.patientID=B.patientID and visitDate >= arvDate 
-where arvDate <= DATE_ADD(now(), INTERVAL -6 MONTH)');
+where arvDate <= DATE_ADD(now(), INTERVAL -6 MONTH)  and B.patientID is null');
 
 /*Any patients 5 months after ART initiation */
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT LEFT(A.patientid,5), A.patientID, 2, date(now()) FROM arvStartedTemp A LEFT JOIN viralLoadTemp B
 on A.patientID = B.patientID and visitDate >= arvDate
-where arvDate > DATE_ADD(now(), INTERVAL -6 MONTH) and arvDate<= DATE_ADD(now(), INTERVAL -5 MONTH)');
+where arvDate > DATE_ADD(now(), INTERVAL -6 MONTH) and arvDate<= DATE_ADD(now(), INTERVAL -5 MONTH)  and B.patientID is null');
 
 /* Any pregnant woman 4 months after ART initiation */
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)

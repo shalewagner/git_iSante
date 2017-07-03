@@ -29,9 +29,15 @@ $message='Liste de patients ayant reçu des ARVs ';
  
 $queryArray = array(
 "arvDrug" => "select  distinct p.clinicPatientID as ST,p.lname as 'Prenom',p.fname as 'Nom',telephone
-from patient p, a_prescriptions e left outer join obs o  on (e.encounter_id=o.encounter_id and o.concept_id='71642' and o.value_boolean=1)
+from patient p,
+(select max(visitDate) as visitDate,patientID from v_prescriptions  e 
 where drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88)
-and e.dispensed=1 and p.patientID=e.patientID".$dispClause."
+and e.dispensed=1
+and e.visitDate between '".$startDate."' AND '".$endDate."' and  LEFT(e.patientid,5)=".$site." 
+group by patientID
+)p1,v_prescriptions e  left outer join obs o  on (e.encounter_id=o.encounter_id and o.concept_id='71642' and o.value_boolean=1)
+where drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88)
+and e.dispensed=1 and p1.visitDate=e.visitDate and e.patientID=p1.patientID and p.patientID=e.patientID".$dispClause."
 and e.visitDate between '".$startDate."' AND '".$endDate."' and  LEFT(p.patientid,5)=".$site); 
   
   $arvDrug = outputQueryRows($queryArray["arvDrug"]); 
@@ -42,8 +48,7 @@ and e.visitDate between '".$startDate."' AND '".$endDate."' and  LEFT(p.patienti
 	<p>&nbsp;</p>
 	<div><strong> '.$message.'  </strong></div>
 	<div>&nbsp;</div>
-	<div>'.$arvDrug.'</div>
-	<p>'.$queryArray["arvDrug"].'</p>	
+	<div>'.$arvDrug.'</div>	
 	</td>
   </tr>
 </table>';

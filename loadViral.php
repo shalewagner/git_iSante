@@ -59,7 +59,7 @@ require_once "include/standardHeaderExt.php";
 <?php if (!empty($_GET[success])) { echo "<b>Your file has been imported.</b><br><br>"; } //generic success notice ?> 
 
 <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
-  <input name="csv" type="file" id="fileInput" accept="text/*,.csv" placeholder="Choose your csv file"/> 
+  <input name="csv" type="file" id="fileInput" placeholder="Choose your csv file"/> 
   <input type="submit" name="Submit" value="Submit" id="submit" />   
 </form> 
 
@@ -67,3 +67,4 @@ require_once "include/standardHeaderExt.php";
 </div>
 </body>
 </html>
+

@@ -155,7 +155,7 @@ $cmdLabel = array (
 		"Surveillance de l'OB/GYN",
 		"Surveillance de la Qualité de données",
 		"Indicateur MER",
-		"Chargement Charge Virale"
+		"T&eacute;l&eacute;chargement Charge Virale"
 	)
 );
 // pages mapped to labels. Also used to define IDs in navigation structure
