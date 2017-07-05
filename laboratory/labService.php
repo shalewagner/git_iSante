@@ -5,32 +5,45 @@ require_once "backend.php";
 
 switch ($_REQUEST['task']) {
 	case 'loadViral':
-		$rowArray = explode(",", $_REQUEST['viralRow']);
-		$siteCode =  $rowArray[0];	
-		$stCode =    $rowArray[1];
-		$visitDate = $rowArray[2];
-		$result =    $rowArray[3];
-		$resultDate =$rowArray[4];
-		$note =      $rowArray[5];
+	    $recordArray = explode('\r\n', $_REQUEST['params']);
+		$cs = 0;  // count successful loads
+		$cnf = 0; // count patients not found
+		$cd = 0;  // count duplicate patients
+		initErrorTable();
+		foreach ($recordArray as $vr) {
+			$rowArray = explode(",", $vr);
+			$siteCode =  $rowArray[0];	
+			$stCode =    $rowArray[1];
+			$visitDate = $rowArray[2];
+			$result =    $rowArray[3];
+			$resultDate =$rowArray[4];
+			$note =      $rowArray[5];
 		
-		// fix up the visit date
-		$visitDate = fixDate($visitDate);
-		// fix up the result date
-		$resultDate = fixDate($resultDate);
-
-		$patientID = getPatient($stCode,$siteCode);
-		switch ($patientID) {
-			case 'NotFound':
-			case 'DuplicatePatient': 
-				echo $patientID;
-				break;
-			default:
-				$orderDate = checkOrderDate($patientID,$siteCode,$visitDate);
-				if ($orderDate == null) $result = saveEncounter($patientID,$siteCode,$visitDate);
-				$resultLab=saveViralResult($patientID,$siteCode,$visitDate,$result,$resultDate,$note);
-				echo '1';
-				break;
+			// fix up the visit date
+			$visitDate = fixDate($visitDate);
+			// fix up the result date
+			$resultDate = fixDate($resultDate);
+			// process records...
+			$patientID = getPatient($stCode,$siteCode);
+			switch ($patientID) {
+				case 'NotFound':
+					$cnf++;
+					writeErrorRecord($patientID, $vr);
+					break;
+				case 'DuplicatePatient':
+					$cd++;
+					writeErrorRecord($patientID, $vr);
+					break;
+				default:
+					$orderDate = checkOrderDate($patientID,$siteCode,$visitDate);
+					if ($orderDate == null) $result = saveEncounter($patientID,$siteCode,$visitDate);
+					$resultLab = saveViralResult($patientID,$siteCode,$visitDate,$result,$resultDate,$note);
+					$cs++;
+					break;
+			}
 		}
+		echo $cs . " tests loaded; " . $cnf . " patients not found; " . $cd . " duplicate patients.\n
+			Click button to view failed records";
 		break;
 	case 'getOrdered':  
 	        // check to see if order has been sent; hide OE catalog items with no results; show OE catalog with results 
@@ -116,6 +129,11 @@ switch ($_REQUEST['task']) {
 			$mess = 'results saved';           
 			echo '{"success":"true","message":"' . $mess . '"}'; 
 		}
+		break;
+	case 'fetchViralErrors':
+		$qry = "select * from viralLoadErrors";
+		$result = database()->query($qry)->fetchAll(PDO::FETCH_ASSOC);
+		print_r($result);
 } 
 
 function saveRows($records,$keyArray) { 
@@ -189,9 +207,9 @@ function saveEncounter($patientID,$site,$visit) {
 	$sql = "INSERT INTO encounter (siteCode,patientID,visitDateDd,visitDateMm,visitDateYy,lastModified,
 		encounterType,seqNum,encStatus,encComments,dbSite,visitPointer,formAuthor,formVersion,labOrDrugForm,
 		creator,createDate,lastModifier,badVisitDate,visitDate) 
-		VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+		VALUES (?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,now(),?,?,?)
 		ON DUPLICATE KEY UPDATE lastModified = VALUES(lastModified)";
-	$rc = database()->query($sql,array($site,$patientID,$rd,$rm,$ry,"now()",6,0,0,'',$dbSite,0,'admin',3,0, 'admin',"now()",'admin',0,$visit));
+	$rc = database()->query($sql,array($site,$patientID,$rd,$rm,$ry,6,0,0,'',$dbSite,0,'admin',3,0, 'admin','admin',0,$visit));
 	return $rc->rowCount();
 }
 
@@ -218,5 +236,16 @@ function fixDate($dt) {
 	if (count($dArray) != 3) $dArray = split('/',$dt);
 	return $dArray[2] . '-' . $dArray[1] . '-' . $dArray[0];
 
+}
+
+function initErrorTable() {
+	$qry = "DROP TABLE IF EXISTS viralLoadErrors; CREATE TABLE viralLoadErrors (errorType VARCHAR(25), originalRecord VARCHAR(200))";
+	$result = database()->query($qry);
+}
+
+function writeErrorRecord ($err, $rw) {
+	$qry = "INSERT INTO viralLoadErrors VALUES(?,?)";
+	$result = database()->query($qry, array($err, trim($rw)));
+	if ($result->rowCount() != 1) echo "bad record insert failed";
 }
 ?>  
