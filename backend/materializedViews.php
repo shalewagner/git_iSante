@@ -591,7 +591,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
            p.patStatus < 255 AND 
            p.hivPositive = 1 AND
            e.encStatus < 255 AND
-           e.encounterType IN (1,2,5,7,10,14,15,16,17,18,20,24,25,26,27,28,29,31) AND
+           e.encounterType IN (1,2,5,10,14,15,16,17,18,20,24,25,26,27,28,29,31) AND
            ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?;', array($endDate));
 
   database()->query('DELETE FROM allHIV WHERE patientid IN (SELECT DISTINCT p.patientID 
@@ -629,7 +629,7 @@ MAX(ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd)) as maxDt,
 MAX(CASE WHEN ISDATE(ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd)) = 1 THEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) ELSE DATE_ADD(ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd),INTERVAL 1 MONTH) END) AS nextDt 
 FROM encounter e, allHIV h
 WHERE e.patientid = h.patientid AND  
-e.encountertype in (1,2,5,7,10,14,15,16,17,18,20,24,25,26,27,28,29,31) AND 
+e.encountertype in (1,2,5,10,14,15,16,17,18,20,24,25,26,27,28,29,31) AND 
 e.encStatus < 255 AND badvisitdate = 0 AND
 ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ? group by 1;', array($endDate));
 

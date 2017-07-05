@@ -1,3 +1,5 @@
+17.2.list
+17.2.tar.gz
 arvDrugPeriodeList.php
 backend/arvDrugPeriode.php
 backend/arvStarted.php
@@ -47,6 +49,7 @@ include/errorMessages.php
 include/nextVisitDate.php
 include/pedImmunizations.php
 include/pedMedicalEligibility.php
+include/standardHeaderExt.php
 include/util.js
 intake.php
 jrxml/reports.xml
@@ -55,9 +58,12 @@ labels/bannerLabels.php
 labels/labels.php
 labels/menu.php
 labels/report.php
+labels/splash.php
 laboratory/labHeader.php
 laboratory/laboratoryRender.php
 laboratory/laboratorySummaryFunctions.php
+ldap/loadLdapToUserPrivilege.php
+loadViral.php
 map/Ext.ux.GMapPanel3.js
 medicalEligibility/1.php
 patient/coverTab.php
@@ -115,4 +121,5 @@ support/schema-user-functions/udf_itech.so
 support/schema-views.sql
 support/setTargets.php
 support/version.ini
+uploadCsv.php
 viralLoadList.php

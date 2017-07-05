@@ -8,21 +8,16 @@ if (DEBUG_FLAG) {
 	ob_start();
 	$firephp = FirePHP::getInstance(true);
 }
-
 $pid = "";
 $lang = "fr";
 $site = "";
-
 if (isset ($_REQUEST['pid'])) $pid = $_REQUEST['pid'];
 if (isset ($_REQUEST['lang'])) $lang = $_REQUEST['lang'];
 if (isset ($_REQUEST['site'])) $site = $_REQUEST['site'];
 if (isset ($_REQUEST['lastPid'])) $lastPid = $_REQUEST['lastPid'];
-
 if ($pid != "")  $lastPid = $pid;
 if (!isset($lastPid)) $lastPid = '';
-
 $scriptName = basename($_SERVER["SCRIPT_NAME"]);
-
 /*** This block of code saves the old-style form before displaying the patienttabs for that patient
  *** works by including genericsave.php, which handles all saving
  ***/
@@ -36,9 +31,7 @@ if (empty($_GET) && $scriptName == "patienttabs.php") {
 		header ("Location: find.php?lang=$lang");  
 	}  */
 } 
-
 require_once 'include/standardGets.php'; 
-
 /*** This block of code merges patients together if selected as a pidCollection in the find page 
  *** all patients merged have their person_id and patientID change to the designated patient in all tables
  *** the merged patients registration records are deleted, with their masterPid set to the designated patient
@@ -140,14 +133,13 @@ if (empty($_GET) && $scriptName == "find.php" && isset($_POST['deletePatient']) 
 		$lastPid = "";
 	}
 }
-
 require_once 'labels/bannerLabels.php';
 require_once 'labels/labels.php';
 require_once 'labels/menu.php';
 if (!headers_sent()) {
   header('Content-Type: text/html; charset=utf-8');
 }
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+?><!DOCTYPE HTML>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -214,8 +206,6 @@ if (!headers_sent()) {
     	});
     }
 <?php } ?>
-
-
 	Ext.BLANK_IMAGE_URL = 'ext-<?= EXTJS_VERSION ?>/resources/images/default/s.gif';
 	function getCheckedValue(radioObj) {
 		if (!radioObj) {

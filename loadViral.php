@@ -9,41 +9,90 @@ require_once "include/standardHeaderExt.php";
 <head>
   <title>file parser</title>
 <script type="text/javascript">
+	
+	var globalErrors = '';
+	
 	window.onload = function() {
 		var fileInput = document.getElementById('fileInput');
 		fileInput.addEventListener('change', function(e) {
 			var file = fileInput.files[0];
-			var textType = /text.*/;
-			if (file.type.match(textType)) {
+			//var textType = /*.csv/;
+			//if (file.type.match(textType)) {
 				var reader = new FileReader();
 				reader.onload = function(e) {
-					parseFileContents(reader.result);
+		//			parseFileContents(reader.result);
+					parseToArray(reader.result);
 				}
 				reader.readAsText(file);	
-			} else {
+			/*} else {
 				alert("File not supported!");
+			}*/
+		});
+	}
+	
+	function parseToArray(result) {
+		//put the file rows into a javascript array
+	    var resultArray = [];
+		result.split("\n").forEach(function(row) {
+			resultArray.push(row);
+		});
+		sendToBackend(resultArray);
+	}
+	
+	function sendToBackend(result) {
+	    var i = 0;
+		var le = document.getElementById('loadErrors');
+	    result.forEach(function(row) {
+			i++;
+			if (i < 7) {
+				Ext.Ajax.request({
+					waitMsg: 'Saving changes...',
+					url: 'laboratory/labService.php', 
+					params: {
+						task: 'loadViral',
+						viralRow: row
+					},
+					failure:function(response,options){
+						Ext.MessageBox.alert('Warning','Oops...');
+					},
+					success:function(response,options){
+						if (response.responseText === 'NotFound') {
+							alert('patient not found');
+							globalErrors += 'Patient not found error,' + row;
+						} else if (response.responseText === 'DuplicatePatient') {
+							alert('duplicate patient');
+							globalErrors += 'Duplicate patient error,' + row;
+						} 
+					}
+				});
 			}
 		});
 	}
+	
+	function displayErrors() {
+		alert(globalErrors);
+	}
+	
 	function parseFileContents(result) {
 		var table = document.createElement('table');
 		table.style.border = "thick solid #0000FF";
 	    //var resultArray = [];
-	    result.split("\n").forEach(function(row) {
-		    var tr = document.createElement('tr'); 			
-	        var rowArray = [];
-	        row.split(",").forEach(function(cell) {
+		result.split("\n").forEach(function(row) {
+		//result.forEach(function(row) {
+			var tr = document.createElement('tr');
+			//var rowArray = [];
+			row.split(",").forEach(function(cell) {
 				var td1 = document.createElement('td');
 				var text1 = document.createTextNode(cell);
 				td1.appendChild(text1);
 				tr.appendChild(td1);
 	            //rowArray.push(cell);
-	        });
+			});
 			table.appendChild(tr);
 	        //resultArray.push(rowArray);
-	    });
+		});
 		document.body.appendChild(table);
-	}		
+	}
 </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <style type="text/css">
@@ -60,11 +109,13 @@ require_once "include/standardHeaderExt.php";
 
 <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
   <input name="csv" type="file" id="fileInput" placeholder="Choose your csv file"/> 
-  <input type="submit" name="Submit" value="Submit" id="submit" />   
+  
+  <input type="hidden" id="loadErrors" value="eatmysocks">
+  
+  <button id="errorButton" onclick="displayErrors()">View Errors</button><P>
 </form> 
 
 <div id="viral_load"></div>
 </div>
 </body>
 </html>
-

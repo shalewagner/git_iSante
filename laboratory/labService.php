@@ -2,8 +2,34 @@
 header('Content-Type: text/javascript; charset=UTF-8');  
 chdir('..');
 require_once "backend.php"; 
-
 switch ($_REQUEST['task']) {
+	case 'loadViral':
+		$rowArray = explode(",", $_REQUEST['viralRow']);
+		$siteCode =  $rowArray[0];	
+		$stCode =    $rowArray[1];
+		$visitDate = $rowArray[2];
+		$result =    $rowArray[3];
+		$resultDate =$rowArray[4];
+		$note =      $rowArray[5];
+		
+		// fix up the visit date
+		$visitDate = fixDate($visitDate);
+		// fix up the result date
+		$resultDate = fixDate($resultDate);
+		$patientID = getPatient($stCode,$siteCode);
+		switch ($patientID) {
+			case 'NotFound':
+			case 'DuplicatePatient': 
+				echo $patientID;
+				break;
+			default:
+				$orderDate = checkOrderDate($patientID,$siteCode,$visitDate);
+				if ($orderDate == null) $result = saveEncounter($patientID,$siteCode,$visitDate);
+				$resultLab=saveViralResult($patientID,$siteCode,$visitDate,$result,$resultDate,$note);
+				echo '1';
+				break;
+		}
+		break;
 	case 'getOrdered':  
 	        // check to see if order has been sent; hide OE catalog items with no results; show OE catalog with results 
 	        $sql = "select count(*) as cnt from encounterQueue 
@@ -89,7 +115,6 @@ switch ($_REQUEST['task']) {
 			echo '{"success":"true","message":"' . $mess . '"}'; 
 		}
 } 
-
 function saveRows($records,$keyArray) { 
 	foreach ($records as $rec) {
 		$sql = "insert into labs (patientID, dbsite, sitecode, visitdateDd, visitdateMm, visitdateYy, seqNum, labid, ordered, labGroup, testnamefr,sampletype,result,result2,result3,resultAbnormal,resultdateyy,resultdatemm,resultdatedd,resultRemarks) values (?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?,?,?)"; 
@@ -109,4 +134,79 @@ function saveRows($records,$keyArray) {
 	}
 	return 1;
 }
-?>  
+function getPatient($st,$site){
+	$sql ="SELECT patientID
+	FROM patient 
+	WHERE location_id = ? AND DIGITS(clinicPatientid)+0 = DIGITS(?)+0";
+	
+	$result = array();
+	$result = database()->query($sql, array($site, $st))->fetchAll(PDO::FETCH_ASSOC);
+	$cnt = 0;
+	foreach ($result as $row) {
+		$cnt++;
+		$pid = $row['patientID'];
+	}
+	switch ($cnt) {
+		case 0:
+			return 'NotFound';
+			break;
+		case 1:
+			return $result[0]['patientID'];
+			break;
+		default:
+			return 'DuplicatePatient';
+			break;
+	}
+}
+function checkOrderDate($patientID,$site,$visit) {
+	$sql = "SELECT ymdToDate(visitDateYy,visitDateMm,visitDateDd) as visitDate
+		FROM labs 
+		WHERE siteCode = ? AND 
+		patientID = ? AND 
+		ymdToDate(visitDateYy,visitDateMm,visitDateDd) = ? AND
+		labID IN (103, 1257)";
+	$visitDate = "";
+	$result = database()->query($sql, array($site,$patientID,'20' . $visit))->fetchAll(PDO::FETCH_ASSOC);
+	foreach($result as $row) {
+		$visitDate = $row['visitDate'];
+	}
+	return $visitDate;
+}
+function saveEncounter($patientID,$site,$visit) {
+	$visitArray = split('-', $visit);
+	$rd = $visitArray[2];
+	$rm = $visitArray[1];
+	$ry = $visitArray[0];
+	$date = date('Y-m-d', time());
+	$dbSite = DB_SITE;
+	$sql = "INSERT INTO encounter (siteCode,patientID,visitDateDd,visitDateMm,visitDateYy,lastModified,
+		encounterType,seqNum,encStatus,encComments,dbSite,visitPointer,formAuthor,formVersion,labOrDrugForm,
+		creator,createDate,lastModifier,badVisitDate,visitDate) 
+		VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+		ON DUPLICATE KEY UPDATE lastModified = VALUES(lastModified)";
+	$rc = database()->query($sql,array($site,$patientID,$rd,$rm,$ry,"now()",6,0,0,'',$dbSite,0,'admin',3,0, 'admin',"now()",'admin',0,$visit));
+	return $rc->rowCount();
+}
+function saveViralResult($patientID,$site,$visit,$result,$resultDate,$note) {
+	$visitArray = split('-', $visit);
+	$rd = $visitArray[2];
+	$rm = $visitArray[1];
+	$ry = $visitArray[0];
+	$resultArray = split('-', $resultDate);
+	$rdd = $visitArray[2];
+	$rdm = $visitArray[1];
+	$rdy = $visitArray[0];
+	$sql = "INSERT INTO labs (patientid, sitecode, visitdateyy, visitdatemm,visitdatedd,seqNum, labID, 
+		result, resultDateYy, resultDateMm, resultDateDd, resultRemarks)
+		VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE 
+		result = VALUES(result), resultDateDd = VALUES(resultDateDd), resultDateMm = VALUES(resultDateMm), 
+		resultDateYy = VALUES(resultDateDd), resultRemarks = VALUES(resultRemarks)";
+	$result = database()->query($sql,array($patientID, $site, $ry, $rm, $rd, 0,103,$result,$rdy,$rdm,$rdd,$note));
+	return $result->rowCount();
+}
+function fixDate($dt) {
+	$dArray = split('-',$dt);
+	if (count($dArray) != 3) $dArray = split('/',$dt);
+	return $dArray[2] . '-' . $dArray[1] . '-' . $dArray[0];
+}
+?> 
