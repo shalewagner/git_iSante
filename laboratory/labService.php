@@ -26,11 +26,11 @@ switch ($_REQUEST['task']) {
 			// process records...
 			$patientID = getPatient($stCode,$siteCode);
 			switch ($patientID) {
-				case 'NotFound':
+				case 'Patient non trouv&eacute;':
 					$cnf++;
 					writeErrorRecord($patientID, $vr);
 					break;
-				case 'DuplicatePatient':
+				case 'Patient dupliqu&eacute;':
 					$cd++;
 					writeErrorRecord($patientID, $vr);
 					break;
@@ -133,7 +133,13 @@ switch ($_REQUEST['task']) {
 	case 'fetchViralErrors':
 		$qry = "select * from viralLoadErrors";
 		$result = database()->query($qry)->fetchAll(PDO::FETCH_ASSOC);
-		print_r($result);
+		$table="<table id=\"keywords\" cellspacing=\"0\" cellpadding=\"0\"><thead><tr><th>Code Site</th><th>Code ST</th><th>collect Date</th><th>Resultat</th><th>Date Resultat</th><th>Remarque</th><th>Erreurs</th></tr> </thead>";
+		foreach($result as $row) {
+		$record=explode(',',$row['originalRecord']);
+		$table.="<tbody><tr><td>".$record[0]."</td><td>".$record[1]."</td><td>".$record[2]."</td><td>".$record[3]."</td><td>".$record[4]."</td><td>".$record[5]."</td><td>".$row['errorType']."</td></tr>";
+	}
+	$table.="</tbody></table>";
+		print_r($table);
 } 
 
 function saveRows($records,$keyArray) { 
@@ -170,13 +176,13 @@ function getPatient($st,$site){
 	}
 	switch ($cnt) {
 		case 0:
-			return 'NotFound';
+			return 'Patient non trouv&eacute;';
 			break;
 		case 1:
 			return $result[0]['patientID'];
 			break;
 		default:
-			return 'DuplicatePatient';
+			return 'Patient dupliqu&eacute;';
 			break;
 	}
 }
