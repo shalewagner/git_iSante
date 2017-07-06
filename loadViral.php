@@ -76,7 +76,10 @@ require_once "include/standardHeaderExt.php";
 	}
 	
 	function parseFileContents(result) {
-		var table = document.createElement('table');
+		
+		var table = document.createElement("p");
+        table.innerHTML = result;
+		/*var table = document.createElement('table');
 		table.style.border = "thick solid #0000FF";
 		result.split(")").forEach(function(row) {
 			var tr = document.createElement('tr');
@@ -87,7 +90,7 @@ require_once "include/standardHeaderExt.php";
 				tr.appendChild(td1);
 			});
 			table.appendChild(tr);
-		});
+		});*/
 		document.body.appendChild(table);
 	}
 </script>
@@ -96,6 +99,42 @@ require_once "include/standardHeaderExt.php";
     a {text-decoration: none}
 	input[type="file"] { padding:3px; border:1px solid #F5C5C5; border-radius:2px; width:500px;}
 	input[type="submit"] { padding:3px; border:1px solid #F5C5C5; border-radius:2px; width:142px;}
+#keywords {
+  margin: 0 auto;
+  font-size: 1.2em;
+}
+table { border-collapse: collapse; border-spacing: 0; }
+#keywords thead {
+  cursor: pointer;
+  background: #c9dff0;
+}
+#keywords thead tr th { 
+  font-weight: bold;
+  padding: 12px 30px;
+  padding-left: 42px;
+}
+#keywords thead tr th span { 
+  padding-right: 20px;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+}
+
+#keywords thead tr th.headerSortUp, #keywords thead tr th.headerSortDown {
+  background: #acc8dd;
+}
+
+
+
+#keywords tbody tr { 
+  color: #555;
+}
+#keywords tbody tr td {
+  text-align: center;
+}
+#keywords tbody tr td.lalign {
+  text-align: left;
+}
+	
   </style>  
 </head>
 <body text="#000000" link="#000000" alink="#000000" vlink="#000000" align="center"> 
