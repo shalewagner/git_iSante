@@ -2,33 +2,48 @@
 header('Content-Type: text/javascript; charset=UTF-8');  
 chdir('..');
 require_once "backend.php"; 
+
 switch ($_REQUEST['task']) {
 	case 'loadViral':
-		$rowArray = explode(",", $_REQUEST['viralRow']);
-		$siteCode =  $rowArray[0];	
-		$stCode =    $rowArray[1];
-		$visitDate = $rowArray[2];
-		$result =    $rowArray[3];
-		$resultDate =$rowArray[4];
-		$note =      $rowArray[5];
+	    $recordArray = explode('\r\n', $_REQUEST['params']);
+		$cs = 0;  // count successful loads
+		$cnf = 0; // count patients not found
+		$cd = 0;  // count duplicate patients
+		initErrorTable();
+		foreach ($recordArray as $vr) {
+			$rowArray = explode(",", $vr);
+			$siteCode =  $rowArray[0];	
+			$stCode =    $rowArray[1];
+			$visitDate = $rowArray[2];
+			$result =    $rowArray[3];
+			$resultDate =$rowArray[4];
+			$note =      $rowArray[5];
 		
-		// fix up the visit date
-		$visitDate = fixDate($visitDate);
-		// fix up the result date
-		$resultDate = fixDate($resultDate);
-		$patientID = getPatient($stCode,$siteCode);
-		switch ($patientID) {
-			case 'NotFound':
-			case 'DuplicatePatient': 
-				echo $patientID;
-				break;
-			default:
-				$orderDate = checkOrderDate($patientID,$siteCode,$visitDate);
-				if ($orderDate == null) $result = saveEncounter($patientID,$siteCode,$visitDate);
-				$resultLab=saveViralResult($patientID,$siteCode,$visitDate,$result,$resultDate,$note);
-				echo '1';
-				break;
+			// fix up the visit date
+			$visitDate = fixDate($visitDate);
+			// fix up the result date
+			$resultDate = fixDate($resultDate);
+			// process records...
+			$patientID = getPatient($stCode,$siteCode);
+			switch ($patientID) {
+				case 'Patient non trouv&eacute;':
+					$cnf++;
+					writeErrorRecord($patientID, $vr);
+					break;
+				case 'Patient dupliqu&eacute;':
+					$cd++;
+					writeErrorRecord($patientID, $vr);
+					break;
+				default:
+					$orderDate = checkOrderDate($patientID,$siteCode,$visitDate);
+					if ($orderDate == null) $result = saveEncounter($patientID,$siteCode,$visitDate);
+					$resultLab = saveViralResult($patientID,$siteCode,$visitDate,$result,$resultDate,$note);
+					$cs++;
+					break;
+			}
 		}
+		echo $cs . " tests loaded; " . $cnf . " patients not found; " . $cd . " duplicate patients.\n
+			Click button to view failed records";
 		break;
 	case 'getOrdered':  
 	        // check to see if order has been sent; hide OE catalog items with no results; show OE catalog with results 
@@ -114,7 +129,19 @@ switch ($_REQUEST['task']) {
 			$mess = 'results saved';           
 			echo '{"success":"true","message":"' . $mess . '"}'; 
 		}
+		break;
+	case 'fetchViralErrors':
+		$qry = "select * from viralLoadErrors";
+		$result = database()->query($qry)->fetchAll(PDO::FETCH_ASSOC);
+		$table="<table id=\"keywords\" cellspacing=\"0\" cellpadding=\"0\"><thead><tr><th>Code Site</th><th>Code ST</th><th>collect Date</th><th>Resultat</th><th>Date Resultat</th><th>Remarque</th><th>Erreurs</th></tr> </thead>";
+		foreach($result as $row) {
+		$record=explode(',',$row['originalRecord']);
+		$table.="<tbody><tr><td>".$record[0]."</td><td>".$record[1]."</td><td>".$record[2]."</td><td>".$record[3]."</td><td>".$record[4]."</td><td>".$record[5]."</td><td>".$row['errorType']."</td></tr>";
+	}
+	$table.="</tbody></table>";
+		print_r($table);
 } 
+
 function saveRows($records,$keyArray) { 
 	foreach ($records as $rec) {
 		$sql = "insert into labs (patientID, dbsite, sitecode, visitdateDd, visitdateMm, visitdateYy, seqNum, labid, ordered, labGroup, testnamefr,sampletype,result,result2,result3,resultAbnormal,resultdateyy,resultdatemm,resultdatedd,resultRemarks) values (?,?,?,?,?,?,?,?,1,?,?,?,?,?,?,?,?,?,?,?)"; 
@@ -134,6 +161,7 @@ function saveRows($records,$keyArray) {
 	}
 	return 1;
 }
+
 function getPatient($st,$site){
 	$sql ="SELECT patientID
 	FROM patient 
@@ -148,16 +176,17 @@ function getPatient($st,$site){
 	}
 	switch ($cnt) {
 		case 0:
-			return 'NotFound';
+			return 'Patient non trouv&eacute;';
 			break;
 		case 1:
 			return $result[0]['patientID'];
 			break;
 		default:
-			return 'DuplicatePatient';
+			return 'Patient dupliqu&eacute;';
 			break;
 	}
 }
+
 function checkOrderDate($patientID,$site,$visit) {
 	$sql = "SELECT ymdToDate(visitDateYy,visitDateMm,visitDateDd) as visitDate
 		FROM labs 
@@ -165,6 +194,7 @@ function checkOrderDate($patientID,$site,$visit) {
 		patientID = ? AND 
 		ymdToDate(visitDateYy,visitDateMm,visitDateDd) = ? AND
 		labID IN (103, 1257)";
+
 	$visitDate = "";
 	$result = database()->query($sql, array($site,$patientID,'20' . $visit))->fetchAll(PDO::FETCH_ASSOC);
 	foreach($result as $row) {
@@ -172,6 +202,7 @@ function checkOrderDate($patientID,$site,$visit) {
 	}
 	return $visitDate;
 }
+
 function saveEncounter($patientID,$site,$visit) {
 	$visitArray = split('-', $visit);
 	$rd = $visitArray[2];
@@ -182,11 +213,12 @@ function saveEncounter($patientID,$site,$visit) {
 	$sql = "INSERT INTO encounter (siteCode,patientID,visitDateDd,visitDateMm,visitDateYy,lastModified,
 		encounterType,seqNum,encStatus,encComments,dbSite,visitPointer,formAuthor,formVersion,labOrDrugForm,
 		creator,createDate,lastModifier,badVisitDate,visitDate) 
-		VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+		VALUES (?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,now(),?,?,?)
 		ON DUPLICATE KEY UPDATE lastModified = VALUES(lastModified)";
-	$rc = database()->query($sql,array($site,$patientID,$rd,$rm,$ry,"now()",6,0,0,'',$dbSite,0,'admin',3,0, 'admin',"now()",'admin',0,$visit));
+	$rc = database()->query($sql,array($site,$patientID,$rd,$rm,$ry,6,0,0,'',$dbSite,0,'admin',3,0, 'admin','admin',0,$visit));
 	return $rc->rowCount();
 }
+
 function saveViralResult($patientID,$site,$visit,$result,$resultDate,$note) {
 	$visitArray = split('-', $visit);
 	$rd = $visitArray[2];
@@ -204,9 +236,22 @@ function saveViralResult($patientID,$site,$visit,$result,$resultDate,$note) {
 	$result = database()->query($sql,array($patientID, $site, $ry, $rm, $rd, 0,103,$result,$rdy,$rdm,$rdd,$note));
 	return $result->rowCount();
 }
+
 function fixDate($dt) {
 	$dArray = split('-',$dt);
 	if (count($dArray) != 3) $dArray = split('/',$dt);
 	return $dArray[2] . '-' . $dArray[1] . '-' . $dArray[0];
+
 }
-?> 
+
+function initErrorTable() {
+	$qry = "DROP TABLE IF EXISTS viralLoadErrors; CREATE TABLE viralLoadErrors (errorType VARCHAR(25), originalRecord VARCHAR(200))";
+	$result = database()->query($qry);
+}
+
+function writeErrorRecord ($err, $rw) {
+	$qry = "INSERT INTO viralLoadErrors VALUES(?,?)";
+	$result = database()->query($qry, array($err, trim($rw)));
+	if ($result->rowCount() != 1) echo "bad record insert failed";
+}
+?>  

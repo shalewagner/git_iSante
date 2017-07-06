@@ -563,8 +563,8 @@ function resetStID() {
 #mode = 1 -> update patient.patientStatus
 #mode = 2 -> update patientStatusTemp where endDate = '$endDate and return getPatientStatusTemp($endDate)
 function updatePatientStatus($mode = 1, $endDate = null) {
-  $encTypeList = '1,2,3,4,5,6,7,10,14,15,16,17,18,19,20,24,25,26,27,28,29,31';
-  $encTypeListMod = '1,2,5,7,10,14,15,16,17,18,20,24,25,26,27,28,29,31';
+  $encTypeList = '1,2,3,4,5,6,10,14,15,16,17,18,19,20,24,25,26,27,28,29,31';
+  $encTypeListMod = '1,2,5,10,14,15,16,17,18,20,24,25,26,27,28,29,31';
   if (is_null($endDate) || strtotime($endDate) > strtotime(date('Y-m-d'))) {
     $endDate = date('Y-m-d');
   }
@@ -2423,6 +2423,7 @@ from eligibilityTempFinal;');
   database()->exec('drop temporary table tempPregDates;');
   database()->exec('drop temporary table tempPedHivStatus;');
 } 
+
 
 
 function generateSplashArray () {
