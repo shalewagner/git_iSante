@@ -33,12 +33,14 @@ require_once "include/standardHeaderExt.php";
 	function sendToServer(result) {
 		//put the file rows into a javascript array
 	    var resultArray = [];
+		var cnt=0;
 		result.split("\n").forEach(function(row) {
-			resultArray.push(row.trim());
+			if(cnt>0) resultArray.push(row.trim());
+			cnt=cnt+1;
 		});
 		var params = JSON.stringify(result);
 		Ext.Ajax.timeout = 120000; // 120 seconds
-		var box = Ext.MessageBox.wait('Please wait while records are loading', 'Loading records to database');
+		var box = Ext.MessageBox.wait('Patientez pendant que les enregistrements sont en cours de chargement', 'Enregistrement dans la base de donn&eacute;e');
 		box.minWidth = 800;
 		Ext.Ajax.request({
 			waitMsg: 'Saving changes...',
@@ -61,7 +63,7 @@ require_once "include/standardHeaderExt.php";
 	function displayErrors(e) {
 		e.preventDefault();
 		Ext.Ajax.request({
-			waitMsg: 'Fetching error records...',
+			waitMsg: 'Enregistrement des erreurs...',
 			url: 'laboratory/labService.php', 
 			params: {
 				task: 'fetchViralErrors'
@@ -123,8 +125,6 @@ table { border-collapse: collapse; border-spacing: 0; }
   background: #acc8dd;
 }
 
-
-
 #keywords tbody tr { 
   color: #555;
 }
@@ -144,11 +144,11 @@ table { border-collapse: collapse; border-spacing: 0; }
 <?php if (!empty($_GET[success])) { echo "<b>Your file has been imported.</b><br><br>"; } //generic success notice ?> 
 
 <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
-  <input name="csv" type="file" id="fileInput" placeholder="Choose your csv file"/> 
+  <input name="csv" type="file" id="fileInput" placeholder="Choisissez votre fichier csv"/> 
 </form> 
 
 <div id="viral_load">
-	<input type="button" name="errorButton" value="Show error records" onclick="displayErrors(event)"/>
+	<input type="button" name="errorButton" value="Afficher les erreurs" onclick="displayErrors(event)"/>
 </div>
 </div>
 </body>
