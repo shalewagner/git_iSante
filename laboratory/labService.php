@@ -2,20 +2,18 @@
 header('Content-Type: text/javascript; charset=UTF-8');  
 chdir('..');
 require_once "backend.php"; 
-
 switch ($_REQUEST['task']) {
+
 	case 'loadViral':
 	    $recordArray = explode('\r\n', $_REQUEST['params']);
 		$cs = 0;  // count successful loads
 		$cnf = 0; // count patients not found
 		$cd = 0;  // count duplicate patients		
 		initErrorTable();
-		$cnt=0;
+		$flag=1;
 		foreach ($recordArray as $vr) {
 			
-			if($cnt==0){$cnt=$cnt+1;}
-			else 
-			{
+			if($flag==1){$flag=0; continue;}
 			$rowArray = explode(",", $vr);
 			$siteCode =  $rowArray[0];	
 			$stCode =    $rowArray[1];
@@ -46,7 +44,7 @@ switch ($_REQUEST['task']) {
 					$cs++;
 					break;
 			}
-		}
+		
 		}
 		echo $cs.":tests loaded; " . $cnf . ": patients not found; " . $cd . " : duplicate patients.\nClick button to view failed records >> ".$result;
 		break;
@@ -231,8 +229,8 @@ function saveViralResult($patientID,$site,$visit,$result,$resultDate,$note) {
 	$ry = $visitArray[0];
 	$resultArray = split('-', $resultDate);
 	$rdd = $resultArray[2];
-	$rdm = $resultArray[1];
 	$rdy = $resultArray[0];
+	$rdm = $resultArray[1];
 	$sql = "INSERT INTO labs (patientid, sitecode, visitdateyy, visitdatemm,visitdatedd,seqNum, labID, 
 		result, resultDateYy, resultDateMm, resultDateDd, resultRemarks)
 		VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE 
