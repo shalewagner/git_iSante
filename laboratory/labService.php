@@ -18,7 +18,7 @@ switch ($_REQUEST['task']) {
 			$siteCode =  $rowArray[0];	
 			$stCode =    $rowArray[1];
 			$visitDate = $rowArray[2];
-			$result =    $rowArray[3];
+			$resultat =    $rowArray[3];
 			$resultDate =$rowArray[4];
 			$note =      $rowArray[5];
 		
@@ -40,13 +40,13 @@ switch ($_REQUEST['task']) {
 				default:
 					$orderDate = checkOrderDate($patientID,$siteCode,$visitDate);
 					if ($orderDate == null) $result = saveEncounter($patientID,$siteCode,$visitDate);
-					$resultLab = saveViralResult($patientID,$siteCode,$visitDate,$result,$resultDate,$note);
+					$resultLab = saveViralResult($patientID,$siteCode,$visitDate,$resultat,$resultDate,$note);
 					$cs++;
 					break;
 			}
 		
 		}
-		echo $cs.":tests loaded; " . $cnf . ": patients not found; " . $cd . " : duplicate patients.\nClick button to view failed records >> ".$result;
+		echo $cs.":tests loaded; " . $cnf . ": patients not found; " . $cd . " : duplicate patients.\n Click button to view failed records >> ";
 		break;
 	case 'getOrdered':  
 	        // check to see if order has been sent; hide OE catalog items with no results; show OE catalog with results 
@@ -222,7 +222,7 @@ function saveEncounter($patientID,$site,$visit) {
 	return $rc->rowCount();
 }
 
-function saveViralResult($patientID,$site,$visit,$result,$resultDate,$note) {
+function saveViralResult($patientID,$site,$visit,$resultat,$resultDate,$note) {
 	$visitArray = split('-', $visit);
 	$rd = $visitArray[2];
 	$rm = $visitArray[1];
@@ -236,7 +236,7 @@ function saveViralResult($patientID,$site,$visit,$result,$resultDate,$note) {
 		VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE 
 		result = VALUES(result), resultDateDd = VALUES(resultDateDd), resultDateMm = VALUES(resultDateMm), 
 		resultDateYy = VALUES(resultDateDd), resultRemarks = VALUES(resultRemarks)";
-	$result = database()->query($sql,array($patientID, $site, $ry, $rm, $rd, 0,103,$result,$rdy,$rdm,$rdd,$note));
+	$result = database()->query($sql,array($patientID, $site, $ry, $rm, $rd, 0,103,$resultat,$rdy,$rdm,$rdd,$note));
 	return $result->rowCount();
 }
 
