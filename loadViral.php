@@ -33,10 +33,8 @@ require_once "include/standardHeaderExt.php";
 	function sendToServer(result) {
 		//put the file rows into a javascript array
 	    var resultArray = [];
-		var cnt=0;
 		result.split("\n").forEach(function(row) {
-			if(cnt>0) resultArray.push(row.trim());
-			cnt=cnt+1;
+			resultArray.push(row.trim());
 		});
 		var params = JSON.stringify(result);
 		Ext.Ajax.timeout = 120000; // 120 seconds
