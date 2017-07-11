@@ -22,15 +22,15 @@ $viralClause=' And 1=1';
 $message='Liste de patients avec un resultat de charge viral';
  switch ($viral)
  {
-	 case '0' :{$viralClause.=' And ifnull(DIGITS(result)+0,0)<=1000'; $message.=' <= 1000 copies/ml '; break;}
-	 case '1' :{$viralClause.=' And ifnull(DIGITS(result)+0,0)>1000'; $message.=' > 1000 copies/ml  :';break;}
+	 case '0' :{$viralClause.=' And ifnull(result+0,0)<=1000'; $message.=' <= 1000 copies/ml '; break;}
+	 case '1' :{$viralClause.=' And ifnull(result+0,0)>1000'; $message.=' > 1000 copies/ml  :';break;}
 	 default: $viralClause.='';
  }
  
 $queryArray = array(
 "viralLoad" => "select  distinct clinicPatientID as ST,p.lname as 'Prenom',p.fname as 'Nom',telephone
 from patient p, (SELECT distinct patientid, date(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as visitDate, result
-FROM labs WHERE labID IN (103, 1257) and result IS NOT NULL and DIGITS(result)+0>0) e
+FROM labs WHERE labID IN (103, 1257) and result IS NOT NULL and result+0>0) e
 where e.patientid=p.patientID ".$viralClause."
 and e.visitDate between '".$startDate."' AND '".$endDate."' and  LEFT(p.patientid,5)=".$site); 
   
