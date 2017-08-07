@@ -1459,42 +1459,42 @@ $tipranavirStartMm = array (
 );
 $DarunavirStartMm = array (
    "en" => array (
-        "Darunavir",
+        "Darunavir(DRV)",
         "",
         ""),
    "fr" => array (
-        "Darunavir",
+        "Darunavir(DRV)",
         "",
         "")
 );
 $RaltegravirStartMm = array (
    "en" => array (
-        "Raltegravir",
+        "Raltegravir(RAL)",
         "",
         ""),
    "fr" => array (
-        "Raltegravir",
+        "Raltegravir(RAL)",
         "",
         "")
 );
 $dolutegravirStartMm = array (
    "en" => array (
-        "Dolutegravir",
+        "Dolutegravir(DTG)",
         "",
         ""),
    "fr" => array (
-        "Dolutegravir",
+        "Dolutegravir(DTG)",
         "",
         "")
 );
 
 $etravirineStartMm = array (
    "en" => array (
-        "Etravirine",
+        "Etravirine(ETV)",
         "",
         ""),
    "fr" => array (
-        "Etravirine",
+        "Etravirine(ETV)",
         "",
         "")
 );
