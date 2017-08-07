@@ -2452,7 +2452,7 @@ function generateSplashArray () {
 	$qry2 = "select clinic,
 		rtrim(c.sitecode) as sitecode, case when c.dbSite != 0 then '" . $splashLabels[$lang]['sLocal'] . "' else '' end as 
 'local', dbVersion, case when max(lastmodified) is null then '2000-01-01' else max(lastmodified) end as 'maxDate',
-case when min(visitDate) is null then '2000-01-01' else min(visitDate) end as 'minDate',
+case when min(lastModified) is null then '2000-01-01' else min(lastModified) end as 'minDate',
  datediff(d,max(lastmodified),getDate()) as ddDelta, datediff(d,min(createdate),getDate()) as ddNew
 		from clinicLookup c, encounter e where e.encStatus < 255 and e.sitecode = c.sitecode and c.incphr = 1";
 	$qry2 .= " group by clinic, c.sitecode, case when c.dbSite != 0 then '" . $splashLabels[$lang]['sLocal'] . "' else '' end, dbVersion order by 5 desc";  
