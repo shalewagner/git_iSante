@@ -22,6 +22,7 @@ function generateViral($startdate, $enddate,$site, $lang) {
  
   $queryArray = array(
 "viralLoad" => "select 
+<<<<<<< HEAD
 concat(?,count(distinct case when digits(result)+0<1000 then l.patientID else null end),?) as ? ,
 concat(?,count(distinct case when digits(result)+0>=1000 then l.patientID else null end),?)as ?,
 count(distinct l.patientID) as ?
@@ -30,6 +31,13 @@ WHERE l.labID IN (103, 1257) and l.result IS NOT NULL and digits(l.result)>0
 and la.visitDate=date(ymdToDate(l.visitdateyy,l.visitDateMm,l.visitDateDd))
 and la.patientID=l.patientID
 and date(ymdToDate(l.visitdateyy,l.visitDateMm,l.visitDateDd)) between ? AND ? and  LEFT(l.patientid,5)=?"); 
+=======
+concat('<a href=\"viralLoadList.php?viral=0&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when ifnull(DIGITS(result)+0,0)<=1000 then patientID else null end),'</a>') as 'Patient avec un resultat de charge viral <= 1000 copies/ml',
+concat('<a href=\"viralLoadList.php?viral=1&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when ifnull(DIGITS(result)+0,0)>1000 then patientID else null end),'</a>')as 'Patient avec un resultat de charge viral > 1000 copies/ml',
+count(distinct patientID) as 'Patient Unique'
+FROM labs WHERE labID IN (103, 1257) and result IS NOT NULL  and DIGITS(result)+0>0
+and date(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) between '".$startdate."' AND '".$enddate."' and  LEFT(patientid,5)=".$site); 
+>>>>>>> b8e291243d8b035889fce80796d71c58b60c4db8
   
   $viralLoad = outputQueryRows($queryArray["viralLoad"],$param); 
  

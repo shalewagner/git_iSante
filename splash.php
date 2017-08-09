@@ -158,7 +158,7 @@ Ext.onReady(function() {
 			{ xtype: 'field',id: 'Total', name: 'Total', type: 'string',  width: 170, readOnly: true, style: 'text-align: center', value: totalVector[17]}
 		]
 	});
-
+<? if (getConfig('serverRole') == 'consolidated') echo "/*"; ?>
 	var record = new Ext.data.Record.create([
 		{name: 'clinic', type: 'string'},
 		{name: 'dbVersion', type: 'string'},
@@ -220,7 +220,7 @@ Ext.onReady(function() {
 			}
 		]
 	});
-	 
+<? if (getConfig('serverRole') == 'consolidated') echo "*/"; ?>
 	<?	
 	// format legend for bottom of hiv panel
 	$statusMessage1 = array ("fr" => "<font color=\"blue\">Bleu</font>--Sites utilisant iSant&eacute; pendant moins de 90 jours.", "en" => "<font color=\"blue\">Blue</font>--Sites who have been using iSant&eacute; for 90 days or less.");
@@ -243,7 +243,7 @@ Ext.onReady(function() {
 		        }]
 		
 	};
-	
+<? if (getConfig('serverRole') == 'consolidated') echo "/*"; ?>
 	var primary = {
 		xtype: 'panel', 
 		title: 'Dashboard soins de santé primaire',
@@ -266,7 +266,7 @@ Ext.onReady(function() {
 		        }
 		]      	
 	};
-	
+<? if (getConfig('serverRole') == 'consolidated') echo "*/"; ?>
 	var mapPanel = {
 		xtype: 'gmappanel',  
     		zoomLevel: 8,
@@ -316,7 +316,7 @@ Ext.onReady(function() {
 			{ xtype: 'tabpanel', id: 'centerPanel', region: 'center', activeTab: <? if (! HIV_AUTH) echo "1"; else echo "0";?>, defaults: {autoScroll: true},
 				items: [
 					hiv,
-					primary,
+<? if (getConfig('serverRole') != 'consolidated') echo "					primary,"; ?>
 					map
 				]
 			},

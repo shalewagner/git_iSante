@@ -1958,8 +1958,17 @@
 				    <reportFile></reportFile>
 				    <groupLevel>0</groupLevel>
 				    <otherLevel>0</otherLevel>
-				    <query>select distinct p.patientID as IdPatient, lname as Nom, fname as Prenom, telephone from patientAlert p, patient q where p.patientId=q.patientID and (alertId=1 or alertId=4)</query> 
-			    </report>
+				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone from patient p, pepfarTable t where p.patientId=t.patientID and p.patientID not in(select patientID from discTable) and p.patientID not in(select l.patientID from labs l where labID in(103,1257) and (result is not null and result !='')) group by 1  having datediff(mm,max(visitDate),getDate()) &gt; 6</query>  
+				
+				</report>
+		<report id="556" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Eligible for a control viral load </title>
+				  <title lang="fr">Liste des patients eligibles pour une charge virale de controle</title>
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, result from patient p, labs l where p.patientId=l.patientID and labID in(103,1257) and (result is not null and result !='') and p.patientID not in(select patientID from discTable) group by 1  having datediff(mm,max(ymdtoDate(visitDateYy,visitDateMm,visitDateDd)),getDate()) &gt; 12 UNION select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, result from patient p, labs l where p.patientId=l.patientID and labID in(103,1257) and (result is not null and result !='') and p.patientID not in(select patientID from discTable) group by 1 having datediff(mm,max(ymdtoDate(visitDateYy,visitDateMm,visitDateDd)),getDate()) between 6 and 12 and digits(result) &lt; 1000</query> 
+				</report>
 		</reportSubSet>
 		<reportSubSet><!--  patient demographics -->
 		<title lang="en">Patient Demographics</title>
