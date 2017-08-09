@@ -144,7 +144,8 @@ echo "
      </tr>
 ";
 	$transferDisabled = "disabled";
-	if (getAccessLevel(getSessionUser()) == 3) $transferDisabled = "";
+	//if (getAccessLevel(getSessionUser()) == 3) 
+		$transferDisabled = "";
    echo "
      <tr>
          <td colspan=\"4\" width=\"100%\"><input tabindex=\"3201\" name=\"reasonDiscTransfer\" " . getData ("reasonDiscTransfer", "checkbox") . " type=\"checkbox\" value=\"On\" " . $transferDisabled . " /> " .  $transferClinics_1[$lang][0] . "

@@ -11,15 +11,27 @@ function generateViral($startdate, $enddate,$site, $lang) {
   $siteName = getSiteName ($site, $lang);
   $period=date("d-M-Y", strtotime($startdate)).' To '.date("d-M-Y", strtotime($enddate));
  
+ $lien1="<a href=\"viralLoadList.php?viral=0&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">";
+ $a='</a>';
+ $col1='Patient avec un resultat de charge viral < 1000 copies/ml';
+ $lien2="<a href=\"viralLoadList.php?viral=1&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">";
+ $col2='Patient avec un resultat de charge viral >= 1000 copies/ml';
+ $col3='Patient Unique';
+ 
+ $param=array($lien1,$a,$col1,$lien2,$a,$col2,$col3,$startdate,$enddate,$site);
+ 
   $queryArray = array(
 "viralLoad" => "select 
-concat('<a href=\"viralLoadList.php?viral=0&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when ifnull(result,0)+0<1000 then patientID else null end),'</a>') as 'Patient avec un resultat de charge viral < 1000 copies/ml',
-concat('<a href=\"viralLoadList.php?viral=1&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when ifnull(result,0)+0>=1000 then patientID else null end),'</a>')as 'Patient avec un resultat de charge viral >= 1000 copies/ml',
-count(distinct patientID) as 'Patient Unique'
-FROM labs WHERE labID IN (103, 1257) and result IS NOT NULL and result<>''
-and date(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) between '".$startdate."' AND '".$enddate."' and  LEFT(patientid,5)=".$site); 
+concat(?,count(distinct case when digits(result)+0<1000 then l.patientID else null end),?) as ? ,
+concat(?,count(distinct case when digits(result)+0>=1000 then l.patientID else null end),?)as ?,
+count(distinct l.patientID) as ?
+FROM labs l,(select patientID,max(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as visitDate from labs where labID in (103,1257) group by 1) la
+WHERE l.labID IN (103, 1257) and l.result IS NOT NULL and digits(l.result)>0
+and la.visitDate=date(ymdToDate(l.visitdateyy,l.visitDateMm,l.visitDateDd))
+and la.patientID=l.patientID
+and date(ymdToDate(l.visitdateyy,l.visitDateMm,l.visitDateDd)) between ? AND ? and  LEFT(l.patientid,5)=?"); 
   
-  $viralLoad = outputQueryRows($queryArray["viralLoad"]); 
+  $viralLoad = outputQueryRows($queryArray["viralLoad"],$param); 
  
   $summary = <<<EOF
   
@@ -79,10 +91,10 @@ EOF;
 
 
 
-function outputQueryRows($qry) {
+function outputQueryRows($qry,$param) {
         $output = '';
         // execute the query 
-        $arr = databaseSelect()->query($qry)->fetchAll(PDO::FETCH_ASSOC); 
+        $arr = database()->query($qry,$param)->fetchAll(PDO::FETCH_ASSOC); 
         if (count($arr) == 0) return '<p><center><font color="red"><bold>Aucuns résultats trouvés</bold></font></center><p>';
         // set up the table
         $output = '<table class="" width="90%" border="1" cellpadding="0" cellspacing="0">';

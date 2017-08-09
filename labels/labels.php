@@ -1459,24 +1459,46 @@ $tipranavirStartMm = array (
 );
 $DarunavirStartMm = array (
    "en" => array (
-        "Darunavir",
+        "Darunavir(DRV)",
         "",
         ""),
    "fr" => array (
-        "Darunavir",
+        "Darunavir(DRV)",
         "",
         "")
 );
 $RaltegravirStartMm = array (
    "en" => array (
-        "Raltegravir",
+        "Raltegravir(RAL)",
         "",
         ""),
    "fr" => array (
-        "Raltegravir",
+        "Raltegravir(RAL)",
         "",
         "")
 );
+$dolutegravirStartMm = array (
+   "en" => array (
+        "Dolutegravir(DTG)",
+        "",
+        ""),
+   "fr" => array (
+        "Dolutegravir(DTG)",
+        "",
+        "")
+);
+
+$etravirineStartMm = array (
+   "en" => array (
+        "Etravirine(ETV)",
+        "",
+        ""),
+   "fr" => array (
+        "Etravirine(ETV)",
+        "",
+        "")
+);
+
 $trizivirStartMm = array (
    "en" => array (
         "Trizivir (ABC+AZT+3TC)",
@@ -5493,13 +5515,15 @@ $rxStdDosage1 = array (
 	"300mg BID",
 	"600mg qd",
 	"200mg BID",
+	"200mg BID",
 	"400mg qd",
 	"300mg/ 100mg qd",
 	"800mg TID",
 	"800mg/ 200mg BID",
 	"400mg/ 100mg BID",
 	"300mg 2co BID",
-	"400 mg 1Co BID"),
+	"400 mg 1Co BID",
+	"50mg qd"),
    "fr" => array (
 	"300mg BID",
 	"300mg/ 150mg BID",
@@ -5512,13 +5536,15 @@ $rxStdDosage1 = array (
 	"300mg BID",
 	"600mg qd",
 	"200mg BID",
+	"200mg BID",
 	"400mg qd",
 	"300mg/ 100mg qd",
 	"800mg TID",
 	"800mg/ 200mg BID",
 	"400mg/ 100mg BID",
 	"300mg 2co BID",
-	"400 mg 1Co BID")
+	"400 mg 1Co BID",
+	"50mg qd")
 );
 // The form titles are not in the db, but I figure all labels should probably
 // be in this file instead of spread across all the forms.

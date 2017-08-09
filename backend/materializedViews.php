@@ -2427,7 +2427,7 @@ from eligibilityTempFinal;');
 
 
 function generateSplashArray () {
-	//return;
+	return;
 	$lang = 'fr';   
 	require_once 'labels/splash.php';
 	dbQuery("truncate table lastSplash");

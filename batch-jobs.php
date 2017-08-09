@@ -41,12 +41,12 @@ select case when max(lastModified) < lastRun then 0 else 1 end as flag
  group by lastRun';
 $result = dbQuery($sql);
 $row = psRowFetch($result);
-if ( ($row['flag'] == 0)
+/*if ( ($row['flag'] == 0)
      && ($argv[1] != '-f') 
      && (!array_key_exists('force', $_REQUEST)) ) {
   printLog('Skipping 10 minute job because no encounters were updated.');
   exit;
-}
+}*/
 
 $startTime = round(microtime(true));
 printLog('Starting 10 minute job.');
