@@ -37,7 +37,6 @@ and e.dispensed=1
  group by 1) A" ); 
   
   $darck = outputQueryRows($queryArray["darck"]); 
-  echo $queryArray["darck"];
  
   $summary = <<<EOF
   
