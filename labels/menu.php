@@ -69,9 +69,9 @@ $menuPatients = array (
 	"About")
 );
 $menuReports = array (
-	"en" => array (
+  "en" => array (
     "Monitoring and Evaluation",
-    "Active/inactive patients",
+    "Patient Status",
     "Quality of care",
     "Program Management",
     "Data Quality",
@@ -87,7 +87,7 @@ $menuReports = array (
     "Data quality Surveillance"),
   "fr" => array (
     "&Eacute;valuation et surveillance",
-    "Patients actifs et inactifs",
+    "Status des Patients",
     "Qualit&eacute; des soins",
     "Gestion de programme",
     "Qualit&eacute; des donn&eacute;es",

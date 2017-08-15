@@ -2427,7 +2427,6 @@ from eligibilityTempFinal;');
 
 
 function generateSplashArray () {
-	return;
 	$lang = 'fr';   
 	require_once 'labels/splash.php';
 	dbQuery("truncate table lastSplash");
@@ -2449,13 +2448,12 @@ function generateSplashArray () {
 		$statusArray[$row[0] . "|" . $row[1]][$statusMap[$row["patientStatus"]]] = $row[3];
 	}
 	// this query gets clinic information
-	$qry2 = "select clinic,
-		rtrim(c.sitecode) as sitecode, case when c.dbSite != 0 then '" . $splashLabels[$lang]['sLocal'] . "' else '' end as 
-'local', dbVersion, case when max(lastmodified) is null then '2000-01-01' else max(lastmodified) end as 'maxDate',
-case when min(visitDate) is null then '2000-01-01' else min(visitDate) end as 'minDate',
- datediff(d,max(lastmodified),getDate()) as ddDelta, datediff(d,min(createdate),getDate()) as ddNew
-		from clinicLookup c, encounter e where e.encStatus < 255 and e.sitecode = c.sitecode and c.incphr = 1";
-	$qry2 .= " group by clinic, c.sitecode, case when c.dbSite != 0 then '" . $splashLabels[$lang]['sLocal'] . "' else '' end, dbVersion order by 5 desc";  
+	$qry2 = "SELECT clinic,RTRIM(c.sitecode) AS sitecode, CASE WHEN c.dbSite != 0 THEN '" . $splashLabels[$lang]['sLocal'] . "' ELSE '' END AS 'local', LEFT(dbVersion,4) AS dbVersion,
+		CASE WHEN MAX(lastmodified) IS NULL OR MAX(lastModified) NOT BETWEEN '2005-04-08' AND getDate() THEN '2005-04-08' ELSE DATE(MAX(lastmodified)) end as 'maxDate',
+		CASE WHEN MIN(createDate) IS NULL OR MIN(createDate) NOT BETWEEN '2005-04-08' AND getDate() THEN '2005-04-08' ELSE DATE(MIN(createDate)) END AS 'minDate',
+		DATEDIFF(d,MAX(lastmodified),getDate()) as ddDelta, DATEDIFF(d,MIN(createdate),getDate()) as ddNew
+		FROM clinicLookup c, encounter e WHERE e.encStatus < 255 AND e.sitecode = c.sitecode AND c.incphr = 1 
+		GROUP BY clinic, c.sitecode, CASE WHEN c.dbSite != 0 THEN '" . $splashLabels[$lang]['sLocal'] . "' ELSE '' END, dbVersion ORDER BY 5 DESC";  
 	eval("\$qry2 = \"$qry2\";");
  	$result = dbQuery ($qry2);
 	$jj = 0;

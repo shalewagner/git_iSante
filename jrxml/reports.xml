@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <reports>
-	<reportSet rtype="clinicalCare">   <!--   Type 1: Active and inactive patient reports -->
-	<title lang="en">Type 1: Active and inactive patient reports</title>
-	<title lang="fr">Type 1: Patients actifs et inactifs</title>
+	<reportSet rtype="clinicalCare">   <!--   Type 1: Patient Status -->
+	<title lang="en">Type 1: Patient Status</title>
+	<title lang="fr">Type 1: Statut des Patients</title>
 		<reportSubSet>
-		<title lang="en">Type 1: Active and inactive patient reports</title>
-		<title lang="fr">Type 1: Patients actifs et inactifs</title>
+		<title lang="en">Type 1: Patient Status</title>
+		<title lang="fr">Type 1: Statut des Patients</title>
 			<report id="1591" patientStatus="62" treatmentStatus="1" testType="0">
-				<title lang="en">Active/Inactive Patients</title>
-				<title lang="fr">Patients actifs/inactifs</title>
+				<title lang="en">Patient Status</title>
+				<title lang="fr">Statut des Patients</title>
 				<groupLevel>1</groupLevel>
 				<otherLevel>1</otherLevel>
 				<reportFile groupLevel="1" otherLevel="1">patientRpt.jasper</reportFile> 
@@ -43,33 +43,29 @@
 				<description>Generic placeholder for active/inactive patient reports</description>
 			</report>
 			<report id="589">
-				<title lang="en">Type 1: Active and inactive patient reports</title>
-				<title lang="fr">Type 1: Patients actifs et inactifs</title>
+				<title lang="en">Type 1: Patient Status</title>
+				<title lang="fr">Type 1: Statut des Patients</title>
 				<reportFile>siteReport.jasper</reportFile>
 				<query>select CASE WHEN sex = 1 THEN 'Femme' WHEN sex = 2 THEN 'Homme' ELSE 'Autre' END as sex,count(distinct lname+fname+dobyy+dobmm+dobdd+fnamemother+clinicPatientID) as 'Count', round(count(distinct lname+fname+dobyy+dobmm+dobdd+fnamemother+clinicPatientID) / $total * 100.00, 2) as 'Pour cent' from $temptable t, v_patients p, entityAccess a where t.patientID = p.patientID and a.siteCode = p.siteCode and a.username = '$username' and a.siteCode = '$clinic' group by CASE WHEN sex = 1 THEN 'Femme' WHEN sex = 2 THEN 'Homme' ELSE 'Autre' END order by 2 desc</query>
 				<description />
 			</report>
 			<report id="590">
-				<title lang="en">Type 1: Active and inactive patient reports</title>
-				<title lang="fr">Type 1: Patients actifs et inactifs</title>
+				<title lang="en">Type 1: Patient Status</title>
+				<title lang="fr">Type 1: Statut des Patients</title>
 				<reportFile>groupByGender.jasper</reportFile>
 				<query>select CASE WHEN sex = 1 THEN 'Femme' WHEN sex = 2 THEN 'Homme' ELSE 'Autre' END as sex,count(distinct lname+fname+dobyy+dobmm+dobdd+fnamemother+clinicPatientID) as 'Count', left(convert(float,count(distinct lname+fname+dobyy+dobmm+dobdd+fnamemother+clinicPatientID)/$total*100),4) as 'Pour cent' from $temptable t, v_patients p, entityAccess a where t.patientID = p.patientID and a.siteCode = p.siteCode and a.username = '$username' and a.siteCode = '$clinic' group by CASE WHEN sex = 1 THEN 'Femme' WHEN sex = 2 THEN 'Homme' ELSE 'Autre' END order by 2 desc</query>
 				<description />
 			</report>
 			<report id="591">
-				<title lang="en">Type 1: Active and inactive patient reports</title>
-				<title lang="fr">Type 1: Patients actifs et inactifs</title>
+				<title lang="en">Type 1: Patient Status</title>
+				<title lang="fr">Type 1: Statut des Patients</title>
 				<reportFile>genderList.jasper</reportFile>
 				<query>select CASE WHEN sex = 1 THEN 'Femme' WHEN sex = 2 THEN 'Homme' ELSE 'Autre' END as sex,count(distinct lname+fname+dobyy+dobmm+dobdd+fnamemother+clinicPatientID) as 'Count', left(convert(float,count(distinct lname+fname+dobyy+dobmm+dobdd+fnamemother+clinicPatientID)/$total*100),4) as 'Pour cent' from $temptable t, v_patients p, entityAccess a where t.patientID = p.patientID and a.siteCode = p.siteCode and a.username = '$username' and a.siteCode = '$clinic' group by CASE WHEN sex = 1 THEN 'Femme' WHEN sex = 2 THEN 'Homme' ELSE 'Autre' END order by 2 desc</query>
 				<description />
 			</report>
 		</reportSubSet>
-	</reportSet>
-	
-	
-	
-	
-		<reportSet rtype="dailyCase"> <!--  Daily case reports -->
+	</reportSet>	
+	<reportSet rtype="dailyCase"> <!--  Daily case reports -->
 		<title lang="en">Daily Report summary</title>
 		<title lang="fr">Rapports journaliers</title>
 		<reportSubSet><!--  care summaries -->
@@ -82,13 +78,9 @@
 				     <groupLevel>1</groupLevel>
 				             <otherLevel>0</otherLevel>
                                 <menuSelection>dateSelect</menuSelection>
-				
 			    </report>	
 		    </reportSubSet>
-	    </reportSet>
-	
-	
-	
+	</reportSet>	
 	<reportSet rtype="individualCase"> <!--  Individual case reports -->
 		<title lang="en">Patient care summaries</title>
 		<title lang="fr">Rapports de cas particulier</title>
