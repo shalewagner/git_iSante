@@ -39,7 +39,6 @@ and date(ymdToDate(l.visitdateyy,l.visitDateMm,l.visitDateDd)) between ? AND ? a
 $param=array($startDate,$endDate,$site);
   
   $viralLoad = outputQueryRows($queryArray["viralLoad"],$param); 
- echo ($queryArray["viralLoad"];
   $summary ='<table width="100%" >
   <tr>
     <td width="70%">
