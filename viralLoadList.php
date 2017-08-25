@@ -22,8 +22,8 @@ $viralClause=' And 1=1';
 $message='Liste de patients avec un resultat de charge viral';
  switch ($viral)
  {
-	 case '0' :{$viralClause.=' And digits(result)+0<=1000'; $message.=' <= 1000 copies/ml '; break;}
-	 case '1' :{$viralClause.=' And digits(result)+0>1000'; $message.=' > 1000 copies/ml  :';break;}
+	 case '0' :{$viralClause.=' And digits(result)+0<=1000'; $message.=' < 1000 copies/ml '; break;}
+	 case '1' :{$viralClause.=' And digits(result)+0>1000'; $message.=' => 1000 copies/ml  :';break;}
 	 default: $viralClause.='';
  }
  
