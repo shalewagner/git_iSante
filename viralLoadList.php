@@ -22,8 +22,8 @@ $viralClause=' And 1=1';
 $message='Liste de patients avec un resultat de charge viral';
  switch ($viral)
  {
-	 case '0' :{$viralClause.=' And digits(result)+0<=1000'; $message.=' <= 1000 copies/ml '; break;}
-	 case '1' :{$viralClause.=' And digits(result)+0>1000'; $message.=' > 1000 copies/ml  :';break;}
+	 case '0' :{$viralClause.=' And digits(result)+0<=1000'; $message.=' < 1000 copies/ml '; break;}
+	 case '1' :{$viralClause.=' And digits(result)+0>1000'; $message.=' => 1000 copies/ml  :';break;}
 	 default: $viralClause.='';
  }
  
@@ -39,7 +39,6 @@ and date(ymdToDate(l.visitdateyy,l.visitDateMm,l.visitDateDd)) between ? AND ? a
 $param=array($startDate,$endDate,$site);
   
   $viralLoad = outputQueryRows($queryArray["viralLoad"],$param); 
- echo ($queryArray["viralLoad"];
   $summary ='<table width="100%" >
   <tr>
     <td width="70%">

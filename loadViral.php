@@ -37,7 +37,7 @@ require_once "include/standardHeaderExt.php";
 			resultArray.push(row.trim());
 		});
 		var params = JSON.stringify(result);
-		Ext.Ajax.timeout = 120000; // 120 seconds
+		Ext.Ajax.timeout = 240000; // 120 seconds
 		var box = Ext.MessageBox.wait('Patientez pendant que les enregistrements sont en cours de chargement', 'Enregistrement dans la base de donn&eacute;e');
 		box.minWidth = 800;
 		Ext.Ajax.request({
@@ -49,7 +49,7 @@ require_once "include/standardHeaderExt.php";
 			},
 			failure:function(response,options){
 				box.hide();
-				Ext.MessageBox.alert('Warning','processing timed out...need to increase the current timeout beyond 120 seconds in Ext.Ajax.timeout');
+				Ext.MessageBox.alert('Warning','processing timed out...need to increase the current timeout beyond 240 seconds in Ext.Ajax.timeout');
 			},
 			success:function(response,options){
 				box.hide();
