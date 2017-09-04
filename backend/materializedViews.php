@@ -595,9 +595,9 @@ function updatePatientStatus($mode = 1, $endDate = null) {
            ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?;', array($endDate));
 
   database()->query('DELETE FROM allHIV WHERE patientid IN (SELECT DISTINCT p.patientID 
-           FROM  patient p left outer join labs l on (p.patientID = l.patientID and labID=?)
-           WHERE (ifnull(result,0)<>1) 
-           AND TIMESTAMPDIFF(MONTH , ymdToDate(p.dobYy, CASE WHEN UPPER(p.dobMm)=? OR p.dobMm = ? THEN ? ELSE IFNULL(p.dobMm,?) end,?),?)< 18 AND ymdToDate(l.visitDateYy, l.visitDateMm, l.visitDateDd) <= ?);', array('181','XX','','01','01','01',$endDate,$endDate));
+           FROM  patient p left outer join labs l on (p.patientID = l.patientID )
+           WHERE ( (labID=? and (ifnull(result,0)<>1 and upper(result) not like ?)) or labID is null) 
+           AND TIMESTAMPDIFF(MONTH , ymdToDate(p.dobYy, CASE WHEN UPPER(p.dobMm)=? OR p.dobMm = ? THEN ? ELSE IFNULL(p.dobMm,?) end,?),?)< 18 AND ifnull(ymdToDate(l.visitDateYy, l.visitDateMm, l.visitDateDd),?) <= ?);', array('181','POS%','XX','','01','01','01',$endDate,'1979-01-01',$endDate));
 
   database()->query('DROP TABLE IF EXISTS art;');
   # add patients with only one dispense   
