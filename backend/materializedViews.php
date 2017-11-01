@@ -585,7 +585,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 		(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR dispAltDosage IS NOT NULL) AND 
 		(forPepPmtct = 2 OR forPepPmtct IS NULL) AND CASE WHEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) IS NOT NULL THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) ELSE
 		ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) end <= ? GROUP BY 1,2 ORDER BY 1,2 DESC', array('un','un','un','un',$endDate));
-  # adjust nxt_disp when null and patient has multiple dispense in the past 
+# initialize allHIV table based upon patients being hivPositive and having valid transactions per the type list
   database()->query('INSERT INTO allHIV SELECT distinct p.patientid, NULL FROM patient p, encounter e 
            WHERE p.patientid = e.patientid AND
            p.patStatus < 255 AND 
@@ -593,14 +593,14 @@ function updatePatientStatus($mode = 1, $endDate = null) {
            e.encStatus < 255 AND
            e.encounterType IN (1,2,5,10,14,15,16,17,18,20,24,25,26,27,28,29,31) AND
            ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?;', array($endDate));
-
+# remove children < 18 months with positive PCR tests ?
   database()->query('DELETE FROM allHIV WHERE patientid IN (SELECT DISTINCT p.patientID 
            FROM  patient p left outer join labs l on (p.patientID = l.patientID )
            WHERE ( (labID=? and (ifnull(result,0)<>1 and upper(result) not like ?)) or labID is null) 
            AND TIMESTAMPDIFF(MONTH , ymdToDate(p.dobYy, CASE WHEN UPPER(p.dobMm)=? OR p.dobMm = ? THEN ? ELSE IFNULL(p.dobMm,?) end,?),?)< 18 AND ifnull(ymdToDate(l.visitDateYy, l.visitDateMm, l.visitDateDd),?) <= ?);', array('181','POS%','XX','','01','01','01',$endDate,'1979-01-01',$endDate));
 
   database()->query('DROP TABLE IF EXISTS art;');
-  # add patients with only one dispense   
+# build table of all patients on ART where each patient has one and only one row
   database()->query('CREATE TABLE art 
 SELECT e.patientid, 
 MAX(CASE WHEN ISDATE(ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd)) = 1 THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) ELSE ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) END) as maxDispDt, 
@@ -621,7 +621,7 @@ GROUP BY 1;', array($endDate));
 
   database()->query('ALTER TABLE art ADD PRIMARY KEY (patientid);');  
   database()->exec('DROP TABLE IF EXISTS allEnc;');
-  
+# build table of all hiv positive patients where each patient has one and only one row  
   database()->query('CREATE TABLE allEnc	
 SELECT e.patientid, 
 MIN(ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd)) as minDt,
@@ -638,18 +638,19 @@ ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ? group by 1;', array(
   database()->query('UPDATE allEnc e, art a SET e.maxDt = a.maxDispDt WHERE e.patientid = a.patientid and a.maxDispDt > e.maxDt;');
    
 $query='UPDATE allHIV a,(
-select case when ? between e.maxDt and e.nextDt then 6 
-            when datediff(?,e.nextDt) between 0 and 90 then 8 
-			else 9 end as patientStatus,l.patientid from art l, allEnc e 
-WHERE l.patientid = e.patientid AND l.patientid NOT IN (SELECT patientID from discTable where discDate <=?)
+SELECT CASE WHEN ? BETWEEN e.maxDt AND e.nextDt THEN 6 
+            WHEN DATEDIFF(?,e.nextDt) BETWEEN 0 AND 90 THEN 8 
+			ELSE 9 END AS patientStatus,l.patientid from art l, allEnc e 
+WHERE l.patientid = e.patientid AND l.patientid NOT IN (SELECT patientID FROM discTable WHERE
+	discType IN (4,8,11,12) AND discDate <=?)
 UNION 
 SELECT CASE WHEN discType = 12 THEN 1 
             WHEN discType = 11 THEN 2 
 		    ELSE 3 END AS patientStatus, d.patientid FROM discTable d,art l 
-WHERE l.patientid = d.patientid AND discDate <=?
+WHERE l.patientid = d.patientid AND d.discType IN (4,8,11,12) AND discDate <=?
 UNION 
 SELECT CASE WHEN e.minDt BETWEEN date_add(?,INTERVAL -12 MONTH) AND ? THEN 7 
-            WHEN e.minDt<date_add(?,INTERVAL -12 MONTH) AND e.maxDt BETWEEN date_add(?,INTERVAL -12 MONTH) AND ? THEN 11 
+            WHEN e.minDt < date_add(?,INTERVAL -12 MONTH) AND e.maxDt BETWEEN date_add(?,INTERVAL -12 MONTH) AND ? THEN 11 
 			ELSE 10 END AS patientStatus, e.patientid FROM allEnc e 
 WHERE patientid NOT IN (SELECT patientID from discTable WHERE discDate <=?) AND patientid NOT IN (SELECT patientID FROM art)
 UNION 
