@@ -351,6 +351,24 @@ $kickLabel = array (
 			"3" => "Age",
 			"4" => "Grossesse <span class=\"small_cnt\">(femme seulement, &acirc;ge > 14)</span>"
 		)
+	),
+	"riskStatus" => array (
+		"en" => array (
+			"0" => "Treatment Status",
+			"1" => "Possible Failure",
+			"2" => "High Risk",
+			"3" => "Medium Risk",
+			"4" => "Low Risk",
+			"5" => "Success"
+		),
+		"fr" => array (
+			"0" => "Statut du Traitement ",
+			"1" => 'Échec possible (virologique)',
+			"2" => 'Risque Haut',
+			"3" => 'Risque Moyen',
+			"4" => "Risque Minimal",
+			"5" => "Success"
+		)
 	)
 );
 

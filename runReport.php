@@ -269,24 +269,24 @@ switch ( $repNum ) {
 		include ("pepfarLoad.php");
 		doPepfarPrep($site, $lang, $start, $end);
 		break;
-        case '520':
-                // for report 520 (pregnancy regimens)
-                include ("report520Setup.php");
-                $oLevel = 0;
-                $gLevel = 0;
-                break;
-        case '540':
-                // for report 540 (disease surveillance)
-                include ("report540Setup.php");
-                $oLevel = 0;
-                $gLevel = 0;
-                break;
-        case '601':
-                include ("backend/sharedRptFunctions.php");
-                $tempTableNames = createTempTables ("#tempPregCalc", 2, array ("patientID varchar(11), maxDate date", "patientID varchar(11), lmpDate date, eligDate date"), "pat_idx::patientID");
-                fillLmpTable ($tempTableNames[2], $site, $end, (strtotime ($start) >= strtotime (PMTCT_14_WEEKS_DATE) ? 98 : 196));
-                fillPregnancyTable ($tempTableNames[1], $site, $start, $end, $tempTableNames[2]);
-                break;
+    case '520':
+        // for report 520 (pregnancy regimens)
+        include ("report520Setup.php");
+        $oLevel = 0;
+        $gLevel = 0;
+        break;
+    case '540':
+        // for report 540 (disease surveillance)
+        include ("report540Setup.php");
+        $oLevel = 0;
+        $gLevel = 0;
+        break;
+    case '601':
+        include ("backend/sharedRptFunctions.php");
+        $tempTableNames = createTempTables ("#tempPregCalc", 2, array ("patientID varchar(11), maxDate date", "patientID varchar(11), lmpDate date, eligDate date"), "pat_idx::patientID");
+        fillLmpTable ($tempTableNames[2], $site, $end, (strtotime ($start) >= strtotime (PMTCT_14_WEEKS_DATE) ? 98 : 196));
+        fillPregnancyTable ($tempTableNames[1], $site, $start, $end, $tempTableNames[2]);
+        break;
 	case '604':
 	case '605':
 		$gLevel = 0;
@@ -296,51 +296,57 @@ switch ( $repNum ) {
 		dbQuery("sp_cohortAnalysis");
 	case '5000':
 		echo  "<style type=\"text/css\">
-				  <!--
-					td{font-family: Arial; font-size: 8pt;}
-					th{font-family: Arial; font-size: 8pt;}
-				  --->
-  			</style>";
-                break;
-        case ($repNum >= 2000 && $repNum <= 2999):
-                $tempNames = setupPrimCareRpt ($repNum, $site, $start, $end, $userSub);
-                if (!empty ($tempNames)) {
-                  foreach ($tempNames as $tbl) {
-                    array_push ($tblNames, $tbl);
-                  }
-                }
-                if (DEBUG_FLAG) dumpTempTables ($tblNames);
-                $den = count (denPrimCareRpt ($repNum, $site, $start, $end, $tblNames));
-                break;
-        case ($repNum >= 3000 && $repNum <= 3099 && $repNum != 3001):
-                $tempNames = setupObGynRpt ($repNum, $site, $start, $end, $userSub);
-                if (!empty ($tempNames)) {
-                  foreach ($tempNames as $tbl) {
-                    array_push ($tblNames, $tbl);
-                  }
-                }
-                if (DEBUG_FLAG) dumpTempTables ($tblNames);
-                $den = count (denObGynRpt ($repNum, $site, $start, $end, $tblNames));
-                break;
-        case (($repNum >= 3100 && $repNum <= 3999) || $repNum == 3001):
-                $tempNames = setupObGynRpt ($repNum, $site, $start, $end, $userSub);
-                if (!empty ($tempNames)) {
-                  foreach ($tempNames as $tbl) {
-                    array_push ($tblNames, $tbl);
-                  }
-                }
-                if (DEBUG_FLAG) dumpTempTables ($tblNames);
-                break;
+	    <!--
+		td{font-family: Arial; font-size: 8pt;}
+		th{font-family: Arial; font-size: 8pt;}
+	    --->
+		</style>";
+        break;
+    case ($repNum >= 2000 && $repNum <= 2999):
+        $tempNames = setupPrimCareRpt ($repNum, $site, $start, $end, $userSub);
+        if (!empty ($tempNames)) {
+          foreach ($tempNames as $tbl) {
+            array_push ($tblNames, $tbl);
+          }
+        }
+        if (DEBUG_FLAG) dumpTempTables ($tblNames);
+        $den = count (denPrimCareRpt ($repNum, $site, $start, $end, $tblNames));
+        break;
+    case ($repNum >= 3000 && $repNum <= 3099 && $repNum != 3001):
+        $tempNames = setupObGynRpt ($repNum, $site, $start, $end, $userSub);
+        if (!empty ($tempNames)) {
+          foreach ($tempNames as $tbl) {
+            array_push ($tblNames, $tbl);
+          }
+        }
+        if (DEBUG_FLAG) dumpTempTables ($tblNames);
+        $den = count (denObGynRpt ($repNum, $site, $start, $end, $tblNames));
+        break;
+    case (($repNum >= 3100 && $repNum <= 3999) || $repNum == 3001):
+       $tempNames = setupObGynRpt ($repNum, $site, $start, $end, $userSub);
+       if (!empty ($tempNames)) {
+         foreach ($tempNames as $tbl) {
+           array_push ($tblNames, $tbl);
+         }
+       }
+       if (DEBUG_FLAG) dumpTempTables ($tblNames);
+       break;
 }
 
-
+$r34pStatus = $pStatus;
+$r34tStatus = $tStatus;
+	if (DEBUG_FLAG) print "<br>before list statement, query for table: " . $qry . "<br>";
 list($qry, $chartQry, $tableName,
      $start, $end, $pStatus, $tStatus, $tType,
      $gLevel, $oLevel, $ddValue) = 
   prepareReportQueries($xmlRep, $rtype, $repNum, $lang, $site, $pStatus, $tStatus, $tType,
 		       $gLevel, $oLevel, $start, $end, $pid, $ddValue,
 		       $nForms, $creator, $order, $odir);
-
+	if (DEBUG_FLAG) print "<br>after list statement, query for table: " . $qry . "<br>";
+if ($repNum == 777) {
+$pStatus = $r34pStatus;
+$tStatus = $r34tStatus;
+}
 ?>
 <script type="text/javascript" src="jquery-<?= JQUERY_VERSION ?>.js"></script>
 <script type="text/javascript" src="Highcharts-<?= HIGHCHARTS_VERSION ?>/js/highcharts.js"></script>
@@ -470,7 +476,7 @@ echo "
  <input type=\"hidden\" name=\"tType\" value=\"" . $tType . "\">
  <input type=\"hidden\" name=\"order\" value=\"" . $order . "\">
  <input type=\"hidden\" name=\"odir\" value=\"" . $odir . "\">
-  <input type=\"hidden\" name=\"nForms\" value=\"" . $nForms . "\">
+ <input type=\"hidden\" name=\"nForms\" value=\"" . $nForms . "\">
  <input type=\"hidden\" name=\"creator\" value=\"" . $creator . "\">
 
 <div class=\"hide-this print-show\">
@@ -507,41 +513,52 @@ echo "
 			$endYY = substr($end,2,2);
 			$endMM = substr($end,5,2);
 			$endDD = substr($end,8,2);
-		}
+	    }
+	    if ($repNum == 777 | $repNum == 778) {
 		echo "
-		<tr>
-			<td>" . $startDateLabel[$lang] . " " . ($repNum == 540 && !empty ($startDD) ? "$startDD/" : "") . $startMM . "/" . $startYY . " " . ($repNum == 540 ? $dateFormatWithDay[$lang] : $dateFormat[$lang]) . "
-			</td>
-			<td>" . $endDateLabel[$lang] . " " . ($repNum == 540 && !empty ($endDD) ? "$endDD/" : "") . $endMM . "/" . $endYY . " " . ($repNum == 540 ? $dateFormatWithDay[$lang] : $dateFormat[$lang]) . "
-			</td>
-		</tr>";
+			<tr>
+				<td>Date d'exécution:" . date("d-m-Y") . "</td>
+			</tr>";		
+	    } else {
+			echo "
+			<tr>
+				<td>" . $startDateLabel[$lang] . " " . ($repNum == 540 && !empty ($startDD) ? "$startDD/" : "") . $startMM . "/" . $startYY . " " . ($repNum == 540 ? $dateFormatWithDay[$lang] : $dateFormat[$lang]) . "
+				</td>
+				<td>" . $endDateLabel[$lang] . " " . ($repNum == 540 && !empty ($endDD) ? "$endDD/" : "") . $endMM . "/" . $endYY . " " . ($repNum == 540 ? $dateFormatWithDay[$lang] : $dateFormat[$lang]) . "
+				</td>
+			</tr>";
+		}
 	}
 
-        // Print report description here if prim. care or ob/gyn report
-        if (($repNum >= 2000 && $repNum <= 3999) || $repNum == 311) {
-          echo "
-	<tr>
-		<th align=\"left\" colspan=\"2\">" . _("Description") . "</th>
-	</tr>
-	<tr>
-		<td align=\"left\" colspan=\"2\"><textarea style=\"overflow: auto; font-family: Verdana, Arial, Helvetica, Geneva, sans-serif; color: #444; font-size: 11px; line-height: 1.5em;\" cols=\"90\" rows=\"9\" id=\"repDesc\">" . str_replace ("<BR/>", "\n", $repDesc) . "</textarea></td>
-	</tr>
-	<tr>
-		<th align=\"left\" colspan=\"2\">" . _("Résultats") . "</th>
-	</tr>
-          ";
-        }
-
-	if (!($pStatus == 0 && $tStatus == 0 && $tType == 0 && $gLevel == 0 && $oLevel == 0)) {
-		echo "
+	  // Print report description here if prim. care or ob/gyn report
+	  if (($repNum >= 2000 && $repNum <= 3999) || $repNum == 311 || $repNum == 777 || $repNum == 778) {
+	          echo "
 		<tr>
-			<td valign=\"top\" colspan=\"5\">" . $kickLabel['patientStatus'][$lang][0] . ": ";
+			<th align=\"left\" colspan=\"2\">" . _("Description") . "</th>
+		</tr>
+		<tr>
+			<td align=\"left\" colspan=\"2\"><textarea style=\"overflow: auto; font-family: Verdana, Arial, Helvetica, Geneva, sans-serif; color: #444; font-size: 11px; line-height: 1.5em;\" cols=\"90\" rows=\"9\" id=\"repDesc\">" . str_replace ("<BR/>", "\n", $repDesc) . "</textarea></td>
+		</tr>
+		<tr>
+			<th align=\"left\" colspan=\"2\">" . _("Résultats") . "</th>
+		</tr>
+	          ";
+      }
+
+	  if (!($pStatus == 0 && $tStatus == 0 && $tType == 0 && $gLevel == 0 && $oLevel == 0)) { 
+		// main flag block for patient status, treatment, tests
+			echo "
+			<tr>";
+			if ($repNum != 777) 
+				echo "<td valign=\"top\" colspan=\"5\">" . $kickLabel['patientStatus'][$lang][0] . ": ";
+			else
+				echo "<td valign=\"top\" colspan=\"5\">Statut ARV: ";					
 			$pArray = getPatientStatusArray ($pStatus);
 			$j = 0;
 			if (array_sum($pArray) > 0) {
 				for ($i = 0; $i < 5; $i++) {
 					if ($pArray[$i] == 1) {
-						$curVal = substr($kickLabel['patientStatus'][$lang][$i+1],0,strpos($kickLabel['patientStatus'][$lang][$i+1],"<span"));
+						$curVal = $kickLabel['patientStatus'][$lang][$i+1];
 						if ($j == 0) echo $curVal;
 						else echo ", " . $curVal;
 						$j++;
@@ -553,7 +570,30 @@ echo "
 			</td>
 		</tr>
 		<tr>";
-			if ($tStatus == 0) $curVal = "-";
+
+		if ($repNum == 777) {
+			echo "
+			<tr>
+				<td valign=\"top\" colspan=\"5\">Status Risque : ";
+				$tArray = getPatientStatusArray ($tStatus);
+				$j = 0;
+				if (array_sum($tArray) > 0) {
+					for ($i = 0; $i < 5; $i++) {
+						if ($tArray[$i] == 1) {
+						$curVal = $kickLabel['riskStatus'][$lang][$i+1];
+							if ($j == 0) echo $curVal;
+							else echo ", " . $curVal;
+							$j++;
+						}
+					}
+				} else
+					echo "-";
+				echo "
+				</td>
+			</tr>
+			<tr>";		
+	   } else {
+			if ($tStatus == 0) $curVal = "-";				
 			else $curVal = substr($kickLabel['treatmentStatus'][$lang][$tStatus],0,strpos($kickLabel['treatmentStatus'][$lang][$tStatus],"<span")-1);
 			echo "
 			<td valign=\"top\">" . $kickLabel['treatmentStatus'][$lang][0] . ": " . $curVal . "
@@ -575,6 +615,7 @@ echo "
 			<td>" . $kickLabel['otherLevel'][$lang][0] . ": " . $curVal . "
 			</td>
 		</tr>";
+	  }
 	}
 	echo "
 	</table>";
@@ -646,6 +687,44 @@ echo "
                   }
 		  echo "<script language=\"javascript\" type=\"text/javascript\">document.forms[0].total.value=".$total4Patients . "</script>";
   	}
+	
+	if ($repNum == 777) {
+		$y = array(6,8,9);
+		$x = getPatientStatusArray ($r34pStatus);
+		print_r($y);
+		echo $r34pStatus;
+		print_r($x);
+		$j = 0;
+		if (array_sum($x) > 0) {
+			$j = 0;
+			for ($i = 0; $i < 3; $i++) {
+				if ($x[$i] == 1) {
+					if ($j == 0) {
+						$ps = $y[$i];
+						$j++;
+					}
+					else $ps .= ',' . $y[$i];
+				}
+			}
+		}
+		$y = array(500,400,300,200,100);
+		$x = getPatientStatusArray ($r34tStatus);
+		if (array_sum($x) > 0) {
+			$j = 0;
+			for ($i = 0; $i < 5; $i++) {
+				if ($x[$i] == 1) {
+					if ($j == 0) {
+						$ts = $y[$i];
+						$j++;
+					}
+					else $ts .= ',' . $y[$i];
+				}
+			}
+		}
+		$qry .= " and p.patientStatus in (" . $ps . ")";
+		$qry .= " and r.riskLevel in (" . $ts . ")";
+		$qry .= " group by 4 having MAX(lw.dispDate) > DATE_ADD(now(),interval -180 day) order by 1,2";
+	}
 
 	if (DEBUG_FLAG) print "<br>query for table: " . $qry . "<br>";
 	recordEvent('report', array(

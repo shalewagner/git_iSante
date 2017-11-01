@@ -1723,6 +1723,19 @@
 				<query>select * from pepfarRecords order by 1</query>
 			</report>
                         -->
+			<report id="777" patientStatus="2" treatmentStatus="2" testType="">
+			  <title lang="en">Report of Therapeutic Risk Categories</title>
+			  <title lang="fr">Rapport des Catégories de Risque d’Échec Thérapeutique</title>
+			    <reportFile></reportFile>
+			    <groupLevel>0</groupLevel>
+			    <otherLevel>0</otherLevel>
+				<query>SELECT IF('$lang' = 'fr', statusDescfr, statusDescen) AS 'Statut', IF('$lang' = 'fr', riskNamefr, riskNameen) AS 'Catégorie', CONCAT(fname,' ',lname) AS Nom, p.patientid, clinicPatientID AS 'Code ST', 'popup' AS 'Alerte popup', YEAR(GETDATE()) - dobyy+0 AS Age, telephone, addrDistrict, MAX(lw.dispDate) AS 'Dernier date d´ARV', MAX(lw.nxtDt) AS 'Prochaine date d´ARV' FROM patient p, r34Summary rx, patientStatusLookup l, longWide lw, r34RiskLookup r 
+					WHERE (p.patientid = rx.patientid AND p.patientid = lw.patientid AND p.patientStatus = l.statusValue AND p.location_id = $site AND r.riskLevel = rx.riskLevel)
+				</query>
+				<menuSelection></menuSelection>
+				<description lang="en">This report lists patients in selected ARV status and theraputic risk categories.&lt;BR/&gt;Clicking the ST Code link on a patient takes the user to that patient's cover page.&lt;BR/&gt;Further information on the patient's theraputic risk is available on the cover page.</description>
+				<description lang="fr">Ce rapport énumère les patients dans des catégories d'ARV sélectionnées et des catégories de risque thérapeutique.&lt;BR/&gt;En cliquant sur le lien Code ST sur un patient, l'utilisateur envoie la page de couverture de ce patient.&lt;BR/&gt;De plus amples informations sur le risque thérapeutique du patient sont disponibles sur la page couverture.</description>
+			</report>
 			<report id="505" patientStatus="0" treatmentStatus="0" testType="0">
 				<title lang="en">PEPFAR/WHO Facility Level Monthly</title>
 				<title lang="fr">Rapport mensuel PEPFAR/OMS par établissement</title>

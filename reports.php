@@ -141,6 +141,10 @@ echo "
 					else
 						echo "<a href=\"#\" onclick=\"doWindow ('" . $url . "')\">" . $repName . "</a>";
 				} else {  // launch via kickPoint
+					if ($repNum == 777) {
+						$url = "kick2.php?" . ($requestNoid == "true" ? "noid=true&" : "") . "rtype=" . $_GET['rtype'] . "&reportNumber=" . $repNum . "&lang=" . $lang . "&site=" . $site . "&patientStatus=" . $pStatus . "&treatmentStatus=" . $tStatus . "&testType=" . $tType . "&groupLevel=" . $gLevel . "&otherLevel=" . $oLevel . "&menu=" . $mSelection . "&lastPid=" . $_GET['lastPid'];
+
+					} else
 					$url = "kickPoint.php?" . ($requestNoid == "true" ? "noid=true&" : "") . "rtype=" . $_GET['rtype'] . "&reportNumber=" . $repNum . "&lang=" . $lang . "&site=" . $site . "&patientStatus=" . $pStatus . "&treatmentStatus=" . $tStatus . "&testType=" . $tType . "&groupLevel=" . $gLevel . "&otherLevel=" . $oLevel . "&menu=" . $mSelection . "&lastPid=" . $_GET['lastPid'];
 					echo "<a href=\"" . $url . "\">" . $repName . "</a>";
 				}

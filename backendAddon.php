@@ -1208,6 +1208,7 @@ function generateQueryResult($qry, $rtype = '', $repNum = '', $lang = 'fr', $sit
 			$pid = (!empty ($row['patientID'])) ? $row['patientID'] : "";
 			// Get pid via other patient identifiers, if present
 			if ($pid == "") { 
+				if (!empty($row['Code ST'])) $pid = getPidByOtherID ($row['Code ST'], $site, 'clinicPatientID');
 				if (!empty($row['clinicPatientID'])) $pid = getPidByOtherID ($row['clinicPatientID'], $site, 'clinicPatientID');
 				if (!empty($row['pcID'])) $pid = getPidByOtherID ($row['pcID'], $site, 'pcID');
 				if (!empty($row['obgynID'])) $pid = getPidByOtherID ($row['obgynID'], $site, 'obgynID'); 
@@ -1254,10 +1255,13 @@ function generateQueryResult($qry, $rtype = '', $repNum = '', $lang = 'fr', $sit
 			foreach ($row as $fieldName => $fieldVal) {
 				if (is_numeric ($fieldName)) continue;
 				if (! (strcasecmp($fieldName,"patientid") == 0 || strcasecmp($fieldName,"encountertype") == 0)) {
-					if ($havePidLink && (strcasecmp($fieldName, "clinicPatientID") == 0 || strcasecmp($fieldName, "pcID") == 0 || strcasecmp($fieldName, "obgynID") == 0)) {
+					if ($havePidLink && (strcasecmp($fieldName, "Code ST") == 0 || strcasecmp($fieldName, "clinicPatientID") == 0 || strcasecmp($fieldName, "pcID") == 0 || strcasecmp($fieldName, "obgynID") == 0)) {
 						// there's an id in the results--generate a url for finding the patient
 						$htmlRowData .= "<td align=\"left\"><a target=\"mainWindow\" href=\"patienttabs.php?lang=$lang&site=$site&pid=$pid\" onclick=\"javascript:window.blur()\">" . (strlen (trim ($fieldVal)) > 0 ? $fieldVal : "N/A") . "</a></td>";
 						array_push($outputRowData, $fieldVal);
+					} else if (strcasecmp($fieldName,"Alerte popup") == 0) {
+							$htmlRowData .= "<td align=\"center\"><a target=\"_blank\" href=\"patient/r34Popup.php?lang=$lang&amp;pid=$pid\" onclick=\"javascript:window.blur()\">popup</a></td>";
+							array_push($outputRowData, "popup");
 					} else if ($haveEncLink && $fieldName == "encounter_id") {
 						$fname = $GLOBALS['encType'][$lang][$enctype];
 						// encounter_id is in the query--generate a url for displaying the encounter
@@ -1269,37 +1273,37 @@ function generateQueryResult($qry, $rtype = '', $repNum = '', $lang = 'fr', $sit
 							$curDate = "null";
 						else {
 							$curDate = formatDisplayedDate ($fieldName, $fieldVal,$lang);
-						        if (strcmp ($fieldName, "stopDate") == 0) $curDate = (strcmp ($lang, "en") == 0) ? substr ($curDate, 0, 3) . substr ($curDate, 6, 2) : substr ($curDate, 3);
-                                                }
+							if (strcmp ($fieldName, "stopDate") == 0) $curDate = (strcmp ($lang, "en") == 0) ? substr ($curDate, 0, 3) . substr ($curDate, 6, 2) : substr ($curDate, 3);
+						}
 						$htmlRowData .= "<td align=\"left\">" . $curDate . "</td>";
 						array_push($outputRowData, $curDate);
 					} else if (strcasecmp($fieldName,"arvNoReasonDesc") == 0 ) {
-                                                $reasons = explode ("|", $fieldVal);
-                                                $finalFieldVal = "";
-                                                for ($z = 0; $z < count ($reasons); $z++) {
-                                                  if ($z > 0) $finalFieldVal .= "; ";
-						  $finalFieldVal .= $reasons[$z];
-                                                }
+						$reasons = explode ("|", $fieldVal);
+						$finalFieldVal = "";
+						for ($z = 0; $z < count ($reasons); $z++) {
+							if ($z > 0) $finalFieldVal .= "; ";
+							$finalFieldVal .= $reasons[$z];
+						}
 						$htmlRowData .= "<td align=\"left\">" ;
-                                                $htmlRowData .= $finalFieldVal;
+						$htmlRowData .= $finalFieldVal;
 						$htmlRowData .= "</td>";
-					        array_push($outputRowData, $finalFieldVal);
+						array_push($outputRowData, $finalFieldVal);
 					} else if (strcasecmp($fieldName,"eligReason") == 0 || strcasecmp($fieldName,"eligReasonTemp") == 0) {
 						$eligReasonXref = array ( "en" => array ( "cd4LT200" => "CD4 below threshold", "tlcLT1200" => "Lymphocytes <= 1200", "WHOIII" => "WHO Stage III & CD4 below threshold", "WHOIII-2" => "WHO Stage III", "WHOIIICond" => "WHO Stage III & active condition", "WHOIV" => "WHO Stage IV", "PMTCT" => "PMTCT", "medEligHAART" => "\"Yes\" checked on form", "estPrev" => "Established at last visit", "former" => "Former ARV therapy", "PEP" => "PEP", "eligByAge" => "Age", "eligByCond" => "Active condition", "eligPcr" => "Positive PCR result", "OptionB+" => "Option B+", "tmsAdult" => "HIV+ adult or adolescent", "tmsChildInfected" => "HIV+ child w/ diagnoses", "tmsChildExposed" => "HIV-exposed child" ), "fr" => array ( "cd4LT200" => "CD4 inf&#xe9;rieur au seuil", "tlcLT1200" => "Lymphocytes <= 1200", "WHOIII" => "OMS Stade III & CD4 inf&#xe9;rieur au seuil", "WHOIII-2" => "OMS Stade III", "WHOIIICond" => "OMS Stade III & condition actif", "WHOIV" => "OMS Stade IV", "PMTCT" => "PTME", "medEligHAART" => "\"Oui\" choisi sur la fiche", "estPrev" => "&#xc9;ligibilit&#xe9; m&#xe9;dicale &#xe9;tablie &#xe0; la visite ant&#xe9;rieure", "former" => "ARV trith&#xe9;rapie ant&#xe9;rieure", "PEP" => "PEP", "eligByAge" => "L'âge", "eligByCond" => "Condition actif", "eligPcr" => "Résultat positif de test PCR", "OptionB+" => "Option B+", "tmsAdult" => "Adulte ou adolescent VIH-positif", "tmsChildInfected" => "Enfant VIH-positif avec diagnostics", "tmsChildExposed" => "Enfant expos&#xe9; &#xe0; VIH" ) ); 
-                                                $reasons = explode ("|", $fieldVal);
-                                                $finalFieldVal = "";
-                                                for ($z = 0; $z < count ($reasons); $z++) {
-                                                  if ($z > 0) $finalFieldVal .= "; ";
-						  if(isset($eligReasonXref[$lang][$reasons[$z]])) {
-							$finalFieldVal .= $eligReasonXref[$lang][$reasons[$z]];
-						  } else {
-							$finalFieldVal .= $reasons[$z];
-                                                  }
-                                                }
+						$reasons = explode ("|", $fieldVal);
+						$finalFieldVal = "";
+						for ($z = 0; $z < count ($reasons); $z++) {
+							if ($z > 0) $finalFieldVal .= "; ";
+							if(isset($eligReasonXref[$lang][$reasons[$z]])) {
+								$finalFieldVal .= $eligReasonXref[$lang][$reasons[$z]];
+							} else {
+								$finalFieldVal .= $reasons[$z];
+							}
+						}
 						$htmlRowData .= "<td align=\"left\">" ;
-                                                $htmlRowData .= $finalFieldVal;
+						$htmlRowData .= $finalFieldVal;
 						$htmlRowData .= "</td>";
-					        array_push($outputRowData, $finalFieldVal);
+						array_push($outputRowData, $finalFieldVal);
 					} else if (strcasecmp($fieldName,"status") == 0) {
 						$statusXref = array ( "en" => array ( "ART" => "On ART", "CC" => "Palliative Care", "soins palliatifs" => "Palliative Care", "sous ARV" => "On ART" ), "fr" => array ( "ART" => "sous ARV", "CC" => "soins palliatifs" ) ); 
 						$htmlRowData .= "<td align=\"left\">";
@@ -1312,15 +1316,15 @@ function generateQueryResult($qry, $rtype = '', $repNum = '', $lang = 'fr', $sit
 						}
 						$htmlRowData .= "</td>";
 					} else if (strcasecmp($fieldName,"sex") == 0) {
-                                                if (is_numeric ($fieldVal)) {
-                                                  if ($fieldVal == 2) {
-                                                    $fieldVal = $repWords[$lang][41];
-                                                  } else if ($fieldVal == 1) {
-                                                    $fieldVal = $repWords[$lang][42];
-                                                  } else {
-                                                    $fieldVal = $repWords[$lang][43];
-                                                  }
-                                                }
+						if (is_numeric ($fieldVal)) {
+							if ($fieldVal == 2) {
+								$fieldVal = $repWords[$lang][41];
+							} else if ($fieldVal == 1) {
+								$fieldVal = $repWords[$lang][42];
+							} else {
+								$fieldVal = $repWords[$lang][43];
+							}
+						}
 						$htmlRowData .= "<td align=\"left\">" . $fieldVal . "</td>";
 						array_push($outputRowData, $fieldVal);
 					} else if (strcasecmp($fieldName,"errorDesc") == 0) {
@@ -1341,27 +1345,27 @@ function generateQueryResult($qry, $rtype = '', $repNum = '', $lang = 'fr', $sit
 							$htmlRowData .= "<td align=\"left\">" . $errorDesc . "</td>";
 							array_push($outputRowData, $errorDesc);
 					} else if (strcasecmp($fieldName,"Address") == 0) {
-                                                $addr = explode ("|", $fieldVal);
-                                                $finalFieldVal = "";
-                                                for ($z = 0; $z < count ($addr); $z++) {
-                                                  if ($z > 0) $finalFieldVal .= "; ";
+						$addr = explode ("|", $fieldVal);
+						$finalFieldVal = "";
+						for ($z = 0; $z < count ($addr); $z++) {
+							if ($z > 0) $finalFieldVal .= "; ";
 						  $finalFieldVal .= $addr[$z];
-                                                }
+					  }
 						$htmlRowData .= "<td align=\"left\">" ;
-                                                $htmlRowData .= $finalFieldVal;
+						$htmlRowData .= $finalFieldVal;
 						$htmlRowData .= "</td>";
-					        array_push($outputRowData, $finalFieldVal);
+						array_push($outputRowData, $finalFieldVal);
 					} else if (strcasecmp($fieldName,"receivedDrug") == 0) {
-                                                $drugs = explode ("|", $fieldVal);
-                                                $finalFieldVal = "";
-                                                for ($z = 0; $z < count ($drugs); $z++) {
-                                                  if ($z > 0) $finalFieldVal .= "; ";
+						$drugs = explode ("|", $fieldVal);
+						$finalFieldVal = "";
+						for ($z = 0; $z < count ($drugs); $z++) {
+							if ($z > 0) $finalFieldVal .= "; ";
 						  $finalFieldVal .= $drugs[$z];
-                                                }
+					  }
 						$htmlRowData .= "<td align=\"left\">" ;
-                                                $htmlRowData .= $finalFieldVal;
+						$htmlRowData .= $finalFieldVal;
 						$htmlRowData .= "</td>";
-					        array_push($outputRowData, $finalFieldVal);
+						array_push($outputRowData, $finalFieldVal);
 					} else {
 						if ($gLevel != 1 && $oLevel == 1 && is_null($fieldVal)) {
 							$htmlRowData .= "<td align=\"left\">Total</td>";

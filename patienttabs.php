@@ -383,6 +383,13 @@ function launchClinicalSummary () {
 	currWindow.focus();
 }
 
+function r34Popup () {
+        var url = 'patient/r34Popup.php?pid=<?=$pid;?>&lang=<?=$lang;?>';
+        stuff = 'width=750,height=1000,scrollbars=yes,resizable=yes,titlebar=no';
+        currWindow = window.open(url ,'VIH Status', stuff);
+        currWindow.focus();
+}
+
 function delPatFromHeader() {
 	var url = 'adminPat.php?pid=<?=$pid;?>&lang=<?=$lang;?>';
 	document.location = url;

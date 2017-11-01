@@ -1,0 +1,10 @@
+"gender" => "UPDATE r34Summary SET risk_gender   = -40.51375*IF(gender = 1,1,0)        + 29.89521*IF(gender = 2,1,0)        + 38.29464*IF(gender = 3,1,0)",
+"age"    => "UPDATE r34Summary SET risk_age      = -06.61292*IF(agecat = 1,1,0)        - 20.63127*IF(agecat = 2,1,0)        - 40.26676*IF(agecat = 3,1,0)        - 91.07812*(agecat = 4,1,0)",
+"marital"=> "UPDATE r34Summary SET risk_marital  =  12.18453*IF(marital = 1,1,0)       +   2.5795*IF(marital = 2,1,0)       +  4.84592*IF(marital = 3,1,0)", 
+"cd4"    => "UPDATE r34Summary SET risk_cd4      = -72.88984*IF(blcd4cat = 1,1,0)      - 87.49897*IF(blcd4cat = 2,1,0)      - 103.4112*IF(blcd4cat = 3,1,0)      - 32.5704*IF(blcd4cat = 4,1,0)",
+"bmi"    => "UPDATE r34Summary SET risk_bmi      = -20.66448*IF(bmiblcat = 1,1,0)      -  62.1467*IF(bmiblcat = 2,1,0)      - 49.00957*IF(bmiblcat = 3,1,0)      - 7.93251*IF(bmiblcat = 4,1,0)",
+"who"    => "UPDATE r34Summary SET risk_who      =  23.25023*IF(whostage = 2,1,0)      + 45.64527*IF(whostage = 3,1,0)      + 65.05058*IF(whostage = 4,1,0)      +  1.0607*IF(whostage = 5,1,0)",
+"test"   => "UPDATE r34Summary SET risk_test     =    7.9333*IF(testenrollcat = 1,1,0) + 11.70411*IF(testenrollcat = 2,1,0) + 14.31527*IF(testenrollcat = 3,1,0) + 6.86998*IF(testenrollcat = 4,1,0)",
+"regimen"=> "UPDATE r34Summary SET risk_regimen  =   7.68216*IF(regimen = 1,1,0)       + 26.73288*IF(regimen==2,1,0)        + 43.21174*IF(regimen = 3,1,0)      - 10.46431*IF(regimen = 4,1,0) + 27.63415*IF(regimen = 5,1,0) + 12.48443*IF(regimen = 8,1,0)", 
+"risk"   => "UPDATE r34Summary SET riskscore     = 277 - 56.55093*pdcall180 + 10.2163*pdcfall + 10.81102*gap3count180 + 21.45772*artstartyearx -.00803*preartdays -.66252*visotherpreart + 
+ risk_gender + risk_age + risk_marital + risk_cd4 + risk_bmi + risk_who + risk_test + risk_regimen"

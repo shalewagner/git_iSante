@@ -5,6 +5,7 @@ $_REQUEST['noid'] = 'true';
 require_once 'backend/materializedViews.php';
 require_once 'backend/encounterSnapshot.php';
 require_once 'backend/dataWarehouse.php';
+require_once 'r34/r34Daily.php';
 
 function printLog($message) {
   print strftime('%Y-%m-%d %H:%M:%S') . ' ' . $message . "\n";
@@ -55,9 +56,17 @@ printLog('generatePatientAlert() started');
 if (getConfig('serverRole') != 'consolidated') generatePatientAlert();
 printLog('generatePatientAlert() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 
+#adding r34 daily run.
+if (getConfig('defsitecode') == '31100') {
+	printLog('runR34 started');
+	runR34('NOW()');
+	printLog('runR34 finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
+}
+
 printLog('Patient status update finished (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 
-recordEvent('patientStatusBatchFi', array('duration' => $stopwatch->elapsed()));  
+recordEvent('patientStatusBatchFi', array('duration' => $stopwatch->elapsed()));
+
 
 class StopWatch { 
     public $total; 
