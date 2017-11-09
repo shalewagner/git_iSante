@@ -1,5 +1,5 @@
 <?
-$menustring = "lang=$lang&site=$site&lastPid=$lastPid";
+$menustring = ($lastPid == '') ? "lang=$lang&site=$site":"lang=$lang&site=$site&lastPid=$lastPid";
 require_once 'labels/setPriv.php';
 ?>
 

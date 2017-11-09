@@ -8,6 +8,7 @@ if (DEBUG_FLAG) $rptStart = time();
 $repNum = ereg_replace('[^0-9]', '', $_GET['reportNumber']);
 $rtype = $_GET['rtype'];
 $lang = $_GET['lang'];
+$printLabel = ($lang == 'fr') ? 'Impression':'Print';
 $site = $_GET['site'];
 $pStatus = $_GET['patientStatus'];
 $tStatus = $_GET['treatmentStatus'];
@@ -490,7 +491,7 @@ echo "
 		<tr>
 		   	<td>
 		   		<input class=\"print-hide\" type=\"button\" name=\"ret1\" value=\"" . $repReturn[$lang] . "\" onclick=\"window.close()\" />
-		   		<input class=\"print-hide\" type=\"button\" name=\"printButton\" value=\"" . _('en:Print') . "\" onclick=\"window.print()\" />";
+		   		<input class=\"print-hide\" type=\"button\" name=\"printButton\" value=\"" . $printLabel . "\" onclick=\"window.print()\" />";
 		   		if ($rtype == "clinicalCare"||$rtype == "qualityCare"||$repNum == "505" || $repNum == "903")
                                         //echo "&nbsp;<input class=\"print-hide\" type=\"button\" name=\"genPDF\" value=\"PDF\" onclick=\"runJasper('pdf')\" />";
 		   		if ($repNum != 205 && $repNum != 5000)

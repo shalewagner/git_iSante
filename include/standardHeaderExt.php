@@ -143,7 +143,7 @@ if (!headers_sent()) {
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="x-ua-compatible" content="IE=8">
+<meta http-equiv="x-ua-compatible" content="edge">
 <link rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" type="text/css" href="ext-<?= EXTJS_VERSION ?>/resources/css/ext-all.css">
 <link rel="stylesheet" type="text/css" href="ext-<?= EXTJS_VERSION ?>/resources/css/xtheme-gray.css">

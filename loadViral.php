@@ -1,16 +1,12 @@
 <?php
 require_once ("backend.php");
-
 require_once 'backend/config.php';
 require_once 'backend/database.php';
 require_once 'backend/materializedViews.php';
 require_once "include/standardHeaderExt.php";  
 ?> 
-<html>
-<head>
-  <title>file parser</title>
-<script type="text/javascript">
-	
+<title>Upload Test Results</title>
+<script type="text/javascript">	
 	var globalErrors = '';
 	
 	window.onload = function() {
@@ -94,16 +90,21 @@ require_once "include/standardHeaderExt.php";
 		document.body.appendChild(table);
 	}
 </script>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <style type="text/css">
-    a {text-decoration: none}
-	input[type="file"] { padding:3px; border:1px solid #F5C5C5; border-radius:2px; width:500px;}
-	input[type="submit"] { padding:3px; border:1px solid #F5C5C5; border-radius:2px; width:142px;}
+<style type="text/css">
+a {
+  text-decoration: none
+}
+  input[type="file"] { padding:3px; border:1px solid #F5C5C5; border-radius:2px; width:500px;
+}
+  input[type="submit"] { padding:3px; border:1px solid #F5C5C5; border-radius:2px; width:142px;
+}
 #keywords {
   margin: 0 auto;
   font-size: 1.2em;
 }
-table { border-collapse: collapse; border-spacing: 0; }
+table { 
+  border-collapse: collapse; border-spacing: 0; 
+}
 #keywords thead {
   cursor: pointer;
   background: #c9dff0;
@@ -132,8 +133,17 @@ table { border-collapse: collapse; border-spacing: 0; }
 #keywords tbody tr td.lalign {
   text-align: left;
 }
-	
-  </style>  
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+</style>
 </head>
 <body text="#000000" link="#000000" alink="#000000" vlink="#000000" align="center"> 
 
@@ -141,12 +151,18 @@ table { border-collapse: collapse; border-spacing: 0; }
 <div id="dialog" title="Upload Viral Load" style="padding:20px; float:center">
 <?php if (!empty($_GET[success])) { echo "<b>Your file has been imported.</b><br><br>"; } //generic success notice ?> 
 
-<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
-  <input name="csv" type="file" id="fileInput" placeholder="Choisissez votre fichier csv"/> 
+<form action="dummy" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
+<label class="custom-file-upload">
+  <input name="csv" type="file" id="fileInput" /> 
+  <? $prompt = ($lang == 'fr') ? 'Choisissez votre fichier csv':'Select csv file for upload';
+  	 echo $prompt;
+  ?>
+</label>
 </form> 
 
 <div id="viral_load">
-	<input type="button" name="errorButton" value="Afficher les erreurs" onclick="displayErrors(event)"/>
+	<? $prompt2 = ($lang == 'fr') ? 'Afficher les enregistrements d´erreur':'Show records with errors'; ?>
+	<input type="button" name="errorButton" value="<? echo $prompt2; ?>" onclick="displayErrors(event)"/>
 </div>
 </div>
 </body>

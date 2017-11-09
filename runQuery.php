@@ -1,7 +1,7 @@
 <?php
 require_once 'include/standardHeader.php';
 require_once 'labels/report.php';
-
+$printLabel = ($lang == 'fr') ? 'Impression':'Print';
 if (DEBUG_FLAG) print_r ($_POST);
 if (!empty ($_POST['order']))
 	$order = $_POST['order'];
@@ -36,7 +36,7 @@ function runJasper(format) {
    </tr>
  </table>
  <input class=\"print-hide\" type=\"button\" name=\"ret1\" value=\"" . $repReturn[$lang] . "\" onclick=\"window.close()\" />
-&nbsp;<input class=\"print-hide\" type=\"button\" name=\"printButton\" value=\"" . _('en:Print') . "\" onclick=\"window.print()\" />
+&nbsp;<input class=\"print-hide\" type=\"button\" name=\"printButton\" value=\"" . $printLabel . "\" onclick=\"window.print()\" />
 &nbsp;<input class=\"print-hide\" type=\"button\" name=\"genExcel\" value=\"Excel (CSV)\" onclick=\"runJasper('xls')\" />
  <center>";
 if ( $order != "" ) {

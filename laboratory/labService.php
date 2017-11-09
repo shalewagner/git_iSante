@@ -3,50 +3,54 @@ header('Content-Type: text/javascript; charset=UTF-8');
 chdir('..');
 require_once "backend.php"; 
 switch ($_REQUEST['task']) {
-
 	case 'loadViral':
 	    $recordArray = explode('\r\n', $_REQUEST['params']);
 		$cs = 0;  // count successful loads
 		$cnf = 0; // count patients not found
-		$cd = 0;  // count duplicate patients		
+		$cd = 0;  // count duplicate patients
 		initErrorTable();
 		$flag=1;
 		foreach ($recordArray as $vr) {
-			
-			if($flag==1){$flag=0; continue;}
+			if ($flag==1) {$flag=0; continue;}
 			$rowArray = explode(",", $vr);
-			$siteCode =  $rowArray[0];	
-			$stCode =    $rowArray[1];
-			$visitDate = $rowArray[2];
-			$resultat =    $rowArray[3];
-			$resultDate =$rowArray[4];
-			$note =      $rowArray[5];
-		
-			// fix up the visit date
+			$cliniqueCode =  $rowArray[0];
+			$comPatient =    $rowArray[1];
+			$patientID = $rowArray[2];	
+			// dummy dob 3
+			// dummy sexe 4
+			$orderID = $rowArray[5];
+			$visitDate = $rowArray[6];
+			$tInd = $rowArray[7];
+			$resultat = $rowArray[8];
+			$resultDate = $rowArray[9];
+			$note = $rowArray[10];
+			// remove sitecode from encID
+			$encID = substr($orderID,5);
+			// fix up the draw date/result date
 			$visitDate = fixDate($visitDate);
-			// fix up the result date
 			$resultDate = fixDate($resultDate);
-			// process records...
-			$patientID = getPatient($stCode,$siteCode);
-			switch ($patientID) {
-				case 'Patient non trouv&eacute;':
-					$cnf++;
-					writeErrorRecord($patientID, $vr);
-					break;
-				case 'Patient dupliqu&eacute;':
-					$cd++;
-					writeErrorRecord($patientID, $vr);
-					break;
-				default:
-					$orderDate = checkOrderDate($patientID,$siteCode,$visitDate);
-					if ($orderDate == null) $result = saveEncounter($patientID,$siteCode,$visitDate);
-					$resultLab = saveViralResult($patientID,$siteCode,$visitDate,$resultat,$resultDate,$note);
-					$cs++;
-					break;
-			}
-		
+			$resultLab = updateViral($cliniqueCode,$encID,$tInd,$resultat,$resultDate,$note);
+			if ($resultLab != 1) {
+				$patientID = getPatient($comPatient,$cliniqueCode);
+				switch ($patientID) {
+					case 'Patient non trouv&eacute;':
+						$cnf++;
+						writeErrorRecord($patientID, $vr);
+						break;
+					case 'Patient dupliqu&eacute;':
+						$cd++;
+						writeErrorRecord($patientID, $vr);
+						break;
+					default:
+						$orderDate = checkOrderDate($patientID,$cliniqueCode,$visitDate);
+						if ($orderDate == null) $result = saveEncounter($patientID,$cliniqueCode,$visitDate);
+						$resultLab = saveViralResult($patientID,$cliniqueCode,$visitDate,$resultat,$resultDate,$note);
+						$cs++;
+						break;
+				}
+			} else $cs++;
 		}
-		echo $cs.":tests loaded; " . $cnf . ": patients not found; " . $cd . " : duplicate patients.\n Click button to view failed records >> ";
+		echo $cs . ": tests chargés;\n" . $cnf .": patients non retrouvés;\n". $cd .": dupliquer des patients.\n Cliquez sur le bouton pour afficher les enregistrements ayant échoué. ";
 		break;
 	case 'getOrdered':  
 	        // check to see if order has been sent; hide OE catalog items with no results; show OE catalog with results 
@@ -166,10 +170,7 @@ function saveRows($records,$keyArray) {
 }
 
 function getPatient($st,$site){
-	$sql ="SELECT patientID
-	FROM patient 
-	WHERE location_id = ? AND DIGITS(clinicPatientid)+0 = DIGITS(?)+0";
-	
+	$sql = "SELECT patientID FROM patient WHERE location_id = ? AND DIGITS(clinicPatientid)+0 = DIGITS(?)+0";
 	$result = array();
 	$result = database()->query($sql, array($site, $st))->fetchAll(PDO::FETCH_ASSOC);
 	$cnt = 0;
@@ -192,12 +193,8 @@ function getPatient($st,$site){
 
 function checkOrderDate($patientID,$site,$visit) {
 	$sql = "SELECT ymdToDate(visitDateYy,visitDateMm,visitDateDd) as visitDate
-		FROM labs 
-		WHERE siteCode = ? AND 
-		patientID = ? AND 
-		ymdToDate(visitDateYy,visitDateMm,visitDateDd) = ? AND
-		labID IN (103, 1257)";
-
+	FROM labs 
+	WHERE siteCode = ? AND patientID = ? AND ymdToDate(visitDateYy,visitDateMm,visitDateDd) = ? AND labID IN (103, 181)";
 	$visitDate = "";
 	$result = database()->query($sql, array($site,$patientID,'20' . $visit))->fetchAll(PDO::FETCH_ASSOC);
 	foreach($result as $row) {
@@ -211,13 +208,12 @@ function saveEncounter($patientID,$site,$visit) {
 	$rd = $visitArray[2];
 	$rm = $visitArray[1];
 	$ry = $visitArray[0];
-	$date = date('Y-m-d', time());
 	$dbSite = DB_SITE;
 	$sql = "INSERT INTO encounter (siteCode,patientID,visitDateDd,visitDateMm,visitDateYy,lastModified,
-		encounterType,seqNum,encStatus,encComments,dbSite,visitPointer,formAuthor,formVersion,labOrDrugForm,
-		creator,createDate,lastModifier,badVisitDate,visitDate) 
-		VALUES (?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,now(),?,?,?)
-		ON DUPLICATE KEY UPDATE lastModified = VALUES(lastModified)";
+	encounterType,seqNum,encStatus,encComments,dbSite,visitPointer,formAuthor,formVersion,labOrDrugForm,
+	creator,createDate,lastModifier,badVisitDate,visitDate) 
+	VALUES (?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,now(),?,?,?)
+	ON DUPLICATE KEY UPDATE lastModified = VALUES(lastModified)";
 	$rc = database()->query($sql,array($site,$patientID,$rd,$rm,$ry,6,0,0,'',$dbSite,0,'admin',3,0, 'admin','admin',0,$visit));
 	return $rc->rowCount();
 }
@@ -238,6 +234,27 @@ function saveViralResult($patientID,$site,$visit,$resultat,$resultDate,$note) {
 		resultDateYy = VALUES(resultDateDd), resultRemarks = VALUES(resultRemarks)";
 	$result = database()->query($sql,array($patientID, $site, $ry, $rm, $rd, 0,103,$resultat,$rdy,$rdm,$rdd,$note));
 	return $result->rowCount();
+}
+
+function updateViral($site,$encID,$tInd,$resultat,$resultDate,$note) {
+	$sql = "UPDATE encounter set lastModified = now() WHERE sitecode = ? AND encounter_id = ?";
+	$rc = database()->query($sql,array($site,$encID));
+	$retVal = $rc->rowCount();
+	if ($retVal === 1) {
+		$sql = "UPDATE labs l, encounter e 
+		SET l.result = ?, 
+		l.resultRemarks = ?,
+		l.resultDateYy = ?,
+		l.resultDateMm = ?,
+		l.resultDateYy = ?
+		WHERE e.sitecode = ? AND e.encounter_id = ? AND
+		e.sitecode = l.sitecode and e.patientid = l.patientid AND
+		e.visitdateYy = l.visitdateYy and e.visitdateMm = l.visitdateMm AND
+		e.visitdateDd = l.visitdateDd AND e.seqNum = l.seqNum";
+		$resultDt = split('-', $resultDate);
+		$rc = database()->query($sql,array($resultat,$tInd . " : " . $note,$resultDt[0],$resultDt[1],$resultDt[2],$site,$encID));
+		return $rc->rowCount();
+	} else return "failed enc update";
 }
 
 function fixDate($dt) {

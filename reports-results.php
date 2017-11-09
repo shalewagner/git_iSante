@@ -154,13 +154,14 @@ if ( $orgUnit != 'Haiti') {
   }
   $resultByTimeSubrow = databaseSelect()->query($sqlByTimeSubrow, array($orgUnit, $timePeriod))->fetchAll(PDO::FETCH_ASSOC);
 }
+$printLabel = ($lang == 'fr') ? 'Impression':'Print';
 ?>
 
 <div class="row-fluid">
   <div class="span12">
     <div class="pull-right print-hide">
       <div class="btn-group">
-        <button class="btn btn-mini" name="printButton" id="btnPrint"><i class="icon-print"></i> <?php echo _('en:Print'); ?></button><a class="btn btn-mini csv-list" rel="popover"><i class="icon-share-alt"></i> Excel</a>
+        <button class="btn btn-mini" name="printButton" id="btnPrint"><i class="icon-print"></i> <? echo $printLabel; ?></button><a class="btn btn-mini csv-list" rel="popover"><i class="icon-share-alt"></i> Excel</a>
       </div>
       <div class="btn-group">
         <?php

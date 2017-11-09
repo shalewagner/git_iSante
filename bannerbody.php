@@ -27,7 +27,7 @@ if (preg_match('/test/', APP_VERSION) > 0) {
 ?>
 <?php /* z-index added banner to fix bug in IE7 - menu dropdown was hidden */ ?>
 <div id="banner" style="z-index: 1">
-    <table class="header" id="top" cellspacing="0" cellpadding="0">
+    <table class="header" id="top">
         <tr>
             <td id="top_title" rowspan="2">
                 <?php
@@ -187,8 +187,8 @@ echo "<li class=\"dropdown\"><a class=\"dropdown-toggle\" href=\"#\" data-toggle
 		<li><a class=\"submenu-item\" id=\"" . $cmdList[37] . "\" href=\"./reports-generator.php?rpt=malaria&" . $menustring . "\">" . $cmdLabel[$lang][37] . "</a></li>
 		<li><a class=\"submenu-item\" id=\"" . $cmdList[39] . "\" href=\"./reports-generator.php?rpt=nutrition&" . $menustring . "\">" . $cmdLabel[$lang][39] . "</a></li>
 		<li><a class=\"submenu-item\" id=\"" . $cmdList[40] . "\" href=\"./reports-generator.php?rpt=tb&" . $menustring . "\">" . $cmdLabel[$lang][40] . "</a></li>
-		<li><a class=\"submenu-item\" id=\"" . $cmdList[42] . "\" href=\"./reports-generator.php?rpt=obgyn&" . $menustring . "\">" . $cmdLabel[$lang][43] . "</a></li>
-		<li><a class=\"submenu-item\" id=\"" . $cmdList[43] . "\" href=\"./reports-generator.php?rpt=dataquality&" . $menustring . "\">" . $cmdLabel[$lang][44] . "</a></li>"; 
+		<li><a class=\"submenu-item\" id=\"" . $cmdList[41] . "\" href=\"./reports-generator.php?rpt=obgyn&" . $menustring . "\">" . $cmdLabel[$lang][43] . "</a></li>
+		<li><a class=\"submenu-item\" id=\"" . $cmdList[42] . "\" href=\"./reports-generator.php?rpt=dataquality&" . $menustring . "\">" . $cmdLabel[$lang][44] . "</a></li>"; 
 	if (getConfig('serverRole') == 'consolidated') {
 		echo "
 		<li><a class=\"submenu-item\" id=\"" . $cmdList[43] . "\" href=\"./reports-generator.php?rpt=mer&" . $menustring . "\">" . $cmdLabel[$lang][45] . "</a></li>";
@@ -215,48 +215,48 @@ echo "<li class=\"dropdown\"><a class=\"dropdown-toggle\" href=\"#\" data-toggle
 
 // Administration
 if ($userAccessLevel >= ADMIN) {
-echo "<li class=\"dropdown\"><a class=\"dropdown-toggle\" href=\"#\" data-toggle=\"dropdown\" id=\"" . $topLabelsId[5] . "\">" . $topLabels[$lang][5] . " <b class=\"caret\"></b></a>
-    <ul class=\"dropdown-menu\">
-        <li><a id=\"" . $cmdList[28] . "\" href=\"./LDAPform.php?id=$user&" . $menustring . "\">" . $cmdLabel[$lang][28] . "</a></li>";
+echo '
+	<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" id="' . $topLabelsId[5] . '">' . $topLabels[$lang][5] . '<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li><a id="' . $cmdList[28] . '" href="./LDAPform.php?id=$user&' . $menustring . '">' . $cmdLabel[$lang][28] . '</a></li>';
             // next menuitem should only appear in the iSanté instance that is running on the Haiti national identified server
             if ((isset($_SERVER['HTTP_X_FORWARDED_HOST']) && NATIONAL_IDENTIFIED_SERVER === $_SERVER['HTTP_X_FORWARDED_HOST'] . '/consolidatedId/isante') || (SERVER_ROLE === 'test' && $_SERVER['SERVER_NAME'] === 'haiti-dev.cirg.washington.edu' && DB_NAME === 'itech'))
-                echo "
-        <li><a id=\"" . $cmdList[15] . "\" href=\"./maintainSites.php?id=$user&" . $menustring . "\">" . _('Entretien des cliniques de iSanté') . "</a></li>";
-            echo "
-        <li><a id=\"" . $cmdList[16] . "\" href=\"./config.php?" . $menustring . "\">" . $cmdLabel[$lang][16] . "</a></li> 
-        <li><a id=\"" . $cmdList[38] . "\" href=\"./listEncounterStatus.php?" . $menustring . "\">" . $cmdLabel[$lang][38] . "</a></li>
-        ";
-            if ($userAccessLevel > 2) {
-                echo "<li><a id=\"" . $cmdList[17] . "\" href=\"./adhocSetup.php?rtype=adhoc&testType=0&" . $menustring . "\">" . $cmdLabel[$lang][17] . "</a></li>";
-            }
-            echo "
-	    <li><a id=\"" . $cmdList[16] . "\" href=\"./loadViral.php\">" . $cmdLabel[$lang][46] . "</a></li>
+                echo '
+        <li><a id="' . $cmdList[15] . '" href="./maintainSites.php?id=$user&' . $menustring . '">' . _('Entretien des cliniques de iSanté') . '</a></li>';
+            echo '
+        <li><a id="' . $cmdList[16] . '" href="./config.php?' . $menustring . '">' . $cmdLabel[$lang][16] . '</a></li> 
+        <li><a id="' . $cmdList[38] . '" href="./listEncounterStatus.php?' . $menustring . '">' . $cmdLabel[$lang][38] . '</a></li>';
+        if ($userAccessLevel > 2) {
+                echo '<li><a id="' . $cmdList[17] . '" href="./adhocSetup.php?rtype=adhoc&testType=0&' . $menustring . '">' . $cmdLabel[$lang][17] . '</a></li>';
+        }
+$viralLoadLabel = ($lang == 'fr') ? 'Rapport pour les commandes de charge virale':'Report For Viral Load Orders';
+$viralLoadURL = 'kickPoint.php?rtype=aggregatePop&reportNumber=778&lang=' . $lang . '&site=' . $site . '&patientStatus=0&treatmentStatus=0&testType=0&groupLevel=0&otherLevel=0&menu=dateSelect';
+$saveViralResultsLabel = ($lang == 'fr') ? 'Enregistrer les résultats viraux':'Load Viral Results';
+echo '
+        <li><a id="barcodeReport" href="' . $viralLoadURL . '">' . $viralLoadLabel . '</a></li>
+        <li><a id="loadViral" href="./loadViral.php">' . $saveViralResultsLabel . '</a></li>
     </ul>
-</li>
-";
+</li>';
 }
 
 // Help 
 $newIn = ($lang == 'en') ? 'New in ':'Nouveau dans la ';
-echo '<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" id="' . $topLabelsId[6] . '">' . $topLabels[$lang][6] . ' <b class="caret"></b></a>
-    <ul class="dropdown-menu">
-        <li><a id="' . $cmdList[19] . '" href="./helpfile.php?file=report_definitions_1.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&' . $menustring . '">' . $cmdLabel[$lang][19] . '</a></li>
+echo '
+<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" id="' . $topLabelsId[6] . '">' . $topLabels[$lang][6] . ' <b class="caret"></b></a>
+<ul class="dropdown-menu">
+	<li><a id="' . $cmdList[19] . '" href="./helpfile.php?file=report_definitions_1.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&' . $menustring . '">' . $cmdLabel[$lang][19] . '</a></li>
 	<li><a id="17.3"  href="helpfiles/ChangeDocument17.3' . $lang . '.pdf" target="_blank">' . $newIn . '17.3' .    '</a></li>
 	<li><a id="17.2"  href="helpfiles/ChangeDocument17.2' . $lang . '.pdf" target="_blank">' . $newIn . '17.2' .    '</a></li>
 	<li><a id="17.1"  href="helpfiles/ChangeDocument17.1' . $lang . '.pdf" target="_blank">' . $newIn . '17.1' .    '</a></li>
 	<li><a id="16.2"  href="helpfiles/ChangeDocument16.2' . $lang . '.pdf" target="_blank">' . $newIn . '16.2' .    '</a></li>
 	<li><a id="16.1"  href="helpfiles/ChangeDocument16.1' . $lang . '.pdf" target="_blank">' . $newIn . '16.1' .    '</a></li>
-        <li><a id="15.1"  href="helpfiles/ChangeDocument15.1' . $lang . '.pdf" target="_blank">' . $newIn . '15.1' .    '</a></li>
-        <li><a id="14.2"  href="helpfiles/ChangeDocument14.2' . $lang . '.pdf" target="_blank">' . $newIn . '14.2' .    '</a></li>
-        <li><a id="14.1"  href="helpfiles/ChangeDocument14.1' . $lang . '.pdf" target="_blank">' . $newIn . '14.1' .    '</a></li> 
-        <li><a id="' . $cmdList[26] . '" href="helpfiles/recordsRequestUserGuide' . $lang . '.docx" target="_blank">' . $cmdLabel[$lang][26] . '</a></li>
-        <li><a id="' . $cmdList[21] . '" href="./helpfile.php?file=reportFAQ&titleen=Frequently%20Asked%20Questions&titlefr=Questions%20Fr%e9quemment%20Pos%e9es&"' . $menustring . '">' . $cmdLabel[$lang][21] . '</a></li>
-    </ul>
+	<li><a id="' . $cmdList[26] . '" href="helpfiles/recordsRequestUserGuide' . $lang . '.docx" target="_blank">' . $cmdLabel[$lang][26] . '</a></li>
+	<li><a id="' . $cmdList[21] . '" href="./helpfile.php?file=reportFAQ&titleen=Frequently%20Asked%20Questions&titlefr=Questions%20Fréquemment%20Posées&' . $menustring . '">' . $cmdLabel[$lang][21] . '</a></li>
+</ul>
 </li>
 ';
 // End main menu items
-echo "<li><span id=\"searchbox\"></span></li>
-";
+echo '<li><span id="searchbox"></span></li>';
 ?>
                     </ul>
                 </div>
