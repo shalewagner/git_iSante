@@ -70,11 +70,19 @@ encountertype in (24,25) group by 1,2,3",
 /* duplicate patients */
 'duplicates' => "select d.match_id, e.patientid, e.sitecode, date(min(visitdate)) as minDate, date(max(visitdate)) as maxDate, d.counter from dupNames d, encValidAll e, patient p where d.lname = p.lname and d.fname = p.fname and d.dobyy = p.dobyy and d.dobmm = p.dobmm and d.dobdd = p.dobdd and d.sex = p.sex and d.fnameMother = p.fnameMother and e.patientid = p.patientid group by 1,2 order by 1,2" 
 );  
+
+$qry="create table preArt select p.patientid from patient where hivPositive = 1 and patientid not in (select patientid from bplusPids);";
+result = database()->query($qry);
+$qry="drop table bplusPids;";
+result = database()->query($qry);
+$qry="create table bplusPids select patientid from preArt;";
+result = database()->query($qry);
 // generate bplusPids patient reference list
-$qry = "drop table if exists bplusPids";
+/* $qry = "drop table if exists bplusPids";
 $result = database()->query($qry);
 $qry = "create table bplusPids select b.patientid from ( select p.patientid, min(CASE WHEN ISDATE(ymdToDate(p.dispDateYy, p.dispDateMm, p.dispDateDd)) = 1 THEN ymdToDate(p.dispDateYy, p.dispDateMm, p.dispDateDd) WHEN ISDATE(ymdToDate(p.dispDateYy, p.dispDateMm, 1)) = 1 THEN ymdToDate(p.dispDateYy, p.dispDateMm, 1) ELSE ymdToDate(p.visitDateYy, p.visitDateMm, p.visitDateDd) end) as mDt from prescriptions p, drugLookup d, patient t where p.patientid = t.patientid and (dispensed = 1 or dispAltDosage is not null or dispAltDosageSpecify is not null or dispAltNumDays is not null or dispAltNumDaysSpecify is not null or dispDateYy is not null or dispDateDd is not null or dispDateMm is not null or dispDateYy is not null or dispAltNumPills is not null) and p.drugID = d.drugID and druggroup in (?,?,?,?) group by 1 having mDt > ?) b, patient t where b.patientid = t.patientid and patStatus < 255";
 $result = database()->query($qry,array('NRTIs', 'Pls', 'NNRTIs','II', '2010-01-01'));
+*/
 $qry = "alter table bplusPids add primary key (patientid)";
 $result = database()->query($qry); 
 
