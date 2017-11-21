@@ -1,7 +1,7 @@
 SET GLOBAL log_bin_trust_function_creators=1;
 DROP FUNCTION IF EXISTS digits;
 DELIMITER |
-CREATE FUNCTION digits( str CHAR(32) ) RETURNS CHAR(32)
+CREATE FUNCTION itech.digits( str CHAR(32) ) RETURNS CHAR(32)
 BEGIN
   DECLARE i, len SMALLINT DEFAULT 1;
   DECLARE ret CHAR(32) DEFAULT '';
@@ -27,3 +27,15 @@ BEGIN
   RETURN ret;
 END |
 DELIMITER ;
+
+REVOKE ALL PRIVILEGES ON * . * FROM  'itechappselect'@'localhost';
+REVOKE GRANT OPTION ON * . * FROM  'itechappselect'@'localhost';
+GRANT SELECT , 
+EXECUTE ON * . * 
+TO  'itechappselect'@'localhost'
+WITH MAX_QUERIES_PER_HOUR 0 
+MAX_CONNECTIONS_PER_HOUR 0 
+MAX_UPDATES_PER_HOUR 0 
+MAX_USER_CONNECTIONS 0 ;
+
+flush privileges;
