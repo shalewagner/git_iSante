@@ -4,42 +4,43 @@ chdir('..');
 require_once "backend.php"; 
 switch ($_REQUEST['task']) {
 	case 'loadViral':
-	    $recordArray = explode('\r\n', $_REQUEST['params']);
+		$recordArray = array();
+		$recordArray = json_decode($_REQUEST['params']);
 		$cs = 0;  // count successful loads
-		$cnf = 0; // count patients not found
-		$cd = 0;  // count duplicate patients
+		$cnf = 0; // count orders not found
+		$cd = 0;  // count result already entered
 		initErrorTable();
 		$flag=1;
-		foreach ($recordArray as $vr) {
-			if ($flag==1) {$flag=0; continue;}
-			$rowArray = explode(",", $vr);
+		//foreach ($recordArray as $vr) {
+		foreach ($recordArray as $rowArray) { 
 			$cliniqueCode =  $rowArray[0];
-			$comPatient =    $rowArray[1];
-			$patientID = $rowArray[2];	
+			if (strlen($cliniqueCode) > 5) continue;
+			$comPatient = $rowArray[1];
+			$patientID  = $rowArray[2];	
 			// dummy dob 3
 			// dummy sexe 4
-			$orderID = $rowArray[5];
-			$visitDate = $rowArray[6];
-			$tInd = $rowArray[7];
-			$resultat = $rowArray[8];
-			$resultDate = $rowArray[9];
-			$note = $rowArray[10];
+			$orderID    = $rowArray[5];
+			$visitDate  = $rowArray[6];
+			$resultDate = $rowArray[7];
+			$tInd       = $rowArray[8];
+			$resultat   = $rowArray[9];
+			$note       = $rowArray[10];
 			// remove sitecode from encID
-			$encID = substr($orderID,5);
+			$encID      = substr($orderID,5);
 			// fix up the draw date/result date
-			$visitDate = fixDate($visitDate);
+			$visitDate  = fixDate($visitDate);
 			$resultDate = fixDate($resultDate);
-			$resultLab = updateViral($cliniqueCode,$encID,$tInd,$resultat,$resultDate,$note);
+			/* Old code when we were attempting to match on ST number
 			if ($resultLab != 1) {
 				$patientID = getPatient($comPatient,$cliniqueCode);
 				switch ($patientID) {
 					case 'Patient non trouv&eacute;':
 						$cnf++;
-						writeErrorRecord($patientID, $vr);
+						writeErrorRecord($patientID, $rowArray);
 						break;
 					case 'Patient dupliqu&eacute;':
 						$cd++;
-						writeErrorRecord($patientID, $vr);
+						writeErrorRecord($patientID, $rowArray);
 						break;
 					default:
 						$orderDate = checkOrderDate($patientID,$cliniqueCode,$visitDate);
@@ -48,9 +49,22 @@ switch ($_REQUEST['task']) {
 						$cs++;
 						break;
 				}
-			} else $cs++;
+			} */
+			$resultLab = updateViral($cliniqueCode,$encID,$tInd,$resultat,$resultDate,$note);
+			switch ($resultLab) {
+				case 0:      // update already entered
+					$cd++;
+					break;
+				case -1:     // order not found
+					$cnf++;
+					writeErrorRecord('Ordre non trouvée', $rowArray);
+					break;
+				default:
+					$cs++;
+					break;
+			}
 		}
-		echo $cs . ": tests chargés;\n" . $cnf .": patients non retrouvés;\n". $cd .": dupliquer des patients.\n Cliquez sur le bouton pour afficher les enregistrements ayant échoué. ";
+		echo $cs . ": Tests chargés;\n" . $cnf .": Ordre non retrouvés;\n" . $cd . ": Mise à jour entrée précédemment.\n";
 		break;
 	case 'getOrdered':  
 	        // check to see if order has been sent; hide OE catalog items with no results; show OE catalog with results 
@@ -140,10 +154,34 @@ switch ($_REQUEST['task']) {
 	case 'fetchViralErrors':
 		$qry = "select * from viralLoadErrors";
 		$result = database()->query($qry)->fetchAll(PDO::FETCH_ASSOC);
-		$table="<table id=\"keywords\" cellspacing=\"0\" cellpadding=\"0\"><thead><tr><th>Code Site</th><th>Code ST</th><th>collect Date</th><th>Resultat</th><th>Date Resultat</th><th>Remarque</th><th>Erreurs</th></tr> </thead>";
+		$table="<table id=\"keywords\" cellspacing=\"0\" cellpadding=\"0\"><thead><tr>
+			<th>CLINIQUE CODE</th>
+			<th>COMENTAIRES DE PATIENT</th>
+			<th>NDM</th>
+			<th>DDN</th>
+			<th>SEXE</th>
+			<th># SÉJOUR</th>
+			<th>DATE DE PRÉLEVÉ</th>
+			<th>VALIDE DATE</th>
+			<th>T IND</th>
+			<th>RÉSULTAT</th>
+			<th>COMMENTAIRES DE RÉSULTAT</th>
+			<th>ERREURS</th></tr></thead>";
 		foreach($result as $row) {
 		$record=explode(',',$row['originalRecord']);
-		$table.="<tbody><tr><td>".$record[0]."</td><td>".$record[1]."</td><td>".$record[2]."</td><td>".$record[3]."</td><td>".$record[4]."</td><td>".$record[5]."</td><td>".$row['errorType']."</td></tr>";
+		$table.="<tbody><tr>
+			<td>".$record[0]."</td>
+			<td>".$record[1]."</td>
+			<td>".$record[2]."</td>
+			<td>".$record[3]."</td>
+			<td>".$record[4]."</td>
+			<td>".$record[5]."</td>
+			<td>".$record[6]."</td>
+			<td>".$record[7]."</td>
+			<td>".$record[8]."</td>
+			<td>".$record[9]."</td>
+			<td>".$record[10]."</td>
+			<td>".$row['errorType']."</td></tr>";
 	}
 	$table.="</tbody></table>";
 		print_r($table);
@@ -244,7 +282,7 @@ function updateViral($site,$encID,$tInd,$resultat,$resultDate,$note) {
 		$sql = "UPDATE labs l, encounter e 
 		SET l.result = ?, 
 		l.resultRemarks = ?,
-		l.resultDateYy = ?,
+		l.resultDateDd = ?,
 		l.resultDateMm = ?,
 		l.resultDateYy = ?
 		WHERE e.sitecode = ? AND e.encounter_id = ? AND
@@ -253,14 +291,16 @@ function updateViral($site,$encID,$tInd,$resultat,$resultDate,$note) {
 		e.visitdateDd = l.visitdateDd AND e.seqNum = l.seqNum";
 		$resultDt = split('-', $resultDate);
 		$rc = database()->query($sql,array($resultat,$tInd . " : " . $note,$resultDt[0],$resultDt[1],$resultDt[2],$site,$encID));
-		return $rc->rowCount();
-	} else return "failed enc update";
+		$retVal = $rc->rowCount();
+		if ($retVal === 1) return 1;
+		else return 0;
+	} else return -1;
 }
 
 function fixDate($dt) {
 	$dArray = split('-',$dt);
 	if (count($dArray) != 3) $dArray = split('/',$dt);
-	return $dArray[2] . '-' . $dArray[1] . '-' . $dArray[0];
+	return  $dArray[0] . '-' . $dArray[1] . '-' . substr($dArray[2],2);
 
 }
 
@@ -271,7 +311,7 @@ function initErrorTable() {
 
 function writeErrorRecord ($err, $rw) {
 	$qry = "INSERT INTO viralLoadErrors VALUES(?,?)";
-	$result = database()->query($qry, array($err, trim($rw)));
+	$result = database()->query($qry, array($err, implode(',',$rw)));
 	if ($result->rowCount() != 1) echo "bad record insert failed";
 }
 ?>  

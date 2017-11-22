@@ -8,30 +8,21 @@ require_once "include/standardHeaderExt.php";
 <title>Upload Test Results</title>
 <script type="text/javascript">	
 	var globalErrors = '';
+	var data;
 	
 	window.onload = function() {
 		var fileInput = document.getElementById('fileInput');
 		fileInput.addEventListener('change', function(e) {
 			var file = fileInput.files[0];
-			//var textType = /*.csv/;
-			//if (file.type.match(textType)) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					sendToServer(reader.result);
+			Papa.parse(file, {
+				complete: function(results) {
+					sendToServer(results.data);
 				}
-				reader.readAsText(file);	
-			/*} else {
-				alert("File not supported!");
-			}*/
+			});
 		});
 	}
 	
 	function sendToServer(result) {
-		//put the file rows into a javascript array
-	    var resultArray = [];
-		result.split("\n").forEach(function(row) {
-			resultArray.push(row.trim());
-		});
 		var params = JSON.stringify(result);
 		Ext.Ajax.timeout = 240000; // 120 seconds
 		var box = Ext.MessageBox.wait('Patientez pendant que les enregistrements sont en cours de chargement', 'Enregistrement dans la base de donn&eacute;e');
@@ -72,24 +63,12 @@ require_once "include/standardHeaderExt.php";
 	}
 	
 	function parseFileContents(result) {
-		
 		var table = document.createElement("p");
-        table.innerHTML = result;
-		/*var table = document.createElement('table');
-		table.style.border = "thick solid #0000FF";
-		result.split(")").forEach(function(row) {
-			var tr = document.createElement('tr');
-			row.split("[").forEach(function(cell) {
-				var td1 = document.createElement('td');
-				var text1 = document.createTextNode(cell);
-				td1.appendChild(text1);
-				tr.appendChild(td1);
-			});
-			table.appendChild(tr);
-		});*/
+		table.innerHTML = result;
 		document.body.appendChild(table);
 	}
 </script>
+<script type="text/javascript" src="include/papaparse.min.js"></script>
 <style type="text/css">
 a {
   text-decoration: none
