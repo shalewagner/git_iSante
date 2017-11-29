@@ -31,14 +31,17 @@ $lastModified = updateEncounterSnapshot ($truncate);
 
 printLog('Encounter snaphot refresh finished...starting data warehouse refresh (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 
-updateDataWarehouse('nutrition', $truncate, $lastModified); 
-updateDataWarehouse('malaria', $truncate, $lastModified); 
-if ($dow == 6) updateDataWarehouse('tb', $truncate, $lastModified); 
-updateDataWarehouse('obgyn', $truncate, $lastModified); 
-if ($dow == 6) updateDataWarehouse('dataquality', $truncate, $lastModified);
-if (getConfig('serverRole') == 'consolidated') updateDataWarehouse('mer', $truncate, $lastModified); 
+if (getConfig('serverRole') != 'consolidated') { // stop running dataWarehouse on consolidated sites starting with 17.4
+	updateDataWarehouse('nutrition', $truncate, $lastModified); 
+	updateDataWarehouse('malaria', $truncate, $lastModified); 
+	if ($dow == 6) updateDataWarehouse('tb', $truncate, $lastModified); 
+	updateDataWarehouse('obgyn', $truncate, $lastModified); 
+	if ($dow == 6) updateDataWarehouse('dataquality', $truncate, $lastModified);
+	if (getConfig('serverRole') == 'consolidated') updateDataWarehouse('mer', $truncate, $lastModified); 
+}
 
 printLog('Data warehouse refresh finished...starting PepfarTable refresh (' . $stopwatch->elapsed() . ' total seconds elapsed)');
+
 updatePepfarTable(); 
 
 printLog('PepfarTable refresh finished...starting patient status update (' . $stopwatch->elapsed() . ' total seconds elapsed)');
