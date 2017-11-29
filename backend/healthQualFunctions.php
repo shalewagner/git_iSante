@@ -3,30 +3,36 @@ require_once 'backend/hivQualFunctions.php';
 
 $indicatorProperties = array (
   '01' => array ('numFunct' => 'getHealthQualInd1Num', 'denFunct' => 'getHealthQualInd1Den'),
-  '02' => array ('numFunct' => 'getHealthQualInd2Num', 'denFunct' => 'getHealthQualInd2Den'),
+  /*'02' => array ('numFunct' => 'getHealthQualInd2Num', 'denFunct' => 'getHealthQualInd2Den'),
   '03' => array ('numFunct' => 'getHealthQualInd3Num', 'denFunct' => 'getHealthQualInd3Den'),
-  '04' => array ('numFunct' => 'getHealthQualInd4Num', 'denFunct' => 'getHealthQualInd4Den'),
+  '04' => array ('numFunct' => 'getHealthQualInd4Num', 'denFunct' => 'getHealthQualInd4Den'),*/
   '05' => array ('numFunct' => 'getInd3Num', 'denFunct' => 'getInd3Den'),
-  '06A' => array ('numFunct' => 'getInd4Num', 'denFunct' => 'getInd4ADen'),
-  '06B' => array ('numFunct' => 'getInd4Num', 'denFunct' => 'getInd4BDen'),
+  /*'06A' => array ('numFunct' => 'getInd4Num', 'denFunct' => 'getInd4ADen'),
+  '06B' => array ('numFunct' => 'getInd4Num', 'denFunct' => 'getInd4BDen'),*/
+  /*indicateur 6 : Nouvel indicateur*/
+  '12' => array ('numFunct' => 'getHealthQualInd6Num', 'denFunct' => 'getHealthQualInd19Den'),
   '07' => array ('numFunct' => 'getInd5Num', 'denFunct' => 'getInd5Den'),
   '08' => array ('numFunct' => 'getHealthQualInd8Num', 'denFunct' => 'getHealthQualInd8Den'),
-  '09' => array ('numFunct' => 'getInd6Num', 'denFunct' => 'getInd6Den'),
+  /*'09' => array ('numFunct' => 'getInd6Num', 'denFunct' => 'getInd6Den'),*/
   '10' => array ('numFunct' => 'getHealthQualInd10Num', 'denFunct' => 'getHealthQualInd10Den'),
-  '11' => array ('numFunct' => 'getInd7Num', 'denFunct' => 'getInd7Den'),
+  //Nouvel indicateur
+  '11' => array ('numFunct' => 'getHealthQualInd11Num', 'denFunct' => 'getHealthQualInd11Den'),
+  /*'11' => array ('numFunct' => 'getInd7Num', 'denFunct' => 'getInd7Den'),
   '12' => array ('numFunct' => 'getHealthQualInd12Num', 'denFunct' => 'getHealthQualInd12Den'),
-  '13' => array ('numFunct' => 'getInd8Num', 'denFunct' => 'getInd8Den'),
+  '13' => array ('numFunct' => 'getInd8Num', 'denFunct' => 'getInd8Den'),*/
   '14' => array ('numFunct' => 'getInd9Num', 'denFunct' => 'getInd9Den'),
+  //nouvel indicateur : Retention a 12 mois
   '15' => array ('numFunct' => 'getHealthQualInd15Num', 'denFunct' => 'getHealthQualInd15Den'),
+  /*'15' => array ('numFunct' => 'getHealthQualInd15Num', 'denFunct' => 'getHealthQualInd15Den'),
   '16' => array ('numFunct' => 'getHealthQualInd16Num', 'denFunct' => 'getHealthQualInd16Den'),
   '17' => array ('numFunct' => 'getHealthQualInd17Num', 'denFunct' => 'getHealthQualInd17Den'),
-  '18' => array ('numFunct' => 'getInd10Num', 'denFunct' => 'getInd10Den'),
+  '18' => array ('numFunct' => 'getInd10Num', 'denFunct' => 'getInd10Den'),*/
   '19' => array ('numFunct' => 'getHealthQualInd19Num', 'denFunct' => 'getHealthQualInd19Den'));
   
 function insertHealthqualStaticRows ($data) {
-  $indArray = array ("01,02,03", "04,05,06", "07,08,09",
+  $indArray = array (/*"01,02,03", "04,05,06", "07,08,09",
                      "10,11,12", "13,14,15", "16,17,18",
-                     "19");
+                     "19"*/"01,19,12","05,14,15","07,08,10","11");
   $keys = implode (", ", array_keys ($data));
   $vals = implode (", ", array_values ($data));
 
@@ -99,7 +105,7 @@ function setupHealthQual ($repNum, $site, $start, $end) {
      AND discDate <= '$end'");
 
   // Severe malnutrition indicator needs -3 SD from median values (source = WHO)
-  dbQuery ("INSERT INTO " . $setupTableNames[5] . " VALUES
+  /*dbQuery ("INSERT INTO " . $setupTableNames[5] . " VALUES
     ('ml2', 45.0, 1.9), ('ml2', 45.5, 1.9), ('ml2', 46.0, 2.0),
     ('ml2', 46.5, 2.1), ('ml2', 47.0, 2.1), ('ml2', 47.5, 2.2),
     ('ml2', 48.0, 2.3), ('ml2', 48.5, 2.3), ('ml2', 49.0, 2.4),
@@ -342,7 +348,7 @@ function setupHealthQual ($repNum, $site, $start, $end) {
     ('mg5', 172, 14.4), ('mg5', 173, 14.5), ('mg5', 174, 14.5),
     ('mg5', 175, 14.5), ('mg5', 176, 14.6), ('mg5', 177, 14.6),
     ('mg5', 178, 14.6), ('mg5', 179, 14.7)
-  ");
+  ");*/
 
 }
 
@@ -372,20 +378,20 @@ function healthQual($repNum, $site, $intervalLength, $startDate, $endDate = null
   $pidsByAgeSex = array ();
   $tmpDen = array ();
   $tmpNum = array ();
-  $tmpInd = array ('01' => array (), '02' => array (), '03' => array (),
-                   '04' => array (), '05' => array (), '06A' => array (),
-                   '06B' => array (), '07' => array (), '08' => array (),
-                   '09' => array (), '10' => array (), '11' => array (),
-                   '12' => array (), '13' => array (), '14' => array (),
-                   '15' => array (), '16' => array (), '17' => array (),
-                   '18' => array (), '19' => array ());
-  $tmpPedInd = array ('01' => array (), '02' => array (), '03' => array (),
-                      '04' => array (), '05' => array (), '06A' => array (),
-                      '06B' => array (), '07' => array (), '08' => array (),
-                      '09' => array (), '10' => array (), '11' => array (),
-                      '12' => array (), '13' => array (), '14' => array (),
-                      '15' => array (), '16' => array (), '17' => array (),
-                      '18' => array (), '19' => array ());
+  $tmpInd = array ('01' => array (), /*'02' => array (), '03' => array (),
+                   '04' => array (),*/ '05' => array (), /*'06A' => array (),
+                   '06B' => array (),*/ '12' => array (),'07' => array (), '08' => array (),/*
+                   '09' => array (),*/ '10' => array (), '11' => array (),
+                   /*'12' => array (), '13' => array (),*/ '14' => array (),
+                   '15' => array (), /*'16' => array (), '17' => array (),
+                   '18' => array (),*/ '19' => array ());
+  $tmpPedInd = array ('01' => array (), /*'02' => array (), '03' => array (),
+                      '04' => array (),*/ '05' => array (), /*'06A' => array (),
+                      '06B' => array (),*/ '12' => array (),'07' => array (), '08' => array (),
+                      /*'09' => array (),*/ '10' => array (), '11' => array (),
+                      /*'12' => array (), '13' => array (),*/ '14' => array (),
+                      '15' => array (), /*'16' => array (), '17' => array (),
+                      '18' => array (),*/ '19' => array ());
 
   if ($endDate == null) {
     $endDate = date ('Y-m-d');
@@ -470,10 +476,10 @@ function healthQual($repNum, $site, $intervalLength, $startDate, $endDate = null
   $tmpCases = array ();
   $cases = array ();
 
-  $result = dbQuery ("SELECT DISTINCT p.patientID FROM patientStatusTemp s, patient p LEFT JOIN " . $setupTableNames[3] . " t2 ON p.patientID = t2.patientID LEFT JOIN " . $setupTableNames[4] . " t3 ON p.patientID = t3.patientID WHERE s.patientID = p.patientID AND s.endDate = '$endDate' AND s.patientStatus IN (2, 3, 4, 5, 6, 7, 8, 10) AND p.location_id = '$site' AND p.patStatus = 0 AND p.hivPositive = 1 AND t2.patientID IS NULL AND t3.patientID IS NULL");
+  /*$result = dbQuery ("SELECT DISTINCT p.patientID FROM patientStatusTemp s, patient p LEFT JOIN " . $setupTableNames[3] . " t2 ON p.patientID = t2.patientID LEFT JOIN " . $setupTableNames[4] . " t3 ON p.patientID = t3.patientID WHERE s.patientID = p.patientID AND s.endDate = '$endDate' AND s.patientStatus IN (2, 3, 4, 5, 6, 7, 8, 10) AND p.location_id = '$site' AND p.patStatus = 0 AND p.hivPositive = 1 AND t2.patientID IS NULL AND t3.patientID IS NULL");
   while ($row = psRowFetch ($result)) {
     array_push ($tmpCases, $row[0]);
-  }
+  }*/
   $cases = generateAgeGenderGroups ($tmpCases, $site, $startDate);
 
   // insert into table, or update if rows already exists
@@ -545,13 +551,13 @@ WHERE e.encounterType IN " . visitList ("hivQual") . "
 
 // Patient Retention in Clinical Care
   
-function getHealthQualInd2Den ($repNum, $site, $intervalLength, $startDate, $endDate) {
+/*function getHealthQualInd2Den ($repNum, $site, $intervalLength, $startDate, $endDate) {
   global $setupTableNames;
 
   $tempTableNames = createTempTables ("#healthQualInd2Den", 1, "patientID varchar(11)", "pid_idx::patientID");
 
   /* Don't count anyone who initiated ART */
-  dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT DISTINCT patientid FROM pepfarTable WHERE siteCode = '$site' AND (forPepPmtct = 0 OR forPepPmtct IS NULL) GROUP BY patientid HAVING MIN(visitDate) <= '$endDate'");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT DISTINCT patientid FROM pepfarTable WHERE siteCode = '$site' AND (forPepPmtct = 0 OR forPepPmtct IS NULL) GROUP BY patientid HAVING MIN(visitDate) <= '$endDate'");
 
   $result = fetchFirstColumn(dbQuery("
 SELECT DISTINCT p.patientID 
@@ -592,10 +598,10 @@ function getHealthQualInd3Den ($repNum, $site, $intervalLength, $startDate, $end
   $tempTableNames = createTempTables ("#healthQualInd3Den", 2, array ("patientID varchar(11), enrollDate date", "patientID varchar(11), maxDate date"), "pid_idx::patientID");
 
   /* Lookup patient enrollment dates */
-  dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT e.patientID, MIN(e.visitDate) FROM encValid e WHERE e.siteCode = '$site' AND e.encounterType IN (10, 15) AND e.visitDate <= '$endDate' GROUP BY e.patientID"); 
+  /*dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT e.patientID, MIN(e.visitDate) FROM encValid e WHERE e.siteCode = '$site' AND e.encounterType IN (10, 15) AND e.visitDate <= '$endDate' GROUP BY e.patientID"); 
 
   /* Lookup patient's earliest visit within the period */
-  dbQuery ("INSERT INTO " . $tempTableNames[2] . " SELECT e.patientID, MAX(e.visitDate) FROM encValid e WHERE e.siteCode = '$site' AND e.encounterType IN " . visitList ("hivQual") . " AND e.visitDate BETWEEN '$startDate' AND '$endDate' GROUP BY e.patientID"); 
+  /*dbQuery ("INSERT INTO " . $tempTableNames[2] . " SELECT e.patientID, MAX(e.visitDate) FROM encValid e WHERE e.siteCode = '$site' AND e.encounterType IN " . visitList ("hivQual") . " AND e.visitDate BETWEEN '$startDate' AND '$endDate' GROUP BY e.patientID"); 
 
   $result = fetchFirstColumn(dbQuery("
 SELECT DISTINCT e.patientID 
@@ -633,7 +639,7 @@ function getHealthQualInd3Num ($repNum, $site, $intervalLength, $startDate, $end
   $tempTableNames = createTempTables ("#healthQualInd3Num", 1, "patientID varchar(11), maxDate date", "pid_idx::patientID");
 
   /* Lookup patient's earliest visit within the period */
-  dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT e.patientID, MAX(e.visitDate) FROM encValid e WHERE e.siteCode = '$site' AND e.encounterType IN " . visitList ("hivQual") . " AND e.visitDate BETWEEN '$startDate' AND '$endDate' GROUP BY e.patientID"); 
+  /*dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT e.patientID, MAX(e.visitDate) FROM encValid e WHERE e.siteCode = '$site' AND e.encounterType IN " . visitList ("hivQual") . " AND e.visitDate BETWEEN '$startDate' AND '$endDate' GROUP BY e.patientID"); 
 
   $result = fetchFirstColumn(dbQuery("
 SELECT l.patientid
@@ -695,7 +701,23 @@ WHERE t.patientID = l.patientID
  AND l.visitDate BETWEEN DATEADD(mm, -2, t.enrollDate) AND DATEADD(mm, 2, t.enrollDate)
 GROUP BY l.patientID
 HAVING COUNT(l.visitDate) >= 1"));
-}
+}*/
+
+//nouvel indicateur ARV en cours
+/*function getHealthQualInd4Num ($repNum, $site, $intervalLength, $startDate, $endDate) {
+  return fetchFirstColumn(dbQuery("
+SELECT DISTINCT v.patientID
+FROM patient
+WHERE patientStatus in(6,8)"));
+}*/
+
+//nouvel indicateur ARV en cours
+/*function getHealthQualInd4Den ($repNum, $site, $intervalLength, $startDate, $endDate) {
+  return fetchFirstColumn(dbQuery("
+SELECT DISTINCT v.patientID
+FROM patient
+WHERE patientStatus in(6,8)"));
+}*/
 
 // Level of Adherence
    
@@ -735,7 +757,7 @@ WHERE t2.doseAvg >= 9.5"));
   dropTempTables ($tempTableNames);
   return $result;
 }
-
+/*
 // Isoniazid Prophylaxis
 
 function getHealthQualInd10Den ($repNum, $site, $intervalLength, $startDate, $endDate) {
@@ -746,49 +768,49 @@ function getHealthQualInd10Den ($repNum, $site, $intervalLength, $startDate, $en
   /* Don't count patients with active TB, regardless of treatment status */
 
   /* First, check for active diagnoses */
-  dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT STRAIGHT_JOIN e.patientID, MAX(e.visitDate) FROM encValid e, conditions c WHERE e.patientID = c.patientID AND e.siteCode = c.siteCode AND e.visitDateDd = c.visitDateDd AND e.visitDateMm = c.visitDateMm AND e.visitDateYy = c.visitDateYy AND e.seqNum = c.seqNum AND (c.conditionID IN (20,21,41,208,397,405,409,423) AND ((c.conditionActive IN (1,5) AND e.encounterType IN (16,17)) OR (c.conditionActive IN (1,4,5) AND e.encounterType IN (1,2)) OR (c.conditionActive = 1 AND e.encounterType IN (24,25)))) AND e.siteCode = '$site' AND e.visitDate <= '$endDate' GROUP BY 1");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT STRAIGHT_JOIN e.patientID, MAX(e.visitDate) FROM encValid e, conditions c WHERE e.patientID = c.patientID AND e.siteCode = c.siteCode AND e.visitDateDd = c.visitDateDd AND e.visitDateMm = c.visitDateMm AND e.visitDateYy = c.visitDateYy AND e.seqNum = c.seqNum AND (c.conditionID IN (20,21,41,208,397,405,409,423) AND ((c.conditionActive IN (1,5) AND e.encounterType IN (16,17)) OR (c.conditionActive IN (1,4,5) AND e.encounterType IN (1,2)) OR (c.conditionActive = 1 AND e.encounterType IN (24,25)))) AND e.siteCode = '$site' AND e.visitDate <= '$endDate' GROUP BY 1");
   dbQuery ("INSERT INTO " . $tempTableNames[2] . " SELECT STRAIGHT_JOIN e.patientID, MAX(e.visitDate) FROM encValid e, conditions c WHERE e.patientID = c.patientID AND e.siteCode = c.siteCode AND e.visitDateDd = c.visitDateDd AND e.visitDateMm = c.visitDateMm AND e.visitDateYy = c.visitDateYy AND e.seqNum = c.seqNum AND (c.conditionID IN (20,21,41,208,397,405,409,423) AND ((c.conditionActive IN (2,3,6,7) AND e.encounterType IN (1,2,16,17)) OR (c.conditionActive > 1 AND e.encounterType IN (24,25)))) AND e.siteCode = '$site' AND e.visitDate <= '$endDate' GROUP BY 1");
 
   /* If marked 'resolved' after 'active', then remove from active list */
-  dbQuery ("DELETE t1 FROM " . $tempTableNames[1] . " t1, " . $tempTableNames[2] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
+  /*dbQuery ("DELETE t1 FROM " . $tempTableNames[1] . " t1, " . $tempTableNames[2] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
 
   /* Pull most recent 'treatment completed' or 'asymptomatic' date */
-  dbQuery ("INSERT INTO " . $tempTableNames[3] . " SELECT STRAIGHT_JOIN e.patientID, CASE WHEN c.completeTreat = 1 THEN MAX(dbo.ymdToDate(c.completeTreatYy, c.completeTreatMm, c.completeTreatDd)) WHEN c.asymptomaticTb = 1 OR c.noTBsymptoms = 1 THEN e.visitDate END FROM tbStatus c, encValid e WHERE e.patientID = c.patientID AND e.siteCode = c.siteCode AND e.visitDateDd = c.visitDateDd AND e.visitDateMm = c.visitDateMm AND e.visitDateYy = c.visitDateYy AND e.seqNum = c.seqNum AND e.encounterType IN (1,2,16,17) AND ((c.completeTreat = 1 AND ISDATE(dbo.ymdToDate(c.completeTreatYy, c.completeTreatMm, c.completeTreatDd)) = 1 AND dbo.ymdToDate(c.completeTreatYy, c.completeTreatMm, c.completeTreatDd) <= '$endDate') OR c.asymptomaticTb = 1 OR c.noTBsymptoms = 1) AND e.siteCode = '$site' AND e.visitDate <= '$endDate' GROUP BY 1");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[3] . " SELECT STRAIGHT_JOIN e.patientID, CASE WHEN c.completeTreat = 1 THEN MAX(dbo.ymdToDate(c.completeTreatYy, c.completeTreatMm, c.completeTreatDd)) WHEN c.asymptomaticTb = 1 OR c.noTBsymptoms = 1 THEN e.visitDate END FROM tbStatus c, encValid e WHERE e.patientID = c.patientID AND e.siteCode = c.siteCode AND e.visitDateDd = c.visitDateDd AND e.visitDateMm = c.visitDateMm AND e.visitDateYy = c.visitDateYy AND e.seqNum = c.seqNum AND e.encounterType IN (1,2,16,17) AND ((c.completeTreat = 1 AND ISDATE(dbo.ymdToDate(c.completeTreatYy, c.completeTreatMm, c.completeTreatDd)) = 1 AND dbo.ymdToDate(c.completeTreatYy, c.completeTreatMm, c.completeTreatDd) <= '$endDate') OR c.asymptomaticTb = 1 OR c.noTBsymptoms = 1) AND e.siteCode = '$site' AND e.visitDate <= '$endDate' GROUP BY 1");
 
   /* Check for negative lab tests */
-  dbQuery ("INSERT INTO " . $tempTableNames[6] . " SELECT STRAIGHT_JOIN e.patientID, MAX(CASE WHEN ISDATE(dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd)) = 1 THEN dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd) ELSE e.visitDate END) FROM encValid e, labs l WHERE e.patientID = l.patientID AND e.siteCode = l.siteCode AND e.visitDateDd = l.visitDateDd AND e.visitDateMm = l.visitDateMm AND e.visitDateYy = l.visitDateYy AND e.seqNum = l.seqNum AND ((e.encounterType IN (6, 19) AND l.ordered = 1 AND l.labID = 130 AND ISNUMERIC(l.result) AND l.result < 5) OR (e.encounterType IN (6, 19) AND l.ordered = 1 AND l.labID IN (131, 169, 172) AND ISNUMERIC(l.result) AND l.result = 2) OR (LOWER(l.testNameFr) LIKE '%ppd qual%' AND LOWER(LTRIM(RTRIM(l.result))) LIKE '%non%' AND LOWER(l.sampleType) = 'in vivo') OR (LOWER(l.testNameFr) LIKE '%ppd quant%' AND ISNUMERIC(l.result) AND l.result < 5 AND LOWER(l.sampleType) = 'in vivo') OR (LOWER(l.testNameFr) LIKE '%tuberculos%' AND LOWER(LTRIM(RTRIM(l.result))) NOT LIKE '%pos%' AND LOWER(l.sampleType) = 'expectoration') OR ((LOWER(l.testNameFr) LIKE '%baar%' OR LOWER(l.testNameFr LIKE '%barr%')) AND LOWER(LTRIM(RTRIM(l.result))) LIKE '%nég%' AND LOWER(l.sampleType) IN ('liquide pleural', 'expectoration', 'sputum'))) AND e.siteCode = '$site' AND CASE WHEN ISDATE(dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd)) = 1 THEN dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd) ELSE e.visitDate END <= '$endDate' GROUP BY 1");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[6] . " SELECT STRAIGHT_JOIN e.patientID, MAX(CASE WHEN ISDATE(dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd)) = 1 THEN dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd) ELSE e.visitDate END) FROM encValid e, labs l WHERE e.patientID = l.patientID AND e.siteCode = l.siteCode AND e.visitDateDd = l.visitDateDd AND e.visitDateMm = l.visitDateMm AND e.visitDateYy = l.visitDateYy AND e.seqNum = l.seqNum AND ((e.encounterType IN (6, 19) AND l.ordered = 1 AND l.labID = 130 AND ISNUMERIC(l.result) AND l.result < 5) OR (e.encounterType IN (6, 19) AND l.ordered = 1 AND l.labID IN (131, 169, 172) AND ISNUMERIC(l.result) AND l.result = 2) OR (LOWER(l.testNameFr) LIKE '%ppd qual%' AND LOWER(LTRIM(RTRIM(l.result))) LIKE '%non%' AND LOWER(l.sampleType) = 'in vivo') OR (LOWER(l.testNameFr) LIKE '%ppd quant%' AND ISNUMERIC(l.result) AND l.result < 5 AND LOWER(l.sampleType) = 'in vivo') OR (LOWER(l.testNameFr) LIKE '%tuberculos%' AND LOWER(LTRIM(RTRIM(l.result))) NOT LIKE '%pos%' AND LOWER(l.sampleType) = 'expectoration') OR ((LOWER(l.testNameFr) LIKE '%baar%' OR LOWER(l.testNameFr LIKE '%barr%')) AND LOWER(LTRIM(RTRIM(l.result))) LIKE '%nég%' AND LOWER(l.sampleType) IN ('liquide pleural', 'expectoration', 'sputum'))) AND e.siteCode = '$site' AND CASE WHEN ISDATE(dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd)) = 1 THEN dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd) ELSE e.visitDate END <= '$endDate' GROUP BY 1");
 
   /* If treatment completed after diagnosis, then not active */
-  dbQuery ("DELETE t1 FROM " . $tempTableNames[1] . " t1, " . $tempTableNames[3] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
+  /*dbQuery ("DELETE t1 FROM " . $tempTableNames[1] . " t1, " . $tempTableNames[3] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
 
   /* If negative lab result after diagnosis, then not active */
-  dbQuery ("DELETE t1 FROM " . $tempTableNames[1] . " t1, " . $tempTableNames[6] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
+  /*dbQuery ("DELETE t1 FROM " . $tempTableNames[1] . " t1, " . $tempTableNames[6] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
 
   /* Next, check for positive lab tests */
-  dbQuery ("INSERT INTO " . $tempTableNames[7] . " SELECT STRAIGHT_JOIN e.patientID, MAX(CASE WHEN ISDATE(dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd)) = 1 THEN dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd) ELSE e.visitDate END) FROM encValid e, labs l WHERE e.patientID = l.patientID AND e.siteCode = l.siteCode AND e.visitDateDd = l.visitDateDd AND e.visitDateMm = l.visitDateMm AND e.visitDateYy = l.visitDateYy AND e.seqNum = l.seqNum AND ((e.encounterType IN (6, 19) AND l.ordered = 1 AND ISNUMERIC(l.result) AND l.labID = 130 AND l.result >= 5) OR (e.encounterType IN (6, 19) AND l.ordered = 1 AND ISNUMERIC(l.result) AND l.labID IN (131, 169, 172) AND l.result = 1) OR (LOWER(l.testNameFr) LIKE '%ppd qual%' AND LOWER(LTRIM(RTRIM(l.result))) NOT LIKE '%non%' AND LOWER(l.sampleType) = 'in vivo') OR (LOWER(l.testNameFr) LIKE '%ppd quant%' AND ISNUMERIC(l.result) AND l.result > 0 AND LOWER(l.sampleType) = 'in vivo') OR (LOWER(l.testNameFr) LIKE '%tuberculos%' AND LOWER(LTRIM(RTRIM(l.result))) LIKE '%pos%' AND LOWER(l.sampleType) = 'expectoration') OR ((LOWER(l.testNameFr) LIKE '%baar%' OR LOWER(l.testNameFr LIKE '%barr%')) AND LOWER(LTRIM(RTRIM(l.result))) NOT LIKE '%nég%' AND LOWER(l.sampleType) IN ('liquide pleural', 'expectoration', 'sputum'))) AND e.siteCode = '$site' AND CASE WHEN ISDATE(dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd)) = 1 THEN dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd) ELSE e.visitDate END <= '$endDate' GROUP BY 1");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[7] . " SELECT STRAIGHT_JOIN e.patientID, MAX(CASE WHEN ISDATE(dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd)) = 1 THEN dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd) ELSE e.visitDate END) FROM encValid e, labs l WHERE e.patientID = l.patientID AND e.siteCode = l.siteCode AND e.visitDateDd = l.visitDateDd AND e.visitDateMm = l.visitDateMm AND e.visitDateYy = l.visitDateYy AND e.seqNum = l.seqNum AND ((e.encounterType IN (6, 19) AND l.ordered = 1 AND ISNUMERIC(l.result) AND l.labID = 130 AND l.result >= 5) OR (e.encounterType IN (6, 19) AND l.ordered = 1 AND ISNUMERIC(l.result) AND l.labID IN (131, 169, 172) AND l.result = 1) OR (LOWER(l.testNameFr) LIKE '%ppd qual%' AND LOWER(LTRIM(RTRIM(l.result))) NOT LIKE '%non%' AND LOWER(l.sampleType) = 'in vivo') OR (LOWER(l.testNameFr) LIKE '%ppd quant%' AND ISNUMERIC(l.result) AND l.result > 0 AND LOWER(l.sampleType) = 'in vivo') OR (LOWER(l.testNameFr) LIKE '%tuberculos%' AND LOWER(LTRIM(RTRIM(l.result))) LIKE '%pos%' AND LOWER(l.sampleType) = 'expectoration') OR ((LOWER(l.testNameFr) LIKE '%baar%' OR LOWER(l.testNameFr LIKE '%barr%')) AND LOWER(LTRIM(RTRIM(l.result))) NOT LIKE '%nég%' AND LOWER(l.sampleType) IN ('liquide pleural', 'expectoration', 'sputum'))) AND e.siteCode = '$site' AND CASE WHEN ISDATE(dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd)) = 1 THEN dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd) ELSE e.visitDate END <= '$endDate' GROUP BY 1");
 
   /* If treatment completed after positive lab test, then not active */
-  dbQuery ("DELETE t1 FROM " . $tempTableNames[7] . " t1, " . $tempTableNames[3] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
+  /*dbQuery ("DELETE t1 FROM " . $tempTableNames[7] . " t1, " . $tempTableNames[3] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
 
   /* If negative lab result after positive lab result, then not active */
-  dbQuery ("DELETE t1 FROM " . $tempTableNames[7] . " t1, " . $tempTableNames[6] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
+  /*dbQuery ("DELETE t1 FROM " . $tempTableNames[7] . " t1, " . $tempTableNames[6] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
 
   /* Finally, check for indications of treatment: */
   /*   A) 2 or more anti-TB meds dispensed on the same date */
   /*   B) 'Currently on treatment' selected on intake/f-u forms */
-  dbQuery ("INSERT INTO " . $tempTableNames[8] . " SELECT STRAIGHT_JOIN e.patientID, MAX(CASE WHEN ISDATE(dbo.ymdToDate(p.dispDateYy, p.dispDateMm, IFNULL(p.dispDateDd, '01'))) = 1 THEN dbo.ymdToDate(p.dispDateYy, p.dispDateMm, IFNULL(p.dispDateDd, '01')) ELSE e.visitDate END) FROM encValid e, prescriptions p, drugLookup d WHERE d.drugID = p.drugID AND d.drugGroup = 'Anti-TB' AND (p.forPepPmtct IS NULL OR p.forPepPmtct <> 1) AND e.patientID = p.patientID AND e.siteCode = p.siteCode AND e.visitDateDd = p.visitDateDd AND e.visitDateMm = p.visitDateMm AND e.visitDateYy = p.visitDateYy AND e.seqNum = p.seqNum AND e.siteCode = '$site' AND CASE WHEN ISDATE(dbo.ymdToDate(p.dispDateYy, p.dispDateMm, IFNULL(p.dispDateDd, '01'))) = 1 THEN dbo.ymdToDate(p.dispDateYy, p.dispDateMm, IFNULL(p.dispDateDd, '01')) ELSE e.visitDate END <= '$endDate' GROUP BY 1 HAVING COUNT(DISTINCT p.drugID) >= 2");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[8] . " SELECT STRAIGHT_JOIN e.patientID, MAX(CASE WHEN ISDATE(dbo.ymdToDate(p.dispDateYy, p.dispDateMm, IFNULL(p.dispDateDd, '01'))) = 1 THEN dbo.ymdToDate(p.dispDateYy, p.dispDateMm, IFNULL(p.dispDateDd, '01')) ELSE e.visitDate END) FROM encValid e, prescriptions p, drugLookup d WHERE d.drugID = p.drugID AND d.drugGroup = 'Anti-TB' AND (p.forPepPmtct IS NULL OR p.forPepPmtct <> 1) AND e.patientID = p.patientID AND e.siteCode = p.siteCode AND e.visitDateDd = p.visitDateDd AND e.visitDateMm = p.visitDateMm AND e.visitDateYy = p.visitDateYy AND e.seqNum = p.seqNum AND e.siteCode = '$site' AND CASE WHEN ISDATE(dbo.ymdToDate(p.dispDateYy, p.dispDateMm, IFNULL(p.dispDateDd, '01'))) = 1 THEN dbo.ymdToDate(p.dispDateYy, p.dispDateMm, IFNULL(p.dispDateDd, '01')) ELSE e.visitDate END <= '$endDate' GROUP BY 1 HAVING COUNT(DISTINCT p.drugID) >= 2");
   dbQuery ("TRUNCATE TABLE " . $tempTableNames[2]);
   dbQuery ("INSERT INTO " . $tempTableNames[2] . " SELECT STRAIGHT_JOIN e.patientID, MAX(e.visitDate) FROM encValid e, tbStatus t WHERE e.patientID = t.patientID AND e.siteCode = t.siteCode AND e.visitDateDd = t.visitDateDd AND e.visitDateMm = t.visitDateMm AND e.visitDateYy = t.visitDateYy AND e.seqNum = t.seqNum AND e.encounterType IN (1, 2, 16, 17) AND t.currentTreat = 1 AND e.siteCode = '$site' AND e.visitDate <= '$endDate' GROUP BY 1");
   
   /* If treatment completed, then not active */
-  dbQuery ("DELETE t1 FROM " . $tempTableNames[8] . " t1, " . $tempTableNames[3] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
+  /*dbQuery ("DELETE t1 FROM " . $tempTableNames[8] . " t1, " . $tempTableNames[3] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
   dbQuery ("DELETE t1 FROM " . $tempTableNames[2] . " t1, " . $tempTableNames[3] . " t2 WHERE t1.patientID = t2.patientID AND t2.maxDate > t1.maxDate");
 
   /* Merge all active TB patients into one table */
-  dbQuery ("INSERT INTO " . $tempTableNames[9] . " SELECT patientID FROM " . $tempTableNames[1] . " UNION SELECT patientID FROM " . $tempTableNames[7] . " UNION SELECT patientID FROM " . $tempTableNames[8] . " UNION SELECT patientID FROM " . $tempTableNames[2]);
+  /*dbQuery ("INSERT INTO " . $tempTableNames[9] . " SELECT patientID FROM " . $tempTableNames[1] . " UNION SELECT patientID FROM " . $tempTableNames[7] . " UNION SELECT patientID FROM " . $tempTableNames[8] . " UNION SELECT patientID FROM " . $tempTableNames[2]);
 
   /* Read HIV status from pediatric patient's most recent form */
-  dbQuery ("INSERT INTO " . $tempTableNames[4] . " SELECT e.patientID, MAX(e.visitDate), MAX(e.seqNum) FROM encValid e, vitals t WHERE e.patientID = t.patientID AND e.siteCode = t.siteCode AND e.visitDateDd = t.visitDateDd AND e.visitDateMm = t.visitDateMm AND e.visitDateYy = t.visitDateYy AND e.seqNum = t.seqNum AND e.siteCode = '$site' AND e.encounterType IN (16, 17) AND t.pedCurrHiv >= 1 AND e.visitDate <= '$endDate' GROUP BY 1");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[4] . " SELECT e.patientID, MAX(e.visitDate), MAX(e.seqNum) FROM encValid e, vitals t WHERE e.patientID = t.patientID AND e.siteCode = t.siteCode AND e.visitDateDd = t.visitDateDd AND e.visitDateMm = t.visitDateMm AND e.visitDateYy = t.visitDateYy AND e.seqNum = t.seqNum AND e.siteCode = '$site' AND e.encounterType IN (16, 17) AND t.pedCurrHiv >= 1 AND e.visitDate <= '$endDate' GROUP BY 1");
   dbQuery ("INSERT INTO " . $tempTableNames[5] . " SELECT DISTINCT e.patientID, t.pedCurrHiv FROM encValid e, vitals t, " . $tempTableNames[4] . " t1 WHERE e.patientID = t.patientID AND e.siteCode = t.siteCode AND e.visitDateDd = t.visitDateDd AND e.visitDateMm = t.visitDateMm AND e.visitDateYy = t.visitDateYy AND e.seqNum = t.seqNum AND e.siteCode = '$site' AND e.encounterType IN (16, 17) AND e.patientID = t1.patientID AND e.visitDate = t1.maxDate AND e.seqNum = t1.maxSeq");
 
   // Adults
@@ -963,13 +985,13 @@ function getHealthQualInd12Num ($repNum, $site, $intervalLength, $startDate, $en
   $tempTableNames = createTempTables ("#healthQualInd12Num", 8, array ("patientID varchar(11), maxDate date, maxSeq tinyint unsigned", "patientID varchar(11), maxDate date, maxSeq tinyint unsigned", "patientID varchar(11), height decimal(4,1)", "patientID varchar(11), weight decimal(4,1)", "patientID varchar(11), maxDate date, maxSeq tinyint unsigned", "patientID varchar(11), maxDate date, maxSeq tinyint unsigned", "patientID varchar(11), armCirc decimal(4,2)", "patientID varchar(11), acHcRatio decimal(4,2)"), "pat_idx::patientID");
 
   /* Read most recent weights and heights/lengths */
-  dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT patientID, MAX(visitDate), MAX(seqNum) FROM v_vitals WHERE siteCode = '$site' AND (ISNUMERIC(REPLACE(LTRIM(RTRIM(vitalHeight)), ',', '.')) = 1 OR ISNUMERIC(REPLACE(LTRIM(RTRIM(vitalHeightCm)), ',', '.')) = 1) AND encounterType IN (1, 2, 16, 17) AND visitDate <= '$endDate' GROUP BY 1");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT patientID, MAX(visitDate), MAX(seqNum) FROM v_vitals WHERE siteCode = '$site' AND (ISNUMERIC(REPLACE(LTRIM(RTRIM(vitalHeight)), ',', '.')) = 1 OR ISNUMERIC(REPLACE(LTRIM(RTRIM(vitalHeightCm)), ',', '.')) = 1) AND encounterType IN (1, 2, 16, 17) AND visitDate <= '$endDate' GROUP BY 1");
   dbQuery ("INSERT INTO " . $tempTableNames[2] . " SELECT patientID, MAX(visitDate), MAX(seqNum) FROM v_vitals WHERE siteCode = '$site' AND ISNUMERIC(REPLACE(LTRIM(RTRIM(vitalWeight)), ',', '.')) = 1 AND encounterType IN (1, 2, 16, 17) AND visitDate <= '$endDate' GROUP BY 1");
   dbQuery ("INSERT INTO " . $tempTableNames[3] . " SELECT DISTINCT v.patientID, CASE WHEN ISNUMERIC(REPLACE(LTRIM(RTRIM(v.vitalHeight)),',','.')) = 1 AND ISNUMERIC(REPLACE(LTRIM(RTRIM(v.vitalHeightCm)),',','.')) = 1 THEN REPLACE(LTRIM(RTRIM(v.vitalHeight)),',','.') * 100 + REPLACE(LTRIM(RTRIM(v.vitalHeightCm)),',','.') WHEN ISNUMERIC(REPLACE(LTRIM(RTRIM(v.vitalHeight)),',','.')) = 1 AND ISNUMERIC(REPLACE(LTRIM(RTRIM(v.vitalHeightCm)),',','.')) <> 1 THEN REPLACE(LTRIM(RTRIM(v.vitalHeight)),',','.') * 100 WHEN ISNUMERIC(REPLACE(LTRIM(RTRIM(v.vitalHeight)),',','.')) <> 1 AND ISNUMERIC(REPLACE(LTRIM(RTRIM(v.vitalHeightCm)),',','.')) = 1 THEN REPLACE(LTRIM(RTRIM(v.vitalHeightCm)),',','.') END FROM v_vitals v, " . $tempTableNames[1] . " t1 WHERE v.siteCode = '$site' AND (ISNUMERIC(REPLACE(LTRIM(RTRIM(v.vitalHeight)), ',', '.')) = 1 OR ISNUMERIC(REPLACE(LTRIM(RTRIM(v.vitalHeightCm)), ',', '.')) = 1) AND v.encounterType IN (1, 2, 16, 17) AND v.visitDate <= '$endDate' AND v.patientID = t1.patientID AND v.visitDate = t1.maxDate AND v.seqNum = t1.maxSeq");
   dbQuery ("INSERT INTO " . $tempTableNames[4] . " SELECT DISTINCT v.patientID, CASE WHEN v.vitalWeightUnits = 2 THEN ROUND((REPLACE(LTRIM(RTRIM(v.vitalWeight)), ',', '.')) * 0.453592, 1) ELSE REPLACE(LTRIM(RTRIM(v.vitalWeight)), ',', '.') END FROM v_vitals v, " . $tempTableNames[2] . " t1 WHERE v.siteCode = '$site' AND ISNUMERIC(REPLACE(LTRIM(RTRIM(v.vitalWeight)), ',', '.')) = 1 AND v.encounterType IN (1, 2, 16, 17) AND v.visitDate <= '$endDate' AND v.patientID = t1.patientID AND v.visitDate = t1.maxDate AND v.seqNum = t1.maxSeq");
 
   /* Read most recent arm circumference and AC/HC ratio */
-  dbQuery ("INSERT INTO " . $tempTableNames[5] . " SELECT patientID, MAX(visitDate), MAX(seqNum) FROM v_vitals WHERE siteCode = '$site' AND ISNUMERIC(REPLACE(LTRIM(RTRIM(pedVitCurBracCirc)), ',', '.')) = 1 AND encounterType IN (16, 17) AND visitDate BETWEEN '$startDate' AND '$endDate' GROUP BY 1");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[5] . " SELECT patientID, MAX(visitDate), MAX(seqNum) FROM v_vitals WHERE siteCode = '$site' AND ISNUMERIC(REPLACE(LTRIM(RTRIM(pedVitCurBracCirc)), ',', '.')) = 1 AND encounterType IN (16, 17) AND visitDate BETWEEN '$startDate' AND '$endDate' GROUP BY 1");
   dbQuery ("INSERT INTO " . $tempTableNames[6] . " SELECT patientID, MAX(visitDate), MAX(seqNum) FROM v_vitals WHERE siteCode = '$site' AND ISNUMERIC(REPLACE(LTRIM(RTRIM(pedVitCurCircCirc)), ',', '.')) = 1 AND encounterType IN (16, 17) AND visitDate BETWEEN '$startDate' AND '$endDate' GROUP BY 1");
   dbQuery ("INSERT INTO " . $tempTableNames[7] . " SELECT DISTINCT v.patientID, REPLACE(LTRIM(RTRIM(v.pedVitCurBracCirc)), ',', '.') FROM v_vitals v, " . $tempTableNames[5] . " t1 WHERE v.siteCode = '$site' AND ISNUMERIC(REPLACE(LTRIM(RTRIM(v.pedVitCurBracCirc)), ',', '.')) = 1 AND v.encounterType IN (16, 17) AND v.visitDate BETWEEN '$startDate' AND '$endDate' AND v.patientID = t1.patientID AND v.visitDate = t1.maxDate AND v.seqNum = t1.maxSeq");
   dbQuery ("INSERT INTO " . $tempTableNames[8] . " SELECT DISTINCT v.patientID, CASE WHEN REPLACE(LTRIM(RTRIM(v.pedVitCurCircCirc)), ',', '.') < 1 THEN REPLACE(LTRIM(RTRIM(v.pedVitCurCircCirc)), ',', '.') * 100 ELSE REPLACE(LTRIM(RTRIM(v.pedVitCurCircCirc)), ',', '.') END FROM v_vitals v, " . $tempTableNames[6] . " t1 WHERE v.siteCode = '$site' AND ISNUMERIC(REPLACE(LTRIM(RTRIM(v.pedVitCurCircCirc)), ',', '.')) = 1 AND v.encounterType IN (16, 17) AND v.visitDate BETWEEN '$startDate' AND '$endDate' AND v.patientID = t1.patientID AND v.visitDate = t1.maxDate AND v.seqNum = t1.maxSeq");
@@ -1043,7 +1065,7 @@ function getHealthQualInd15Den ($repNum, $site, $intervalLength, $startDate, $en
   $tempTableNames = createTempTables ("#healthQualInd15Den", 1, "patientID varchar(11)", "pat_idx::patientID");
 
   /* Collect positive syphilis cases */
-  dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT e.patientID FROM encValid e, obs o WHERE e.encounter_id = o.encounter_id AND e.siteCode = o.location_id AND o.concept_id IN (71021, 71022) AND e.siteCode = '$site' AND e.visitDate BETWEEN '$startDate' AND '$endDate'");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT e.patientID FROM encValid e, obs o WHERE e.encounter_id = o.encounter_id AND e.siteCode = o.location_id AND o.concept_id IN (71021, 71022) AND e.siteCode = '$site' AND e.visitDate BETWEEN '$startDate' AND '$endDate'");
   dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT e.patientID FROM encValid e, conditions c WHERE e.patientID = c.patientID AND e.siteCode = c.siteCode AND e.visitDateDd = c.visitDateDd AND e.visitDateMm = c.visitDateMm AND e.visitDateYy = c.visitDateYy AND e.seqNum = c.seqNum AND (c.conditionID IN (350) AND ((c.conditionActive IN (1,5) AND e.encounterType IN (16,17)) OR (c.conditionActive IN (1,4,5) AND e.encounterType IN (1,2)) OR (c.conditionActive = 1 AND e.encounterType IN (24,25)))) AND e.siteCode = '$site' AND e.visitDate BETWEEN '$startDate' AND '$endDate'");
   dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT patientID FROM v_labsCompleted WHERE LOWER(testNameFr) LIKE '%syphilis%' AND ((LOWER(LTRIM(RTRIM(result))) IS NOT NULL AND LOWER(LTRIM(RTRIM(result))) != '' AND LOWER(LTRIM(RTRIM(result))) NOT LIKE '%neg%' AND LOWER(LTRIM(RTRIM(result))) NOT LIKE '%nég%') OR (LOWER(LTRIM(RTRIM(result2))) IS NOT NULL AND LOWER(LTRIM(RTRIM(result2))) != '' AND LOWER(LTRIM(RTRIM(result2))) NOT LIKE '%neg%' AND LOWER(LTRIM(RTRIM(result2))) NOT LIKE '%nég%') OR (LOWER(LTRIM(RTRIM(result3))) IS NOT NULL AND LOWER(LTRIM(RTRIM(result3))) != '' AND LOWER(LTRIM(RTRIM(result3))) NOT LIKE '%neg%' AND LOWER(LTRIM(RTRIM(result3))) NOT LIKE '%nég%') OR (LOWER(LTRIM(RTRIM(result4))) IS NOT NULL AND LOWER(LTRIM(RTRIM(result4))) != '' AND LOWER(LTRIM(RTRIM(result4))) NOT LIKE '%neg%' AND LOWER(LTRIM(RTRIM(result4))) NOT LIKE '%nég%')) AND siteCode = '$site' AND dbo.ymdToDate(resultDateYy, resultDateMm, resultDateDd) BETWEEN '$startDate' AND '$endDate'");
 
@@ -1210,6 +1232,43 @@ WHERE e.siteCode = '$site'
  OR n.needsAssOtherUn > 0
  OR LTRIM(RTRIM(n.needsAssOtherText)) != ''
  OR LTRIM(RTRIM(n.needsAssOtherSvcsText)) != '')"));
+}*/
+
+// nouvel indicateur : Retention a 12 mois 
+
+function getHealthQualInd15Den ($repNum, $site, $intervalLength, $startDate, $endDate) {
+  global $setupTableNames;
+
+  return fetchFirstColumn(dbQuery("
+SELECT DISTINCT l.patientid 
+FROM (select p.patientId, min(p.visitDate) as date_visit from pepfarTable p
+LEFT JOIN " . $setupTableNames[3] . " t1 ON p.patientID = t1.patientID
+LEFT JOIN " . $setupTableNames[4] . " t2 ON p.patientID = t2.patientID
+WHERE p.siteCode = '$site'
+ AND (p.forPepPmtct = 0 OR p.forPepPmtct IS NULL)
+ AND p.visitDate <= '$endDate'
+ AND t1.patientID IS NULL GROUP BY 1
+ HAVING datediff(day,date_visit, '$startDate') <=365 and datediff(day,date_visit, '$endDate') >=365
+) l"));
+}
+
+function getHealthQualInd15Num ($repNum, $site, $intervalLength, $startDate, $endDate) {
+   global $setupTableNames;
+
+  return fetchFirstColumn(dbQuery("
+SELECT DISTINCT l.patientid 
+FROM (select p.patientId, min(p.visitDate) as date_visit from pepfarTable p 
+LEFT JOIN " . $setupTableNames[3] . " t1 ON p.patientID = t1.patientID
+ LEFT JOIN " . $setupTableNames[4] . " t2 ON p.patientID = t2.patientID , patientStatusTemp t
+WHERE p.siteCode = '$site'
+ AND p.patientID = t.patientID
+ AND t.patientStatus = 6 
+ AND (p.forPepPmtct = 0 OR p.forPepPmtct IS NULL)
+ AND p.visitDate <= '$endDate'
+ AND t1.patientID IS NULL
+ AND t2.patientID IS NULL GROUP BY 1
+ HAVING datediff(day, date_visit,'$startDate') <=365 and datediff(day, date_visit, '$endDate') >=365
+ ) l"));
 }
 
 // Pediatric Early HIV Detection
@@ -1236,6 +1295,119 @@ FROM v_labs v
 WHERE v.labID = '181'
  AND v.siteCode = '$site'
  AND v.visitDate <= '$endDate'"));
+}
+
+//nouvel indicateur : PCR négatif 
+function getHealthQualInd6Num ($repNum, $site, $intervalLength, $startDate, $endDate) {
+  return fetchFirstColumn(dbQuery("
+SELECT DISTINCT v.patientID
+FROM v_labs v
+WHERE v.labID = '181'
+ AND v.result='2'
+ AND v.siteCode = '$site'
+ AND v.visitDate <= '$endDate'"));
+}
+
+// nouvel indicateur : Proportion de patients VIH+ sous traitement ARV 
+//ayant bénéficié d'une évaluation de leur Charge virale à 6 mois après 
+//le début de leur traitement
+/*function getHealthQualInd10Num ($repNum, $site, $intervalLength, $startDate, $endDate) {
+return fetchFirstColumn(dbQuery("
+SELECT DISTINCT l.patientID
+FROM (select v. patientID, min(v.visitDate), min(p.visitDate), result FROM pepfarTable p, v_labs v
+WHERE p.patientID=v.patientID
+AND labID in(103,1257)
+AND v.siteCode = '$site'
+AND (result is not null and result !='')
+ AND v.visitDate <= '$endDate'
+ GROUP BY 1
+HAVING datediff(mm, min(p.visitDate),min(v.visitDate)) >= 6) l"));
+
+}*/
+
+/*le denominateur de indicateur 11 est le num de cet indicateur (reunion avec Nicasky)*/
+function getHealthQualInd10Num ($repNum, $site, $intervalLength, $startDate, $endDate) {
+return fetchFirstColumn(dbQuery("
+SELECT DISTINCT l.patientID
+FROM (select p.patientID, min(p.visitDate), result, v.visitDate FROM pepfarTable p, v_labs v
+WHERE p.patientID=v.patientID
+AND p. siteCode = '$site'
+AND labID in(103,1257)
+AND (result is not null and result !='')
+ AND v.visitDate between '$startDate' AND '$endDate'
+GROUP BY 1
+HAVING datediff(mm, min(p.visitDate),'$endDate') >= 6) l"));
+}
+
+// le den de cet indicateur est un sous-ensemble du den de indicateur 1
+function getHealthQualInd10Den ($repNum, $site, $intervalLength, $startDate, $endDate) {
+global $setupTableNames;	
+return fetchFirstColumn(dbQuery("
+SELECT DISTINCT l.patientID
+FROM (select p.patientID, min(visitDate) FROM pepfarTable p
+LEFT JOIN " . $setupTableNames[3] . " t1 ON p.patientID = t1.patientID
+LEFT JOIN " . $setupTableNames[4] . " t2 ON p.patientID = t2.patientID
+WHERE  siteCode = '$site'
+ AND visitDate <= '$endDate'
+ AND (p.forPepPmtct = 0 OR p.forPepPmtct IS NULL)
+ AND t1.patientID IS NULL
+AND t2.patientID IS NULL
+GROUP BY 1
+HAVING datediff(mm, min(visitDate),'$endDate') >= 6) l"));
+
+}
+
+/*function getHealthQualInd1Den ($repNum, $site, $intervalLength, $startDate, $endDate) {
+  global $setupTableNames;
+
+  return fetchFirstColumn(dbQuery("
+SELECT DISTINCT p.patientid 
+FROM pepfarTable p
+ LEFT JOIN " . $setupTableNames[3] . " t1 ON p.patientID = t1.patientID
+ LEFT JOIN " . $setupTableNames[4] . " t2 ON p.patientID = t2.patientID
+WHERE p.siteCode = '$site'
+ AND (p.forPepPmtct = 0 OR p.forPepPmtct IS NULL)
+ AND p.visitDate <= '$endDate'
+ AND t1.patientID IS NULL
+ AND t2.patientID IS NULL"));
+}*/
+
+// nouvel indicateur : Proportion de patients VIH+ sous traitement ARV 
+// depuis plus de 6 mois ayant une charge virale indétectable
+
+// Num : Nombre de patients VH+ placés sous ARV depuis plus de 6 mois ayant 
+// une charge virale indétectable (derniere charge virale) durant la période d’analyse
+
+// Den : Nombre de patients places sous ARV depuis plus de 6 mois ayant 
+// bénéficié d’une évaluation de la charge virale durant la période d’analyse.
+
+function getHealthQualInd11Num ($repNum, $site, $intervalLength, $startDate, $endDate) {
+return fetchFirstColumn(dbQuery("
+SELECT DISTINCT l.patientID
+FROM (select v. patientID, min(p.visitDate), result, max(dbo.ymdToDate(LTRIM(RTRIM(v.resultDateYy)),LTRIM(RTRIM(v.resultDateMm)),LTRIM(RTRIM(v.resultDateDd)))) FROM pepfarTable p, v_labs v
+WHERE p.patientID=v.patientID
+AND labID in(103,1257)
+AND v.siteCode = '$site'
+AND (result like '%Ind%' or result like '%ind%')
+ 
+ GROUP BY 1
+HAVING datediff(mm, min(p.visitDate),'$endDate') >= 6 
+AND max(dbo.ymdToDate(LTRIM(RTRIM(v.resultDateYy)),LTRIM(RTRIM(v.resultDateMm)),LTRIM(RTRIM(v.resultDateDd)))) between '$startDate' AND '$endDate') l"));
+
+}
+
+function getHealthQualInd11Den ($repNum, $site, $intervalLength, $startDate, $endDate) {
+return fetchFirstColumn(dbQuery("
+SELECT DISTINCT l.patientID
+FROM (select p.patientID, min(p.visitDate), result, v.visitDate FROM pepfarTable p, v_labs v
+WHERE p.patientID=v.patientID
+AND p. siteCode = '$site'
+AND labID in(103,1257)
+AND (result is not null and result !='')
+ AND v.visitDate between '$startDate' AND '$endDate'
+GROUP BY 1
+HAVING datediff(mm, min(p.visitDate),'$endDate') >= 6) l"));
+
 }
 
 ?>
