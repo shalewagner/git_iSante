@@ -71,12 +71,12 @@ encountertype in (24,25) group by 1,2,3",
 'duplicates' => "select d.match_id, e.patientid, e.sitecode, date(min(visitdate)) as minDate, date(max(visitdate)) as maxDate, d.counter from dupNames d, encValidAll e, patient p where d.lname = p.lname and d.fname = p.fname and d.dobyy = p.dobyy and d.dobmm = p.dobmm and d.dobdd = p.dobdd and d.sex = p.sex and d.fnameMother = p.fnameMother and e.patientid = p.patientid group by 1,2 order by 1,2" 
 );  
 
-$qry="create table preArt select p.patientid from patient where hivPositive = 1 and patientid not in (select patientid from bplusPids);";
-result = database()->query($qry);
+$qry="create table preArt select p.patientid from patient p where hivPositive = 1 and patientid not in (select patientid from bplusPids);";
+$result = database()->query($qry);
 $qry="drop table bplusPids;";
-result = database()->query($qry);
+$result = database()->query($qry);
 $qry="create table bplusPids select patientid from preArt;";
-result = database()->query($qry);
+$result = database()->query($qry);
 // generate bplusPids patient reference list
 /* $qry = "drop table if exists bplusPids";
 $result = database()->query($qry);
