@@ -113,6 +113,9 @@ echo "
 			$gLevel =  $reportSetArray[$i]['groupLevel'];
 			$oLevel =  $reportSetArray[$i]['otherLevel'];
 			$mSelection =  $reportSetArray[$i]['menuSelection'];
+			
+			// skip r34 report for all sites except Justinien
+			if ($repNum == 778 && getConfig('defsitecode') != '31100' ) continue;
 
 			if ( $repNum == '') { // group header--print on left
 				$k = 0;

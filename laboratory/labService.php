@@ -288,7 +288,8 @@ function updateViral($site,$encID,$tInd,$resultat,$resultDate,$note) {
 		WHERE e.sitecode = ? AND e.encounter_id = ? AND
 		e.sitecode = l.sitecode and e.patientid = l.patientid AND
 		e.visitdateYy = l.visitdateYy and e.visitdateMm = l.visitdateMm AND
-		e.visitdateDd = l.visitdateDd AND e.seqNum = l.seqNum";
+		e.visitdateDd = l.visitdateDd AND e.seqNum = l.seqNum AND
+		l.labid in (103,181)";
 		$resultDt = split('-', $resultDate);
 		$rc = database()->query($sql,array($resultat,$tInd . " : " . $note,$resultDt[0],$resultDt[1],$resultDt[2],$site,$encID));
 		$retVal = $rc->rowCount();
