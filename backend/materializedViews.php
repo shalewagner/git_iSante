@@ -2783,5 +2783,29 @@ where p1.patientID=p.patientID
 group by 1,2,3,4
 ) A where DATEDIFF(dispenseDate, now())<0');
 
+/* Any patient with both ART and TB treatment dispenses within the last 3 months */
+database()->exec('DROP TABLE IF EXISTS tbTemp');
+database()->exec('CREATE TABLE tbTemp SELECT patientid, p.drugid, DATE(CASE WHEN ISDATE(ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd)) = 1 THEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd)
+ELSE ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd) END) as dispDt 
+FROM prescriptions p, drugLookup d 
+WHERE p.drugid = d.drugid AND d.drugGroup = ? AND 
+(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR dispAltDosage IS NOT NULL) GROUP BY 1,2,3',array('Anti-TB'));
+database()->exec('ALTER TABLE tbTemp ADD PRIMARY KEY (patientid,drugid,dispDt)');
+
+database()->exec('DROP TABLE IF EXISTS artTemp');
+database()->exec('CREATE TABLE artTemp SELECT p.patientid, DATE(ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd)) as dispDt
+FROM prescriptions p, encounter e, drugLookup d 
+WHERE p.patientid = e.patientid and p.visitdateyy = e.visitdateyy and p.visitdatemm = e.visitdatemm and p.visitdatedd = e.visitdatedd and p.seqnum = e.seqnum and
+p.drugid = d.drugid AND d.drugGroup in (?,?,?,?) AND 
+(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR dispAltDosage IS NOT NULL) AND
+CASE WHEN ISDATE(ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd)) = 1 THEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd)
+ELSE ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd) END GROUP BY 1,2',array('NRTIs','Pls','NNRTIs','II'));
+database()->exec('ALTER TABLE artTemp ADD PRIMARY KEY (patientid, dispDt)');
+
+database()->exec('INSERT INTO patientAlert (siteCode,patientID,alertId,insertDate)
+SELECT LEFT(a.patientid,5), a.patientID, 9, DATE(now()) FROM artTemp a, tbTemp b 
+where a.patientid = b.patientid and b.dispDt BETWEEN DATE_ADD(NOW(),INTERVAL -3 MONTH) AND NOW() AND
+a.dispDt BETWEEN DATE_ADD(NOW(),INTERVAL -3 MONTH) AND NOW()
+GROUP BY 2 HAVING COUNT(DISTINCT b.drugid) >= 2');
 }
 ?>
