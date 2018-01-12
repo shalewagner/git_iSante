@@ -245,7 +245,7 @@ echo '
 <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" id="' . $topLabelsId[6] . '">' . $topLabels[$lang][6] . ' <b class="caret"></b></a>
 <ul class="dropdown-menu">
 	<li><a id="' . $cmdList[19] . '" href="./helpfile.php?file=report_definitions_1.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&' . $menustring . '">' . $cmdLabel[$lang][19] . '</a></li>
-	<li><a id="17.4"  href="helpfiles/ChangeDocument17.4' . $lang . '.pdf" target="_blank">' . $newIn . '17.4' .    '</a></li>
+	<li><a id="18.1"  href="helpfiles/ChangeDocument18.1' . $lang . '.pdf" target="_blank">' . $newIn . '18.1' .    '</a></li>
 	<li><a id="17.3"  href="helpfiles/ChangeDocument17.3' . $lang . '.pdf" target="_blank">' . $newIn . '17.3' .    '</a></li>
 	<li><a id="17.2"  href="helpfiles/ChangeDocument17.2' . $lang . '.pdf" target="_blank">' . $newIn . '17.2' .    '</a></li>
 	<li><a id="17.1"  href="helpfiles/ChangeDocument17.1' . $lang . '.pdf" target="_blank">' . $newIn . '17.1' .    '</a></li>
