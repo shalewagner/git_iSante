@@ -1963,13 +1963,23 @@
 				    <menuSelection>dateSelect</menuSelection>
 			    </report>
             	<report id="554" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Viral load by number of copies/ml</title>
-				  <title lang="fr">Charge virale en fonction du nombre de copies/ml</title>
+				  <title lang="en">Viral load by number of copies/ml (according to the application date)</title>
+				  <title lang="fr">Charge virale en fonction du nombre de copies/ml (selon la date de demande)</title>
 				   <reportFile></reportFile>
 				    <groupLevel>0</groupLevel>
 				    <otherLevel>0</otherLevel>
 				    <menuSelection>dateSelect</menuSelection>
 			    </report>
+
+	       <report id="557" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Viral load by number of copies/ml (according to the result Date)</title>
+				  <title lang="fr">Charge virale en fonction du nombre de copies/ml (selon la date du resultat) </title>
+				   <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <menuSelection>dateSelect</menuSelection>
+			    </report>	
+			
 		<report id="555" patientStatus="0" treatmentStatus="0" testType="0">
 				  <title lang="en">Eligible for viral load but not done yet </title>
 				  <title lang="fr">Liste des patients eligibles pour la charge virale mais n'en ayant pas</title>
