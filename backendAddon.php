@@ -540,6 +540,11 @@ function generateQueryResult($qry, $rtype = '', $repNum = '', $lang = 'fr', $sit
                 echo generateViral($start, $end, $site, $lang);
                 return '';
         }
+		if ($repNum == "557") {
+                include_once "backend/viralLoadResult.php";
+                echo generateViral($start, $end, $site, $lang);
+                return '';
+        }
 		if ($repNum == "778") {
 			include_once "viralBarcodeReport.php";
 			echo generateBarcode($qry, $start, $end, $site, $lang);
