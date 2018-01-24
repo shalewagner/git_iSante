@@ -529,24 +529,38 @@ function getHealthQualInd1Den ($repNum, $site, $intervalLength, $startDate, $end
   return fetchFirstColumn(dbQuery("
 SELECT DISTINCT p.patientid 
 FROM pepfarTable p
- LEFT JOIN " . $setupTableNames[3] . " t1 ON p.patientID = t1.patientID
- LEFT JOIN " . $setupTableNames[4] . " t2 ON p.patientID = t2.patientID
+ 
 WHERE p.siteCode = '$site'
- AND (p.forPepPmtct = 0 OR p.forPepPmtct IS NULL)
+ 
  AND p.visitDate <= '$endDate'
- AND t1.patientID IS NULL
- AND t2.patientID IS NULL"));
+ "));
 }
 
 function getHealthQualInd1Num ($repNum, $site, $intervalLength, $startDate, $endDate) {
-  $threeMonths = monthDiff(-3, $endDate);
+  /*$threeMonths = monthDiff(-3, $endDate);
   
   return fetchFirstColumn(dbQuery("
 SELECT STRAIGHT_JOIN DISTINCT e.patientID
 FROM encValid e
 WHERE e.encounterType IN " . visitList ("hivQual") . "
  AND e.siteCode = '$site'
- AND e.visitDate BETWEEN '$threeMonths' AND '$endDate'"));
+ AND e.visitDate BETWEEN '$threeMonths' AND '$endDate'"));*/
+ 
+ global $setupTableNames;
+ $threeMonths = monthDiff(-3, $endDate);
+
+  return fetchFirstColumn(dbQuery("
+SELECT DISTINCT l.patientid 
+FROM (select p.patientId, max(p.visitDate) as date_visit from pepfarTable p 
+, patientStatusTemp t
+WHERE p.siteCode = '$site'
+ AND p.patientID = t.patientID
+ AND (t.patientStatus = 6 OR t.patientStatus = 8)
+ 
+ AND p.visitDate <= '$endDate'
+  GROUP BY 1
+ HAVING date_visit BETWEEN '$threeMonths' AND '$endDate'
+ ) l"));
 }
 
 // Patient Retention in Clinical Care
@@ -1247,17 +1261,19 @@ LEFT JOIN " . $setupTableNames[4] . " t2 ON p.patientID = t2.patientID
 WHERE p.siteCode = '$site'
  AND (p.forPepPmtct = 0 OR p.forPepPmtct IS NULL)
  AND p.visitDate <= '$endDate'
- AND t1.patientID IS NULL GROUP BY 1
+ AND t1.patientID IS NULL
+ AND t2.patientID IS NULL GROUP BY 1
  HAVING datediff(day,date_visit, '$startDate') <=365 and datediff(day,date_visit, '$endDate') >=365
 ) l"));
 }
 
 function getHealthQualInd15Num ($repNum, $site, $intervalLength, $startDate, $endDate) {
    global $setupTableNames;
+   $threeMonths = monthDiff(-3, $endDate);
 
   return fetchFirstColumn(dbQuery("
 SELECT DISTINCT l.patientid 
-FROM (select p.patientId, min(p.visitDate) as date_visit from pepfarTable p 
+FROM (select p.patientId, min(p.visitDate) as date_visit, max(p.visitDate) as visitMax from pepfarTable p 
 LEFT JOIN " . $setupTableNames[3] . " t1 ON p.patientID = t1.patientID
  LEFT JOIN " . $setupTableNames[4] . " t2 ON p.patientID = t2.patientID , patientStatusTemp t
 WHERE p.siteCode = '$site'
@@ -1268,6 +1284,7 @@ WHERE p.siteCode = '$site'
  AND t1.patientID IS NULL
  AND t2.patientID IS NULL GROUP BY 1
  HAVING datediff(day, date_visit,'$startDate') <=365 and datediff(day, date_visit, '$endDate') >=365
+ and visitMax BETWEEN '$threeMonths' AND '$endDate'
  ) l"));
 }
 
