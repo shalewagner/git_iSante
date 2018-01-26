@@ -43,7 +43,7 @@ e.encStatus < 255 and e.encountertype in (24,25)",
 'discBplus' => "select left(b.patientid,5) as sitecode, b.patientid, date(d.discDate) as discDate, d.discType, r.reasonDescEn from bplusPids b, discTable d, discReasonLookup r where b.patientid = d.patientid and d.discType = r.discType",  
 /* counseling  */  
 'houseBplus' => "select c.patientid, c.sitecode, ymdtodate(c.visitdateyy,c.visitdatemm,c.visitdatedd) as visitdate, c.seqNum, count(*) as houseCount, sum(case when hivStatus = 1 then 1 else 0 end) as hivPos, sum(case when hivStatus = 2 then 1 else 0 end) as hivNeg, sum(case when hivStatus = 4 then 1 else 0 end) as hivUnk from bplusPids b, householdComp c where b.patientid = c.patientid group by 1,2,3,4", 
-'buddyBplus' => "select distinct ymdtodate(u.visitdateyy,u.visitdatemm,u.visitdatedd) as visitdate, u.* from bplusPids b, buddies u where b.patientid = u.patientid and supportAccomp = 1",  
+'buddyBplus' => "select distinct ymdtodate(u.visitdateyy,u.visitdatemm,u.visitdatedd) as visitdate, u.* from bplusPids b, buddies u where b.patientid = u.patientid and supportAccomp = 1",
 /* committee remove: othermedeligtext othermedreftext notesarvenroll */ 
 'commitBplus' => "select ymdtodate(visitdateyy,visitdatemm,visitdatedd) as reportDate, a.siteCode ,a.patientID ,a.seqNum ,a.arv ,a.initiateTB ,a.TBprogram ,a.PMTCTprogram ,a.continueTB ,a.inadPsychPro ,a.psychEval ,a.familyPlanProg ,a.poorAdherence ,a.ARVadherCoun ,a.immunProg ,a.patientPref ,a.ARVeducCoun ,a.hospitalization ,a.inadPrepForAd ,a.otherMedRef ,a.doesntAccAcc ,a.psychSocialCoun ,a.doesntAccHome ,a.weakFamilySupp ,a.barriersToReg ,a.transAssProg ,a.livesOutsideZone ,a.otherARVprog ,a.progHasRlimit ,a.ARVsTempUn ,a.otherMedElig ,a.nextVisitWeeks ,a.nextVisitDD ,a.nextVisitMM ,a.nextVisitYY ,a.arvEver ,a.committeeApproval ,a.committeeApprovalDateDd ,a.committeeApprovalDateMm ,a.committeeApprovalDateYy ,a.tWaitListOther ,a.tWaitList ,a.dbSite ,a.pedArvEver ,a.pedArvKnown ,a.pedNextVisitDays ,a.pedNextVisitWeeks ,a.pedNextVisitMos from bplusPids b, arvEnrollment a where a.arv is not null and a.arv <> 0 and b.patientid = a.patientid",
 /* sites with lat/long */
@@ -66,35 +66,10 @@ from encValidAll e, dw_pregnancy_ranges p, bplusPids b
 where e.patientid = b.patientid and
 e.patientid = p.patientid and 
 e.visitdate between p.startDate and p.stopDate and
-encountertype in (24,25) group by 1,2,3",
-/* duplicate patients */
-'duplicates' => "select d.match_id, e.patientid, e.sitecode, date(min(visitdate)) as minDate, date(max(visitdate)) as maxDate, d.counter from dupNames d, encValidAll e, patient p where d.lname = p.lname and d.fname = p.fname and d.dobyy = p.dobyy and d.dobmm = p.dobmm and d.dobdd = p.dobdd and d.sex = p.sex and d.fnameMother = p.fnameMother and e.patientid = p.patientid group by 1,2 order by 1,2" 
-);  
-
-$qry="create table preArt select p.patientid from patient p where hivPositive = 1 and patientid not in (select patientid from bplusPids);";
-$result = database()->query($qry);
-$qry="drop table bplusPids;";
-$result = database()->query($qry);
-$qry="create table bplusPids select patientid from preArt;";
-$result = database()->query($qry);
-// generate bplusPids patient reference list
-/* $qry = "drop table if exists bplusPids";
-$result = database()->query($qry);
-$qry = "create table bplusPids select b.patientid from ( select p.patientid, min(CASE WHEN ISDATE(ymdToDate(p.dispDateYy, p.dispDateMm, p.dispDateDd)) = 1 THEN ymdToDate(p.dispDateYy, p.dispDateMm, p.dispDateDd) WHEN ISDATE(ymdToDate(p.dispDateYy, p.dispDateMm, 1)) = 1 THEN ymdToDate(p.dispDateYy, p.dispDateMm, 1) ELSE ymdToDate(p.visitDateYy, p.visitDateMm, p.visitDateDd) end) as mDt from prescriptions p, drugLookup d, patient t where p.patientid = t.patientid and (dispensed = 1 or dispAltDosage is not null or dispAltDosageSpecify is not null or dispAltNumDays is not null or dispAltNumDaysSpecify is not null or dispDateYy is not null or dispDateDd is not null or dispDateMm is not null or dispDateYy is not null or dispAltNumPills is not null) and p.drugID = d.drugID and druggroup in (?,?,?,?) group by 1 having mDt > ?) b, patient t where b.patientid = t.patientid and patStatus < 255";
-$result = database()->query($qry,array('NRTIs', 'Pls', 'NNRTIs','II', '2010-01-01'));
-*/
-$qry = "alter table bplusPids add primary key (patientid)";
-$result = database()->query($qry); 
-
-// setup for duplicate patients
-$qry = "drop table if exists dupNames";
-$result = database()->query($qry);
-$qry = "create table dupNames ( match_id int unsigned not null auto_increment, lname varchar(255) , fname varchar(255) , dobyy char(4) , dobmm char(2) , dobdd char(2) , sex tinyint(3) unsigned , fnameMother varchar(255) , counter bigint(21) , primary key (match_id) )"; 
-$result = database()->query($qry);
-$qry = "insert into dupNames (lname, fname, dobyy, dobmm, dobdd, sex, fnameMother, counter) select lname, fname, dobyy, dobmm, dobdd, sex, fnameMother, count(*) from patient where patStatus < 255 group by 1,2,3,4,5,6,7 having count(*) > 1";
+encountertype in (24,25) group by 1,2,3"
+);
 
 $counter = 0;
-$result = database()->query($qry);
 foreach($queryList as $fh => $qry) {
         writeNancyFile($fh, $qry);
         $counter++;
