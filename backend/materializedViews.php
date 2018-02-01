@@ -572,19 +572,20 @@ function updatePatientStatus($mode = 1, $endDate = null) {
   database()->query('DROP TABLE IF EXISTS allHIV;');
   database()->exec('CREATE TABLE allHIV (patientid varchar(11), patientStatus int null, PRIMARY KEY (patientid));');
   #compute some lists of patients that will be used multiple times later on
-  database()->query('DROP TABLE IF EXISTS patientDispenses');
-  database()->query('CREATE TABLE patientDispenses (keycol INT UNSIGNED NOT NULL AUTO_INCREMENT, patientid varchar(11) not null, dispd date not null, nxt_dispd date null, 
-  		PRIMARY KEY (keycol,patientid,dispd), UNIQUE INDEX iDisp (patientid,dispd))');
-  database()->query('INSERT INTO patientDispenses (patientid, dispd, nxt_dispd) SELECT DISTINCT e.patientid,
+  if ($mode === 1) {
+		database()->query('DROP TABLE IF EXISTS patientDispenses');
+		database()->query('CREATE TABLE patientDispenses (keycol INT UNSIGNED NOT NULL AUTO_INCREMENT, patientid varchar(11) not null, dispd date not null, nxt_dispd date null, 
+		PRIMARY KEY (keycol,patientid,dispd), UNIQUE INDEX iDisp (patientid,dispd))');
+		database()->query('INSERT INTO patientDispenses (patientid, dispd, nxt_dispd) SELECT DISTINCT e.patientid,
 		CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm != ? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
 		ELSE ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) END,
 		MIN(CASE WHEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) IS NOT NULL and e.nxtVisityy != ? and e.nxtvisitmm != ? THEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) ELSE NULL END)
 		FROM prescriptions p, encounter e WHERE e.encountertype in (5,18) AND encStatus < 255 AND 
 		p.patientid = e.patientid AND p.sitecode = e.sitecode AND p.visitdateyy = e.visitdateyy AND p.visitdatemm = e.visitdatemm AND p.visitdatedd = e.visitdatedd AND p.seqNum = e.seqNum AND 
 		drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88) AND 
-		(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR dispAltDosage IS NOT NULL) AND 
-		(forPepPmtct = 2 OR forPepPmtct IS NULL) AND CASE WHEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) IS NOT NULL THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) ELSE
-		ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) end <= ? GROUP BY 1,2 ORDER BY 1,2 DESC', array('un','un','un','un',$endDate));
+		(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR 
+		dispAltDosage IS NOT NULL) AND (forPepPmtct = 2 OR forPepPmtct IS NULL) GROUP BY 1,2 ORDER BY 1,2 DESC', array('un','un','un','un'));
+  }
 # initialize allHIV table based upon patients being hivPositive and having valid transactions per the type list
   database()->query('INSERT INTO allHIV SELECT distinct p.patientid, NULL FROM patient p, encounter e 
            WHERE p.patientid = e.patientid AND
@@ -661,17 +662,22 @@ WHERE d.patientid = h.patientid AND d.patientid NOT IN (SELECT patientid FROM ar
 ) b SET a.patientStatus=b.patientStatus WHERE a.patientid=b.patientid;';
 database()->query($query,array($endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate));
 
-  if ($mode == 2) {
-    database()->exec('lock tables patientStatusTemp write,allHIV t read;');
-    database()->query('delete from patientStatusTemp where endDate = ?', array($endDate));
-    database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from allHIV t;', array($endDate));
-    database()->exec('unlock tables');
-    return getPatientStatusTemp($endDate);
-  } else {
-    database()->exec('lock tables patient p write,allHIV t read');
-    database()->exec('update patient p left join allHIV t using (patientid) set p.patientStatus = t.patientStatus'); 
-    database()->exec('unlock tables;'); 
-  }
+// mode = 1 will now update both the patient table and the patientStatusBatch table, thus removing the need to do multile status update runs in the patientStatusBatch code
+if ($mode == 1) {
+	database()->exec('lock tables patient p write,patientStatusTemp write,allHIV t read');
+	database()->query('delete from patientStatusTemp where endDate = ?', array($endDate));
+	database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from allHIV t', array($endDate));
+	database()->exec('update patient p left join allHIV t using (patientid) set p.patientStatus = t.patientStatus'); 
+	database()->exec('unlock tables'); 
+}
+// in mode = 2 the patientStatusTemp table is updated with new information and that information is returned to the caller
+if ($mode == 2) {
+	database()->exec('lock tables patientStatusTemp write,allHIV t read');
+	database()->query('delete from patientStatusTemp where endDate = ?', array($endDate));
+	database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from allHIV t', array($endDate));
+	database()->exec('unlock tables');
+	return getPatientStatusTemp($endDate);
+}
 }
 
 

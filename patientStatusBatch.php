@@ -44,18 +44,19 @@ printLog('Data warehouse refresh finished...starting PepfarTable refresh (' . $s
 
 updatePepfarTable(); 
 
-printLog('PepfarTable refresh finished...starting patient status update (' . $stopwatch->elapsed() . ' total seconds elapsed)');
+printLog('PepfarTable refresh finished...starting patient alert generation (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 
+/* don't need this anymore, because mode = 1 (ten minute job) will now do it
+ * if a date is missed, various places in the code call updatePatientStatus in mode = 2, so the date will be filled in then
 $times = 25;
 $currDate = date('Y-m-d');
-updatePatientStatus(2, $currDate);
+updatePatientStatus(2, $currDate); 
 for ($i=1; $i <= $times; $i++) {
   $endDate = date('Y-m-d', strtotime('-1 second',strtotime('- ' . ($i-1) . ' month',strtotime(date('m').'/01/'.date('Y').' 00:00:00'))));
   updatePatientStatus(2, $endDate);
-} 
+} */
 
 #adding for the alert.
-printLog('generatePatientAlert() started');
 if (getConfig('serverRole') != 'consolidated') generatePatientAlert();
 printLog('generatePatientAlert() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 
@@ -66,7 +67,7 @@ if (getConfig('defsitecode') == '31100') {
 	printLog('runR34 finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 }
 
-printLog('Patient status update finished (' . $stopwatch->elapsed() . ' total seconds elapsed)');
+printLog('Patient status batch finished (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 
 recordEvent('patientStatusBatchFi', array('duration' => $stopwatch->elapsed()));
 

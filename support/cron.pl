@@ -106,7 +106,9 @@ given ($timeframe) {
 	if ($serverRole eq 'consolidated') {
 	    run10minuteForce();
 	}
-	runPatientStatus();
+	if ($serverRole eq 'production' || $serverRole eq 'test') {
+		runPatientStatus();
+	}
 	if ($serverRole eq 'consolidated') {
 	    runBackup();
 	}
@@ -129,7 +131,8 @@ given ($timeframe) {
         # this should only get called from the primary consolidated server,
         # so make sure there's a cron task added there to call this.
 	if ($serverRole eq 'consolidated') {
-	    runCaseNotif();
+		# removing this in 18.1 because Solutions is now using a different process (and this one is not working)
+	    #runCaseNotif();
 	}
     }
 }
