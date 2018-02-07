@@ -1995,7 +1995,25 @@
 				    <reportFile></reportFile>
 				    <groupLevel>0</groupLevel>
 				    <otherLevel>0</otherLevel>
-				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, result, max(ymdtoDate(resultDateYy,resultDateMm,resultDateDd)) as 'Date resultat' from patient p, labs l where p.patientId=l.patientID and labID in(103,1257) and (result is not null and result !='') and p.patientID not in(select patientID from discTable) group by 1, result, 'Date resultat'  having datediff(mm,max(ymdtoDate(resultDateYy,resultDateMm,resultDateDd)),getDate()) between 6 and 12 and digits(result) &gt; 1000 UNION select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, result, max(ymdtoDate(resultDateYy,resultDateMm,resultDateDd)) as 'Date resultat' from patient p, labs l where p.patientId=l.patientID and labID in(103,1257) and (result is not null and result !='') and p.patientID not in(select patientID from discTable) group by 1, result, 'Date resultat' having datediff(mm,max(ymdtoDate(resultDateYy,resultDateMm,resultDateDd)),getDate()) &gt; 12 and digits(result) &lt; 1000</query> 
+				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, result, ymdtoDate(resultDateYy,resultDateMm,resultDateDd) as 'Date resultat' from patient p, labs l, (
+
+SELECT DISTINCT patientID, MAX( ymdtoDate(
+resultDateYy, resultDateMm, resultDateDd
+) ) AS DateResultat
+FROM  `labs` 
+WHERE labID
+IN ( 103, 1257 ) 
+GROUP BY 1
+)q where p.patientId=l.patientID and q.patientID=l.patientID and q.DateResultat = ymdtoDate(l.resultDateYy,l.resultDateMm,l.resultDateDd) and l.labID in(103,1257) and (result is not null and result !='') and p.patientID not in(select patientID from discTable) AND datediff(mm,DateResultat,getDate()) between 6 and 12 and digits(result) &gt; 1000 UNION select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, result, ymdtoDate(resultDateYy,resultDateMm,resultDateDd) as 'Date resultat' from patient p, labs l, (
+
+SELECT DISTINCT patientID, MAX( ymdtoDate(
+resultDateYy, resultDateMm, resultDateDd
+) ) AS DateResultat
+FROM  `labs` 
+WHERE labID
+IN ( 103, 1257 ) 
+GROUP BY 1
+)q where p.patientId=l.patientID and q.patientID=l.patientID and q.DateResultat = ymdtoDate(l.resultDateYy,l.resultDateMm,l.resultDateDd) and l.labID in(103,1257) and (result is not null and result !='') and p.patientID not in(select patientID from discTable) AND datediff(mm,DateResultat,getDate()) &gt; 12 and digits(result) &lt; 1000</query> 
 				</report>
 		</reportSubSet>
 		<reportSubSet><!--  patient demographics -->
