@@ -597,8 +597,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 # remove children < 18 months with positive PCR tests ?
   database()->query('DELETE FROM allHIV WHERE patientid IN (SELECT DISTINCT p.patientID 
            FROM  patient p left outer join labs l on (p.patientID = l.patientID )
-           WHERE ( (labID=? and (ifnull(result,0)<>1 and upper(result) not like ?)) or labID is null) 
-           AND TIMESTAMPDIFF(MONTH , ymdToDate(p.dobYy, CASE WHEN UPPER(p.dobMm)=? OR p.dobMm = ? THEN ? ELSE IFNULL(p.dobMm,?) end,?),?)< 18 AND ifnull(ymdToDate(l.visitDateYy, l.visitDateMm, l.visitDateDd),?) <= ?);', array('181','POS%','XX','','01','01','01',$endDate,'1979-01-01',$endDate));
+           WHERE ( (labID=? and (ifnull(result,0)<>1 and upper(result) not like ?)) or labID is null));', array('181','POS%'));
 
   database()->query('DROP TABLE IF EXISTS art;');
 # build table of all patients on ART where each patient has one and only one row
