@@ -594,10 +594,38 @@ function updatePatientStatus($mode = 1, $endDate = null) {
            e.encStatus < 255 AND
            e.encounterType IN (1,2,5,10,14,15,16,17,18,20,24,25,26,27,28,29,31) AND
            ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?;', array($endDate));
-# remove children < 18 months with positive PCR tests ?
-  database()->query('DELETE FROM allHIV WHERE patientid IN (SELECT DISTINCT p.patientID 
-           FROM  patient p left outer join labs l on (p.patientID = l.patientID )
-           WHERE ( (labID=? and (ifnull(result,0)<>1 and upper(result) not like ?)) or labID is null));', array('181','POS%'));
+		   
+# remove expose children with new definition 
+  database()->query('drop table if exists exposeChild;');
+  database()->query('create table exposeChild (patientID int primary key , dobDate date,lastVisitDate Date,lastDispDate date,lastPCR int);');
+  database()->query('create unique index exposeChild_index on exposeChild (patientID);');
+  database()->query('insert into exposeChild(patientID) select distinct patientID from vitals p where pedCurrHiv=1 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=?',array($endDate)); 
+  database()->query('insert into exposeChild(patientID) select distinct patientID from discEnrollment p where seroreversion=1 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=? on duplicate key update lastPCR=0;',array($endDate));
+  database()->query('insert into exposeChild(patientID,lastDispDate) select distinct p.patientID ,l.lastDispDate
+  from prescriptions p,
+  (select 
+    patientID,max(CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm != ? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
+		ELSE ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd) END) as lastDispDate from prescriptions p where drugID in (1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88) group by 1) l 
+     where p.forPepPmtct=1
+     and l.lastDispDate=CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm != ? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
+		ELSE ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd) END
+     and l.patientID=p.patientID 
+	 and drugID in (1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88)
+	 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=?
+     on duplicate key update lastDispDate=l.lastDispDate;',array('un','un','un','un',$endDate));
+	 
+   database()->query('insert into exposeChild(patientID,lastPCR)
+  select l.patientID,case when (l.result=1 or upper(l.result) like ?) then 1 else 2 end  from labs l,
+  (select patientID, max(ymdToDate(p.visitDateYy,p.visitDateMm,p.visitDateDd)) as visitDate from labs p where labID=181 group by 1) p 
+  where l.patientID=p.patientID and 
+  p.visitDate=ymdToDate(l.visitDateYy,l.visitDateMm,l.visitDateDd) and 
+  ymdToDate(l.visitDateYy,l.visitDateMm,l.visitDateDd)<=? and
+  l.labID=181 on duplicate key update lastPCR=case when(l.result=1 or upper(l.result) like ?) then 1 else 2 end;',array('POS%',$endDate,'POS%')); 
+
+  database()->query('delete from exposeChild where lastPCR=1;');
+    database()->query('delete from allHIV where patientID in (select patientID from exposeChild)');
+#end of remove expose children
+
 
   database()->query('DROP TABLE IF EXISTS art;');
 # build table of all patients on ART where each patient has one and only one row

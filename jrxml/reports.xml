@@ -1979,7 +1979,13 @@
 				    <otherLevel>0</otherLevel>
 				    <menuSelection>dateSelect</menuSelection>
 			    </report>	
-			
+		<report id="559" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Eligible children for a PCR</title>
+				  <title lang="fr">Enfants éligibles pour un PCR </title>
+				   <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+			    </report>		
 		<report id="555" patientStatus="0" treatmentStatus="0" testType="0">
 				  <title lang="en">Eligible for viral load but not done yet </title>
 				  <title lang="fr">Liste des patients eligibles pour la charge virale mais n'en ayant pas</title>
