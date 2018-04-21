@@ -2,8 +2,8 @@ Most recent change: 1970-01-01 00:00:00
 Application version: 17.3 (84ab284)
 Schema version: 44
 Seconds elapsed: 1
-Total records read: 11190
-Records per second: 11190
+Total records read: 11191
+Records per second: 11191
 
 Record counts by table:
 alertLookup                  15
@@ -17,7 +17,7 @@ conditionOrder              166
 cohortAsort                  19
 discReasonLookup             16
 drugGroupLookup              11
-drugLookup                   89
+drugLookup                   90
 drugVersionOrder             65
 dw_merReportLookup          169
 dw_dataqualityReportLookup    40
