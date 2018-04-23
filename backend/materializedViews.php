@@ -599,7 +599,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
   database()->query('drop table if exists exposeChild;');
   database()->query('create table exposeChild (patientID int primary key , dobDate date,lastVisitDate Date,lastDispDate date,lastPCR int);');
   database()->query('create unique index exposeChild_index on exposeChild (patientID);');
-  database()->query('insert into exposeChild(patientID) select distinct patientID from vitals p where pedCurrHiv=1 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=?',array($endDate)); 
+  database()->query('insert into exposeChild(patientID) select distinct patientID from vitals p where pedCurrHiv=1 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=? on duplicate key update lastPCR=0;',array($endDate)); 
   database()->query('insert into exposeChild(patientID) select distinct patientID from discEnrollment p where seroreversion=1 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=? on duplicate key update lastPCR=0;',array($endDate));
   database()->query('insert into exposeChild(patientID,lastDispDate) select distinct p.patientID ,l.lastDispDate
   from prescriptions p,
