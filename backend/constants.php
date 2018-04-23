@@ -106,7 +106,8 @@ $rxSubHeadElems = array(9,3,6,2);
 
 $pedRxs = array ("abacavir", "combivir", "didanosine", "emtricitabine", "lamivudine", "stavudine", "trizivir", "zidovudine", "tenofovir", 
   "subhead4", "efavirenz", "nevirapine","etravirine",
-  "subhead16", "lopinavirPlusBostRtv", "nelfinavir", "saquinavir", "ritonavir2");
+  "subhead16", "lopinavirPlusBostRtv", "nelfinavir", "saquinavir", "ritonavir2",
+  "subhead17", "Raltegravir","dolutegravir","Elviltegravir");
 
 //no of elements in each rx section/subhead. Has to be reviewed/updated when rxs array is updated
 $pedRxSubHeadElems = array(14,4,7);
