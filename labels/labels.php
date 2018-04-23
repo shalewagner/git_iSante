@@ -1488,6 +1488,17 @@ $dolutegravirStartMm = array (
         "")
 );
 
+$ElviltegravirStartMm = array (
+   "en" => array (
+        "Elviltegravir(EVG)",
+        "",
+        ""),
+   "fr" => array (
+        "Elviltegravir(EVG)",
+        "",
+        "")
+);
+
 $etravirineStartMm = array (
    "en" => array (
         "Etravirine(ETV)",
@@ -5523,7 +5534,8 @@ $rxStdDosage1 = array (
 	"400mg/ 100mg BID",
 	"300mg 2co BID",
 	"400 mg 1Co BID",
-	"50mg qd"),
+	"50mg qd",
+	"150mg qd"),
    "fr" => array (
 	"300mg BID",
 	"300mg/ 150mg BID",
@@ -5544,7 +5556,8 @@ $rxStdDosage1 = array (
 	"400mg/ 100mg BID",
 	"300mg 2co BID",
 	"400 mg 1Co BID",
-	"50mg qd")
+	"50mg qd",
+	"150mg qd")
 );
 // The form titles are not in the db, but I figure all labels should probably
 // be in this file instead of spread across all the forms.

@@ -99,7 +99,7 @@ $rxs = array ("abacavir", "combivir", "didanosine", "emtricitabine", "lamivudine
 $rxs_1 = array ("abacavir", "combivir", "didanosine", "emtricitabine", "lamivudine", "stavudine", "tenofovir", "trizivir", "zidovudine",
   "subhead4", "efavirenz", "nevirapine","etravirine", 
   "subhead5", "atazanavir", "atazanavirPlusBostRtv", "indinavir", "indinavirPlusBostRtv", "lopinavirPlusBostRtv", "Darunavir",
-  "subhead17", "Raltegravir","dolutegravir");
+  "subhead17", "Raltegravir","dolutegravir","Elviltegravir");
 
 //no of elements in each rx section/subhead. Has to be reviewed/updated when rxs array is updated
 $rxSubHeadElems = array(9,3,6,2);
