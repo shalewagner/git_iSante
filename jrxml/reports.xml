@@ -1262,10 +1262,10 @@
                                 <reportFile groupLevel="5" otherLevel="4">networkPregnancyRpt.jasper</reportFile>
 				<groupLevel>1</groupLevel>
 				<otherLevel>1</otherLevel>
-                                <fromClause>temp$user t, #tempStatus1$user s, patientStatusLookup q, v_patients p, clinicLookup a, tbTemp$user b</fromClause>
-				<targetList>distinct ltrim(rtrim(p.clinicPatientID)) as clinicPatientID, p.patientID, p.nationalID, ltrim(rtrim(p.fname)) as fName, ltrim(rtrim(p.lname)) as lName, $localized_gender as 'sex', $computed_age as age, case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc, t.maxDate as LastDate</targetList>
-                                <whereClause>t.patientID = p.patientID and a.sitecode = p.sitecode and p.encounterType in (10, 15) and t.patientID = b.patientID and b.suspectTBDate is not NULL and (b.tbLabsDate is NULL or (b.tbLabsDate is not NULL and b.tbLabsDate &lt; b.suspectTBDate)) and (b.tbDrugsDate is NULL or (b.tbDrugsDate is not NULL and b.tbDrugsDate &lt; b.suspectTBDate)) and p.patientID = s.patientId and q.statusValue = s.status</whereClause>
-                                <groupBy></groupBy>
+                                <fromClause>v_patients p, obs o, encounter e, clinicLookup a, patientStatusLookup q</fromClause>
+				<targetList>distinct ltrim(rtrim(p.clinicPatientID)) as clinicPatientID, p.patientID, p.nationalID, ltrim(rtrim(p.fname)) as fName, ltrim(rtrim(p.lname)) as lName, $localized_gender as sex, $computed_age AS age, case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc, max(e.visitDate) as DDate</targetList>
+                                <whereClause>a.sitecode = p.sitecode and a.sitecode like '$site' and p.patientID=e.patientID and p.patientID=concat(o.location_id,o.person_id) and o.encounter_id=e.encounter_id and q.statusValue = p.patientStatus and o.concept_id=70207 and e.visitDate between '$start' AND '$end' and p.patientID not in(select distinct patientID from labs where labID=137 and result in(1,2) and ymdToDate(resultDateYy,resultDateMm,resultDateDd) between '$start' AND '$end')</whereClause>
+                                <groupBy>2</groupBy>
                                 <havingClause/>
                                 <orderBy>1,2,3</orderBy>
                                 <query>$query</query>
