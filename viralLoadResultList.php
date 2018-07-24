@@ -28,7 +28,7 @@ $message='Liste de patients avec un resultat de charge viral';
  }
  
 $queryArray = array(
-"viralLoad" => "select  distinct clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,telephone
+"viralLoad" => "select  distinct clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,p.sex,DATEDIFF(disp,dbo.ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then dobDd else '15' end )/365 as Age,telephone
 FROM patient p,labs l,(select patientID,max(ymdToDate(resultDateYy,resultDateMm,resultDateDd)) as resultDate from labs where labID in (103,1257) group by 1) la
 WHERE l.labID IN (103, 1257) and digits(l.result)>0
 and la.resultDate=date(ymdToDate(l.resultDateYy,l.resultDateMm,l.resultDateDd))
