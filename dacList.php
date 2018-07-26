@@ -28,7 +28,7 @@ $message='Liste de patients ayant reçu des ARVs ';
  }
  
 $queryArray = array(
-"arvDrug" => "select  distinct p.clinicPatientID as ST,p.lname as 'Prenom',p.fname as 'Nom',telephone
+"arvDrug" => "select  distinct p.clinicPatientID as ST,p.lname as 'Prenom',p.fname as 'Nom',p.sex,DATEDIFF(disp,dbo.ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then dobDd else '15' end )/365 as Age,telephone
 from patient p,
 (select max(visitDate) as visitDate,patientID from v_prescriptions  e 
 where drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88)
