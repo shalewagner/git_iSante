@@ -2842,9 +2842,9 @@ a.dispDt BETWEEN DATE_ADD(NOW(),INTERVAL -3 MONTH) AND NOW()
 GROUP BY 2 HAVING COUNT(DISTINCT b.drugid) >= 2');
 
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
-SELECT LEFT(e.patientID,5),e.patientID,10,date(now()) 
+SELECT distinct LEFT(e.patientID,5),e.patientID,10,date(now()) 
 FROM  `formErrors` f, encounter e 
-WHERE f.encounter_id = e.encounter_id and e.patientID not in (select patientId from patientAlert where alertId=10);
+WHERE f.encounter_id = e.encounter_id and e.patientID not in (select patientId from patientAlert where alertId=10);');
 
 }
 ?>
