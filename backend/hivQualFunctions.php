@@ -86,13 +86,13 @@ function hivQual($repNum, $site, $intervalLength, $startDate, $endDate = null) {
   $tmpDen = array ();
   $tmpNum = array ();
   $tmpInd = array ('01' => array (), '02' => array (), '03' => array (),
-                   '04A' => array (), '04B' => array (), '05' => array (),
-                   '06' => array (), '07' => array (), '08' => array (),
-                   '09' => array (), '10' => array ());
+                   /*'04A' => array (), '04B' => array (),*/ '05' => array (),
+                   '06' => array (), /*'07' => array (), '08' => array (),*/
+                   '09' => array (), /*'10' => array ()*/);
   $tmpPedInd = array ('01' => array (), '02' => array (), '03' => array (),
-                      '04A' => array (), '04B' => array (), '05' => array (),
-                      '06' => array (), '07' => array (), '08' => array (),
-                      '09' => array (), '10' => array ());
+                      /*'04A' => array (), '04B' => array (),*/ '05' => array (),
+                      '06' => array (), /*'07' => array (), '08' => array (),*/
+                      '09' => array (), /*'10' => array ()*/);
 
   if ($endDate == null) {
     $endDate = date ('Y-m-d');
@@ -118,13 +118,13 @@ function hivQual($repNum, $site, $intervalLength, $startDate, $endDate = null) {
   $indicatorProperties[] = array('name' => '01', 'numFunct' => 'getInd1Num', 'denFunct' => 'getInd1Den');
   $indicatorProperties[] = array('name' => '02', 'numFunct' => 'getInd2Num', 'denFunct' => 'getInd2Den');
   $indicatorProperties[] = array('name' => '03', 'numFunct' => 'getInd3Num', 'denFunct' => 'getInd3Den');
-  $indicatorProperties[] = array('name' => '04A', 'numFunct' => 'getInd4Num', 'denFunct' => 'getInd4ADen');
-  $indicatorProperties[] = array('name' => '04B', 'numFunct' => 'getInd4Num', 'denFunct' => 'getInd4BDen');
+  //$indicatorProperties[] = array('name' => '04A', 'numFunct' => 'getInd4Num', 'denFunct' => 'getInd4ADen');
+  //$indicatorProperties[] = array('name' => '04B', 'numFunct' => 'getInd4Num', 'denFunct' => 'getInd4BDen');
   $indicatorProperties[] = array('name' => '06', 'numFunct' => 'getInd6Num', 'denFunct' => 'getInd6Den');
-  $indicatorProperties[] = array('name' => '07', 'numFunct' => 'getInd7Num', 'denFunct' => 'getInd7Den');
-  $indicatorProperties[] = array('name' => '08', 'numFunct' => 'getInd8Num', 'denFunct' => 'getInd8Den');
+  //$indicatorProperties[] = array('name' => '07', 'numFunct' => 'getInd7Num', 'denFunct' => 'getInd7Den');
+  //$indicatorProperties[] = array('name' => '08', 'numFunct' => 'getInd8Num', 'denFunct' => 'getInd8Den');
   $indicatorProperties[] = array('name' => '09', 'numFunct' => 'getInd9Num', 'denFunct' => 'getInd9Den');
-  $indicatorProperties[] = array('name' => '10', 'numFunct' => 'getInd10Num', 'denFunct' => 'getInd10Den');
+  //$indicatorProperties[] = array('name' => '10', 'numFunct' => 'getInd10Num', 'denFunct' => 'getInd10Den');
   
   foreach ($indicatorProperties as $indicatorProperty) {
     // No need to run 5, 7, or 8 if monthly indicator report
@@ -236,26 +236,23 @@ WHERE siteCode = '$site'
 // Adherence Assessment
 
 function getInd5Den($repNum, $site, $intervalLength, $startDate, $endDate) {
-  $threeMonths = monthDiff(-3, $endDate);
   return fetchFirstColumn(dbQuery("
-SELECT DISTINCT p.patientid 
-FROM encValid e, pepfarTable p
+Select distinct patientID FROM (SELECT DISTINCT p.patientid, min(p.visitDate) as minDate
+FROM pepfarTable p
 WHERE p.siteCode = '$site'
  AND (p.forPepPmtct = 0 OR p.forPepPmtct IS NULL)
- AND p.visitDate <= '$threeMonths'
- AND e.patientid = p.patientid
- AND e.encounterType IN " . visitList ("hivQual") . "
- AND e.visitDate BETWEEN '$startDate' AND '$endDate'
- AND p.patientid NOT IN (SELECT DISTINCT patientID FROM discTable WHERE sitecode = '$site' AND discDate <= '$endDate')"));
+ AND p.patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
+ AND p.patientID not in(select distinct patientID from patient where sitecode = '$site' and patientStatus is NULL OR patientStatus=0)
+ GROUP BY 1) l where timestampdiff(month, l.minDate, '$endDate') between 0 and 6"));
 }
 
 function getInd5Num($repNum, $site, $intervalLength, $startDate, $endDate) {
   return fetchFirstColumn(dbQuery("
-SELECT STRAIGHT_JOIN DISTINCT patientID 
+SELECT DISTINCT patientID 
 FROM encValid 
 WHERE siteCode = '$site'
  AND encounterType IN (14, 20)
- AND visitDate BETWEEN '$startDate' AND '$endDate'"));
+ AND timestampdiff(month, visitDate,'$endDate') between 0 and 6"));
 }
 
 
@@ -369,18 +366,18 @@ function getInd3Den($repNum, $site, $intervalLength, $startDate, $endDate) {
 
   // Make some temp tables to hold all the subquery results to use in
   // later joins (improves performance enormously)
-  $tempTableNames = createTempTables ("#ind3Den", 3, "patientID varchar(11)", "pid_idx::patientID");
+  /*$tempTableNames = createTempTables ("#ind3Den", 3, "patientID varchar(11)", "pid_idx::patientID");
 
   // Fill temp tables with values to be used in later joins
   /* Don't count anyone who initiated ART previously */
-  dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT DISTINCT patientid FROM pepfarTable WHERE siteCode = '$site' AND (forPepPmtct = 0 OR forPepPmtct IS NULL) GROUP BY patientid HAVING MIN(visitDate) < '$startDate'");
+ /* dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT DISTINCT patientid FROM pepfarTable WHERE siteCode = '$site' AND (forPepPmtct = 0 OR forPepPmtct IS NULL) GROUP BY patientid HAVING MIN(visitDate) < '$startDate'");
   /* Don't count anyone who's been discontinued */
-  dbQuery ("INSERT INTO " . $tempTableNames[2] . " SELECT DISTINCT patientid FROM discTable WHERE sitecode = '$site' AND discDate <= '$endDate'");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[2] . " SELECT DISTINCT patientid FROM discTable WHERE sitecode = '$site' AND discDate <= '$endDate'");
   /* Patient needs >= 1 visit in period */
-  dbQuery ("INSERT INTO " . $tempTableNames[3] . " SELECT STRAIGHT_JOIN DISTINCT patientID FROM encValid WHERE siteCode = '$site' AND encounterType IN " . visitList ("hivQual") . " AND visitDate BETWEEN '$startDate' AND '$endDate'");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[3] . " SELECT STRAIGHT_JOIN DISTINCT patientID FROM encValid WHERE siteCode = '$site' AND encounterType IN " . visitList ("hivQual") . " AND visitDate BETWEEN '$startDate' AND '$endDate'");
 
   /* Run eligibility query at end of period and store matching pids */
-  $result = fetchFirstColumn(dbQuery("
+ /* $result = fetchFirstColumn(dbQuery("
 SELECT DISTINCT e.patientid 
 FROM eligibility e 
 LEFT JOIN " . $tempTableNames[1] . " t1 ON e.patientid = t1.patientID
@@ -396,21 +393,28 @@ WHERE LEFT(e.patientid, 5) = '$site'
  AND t3.patientID = e.patientID"));
 
   dropTempTables ($tempTableNames);  
-  return $result;
+  return $result;*/
+  
+   return fetchFirstColumn(dbQuery("
+SELECT DISTINCT patientid, visitDate 
+FROM v_patients 
+WHERE siteCode = '$site'
+ AND encounterType in(1,16)
+ AND visitDate BETWEEN '$startDate' AND '$endDate'
+AND patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
+ AND patientID not in(select distinct patientID from patient where sitecode = '$site' and patientStatus is NULL OR patientStatus=0)")); 
 }
         
 function getInd3Num($repNum, $site, $intervalLength, $startDate, $endDate) {
   return fetchFirstColumn(dbQuery("
-SELECT DISTINCT patientid 
-FROM pepfarTable 
+SELECT DISTINCT patientid, visitDate 
+FROM v_patients 
 WHERE siteCode = '$site'
- AND (forPepPmtct = 0 OR forPepPmtct IS NULL)
-" . ($repNum == "530" ? "
+ AND encounterType in(1,16)
  AND visitDate BETWEEN '$startDate' AND '$endDate'
-" : "
-GROUP BY patientid 
-HAVING MIN(visitDate) BETWEEN '$startDate' AND '$endDate'
-")));
+AND patientID in(select distinct patientID from pepfarTable 
+where visitDate BETWEEN '$startDate' AND '$endDate'
+AND (forPepPmtct = 0 OR forPepPmtct IS NULL))"));
 }
 
 
@@ -557,7 +561,7 @@ WHERE e.patientID = v.patientID
 // TB Assessment
 
 function getInd6Den($repNum, $site, $intervalLength, $startDate, $endDate) {
-  $threeDaysStart = dayDiff (-3, $startDate);
+  /*$threeDaysStart = dayDiff (-3, $startDate);
   $threeDaysEnd = dayDiff (-3, $endDate);
 
   $rangeStart = ($repNum == "530") ? $startDate : $threeDaysStart;
@@ -569,11 +573,11 @@ function getInd6Den($repNum, $site, $intervalLength, $startDate, $endDate) {
   // Fill temp tables with values to be used in later joins
   /* Don't count anyone who's on TB treatment currently */
   /* Joining encValid and tbStatus runs much faster than using v_tbStatus */
-  dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT STRAIGHT_JOIN DISTINCT e.patientid FROM encValid e, tbStatus t WHERE e.patientID = t.patientID AND e.siteCode = t.siteCode AND e.visitDateDd = t.visitDateDd AND e.visitDateMm = t.visitDateMm AND e.visitDateYy = t.visitDateYy AND e.seqNum = t.seqNum AND e.siteCode = '$site' AND (t.currentTreat = 1 OR t.currentProp = 1 OR t.propINH = 1) AND e.encounterType IN (1, 2, 16, 17) AND e.visitDate BETWEEN '$rangeStart' AND '$endDate'");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT STRAIGHT_JOIN DISTINCT e.patientid FROM encValid e, tbStatus t WHERE e.patientID = t.patientID AND e.siteCode = t.siteCode AND e.visitDateDd = t.visitDateDd AND e.visitDateMm = t.visitDateMm AND e.visitDateYy = t.visitDateYy AND e.seqNum = t.seqNum AND e.siteCode = '$site' AND (t.currentTreat = 1 OR t.currentProp = 1 OR t.propINH = 1) AND e.encounterType IN (1, 2, 16, 17) AND e.visitDate BETWEEN '$rangeStart' AND '$endDate'");
   /* Joining encValid and prescriptions runs much faster than using v_prescriptions */
-  dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT STRAIGHT_JOIN DISTINCT e.patientid FROM encValid e, prescriptions t WHERE e.patientID = t.patientID AND e.siteCode = t.siteCode AND e.visitDateDd = t.visitDateDd AND e.visitDateMm = t.visitDateMm AND e.visitDateYy = t.visitDateYy AND e.seqNum = t.seqNum AND e.siteCode = '$site' AND e.encounterType IN (5, 18) AND t.drugID IN (13, 18, 24, 25, 30) AND t.dispensed = 1 AND e.visitDate BETWEEN '$rangeStart' AND '$endDate'");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT STRAIGHT_JOIN DISTINCT e.patientid FROM encValid e, prescriptions t WHERE e.patientID = t.patientID AND e.siteCode = t.siteCode AND e.visitDateDd = t.visitDateDd AND e.visitDateMm = t.visitDateMm AND e.visitDateYy = t.visitDateYy AND e.seqNum = t.seqNum AND e.siteCode = '$site' AND e.encounterType IN (5, 18) AND t.drugID IN (13, 18, 24, 25, 30) AND t.dispensed = 1 AND e.visitDate BETWEEN '$rangeStart' AND '$endDate'");
   /* Don't count anyone who's been discontinued */
-  dbQuery ("INSERT INTO " . $tempTableNames[2] . " SELECT DISTINCT patientid FROM discTable WHERE sitecode = '$site' AND discDate <= '$endDate'");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[2] . " SELECT DISTINCT patientid FROM discTable WHERE sitecode = '$site' AND discDate <= '$endDate'");
 
   $result = $repNum == "530" ? fetchFirstColumn(dbQuery("
 SELECT DISTINCT e.patientID
@@ -599,11 +603,18 @@ WHERE siteCode = '$site'
 GROUP BY e.patientID 
 HAVING MIN(e.visitDate) BETWEEN '$rangeStart' AND '$rangeEnd'"));
   dropTempTables ($tempTableNames);
-  return $result;
-}
+  return $result;*/
+  return fetchFirstColumn(dbQuery("
+SELECT DISTINCT patientID 
+FROM v_patients 
+WHERE siteCode = '$site'
+ AND visitDate BETWEEN '$startDate' AND '$endDate'
+ AND dateDiff(mm,ymdToDate(dobYy,dobMm,dobDd), visitDate)>=6
+ AND patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')"));
+ }
 
 function getInd6Num($repNum, $site, $intervalLength, $startDate, $endDate) {
-  $threeDaysStart = dayDiff (-3, $startDate);
+  /*$threeDaysStart = dayDiff (-3, $startDate);
   $threeDaysEnd = dayDiff (-3, $endDate);
 
   $rangeStart = ($repNum == "530") ? $startDate : $threeDaysStart;
@@ -614,7 +625,7 @@ function getInd6Num($repNum, $site, $intervalLength, $startDate, $endDate) {
 
   // Fill temp table with values to be used in later joins
   /* Count patients screened for TB symptoms */
-  dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT STRAIGHT_JOIN DISTINCT e.patientid FROM encValid e, tbStatus t WHERE e.patientID = t.patientID AND e.siteCode = t.siteCode AND e.visitDateDd = t.visitDateDd AND e.visitDateMm = t.visitDateMm AND e.visitDateYy = t.visitDateYy AND e.seqNum = t.seqNum AND e.siteCode = '$site' AND (t.noTBsymptoms = 1 OR t.asymptomaticTb = 1) AND e.encounterType IN (1, 2, 16, 17) AND e.visitDate BETWEEN '$rangeStart' AND '$endDate'");
+  /*dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT STRAIGHT_JOIN DISTINCT e.patientid FROM encValid e, tbStatus t WHERE e.patientID = t.patientID AND e.siteCode = t.siteCode AND e.visitDateDd = t.visitDateDd AND e.visitDateMm = t.visitDateMm AND e.visitDateYy = t.visitDateYy AND e.seqNum = t.seqNum AND e.siteCode = '$site' AND (t.noTBsymptoms = 1 OR t.asymptomaticTb = 1) AND e.encounterType IN (1, 2, 16, 17) AND e.visitDate BETWEEN '$rangeStart' AND '$endDate'");
   dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT STRAIGHT_JOIN DISTINCT e.patientid FROM encValid e, obs t WHERE e.siteCode = t.location_id AND e.encounter_id = t.encounter_id AND e.siteCode = '$site' AND ((t.concept_id IN ('7000', '7001', '7002', '7003', '7004', '7005', '7006', '7007', '7008', '7009', '7010', '7011', '7012', '7013', '7014', '7015', '7016', '7017', '7018', '7019', '7020', '7021', '7022', '7023', '7024', '7025', '7026', '7027', '7028', '7029', '7023', '7033', '7034', '7035', '7036', '7037', '7038', '7042', '7043') AND t.value_boolean = 1) OR (t.concept_id IN ('7030', '7031', '7044') AND t.value_text IS NOT NULL)) AND e.encounterType IN (1, 2, 16, 17) AND e.visitDate BETWEEN '$rangeStart' AND '$endDate'");
 
   $result = $repNum == "530" ? fetchFirstColumn(dbQuery("
@@ -662,7 +673,14 @@ UNION
 SELECT DISTINCT patientID FROM " . $tempTableNames[1]
 : "")));
   dropTempTables ($tempTableNames);
-  return $result;
+  return $result;*/
+  
+  return fetchFirstColumn(dbQuery("
+SELECT DISTINCT patientID 
+FROM v_tbStatus 
+WHERE siteCode = '$site'
+ AND visitDate BETWEEN '$startDate' AND '$endDate'
+ AND (presenceBCG=1 or suspicionTBwSymptoms=1 or recentNegPPD=1 or noTBsymptoms=1 or statusPPDunknown=1 or propINH=1 or pedTbEvalRecentExp=1 or pedTbEvalPpdRecent in(1,2,4))"));
 }
 
 
@@ -788,7 +806,7 @@ function getEligDays ($repNum, $startDate) {
 }
 
 function getInd9Den($repNum, $site, $intervalLength, $startDate, $endDate) {
-  global $setupTableNames;
+  /*global $setupTableNames;
   $eligDays = getEligDays ($repNum, $startDate);
 
   // Make some temp tables to hold all the subquery results to use in
@@ -798,15 +816,15 @@ function getInd9Den($repNum, $site, $intervalLength, $startDate, $endDate) {
   fillPregnancyTable ($tempTableNames[1], $site, $startDate, $endDate, $setupTableNames[2]);
 
   /* For monthly, need to check for treatment eligibility too */
-  if ($repNum == "530") {
+  /*if ($repNum == "530") {
     dbQuery ("INSERT INTO " . $tempTableNames[2] . " SELECT patientID, reason FROM eligibility WHERE LEFT(patientid, 5) = '$site' AND visitDate BETWEEN '$startDate' AND '$endDate' AND criteriaVersion " . (strtotime ($endDate) <= strtotime (CD4_350_DATE) ? "= 1" : (strtotime ($endDate) <= strtotime (OPTION_B_PLUS_DATE) ? "= 2" : "IN (2, 3)")));
     /* Need multiple copies to avoid "Can't reopen table" error */
-    dbQuery ("INSERT INTO " . $tempTableNames[3] . " SELECT patientID, maxDate FROM " . $tempTableNames[1]);
+    /*dbQuery ("INSERT INTO " . $tempTableNames[3] . " SELECT patientID, maxDate FROM " . $tempTableNames[1]);
     dbQuery ("INSERT INTO " . $tempTableNames[4] . " SELECT patientID, lmpDate, eligDate FROM " . $setupTableNames[2]);
   }
 
   /* Run denominator query and store results for computing numerator */
-  $result = fetchFirstColumn(dbQuery("
+  /*$result = fetchFirstColumn(dbQuery("
 SELECT DISTINCT e.patientID
 FROM encValid e, " . $setupTableNames[2] . " t, " . $tempTableNames[1] . " x
 WHERE t.patientID = e.patientID
@@ -859,11 +877,31 @@ WHERE t.patientID = e.patientID
 " : "")));
 
   dropTempTables ($tempTableNames);  
-  return $result;
+  return $result;*/
+  
+  $result = fetchFirstColumn(dbQuery("
+select distinct A.patientID from 
+(  
+SELECT  ymdToDate(visitDateYy,visitDateMm,visitDateDd) as startDate,patientID,siteCode FROM `medicalEligARVs` WHERE pregnantWomen=1
+union
+SELECT  e.visitDate, e.patientID, e.siteCode
+FROM  `obs` o, encounter e
+WHERE e.encounter_id = o.encounter_id
+AND o.concept_id IN (71262,7959,7098,7051,7053,7052,70118,70132,70150,70144,70130,70148,71140,70128,71398,70084,70069,
+70082,70078,70086,70066,70103,70624,70068,70087,70733,7958,71068,70732,7960,71070,7967,70730,70591,70731,70750,7957,
+70126,7955,71067,70729,7806,70067,70826,7805,70827,7804,70465,70018,70466,70083)
+and (o.value_text<>'' or o.value_numeric>0 or o.value_boolean>0 or value_datetime is not null)
+union 
+select  ymdToDate(visitDateYy,visitDateMm,visitDateDd) as startDate,patientID,siteCode from labs where labID in (134,1603,1601,1602) and (result=1 or upper(result) like 'POS%')
+union 
+select visitDate ,patientId,siteCode from encounter where encounterType=26 and encStatus<255) A where startDate between '$startDate' and '$endDate' 
+and A.patientID in(select distinct patientID from v_patients)
+AND A.patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or LOWER(discReasonOtherText) like '%transfert%' or reasonDiscDeath=1) and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')" ));
+ return $result;
 }
 
 function getInd9Num($repNum, $site, $intervalLength, $startDate, $endDate) {
-  global $setupTableNames;
+  /*global $setupTableNames;
 
   // If monthly, need temp tables to hold subquery results used in later joins
   if ($repNum == "530") {
@@ -872,7 +910,7 @@ function getInd9Num($repNum, $site, $intervalLength, $startDate, $endDate) {
     // Fill temp tables with values to be used in later joins
     dbQuery ("INSERT INTO " . $tempTableNames[1] . " SELECT patientID, reason FROM eligibility WHERE LEFT(patientid, 5) = '$site' AND visitDate BETWEEN '$startDate' AND '$endDate' AND criteriaVersion " . (strtotime ($endDate) <= strtotime (CD4_350_DATE) ? "= 1" : (strtotime ($endDate) <= strtotime (OPTION_B_PLUS_DATE) ? "= 2" : "IN (2, 3)")));
     /* Need multiple copies to avoid "Can't reopen table" error */
-    dbQuery ("INSERT INTO " . $tempTableNames[2] . " SELECT patientID, lmpDate, eligDate FROM " . $setupTableNames[2]);
+    /*dbQuery ("INSERT INTO " . $tempTableNames[2] . " SELECT patientID, lmpDate, eligDate FROM " . $setupTableNames[2]);
   }
 
   $result = fetchFirstColumn(dbQuery("
@@ -902,8 +940,27 @@ WHERE p.patientID = d.patientID
 " : "
  AND d.visitdate BETWEEN t.eligDate AND '$endDate'")));
   if ($repNum == "530") dropTempTables ($tempTableNames);
-  return $result;
-}
+  return $result;*/
+
+  
+  $result = fetchFirstColumn(dbQuery("
+select distinct A.patientID from 
+(  
+SELECT  ymdToDate(visitDateYy,visitDateMm,visitDateDd) as startDate,patientID,siteCode FROM `medicalEligARVs` WHERE pregnantWomen=1
+union
+SELECT  e.visitDate, e.patientID, e.siteCode
+FROM  `obs` o, encounter e
+WHERE e.encounter_id = o.encounter_id
+AND o.concept_id IN (71262,7959,7098,7051,7053,7052,70118,70132,70150,70144,70130,70148,71140,70128,71398,70084,70069,
+70082,70078,70086,70066,70103,70624,70068,70087,70733,7958,71068,70732,7960,71070,7967,70730,70591,70731,70750,7957,
+70126,7955,71067,70729,7806,70067,70826,7805,70827,7804,70465,70018,70466,70083)
+and (o.value_text<>'' or o.value_numeric>0 or o.value_boolean>0 or value_datetime is not null)
+union 
+select  ymdToDate(visitDateYy,visitDateMm,visitDateDd) as startDate,patientID,siteCode from labs where labID in (134,1603,1601,1602) and (result=1 or upper(result) like 'POS%')
+union 
+select visitDate ,patientId,siteCode from encounter where encounterType=26 and encStatus<255) A where startDate between '$startDate' and '$endDate' and A.patientID in(select distinct patientID from pepfarTable)" ));
+ return $result;
+ }
 
 
 // Immunization

@@ -1260,18 +1260,11 @@
                                 <reportFile groupLevel="5" otherLevel="2">networkSexRpt.jasper</reportFile>
                                 <reportFile groupLevel="5" otherLevel="3">networkAgeRpt.jasper</reportFile>
                                 <reportFile groupLevel="5" otherLevel="4">networkPregnancyRpt.jasper</reportFile>
-				<groupLevel>1</groupLevel>
-				<otherLevel>1</otherLevel>
+				                <groupLevel>1</groupLevel>
+				                <otherLevel>1</otherLevel>
                                 <fromClause>a_patients p, obs o, encounter e, clinicLookup a</fromClause>
-				<targetList>distinct ltrim(rtrim(p.clinicPatientID)) as clinicPatientID, p.patientID, 
-p.nationalID, ltrim(rtrim(p.fname)) as fName, ltrim(rtrim(p.lname)) as lName, $localized_gender as sex, $computed_age AS age,
-max(e.visitDate) as DDate</targetList>
-                                <whereClause>a.sitecode = p.sitecode and a.sitecode like '$site' and p.patientID=e.patientID and 
-p.patientID=concat(o.location_id,o.person_id) and o.encounter_id=e.encounter_id  
-and o.concept_id=70207 and e.encStatus &lt; 255
-and e.visitDate between '$start' AND '$end'
-and p.patientID not in(select distinct patientID from labs 
-where labID=137 and result in(1,2) and ymdToDate(resultDateYy,resultDateMm,resultDateDd) between '$start' AND '$end')</whereClause>
+				                <targetList>distinct ltrim(rtrim(p.clinicPatientID)) as clinicPatientID, p.patientID,p.nationalID, ltrim(rtrim(p.fname)) as fName, ltrim(rtrim(p.lname)) as lName, $localized_gender as sex, $computed_age AS age,max(e.visitDate) as DDate</targetList>
+                                <whereClause>a.sitecode = p.sitecode and a.sitecode like '$site' and p.patientID=e.patientID and p.patientID=concat(o.location_id,o.person_id) and o.encounter_id=e.encounter_id  and o.concept_id=70207 and e.encStatus &lt; 255 and e.visitDate between '$start' AND '$end' and p.patientID not in(select distinct patientID from labs  where labID=137 and result in(1,2) and ymdToDate(resultDateYy,resultDateMm,resultDateDd) between '$start' AND '$end')</whereClause>
                                 <groupBy>2</groupBy>
                                 <havingClause/>
                                 <orderBy>1,2,3</orderBy>
@@ -1335,19 +1328,12 @@ where labID=137 and result in(1,2) and ymdToDate(resultDateYy,resultDateMm,resul
                                 <reportFile groupLevel="5" otherLevel="2">networkSexRpt.jasper</reportFile>
                                 <reportFile groupLevel="5" otherLevel="3">networkAgeRpt.jasper</reportFile>
                                 <reportFile groupLevel="5" otherLevel="4">networkPregnancyRpt.jasper</reportFile>
-				<groupLevel>1</groupLevel>
-				<otherLevel>1</otherLevel>
+				                <groupLevel>1</groupLevel>
+				                <otherLevel>1</otherLevel>
 								<menuSelection>dateSelect</menuSelection>
-								<fromClause>a_patients p, obs o, encounter e, clinicLookup a</fromClause>
-                                <targetList>distinct ltrim(rtrim(p.clinicPatientID)) as clinicPatientID, p.patientID, 
-p.nationalID, ltrim(rtrim(p.fname)) as fName, ltrim(rtrim(p.lname)) as lName, $localized_gender as sex, $computed_age AS age,
-max(e.visitDate) as DDate</targetList>
-								<whereClause>a.sitecode = p.sitecode and a.sitecode='$site' and p.patientID=e.patientID and 
-p.patientID=concat(o.location_id,o.person_id) and o.encounter_id=e.encounter_id  and e.encStatus &lt; 255
-and o.concept_id in(71271,71272,71273,71403,71404,71405) and e.visitDate between '$start' AND '$end'
- and p.patientID not in(select distinct patientID from prescriptions 
-where drugID in(13,18,24,25,30) and (forPepPmtct is NULL or forPepPmtct=2) 
-and ymdToDate(dispDateYy,dispDateMm,dispDateDd) between '$start' AND '$end')</whereClause>
+								<fromClause>a_patients p,(select patientID, visitDate, siteCode from v_conditions where  encounterType in (1, 2, 16, 17) and conditionID in (20, 21, 41, 208, 397, 405, 409, 423) and conditionActive != 2 and conditionActive is not null  union select e.patientID,e.visitDate,e.siteCode from encounter e,obs o where o.encounter_id=e.encounter_id  and e.encStatus &lt; 255 and o.concept_id in(71271,71272,71273,71403,71404,71405)) e, clinicLookup a</fromClause>
+                                <targetList>distinct ltrim(rtrim(p.clinicPatientID)) as clinicPatientID, p.patientID, p.nationalID, ltrim(rtrim(p.fname)) as fName, ltrim(rtrim(p.lname)) as lName, $localized_gender as sex, $computed_age AS age,max(e.visitDate) as DDate</targetList>
+								<whereClause>a.sitecode = p.sitecode and a.sitecode='$site' and p.patientID=e.patientID and e.visitDate between '$start' AND '$end'  and p.patientID not in(select distinct patientID from prescriptions where drugID in(13,18,24,25,30) and (forPepPmtct is NULL or forPepPmtct=2)  and ymdToDate(dispDateYy,dispDateMm,dispDateDd) between '$start' AND '$end')</whereClause>
 								<groupBy>2</groupBy>
                                 <havingClause></havingClause>
 								<orderBy></orderBy>
