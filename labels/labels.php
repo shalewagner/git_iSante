@@ -222,7 +222,7 @@ $doseProp = array (
 	"60%",
 	"70%",
 	"80%",
-	"90%",
+	"95%",
 	"100%",
         "Ask patient to give a visual estimate of how regularly they have taken their ARV doses, with 0% representing none, 50% representing half of the time, 100% representing all of the time."),
    "fr" => array (
@@ -236,7 +236,7 @@ $doseProp = array (
 	"60%",
 	"70%",
 	"80%",
-	"90%",
+	"95%",
 	"100%",
         "Demander au patient une estimation visuelle de la prise de ses m&#xe9;dicaments ARV. 0% repr&#xe9;sente aucune prise de m&#xe9;dicaments, 50% repr&#xe9;sente une prise de m&#xe9;dicaments la moiti&#xe9; du temps, et 100% repr&#xe9;sente une prise parfaite des m&#xe9;dicaments.")
 );

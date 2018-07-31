@@ -1,0 +1,329 @@
+15 seconds elapsed
+total records processed
+$VAR1 = {
+          'errorC' => 0,
+          'unknownC' => 0,
+          'update2C' => 0,
+          'insertC' => 11138,
+          'preDeleteC' => 0,
+          'update1C' => 0
+        };
+
+$VAR1 = {
+          'immunizationLookup' => {
+                                    'insertC' => 21
+                                  },
+          'concept_name' => {
+                              'insertC' => 4831
+                            },
+          'dw_tbReportLookup' => {
+                                   'insertC' => 63
+                                 },
+          'patientStatusLookup' => {
+                                     'insertC' => 11
+                                   },
+          'immunizationRendering' => {
+                                       'insertC' => 37
+                                     },
+          'concept' => {
+                         'insertC' => 2416
+                       },
+          'concept_datatype' => {
+                                  'insertC' => 11
+                                },
+          'drugGroupLookup' => {
+                                 'insertC' => 10
+                               },
+          'referralLookup' => {
+                                'insertC' => 19
+                              },
+          'drugVersionOrder' => {
+                                  'insertC' => 65
+                                },
+          'dw_obgynReportLookup' => {
+                                      'insertC' => 18
+                                    },
+          'queueStatusLookup' => {
+                                   'insertC' => 6
+                                 },
+          'dw_malariaReportLookup' => {
+                                        'insertC' => 144
+                                      },
+          'regimen' => {
+                         'insertC' => 106
+                       },
+          'dw_nutritionReportLookup' => {
+                                          'insertC' => 14
+                                        },
+          'cohortAsort' => {
+                             'insertC' => 19
+                           },
+          'riskLookup' => {
+                            'insertC' => 37
+                          },
+          'conditionOrder' => {
+                                'insertC' => 166
+                              },
+          'drugLookup' => {
+                            'insertC' => 85
+                          },
+          'clinicLookup' => {
+                              'insertC' => 756
+                            },
+          'discReasonLookup' => {
+                                  'insertC' => 16
+                                },
+          'labLookup' => {
+                           'insertC' => 617
+                         },
+          'dw_merReportLookup' => {
+                                    'insertC' => 169
+                                  },
+          'dw_dataqualityReportLookup' => {
+                                            'insertC' => 40
+                                          },
+          'concept_class' => {
+                               'insertC' => 18
+                             },
+          'dw_measureForAgeLookup' => {
+                                        'insertC' => 582
+                                      },
+          'pedLabsRendering' => {
+                                  'insertC' => 4
+                                },
+          'riskOrder' => {
+                           'insertC' => 80
+                         },
+          'dw_weightForHeightLookup' => {
+                                          'insertC' => 484
+                                        },
+          'pedLabsLookup' => {
+                               'insertC' => 4
+                             },
+          'labGroupLookup' => {
+                                'insertC' => 14
+                              },
+          'labPanelLookup' => {
+                                'insertC' => 40
+                              },
+          'conditionLookup' => {
+                                 'insertC' => 205
+                               },
+          'encTypeLookup' => {
+                               'insertC' => 30
+                             }
+        };
+
+742.533333333333 records per second
+Pass 1 duration 0 seconds.
+Pass 2 duration 1 seconds.
+Pass 3 duration 12 seconds.
+
+Application version 15.1 test (1f88a5c)
+Schema version 43
+Site codes 11412, 11116, 43303, 11142, 52107, 12202, 51110, 11506, 71205, 92101, 11111, 91111, 51102, 11170, 21201, 41202, 92103, 43103, 11319, 81102, 63103, 42301, 36104, 53204, 62101, 11207, 93102, 91302, 32203, 23102, 91205, 14102, 85401, 91107, 23302, 11210, 63202, 62106, 63201, 53205, 12104, 93415, 71405, 53132, 11101, 11158, 15101, 55205, 82302, 53103, 11223, 73106, 31205, 11325, 71117, 34301, 31103, 32102, 62301, 11213, 91202, 11230, 21104, 91109, 64201, 13302, 35101, 84105, 44202, 11312, 85302, 61402, 54111, 91130, 84104, 32301, 52303, 44201, 61205, 93405, 54301, 93304, 54201, 14202, 83404, 11309, 71501, 13107, 53113, 91102, 81110, 21110, 72201, 22204, 73203, 35205, 73305, 51109, 41101, 51301, 34201, 11129, 22101, 11321, 91301, 22203, 11135, 13104, 11222, 92113, 41100, 34102, 31110, 71206, 11415, 11220, 75201, 12201, 23304, 11126, 11226, 54203, 71204, 11505, 91112, 11303, 71302, 12103, 11308, 14107, 11206, 22202, 73202, 32204, 11450, 61120, 55206, 21403, 53104, 71404, 85103, 21103, 11143, 93406, 51203, 11147, 71116, 34501, 11102, 11157, 91204, 52306, 53206, 91110, 82301, 93407, 11324, 11606, 55111, 11501, 82501, 14205, 61206, 11119, 85301, 81202, 54403, 41102, 54110, 35204, 11235, 11320, 73105, 11108, 93416, 83103, 71105, 84106, 12302, 11313, 15202, 31301, 23101, 83401, 11404, 11420, 81201, 53112, 32201, 51103, 41201, 33101, 32302, 15205, 13106, 11136, 41301, 22102, 12303, 61401, 11124, 11216, 51202, 44101, 52105, 34202, 11302, 11504, 52305, 11317, 11209, 71165, 11103, 71114, 11318, 14207, 62201, 12110, 21301, 37102, 11510, 11417, 11221, 54107, 35202, 11115, 11152, 71115, 32305, 11140, 71402, 64202, 51107, 23402, 82203, 64105, 13110, 14106, 11289, 14201, 73303, 11307, 62303, 54108, 21102, 84103, 31203, 63302, 53105, 54402, 53111, 31201, 11109, 93413, 92106, 13103, 11327, 11121, 92203, 54102, 13119, 71106, 62103, 11146, 23202, 11411, 31204, 23303, 34302, 11114, 92109, 36103, 81112, 84102, 63102, 14204, 55207, 63101, 11603, 11405, 21112, 84109, 11137, 93414, 93403, 54109, 51101, 12111, 91106, 32206, 91108, 53207, 31202, 11110, 93402, 11414, 11112, 32202, 32107, 85101, 11316, 54401, 61407, 81109, 11117, 52106, 11503, 91100, 74301, 71601, 11151, 12205, 51108, 44102, 21101, 73306, 11224, 81101, 73107, 14105, 71103, 11605, 23401, 11306, 11214, 52103, 22103, 91120, 54208, 32108, 12301, 61203, 21111, 11203, 71503, 54303, 53110, 11511, 81502, 93412, 13105, 54101, 13501, 55201, 12112, 11231, 92107, 92202, 11219, 71403, 93404, 11416, 37101, 33102, 11604, 11326, 11251, 11106, 73204, 13111, 93301, 11154, 14203, 92112, 54112, 34401, 12105, 11410, 83403, 35206, 11128, 11208, 21402, 53208, 31104, 91105, 11141, 61105, 11402, 71104, 71201, 72302, 83203, 12108, 61204, 13108, 11145, 73103, 11315, 11408, 15203, 83302, 91103, 23201, 93105, 93409, 11123, 11423, 52104, 61102, 84201, 11138, 75101, 11227, 13401, 92108, 85404, 12109, 12206, 11218, 37201, 31107, 64101, 52302, 53109, 84111, 81402, 71107, 11107, 11105, 32106, 36101, 51106, 93411, 44302, 81103, 93410, 54205, 37103, 13202, 14103, 13112, 82202, 13502, 51201, 61403, 62105, 85105, 21100, 35201, 11602, 74201, 11250, 92104, 32208, 81105, 92201, 23301, 73302, 11419, 11403, 43302, 71113, 12207, 53107, 61406, 72103, 15103, 21302, 61405, 43402, 35203, 75102, 53201, 82102, 11139, 61201, 51302, 13109, 73102, 15204, 32207, 11104, 11153, 15102, 63301, 31100, 93302, 73205, 11314, 54106, 62202, 53108, 54113, 72202, 62102, 21202, 11301, 11240, 13303, 11217, 93104, 91201, 11232, 55202, 83202, 84100, 64102, 61106, 32105, 11509, 21109, 11202, 11601, 13201, 91104, 93401, 11120, 13102, 43301, 54103, 11228, 33201, 52308, 53301, 54204, 31108, 81104, 11188, 83201, 44301, 85104, 61101, 73301, 54206, 74101, 11418, 71101, 52307, 11130, 92105, 11409, 13101, 21303, 54302, 12208, 72102, 12204, 84101, 81106, 31109, 51100, 37104, 54114, 61100, 93201, 81403, 53106, 11305, 73304, 73101, 82205, 11132, 81111, 71112, 36102, 43202, 51204, 54209, 51104, 13503, 52102, 11156, 34502, 12106, 51303, 53116, 55203, 61202, 71130, 73201, 15105, 11323, 71301, 61104, 12102, 21107, 32104, 54207, 93408, 32101, 71401, 62302, 11225, 35103, 21203, 31302, 93417, 85102, 83205, 62203, 91113, 22201, 14104, 32205, 13304, 62104, 72133, 71203, 95698, 54202, 81108, 11229, 93303, 21113, 92110, 11508, 81501, 11421, 31130, 71108, 53101, 54104, 93103, 11149, 21106, 11304, 85403, 63204, 11401, 11133, 83301, 42201, 81107, 31101, 71110, 32303, 83102, 31105, 74102, 43101, 52301, 82101, 84110, 12209, 11215, 91401, 84202, 11233, 84107, 81302, 83402, 93202, 81100, 64103, 73104, 11118, 52114, 34101, 21401, 82204, 11125, 12203, 43201, 14206, 11406, 53202, 11131, 11127, 31111, 71102, 11205, 52101, 15201, 13402, 53114, 61103, 83204, 92111, 13113, 11211, 15206, 53115, 93101, 43401, 13114, 51111, 35102, 81401, 11122, 11201, 92102, 72301, 64104, 53102, 71100, 71202, 85201, 71109, 11507, 83101, 91203, 11502, 84108, 55101, 21105, 31120, 11144, 63104, 11100, 82201, 34402, 11155, 31206, 53203, 32304, 14101, 11234, 21108, 12107, 63203, 41203, 72101, 32103, 61404, 55204, 93418, 11113, 11311, 91101, 13301, 93203, 31106, 11310, 11400, 91114, 11134, 43304, 11148, 93305, 11164, 11150, 11413, 11722, 51105, 11407, 91303, 85303, 34303, 71502, 11212, 11422, 81301, 11322, 52109, 54105, 12101, 52304, 61301, 36201, 13120, 11204, 15104, 31102, 85402, 43102
+
+immunizationLookup
+INSERT INTO `immunizationLookup` (`immunizationCode`, `immunizationID`, `immunizationLookup_id`, `immunizationNameEn`, `immunizationNameFr`) VALUES (?, ?, ?, ?, ?)
+UPDATE `immunizationLookup` SET `immunizationCode` = ?, `immunizationID` = ?, `immunizationNameEn` = ?, `immunizationNameFr` = ? WHERE dbSite = ? AND immunizationID = ?
+UPDATE `immunizationLookup` SET `immunizationCode` = ?, `immunizationID` = ?, `immunizationNameEn` = ?, `immunizationNameFr` = ? WHERE dbSite = ? AND `immunizationLookup_id` = ?
+
+
+concept_name
+INSERT INTO `concept_name` (`concept_id`, `creator`, `date_created`, `description`, `locale`, `name`, `short_name`) VALUES (?, ?, ?, ?, ?, ?, ?)
+UPDATE `concept_name` SET `concept_id` = ?, `creator` = ?, `date_created` = ?, `description` = ?, `locale` = ?, `name` = ?, `short_name` = ? WHERE dbSite = ? AND 
+UPDATE `concept_name` SET `concept_id` = ?, `creator` = ?, `date_created` = ?, `description` = ?, `locale` = ?, `name` = ?, `short_name` = ? WHERE dbSite = ? AND `concept_name_id` = ?
+
+
+dw_tbReportLookup
+INSERT INTO `dw_tbReportLookup` (`data_elements`, `definitionen`, `definitionfr`, `indicator`, `indicatorDenominator`, `indicatorType`, `nameen`, `namefr`, `subGroupEn`, `subGroupFr`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UPDATE `dw_tbReportLookup` SET `data_elements` = ?, `definitionen` = ?, `definitionfr` = ?, `indicator` = ?, `indicatorDenominator` = ?, `indicatorType` = ?, `nameen` = ?, `namefr` = ?, `subGroupEn` = ?, `subGroupFr` = ? WHERE dbSite = ? AND 
+UPDATE `dw_tbReportLookup` SET `data_elements` = ?, `definitionen` = ?, `definitionfr` = ?, `indicator` = ?, `indicatorDenominator` = ?, `indicatorType` = ?, `nameen` = ?, `namefr` = ?, `subGroupEn` = ?, `subGroupFr` = ? WHERE dbSite = ? AND `dw_tbReportLookup_id` = ?
+
+
+patientStatusLookup
+INSERT INTO `patientStatusLookup` (`reportOrder`, `statusDescEn`, `statusDescFr`, `statusValue`) VALUES (?, ?, ?, ?)
+UPDATE `patientStatusLookup` SET `reportOrder` = ?, `statusDescEn` = ?, `statusDescFr` = ?, `statusValue` = ? WHERE dbSite = ? AND 
+UPDATE `patientStatusLookup` SET `reportOrder` = ?, `statusDescEn` = ?, `statusDescFr` = ?, `statusValue` = ? WHERE dbSite = ? AND `patientStatusLookup_id` = ?
+
+
+immunizationRendering
+INSERT INTO `immunizationRendering` (`immunizationCnt`, `immunizationEncounterType`, `immunizationFormVersion`, `immunizationGroup`, `immunizationID`, `immunizationOrderEn`, `immunizationOrderFr`, `immunizationRendering_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+UPDATE `immunizationRendering` SET `immunizationCnt` = ?, `immunizationEncounterType` = ?, `immunizationFormVersion` = ?, `immunizationGroup` = ?, `immunizationID` = ?, `immunizationOrderEn` = ?, `immunizationOrderFr` = ? WHERE dbSite = ? AND immunizationID = ?
+UPDATE `immunizationRendering` SET `immunizationCnt` = ?, `immunizationEncounterType` = ?, `immunizationFormVersion` = ?, `immunizationGroup` = ?, `immunizationID` = ?, `immunizationOrderEn` = ?, `immunizationOrderFr` = ? WHERE dbSite = ? AND `immunizationRendering_id` = ?
+
+
+concept
+INSERT INTO `concept` (`changed_by`, `class_id`, `concept_id`, `creator`, `datatype_id`, `date_changed`, `date_created`, `default_charge`, `description`, `form_text`, `is_set`, `retired`, `short_name`, `version`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UPDATE `concept` SET `changed_by` = ?, `class_id` = ?, `creator` = ?, `datatype_id` = ?, `date_changed` = ?, `date_created` = ?, `default_charge` = ?, `description` = ?, `form_text` = ?, `is_set` = ?, `retired` = ?, `short_name` = ?, `version` = ? WHERE dbSite = ? AND 
+UPDATE `concept` SET `changed_by` = ?, `class_id` = ?, `creator` = ?, `datatype_id` = ?, `date_changed` = ?, `date_created` = ?, `default_charge` = ?, `description` = ?, `form_text` = ?, `is_set` = ?, `retired` = ?, `short_name` = ?, `version` = ? WHERE dbSite = ? AND `concept_id` = ?
+
+
+concept_datatype
+INSERT INTO `concept_datatype` (`concept_datatype_id`, `creator`, `date_created`, `description`, `hl7_abbreviation`, `name`) VALUES (?, ?, ?, ?, ?, ?)
+UPDATE `concept_datatype` SET `creator` = ?, `date_created` = ?, `description` = ?, `hl7_abbreviation` = ?, `name` = ? WHERE dbSite = ? AND 
+UPDATE `concept_datatype` SET `creator` = ?, `date_created` = ?, `description` = ?, `hl7_abbreviation` = ?, `name` = ? WHERE dbSite = ? AND `concept_datatype_id` = ?
+
+
+drugGroupLookup
+INSERT INTO `drugGroupLookup` (`drugGroupID`, `drugGroupLookup_id`, `drugGroupen`, `drugGroupfr`) VALUES (?, ?, ?, ?)
+UPDATE `drugGroupLookup` SET `drugGroupID` = ?, `drugGroupen` = ?, `drugGroupfr` = ? WHERE dbSite = ? AND 
+UPDATE `drugGroupLookup` SET `drugGroupID` = ?, `drugGroupen` = ?, `drugGroupfr` = ? WHERE dbSite = ? AND `drugGroupLookup_id` = ?
+
+
+referralLookup
+INSERT INTO `referralLookup` (`refLabelEn`, `refLabelFr`, `refName`, `refSequence`, `referralLookup_id`) VALUES (?, ?, ?, ?, ?)
+UPDATE `referralLookup` SET `refLabelEn` = ?, `refLabelFr` = ?, `refName` = ?, `refSequence` = ? WHERE dbSite = ? AND 
+UPDATE `referralLookup` SET `refLabelEn` = ?, `refLabelFr` = ?, `refName` = ?, `refSequence` = ? WHERE dbSite = ? AND `referralLookup_id` = ?
+
+
+drugVersionOrder
+INSERT INTO `drugVersionOrder` (`drugGroupID`, `drugID`, `drugVersionOrder_id`, `encounterType`, `formVersion`, `versionOrder`) VALUES (?, ?, ?, ?, ?, ?)
+UPDATE `drugVersionOrder` SET `drugGroupID` = ?, `drugID` = ?, `encounterType` = ?, `formVersion` = ?, `versionOrder` = ? WHERE dbSite = ? AND drugID = ? AND encounterType = ?
+UPDATE `drugVersionOrder` SET `drugGroupID` = ?, `drugID` = ?, `encounterType` = ?, `formVersion` = ?, `versionOrder` = ? WHERE dbSite = ? AND `drugVersionOrder_id` = ?
+
+
+dw_obgynReportLookup
+INSERT INTO `dw_obgynReportLookup` (`definitionen`, `definitionfr`, `indicator`, `indicatorDenominator`, `indicatorType`, `nameen`, `namefr`) VALUES (?, ?, ?, ?, ?, ?, ?)
+UPDATE `dw_obgynReportLookup` SET `definitionen` = ?, `definitionfr` = ?, `indicator` = ?, `indicatorDenominator` = ?, `indicatorType` = ?, `nameen` = ?, `namefr` = ? WHERE dbSite = ? AND 
+UPDATE `dw_obgynReportLookup` SET `definitionen` = ?, `definitionfr` = ?, `indicator` = ?, `indicatorDenominator` = ?, `indicatorType` = ?, `nameen` = ?, `namefr` = ? WHERE dbSite = ? AND `dw_obgynReportLookup_id` = ?
+
+
+queueStatusLookup
+INSERT INTO `queueStatusLookup` (`encounterStatus`, `statusTextEn`, `statusTextFr`) VALUES (?, ?, ?)
+UPDATE `queueStatusLookup` SET `encounterStatus` = ?, `statusTextEn` = ?, `statusTextFr` = ? WHERE dbSite = ? AND 
+UPDATE `queueStatusLookup` SET `encounterStatus` = ?, `statusTextEn` = ?, `statusTextFr` = ? WHERE dbSite = ? AND `queueStatusLookup_id` = ?
+
+
+dw_malariaReportLookup
+INSERT INTO `dw_malariaReportLookup` (`definitionen`, `definitionfr`, `indicator`, `indicatorDenominator`, `indicatorType`, `nameen`, `namefr`, `subGroupEn`, `subGroupFr`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+UPDATE `dw_malariaReportLookup` SET `definitionen` = ?, `definitionfr` = ?, `indicator` = ?, `indicatorDenominator` = ?, `indicatorType` = ?, `nameen` = ?, `namefr` = ?, `subGroupEn` = ?, `subGroupFr` = ? WHERE dbSite = ? AND 
+UPDATE `dw_malariaReportLookup` SET `definitionen` = ?, `definitionfr` = ?, `indicator` = ?, `indicatorDenominator` = ?, `indicatorType` = ?, `nameen` = ?, `namefr` = ?, `subGroupEn` = ?, `subGroupFr` = ? WHERE dbSite = ? AND `dw_malariaReportLookup_id` = ?
+
+
+regimen
+INSERT INTO `regimen` (`charCode`, `drugID1`, `drugID2`, `drugID3`, `regGroup`, `regID`, `regimenName`, `shortName`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+UPDATE `regimen` SET `charCode` = ?, `drugID1` = ?, `drugID2` = ?, `drugID3` = ?, `regGroup` = ?, `regID` = ?, `regimenName` = ?, `shortName` = ? WHERE dbSite = ? AND 
+UPDATE `regimen` SET `charCode` = ?, `drugID1` = ?, `drugID2` = ?, `drugID3` = ?, `regGroup` = ?, `regID` = ?, `regimenName` = ?, `shortName` = ? WHERE dbSite = ? AND `regimen_id` = ?
+
+
+dw_nutritionReportLookup
+INSERT INTO `dw_nutritionReportLookup` (`definitionen`, `definitionfr`, `indicator`, `indicatorDenominator`, `indicatorType`, `nameen`, `namefr`) VALUES (?, ?, ?, ?, ?, ?, ?)
+UPDATE `dw_nutritionReportLookup` SET `definitionen` = ?, `definitionfr` = ?, `indicator` = ?, `indicatorDenominator` = ?, `indicatorType` = ?, `nameen` = ?, `namefr` = ? WHERE dbSite = ? AND 
+UPDATE `dw_nutritionReportLookup` SET `definitionen` = ?, `definitionfr` = ?, `indicator` = ?, `indicatorDenominator` = ?, `indicatorType` = ?, `nameen` = ?, `namefr` = ? WHERE dbSite = ? AND `dw_nutritionReportLookup_id` = ?
+
+
+cohortAsort
+INSERT INTO `cohortAsort` (`sorder`, `title`) VALUES (?, ?)
+UPDATE `cohortAsort` SET `sorder` = ?, `title` = ? WHERE dbSite = ? AND 
+UPDATE `cohortAsort` SET `sorder` = ?, `title` = ? WHERE dbSite = ? AND `cohortAsort_id` = ?
+
+
+riskLookup
+INSERT INTO `riskLookup` (`answerType`, `fieldName`, `riskDescEn`, `riskDescFr`, `riskID`) VALUES (?, ?, ?, ?, ?)
+UPDATE `riskLookup` SET `answerType` = ?, `fieldName` = ?, `riskDescEn` = ?, `riskDescFr` = ?, `riskID` = ? WHERE dbSite = ? AND riskID = ?
+UPDATE `riskLookup` SET `answerType` = ?, `fieldName` = ?, `riskDescEn` = ?, `riskDescFr` = ?, `riskID` = ? WHERE dbSite = ? AND `riskLookup_id` = ?
+
+
+conditionOrder
+INSERT INTO `conditionOrder` (`conditionEncounterType`, `conditionGroupID`, `conditionID`, `conditionOrder`, `conditionVersion`) VALUES (?, ?, ?, ?, ?)
+UPDATE `conditionOrder` SET `conditionEncounterType` = ?, `conditionGroupID` = ?, `conditionID` = ?, `conditionOrder` = ?, `conditionVersion` = ? WHERE dbSite = ? AND conditionID = ?
+UPDATE `conditionOrder` SET `conditionEncounterType` = ?, `conditionGroupID` = ?, `conditionID` = ?, `conditionOrder` = ?, `conditionVersion` = ? WHERE dbSite = ? AND `conditionOrder_id` = ?
+
+
+drugLookup
+INSERT INTO `drugLookup` (`drugGroup`, `drugID`, `drugLabel`, `drugLabelen`, `drugLabelfr`, `drugLookup_id`, `drugName`, `pedDosageLabel`, `pedStdDosageEn1`, `pedStdDosageEn2`, `pedStdDosageFr1`, `pedStdDosageFr2`, `shortName`, `stdDosageDescription`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UPDATE `drugLookup` SET `drugGroup` = ?, `drugID` = ?, `drugLabel` = ?, `drugLabelen` = ?, `drugLabelfr` = ?, `drugName` = ?, `pedDosageLabel` = ?, `pedStdDosageEn1` = ?, `pedStdDosageEn2` = ?, `pedStdDosageFr1` = ?, `pedStdDosageFr2` = ?, `shortName` = ?, `stdDosageDescription` = ? WHERE dbSite = ? AND drugID = ? AND drugName = ?
+UPDATE `drugLookup` SET `drugGroup` = ?, `drugID` = ?, `drugLabel` = ?, `drugLabelen` = ?, `drugLabelfr` = ?, `drugName` = ?, `pedDosageLabel` = ?, `pedStdDosageEn1` = ?, `pedStdDosageEn2` = ?, `pedStdDosageFr1` = ?, `pedStdDosageFr2` = ?, `shortName` = ?, `stdDosageDescription` = ? WHERE dbSite = ? AND `drugLookup_id` = ?
+
+
+clinicLookup
+INSERT INTO `clinicLookup` (`category`, `clinic`, `commune`, `dbSite`, `dbVersion`, `department`, `hostname`, `inCPHR`, `ipAddress`, `lat`, `lng`, `network`, `oldClinicName`, `siteCode`, `type`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UPDATE `clinicLookup` SET `category` = ?, `clinic` = ?, `commune` = ?, `dbSite` = ?, `dbVersion` = ?, `department` = ?, `hostname` = ?, `inCPHR` = ?, `ipAddress` = ?, `lat` = ?, `lng` = ?, `network` = ?, `oldClinicName` = ?, `siteCode` = ?, `type` = ? WHERE dbSite = ? AND siteCode = ?
+UPDATE `clinicLookup` SET `category` = ?, `clinic` = ?, `commune` = ?, `dbSite` = ?, `dbVersion` = ?, `department` = ?, `hostname` = ?, `inCPHR` = ?, `ipAddress` = ?, `lat` = ?, `lng` = ?, `network` = ?, `oldClinicName` = ?, `siteCode` = ?, `type` = ? WHERE dbSite = ? AND `clinicLookup_id` = ?
+
+
+discReasonLookup
+INSERT INTO `discReasonLookup` (`discType`, `reasonDescEn`, `reasonDescFr`) VALUES (?, ?, ?)
+UPDATE `discReasonLookup` SET `discType` = ?, `reasonDescEn` = ?, `reasonDescFr` = ? WHERE dbSite = ? AND 
+UPDATE `discReasonLookup` SET `discType` = ?, `reasonDescEn` = ?, `reasonDescFr` = ? WHERE dbSite = ? AND `discReasonLookup_id` = ?
+
+
+labLookup
+INSERT INTO `labLookup` (`externalResultType`, `labGroup`, `labID`, `labLookup_id`, `labName`, `loincCode`, `maxValue`, `minValue`, `panelName`, `panelOrder`, `pedResultLabelEn1`, `pedResultLabelEn2`, `pedResultLabelEn3`, `pedResultLabelEn4`, `pedResultLabelEn5`, `pedResultLabelEn6`, `pedResultLabelEn7`, `pedResultLabelFr1`, `pedResultLabelFr2`, `pedResultLabelFr3`, `pedResultLabelFr4`, `pedResultLabelFr5`, `pedResultLabelFr6`, `pedResultLabelFr7`, `pedResultType`, `referenceRange`, `resultLabelEn1`, `resultLabelEn2`, `resultLabelEn3`, `resultLabelEn4`, `resultLabelEn5`, `resultLabelEn6`, `resultLabelFr1`, `resultLabelFr2`, `resultLabelFr3`, `resultLabelFr4`, `resultLabelFr5`, `resultLabelFr6`, `resultType`, `sampleType`, `sectionOrder`, `status`, `testNameEn`, `testNameFr`, `testOrder`, `units`, `validRangeMax`, `validRangeMin`, `version0`, `version1`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UPDATE `labLookup` SET `externalResultType` = ?, `labGroup` = ?, `labID` = ?, `labName` = ?, `loincCode` = ?, `maxValue` = ?, `minValue` = ?, `panelName` = ?, `panelOrder` = ?, `pedResultLabelEn1` = ?, `pedResultLabelEn2` = ?, `pedResultLabelEn3` = ?, `pedResultLabelEn4` = ?, `pedResultLabelEn5` = ?, `pedResultLabelEn6` = ?, `pedResultLabelEn7` = ?, `pedResultLabelFr1` = ?, `pedResultLabelFr2` = ?, `pedResultLabelFr3` = ?, `pedResultLabelFr4` = ?, `pedResultLabelFr5` = ?, `pedResultLabelFr6` = ?, `pedResultLabelFr7` = ?, `pedResultType` = ?, `referenceRange` = ?, `resultLabelEn1` = ?, `resultLabelEn2` = ?, `resultLabelEn3` = ?, `resultLabelEn4` = ?, `resultLabelEn5` = ?, `resultLabelEn6` = ?, `resultLabelFr1` = ?, `resultLabelFr2` = ?, `resultLabelFr3` = ?, `resultLabelFr4` = ?, `resultLabelFr5` = ?, `resultLabelFr6` = ?, `resultType` = ?, `sampleType` = ?, `sectionOrder` = ?, `status` = ?, `testNameEn` = ?, `testNameFr` = ?, `testOrder` = ?, `units` = ?, `validRangeMax` = ?, `validRangeMin` = ?, `version0` = ?, `version1` = ? WHERE dbSite = ? AND labID = ?
+UPDATE `labLookup` SET `externalResultType` = ?, `labGroup` = ?, `labID` = ?, `labName` = ?, `loincCode` = ?, `maxValue` = ?, `minValue` = ?, `panelName` = ?, `panelOrder` = ?, `pedResultLabelEn1` = ?, `pedResultLabelEn2` = ?, `pedResultLabelEn3` = ?, `pedResultLabelEn4` = ?, `pedResultLabelEn5` = ?, `pedResultLabelEn6` = ?, `pedResultLabelEn7` = ?, `pedResultLabelFr1` = ?, `pedResultLabelFr2` = ?, `pedResultLabelFr3` = ?, `pedResultLabelFr4` = ?, `pedResultLabelFr5` = ?, `pedResultLabelFr6` = ?, `pedResultLabelFr7` = ?, `pedResultType` = ?, `referenceRange` = ?, `resultLabelEn1` = ?, `resultLabelEn2` = ?, `resultLabelEn3` = ?, `resultLabelEn4` = ?, `resultLabelEn5` = ?, `resultLabelEn6` = ?, `resultLabelFr1` = ?, `resultLabelFr2` = ?, `resultLabelFr3` = ?, `resultLabelFr4` = ?, `resultLabelFr5` = ?, `resultLabelFr6` = ?, `resultType` = ?, `sampleType` = ?, `sectionOrder` = ?, `status` = ?, `testNameEn` = ?, `testNameFr` = ?, `testOrder` = ?, `units` = ?, `validRangeMax` = ?, `validRangeMin` = ?, `version0` = ?, `version1` = ? WHERE dbSite = ? AND `labLookup_id` = ?
+
+
+dw_merReportLookup
+INSERT INTO `dw_merReportLookup` (`definitionen`, `definitionfr`, `indicator`, `indicatorDenominator`, `indicatorType`, `nameen`, `namefr`, `subGroupEn`, `subGroupFr`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+UPDATE `dw_merReportLookup` SET `definitionen` = ?, `definitionfr` = ?, `indicator` = ?, `indicatorDenominator` = ?, `indicatorType` = ?, `nameen` = ?, `namefr` = ?, `subGroupEn` = ?, `subGroupFr` = ? WHERE dbSite = ? AND 
+UPDATE `dw_merReportLookup` SET `definitionen` = ?, `definitionfr` = ?, `indicator` = ?, `indicatorDenominator` = ?, `indicatorType` = ?, `nameen` = ?, `namefr` = ?, `subGroupEn` = ?, `subGroupFr` = ? WHERE dbSite = ? AND `dw_merReportLookup_id` = ?
+
+
+dw_dataqualityReportLookup
+INSERT INTO `dw_dataqualityReportLookup` (`definitionen`, `definitionfr`, `indicator`, `indicatorDenominator`, `indicatorType`, `nameen`, `namefr`, `subGroupEn`, `subGroupFr`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+UPDATE `dw_dataqualityReportLookup` SET `definitionen` = ?, `definitionfr` = ?, `indicator` = ?, `indicatorDenominator` = ?, `indicatorType` = ?, `nameen` = ?, `namefr` = ?, `subGroupEn` = ?, `subGroupFr` = ? WHERE dbSite = ? AND 
+UPDATE `dw_dataqualityReportLookup` SET `definitionen` = ?, `definitionfr` = ?, `indicator` = ?, `indicatorDenominator` = ?, `indicatorType` = ?, `nameen` = ?, `namefr` = ?, `subGroupEn` = ?, `subGroupFr` = ? WHERE dbSite = ? AND `dw_dataqualityReportLookup_id` = ?
+
+
+concept_class
+INSERT INTO `concept_class` (`concept_class_id`, `creator`, `date_created`, `description`, `name`) VALUES (?, ?, ?, ?, ?)
+UPDATE `concept_class` SET `creator` = ?, `date_created` = ?, `description` = ?, `name` = ? WHERE dbSite = ? AND 
+UPDATE `concept_class` SET `creator` = ?, `date_created` = ?, `description` = ?, `name` = ? WHERE dbSite = ? AND `concept_class_id` = ?
+
+
+dw_measureForAgeLookup
+INSERT INTO `dw_measureForAgeLookup` (`ageInMos`, `gender`, `measure`, `minus2Sd`, `minus3Sd`, `plus1Sd`, `plus2Sd`) VALUES (?, ?, ?, ?, ?, ?, ?)
+UPDATE `dw_measureForAgeLookup` SET `ageInMos` = ?, `gender` = ?, `measure` = ?, `minus2Sd` = ?, `minus3Sd` = ?, `plus1Sd` = ?, `plus2Sd` = ? WHERE dbSite = ? AND 
+UPDATE `dw_measureForAgeLookup` SET `ageInMos` = ?, `gender` = ?, `measure` = ?, `minus2Sd` = ?, `minus3Sd` = ?, `plus1Sd` = ?, `plus2Sd` = ? WHERE dbSite = ? AND `dw_measureForAgeLookup_id` = ?
+
+
+pedLabsRendering
+INSERT INTO `pedLabsRendering` (`pedLabsCnt`, `pedLabsEncounterType`, `pedLabsFormVersion`, `pedLabsGroup`, `pedLabsID`, `pedLabsOrderEn`, `pedLabsOrderFr`, `pedLabsRendering_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+UPDATE `pedLabsRendering` SET `pedLabsCnt` = ?, `pedLabsEncounterType` = ?, `pedLabsFormVersion` = ?, `pedLabsGroup` = ?, `pedLabsID` = ?, `pedLabsOrderEn` = ?, `pedLabsOrderFr` = ? WHERE dbSite = ? AND pedLabsID = ?
+UPDATE `pedLabsRendering` SET `pedLabsCnt` = ?, `pedLabsEncounterType` = ?, `pedLabsFormVersion` = ?, `pedLabsGroup` = ?, `pedLabsID` = ?, `pedLabsOrderEn` = ?, `pedLabsOrderFr` = ? WHERE dbSite = ? AND `pedLabsRendering_id` = ?
+
+
+riskOrder
+INSERT INTO `riskOrder` (`formVersion`, `postMarkup`, `preMarkup`, `riskName`, `riskOrder`) VALUES (?, ?, ?, ?, ?)
+UPDATE `riskOrder` SET `formVersion` = ?, `postMarkup` = ?, `preMarkup` = ?, `riskName` = ?, `riskOrder` = ? WHERE dbSite = ? AND 
+UPDATE `riskOrder` SET `formVersion` = ?, `postMarkup` = ?, `preMarkup` = ?, `riskName` = ?, `riskOrder` = ? WHERE dbSite = ? AND `riskOrder_id` = ?
+
+
+dw_weightForHeightLookup
+INSERT INTO `dw_weightForHeightLookup` (`gender`, `heightInCm`, `maxAgeInYrs`, `minus2Sd`, `minus3Sd`) VALUES (?, ?, ?, ?, ?)
+UPDATE `dw_weightForHeightLookup` SET `gender` = ?, `heightInCm` = ?, `maxAgeInYrs` = ?, `minus2Sd` = ?, `minus3Sd` = ? WHERE dbSite = ? AND 
+UPDATE `dw_weightForHeightLookup` SET `gender` = ?, `heightInCm` = ?, `maxAgeInYrs` = ?, `minus2Sd` = ?, `minus3Sd` = ? WHERE dbSite = ? AND `dw_weightForHeightLookup_id` = ?
+
+
+pedLabsLookup
+INSERT INTO `pedLabsLookup` (`pedLabsCode`, `pedLabsID`, `pedLabsLookup_id`, `pedLabsNameEn`, `pedLabsNameFr`) VALUES (?, ?, ?, ?, ?)
+UPDATE `pedLabsLookup` SET `pedLabsCode` = ?, `pedLabsID` = ?, `pedLabsNameEn` = ?, `pedLabsNameFr` = ? WHERE dbSite = ? AND pedLabsID = ?
+UPDATE `pedLabsLookup` SET `pedLabsCode` = ?, `pedLabsID` = ?, `pedLabsNameEn` = ?, `pedLabsNameFr` = ? WHERE dbSite = ? AND `pedLabsLookup_id` = ?
+
+
+labGroupLookup
+INSERT INTO `labGroupLookup` (`labGroup`, `labGroupLookup_id`) VALUES (?, ?)
+UPDATE `labGroupLookup` SET `labGroup` = ? WHERE dbSite = ? AND 
+UPDATE `labGroupLookup` SET `labGroup` = ? WHERE dbSite = ? AND `labGroupLookup_id` = ?
+
+
+labPanelLookup
+INSERT INTO `labPanelLookup` (`labGroup`, `labPanelLookup_id`, `panelName`, `sampleType`) VALUES (?, ?, ?, ?)
+UPDATE `labPanelLookup` SET `labGroup` = ?, `panelName` = ?, `sampleType` = ? WHERE dbSite = ? AND 
+UPDATE `labPanelLookup` SET `labGroup` = ?, `panelName` = ?, `sampleType` = ? WHERE dbSite = ? AND `labPanelLookup_id` = ?
+
+
+conditionLookup
+INSERT INTO `conditionLookup` (`conditionCode`, `conditionDisplay`, `conditionGroup`, `conditionLookup_id`, `conditionNameEn`, `conditionNameFr`, `conditionSort`, `conditionSortEn`, `conditionsID`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+UPDATE `conditionLookup` SET `conditionCode` = ?, `conditionDisplay` = ?, `conditionGroup` = ?, `conditionNameEn` = ?, `conditionNameFr` = ?, `conditionSort` = ?, `conditionSortEn` = ?, `conditionsID` = ? WHERE dbSite = ? AND 
+UPDATE `conditionLookup` SET `conditionCode` = ?, `conditionDisplay` = ?, `conditionGroup` = ?, `conditionNameEn` = ?, `conditionNameFr` = ?, `conditionSort` = ?, `conditionSortEn` = ?, `conditionsID` = ? WHERE dbSite = ? AND `conditionLookup_id` = ?
+
+
+encTypeLookup
+INSERT INTO `encTypeLookup` (`enName`, `encounterType`, `frName`, `newestFormVersion`) VALUES (?, ?, ?, ?)
+UPDATE `encTypeLookup` SET `enName` = ?, `encounterType` = ?, `frName` = ?, `newestFormVersion` = ? WHERE dbSite = ? AND encounterType = ?
+UPDATE `encTypeLookup` SET `enName` = ?, `encounterType` = ?, `frName` = ?, `newestFormVersion` = ? WHERE dbSite = ? AND `encTypeLookup_id` = ?
+
+

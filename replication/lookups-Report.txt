@@ -1,9 +1,9 @@
 Most recent change: 1970-01-01 00:00:00
 Application version: 18.2 (f4ecc8)
 Schema version: 45
-Seconds elapsed: 3
+Seconds elapsed: 2
 Total records read: 11190
-Records per second: 3730
+Records per second: 5595
 
 Record counts by table:
 alertLookup                  16
