@@ -1422,7 +1422,7 @@ WHERE
  v.patientID=p.patientID
  AND v.labID = '181'
  AND v.siteCode = '$site'
- AND datediff(week,ymdtoDate(dobYy,dobMm,dobDd),'$endDate') between 4 and 52
+ AND datediff(week,ymdtoDate(dobYy,dobMm,dobDd),'$endDate') between 4 and 78
  AND v.visitDate <= '$endDate'"));
 }
 
@@ -1474,7 +1474,7 @@ HAVING datediff(mm, min(p.visitDate),min(v.visitDate)) >= 6) l"));
 
 /*le denominateur de indicateur 11 est le num de cet indicateur (reunion avec Nicasky)*/
 function getHealthQualInd10Num ($repNum, $site, $intervalLength, $startDate, $endDate) {
-return fetchFirstColumn(dbQuery("
+/*return fetchFirstColumn(dbQuery("
 SELECT DISTINCT l.patientID
 FROM (select p.patientID, min(p.visitDate), result, v.visitDate FROM pepfarTable p, v_labs v
 WHERE p.patientID=v.patientID
@@ -1483,13 +1483,26 @@ AND labID in(103,1257)
 AND (result is not null and result !='')
  AND v.visitDate between '$startDate' AND '$endDate'
 GROUP BY 1
-HAVING datediff(mm, min(p.visitDate),'$endDate') >= 18) l"));
+HAVING datediff(mm, min(p.visitDate),'$endDate') >= 18) l"));*/
+return fetchFirstColumn(dbQuery("
+SELECT DISTINCT l.patientID
+FROM (select p.patientID, min(p.visitDate), result, v.visitDate,max(dbo.ymdToDate(LTRIM(RTRIM(v.resultDateYy)),LTRIM(RTRIM(v.resultDateMm)),LTRIM(RTRIM(v.resultDateDd)))) FROM pepfarTable p, v_labs v
+WHERE p.patientID=v.patientID
+AND p. siteCode = '$site'
+AND p.patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
+ AND p.patientID not in(select distinct patientID from patient where location_id = '$site' and patientStatus is NULL OR patientStatus=0) 
+AND labID in(103,1257)
+AND (result is not null and result !='')
+ AND v.visitDate between '$startDate' AND '$endDate'
+GROUP BY 1
+HAVING datediff(mm, min(p.visitDate),'$endDate') >= 6
+AND datediff(mm,max(dbo.ymdToDate(LTRIM(RTRIM(v.resultDateYy)),LTRIM(RTRIM(v.resultDateMm)),LTRIM(RTRIM(v.resultDateDd)))),'$endDate') <= 12) l"));
 }
 
 // le den de cet indicateur est un sous-ensemble du den de indicateur 1
 function getHealthQualInd10Den ($repNum, $site, $intervalLength, $startDate, $endDate) {
 global $setupTableNames;	
-return fetchFirstColumn(dbQuery("
+/*return fetchFirstColumn(dbQuery("
 SELECT DISTINCT l.patientID
 FROM (select p.patientID, min(visitDate), max(visitDate) FROM pepfarTable p
 
@@ -1500,6 +1513,18 @@ AND p.patientID not in(select distinct patientID from discEnrollment where sitec
  
 GROUP BY 1
 HAVING datediff(mm, min(visitDate),'$endDate') >= 18
+AND max(visitDate) between '$startDate' AND '$endDate') l"));*/
+
+return fetchFirstColumn(dbQuery("
+SELECT DISTINCT l.patientID
+FROM (select p.patientID, min(p.visitDate), max(visitDate) FROM pepfarTable p
+WHERE p. siteCode = '$site'
+ AND visitDate <= '$endDate'
+AND p.patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
+ AND p.patientID not in(select distinct patientID from patient where location_id = '$site' and patientStatus is NULL OR patientStatus=0) 
+
+GROUP BY 1
+HAVING datediff(mm, min(p.visitDate),'$endDate') >= 6
 AND max(visitDate) between '$startDate' AND '$endDate') l"));
 
 }
