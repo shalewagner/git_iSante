@@ -457,7 +457,7 @@ function applyCriteria ($rtype, $repNum, $site, $pType, $tType, $ttType,
           p.patientID = d.patientID and
           d.patientID = e.patientID and
           d.drugID = l.drugID and
-          l.drugGroup in ('NRTIs', 'NNRTIs', 'Pls') and
+          l.drugGroup in ('NRTIs', 'NNRTIs', 'Pls','II') and
           (isdate(dbo.ymdToDate(stopYy, stopMm, '01')) = 1 or
           d.toxicity = 1 or d.intolerance = 1 or d.failure = 1 or
           d.stockOut = 1 or d.pregnancy = 1 or d.patientHospitalized = 1 or

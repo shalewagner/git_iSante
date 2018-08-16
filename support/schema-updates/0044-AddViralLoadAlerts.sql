@@ -21,6 +21,14 @@ insert into alertLookup(alertId,alertName,descriptionFr,descriptionEn,messageFr,
 (6,'1000ViralLoadHiv','patient with a VL test of >1000 copies','patient with a VL test of >1000 copies','La dernière charge virale du patient est >1000 copies/ml','La dernière charge virale du patient est >1000 copies/ml',1,6);
 go
 
+insert into regimen( regID,regimenName,drugID1,drugID2,drugID3,shortName,regGroup) 
+values ('120','1stReg120','91','12','31','EVG-FTC-TDF','1stReg120'),
+       ('121','3rd','87','88','90','RAL-DRV/r - ETV','3rd'),
+	   ('122','1stReg122','8','89','0','AZT-3TC-DTG','1stReg122'),
+       ('123','1stReg123','1','20','89','ABC-3TC-DTG''1stReg123');
+
+
+go
 drop table if exists patientAlert;
 go
 create table patientAlert(siteCode int,

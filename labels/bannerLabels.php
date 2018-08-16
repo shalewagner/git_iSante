@@ -118,7 +118,7 @@ $cmdLabel = array (
 		"Supprimer patient",
 		"Registre Pr&eacute;-ARV",
 		"Registre ARV",
-		"Status des Patients",
+		"Statut des Patients",
 		"Qualit&eacute; des soins",
 		"Gestion de programme",
 		"Qualit&eacute; des donn&eacute;es",

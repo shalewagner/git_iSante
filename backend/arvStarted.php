@@ -12,14 +12,14 @@ function generatearvStarted ($startdate, $enddate,$site, $lang) {
   $period=date("d-M-Y", strtotime($startdate)).' To '.date("d-M-Y", strtotime($enddate));
  
   $queryArray = array(
-"arvStarted" => "select startDate as 'Date de visite',p.clinicPatientID as ST,lname as 'Prenom',fname as 'Nom',telephone,p.sex,ymdToDate(dobYy,dobMm,dobDd) as 'Date de naissance'
+"arvStarted" => "select startDate as 'Date de visite',p.clinicPatientID as ST,lname as 'Prenom',fname as 'Nom',telephone,case when p.sex=2 then 'M' when p.sex=1 then 'F' else 'I' end as sex,round(DATEDIFF(c.startDate,date(concat(p.dobYy,'-', case when p.dobMm is not null or p.dobMm<>'' then dobMm else '06' end ,'-', case when p.dobDd is not null or p.dobDd<>'' then dobDd else '15' end)))/365,0) as Age
 from 
-(select siteCode,patientID,min(visitDate) as startDate from pepfarTable group by 1,2) c , patient p
-where c.patientID=p.patientID and  startDate between  '".$startdate."' AND '".$enddate."' And c.siteCode=".$site." order by 1",
+(select siteCode,patientID,min(visitDate) as startDate from pepfarTable where ifnull(forPepPmtct,0)=0 group by 1,2) c , patient p
+where c.patientID=p.patientID and p.patientStatus>0  and  startDate between  '".$startdate."' AND '".$enddate."' And c.siteCode=".$site." order by 1",
 "arvStartedTotal" =>"select count(distinct p.patientID) as Total
 from 
-(select siteCode,patientID,min(visitDate) as startDate from pepfarTable group by 1,2) c , patient p
-where c.patientID=p.patientID and  startDate between  '".$startdate."' AND '".$enddate."' And c.siteCode=".$site); 
+(select siteCode,patientID,min(visitDate) as startDate from pepfarTable where ifnull(forPepPmtct,0)=0 group by 1,2) c , patient p
+where c.patientID=p.patientID and p.patientStatus>0 and  startDate between  '".$startdate."' AND '".$enddate."' And c.siteCode=".$site); 
   
   $arvStarted = outputQueryRows($queryArray["arvStarted"]);
   $arvStartedTotal = outputQueryRows($queryArray["arvStartedTotal"]); 	

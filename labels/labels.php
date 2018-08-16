@@ -2262,7 +2262,7 @@ $noARVs = array (
 	""),
    "fr" => array (
 	"",
-	"ARVs not available",
+	"ARVs non disponible",
 	"")
 );
 $ARVeducCoun = array (

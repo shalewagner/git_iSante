@@ -12,11 +12,11 @@ function generatenextVisit30D ($startdate, $enddate,$site, $lang) {
   $period=date("d-M-Y", strtotime($startdate)).' To '.date("d-M-Y", strtotime($enddate));
  
   $queryArray = array(
-"nextVisit30D" => "select clinicPatientID as ST,lname as Prenom,fname as Nom,birthDate as 'Date de naissance',dispenseDate as 'Date de dispensation' from (
-SELECT p.patientID,clinicPatientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate,max(nxt_dispd) as dispenseDate
+"nextVisit30D" => "select clinicPatientID as ST,lname as Prenom,fname as Nom,sex,Age,birthDate as 'Date de naissance',dispenseDate as 'Date de dispensation' from (
+SELECT p.patientID,clinicPatientID,lname,fname,ymdToDate(dobYy,dobMm,dobDd) as birthDate,case when p.sex=2 then 'M' when p.sex=1 then 'F' else 'I' end as sex,round(DATEDIFF(la.visitDate,date(concat(p.dobYy,'-', case when p.dobMm is not null or p.dobMm<>'' then dobMm else '06' end ,'-', case when p.dobDd is not null or p.dobDd<>'' then dobDd else '15' end)))/365,0) as Age,max(nxt_dispd) as dispenseDate
 from patient p, patientDispenses p1
 where p1.patientID=p.patientID and p.patientStatus in (6,7,8)   and p.location_id=".$site."
-group by 1,2,3,4,5
+group by 1,2,3,4,5,6,7
 ) A where DATEDIFF(dispenseDate, now()) between 0 and 30 order by 5"); 
   
   $nextVisit30D = outputQueryRows($queryArray["nextVisit30D"]); 

@@ -582,7 +582,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 		MIN(CASE WHEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) IS NOT NULL and e.nxtVisityy != ? and e.nxtvisitmm != ? THEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) ELSE NULL END)
 		FROM prescriptions p, encounter e WHERE e.encountertype in (5,18) AND encStatus < 255 AND 
 		p.patientid = e.patientid AND p.sitecode = e.sitecode AND p.visitdateyy = e.visitdateyy AND p.visitdatemm = e.visitdatemm AND p.visitdatedd = e.visitdatedd AND p.seqNum = e.seqNum AND 
-		drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88) AND 
+		drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91) AND 
 		(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR 
 		dispAltDosage IS NOT NULL) AND (forPepPmtct = 2 OR forPepPmtct IS NULL) GROUP BY 1,2 ORDER BY 1,2 DESC', array('un','un','un','un'));
   }
@@ -641,10 +641,10 @@ and p.patientID=v.patientID and datediff(ymdtodate(v.visitdateyy,v.visitdatemm,v
 		where CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm !=? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
 		ELSE ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd) END<=? and
 		drugID in (1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91) group by 1) l 
-     where p.forPepPmtct=2 and l.lastDispDate=CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy !=? and p.dispdatemm != ? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
+     where p.forPepPmtct=1 and l.lastDispDate=CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy !=? and p.dispdatemm != ? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
 		ELSE ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd) END
      and l.patientID=p.patientID and drugID in (1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
-	 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=?) p2 set p1.lastPCR=1 where p1.patientID=p2.patientID ;',array('un','un','un','un',$endDate,'un','un',$endDate)); 
+	 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=?) p2 set p1.lastPCR=0 where p1.patientID=p2.patientID ;',array('un','un','un','un',$endDate,'un','un',$endDate)); 
 
  
   database()->query('delete from exposeChild where lastPCR=1 or pedCurrHiv=4;');
@@ -665,7 +665,7 @@ p.patientid = e.patientid AND
 p.sitecode = e.sitecode AND 
 p.visitdateyy = e.visitdateyy AND p.visitdatemm = e.visitdatemm AND p.visitdatedd = e.visitdatedd AND 
 p.seqNum = e.seqNum AND 
-drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88) AND 
+drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91) AND 
 (dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR dispAltDosage IS NOT NULL) AND 
 CASE WHEN isdate(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) ELSE ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) END <= ? 
 GROUP BY 1;', array($endDate)); 
@@ -835,11 +835,11 @@ where e.encStatus < 255
  and badvisitdate = 0
  and t.drugID = l.drugID
  and
-  case when l.drugGroup in (?, ?, ?)
+  case when l.drugGroup in (?, ?, ?,?)
   then (t.forPepPmtct IN (1, 2) OR t.dispensed = 1)
   else 1 = 1
   end
- and " . $extraPatientIdWhere . ";", array_merge (array ('NRTIs', 'NNRTIs', 'Pls'), $extraPatientIdParam));
+ and " . $extraPatientIdWhere . ";", array_merge (array ('NRTIs', 'NNRTIs', 'Pls','II'), $extraPatientIdParam));
 
   #lock/begin transaction and remove old records
   if (isset($patientId)) {

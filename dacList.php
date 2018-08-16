@@ -28,15 +28,15 @@ $message='Liste de patients ayant reçu des ARVs ';
  }
  
 $queryArray = array(
-"arvDrug" => "select  distinct p.clinicPatientID as ST,p.lname as 'Prenom',p.fname as 'Nom',p.sex,DATEDIFF(disp,dbo.ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then dobDd else '15' end )/365 as Age,telephone
+"arvDrug" => "select  distinct p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,p.sex,round(DATEDIFF(e.visitDate,ymdToDate(p.dobYy,p.dobMm,p.dobDd))/365,0) as Age,telephone
 from patient p,
 (select max(visitDate) as visitDate,patientID from v_prescriptions  e 
-where drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88)
+where drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
 and e.dispensed=1
 and e.visitDate between '".$startDate."' AND '".$endDate."' and  LEFT(e.patientid,5)=".$site." 
 group by patientID
 )p1,v_prescriptions e  left outer join obs o  on (e.encounter_id=o.encounter_id and o.concept_id='71642' and o.value_boolean=1)
-where drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88)
+where drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
 and e.dispensed=1 and p1.visitDate=e.visitDate and e.patientID=p1.patientID and p.patientID=e.patientID".$dispClause."
 and e.visitDate between '".$startDate."' AND '".$endDate."' and  LEFT(p.patientid,5)=".$site); 
   

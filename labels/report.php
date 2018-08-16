@@ -258,8 +258,8 @@ $kickLabel = array (
 			"11" => "Transferred during the transition period"			
 			),
 		"fr" => array (
-		    "-1" => "ARV Status ",
-			"0" => "Transition Status ",
+		    "-1" => "Statut ARV ",
+			"0" => "Statut Transitoire ",
 			"1" => "Réguliers (actifs sous ARV)",
 			"2" => "Rendez-vous ratés",
 			"3" => "Perdus de vue sous ARV (LTFU, anciennement inactif)",

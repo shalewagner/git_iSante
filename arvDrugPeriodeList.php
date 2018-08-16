@@ -31,7 +31,7 @@ $message='Liste de patients ayant reçu des ARV pour la période allant de ';
  }
  
 $queryArray = array(
-"arvDrug" => "SELECT p1.dispd as 'Date de dispensation',p.clinicPatientID as ST,p.lname as 'Prenom',p.fname as 'Nom',p.sex,DATEDIFF(disp,dbo.ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then dobDd else '15' end )/365 as Age,telephone as Telephone
+"arvDrug" => "SELECT p1.dispd as Date_dispensation,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,p.sex,round(DATEDIFF(p1.dispd,ymdToDate(p.dobYy,p.dobMm,p.dobDd))/365,0) as Age,telephone as Telephone
 from patientDispenses p1,clinicLookup l,patient p, 
 (SELECT patientID,max(dispd) as dispd FROM  patientDispenses  p  where dispd between '".$startDate."' AND '".$endDate."'  group by 1) p2
 where p1.patientID=p2.patientID and p1.dispd=p2.dispd and p.patientID=p1.patientID

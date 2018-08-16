@@ -12,12 +12,12 @@ function generatepatientEligibility ($startdate, $enddate,$site, $lang) {
   $period=date("d-M-Y", strtotime($startdate)).' To '.date("d-M-Y", strtotime($enddate));
  
   $queryArray = array(
-"eligibility" => "select distinct p.patientID,lname,fname,clinicPatientID,ymdToDate(dobYy,dobMm,dobDd) as dobDate from vitals v,patient p 
+"eligibility" => "select distinct p.patientID,lname,fname,clinicPatientID,case when p.sex=2 then 'M' when p.sex=1 then 'F' else 'I' end as sex,round(DATEDIFF(la.visitDate,date(concat(p.dobYy,'-', case when p.dobMm is not null or p.dobMm<>'' then dobMm else '06' end ,'-', case when p.dobDd is not null or p.dobDd<>'' then dobDd else '15' end)))/365,0) as Age from vitals v,patient p 
 where v.pedCurrHiv=1 
 and p.patientID=v.patientID 
 and p.patientID not in (select l.patientID from labs l where labID=181)
 and datediff(now(),(ymdtodate(dobYy,case when dobMm='XX' or dobMm='' or dobMm is null then '01' else dobMm end,
-		case when dobDd='XX' or dobDd='' or dobDd is null then '01' else dobDd end))) between 28 and 30
+		case when dobDd='XX' or dobDd='' or dobDd is null then '01' else dobDd end))) between 28 and 365
 and ymdToDate(v.visitdateyy,v.visitdatemm,v.visitdatedd)<=now()
 union 
 select distinct p.patientID,lname,fname,clinicPatientID,ymdToDate(dobYy,dobMm,dobDd) as dobDate from labs v,patient p  
@@ -25,7 +25,7 @@ select distinct p.patientID,lname,fname,clinicPatientID,ymdToDate(dobYy,dobMm,do
  and p.patientID=v.patientID 
  and p.patientID not in (select l.patientID from labs l where labID=181)
  and datediff(now(),(ymdtodate(dobYy,case when dobMm='XX' or dobMm='' or dobMm is null then '01' else dobMm end,
-		case when dobDd='XX' or dobDd='' or dobDd is null then '01' else dobDd end)))/30 between 12 and 18 
+		case when dobDd='XX' or dobDd='' or dobDd is null then '01' else dobDd end)))  between 366 and 548
  and ymdToDate(v.visitDateYy,v.visitDateMm,v.visitDateDd)<=now();
  SELECT * from pcrEligibility;"); 
   
