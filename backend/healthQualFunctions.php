@@ -800,7 +800,7 @@ WHERE p.siteCode = '$site'
  AND p.patientID not in(select distinct patientID from discEnrollment d where d.sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
  AND p.patientID not in(select distinct patientID from patient q where location_id = '$site' and patientStatus is NULL OR patientStatus=0)
  AND e.encounterType IN (14, 20)
- AND timestampdiff(month, e.visitDate,'$endDate') between 0 and 3
+ AND timestampdiff(month, e.visitDate,'$endDate') between 0 and 6
  GROUP BY 1
  HAVING datediff(mm,date_visit, '$endDate') >=3"));
 }
