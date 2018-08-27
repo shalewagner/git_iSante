@@ -610,6 +610,7 @@ FROM v_patients
 WHERE siteCode = '$site'
  AND visitDate BETWEEN '$startDate' AND '$endDate'
  AND dateDiff(mm,ymdToDate(dobYy,dobMm,dobDd), visitDate)>=6
+ AND patientID not in(select distinct patientID from patient where location_id = '$site' and patientStatus is NULL OR patientStatus=0)
  AND patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')"));
  }
 
