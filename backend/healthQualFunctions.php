@@ -1415,6 +1415,7 @@ FROM v_patients p
 WHERE 
  p.siteCode = '$site'
  AND datediff(week,ymdtoDate(dobYy,dobMm,dobDd),'$endDate') between 4 and 52
+ AND visitDate between '$startDate' AND '$endDate'
  
  UNION
  
