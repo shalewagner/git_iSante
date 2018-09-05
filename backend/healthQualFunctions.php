@@ -1453,7 +1453,7 @@ FROM v_labs v, patient p
 WHERE v.labID = '181'
  AND v.patientID = p.patientID
 
- AND timestampdiff(week,ymdToDate(dobYy,dobMm,dobDd),'$endDate') between 4 and 72
+ AND timestampdiff(week,ymdToDate(dobYy,dobMm,dobDd),'$endDate') between 4 and 78
  AND v.siteCode = '$site'
  AND ymdtoDate(resultDateYy, resultDateMm,resultDateDd) BETWEEN '$startDate' AND '$endDate'"));
 }
