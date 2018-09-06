@@ -243,7 +243,7 @@ WHERE p.siteCode = '$site'
  AND (p.forPepPmtct = 0 OR p.forPepPmtct IS NULL)
  AND p.patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
  AND p.patientID not in(select distinct patientID from patient where sitecode = '$site' and patientStatus is NULL OR patientStatus=0)
- GROUP BY 1) l where timestampdiff(month, l.minDate, '$endDate') between 0 and 6"));
+ GROUP BY 1) l where timestampdiff(month, l.minDate, '$endDate') between 0 and 6 AND l.minDate < '$endDate'"));
 }
 
 function getInd5Num($repNum, $site, $intervalLength, $startDate, $endDate) {
@@ -252,7 +252,8 @@ SELECT DISTINCT patientID
 FROM encValid 
 WHERE siteCode = '$site'
  AND encounterType IN (14, 20)
- AND timestampdiff(month, visitDate,'$endDate') between 0 and 6"));
+ AND timestampdiff(month, visitDate,'$endDate') between 0 and 6
+ AND visitDate < '$endDate'"));
 }
 
 
