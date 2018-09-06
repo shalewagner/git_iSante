@@ -1448,27 +1448,27 @@ WHERE
 function getHealthQualInd6Den ($repNum, $site, $intervalLength, $startDate, $endDate) {
   return fetchFirstColumn(dbQuery("
 
-SELECT p.patientID, ymdtoDate(resultDateYy, resultDateMm,resultDateDd) as resultDate
+SELECT DISTINCT l.patientID FROM (SELECT DISTINCT p.patientID, ymdtoDate(resultDateYy, resultDateMm,resultDateDd) as resultDate
 FROM v_labs v, patient p
 WHERE v.labID = '181'
  AND v.patientID = p.patientID
 
  AND timestampdiff(week,ymdToDate(dobYy,dobMm,dobDd),'$endDate') between 4 and 78
  AND v.siteCode = '$site'
- AND ymdtoDate(resultDateYy, resultDateMm,resultDateDd) BETWEEN '$startDate' AND '$endDate'"));
+ AND ymdtoDate(resultDateYy, resultDateMm,resultDateDd) BETWEEN '$startDate' AND '$endDate')l"));
 }
 
 
 //nouvel indicateur : PCR négatif 
 function getHealthQualInd6Num ($repNum, $site, $intervalLength, $startDate, $endDate) {
   return fetchFirstColumn(dbQuery("
-  select v1.patientID, v.resultDate, v1.result FROM (SELECT patientID,max(ymdtoDate(resultDateYy, resultDateMm,resultDateDd)) as resultDate
+  SELECT DISTINCT l.patientID FROM (select v1.patientID, v.resultDate, v1.result FROM (SELECT patientID,max(ymdtoDate(resultDateYy, resultDateMm,resultDateDd)) as resultDate
 FROM v_labs
 WHERE labID = '181' AND siteCode = '$site' 
 AND ymdtoDate(resultDateYy, resultDateMm,resultDateDd) BETWEEN '$startDate' AND '$endDate' group by 1) v, v_labs v1 
 where v1.patientID=v.patientID 
 AND v.resultDate=ymdtoDate(v1.resultDateYy, v1.resultDateMm,v1.resultDateDd) 
-AND (v1.result='2' or LOWER(LTRIM(RTRIM(v1.result))) like '%neg%')"));
+AND (v1.result='2' or LOWER(LTRIM(RTRIM(v1.result))) like '%neg%'))l"));
 }
 
 // nouvel indicateur : Proportion de patients VIH+ sous traitement ARV 
