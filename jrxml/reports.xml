@@ -1919,7 +1919,7 @@
 				    <reportFile></reportFile>
 				    <groupLevel>0</groupLevel>
 				    <otherLevel>0</otherLevel>
-				    <query>select descriptionFr as Alerte,count(distinct patientID) as cnt from patientAlert p, alertLookup a ,clinicLookup c where p.alertId=a.alertId and p.siteCode=c.siteCode and c.siteCode='$site' group by 1 order by a.alertId </query>
+				    <query>select descriptionFr as Alerte,count(distinct patientID) as cnt from patientAlert p, alertLookup a ,clinicLookup c where p.alertId=a.alertId and p.patientID not in(select patientID from discTable) and p.siteCode=c.siteCode and c.siteCode='$site' group by 1 order by a.alertId </query>
 			    </report>		
 				
 				<report id="549" patientStatus="0" treatmentStatus="0" testType="0">
@@ -1988,12 +1988,12 @@
 				    <otherLevel>0</otherLevel>
 			    </report>		
 		<report id="555" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Eligible for viral load but not done yet </title>
-				  <title lang="fr">Liste des patients eligibles pour la charge virale mais n'en ayant pas</title>
+				  <title lang="en">List of patients eligible for their first viral load </title>
+				  <title lang="fr">Liste des patients eligibles pour leur premiere charge virale</title>
 				    <reportFile></reportFile>
 				    <groupLevel>0</groupLevel>
 				    <otherLevel>0</otherLevel>
-				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone from patient p, pepfarTable t where p.patientId=t.patientID and p.patientID not in(select patientID from discTable) and p.patientID not in(select l.patientID from labs l where labID in(103,1257) and (result is not null and result !='')) group by 1  having datediff(mm,max(visitDate),getDate()) &gt; 6</query>  
+				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone from patient p, pepfarTable t where p.patientId=t.patientID and p.patientID not in(select patientID from discTable) and p.patientID not in(select l.patientID from labs l where labID in(103,1257) and (result is not null and result !='')) group by 1  having min(visitDate) &lt;= DATE_ADD(now(), INTERVAL -6 MONTH)</query> 
 				
 				</report>
 		<report id="556" patientStatus="0" treatmentStatus="0" testType="0">
@@ -3148,7 +3148,7 @@ select CASE WHEN sex = 1 THEN 'Femme' WHEN sex = 2 THEN 'Homme' ELSE 'Autre' END
 				<title lang="fr">Nombre de femmes enceintes VIH(+) placées sous HAART</title>
 				<reportFile></reportFile>
 				<menuSelection>dateSelect</menuSelection>
-				<query>SELECT distinct p.patientID, CASE WHEN p.clinicPatientID IS NULL OR LTRIM(RTRIM(p.clinicPatientID)) = '' THEN 'N/A' ELSE p.clinicPatientID END AS clinicPatientID, p.nationalID, p.fname, p.lname, p.sex, $computed_age AS age, MAX(l.visitDate) AS LastDate FROM (  SELECT  ymdToDate(visitDateYy,visitDateMm,visitDateDd) as startDate,patientID,siteCode FROM `medicalEligARVs` WHERE pregnantWomen=1 union SELECT  e.visitDate, e.patientID, e.siteCode FROM  `obs` o, encounter e WHERE e.encounter_id = o.encounter_id AND o.concept_id IN (71262,7959,7098,7051,7053,7052,70118,70132,70150,70144,70130,70148,71140,70128,71398,70084,70069, 70082,70078,70086,70066,70103,70624,70068,70087,70733,7958,71068,70732,7960,71070,7967,70730,70591,70731,70750,7957,70126,7955,71067,70729,7806,70067,70826,7805,70827,7804,70465,70018,70466,70083) and (o.value_text &lt;>'' or o.value_numeric>0 or o.value_boolean>0 or value_datetime is not null) union select  ymdToDate(visitDateYy,visitDateMm,visitDateDd) as startDate,patientID,siteCode from labs where labID in (134,1603,1601,1602) and (result=1 or upper(result) like 'POS%') union select visitDate ,patientId,siteCode from encounter where encounterType=26 and encStatus &lt; 255) en,patient p, pepfarTable l  WHERE l.patientID = en.patientID AND p.patientID = l.patientID AND l.siteCode = '$site' AND l.visitDate BETWEEN '$start' AND '$end'  and en.startDate BETWEEN '$start' AND '$end' GROUP BY 1,2,4,5,6,7 ORDER BY 2,3</query>
+				<query>SELECT distinct p.patientID, CASE WHEN p.clinicPatientID IS NULL OR LTRIM(RTRIM(p.clinicPatientID)) = '' THEN 'N/A' ELSE p.clinicPatientID END AS clinicPatientID, p.nationalID, p.fname, p.lname, p.sex, $computed_age AS age, MAX(l.visitDate) AS LastDate FROM (  SELECT  ymdToDate(visitDateYy,visitDateMm,visitDateDd) as startDate,patientID,siteCode FROM `medicalEligARVs` WHERE pregnantWomen=1 union SELECT  e.visitDate, e.patientID, e.siteCode FROM  `obs` o, encounter e WHERE e.encounter_id = o.encounter_id AND o.concept_id IN (71262,7959,7098,7051,7053,7052,70118,70132,70150,70144,70130,70148,71140,70128,71398,70084,70069, 70082,70078,70086,70066,70103,70624,70068,70087,70733,7958,71068,70732,7960,71070,7967,70730,70591,70731,70750,7957,70126,7955,71067,70729,7806,70067,70826,7805,70827,7804,70465,70018,70466,70083) and (o.value_text &lt;>'' or o.value_numeric>0 or o.value_boolean>0 or value_datetime is not null) union select  ymdToDate(visitDateYy,visitDateMm,visitDateDd) as startDate,patientID,siteCode from labs where labID in (134,1603,1601,1602) and (result=1 or upper(result) like 'POS%') union select visitDate ,patientId,siteCode from encounter where encounterType=26 and encStatus &lt; 255) en,patient p, (select min(visitDate) as visitDate, patientID,siteCode from pepfarTable group by patientID,siteCode) l  WHERE l.patientID = en.patientID AND p.patientID = l.patientID AND l.siteCode = '$site' AND l.visitDate BETWEEN '$start' AND '$end'  and ((en.startDate BETWEEN '$start' AND '$end') or ( DATE_ADD(en.startDate, INTERVAL 9 Month) BETWEEN '$start' AND '$end')) GROUP BY 1,2,4,5,6,7 ORDER BY 2,3</query>
 				<description lang="en">Number of HIV+ pregnant women started on HAART during the period of review.</description>
 				<description lang="fr">Qté de femmes enceintes VIH(+), placées sous HAART (traitement antirétroviral hautement actif) au cours du mois du rapport.</description>
 			</report>
@@ -3189,8 +3189,8 @@ select CASE WHEN sex = 1 THEN 'Femme' WHEN sex = 2 THEN 'Homme' ELSE 'Autre' END
 				<description lang="fr">Qté d'enfants nés de mère VIH(+) auxquels on a administré au cours du mois du rapport, un traitement prophylactique à l'ARV au plus tard 72 heures après leur naissance.</description>
 			</report>
 			<report id="3114" patientStatus="0" treatmentStatus="0" testType="0">
-				<title lang="en">Number of HIV-positive women enrolled in care who became pregnant</title>
-				<title lang="fr">Nombre de femmes VIH(+) enrôlées en soins devenues enceintes</title>
+				<title lang="en">Number of HIV(+) women on ARVs who became pregnant</title>
+				<title lang="fr">Nombre de femmes VIH(+) sous ARV devenues enceintes</title>
 				<reportFile></reportFile>
 				<menuSelection>dateSelect</menuSelection>
 				<query>SELECT p.patientID, CASE WHEN p.clinicPatientID IS NULL OR LTRIM(RTRIM(p.clinicPatientID)) = '' THEN 'N/A' ELSE p.clinicPatientID END AS clinicPatientID, p.nationalID, p.fname, p.lname, p.sex, $computed_age AS age, MAX(en.startDate) AS LastDate  FROM (  SELECT  ymdToDate(visitDateYy,visitDateMm,visitDateDd) as startDate,patientID,siteCode FROM `medicalEligARVs` WHERE pregnantWomen=1 union SELECT  e.visitDate as startDate, e.patientID, e.siteCode FROM  `obs` o, encounter e WHERE e.encounter_id = o.encounter_id AND o.concept_id IN (71262,7959,7098,7051,7053,7052,70118,70132,70150,70144,70130,70148,71140,70128,71398,70084,70069,70082,70078,70086,70066,70103,70624,70068,70087,70733,7958,71068,70732,7960,71070,7967,70730,70591,70731,70750,7957,70126,7955,71067,70729,7806,70067,70826,7805,70827,7804,70465,70018,70466,70083) and (o.value_text &lt;>'' or o.value_numeric>0 or o.value_boolean>0 or value_datetime is not null) union select  ymdToDate(visitDateYy,visitDateMm,visitDateDd) as startDate,patientID,siteCode from labs where labID in (134,1603,1601,1602) and (result=1 or upper(result) like 'POS%') union select visitDate ,patientId,siteCode from encounter where encounterType=26 and encStatus &lt; 255) en,  patient p, (select patientID,min(visitDate) as visitDate from pepfarTable group by 1) e  WHERE e.patientID = en.patientID AND p.patientID = e.patientID   AND p.hivPositive = 1  and left(e.patientID,5) = p.location_id   AND p.location_id = '$site'  AND e.visitDate &lt; en.startDate  and en.startDate BETWEEN '$start' AND '$end' GROUP BY 1,2,4,5,6,7 ORDER BY 2,3</query>
@@ -3232,10 +3232,7 @@ select CASE WHEN sex = 1 THEN 'Femme' WHEN sex = 2 THEN 'Homme' ELSE 'Autre' END
 				<query>SELECT p.patientID, CASE WHEN p.clinicPatientID IS NULL OR LTRIM(RTRIM(p.clinicPatientID)) = '' THEN 'N/A' ELSE p.clinicPatientID END AS clinicPatientID, p.nationalID, p.fname, p.lname, p.sex, $computed_age AS age, MAX(l.visitDate) AS LastDate FROM a_labs l, patient p WHERE p.patientID = l.patientID AND ISDATE(dbo.ymdToDate(p.dobYy, p.dobMm, p.dobDd)) = 1 AND dbo.ymdToDate(p.dobYy, p.dobMm, p.dobDd) BETWEEN '$start' AND '$end' AND l.result = 1 AND l.labID = 181 AND ISDATE(dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd)) = 1 AND dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd) BETWEEN '$start' AND '$end' AND l.siteCode = '$site' GROUP BY 1,2,4,5,6,7 ORDER BY 2</query>
 				<description lang="en">Number of infants born to HIV+ mothers who had an HIV PCR test that confirmed HIV+ status during the period of review.</description>
 				<description lang="fr">Qté d'enfants nés de mère VIH(+) sont le statut VIH a pu être confirmé positif, par PCR, au cours du mois du rapport.</description>
-			</report>
-			
-			
-			
+			</report>			
 			<report id="3310" patientStatus="0" treatmentStatus="0" testType="0">
 				<title lang="en">Number of exposed children tested for PCR in the first two months of birth</title>
 				<title lang="fr">Nombre d'enfants exposés testés pour le PCR au cours des deux premiers mois de naissance</title>
@@ -3253,6 +3250,23 @@ select CASE WHEN sex = 1 THEN 'Femme' WHEN sex = 2 THEN 'Homme' ELSE 'Autre' END
 				<query>SELECT p.patientID, CASE WHEN p.clinicPatientID IS NULL OR LTRIM(RTRIM(p.clinicPatientID)) = '' THEN 'N/A' ELSE p.clinicPatientID END AS clinicPatientID, p.nationalID, p.fname, p.lname, p.sex, $computed_age AS age from vitals v,patient p, (select ymdtodate(visitDateYy,visitDateMm,visitDateDd) as visitDate,l.patientID from labs l where labID=181) l where v.pedCurrHiv=1 and p.patientID=v.patientID  and l.patientID=v.patientID and datediff(l.visitDate,(ymdtodate(dobYy,case when dobMm='XX' or dobMm='' or dobMm is null then '01' else dobMm end,case when dobDd='XX' or dobDd='' or dobDd is null then '01' else dobDd end))) between 61 and 365 and ymdToDate(v.visitdateyy,v.visitdatemm,v.visitdatedd) BETWEEN '$start' AND '$end' AND p.location_id = '$site'</query>
 				<description lang="en">Number of exposed children tested for PCR between 2nd and 12th month of birth during the period of review.</description>
 				<description lang="fr">Nombre d'enfants exposés testés pour le PCR  entre le 2eme et le 12eme mois de naissance au cours du mois du rapport.</description>
+			</report>
+			<report id="4000" patientStatus="0" treatmentStatus="0" testType="0">
+				<title lang="en">List of exposed children </title>
+				<title lang="fr">Liste des enfants exposés </title>
+				<reportFile></reportFile>
+				<query>SELECT p.patientID, CASE WHEN p.clinicPatientID IS NULL OR LTRIM(RTRIM(p.clinicPatientID)) = '' THEN 'N/A' ELSE p.clinicPatientID END AS clinicPatientID, p.nationalID, p.fname, p.lname, p.sex, $computed_age AS age from exposeChild v,patient p where  p.patientID=v.patientID AND p.location_id = '$site'</query>
+				<description lang="en">List of exposed children (This list contains all patients who have been excluded from the list of ARVs patients including AES patients).</description>
+				<description lang="fr">Nombre d'enfants exposés (Cette liste contient tous les patients qui ont été exclut de la liste des patients ARVs y compris les patient AES.).</description>
+			</report>
+			<report id="4001" patientStatus="0" treatmentStatus="0" testType="0">
+				<title lang="en">List of exposed infants who have a positif PCR</title>
+				<title lang="fr">Liste des enfants exposés ayant un PCR(+)</title>
+				<reportFile></reportFile>
+				<menuSelection>dateSelect</menuSelection>
+				<query>SELECT p.patientID, CASE WHEN p.clinicPatientID IS NULL OR LTRIM(RTRIM(p.clinicPatientID)) = '' THEN 'N/A' ELSE p.clinicPatientID END AS clinicPatientID, p.nationalID, p.fname, p.lname, p.sex, $computed_age AS age, MAX(l.visitDate) AS LastDate   FROM a_labs l, patient p  WHERE p.patientID = l.patientID  AND l.labID = 181 AND (l.result=1 or upper(l.result) like 'POS%') and  dbo.ymdToDate(l.resultDateYy, l.resultDateMm, l.resultDateDd) BETWEEN '$start' AND '$end' AND l.siteCode = '$site' GROUP BY 1,2,4,5,6,7 ORDER BY 2</query>
+				<description lang="en">Number of infants born to HIV+ mothers who had an HIV PCR test during the period of review whose the result is positive</description>
+				<description lang="fr">Qté d'enfants nés de mère VIH(+) qui ont été testés par PCR  au cours du mois du rapport et dont le resultat est positif</description>
 			</report>
 			
 		</reportSubSet>

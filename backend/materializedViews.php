@@ -648,7 +648,9 @@ and p.patientID=v.patientID and datediff(ymdtodate(v.visitdateyy,v.visitdatemm,v
 
  
   database()->query('delete from exposeChild where lastPCR=1 or pedCurrHiv=4;');
+  database()->query('delete from exposeChild where patientID in (select patientID from patient where patStatus>0)');
     database()->query('delete from allHIV where patientID in (select patientID from exposeChild)');
+	
 #end of remove expose children
 
   database()->query('DROP TABLE IF EXISTS art;');
@@ -718,7 +720,7 @@ if ($mode == 1) {
 	database()->exec('lock tables patient p write,patientStatusTemp write,allHIV t read');
 	database()->query('delete from patientStatusTemp where endDate = ?', array($endDate));
 	database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from allHIV t', array($endDate));
-	database()->exec('update patient p left join allHIV t using (patientid) set p.patientStatus = t.patientStatus'); 
+	database()->exec('update patient p , patientStatusTemp t set p.patientStatus = t.patientStatus  where t.patientID=p.patientID and endDate = ?', array($endDate)); 
 	database()->exec('unlock tables'); 
 }
 // in mode = 2 the patientStatusTemp table is updated with new information and that information is returned to the caller
@@ -2780,7 +2782,7 @@ database()->exec('truncate table patientAlert');
 /* Generate viralLoadTemp */
 database()->exec('DROP TABLE IF EXISTS viralLoadTemp');
 database()->query('CREATE TABLE viralLoadTemp SELECT distinct patientid, date(ymdToDate(visitdateyy,visitDateMm,visitDateDd)) as visitDate, result, date(?) as maxDate 
-FROM labs WHERE labID IN (103, 1257) and result IS NOT NULL',array("2016-01-01"));
+FROM labs WHERE labID IN (103, 1257) and result IS NOT NULL and result<>?',array('2016-01-01',''));
 database()->exec('CREATE INDEX iViral ON viralLoadTemp (patientid,visitdate)');
 database()->exec('UPDATE viralLoadTemp A, (select patientID, max(visitDate) as maxDate FROM viralLoadTemp B GROUP BY 1) B set A.maxDate = B.maxDate where A.patientID = B.patientID');
 

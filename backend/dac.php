@@ -24,7 +24,7 @@ count(distinct case when ifnull(o.value_boolean,0)=0 then e.patientID else null 
 count(distinct e.patientID) as uniquePatient
 from 
 (select max(visitDate) as visitDate,patientID from v_prescriptions  e 
-where drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88)
+where drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,90)
 and e.dispensed=1
 and e.visitDate between '".$startdate."' AND '".$enddate."' and  LEFT(e.patientid,5)=".$site." 
 group by patientID
