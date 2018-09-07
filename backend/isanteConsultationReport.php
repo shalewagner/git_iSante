@@ -17,8 +17,7 @@ case when hivPositive=1 then 'Patient VIH' else 'Patient non VIH' end as Patient
 FROM   encValidAll e, clinicLookup c,patient p,encTypeLookup en 
 WHERE  e.patientID=p.patientID and c.siteCode=e.siteCode and e.encounterType in (1,2,16,17,27,28,29,31,24,25) 
 and en.encounterType=e.encounterType
-and visitDate BETWEEN   '".$startdate."' AND '".$enddate."'  AND e.sitecode='".$site."'
-GROUP BY 1"); 
+and visitDate BETWEEN   '".$startdate."' AND '".$enddate."'  AND e.sitecode='".$site."'"); 
   
   $consultationDaily = outputQueryRows($queryArray["consultationDaily"]); 
  

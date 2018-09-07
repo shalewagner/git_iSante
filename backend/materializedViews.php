@@ -619,8 +619,8 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 
 	 
    database()->query('insert into exposeChild(patientID,lastPCR)
-  select l.patientID,case when (l.result=1 or upper(l.result) like ?) then 1 else 2 end  from labs l,
-  (select patientID, max(ymdToDate(p.visitDateYy,p.visitDateMm,p.visitDateDd)) as visitDate from labs p where labID=181 group by 1) p 
+  select l.patientID,case when (l.result=1 or upper(l.result) like ?) then 1 else 2 end  from a_labs l,
+  (select p.patientID, max(ymdToDate(p.visitDateYy,p.visitDateMm,p.visitDateDd)) as visitDate from a_labs p,encounter e where p.patientID=e.patientID and p.encounter_id=e.encounter_id and e.encStatus<255 and labID=181 group by 1) p 
   where l.patientID=p.patientID and 
   p.visitDate=ymdToDate(l.visitDateYy,l.visitDateMm,l.visitDateDd) and 
   ymdToDate(l.visitDateYy,l.visitDateMm,l.visitDateDd)<=? and
@@ -720,7 +720,8 @@ if ($mode == 1) {
 	database()->exec('lock tables patient p write,patientStatusTemp write,allHIV t read');
 	database()->query('delete from patientStatusTemp where endDate = ?', array($endDate));
 	database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from allHIV t', array($endDate));
-	database()->exec('update patient p , patientStatusTemp t set p.patientStatus = t.patientStatus  where t.patientID=p.patientID and endDate = ?', array($endDate)); 
+	database()->exec('lock tables patient p write,patientStatusTemp  p1 read');
+	database()->query('update patient p , patientStatusTemp p1 set p.patientStatus = p1.patientStatus  where p1.patientID=p.patientID and endDate = ?', array($endDate)); 
 	database()->exec('unlock tables'); 
 }
 // in mode = 2 the patientStatusTemp table is updated with new information and that information is returned to the caller
