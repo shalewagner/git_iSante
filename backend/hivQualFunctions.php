@@ -397,16 +397,25 @@ WHERE LEFT(e.patientid, 5) = '$site'
   return $result;*/
   
    return fetchFirstColumn(dbQuery("
-SELECT DISTINCT patientid, visitDate 
+SELECT DISTINCT p.patientid FROM(SELECT DISTINCT patientid, visitDate 
 FROM v_patients 
 WHERE siteCode = '$site'
  AND encounterType in(1,16)
  AND visitDate BETWEEN '$startDate' AND '$endDate'
 AND patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
- AND patientID not in(select distinct patientID from patient where sitecode = '$site' and patientStatus is NULL OR patientStatus=0)")); 
+ AND patientID not in(select distinct patientID from patient where sitecode = '$site' and patientStatus is NULL OR patientStatus=0)
+ UNION
+SELECT DISTINCT patientid, min(visitDate) 
+FROM pepfarTable 
+WHERE siteCode = '$site' AND (forPepPmtct = 0 OR forPepPmtct IS NULL)
+AND patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
+ AND patientID not in(select distinct patientID from patient where sitecode = '$site' and patientStatus is NULL OR patientStatus=0)
+GROUP BY 1
+having min(visitDate) BETWEEN '$startDate' AND '$endDate') p
+ ")); 
 }
         
-function getInd3Num($repNum, $site, $intervalLength, $startDate, $endDate) {
+/*function getInd3Num($repNum, $site, $intervalLength, $startDate, $endDate) {
   return fetchFirstColumn(dbQuery("
 SELECT DISTINCT patientid, visitDate 
 FROM v_patients 
@@ -416,6 +425,15 @@ WHERE siteCode = '$site'
 AND patientID in(select distinct patientID from pepfarTable 
 where visitDate BETWEEN '$startDate' AND '$endDate'
 AND (forPepPmtct = 0 OR forPepPmtct IS NULL))"));
+}*/
+
+function getInd3Num($repNum, $site, $intervalLength, $startDate, $endDate) {
+  return fetchFirstColumn(dbQuery("
+SELECT DISTINCT p.patientid FROM(SELECT DISTINCT patientid, min(visitDate) 
+FROM pepfarTable 
+WHERE siteCode = '$site' AND (forPepPmtct = 0 OR forPepPmtct IS NULL)
+GROUP BY 1
+having min(visitDate) BETWEEN '$startDate' AND '$endDate') p"));
 }
 
 
