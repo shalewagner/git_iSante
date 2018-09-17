@@ -648,8 +648,8 @@ and p.patientID=v.patientID and datediff(ymdtodate(v.visitdateyy,v.visitdatemm,v
 
  
   database()->query('delete from exposeChild where lastPCR=1 or pedCurrHiv=4;');
-  database()->query('delete from exposeChild where patientID in (select patientID from patient where patStatus>0)');
-    database()->query('delete from allHIV where patientID in (select patientID from exposeChild)');
+  database()->query('delete from exposeChild where patientID in (select patientID from patient where patStatus>0);');
+    database()->query('delete from allHIV where patientID in (select patientID from exposeChild);');
 	
 #end of remove expose children
 
@@ -721,6 +721,7 @@ if ($mode == 1) {
 	database()->query('delete from patientStatusTemp where endDate = ?', array($endDate));
 	database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from allHIV t', array($endDate));
 	database()->exec('lock tables patient p write,patientStatusTemp  p1 read');
+	database()->query('update patient p set p.patientStatus =null;'); 	
 	database()->query('update patient p , patientStatusTemp p1 set p.patientStatus = p1.patientStatus  where p1.patientID=p.patientID and endDate = ?', array($endDate)); 
 	database()->exec('unlock tables'); 
 }
@@ -2872,6 +2873,12 @@ database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate
 SELECT distinct LEFT(e.patientID,5),e.patientID,10,date(now()) 
 FROM  `formErrors` f, encounter e 
 WHERE f.encounter_id = e.encounter_id and e.patientID not in (select patientId from patientAlert where alertId=10);');
+
+database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
+select e.siteCode, e.patientID,10,date(now()) 
+from encounter e, patient p where e.patientID = p.patientID 
+and e.encStatus between 1 and 254 and p.patStatus = 0 
+and e.patientID not in (select patientId from patientAlert where alertId=10);');
 
 }
 ?>
