@@ -553,7 +553,7 @@ WHERE p.siteCode = '$site'
  
  AND p.visitDate <= '$endDate'
  AND p.patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
- AND p.patientID not in(select distinct patientID from patient where sitecode = '$site' and patientStatus is NULL OR patientStatus=0) 
+ AND p.patientID not in(select distinct patientID from patient where sitecode = '$site' and (patientStatus is NULL OR patientStatus=0)) 
  "));
 }
 
@@ -798,7 +798,7 @@ select p.patientId, min(p.visitDate) as date_visit from pepfarTable p, encValid 
 WHERE p.siteCode = '$site'
  AND p.patientID=e.patientID
  AND p.patientID not in(select distinct patientID from discEnrollment d where d.sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
- AND p.patientID not in(select distinct patientID from patient q where location_id = '$site' and patientStatus is NULL OR patientStatus=0)
+ AND p.patientID not in(select distinct patientID from patient q where location_id = '$site' and (patientStatus is NULL OR patientStatus=0))
  AND e.encounterType IN (14, 20)
  AND timestampdiff(month, e.visitDate,'$endDate') between 0 and 6
  GROUP BY 1
@@ -1336,8 +1336,9 @@ FROM (select p.patientId, min(p.visitDate) as date_visit from pepfarTable p
 
 WHERE p.siteCode = '$site'
  AND p.patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
- AND p.patientID not in(select distinct patientID from patient where sitecode = '$site' and patientStatus is NULL OR patientStatus=0)
+ AND p.patientID not in(select distinct patientID from patient where sitecode = '$site' and (patientStatus is NULL OR patientStatus=0))
  AND p.visitDate <= '$endDate'
+ and (forPepPmtct is NULL or forPepPmtct=2)
  GROUP BY 1
  HAVING datediff(day,date_visit, '$startDate') <=365 and datediff(day,date_visit, '$endDate') >=365
 ) l"));
@@ -1379,18 +1380,33 @@ WHERE p.siteCode = '$site'
  global $setupTableNames;
    $threeMonths = monthDiff(-3, $endDate);
 
-  return fetchFirstColumn(dbQuery("
+  /*return fetchFirstColumn(dbQuery("
 SELECT DISTINCT l.patientid 
 FROM (select p.patientId, ymdtoDate(visitDateYy,visitDateMm,visitDateDd) as visitDate, numDaysDesc, min(ymdtoDate(visitDateYy,visitDateMm,visitDateDd)) as date_visit, max(ymdtoDate(visitDateYy,visitDateMm,visitDateDd)) as visitMax from prescriptions p 
 
 WHERE p.siteCode = '$site'
  AND ymdtoDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate'
  AND drugID in (1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88, 89, 90, 91)
+ and (forPepPmtct is NULL or forPepPmtct=2)
  GROUP BY 1
  HAVING datediff(day, date_visit,'$startDate') <=365 and datediff(day, date_visit, '$endDate') >=365
  
- AND DATEDIFF(day, visitMax, '$startDate') <=numDaysDesc
- ) l"));
+ AND DATEDIFF(day, visitMax, '$startDate') <=numDaysDesc and numDaysDesc is not NULL
+ ) l"));*/
+ 
+ return fetchFirstColumn(dbQuery("
+SELECT DISTINCT m.patientid 
+FROM (select q.patientID, ymdtoDate(visitDateYy,visitDateMm,visitDateDd) as dateMax, q.numDaysDesc from prescriptions q INNER JOIN (select p.patientId, ymdtoDate(visitDateYy,visitDateMm,visitDateDd) as visitDate, min(ymdtoDate(visitDateYy,visitDateMm,visitDateDd)) as date_visit, max(ymdtoDate(visitDateYy,visitDateMm,visitDateDd)) as visitMax from prescriptions p 
+
+WHERE p.siteCode = '$site'
+ AND ymdtoDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate'
+ AND drugID in (1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88, 89, 90, 91)
+ and (forPepPmtct is NULL or forPepPmtct=2)
+ GROUP BY 1
+ HAVING datediff(day, date_visit,'$startDate') <=365 and datediff(day, date_visit, '$endDate') >=365
+ 
+ ) l on q.patientID=l.patientID and ymdtoDate(visitDateYy,visitDateMm,visitDateDd)=l.visitMax
+ where (DATEDIFF(day, ymdtoDate(visitDateYy,visitDateMm,visitDateDd), '$startDate') <=q.numDaysDesc and q.numDaysDesc is not NULL) or ymdtoDate(visitDateYy,visitDateMm,visitDateDd) BETWEEN '$startDate' and '$endDate' ) m "));
 }
 
 // Pediatric Early HIV Detection
@@ -1508,7 +1524,7 @@ FROM (select p.patientID, min(p.visitDate), result, v.visitDate,max(dbo.ymdToDat
 WHERE p.patientID=v.patientID
 AND p. siteCode = '$site'
 AND p.patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
- AND p.patientID not in(select distinct patientID from patient where location_id = '$site' and patientStatus is NULL OR patientStatus=0) 
+ AND p.patientID not in(select distinct patientID from patient where location_id = '$site' and (patientStatus is NULL OR patientStatus=0)) 
 AND labID in(103,1257)
 AND (result is not null and result !='')
  
@@ -1539,7 +1555,7 @@ FROM (select p.patientID, min(p.visitDate), max(visitDate) FROM pepfarTable p
 WHERE p. siteCode = '$site'
  AND visitDate <= '$endDate'
 AND p.patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
- AND p.patientID not in(select distinct patientID from patient where location_id = '$site' and patientStatus is NULL OR patientStatus=0) 
+ AND p.patientID not in(select distinct patientID from patient where location_id = '$site' and (patientStatus is NULL OR patientStatus=0)) 
 
 GROUP BY 1
 HAVING datediff(mm, min(p.visitDate),'$endDate') >= 6
@@ -1595,7 +1611,7 @@ FROM (select p.patientID, min(p.visitDate), result, v.visitDate,max(dbo.ymdToDat
 WHERE p.patientID=v.patientID
 AND p. siteCode = '$site'
 AND p.patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
- AND p.patientID not in(select distinct patientID from patient where location_id = '$site' and patientStatus is NULL OR patientStatus=0) 
+ AND p.patientID not in(select distinct patientID from patient where location_id = '$site' and (patientStatus is NULL OR patientStatus=0)) 
 AND labID in(103,1257)
 AND (result is not null and result !='')
  
@@ -1785,14 +1801,26 @@ WHERE e.patientID = t4.patientID
   return fetchFirstColumn(dbQuery("
 SELECT distinct p.patientID, min(p.visitDate)
 FROM pepfarTable p
-WHERE p.siteCode = '$site'
+WHERE p.siteCode = '$site' and (forPepPmtct is NULL or forPepPmtct=2)
  AND p.patientID not in (select distinct patientID from prescriptions 
  where drugID in(13,18,24,25,30) and (forPepPmtct is NULL or forPepPmtct=2)  
  AND ymdToDate(dispDateYy,dispDateMm,dispDateDd) BETWEEN '$startDate' AND '$endDate')
  AND p.patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
- AND p.patientID not in(select distinct patientID from patient where sitecode = '$site' and patientStatus is NULL OR patientStatus=0)
+ AND p.patientID not in(select distinct patientID from patient where sitecode = '$site' and (patientStatus is NULL OR patientStatus=0))
  GROUP BY 1
  HAVING min(p.visitDate) BETWEEN '$startDate' AND '$endDate'"));
+ 
+ /*return fetchFirstColumn(dbQuery("
+SELECT DISTINCT patientID from pepfarTable r INNER JOIN (SELECT distinct p.patientID, min(p.visitDate) as minDate
+FROM pepfarTable p
+WHERE p.siteCode = '$site' 
+ AND p.patientID not in (select distinct patientID from prescriptions 
+ where drugID in(13,18,24,25,30) and (forPepPmtct is NULL or forPepPmtct=2)  
+ AND ymdToDate(dispDateYy,dispDateMm,dispDateDd) BETWEEN '$startDate' AND '$endDate')
+ AND p.patientID not in(select distinct patientID from discEnrollment where sitecode = '$site' and (reasonDiscTransfer=1 or reasonDiscDeath=1 or LOWER(discReasonOtherText) like '%transfert%') and ymdToDate(visitDateYy,visitDateMm,visitDateDd) <= '$endDate')
+ AND p.patientID not in(select distinct patientID from patient where sitecode = '$site' and (patientStatus is NULL OR patientStatus=0))
+ GROUP BY 1
+ HAVING min(p.visitDate) BETWEEN '$startDate' AND '$endDate') q on r.patientID=q.patientID and (r.forPepPmtct is NULL or r.forPepPmtct=2) and r.visitDate=q.minDate*/
 }
 
 ?>
