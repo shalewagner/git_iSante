@@ -22,8 +22,8 @@ $dispClause=' And 1=1';
 $message='Liste de patients ayant reçu des ARVs ';
  switch ($disp)
  {
-	 case '0' :{$dispClause.=' And ifnull(o.value_boolean,0)=0'; $message.=' en communauté :'; break;}
-	 case '1' :{$dispClause.=' And ifnull(o.value_boolean,0)=1'; $message.=' dans l`Institution :';break;}
+	 case '0' :{$dispClause.=' And ifnull(o.value_boolean,0)=0'; $message.=' dans l`Institution :'; break;}
+	 case '1' :{$dispClause.=' And ifnull(o.value_boolean,0)=1'; $message.='en communauté : ';break;}
 	 default: $dispClause.='';
  }
  

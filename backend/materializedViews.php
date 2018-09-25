@@ -646,7 +646,7 @@ and p.patientID=v.patientID and datediff(ymdtodate(v.visitdateyy,v.visitdatemm,v
      and l.patientID=p.patientID and drugID in (1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
 	 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=?) p2 set p1.lastPCR=0 where p1.patientID=p2.patientID ;',array('un','un','un','un',$endDate,'un','un',$endDate)); 
 
- 
+  database()->exec('unlock tables'); 
   database()->query('delete from exposeChild where lastPCR=1 or pedCurrHiv=4;');
   database()->query('delete from exposeChild where patientID in (select patientID from patient where patStatus>0);');
     database()->query('delete from allHIV where patientID in (select patientID from exposeChild);');
@@ -721,7 +721,7 @@ if ($mode == 1) {
 	database()->query('delete from patientStatusTemp where endDate = ?', array($endDate));
 	database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from allHIV t', array($endDate));
 	database()->exec('lock tables patient p write,patientStatusTemp  p1 read');
-	database()->query('update patient p set p.patientStatus =null;'); 	
+	database()->query('update patient p set p.patientStatus =null'); 	
 	database()->query('update patient p , patientStatusTemp p1 set p.patientStatus = p1.patientStatus  where p1.patientID=p.patientID and endDate = ?', array($endDate)); 
 	database()->exec('unlock tables'); 
 }
