@@ -586,8 +586,7 @@ WHERE p.siteCode = '$site'
  return fetchFirstColumn(dbQuery("
 SELECT DISTINCT l.patientid 
 FROM (select p.patientId, p.visitDate from pepfarTable p
-WHERE p.siteCode = '$site' AND p.visitDate BETWEEN '$startDate' AND '$endDate'
- 
+WHERE p.siteCode = '$site' AND p.visitDate BETWEEN '$startDate' AND '$endDate' 
   GROUP BY 1
 
  UNION

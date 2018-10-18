@@ -57,6 +57,8 @@ $result = dbQuery('select getDate() as dbStartDate');
 $row = psRowFetch($result);
 $dbStartDate = $row['dbStartDate'];
 
+
+if (getConfig('serverRole') != 'consolidated') { 
 startTimer();
 printLog('fixZeroVisitDates() started');
 fixZeroVisitDates();
@@ -92,6 +94,7 @@ printLog('whoInit() started');
 whoInit();
 printLog('whoInit() finished (' . getTimer() . ' seconds elapsed)');
 
+}
 startTimer();
 printLog('updatePatientStatus(1, null) started');
 updatePatientStatus(1, null);

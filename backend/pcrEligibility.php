@@ -59,7 +59,7 @@ select distinct p.patientID,lname,fname,p.patientStatus,clinicPatientID,p.sex,ym
   <tr>
     <td width="70%">
 	<p>&nbsp;</p>
-	<div><strong>Patient ELigibre pour un PCR </strong></div>
+	<div><strong>Patient ELigible pour un PCR </strong></div>
 	<div>&nbsp;</div>
 	<div>$patientEligibility</div>
 	<p>&nbsp;</p>	

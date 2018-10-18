@@ -586,6 +586,8 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 		(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR 
 		dispAltDosage IS NOT NULL) AND (forPepPmtct = 2 OR forPepPmtct IS NULL) GROUP BY 1,2 ORDER BY 1,2 DESC', array('un','un','un','un'));
   }
+  
+  database()->exec('unlock tables');
 # initialize allHIV table based upon patients being hivPositive and having valid transactions per the type list
   database()->query('INSERT INTO allHIV SELECT distinct p.patientid, NULL FROM patient p, encounter e 
            WHERE p.patientid = e.patientid AND
@@ -594,14 +596,15 @@ function updatePatientStatus($mode = 1, $endDate = null) {
            e.encStatus < 255 AND
            e.encounterType IN (1,2,5,10,14,15,16,17,18,20,24,25,26,27,28,29,31) AND
            ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ?;', array($endDate));
-		   
+ database()->query('create unique index allHIV_index on allHIV (patientID);');		
+ 
 # remove expose children with new definition 
   database()->query('drop table if exists exposeChild;');
   database()->query('create table exposeChild (patientID int primary key , dobDate date,lastVisitDate Date,lastDispDate date,pedCurrHiv int,lastPCR int);');
   database()->query('create unique index exposeChild_index on exposeChild (patientID);');
   database()->query('insert into exposeChild(patientID,pedCurrHiv) SELECT DISTINCT p.patientID, pedCurrHiv FROM vitals p, (SELECT patientID, MAX(ymdToDate(p.visitDateYy, p.visitDateMm, p.visitDateDd)) AS visitDate FROM itech.vitals p WHERE pedCurrHiv IN (1,4) GROUP BY 1)v WHERE p.pedCurrHiv IN(1,4) AND p.patientID = v.patientID AND v.visitDate = ymdToDate(p.visitDateYy, p.visitDateMm, p.visitDateDd) AND v.visitDate<?  on duplicate key update lastPCR=0;',array($endDate)); 
   database()->query('insert into exposeChild(patientID) select distinct patientID from discEnrollment p where seroreversion=1 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=? on duplicate key update lastPCR=0;',array($endDate));
-  database()->query('insert into exposeChild(patientID,lastDispDate) select distinct p.patientID ,l.lastDispDate
+  database()->query('insert into exposeChild(patientID,lastDispDate,lastPCR) select distinct p.patientID ,l.lastDispDate,0 as lastPCR
   from prescriptions p,
   (select 
     patientID,max(CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm != ? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
@@ -615,7 +618,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
      and l.patientID=p.patientID 
 	 and drugID in (1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
 	 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=?
-     on duplicate key update lastDispDate=l.lastDispDate;',array('un','un','un','un',$endDate,'un','un',$endDate));
+     on duplicate key update lastDispDate=l.lastDispDate,lastPCR=0;',array('un','un','un','un',$endDate,'un','un',$endDate));
 
 	 
    database()->query('insert into exposeChild(patientID,lastPCR)
@@ -633,23 +636,10 @@ and p.patientID=v.patientID and datediff(ymdtodate(v.visitdateyy,v.visitdatemm,v
 		case when dobDd=? or dobDd=? or dobDd is null then ? else dobDd end)))>=547 and ymdtodate(v.visitdateyy,v.visitdatemm,v.visitdatedd)<=?
 		) p2 set p1.lastPCR=1 where p1.patientID=p2.patientID',array('POS%','XX','','01','XX','','01',$endDate));  
 
-		
-   database()->query('update exposeChild p1,(select distinct p.patientID from prescriptions p,patient p1,
-  (select patientID,max(CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm !=? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
-		ELSE ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd) END) as lastDispDate 
-		from prescriptions p 
-		where CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm !=? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
-		ELSE ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd) END<=? and
-		drugID in (1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91) group by 1) l 
-     where p.forPepPmtct=1 and l.lastDispDate=CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy !=? and p.dispdatemm != ? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
-		ELSE ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd) END
-     and l.patientID=p.patientID and drugID in (1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
-	 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=?) p2 set p1.lastPCR=0 where p1.patientID=p2.patientID ;',array('un','un','un','un',$endDate,'un','un',$endDate)); 
-
   database()->exec('unlock tables'); 
   database()->query('delete from exposeChild where lastPCR=1 or pedCurrHiv=4;');
-  database()->query('delete from exposeChild where patientID in (select patientID from patient where patStatus>0);');
-    database()->query('delete from allHIV where patientID in (select patientID from exposeChild);');
+  database()->query('delete a from exposeChild a,patient p where p.patientID=a.patientID and p.patStatus>0;');
+  database()->query('delete a from allHIV a,exposeChild p where a.patientID=p.patientID;');
 	
 #end of remove expose children
 
@@ -690,30 +680,40 @@ ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ? group by 1;', array(
 
   database()->exec('ALTER TABLE allEnc ADD PRIMARY KEY (patientid);');  
   database()->query('UPDATE allEnc e, art a SET e.maxDt = a.maxDispDt WHERE e.patientid = a.patientid and a.maxDispDt > e.maxDt;');
-   
-$query='UPDATE allHIV a,(
+/*patient regulier , randez-vous ratez et perdu de vu sous ARV*/   
+$query1='UPDATE allHIV a,(
 SELECT CASE WHEN ? BETWEEN e.maxDt AND e.nextDt THEN 6 
-            WHEN DATEDIFF(?,e.nextDt) BETWEEN 0 AND 90 THEN 8 
+            WHEN DATEDIFF(?,e.nextDt) BETWEEN 0 AND 30 THEN 8 
 			ELSE 9 END AS patientStatus,l.patientid from art l, allEnc e 
 WHERE l.patientid = e.patientid AND l.patientid NOT IN (SELECT patientID FROM discTable WHERE
-	discType IN (4,8,11,12) AND discDate <=?)
-UNION 
+	discType IN (4,8,11,12) AND discDate <=?) ) b SET a.patientStatus=b.patientStatus WHERE a.patientid=b.patientid;';
+database()->query($query1,array($endDate,$endDate,$endDate));
+
+/*patient deceder, transferer et arreter sur ARV*/	
+$query2='UPDATE allHIV a,(
 SELECT CASE WHEN discType = 12 THEN 1 
             WHEN discType = 11 THEN 2 
 		    ELSE 3 END AS patientStatus, d.patientid FROM discTable d,art l 
-WHERE l.patientid = d.patientid AND d.discType IN (4,8,11,12) AND discDate <=?
-UNION 
+WHERE l.patientid = d.patientid AND d.discType IN (4,8,11,12) AND discDate <=?) b SET a.patientStatus=b.patientStatus WHERE a.patientid=b.patientid;';
+database()->query($query2,array($endDate)); 
+
+/* patient actif, recent et perdu de vu en transition */
+$query3='UPDATE allHIV a,(
 SELECT CASE WHEN e.minDt BETWEEN date_add(?,INTERVAL -12 MONTH) AND ? THEN 7 
             WHEN e.minDt < date_add(?,INTERVAL -12 MONTH) AND e.maxDt BETWEEN date_add(?,INTERVAL -12 MONTH) AND ? THEN 11 
 			ELSE 10 END AS patientStatus, e.patientid FROM allEnc e 
 WHERE patientid NOT IN (SELECT patientID from discTable WHERE discDate <=?) AND patientid NOT IN (SELECT patientID FROM art)
-UNION 
+) b SET a.patientStatus=b.patientStatus WHERE a.patientid=b.patientid;';
+database()->query($query3,array($endDate,$endDate,$endDate,$endDate,$endDate,$endDate)); 
+
+/*patient deceder, transferer et arreter en transition*/
+$query4='UPDATE allHIV a,(
 SELECT CASE WHEN discType = 12 THEN 4 
             WHEN discType = 11 THEN 5 
 			ELSE 10 END  AS patientStatus, d.patientid FROM discTable d, allHIV h 
 WHERE d.patientid = h.patientid AND d.patientid NOT IN (SELECT patientid FROM art) AND discDate <=?
 ) b SET a.patientStatus=b.patientStatus WHERE a.patientid=b.patientid;';
-database()->query($query,array($endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate,$endDate));
+database()->query($query4,array($endDate)); 
 
 // mode = 1 will now update both the patient table and the patientStatusBatch table, thus removing the need to do multile status update runs in the patientStatusBatch code
 if ($mode == 1) {
@@ -722,7 +722,8 @@ if ($mode == 1) {
 	database()->query('insert into patientStatusTemp (patientID, patientStatus, endDate, insertDate) select patientID, patientStatus, ?, now() from allHIV t', array($endDate));
 	database()->exec('lock tables patient p write,patientStatusTemp  p1 read');
 	database()->query('update patient p set p.patientStatus =null'); 	
-	database()->query('update patient p , patientStatusTemp p1 set p.patientStatus = p1.patientStatus  where p1.patientID=p.patientID and endDate = ?', array($endDate)); 
+	database()->exec('lock tables patient p write,allHIV  p1 read');
+	database()->query('update patient p , allHIV p1 set p.patientStatus = p1.patientStatus  where p1.patientID=p.patientID'); 
 	database()->exec('unlock tables'); 
 }
 // in mode = 2 the patientStatusTemp table is updated with new information and that information is returned to the caller
@@ -2637,7 +2638,7 @@ function generateMarkerArray() {
 	  // index is patientStatus, associative value is column in final report
 	  $statusMap = array (1 => 7, 2 => 11, 3 => 10, 4 => 5 , 5 => 4,  6 => 6,  7 => 8, 8 => 9,  9 => 3, 10 => 2, 11 => 1);  
 	  $result = database()->query('
-	select siteCode, case when p.patientStatus between 1 and 10 then p.patientStatus else 0 end as patientStatus, count(distinct e.patientid) as patientid
+	select siteCode, case when p.patientStatus between 1 and 11 then p.patientStatus else 0 end as patientStatus, count(distinct e.patientid) as patientid
 	from encounter e join patient p using (patientid)
 	where e.encStatus < 255 and p.patStatus = 0 
 	group by siteCode, p.patientStatus;');
