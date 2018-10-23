@@ -610,7 +610,10 @@ function updatePatientStatus($mode = 1, $endDate = null) {
     patientID,max(CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm != ? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
 		ELSE ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd) END) as lastDispDate from prescriptions 
 		p where CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm != ? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
-		ELSE ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd) END<=? and 
+		ELSE ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd) END<=?
+		AND 
+		(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR 
+		dispAltDosage IS NOT NULL) AND 
 		drugID in (1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91) group by 1) l 
      where p.forPepPmtct=1
      and l.lastDispDate=CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm != ? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
@@ -630,10 +633,10 @@ function updatePatientStatus($mode = 1, $endDate = null) {
   l.labID=181 on duplicate key update lastPCR=case when(l.result=1 or upper(l.result) like ?) then 1 else 2 end;',array('POS%',$endDate,'POS%')); 
 
   
-   database()->query('update exposeChild p1,( select  p.patientID from itech.labs v,itech.patient p 
-where v.labID=100 and (v.result=1 or upper(v.result) like ?)
+   database()->query('update exposeChild p1,( select  p.patientID from a_labs v,itech.patient p ,encounter e
+where p.patientID=e.patientID and v.encounter_id=e.encounter_id and e.encStatus<255 and v.labID=100 and (v.result=1 or upper(v.result) like ?)
 and p.patientID=v.patientID and datediff(ymdtodate(v.visitdateyy,v.visitdatemm,v.visitdatedd),(ymdtodate(dobYy,case when dobMm=? or dobMm=? or dobMm is null then ? else dobMm end,
-		case when dobDd=? or dobDd=? or dobDd is null then ? else dobDd end)))>=547 and ymdtodate(v.visitdateyy,v.visitdatemm,v.visitdatedd)<=?
+		case when dobDd=? or dobDd=? or dobDd is null then ? else dobDd end))) between 547 and 5110 and ymdtodate(v.visitdateyy,v.visitdatemm,v.visitdatedd)<=?
 		) p2 set p1.lastPCR=1 where p1.patientID=p2.patientID',array('POS%','XX','','01','XX','','01',$endDate));  
 
   database()->exec('unlock tables'); 
@@ -673,22 +676,35 @@ MAX(ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd)) as maxDt,
 MAX(CASE WHEN ISDATE(ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd)) = 1 THEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) ELSE DATE_ADD(ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd),INTERVAL 1 MONTH) END) AS nextDt 
 FROM encounter e, allHIV h
 WHERE e.patientid = h.patientid AND  
-e.encountertype in (1,2,5,10,14,15,16,17,18,20,24,25,26,27,28,29,31) AND 
+e.encountertype in (1,2,5,14,16,17,18,20,24,25,26,27,28,29,31) AND 
 e.encStatus < 255 AND badvisitdate = 0 AND
 ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd) <= ? group by 1;', array($endDate));
 
+#built table to considere only the ordonance form in 18.2.1
+database()->exec('DROP TABLE IF EXISTS allOrd;');
+  database()->query('CREATE TABLE allOrd	
+select patientID,max(dispd) as maxDt,max(nxt_dispd) as nextDt from patientDispenses where dispd<=? group by 1;', array($endDate));
+database()->exec('ALTER TABLE allOrd ADD PRIMARY KEY (patientid);'); 
+/*patient regulier , randez-vous ratez et perdu de vu sous ARV*/   
+$query1='UPDATE allHIV a,(
+SELECT CASE WHEN ? BETWEEN e.maxDt AND e.nextDt THEN 6 
+            WHEN DATEDIFF(?,e.nextDt) BETWEEN 0 AND 30 THEN 8 
+			ELSE 9 END AS patientStatus,l.patientid from art l, allOrd e 
+WHERE l.patientid = e.patientid AND l.patientid NOT IN (SELECT patientID FROM discTable WHERE
+	discType IN (4,8,11,12) AND discDate <=?) ) b SET a.patientStatus=b.patientStatus WHERE a.patientid=b.patientid;';
+database()->query($query1,array($endDate,$endDate,$endDate));
 
   database()->exec('ALTER TABLE allEnc ADD PRIMARY KEY (patientid);');  
   database()->query('UPDATE allEnc e, art a SET e.maxDt = a.maxDispDt WHERE e.patientid = a.patientid and a.maxDispDt > e.maxDt;');
 /*patient regulier , randez-vous ratez et perdu de vu sous ARV*/   
-$query1='UPDATE allHIV a,(
+/*$query1='UPDATE allHIV a,(
 SELECT CASE WHEN ? BETWEEN e.maxDt AND e.nextDt THEN 6 
             WHEN DATEDIFF(?,e.nextDt) BETWEEN 0 AND 30 THEN 8 
 			ELSE 9 END AS patientStatus,l.patientid from art l, allEnc e 
 WHERE l.patientid = e.patientid AND l.patientid NOT IN (SELECT patientID FROM discTable WHERE
 	discType IN (4,8,11,12) AND discDate <=?) ) b SET a.patientStatus=b.patientStatus WHERE a.patientid=b.patientid;';
 database()->query($query1,array($endDate,$endDate,$endDate));
-
+*/
 /*patient deceder, transferer et arreter sur ARV*/	
 $query2='UPDATE allHIV a,(
 SELECT CASE WHEN discType = 12 THEN 1 
@@ -714,6 +730,8 @@ SELECT CASE WHEN discType = 12 THEN 4
 WHERE d.patientid = h.patientid AND d.patientid NOT IN (SELECT patientid FROM art) AND discDate <=?
 ) b SET a.patientStatus=b.patientStatus WHERE a.patientid=b.patientid;';
 database()->query($query4,array($endDate)); 
+
+//database()->query('delete a from allHIV where patientStatus is null');
 
 // mode = 1 will now update both the patient table and the patientStatusBatch table, thus removing the need to do multile status update runs in the patientStatusBatch code
 if ($mode == 1) {
