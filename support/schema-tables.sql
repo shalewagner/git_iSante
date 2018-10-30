@@ -9,7 +9,7 @@ CREATE TABLE schemaVersion (
  whenUpgraded timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
  PRIMARY KEY  (version)
 );
-insert into schemaVersion set version=45, scriptName='support/schema-updates/0045-AddNewAlerts.sql';
+insert into schemaVersion set version=46, scriptName='support/schema-updates/0046-AddIntervention.sql';
 
 DROP TABLE IF EXISTS adherenceCounseling;
 CREATE TABLE adherenceCounseling (

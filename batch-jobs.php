@@ -41,6 +41,7 @@ select case when max(lastModified) < lastRun then 0 else 1 end as flag
  group by lastRun';
 $result = dbQuery($sql);
 $row = psRowFetch($result);
+
 // This was commented out and since then deadlocks have been happening. This code is re-established for 18.1
 if ( ($row['flag'] == 0)
      && ($argv[1] != '-f') 

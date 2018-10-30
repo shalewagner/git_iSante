@@ -625,6 +625,32 @@ var itemEvaluationAndPlanning = {
 		}] 
 	}]
     };
+	
+
+itemIntervention = {       // Itervention in OBGYN Stuff
+		xtype: 'fieldset',
+		layout: 'hbox',
+        defaults: {margins: '5 16 5 5'},
+		title: '<?=_('Intervention')?>',
+		padding: 5,
+		items: [{
+      boxLabel: '<?=_('Cryotherapie ')?>',
+      <?= genExtWidget('cryotherapie', 'checkbox', 0); ?> 
+    },
+	{
+      boxLabel: '<?=_('LEEP ')?>',
+      <?= genExtWidget('leep', 'checkbox', 0); ?> 
+    },
+	{
+      boxLabel: '<?=_('Thermocoagulation ')?>',
+      <?= genExtWidget('thermocoagulation', 'checkbox', 0); ?> 
+    }]
+    };	
+	
+	
+	
+	
+	
 buildValidation(72, makeTestAllOrNone(makeTestAnyNotBlank('evalplanHIVCounselingPretestDate0'),
 				      makeTestAnyIsChecked('evalplanHIVCounselingPretest1')));
 buildValidation(72, makeTestAllOrNone(makeTestAnyNotBlank('evalplanHIVCounselingPosttestDate0'),
@@ -722,12 +748,16 @@ var proceduresPanelItems = new Array();
 <? if (getConfig('labOrderUrl') === Null) echo "
 proceduresPanelItems.push(itemLabs);";
 ?>
+
 if (isObgynEncounter) proceduresPanelItems.push(itemFamilyPlanning);
 if (!isPediatricEncounter) proceduresPanelItems.push(itemVaccination);
 proceduresPanelItems.push(itemPrescribedMedications);
+proceduresPanelItems.push(itemIntervention);
 if (isObgynEncounter) proceduresPanelItems.push(itemEvaluationAndPlanning);
 if (isPediatricEncounter) proceduresPanelItems.push(itemNutritionalSupport);
 proceduresPanelItems.push(itemReference);
+
+
 
 var proceduresPanelVariables = {
         title: '<?=_('CONDUITE A TENIR')?>',
