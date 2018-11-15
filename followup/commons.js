@@ -59,3 +59,10 @@ Ext.util.getElements = function(_array)
 	return elements;
 }
 
+    txtFormat['procedureDateDt'] = new Ext.form.DateField({
+		fieldLabel: '',
+		maskRe : /[\d{1,2}\/]/,
+		validationEvent: false,
+		allowBlank:true
+	});	
+	txtFormat['procedureDateDt'].applyToMarkup('procedureDateDt');

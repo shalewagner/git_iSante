@@ -209,6 +209,8 @@ Ext.onReady(function() {
 	names[9] = "bloodExp";
 	names[10] = "papTest";
 	names[11]  = 'clinicalExam';
+	names[12] = "cancerColon";
+	names[13] = "procedureDate";
 	
 	var allElements = Ext.util.getAllElements(document.mainForm,names);
 
@@ -879,12 +881,40 @@ Ext.onReady(function() {
 	errMsg = Ext.util.checkDoseCorresponding(document.getElementById('vaccTetanus1'),document.getElementById('tetDoses'),document.getElementById('tetDosesTitle'));
 	errCount = Ext.util.showErrorHead(errFields,errMsgs,'tetDoses',errMsg,errCount);
 	txtFormat['papTestDT'] = new Ext.form.DateField({
+		id: 'papTestDT',
 		fieldLabel: '',
 		maskRe : /[\d{1,2}\/]/,
 		validationEvent: false,
 		allowBlank:true
-	});
+	});	
 	txtFormat['papTestDT'].applyToMarkup('papTestDT');
+	
+	txtFormat['cancerColonDT'] = new Ext.form.DateField({
+		id: 'cancerColonDT',
+		fieldLabel: '',
+		maskRe : /[\d{1,2}\/]/,
+		validationEvent: false,
+		allowBlank:true
+	});	
+	txtFormat['cancerColonDT'].applyToMarkup('cancerColonDT');
+	
+	txtFormat['procedureDateDt'] = new Ext.form.DateField({
+		id: 'procedureDateDt',
+		fieldLabel: '',
+		maskRe : /[\d{1,2}\/]/,
+		validationEvent: false,
+		allowBlank:true
+	});	
+	txtFormat['procedureDateDt'].applyToMarkup('procedureDateDt');
+	
+	txtFormat['pregnantLmpDt'] = new Ext.form.DateField({
+		fieldLabel: '',
+		maskRe : /[\d{1,2}\/]/,
+		validationEvent: false,
+		allowBlank:true
+	});	
+	txtFormat['pregnantLmpDt'].applyToMarkup('pregnantLmpDt');	
+	
 
 	txtFormat['lowestCd4CntDT'] = new Ext.form.DateField({
 		fieldLabel: '',

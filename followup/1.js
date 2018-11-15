@@ -20,8 +20,19 @@ Ext.onReady(function() {
 		maskRe : /[\d\.]/,
 		validationEvent: false,
 		allowBlank:true
-	});
+	});	
 	vitalTemp.applyToMarkup(document.mainForm.vitalTemp);
+	
+	procedureDateDt = new Ext.form.DateField({
+		fieldLabel: '',
+		id: 'procedureDateDt',
+		maskRe :  /[\d{1,2}\/]/,
+		validationEvent: false,
+		allowBlank:true
+	});	
+	procedureDateDt.applyToMarkup(document.mainForm.procedureDateDt);
+	
+	
 	vitalBp1 = new Ext.form.TextField({
 		fieldLabel: '',
 		name: 'vitalBp1',
@@ -715,7 +726,8 @@ Ext.get('vitalBp1').on('blur', function(){
 	medEligSection[5] = document.mainForm.formerARVtherapy;
 	medEligSection[6] = document.mainForm.PEP;
 	medEligSection[7] = document.mainForm.expFromD1;
-	medEligSection[8] = document.mainForm.tlcLT1200;   
+	medEligSection[8] = document.mainForm.tlcLT1200;  
+	
 
 	for(var i=1;i<4;i++)
 	{

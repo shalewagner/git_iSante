@@ -7,11 +7,32 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (163408,'thermocoagulation','thermocoagulation','Thermocoagulation','en','1','2018-10-25');
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (163408,'thermocoagulation','thermocoagulation','Thermocoagulation','fr','1','2018-10-25');
 
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (162811,'conisation','conisation','Conisation','en','1','2018-10-25');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (162811,'conisation','conisation','Conisation','fr','1','2018-10-25');
 
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (159837,'hysterectomie','hysterectomie','Hystérectomie','en','1','2018-10-25');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (159837,'hysterectomie','hysterectomie','Hystérectomie','fr','1','2018-10-25');
+
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (160715,'procedureDate','procedureDate','Date/time procedure performed','en','1','2018-10-25');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (160715,'procedureDate','procedureDate','Date de procedure','fr','1','2018-10-25');
+ 
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (146602,'screeneddone','screeneddone','Screening done','en','1','2018-10-25');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (146602,'screeneddone','screeneddone','Depistage du cancer du col','fr','1','2018-10-25'); 
+
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (163589,'screenedMethode','screenedMethode','Screening Method','en','1','2018-10-25');
+insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) values (163589,'screenedMethode','screenedMethode','Methode de depistage','fr','1','2018-10-25'); 
+ 
+ 
 insert into concept(concept_id,retired,short_name,description,form_text,datatype_id,class_id,is_set,creator,date_created)
 values(162812,0,'cryotherapie','Cryotherapie','cryotherapie',10,13,0,1,'2018-10-25'),
       (162810,0,'leep','LEEP','leep',10,13,0,1,'2018-10-25'),
-      (163408,0,'thermocoagulation','Thermocoagulation','thermocoagulation',10,13,0,1,'2018-10-25');
+      (163408,0,'thermocoagulation','Thermocoagulation','thermocoagulation',10,13,0,1,'2018-10-25'),
+	  (162811,0,'conisation','Conisation','conisation',10,13,0,1,'2018-10-25'),
+	  (159837,0,'hysterectomie','Hystérectomie','hysterectomie',10,13,0,1,'2018-10-25'),
+	  (160715,0,'procedureDate','Date de procedure','procedureDate',8,13,0,1,'2018-10-25'),
+	  (146602,0,'screeneddone','Depistage','screeneddone',1,13,0,1,'2018-10-25'),
+	  (163589,0,'screenedMethode','Methode de depistage','screenedMethode',1,13,0,1,'2018-10-25');
+	  
 	  
 ALTER TABLE `itech`.`dw_obgyn_snapshot` ADD INDEX `obgyn_idx` (`PatientID` ASC, `VisitDate` ASC);	
   

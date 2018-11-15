@@ -7401,15 +7401,17 @@ $vitalPrevWtUnits = array (
 );
 $pregnant = array (
    "en" => array (
-	"PREGNANCY",
+	"OBSTETRICS AND GYNECOLOGY",
 	"Yes",
 	"No",
-	"Unknown"),
+	"Unknown",
+	"Pregnancy"),
    "fr" => array (
-	"GROSSESSE",
+	"OBSTETRIQUE ET GYNECOLOGIE",
 	"Oui",
 	"Non",
-	"Inconnu")
+	"Inconnu",
+	"Grossesse")
 );
 $pregnantLmpDd = array (
    "en" => array (
@@ -8796,12 +8798,33 @@ $assessmentPlan_header = array (
 	"",
   "Plan",
 	"ASSESSMENT AND PLAN",
-	"Use Previous Medical History section to indicate all diagnoses made today. Use this section to describe care and treatment plan."),
+	"Use Previous Medical History section to indicate all diagnoses made today. Use this section to describe care and treatment plan.",
+	"Intervention"),	
    "fr" => array (
 	"",
 	"Plan",
   "&#xc9;VALUATION ET PLAN",
-	"Utiliser la section Ant&eacute;c&eacute;dants M&eacute;dicaux pour indiquer tous les diagnostics. Utiliser cette section pour d&eacute;crire le plan de traitement et de soin.")
+	"Utiliser la section Ant&eacute;c&eacute;dants M&eacute;dicaux pour indiquer tous les diagnostics. Utiliser cette section pour d&eacute;crire le plan de traitement et de soin.",
+	"Intervention")
+);
+
+$intervention= array (
+   "en" => array (
+	"",
+    "Cryotherapie",
+	"LEEP",
+	"Thermocoagulation",
+	"Conisation",
+	"Hystérectomie",
+	"Date of treatment"),	
+   "fr" => array (
+	"",
+	"Cryotherapie",
+	"LEEP",
+	"Thermocoagulation",
+	"Conisation",
+	"Hystérectomie",
+	"Date du traitement")
 );
 
 $nextVisitDate = array (
@@ -9075,6 +9098,31 @@ $topAlert = array (
         "Cette version est seulement pour les tests."
     )
 );
+
+
+$ConcerColonStatus = array (
+   "en" => array (
+	"Normal",
+	"Abnormal",
+	"Unknown",
+	"Result",
+	"Used Method",
+	"Date of last cervical cancer screening",
+	"cervical cancer screening",
+	"Pap test",
+	"VIA"),
+   "fr" => array (
+	"Normale",
+	"Anormale",
+	"Inconnu",
+	"Résultat",
+	"Méthode utilisée",
+	"Date du dernier dépistage du cancer du Col",
+	"Dépistage du cancer du Col",
+	"Pap test",
+	"VIA")
+);
+
 
 $primCareSummaryLabels = array (
   "fr" => array (

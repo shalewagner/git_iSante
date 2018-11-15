@@ -56,6 +56,11 @@ for ($i=1; $i <= $times; $i++) {
   updatePatientStatus(2, $endDate);
 } */
 
+
+#adding for cancerCol report 
+generatePatientCancerCol();
+printLog('generatePatientCancerCol() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
+
 #adding for the alert.
 if (getConfig('serverRole') != 'consolidated') generatePatientAlert();
 printLog('generatePatientAlert() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');

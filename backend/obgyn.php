@@ -3,9 +3,8 @@
 /* last date modified :  nov 4 */
 function updateObgynSnapshot($lastModified) {
 
-	
-database()->query('INSERT INTO dw_obgyn_snapshot (patientID, visitDate, mammographDt, papTestResult, leucorhee, metrorragieSymptom, sexAgression, consult_obs, grossesseHautRisque, tetanosDtD1, hypertensionArteryA, hemorragieVaginale,hemorragieVaginalet1, membraneRupture, vacuum, laborMethod, laborMystery, laborDifficultBirth, vitalWeight1, ppVitalBp1, ironSup, utilisationPartogramme, beneficieGATPA, laborEvolution, plusDe30Ans, plusDe40Ans, 	femmesVuesPrenatal, suiviPrenatal, 	accouchement,membraneRuptureDeno,cxca_scrnNum,cxca_scrnDeno,cxca_txDeno,cxca_txNum)
- SELECT patientID, maxDate AS visiteDate,
+database()->query('INSERT INTO dw_obgyn_snapshot (patientID, visitDate, mammographDt, papTestResult, leucorhee, metrorragieSymptom, sexAgression, consult_obs, grossesseHautRisque, tetanosDtD1, hypertensionArteryA, hemorragieVaginale,hemorragieVaginalet1, membraneRupture, vacuum, laborMethod, laborMystery, laborDifficultBirth, vitalWeight1, ppVitalBp1, ironSup, utilisationPartogramme, beneficieGATPA, laborEvolution, plusDe30Ans, plusDe40Ans, femmesVuesPrenatal, suiviPrenatal, accouchement,membraneRuptureDeno)
+SELECT patientID, maxDate AS visiteDate,
 COUNT(CASE WHEN concept_id = 8039 THEN patientID ELSE NULL END) AS mammographDt,
 COUNT(CASE WHEN concept_id = 7073 THEN patientID ELSE NULL END) AS papTestResult,
 COUNT(CASE WHEN concept_id = 7886 THEN patientID ELSE NULL END) AS leucorhee,
@@ -33,11 +32,7 @@ COUNT(CASE WHEN concept_id = 984746 THEN patientID ELSE NULL END) AS plusDe40Ans
 COUNT(CASE WHEN concept_id = 683632 THEN patientID ELSE NULL END) AS femmesVuesPrenatal, 
 COUNT(CASE WHEN concept_id = 70729 THEN patientID ELSE NULL END) AS suiviPrenatal,
 COUNT(CASE WHEN concept_id = 70478 THEN patientID ELSE NULL END) AS accouchement ,
-COUNT(CASE WHEN concept_id = 7802 THEN patientID ELSE NULL END) AS membraneRuptureDeno,
-count(case when concept_id=70485 then patientID else null end) AS cxca_scrnNum,
-count(case when concept_id=7073 then patientID else null end) AS cxca_scrnDeno,
-count(case when concept_id=70029 then patientID else null end) AS cxca_txDeno,
-count(case when concept_id=162812 then patientID else null end) AS cxca_txNum
+COUNT(CASE WHEN concept_id = 7802 THEN patientID ELSE NULL END) AS membraneRuptureDeno
 FROM
 (
  

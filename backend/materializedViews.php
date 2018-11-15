@@ -2900,4 +2900,24 @@ and e.encStatus between 1 and 254 and p.patStatus = 0
 and e.patientID not in (select patientId from patientAlert where alertId=10);');
 
 }
+
+
+function generatePatientCancerCol() {
+/* create table cancerCol*/
+database()->exec('drop table if exists cancerCol;');
+database()->exec('create table cancerCol( patientID varchar(20),StCode varchar(20), DateNaiss varchar(30), age varchar(20), Sexe varchar(20), ScreenedDate Date,visitDate Date,screenResult int(11),treatmentDate Date, treatment varchar(20));');
+
+database()->query('insert into cancerCol( patientID,StCode, DateNaiss, age, Sexe , ScreenedDate ,visitDate)
+select p.patientID,p.clinicPatientID as ST,date(concat(p.dobYy,?, case when p.dobMm is not null or p.dobMm<>? then dobMm else ? end ,?, case when p.dobDd is not null or p.dobDd<>? then dobDd else ? end)),round(DATEDIFF(now(),date(concat(p.dobYy,?, case when p.dobMm is not null or p.dobMm<>? then dobMm else ? end ,?, case when p.dobDd is not null or p.dobDd<>? then dobDd else ? end)))/365,0) as Age,case when p.sex=2 then ? when p.sex=1 then ? else ? end as sex,r.ScreenedDate,r.visitDate
+from  patient p,(select e.patientID,value_datetime as ScreenedDate,e.visitDate  from encounter e,obs o where e.encounter_id=o.encounter_id and o.concept_id in (70485)) r
+where p.patientStatus in(6,8,9,1,2,3) and r.patientID=p.patientID;',array('-','','06','-','','15','-','','06','-','','15','M','F','I'));
+
+database()->exec('update cancerCol c,(select e.patientID,value_numeric as screenResult from encounter e,obs o where e.encounter_id=o.encounter_id and o.concept_id in (70029)) r set c.screenResult=r.screenResult where r.patientID=c.patientID;');
+
+database()->exec('update cancerCol c,(select e.patientID,value_datetime as treatmentDate from encounter e,obs o where e.encounter_id=o.encounter_id and o.concept_id in (160715)) r set c.treatmentDate=r.treatmentDate where r.patientID=c.patientID;');
+
+database()->exec('update cancerCol c,
+(select e.patientID,c.description as treatment from encounter e,obs o,concept c where o.concept_id=c.concept_id and e.encounter_id=o.encounter_id and o.concept_id in (162812,162810,163408,0,162811,159837)) r set c.treatment=r.treatment where r.patientID=c.patientID;');
+}
+
 ?>
