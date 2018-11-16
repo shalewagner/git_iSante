@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once ("backend.php");
 
 require_once 'backend/config.php';
@@ -27,7 +27,7 @@ $message='';
 	 case '3' :{$whereClause.=" And screenResult in (1,2)"; $message.="Patient Dépisté avec résultat";break;}
 	 case '4' :{$whereClause.=" And (screenResult=4 or screenResult is null)"; $message.="Patient Dépisté sans résultat";break;}
 	 case '5' :{$whereClause.=""; $message="Patient Dépisté"; break;}
-	 case '6' :{$whereClause.=" And screenResult=2 AND treatment is not null and treatment<>''"; $message="atient  ELigible traité pour le cancer du col"; break;}
+	 case '6' :{$whereClause.=" And screenResult=2 AND treatment is not null and treatment<>''"; $message="Patient  ELigible traité pour le cancer du col"; break;}
 	 case '7' :{$whereClause.=" And screenResult=2 AND treatment is null or treatment=''"; $message=" Patient  ELigible non traité pour le cancer du col"; break;}
 	 case '8' :{$whereClause.="And screenResult=2"; $message="Patient Eligible"; break;}
 	 default: $whereClause.="";
