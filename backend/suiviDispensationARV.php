@@ -10,9 +10,9 @@ function generatearvPatient ($site, $lang) {
   $siteName = getSiteName ($site, $lang);
  
   $queryArray = array(
-"arvpatient"=> "select concat('<a href=\"patienttabs.php?pid=',patientID,'&lang=fr&site=".$site."\">',STCode,'</a>') as STCode,lname,fname,DateNaiss as 'Date de Naissance',age,Sexe,dateInitiationARV as 'Date Initiation ARV',derniereVisite as 'Derniere Visite',derniereRDVARV as 'Dernier RDV Arv',prochainRendezVousARV as 'Prochain Randez-vous ARV',nombreDeJours as 'Nombre de Jours' from suiviDispArv;"); 
+"arvpatient"=> "select concat('<a href=\"patienttabs.php?pid=',patientID,'&lang=fr&site=".$site."\">',STCode,'</a>') as STCode,lname,fname,DateNaiss as 'Date de Naissance',age,Sexe,dateInitiationARV as 'Date Initiation ARV',derniereVisite as 'Derniere Visite',derniereRDVARV as 'Dernier RDV Arv',prochainRendezVousARV as 'Prochain Randez-vous ARV',nombreDeJours as 'Nombre de Jours' from suiviDispArv where left(patientID,5)=".$site); 
   
-  $arvpatient = outputQueryRows($queryArray["arvpatient"]); 
+  $arvpatient = outputQueryRows($queryArray["arvpatient"],$site); 
  
   $summary = <<<EOF
   
@@ -60,7 +60,7 @@ EOF;
 
 
 
-function outputQueryRows($qry) {
+function outputQueryRows($qry,$site) {
         $output = '';
 		database()->exec('drop table if exists suiviDispArv;');
 		
@@ -68,7 +68,7 @@ function outputQueryRows($qry) {
 		
 		database()->query("insert into suiviDispArv (patientID, STCode,DateNaiss,age,Sexe,lname,fname,dateInitiationARV)
 select p.patientID,p.clinicPatientID as ST,date(concat(p.dobYy,?, case when p.dobMm is not null or p.dobMm<>? then dobMm else ? end ,?, case when p.dobDd is not null or p.dobDd<>? then dobDd else ? end)),round(DATEDIFF(now(),date(concat(p.dobYy,?, case when p.dobMm is not null or p.dobMm<>? then dobMm else ? end ,?, case when p.dobDd is not null or p.dobDd<>? then dobDd else ? end)))/365,0) as Age,case when p.sex=2 then ? when p.sex=1 then ? else ? end as sex,p.lname,p.fname,startDate as dateInitiationARV
-from (select siteCode,patientID,min(visitDate) as startDate from pepfarTable where ifnull(forPepPmtct,0)=0 group by 1,2) c , patient p
+from (select siteCode,patientID,min(visitDate) as startDate from pepfarTable where ifnull(forPepPmtct,0)=0 and siteCode=".$site." group by 1,2) c , patient p
 where c.patientID=p.patientID ;",array('-','','06','-','','15','-','','06','-','','15','M','F','I'));
 
 database()->exec('update suiviDispArv r,(select patientID,max(ymdToDate(e.visitDateYy, e.visitDateMm, e.visitDateDd)) maxDt from encounter e  where encountertype in (1,2,5,10,14,15,16,17,18,20,24,25,26,27,28,29,31) AND e.encStatus < 255 group by 1) S

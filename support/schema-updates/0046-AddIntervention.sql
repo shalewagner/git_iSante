@@ -33,8 +33,6 @@ values(162812,0,'cryotherapie','Cryotherapie','cryotherapie',10,13,0,1,'2018-10-
 	  (146602,0,'screeneddone','Depistage','screeneddone',1,13,0,1,'2018-10-25'),
 	  (163589,0,'screenedMethode','Methode de depistage','screenedMethode',1,13,0,1,'2018-10-25');
 	  
-	  
-ALTER TABLE `itech`.`dw_obgyn_snapshot` ADD INDEX `obgyn_idx` (`PatientID` ASC, `VisitDate` ASC);	
   
 ALTER TABLE `itech`.`dw_obgyn_snapshot` 
 ADD COLUMN `cxca_scrnNum` TINYINT(1) NULL AFTER `membraneRuptureDeno`,
