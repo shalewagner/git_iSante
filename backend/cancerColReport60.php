@@ -14,17 +14,17 @@ function generateCancerColPatient($startdate, $enddate,$site, $lang) {
  
   $queryArray = array(
 "cancerColScreened" => "select 
-concat('<a href=\"cancerColList.php?rank=1&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when screenResult=2 then patientID else null end),'</a>') as  'Patient Dépisté avec résultat positive ou anormal',
-concat('<a href=\"cancerColList.php?rank=2&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">', count(distinct case when screenResult=1 then patientID else null end),'</a>') as 'Patient Dépisté avec résultat negative ou normal',
-concat('<a href=\"cancerColList.php?rank=3&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when screenResult in (1,2) then patientID else null end),'</a>') as 'Patient Dépisté avec résultat',
-concat('<a href=\"cancerColList.php?rank=4&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when screenResult=4 or screenResult is null then patientID else null end),'</a>') as 'Patient Dépisté sans résultat',
-concat('<a href=\"cancerColList.php?rank=5&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct patientID),'</a>') as 'Patient Dépisté'
+concat('<a href=\"cancerColList60.php?rank=1&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when screenResult=2 then patientID else null end),'</a>') as  'Patient Dépisté avec résultat positive ou anormal',
+concat('<a href=\"cancerColList60.php?rank=2&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">', count(distinct case when screenResult=1 then patientID else null end),'</a>') as 'Patient Dépisté avec résultat negative ou normal',
+concat('<a href=\"cancerColList60.php?rank=3&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when screenResult in (1,2) then patientID else null end),'</a>') as 'Patient Dépisté avec résultat',
+concat('<a href=\"cancerColList60.php?rank=4&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when screenResult=4 or screenResult is null then patientID else null end),'</a>') as 'Patient Dépisté sans résultat',
+concat('<a href=\"cancerColList60.php?rank=5&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct patientID),'</a>') as 'Patient Dépisté'
 from cancerCol where ScreenedDate is not null and visitDate between '".$startdate."' AND '".$enddate."'  and LEFT(patientid,5)=".$site,
 "cancerColTreatment" => "select 
-concat('<a href=\"cancerColList.php?rank=6&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when treatment is not null and treatment<>'' then patientID else null end),'</a>') as  'Patient  ELigible traité pour le cancer du col',
-concat('<a href=\"cancerColList.php?rank=7&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">', count(distinct case when treatment is null or treatment='' then patientID else null end),'</a>') as 'Patient  ELigible non traité pour le cancer du col',
-concat('<a href=\"cancerColList.php?rank=8&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct patientID),'</a>') as 'Patient Eligible'
-from cancerCol where ScreenedDate is not null and screenResult=2 and visitDate between '".$startdate."' AND '".$enddate."'  and LEFT(patientid,5)=".$site
+concat('<a href=\"cancerColList60.php?rank=6&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when treatment is not null and treatment<>'' then patientID else null end),'</a>') as  'Patient  ELigible traité pour le cancer du col',
+concat('<a href=\"cancerColList60.php?rank=7&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">', count(distinct case when treatment is null or treatment='' then patientID else null end),'</a>') as 'Patient  ELigible non traité pour le cancer du col',
+concat('<a href=\"cancerColList60.php?rank=8&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct patientID),'</a>') as 'Patient Eligible'
+from cancerCol where age between 25 and 60.99 and ScreenedDate is not null and screenResult=2 and visitDate between '".$startdate."' AND '".$enddate."'  and LEFT(patientid,5)=".$site
 ); 
   
   $cancerColScreened = outputQueryRows($queryArray["cancerColScreened"]); 

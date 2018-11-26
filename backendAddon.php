@@ -562,10 +562,15 @@ function generateQueryResult($qry, $rtype = '', $repNum = '', $lang = 'fr', $sit
 			return '';
 		}
 		if ($repNum == "562") {
-			include_once "backend/cancerColReport.php";
+			include_once "backend/cancerColReport49.php";
 			echo generateCancerColPatient($start, $end, $site, $lang);
 			return '';
 		}
+		if ($repNum == "563") {
+			include_once "backend/cancerColReport60.php";
+			echo generateCancerColPatient($start, $end, $site, $lang);
+			return '';
+		}		
 				
 	$repWords = array ( "en" => array ( "This query contains an error", "National ID", "Clinic Patient ID", "Reason for Eligibility", "First Name", "Last Name", "Gender", "Status", "Age", "Last Date", "Regimen", "Change Date", "Stop Date (MM/YY)", "Drug Name", "Reason for Discontinuation", "Error description", "Form", "Field", "Applies to the entire form", "Discontinuation Date", "Patient Status", "Next Visit Date", "Last Modified Date", "Bad Visit Date", "Visit Date" ,"Date of Last Menstrual Period","Week of Amenorrhea","Drug Received", "ART Eligibility Date","Date of Beginning of ART","Regimen Actual","CD4 count at M1","CD4 count at M6","Last Visit Date","Number of ART's patient","Adherence percentage", "Lag (in days)", "Number of forms", "Ob/Gyn ID", "Primary Care ID", "Count", "M", "F", "U", "Address", "Phone", "Contact","Reason for Delayed Enrollment"), "fr" => array ( "La question contient une erreur", "No. d'identit&eacute; nationale", "No. de patient attribu&#xe9; par le site", "Raison d'&#xe9;ligibilit&#xe9;", "Pr&#xe9;nom", "Nom", "Sexe", "Statut", "&#xc2;ge", "Derni&egrave;re date", "R&#xe9;gime", "Date de changement", "Date d'arr&#xea;t (mm/yy)", "Nom de la m&#xe9;dication", "Raison de discontinuation", "Description d'erreur", "Fiche", "Zone", "S'applique &agrave; la fiche enti&egrave;re", "Date de discontinuation", "Statut de patient", "Prochaine date de visite", "Date de dernier changement", "Date de visite mauvaise", "Date de visite","Date de la Semaine Derni&egrave;re de P&eacute;riode","Semaine D'am&eacute;norrh&eacute;e" ,"Médicaments reçus","Date d'&Eacute;ligibilit&eacute; d'ART","Date du Commencement de l'ART","R&eacute;gime R&eacute;el","Compte CD4 &agrave; M1","Compte CD4 &agrave; M6","La Date Pass&eacute;e de Visite","Nombre patient d'ART","Pourcentage d'Adh&eacute;rence", "Laps de temps (jours)", "Compte des fiches", "No. de code OG", "No. de code PC", "Compte", "H", "F", "I", "Adresse", "Téléphone", "Contact", "Raison d'enrôlement rapporté") );
 

@@ -2908,7 +2908,7 @@ database()->exec('drop table if exists cancerCol;');
 database()->exec('create table cancerCol( patientID varchar(20),StCode varchar(20), DateNaiss varchar(30), age varchar(20), Sexe varchar(20), ScreenedDate Date,visitDate Date,screenResult int(11),treatmentDate Date, treatment varchar(20));');
 
 database()->query('insert into cancerCol( patientID,StCode, DateNaiss, age, Sexe , ScreenedDate ,visitDate)
-select p.patientID,p.clinicPatientID as ST,date(concat(p.dobYy,?, case when p.dobMm is not null or p.dobMm<>? then dobMm else ? end ,?, case when p.dobDd is not null or p.dobDd<>? then dobDd else ? end)),round(DATEDIFF(now(),date(concat(p.dobYy,?, case when p.dobMm is not null or p.dobMm<>? then dobMm else ? end ,?, case when p.dobDd is not null or p.dobDd<>? then dobDd else ? end)))/365,0) as Age,case when p.sex=2 then ? when p.sex=1 then ? else ? end as sex,r.ScreenedDate,r.visitDate
+select p.patientID,p.clinicPatientID as ST,date(concat(p.dobYy,?, case when p.dobMm is not null or p.dobMm<>? then dobMm else ? end ,?, case when p.dobDd is not null or p.dobDd<>? then dobDd else ? end)),round(DATEDIFF(r.visitDate,date(concat(p.dobYy,?, case when p.dobMm is not null or p.dobMm<>? then dobMm else ? end ,?, case when p.dobDd is not null or p.dobDd<>? then dobDd else ? end)))/365,0) as Age,case when p.sex=2 then ? when p.sex=1 then ? else ? end as sex,r.ScreenedDate,r.visitDate
 from  patient p,(select e.patientID,value_datetime as ScreenedDate,e.visitDate  from encounter e,obs o where e.encounter_id=o.encounter_id and o.concept_id in (70485)) r
 where p.patientStatus in(6,8,9,1,2,3) and r.patientID=p.patientID;',array('-','','06','-','','15','-','','06','-','','15','M','F','I'));
 

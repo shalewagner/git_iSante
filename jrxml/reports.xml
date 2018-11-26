@@ -1772,8 +1772,16 @@
 			</report>	
 			
 			<report id="562" patientStatus="0" treatmentStatus="0" testType="0">
-				<title lang="en">Patient Detected and treated for cervical cancer(CXCA_SCRN et CXCA_TX)</title>
-				<title lang="fr">Patient Dépisté et traité pour le cancer du col(CXCA_SCRN et CXCA_TX)</title>
+				<title lang="en">Patient from 15 to 49 year Detected and treated for cervical cancer(CXCA_SCRN et CXCA_TX)</title>
+				<title lang="fr">Patient âgé de 15 à 49 ans Dépisté et traité pour le cancer du col (CXCA_SCRN et CXCA_TX)</title>
+				<reportFile></reportFile>
+				<menuSelection>dateSelect</menuSelection>
+				<query></query>
+			</report>
+			
+			<report id="563" patientStatus="0" treatmentStatus="0" testType="0">
+				<title lang="en">Patientfrom 25 to 60 year   Detected and treated for cervical cancer(CXCA_SCRN et CXCA_TX)</title>
+				<title lang="fr">Patient âgé de 25 à 60 ans Dépisté et traité pour le cancer du col (CXCA_SCRN et CXCA_TX)</title>
 				<reportFile></reportFile>
 				<menuSelection>dateSelect</menuSelection>
 				<query></query>
