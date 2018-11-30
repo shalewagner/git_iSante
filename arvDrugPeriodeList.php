@@ -1,12 +1,10 @@
 <?php
-require_once ("backend.php");
+require_once ("/usr/share/isante/htdocs/backend.php");
 
-require_once 'backend/config.php';
-require_once 'backend/database.php';
-require_once 'backend/materializedViews.php';
-require_once "include/standardHeaderExt.php";
-
-
+require_once '/usr/share/isante/htdocs/backend/config.php';
+require_once '/usr/share/isante/htdocs/backend/database.php';
+require_once '/usr/share/isante/htdocs/backend/materializedViews.php';
+require_once "/usr/share/isante/htdocs/include/standardHeaderExt.php";
 
 
 function generatearvDrug()
@@ -31,7 +29,7 @@ $message='Liste de patients ayant reçu des ARV pour la période allant de ';
  }
  
 $queryArray = array(
-"arvDrug" => "SELECT p1.dispd as Date_dispensation,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,p.sex,round(DATEDIFF(p1.dispd,ymdToDate(p.dobYy,p.dobMm,p.dobDd))/365,0) as Age,telephone as Telephone
+"arvDrug" => "SELECT p1.dispd as Date_dispensation,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,case when p.sex=2 then 'M' when p.sex=1 then 'F' else 'I' end as sexe,round(DATEDIFF(p1.dispd,ymdToDate(p.dobYy,p.dobMm,p.dobDd))/365,0) as Age,telephone as Telephone
 from patientDispenses p1,clinicLookup l,patient p, 
 (SELECT patientID,max(dispd) as dispd FROM  patientDispenses  p  where dispd between '".$startDate."' AND '".$endDate."'  group by 1) p2
 where p1.patientID=p2.patientID and p1.dispd=p2.dispd and p.patientID=p1.patientID

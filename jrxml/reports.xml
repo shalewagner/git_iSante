@@ -1691,8 +1691,9 @@
 				  <title lang="en">The list of patients whose ARV refill date has expired</title>
 				  <title lang="fr">La liste des patients dont la date de renflouement des ARV est arrivée à terme</title>
 				   <reportFile></reportFile>
-				     <groupLevel>0</groupLevel>
-				             <otherLevel>0</otherLevel>			
+				   <groupLevel>0</groupLevel>
+				   <otherLevel>0</otherLevel>	
+                   				   
 			</report>	
 			    <report id="552" patientStatus="0" treatmentStatus="0" testType="0">
 				  <title lang="en">Number of patients receiving ARVs by period</title>
@@ -1766,7 +1767,7 @@
 				<title lang="fr">Patient Actif avec une charge virale pendant les 12 dernier mois</title>
 				<reportFile></reportFile>
 				<menuSelection>dateSelect</menuSelection>
-				<query>select p1.clinicPatientID as ST,$localized_gender as sex, $computed_age AS age, case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc,digits(l.result) as 'Charge Viral',date(ymdToDate(l.visitdateyy,l.visitDateMm,l.visitDateDd)) as 'Date du Resultat' FROM labs l, (select patientID,patientStatus from patientStatusTemp p where p.endDate='$end' and p.patientStatus in (6,8)) p,patient p1,patientStatusLookup p2 WHERE l.labID IN (103, 1257) and l.result IS NOT NULL and digits(l.result)>0 and p.patientID=l.patientID and l.patientID=p1.patientID and p2.statusValue=p.patientStatus and l.siteCode='$site' and date(ymdToDate(l.visitdateyy,l.visitDateMm,l.visitDateDd)) between DATE_ADD('$end', INTERVAL -12 MONTH) AND '$end'</query>
+				<query>select p1.clinicPatientID as ST,$localized_gender as sex, $computed_age AS age, case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc,digits(l.result) as 'Charge Viral',date(ymdtoDate(resultDateYy,resultDateMm,resultDateDd)) as 'Date du Resultat' FROM labs l, (select patientID,patientStatus from patientStatusTemp p where p.endDate='$end' and p.patientStatus in (6,8)) p,patient p1,patientStatusLookup p2 WHERE l.labID IN (103, 1257) and l.result IS NOT NULL and digits(l.result)>0 and p.patientID=l.patientID and l.patientID=p1.patientID and p2.statusValue=p.patientStatus and l.siteCode='$site' and date(ymdtoDate(resultDateYy,resultDateMm,resultDateDd)) between DATE_ADD('$end', INTERVAL -12 MONTH) AND '$end'</query>
 				<description lang="en">Active patient with a viral load result over the past 12 months</description>
 				<description lang="fr">Patient regulier et randez-vous rates ayant un resultat de charge viral pandant les 12 dernier mois</description>
 			</report>	
@@ -1774,7 +1775,7 @@
 			<report id="562" patientStatus="0" treatmentStatus="0" testType="0">
 				<title lang="en">Patient from 15 to 49 year Detected and treated for cervical cancer(CXCA_SCRN et CXCA_TX)</title>
 				<title lang="fr">Patient âgé de 15 à 49 ans Dépisté et traité pour le cancer du col (CXCA_SCRN et CXCA_TX)</title>
-				<reportFile></reportFile>
+				<reportFile></reportFile>piethahsie
 				<menuSelection>dateSelect</menuSelection>
 				<query></query>
 			</report>

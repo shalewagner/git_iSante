@@ -1,10 +1,10 @@
 <?php
-require_once ("backend.php");
+require_once ("/usr/share/isante/htdocs/backend.php");
 
-require_once 'backend/config.php';
-require_once 'backend/database.php';
-require_once 'backend/materializedViews.php';
-require_once "include/standardHeaderExt.php";
+require_once '/usr/share/isante/htdocs/backend/config.php';
+require_once '/usr/share/isante/htdocs/backend/database.php';
+require_once '/usr/share/isante/htdocs/backend/materializedViews.php';
+require_once "/usr/share/isante/htdocs/include/standardHeaderExt.php";
 
 
 
@@ -28,7 +28,7 @@ $message='Liste de patients ayant reçu des ARVs ';
  }
  
 $queryArray = array(
-"arvDrug" => "select  distinct p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,p.sex,round(DATEDIFF(e.visitDate,ymdToDate(p.dobYy,p.dobMm,p.dobDd))/365,0) as Age,telephone
+"arvDrug" => "select  distinct p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,case when p.sex=2 then 'M' when p.sex=1 then 'F' else 'I' end as sexe,round(DATEDIFF(e.visitDate,ymdToDate(p.dobYy,p.dobMm,p.dobDd))/365,0) as Age,telephone
 from patient p,
 (select max(visitDate) as visitDate,patientID from v_prescriptions  e 
 where drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)

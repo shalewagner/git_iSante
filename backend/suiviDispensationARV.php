@@ -10,9 +10,11 @@ function generatearvPatient ($site, $lang) {
   $siteName = getSiteName ($site, $lang);
  
   $queryArray = array(
-"arvpatient"=> "select concat('<a href=\"patienttabs.php?pid=',patientID,'&lang=fr&site=".$site."\">',STCode,'</a>') as STCode,lname,fname,DateNaiss as 'Date de Naissance',age,Sexe,dateInitiationARV as 'Date Initiation ARV',derniereVisite as 'date de Derniere Visite',dernieredispensation as 'date de Dernier visite Arv',derniereRDVARV  as 'Date effective de derniere dispensation ARV' ,prochainRendezVousARV as 'Prochain Randez-vous ARV',nombreDeJours as 'Nombre de Jours prescrit pour la derniere visite ARV' from suiviDispArv where left(patientID,5)=".$site); 
+"arvpatient"=> "select concat('<a href=\"patienttabs.php?pid=',patientID,'&lang=fr&site=".$site."\">',STCode,'</a>') as STCode,lname,fname,DateNaiss as 'Date de Naissance',age,Sexe,dateInitiationARV as 'Date Initiation ARV',derniereVisite as 'date de Derniere Visite',dernieredispensation as 'date de Dernier visite Arv',derniereRDVARV  as 'Date effective de derniere dispensation ARV' ,prochainRendezVousARV as 'Prochain Rendez-vous ARV',nombreDeJours as 'Nombre de Jours prescrit pour la derniere visite ARV' from suiviDispArv where left(patientID,5)=".$site,
+"arvPatientCount"=>" select count(*) as Total from suiviDispArv where left(patientID,5)=".$site); 
   
   $arvpatient = outputQueryRows($queryArray["arvpatient"],$site); 
+  $arvPatientCount = outputQueryRows($queryArray["arvPatientCount"],$site); 
  
   $summary = <<<EOF
   
@@ -38,6 +40,7 @@ function generatearvPatient ($site, $lang) {
 	<p>&nbsp;</p>
 	<div><strong> Suivi dispensation ARV </strong></div>
 	<div>&nbsp;</div>
+	<div>$arvPatientCount</div>
 	<div>$arvpatient</div>
 	<p>&nbsp;</p>	
 	</td>
@@ -62,6 +65,8 @@ EOF;
 
 function outputQueryRows($qry,$site) {
         $output = '';
+		if ($site!='')
+		{
 		database()->exec('drop table if exists suiviDispArv;');
 		
 		database()->exec('create table if not exists suiviDispArv ( patientID varchar(20),STCode varchar(20),lname varchar(20),fname varchar(20), DateNaiss varchar(30), age varchar(20), Sexe varchar(20), dateInitiationARV varchar(30),derniereVisite varchar(30),derniereRDVARV varchar(30),dernieredispensation varchar(30),prochainRendezVousARV varchar(30), nombreDeJours int(11));');
@@ -80,7 +85,7 @@ set r.derniereRDVARV=s.dispd,r.prochainRendezVousARV=s.nxt_dispd where r.patient
 
 database()->query("update suiviDispArv r,(select p.patientID,numDaysDesc,CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm != ?  THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd) ELSE ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) END as dispd, ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) as visit from prescriptions p, encounter e WHERE e.encountertype in (5,18) AND encStatus < 255 AND p.patientid = e.patientid AND p.sitecode = e.sitecode AND p.visitdateyy = e.visitdateyy AND p.visitdatemm = e.visitdatemm AND p.visitdatedd = e.visitdatedd AND p.seqNum = e.seqNum AND drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91) AND (dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR dispAltDosage IS NOT NULL) AND (forPepPmtct = 2 OR forPepPmtct IS NULL)) s
 set r.nombreDeJours=s.numDaysDesc,r.dernieredispensation=visit  where r.patientID=s.patientID and r.derniereRDVARV=s.dispd;",array('un','un'));
-		
+}	
         // execute the query 
         $arr = databaseSelect()->query($qry)->fetchAll(PDO::FETCH_ASSOC); 
         if (count($arr) == 0) return '<p><center><font color="red"><bold>Aucuns résultats trouvés</bold></font></center><p>';
