@@ -603,7 +603,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
   database()->query('create table exposeChild (patientID int primary key , dobDate date,lastVisitDate Date,lastDispDate date,pedCurrHiv int,lastPCR int);');
   database()->query('create unique index exposeChild_index on exposeChild (patientID);');
   database()->query('insert into exposeChild(patientID,pedCurrHiv) SELECT DISTINCT p.patientID, pedCurrHiv FROM vitals p, (SELECT patientID, MAX(ymdToDate(p.visitDateYy, p.visitDateMm, p.visitDateDd)) AS visitDate FROM itech.vitals p WHERE pedCurrHiv IN (1,4) GROUP BY 1)v WHERE p.pedCurrHiv IN(1,4) AND p.patientID = v.patientID AND v.visitDate = ymdToDate(p.visitDateYy, p.visitDateMm, p.visitDateDd) AND v.visitDate<?  on duplicate key update lastPCR=0;',array($endDate)); 
-  database()->query('insert into exposeChild(patientID) select distinct patientID from discEnrollment p where seroreversion=1 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=? on duplicate key update lastPCR=0;',array($endDate));
+  
   database()->query('insert into exposeChild(patientID,lastDispDate,lastPCR) select distinct p.patientID ,l.lastDispDate,0 as lastPCR
   from prescriptions p,
   (select 
@@ -642,6 +642,8 @@ and p.patientID=v.patientID and datediff(ymdtodate(v.visitdateyy,v.visitdatemm,v
   database()->exec('unlock tables'); 
   database()->query('delete from exposeChild where lastPCR=1 or pedCurrHiv=4;');
   database()->query('delete a from exposeChild a,patient p where p.patientID=a.patientID and p.patStatus>0;');
+  database()->query('insert into exposeChild(patientID) select distinct patientID from discEnrollment p where seroreversion=1 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=? on duplicate key update lastPCR=0;',array($endDate));
+  
   database()->query('delete a from allHIV a,exposeChild p where a.patientID=p.patientID;');
 	
 #end of remove expose children

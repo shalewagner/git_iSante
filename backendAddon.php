@@ -454,6 +454,7 @@ function makeCustomStatusTable ($statuses) {
   $query = "INSERT " . $tblNames[1] . " (patientId, status) VALUES ";
 
   foreach ($statuses as $pid => $status) {
+	if($status=='')  $status=0;
     dbQuery ($query . "('" . $pid . "', $status)");
   }
 }
