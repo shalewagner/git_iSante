@@ -14,8 +14,8 @@ function generateCancerColPatient($startdate, $enddate,$site, $lang) {
  
   $queryArray = array(
 "cancerColScreened" => "select 
-concat('<a href=\"cancerColList60.php?rank=1&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when screenResult=2 then patientID else null end),'</a>') as  'Patient Dépisté avec résultat positive ou anormal',
-concat('<a href=\"cancerColList60.php?rank=2&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">', count(distinct case when screenResult=1 then patientID else null end),'</a>') as 'Patient Dépisté avec résultat negative ou normal',
+concat('<a href=\"cancerColList60.php?rank=1&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when screenResult=2 then patientID else null end),'</a>') as  'Patient Dépisté avec résultat positif ou anormal',
+concat('<a href=\"cancerColList60.php?rank=2&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">', count(distinct case when screenResult=1 then patientID else null end),'</a>') as 'Patient Dépisté avec résultat negatif ou normal',
 concat('<a href=\"cancerColList60.php?rank=3&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when screenResult in (1,2) then patientID else null end),'</a>') as 'Patient Dépisté avec résultat',
 concat('<a href=\"cancerColList60.php?rank=4&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct case when screenResult=4 or screenResult is null then patientID else null end),'</a>') as 'Patient Dépisté sans résultat',
 concat('<a href=\"cancerColList60.php?rank=5&site=".$site."&endDate=".$enddate."&startDate=".$startdate."&lang=".$lang."\">',count(distinct patientID),'</a>') as 'Patient Dépisté'

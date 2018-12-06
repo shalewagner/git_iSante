@@ -2842,12 +2842,12 @@ WHERE A.hivPositive = 1 AND B.maxDate <= DATE_ADD(now(), INTERVAL -12 MONTH)');
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT left(patientid,5), patientID, 5, date(now())
 FROM viralLoadTemp 
-WHERE maxDate = visitDate AND maxDate <= DATE_ADD(NOW() , INTERVAL -3 MONTH ) AND (result+0) > 1000');
+WHERE maxDate = visitDate AND maxDate <= DATE_ADD(NOW() , INTERVAL -3 MONTH ) AND digits(result)+0 > 1000');
 
 /* Any patient whose viral test result was greater than 1000 copies */
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT left(patientid,5), patientID, 6, date(now())
-FROM viralLoadTemp WHERE maxDate = visitDate AND  (result+0) > 1000');
+FROM viralLoadTemp WHERE maxDate = visitDate AND  digits(result)+0 > 1000');
 
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 select LEFT(patientid,5),patientid,7,date(now()) from (
