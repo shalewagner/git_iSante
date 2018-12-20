@@ -56,7 +56,7 @@ $param=array($startDate,$endDate,$site);
 function outputQueryRows($qry,$param) {
         $output = '';
         // execute the query 
-        $arr = database()->query($qry,$param)->fetchAll(PDO::FETCH_ASSOC); 
+        $arr = databaseSelect()->query($qry,$param)->fetchAll(PDO::FETCH_ASSOC); 
         if (count($arr) == 0) return '<p><center><font color="red"><bold>Aucuns résultats trouvés</bold></font></center><p>';
         // set up the table
         $output = '<center><table class="" width="90%" border="1" cellpadding="0" cellspacing="0">';
