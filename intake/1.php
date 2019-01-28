@@ -6,6 +6,7 @@ echo "
 <div id=\"tab-panes\">
 ";
 $date=explode('-',getData ("cancerColon", "textarea"));
+$dateProcedure=explode('-',getData ("procedureDate", "textarea"));
 
 if (!$tabsOn) {
   include ("include/nurseSection.php");
@@ -75,7 +76,6 @@ echo"
       </tr>
       <tr><td>&nbsp;</td></tr>
      </table>
-
      <table class=\"b_header_nb\">
       <tr>
        <td class=\"s_header\" colspan=\"2\">" . $firstTest[$lang][1] . "</td>
@@ -119,12 +119,10 @@ echo "
 	  </tr>
      </table>
     </td>
-
 <!-- ******************************************************************** -->
 <!-- ******************** Referral ****************************** -->
 <!-- ******************** (tab indices 1400 - 1500) ******************** -->
 <!-- ******************************************************************** -->
-
     <td valign=\"top\" class=\"vert_line\" width=\"1%\">&nbsp;</td>
     <td valign=\"top\" class=\"left_pad\" width=\"39%\">
      <table class=\"b_header_nb\">
@@ -209,7 +207,6 @@ echo "
      </table>
     </td>
    </tr>
-
 <!-- ******************************************************************** -->
 <!-- ******************** Pregnancy ******************** -->
 <!-- ******************** (tab indices 1501 - 1600) ******************** -->
@@ -273,7 +270,6 @@ echo "
 <!-- ******************** Functionality & Family Planning ******************** -->
 <!-- ******************** (tab indices 1901-2008) ******************** -->
 <!-- ******************************************************************** -->
-
    <tr>
     <td colspan=\"3\">
      <table>
@@ -381,13 +377,11 @@ echo "
       </tr>
     </td>
    </tr>
-
 <!-- ******************************************************************** -->
 <!-- ******************** Risk Assessment ******************** -->
 <!-- ******************** (tab indices 6001 - 7000) ******************** -->
 <!-- ******************************************************************** -->
 ";
-
 echo "
    <tr>
     <td colspan=\"3\">
@@ -403,12 +397,10 @@ echo "
      </table>
     </td>
    </tr>
-
 <!-- ******************************************************************** -->
 <!-- ******************** SEX Last 3 Months ******************** -->
 <!-- ******************** (tab indices 7001 - 8000) ******************** -->
 <!-- ******************************************************************** -->
-
    <tr>
     <td colspan=\"3\">
      <table class=\"b_header_nb\">
@@ -479,12 +471,10 @@ echo "
      </table>
     </td>
    </tr>
-
 <!-- ******************************************************************** -->
 <!-- ******************** CD4 Status ******************** -->
 <!-- ******************** (tab indices 8001 - 9000) ******************** -->
 <!-- ******************************************************************** -->
-
    <tr>
     <td colspan=\"3\">
      <table class=\"b_header_nb\">
@@ -525,12 +515,9 @@ echo "
     </td>
    </tr>
 ";
-
 $tabIndex = 9001;
 include ("include/tbStatus_followup.php");
-
 echo "</tr>
-
 <!-- ******************************************************************** -->
 <!-- ******************** Vaccinations ******************** -->
 <!-- ******************** (tab indices 10001 - 11000) ******************** -->
@@ -574,11 +561,9 @@ echo "</tr>
   </table>
 </div>
 ";
-
 if (!$tabsOn) {
   include ("include/doctorSection.php");
 }
-
 // symptoms                    tabstart:12000
 echo "
 <div id=\"pane2\">
@@ -588,7 +573,6 @@ include ("symptoms/adult.php");
 echo "
 	</table>
   </div>";
-
 // Physical/TB Eval            tabstart:13000
 echo "
 <div id=\"pane3\">
@@ -596,13 +580,10 @@ echo "
 $tabIndex = 13000;
 include ("include/clinicalExam.php");
 echo "
-
-
 <!-- ******************************************************************** -->
 <!-- ******************** TB Evaluation ******************** -->
 <!-- ******************** (tab indices 14001 - 15000) ******************** -->
 <!-- ******************************************************************** -->
-
    <tr>
     <td colspan=\"3\">
      <table class=\"b_header_nb\">
@@ -623,7 +604,6 @@ echo "
          <input tabindex=\"14002\" name=\"suspicionTBwSymptoms\" " .
            getData ("suspicionTBwSymptoms", "checkbox", 0) .
            " type=\"checkbox\" value=\"1\">" .
-
            $tbEval[$lang][3] . "
        </td>
       </tr>
@@ -678,10 +658,8 @@ echo "
      </table>
     <td>
    </tr>
-
 </table>
 </div>";
-
 // Conditions                  tabstart:15000
 echo "
 <div id=\"pane4\">
@@ -691,7 +669,6 @@ include ("conditions/1.php");
 echo "
 	</table>
 </div>";
-
 // Medication Allergies        tabs 16001-17000
 echo "
 <div id=\"pane5\">
@@ -720,7 +697,6 @@ echo "
        <td class=\"sm_header_cnt\">" . $allergies_subhead18[$lang][1] . "</td>
       </tr>
 ";
-
 $tabIndex = 16100;
 for ($i = 1; $i <= $max_allergies; $i++) {
   echo "
@@ -745,7 +721,6 @@ for ($i = 1; $i <= $max_allergies; $i++) {
       </tr>";
   $tabIndex += 12;
 }
-
 echo "
       <tr>
        <td  colspan=\"10\">" . $aMedOther[$lang][1] . " <input class=\"medAllergy\" tabindex=\"16201\" name=\"aMedOther\" " . getData ("aMedOther", "text") . " type=\"text\" size=\"120\" maxlength=\"255\"></td>
@@ -773,7 +748,6 @@ echo "
    </tr>
  </table>
 </div>";
-
 // Treatments                  tabstart:17001
 echo "
 <div id=\"pane6\">
@@ -783,7 +757,6 @@ include ("include/arvs.php");
 echo "
 	</table>
   </div>";
-
 // Eligibility                 tabstart:20000
 echo "
 <div id=\"pane7\">
@@ -793,14 +766,11 @@ include ("medicalEligibility/".$version . ".php");
 echo "
 	</table>
   </div>";
-
 // Plan                        tabstart:20009
 echo "
 <div id=\"pane8\">
   <table class=\"header\">";
-
 $formName = "intake";
-
 echo "
    <tr>
     <td>
@@ -810,9 +780,7 @@ echo "
       </tr>
    </table>
    </table>
-
 ";
-
 $tabIndex = 21000;
 include ("include/nextVisitDate.php");
 echo "
@@ -832,7 +800,6 @@ echo "
 				<tr>
 				 <td><b>" . $labOrDrugForm[$lang][3] . "</b></td>
 				</tr>
-
 				<tr>
 	       <td><input tabindex=\"22002\" id=\"labOrDrugForm4\" name=\"labOrDrugForm2\" " . getData ("labOrDrugForm", "radio", 4) . " type=\"radio\" value=\"4\">" . $labOrDrugForm[$lang][4] . "</td>
 	      </tr>
@@ -861,7 +828,7 @@ echo "
 			</tr>
 			
 		<tr>
-	<td>" . $intervention[$lang][6]. "<input class=\"oh3\" tabindex=\"1599\" type=\"text\" id=\"cancerColonDT\" name=\"procedureDate\" value= \"" .substr($dateProcedure[0],-2)."/".$dateProcedure[1]."/".substr($dateProcedure[2],0,2)."\" type=\"text\" size=\"8\" maxlength=\"8\"></td>
+	<td>" . $intervention[$lang][6]. "<input class=\"oh3\" tabindex=\"1599\" type=\"text\" id=\"expFromD1\" name=\"procedureDate\" value= \"" .substr($dateProcedure[0],-2)."/".$dateProcedure[1]."/".substr($dateProcedure[2],0,2)."\" type=\"text\" size=\"8\" maxlength=\"8\"></td>
 			</tr>			
 	<tr><td><input type=\"checkbox\" id=\"cryotherapie\" name=\"cryotherapie\"  tabindex=\"" . ($tabIndex + 5) . "\" " . getData ("cryotherapie", "checkbox", 1) . " type=\"checkbox\" value=\"On\">".$intervention[$lang][1]."</td></tr>
 	<tr>   <td><input type=\"checkbox\" id=\"leep\" name=\"leep\"  tabindex=\"" . ($tabIndex + 5) . "\" " . getData ("leep", "checkbox", 1) . " type=\"checkbox\" value=\"On\">".$intervention[$lang][2]."</td></tr>

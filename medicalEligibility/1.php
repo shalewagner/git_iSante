@@ -87,7 +87,7 @@ echo "
 		  
          </td>
          <td class=\"left_pad\">
-		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<table><tr><td><input tabindex=\"" . ($tabIndex + 20) . "\" id=\"expFromD1\" class=\"medicalElig\"   name=\"expFromD1\" value=\"" . getData ("expFromDt", "textarea") . "/". getData ("expFromMm", "textarea") ."/". getData ("expFromYy", "textarea") . "\" type=\"text\" size=\"8\" maxlength=\"8\"></td><td><i>" . $PEP[$lang][0] . "</i><input type=\"hidden\"  id=\"expFromDt\" class=\"medicalElig\"   name=\"expFromDt\"><input type=\"hidden\" tabindex=\"" . ($tabIndex + 21) . "\" id=\"expFromMm\" class=\"medicalElig\"   name=\"expFromMm\"><input type=\"hidden\" tabindex=\"" . ($tabIndex + 22) . "\" id=\"expFromYy\"  class=\"medicalElig\"   name=\"expFromYy\" ></td></tr></table>
+		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<table><tr><td><input tabindex=\"" . ($tabIndex + 20) . "\" id=\"\" class=\"medicalElig\"   name=\"expFromD1\" value=\"" . getData ("expFromDt", "textarea") . "/". getData ("expFromMm", "textarea") ."/". getData ("expFromYy", "textarea") . "\" type=\"text\" size=\"8\" maxlength=\"8\"></td><td><i>" . $PEP[$lang][0] . "</i><input type=\"hidden\"  id=\"expFromDt\" class=\"medicalElig\"   name=\"expFromDt\"><input type=\"hidden\" tabindex=\"" . ($tabIndex + 21) . "\" id=\"expFromMm\" class=\"medicalElig\"   name=\"expFromMm\"><input type=\"hidden\" tabindex=\"" . ($tabIndex + 22) . "\" id=\"expFromYy\"  class=\"medicalElig\"   name=\"expFromYy\" ></td></tr></table>
 		 </td>
         </tr>
         <tr>

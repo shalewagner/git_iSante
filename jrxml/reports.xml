@@ -34,8 +34,8 @@
 				<targetList>distinct ltrim(rtrim(p.clinicPatientID)) as clinicPatientID, p.patientID, p.nationalID, ltrim(rtrim(p.fname)) as fName, ltrim(rtrim(p.lname)) as lName, $localized_gender as sex, $computed_age AS age, case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc,t.maxDate as  LastDate,max(nxt_dispd) as 'Dernier Randez-vous ARV', CONCAT_WS('|', p.addrDistrict, p.addrSection, p.addrTown) AS Address, p.telephone AS Phone, p.contact AS Contact, l.reasonDesc$lang AS failList</targetList>
 				<aggregateItemsOld>count(distinct p.clinicPatientID+fname+lname+ageYears+nationalID) as 'Compte', left(count(distinct p.clinicPatientID+fname+lname+ageYears+nationalID)/$total. * 100),4) as 'Pour cent'</aggregateItemsOld>
 				<aggregateItems>count(distinct p.patientID) as 'Compte', round(count(distinct p.patientID) / $total * 100.00, 2) as 'Pour cent'</aggregateItems>
-				<fromClause>temp$user t, #tempStatus1$user s,patientDispenses p2, patientStatusLookup q, clinicLookup a, v_patients p LEFT JOIN discTable d ON p.patientID = d.patientid LEFT JOIN discReasonLookup l ON d.discType = l.discType</fromClause>
-				<whereClause>t.patientID = p.patientID and p2.patientID=p.patientID and a.sitecode = p.sitecode and a.sitecode like '$site' and p.encounterType in (10, 15) and p.patientID = s.patientId and q.statusValue = s.status</whereClause>
+				<fromClause>temp$user t, #tempStatus1$user s, patientStatusLookup q, clinicLookup a, v_patients p LEFT JOIN discTable d ON p.patientID = d.patientid LEFT JOIN discReasonLookup l ON d.discType = l.discType left join patientDispenses p2 on p2.patientID=p.patientID</fromClause>
+				<whereClause>t.patientID = p.patientID  and a.sitecode = p.sitecode and a.sitecode like '$site' and p.encounterType in (10, 15) and p.patientID = s.patientId and q.statusValue = s.status</whereClause>
 				<groupBy>1,2</groupBy>
 				<havingClause/>
 				<orderBy>1,3,4</orderBy>
