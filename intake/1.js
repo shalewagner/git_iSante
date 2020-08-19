@@ -885,6 +885,8 @@ Ext.onReady(function() {
 		allowBlank:true
 	});
 	txtFormat['papTestDT'].applyToMarkup('papTestDT');
+	
+
 
 	txtFormat['lowestCd4CntDT'] = new Ext.form.DateField({
 		fieldLabel: '',
@@ -1219,7 +1221,7 @@ Ext.onReady(function() {
 		allowBlank:true
 	});
 	expFromD1.applyToMarkup('expFromD1');
-        Ext.get('PEP').on('click', function(){
+    /*    Ext.get('PEP').on('click', function(){
                 errMsg = Ext.util.checkRadioCorresponding4IE7(document.getElementById('PEP'),document.getElementById('expFromD1'), radioArr, true, document.getElementById('PEPTitle'));
                 errCount = Ext.util.showErrorHead(errFields,errMsgs,'PEP',errMsg,errCount);
 
@@ -1227,6 +1229,7 @@ Ext.onReady(function() {
                 errCount = Ext.util.showErrorHead(errFields,errMsgs,'expFromD1',errMsg,errCount);
 
         }, document.getElementById(this.id), {delay: 5});
+		
 	Ext.get('expFromD1').on('blur', function(){
 		errMsg = Ext.util.checkRadioCorresponding4IE7(document.getElementById('PEP'), document.getElementById('expFromD1'), radioArr, true, document.getElementById('PEPTitle'));
 		errCount = Ext.util.showErrorHead(errFields,errMsgs,'PEP',errMsg,errCount);
@@ -1253,7 +1256,7 @@ Ext.onReady(function() {
 	}
 
 	Ext.util.splitDate(document.getElementById('expFromD1'),document.getElementById('expFromDt'),document.getElementById('expFromMm'),document.getElementById('expFromYy'));
-
+*/
 	var medEligYes = document.getElementById('medElig1');
 	var medEligSection = new Array(9);
 	medEligSection[0] = document.mainForm.cd4LT200;
@@ -1266,13 +1269,13 @@ Ext.onReady(function() {
 	medEligSection[7] = document.mainForm.expFromD1;
 	medEligSection[8] = document.mainForm.tlcLT1200;   
 	Ext.util.disableElements(medEligYes,medEligSection,radioArr,true);
-	Ext.util.disableAssoDt(document.getElementById('medElig1'),expFromD1, document.mainForm.expFromD1,radioArr,true);
+	//Ext.util.disableAssoDt(document.getElementById('medElig1'),expFromD1, document.mainForm.expFromD1,radioArr,true);
 	
 	for(var i=1;i<4;i++)
 	{
 		Ext.get('medElig' + i).on('click', function(){
-			Ext.util.disableElements(document.getElementById('medElig1'),medEligSection,radioArr,true);
-			Ext.util.disableAssoDt(document.getElementById('medElig1'),expFromD1, document.mainForm.expFromD1,radioArr,true);
+			//Ext.util.disableElements(document.getElementById('medElig1'),medEligSection,radioArr,true);
+			//Ext.util.disableAssoDt(document.getElementById('medElig1'),expFromD1, document.mainForm.expFromD1,radioArr,true);
 			if( !document.getElementById('medElig1').checked){
                                 Ext.util.clearElements(medEligSection, errFields, errMsgs, errCount);
                         }	
@@ -1334,6 +1337,7 @@ Ext.onReady(function() {
 	errMsg = Ext.util.checkDateCorresponding4IE7(document.getElementById('papTest1'),document.getElementById('papTestDT'),radioArr, true, document.getElementById('papTestDTTitle'));
 	errCount = Ext.util.showErrorHead(errFields,errMsgs,'papTestDT',errMsg,errCount);
 	Ext.util.splitDate(document.getElementById('papTestDT'),document.getElementById('papTestDd'),document.getElementById('papTestMm'),document.getElementById('papTestYy'));
+	
 });
 
 

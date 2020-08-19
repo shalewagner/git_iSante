@@ -3395,4 +3395,56 @@ function setQueueAccessionAndStatusById ($id, $accNo, $status) {
     WHERE encounter_id = ' . $id, array ($accNo, $status));
 }
 
+function getDrugArv($drugid)
+{
+    $drugOptions='';
+    $drugs_query = "SELECT drugID, drugLabel FROM drugLookup WHERE drugID IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88, 89, 90, 91 ) ";
+    $drugs_res = dbQuery($drugs_query) or die ( "ERROR: unable to select from  drugLookup" );
+        while ( $drug = psRowFetch( $drugs_res ) )
+        {
+            $i++; 
+			if($drugid==$drug[0])
+			$drugOptions=$drugOptions.'<option value="'.$drug[0].'" selected >'.$drug[1].'</option>';
+		else 
+			$drugOptions=$drugOptions.'<option value="'.$drug[0].'">'.$drug[1].'</option>';
+        }
+
+
+    return $drugOptions;
+}
+
+function getIapOptions($id)
+{
+    $iapOptions='';
+    $iap_query = "SELECT indicatorID, name FROM iap_indicator ";
+    $iap_res = dbQuery($iap_query) or die ( "ERROR: unable to select from  drugLookup" );
+        while ( $iap = psRowFetch( $iap_res ) )
+        {
+            $i++; 
+			if($id==$iap[0])
+			$iapOptions=$iapOptions.'<option value="'.$iap[0].'" selected >'.$iap[1].'</option>';
+		else 
+			$iapOptions=$iapOptions.'<option value="'.$iap[0].'">'.$iap[1].'</option>';
+        }
+
+
+    return $iapOptions;
+}
+
+function getIap($id)
+{   
+    $iapArray='';
+	if($id>0)
+    $iap_query = "SELECT * FROM iap_indicator where indicatorID=".$id;
+else 
+	$iap_query = "SELECT * FROM iap_indicator where 1";
+    $iap_res = dbQuery($iap_query) or die ( "ERROR: unable to select from  iap_indicator" );
+        while ( $iap = psRowFetch( $iap_res ) )
+        {
+			$iapArray=$iap;
+           }
+    return $iapArray;
+}
+
+
 ?>

@@ -35,7 +35,7 @@ echo"</div>
      </tr>**/
    
    
-   echo '<tr><td colspan="11" class="top_line" style="padding:5px;" ><b>(-) Regime ARV les plus courant </b>
+   echo '<tr><td colspan="2" class="top_line" style="padding:5px;" ><b>(-) Regime ARV les plus courant </b>
 <select name="regimen" id="regimen" style="height:25px"> ';
 $options='<option value=""> </option>';
 $qry = "select REPLACE(REPLACE(r.shortName, 'ZDV', 'AZT'),'TNF','TDF') as shortName,(select drugName from drugLookup where drugID=r.drugID1)  as drug1, 
@@ -50,7 +50,14 @@ $qry = "select REPLACE(REPLACE(r.shortName, 'ZDV', 'AZT'),'TNF','TDF') as shortN
 			$options=$options.'<option value="'.$row[1].':'.$row[2].':'.$row[3].'">'.$row[0].'</option>';
 	}
     echo $options;
-echo '</select> <p> </p></td></tr>';
+echo '</select> <p> </p></td>
+        <td colspan="9" class="top_line" style="padding:5px;">&nbsp;
+       	 <input tabindex="11001" id="regimeLigne1" name="regimeLigne[]" ' . getData("regimeLigne", "radio", 1) .' type="radio" value="1"\>' . $regimeLigne[$lang][0] .'&nbsp;
+         <input tabindex="11002" id="regimeLigne2" name="regimeLigne[]" ' . getData ("regimeLigne", "radio", 2) .' type="radio" value="2"\>'. $regimeLigne[$lang][1] .'&nbsp;
+         <input tabindex="11003" id="regimeLigne3" name="regimeLigne[]" ' . getData ("regimeLigne", "radio", 4) .' type="radio" value="4"\>'. $regimeLigne[$lang][2] .'
+		 <br/>
+      </td>
+</tr>';
    
    
    

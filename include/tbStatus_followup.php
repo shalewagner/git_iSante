@@ -52,6 +52,10 @@ echo "
        <td><table><tr><td id=\"currentTreatFacTitle\">&nbsp;</td><td>" . $currentTreatFac[$lang][1] . "
        <input tabindex=\"" . ($tabIndex + 9) . "\" id=\"currentTreatFac\" name=\"currentTreatFac\" " . getData ("currentTreatFac", "text") . " type=\"text\" size=\"30\" maxlength=\"255\"></td></tr></table></td>
       </tr>
+	  <tr><td>" . $debutTbTraitement[$lang][0] . "
+       <input tabindex=\"" . ($tabIndex + 10) . "\" id=\"dateDebutTb\" name=\"dateDebutTb\" type=\"date\" value=\"" . getData ("dateDebutTb", "textarea") . "\"\></td></tr>
+      </tr>
+	  
      </table>
     </td>
    

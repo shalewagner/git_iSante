@@ -600,10 +600,9 @@ function updatePatientStatus($mode = 1, $endDate = null) {
  
 # remove expose children with new definition 
   database()->query('drop table if exists exposeChild;');
-  database()->query('create table exposeChild (patientID int primary key , dobDate date,lastVisitDate Date,lastDispDate date,pedCurrHiv int,lastPCR int);');
-  database()->query('create unique index exposeChild_index on exposeChild (patientID);');
+  database()->query('create table exposeChild (patientID varchar(11) primary key , dobDate date,lastVisitDate Date,lastDispDate date,pedCurrHiv int,lastPCR int);');
   database()->query('insert into exposeChild(patientID,pedCurrHiv) SELECT DISTINCT p.patientID, pedCurrHiv FROM vitals p, (SELECT patientID, MAX(ymdToDate(p.visitDateYy, p.visitDateMm, p.visitDateDd)) AS visitDate FROM itech.vitals p WHERE pedCurrHiv IN (1,4) GROUP BY 1)v WHERE p.pedCurrHiv IN(1,4) AND p.patientID = v.patientID AND v.visitDate = ymdToDate(p.visitDateYy, p.visitDateMm, p.visitDateDd) AND v.visitDate<?  on duplicate key update lastPCR=0;',array($endDate)); 
-  database()->query('insert into exposeChild(patientID) select distinct patientID from discEnrollment p where seroreversion=1 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=? on duplicate key update lastPCR=0;',array($endDate));
+  
   database()->query('insert into exposeChild(patientID,lastDispDate,lastPCR) select distinct p.patientID ,l.lastDispDate,0 as lastPCR
   from prescriptions p,
   (select 
@@ -642,6 +641,8 @@ and p.patientID=v.patientID and datediff(ymdtodate(v.visitdateyy,v.visitdatemm,v
   database()->exec('unlock tables'); 
   database()->query('delete from exposeChild where lastPCR=1 or pedCurrHiv=4;');
   database()->query('delete a from exposeChild a,patient p where p.patientID=a.patientID and p.patStatus>0;');
+  database()->query('insert into exposeChild(patientID) select distinct patientID from discEnrollment p where seroreversion=1 and ymdToDate(p.visitdateyy,p.visitdatemm,p.visitdatedd)<=? on duplicate key update lastPCR=0;',array($endDate));
+  
   database()->query('delete a from allHIV a,exposeChild p where a.patientID=p.patientID;');
 	
 #end of remove expose children
@@ -2794,6 +2795,17 @@ function mergeFingerprintData($file) {
 }
 
 
+function generateLabViral()
+{
+database()->exec('create table if not exists labViral(patientID varchar(25),resultDate Date,result varchar(25),past_result varchar(25),past_date Date);');
+database()->exec('truncate table labViral;');
+database()->exec('insert into labViral	
+SELECT L.patientID,date(ymdToDate(L.resultDateYy,L.resultDateMm,L.resultDateDd)) as resultDate,L.result,
+(SELECT result FROM labs  WHERE patientID=L.patientID AND date(ymdToDate(resultDateYy,resultDateMm,resultDateDd))<date(ymdToDate(L.resultDateYy,L.resultDateMm,L.resultDateDd)) and labID IN (103, 1257)  ORDER BY date(ymdToDate(resultDateYy,resultDateMm,resultDateDd)) DESC LIMIT 1) AS past_result,
+(SELECT date(ymdToDate(resultDateYy,resultDateMm,resultDateDd)) FROM labs  WHERE patientID=L.patientID AND date(ymdToDate(resultDateYy,resultDateMm,resultDateDd))<date(ymdToDate(L.resultDateYy,L.resultDateMm,L.resultDateDd)) and labID IN (103, 1257)  ORDER BY date(ymdToDate(resultDateYy,resultDateMm,resultDateDd)) DESC LIMIT 1) AS past_date
+FROM labs AS L where labID IN (103, 1257) 
+GROUP BY (CONCAT(L.patientID,'-',date(ymdToDate(L.resultDateYy,L.resultDateMm,L.resultDateDd))));';
+}
 
 
 function generatePatientAlert() {
@@ -2840,12 +2852,12 @@ WHERE A.hivPositive = 1 AND B.maxDate <= DATE_ADD(now(), INTERVAL -12 MONTH)');
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT left(patientid,5), patientID, 5, date(now())
 FROM viralLoadTemp 
-WHERE maxDate = visitDate AND maxDate <= DATE_ADD(NOW() , INTERVAL -3 MONTH ) AND (result+0) > 1000');
+WHERE maxDate = visitDate AND maxDate <= DATE_ADD(NOW() , INTERVAL -3 MONTH ) AND digits(result)+0 > 1000');
 
 /* Any patient whose viral test result was greater than 1000 copies */
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 SELECT DISTINCT left(patientid,5), patientID, 6, date(now())
-FROM viralLoadTemp WHERE maxDate = visitDate AND  (result+0) > 1000');
+FROM viralLoadTemp WHERE maxDate = visitDate AND  digits(result)+0 > 1000');
 
 database()->exec('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
 select LEFT(patientid,5),patientid,7,date(now()) from (
@@ -2900,4 +2912,24 @@ and e.encStatus between 1 and 254 and p.patStatus = 0
 and e.patientID not in (select patientId from patientAlert where alertId=10);');
 
 }
+
+
+function generatePatientCancerCol() {
+/* create table cancerCol*/
+database()->exec('drop table if exists cancerCol;');
+database()->exec('create table cancerCol( patientID varchar(20),StCode varchar(20), DateNaiss varchar(30), age varchar(20), Sexe varchar(20), ScreenedDate Date,visitDate Date,screenResult int(11),treatmentDate Date, treatment varchar(20));');
+
+database()->query('insert into cancerCol( patientID,StCode, DateNaiss, age, Sexe , ScreenedDate ,visitDate)
+select p.patientID,p.clinicPatientID as ST,date(concat(p.dobYy,?, case when p.dobMm is not null or p.dobMm<>? then dobMm else ? end ,?, case when p.dobDd is not null or p.dobDd<>? then dobDd else ? end)),round(DATEDIFF(r.visitDate,date(concat(p.dobYy,?, case when p.dobMm is not null or p.dobMm<>? then dobMm else ? end ,?, case when p.dobDd is not null or p.dobDd<>? then dobDd else ? end)))/365,0) as Age,case when p.sex=2 then ? when p.sex=1 then ? else ? end as sex,r.ScreenedDate,r.visitDate
+from  patient p,(select e.patientID,value_datetime as ScreenedDate,e.visitDate  from encounter e,obs o where e.encounter_id=o.encounter_id and o.concept_id in (70485)) r
+where p.patientStatus in(6,8,9,1,2,3) and r.patientID=p.patientID;',array('-','','06','-','','15','-','','06','-','','15','M','F','I'));
+
+database()->exec('update cancerCol c,(select e.patientID,value_numeric as screenResult from encounter e,obs o where e.encounter_id=o.encounter_id and o.concept_id in (70029)) r set c.screenResult=r.screenResult where r.patientID=c.patientID;');
+
+database()->exec('update cancerCol c,(select e.patientID,value_datetime as treatmentDate from encounter e,obs o where e.encounter_id=o.encounter_id and o.concept_id in (160715)) r set c.treatmentDate=r.treatmentDate where r.patientID=c.patientID;');
+
+database()->exec('update cancerCol c,
+(select e.patientID,c.description as treatment from encounter e,obs o,concept c where o.concept_id=c.concept_id and e.encounter_id=o.encounter_id and o.concept_id in (162812,162810,163408,0,162811,159837)) r set c.treatment=r.treatment where r.patientID=c.patientID;');
+}
+
 ?>

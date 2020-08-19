@@ -8,7 +8,8 @@ echo "
 if (!$tabsOn) {
   include ("include/nurseSection.php");
 }
-
+$date=explode('-',getData ("cancerColon", "textarea"));
+$dateProcedure=explode('-',getData ("procedureDate", "textarea"));
 //print_r($GLOBALS['errors']);
 echo "
 <div id=\"pane1\">
@@ -84,6 +85,24 @@ echo "
        <td><input tabindex=\"1305\" name=\"sexIntWOcondom[]\" " . getData ("sexIntWOcondom", "radio", 2) . " type=\"radio\" value=\"2\">" . $sexIntWOcondom[$lang][2] . "</td>
        <td><input tabindex=\"1306\" name=\"sexIntWOcondom[]\" " . getData ("sexIntWOcondom", "radio", 4) . " type=\"radio\" value=\"4\">" . $sexIntWOcondom[$lang][3] . "</td>
       </tr>
+	  
+	  
+	     <tr>
+       <td style=\"font-weight: bold;\" colspan=\"4\">" .$PopulationCle[$lang][0] . "  </td>
+      </tr>
+      <tr>
+       <td><input tabindex=\"" . ($tabIndex + 1) .  "\" name=\"harsahRisk\" " . getData ("harsahRisk", "checkbox") .  " type=\"checkbox\" value=\"On\">" .  $PopulationCle[$lang][1] . "</td> 
+       <td colspan=\"2\"><input tabindex=\"" . ($tabIndex + 2) . "\" name=\"sexProfessionelRisk\" " . getData ("sexProfessionelRisk", "checkbox") . " type=\"checkbox\" value=\"On\">" . $PopulationCle[$lang][2] . "</td>
+	   </tr>
+      <tr>       
+       <td><input tabindex=\"" . ($tabIndex + 4) . "\" name=\"transgenreRisk\" " . getData ("transgenreRisk", "checkbox") . " type=\"checkbox\" value=\"On\">" . $PopulationCle[$lang][4] . "</td>
+	   <td colspan=\"2\"><input tabindex=\"" . ($tabIndex + 5) . "\" name=\"drugUserRisk\" " . getData ("drugUserRisk", "checkbox") . " type=\"checkbox\" value=\"On\">" . $PopulationCle[$lang][5] . "</td>
+	   </tr>
+       <tr>       
+       <td><input tabindex=\"" . ($tabIndex + 3) . "\" name=\"prisonierRisk\" " . getData ("prisonierRisk", "checkbox") . " type=\"checkbox\" value=\"On\">" . $PopulationCle[$lang][3] . "</td>
+      </tr>  
+	  
+	  
      </table>
 
     </td>
@@ -93,6 +112,8 @@ echo "
       <tr>
        <td class=\"s_header\" colspan=\"4\">" . $pregnant[$lang][0] . "</td>
       </tr>
+	  
+	  <tr><td colspan=\"2\"><b> " . $pregnant[$lang][4]. "</b></td></tr>
       <tr>
        <td colspan=\"4\"><span><label><input class=\"preg\" tabindex=\"1501\"  id=\"pregY\" name=\"pregnant[]\"" . getData ("pregnant", "radio", 1) . " type=\"radio\" value=\"1\"/>" . $pregnant[$lang][1] . "</label>
        <label><input class=\"preg\" tabindex=\"1502\" id=\"pregN\"  name=\"pregnant[]\"" . getData ("pregnant", "radio", 2) . "
@@ -104,10 +125,6 @@ echo "
  	   <td id = \"pregnantLmpDtTitle\" width=\"5%\">&nbsp;</td>
        <td width=\"20%\"><input tabindex=\"1504\" id=\"pregnantLmpDt\" name=\"pregnantLmpDt\" value=\"" . getData ("pregnantLmpDd", "textarea") . "/". getData ("pregnantLmpMm", "textarea") ."/". getData ("pregnantLmpYy", "textarea") . "\" type=\"text\" size=\"8\" maxlength=\"8\"> <input class=\"femOnly\" id=\"pregnantLmpDd\" name=\"pregnantLmpDd\" " . getData ("pregnantLmpDd", "text") . " type=\"hidden\" ><input tabindex=\"1505\" class=\"femOnly\" id=\"pregnantLmpMm\" name=\"pregnantLmpMm\" " . getData ("pregnantLmpMm", "text") . " type=\"hidden\" ><input class=\"femOnly\" tabindex=\"1506\" id=\"pregnantLmpYy\" name=\"pregnantLmpYy\" " . getData ("pregnantLmpYy", "text") . " type=\"hidden\" ></td>
 	   <td width=\"35%\">&nbsp;<i>" . $pregnantLmpYy[$lang][2] . "</i></td>
-      </tr>
-      <tr>
-      	<td>&nbsp;
-      	</td>
       </tr>
       <tr>
        <td colspan=\"4\">" . $pregnantPrenatal[$lang][0] . "
@@ -129,6 +146,28 @@ echo "
       <tr>
        <td colspan=\"4\"><i>" . $pregnantNoPrenatal[$lang][1] . "</i></td>
       </tr>
+	        <tr>
+      	<td>&nbsp;
+      	</td>
+      </tr>
+     <tr>
+	  <td colspan=\"2\">
+	  <table><tr><td colspan=\"2\"><b> " . $ConcerColonStatus[$lang][6]. "</b> : <input class=\"oh3\" tabindex=\"1600\" id=\"screeneddone1\" name=\"screeneddone[]\" " . getData ("screeneddone", "radio", 1) . " type=\"radio\" value=\"1\" />" . $pregnantPrenatal[$lang][1]. "
+			<input class=\"oh3\" tabindex=\"1601\" id=\"screeneddone2\" name=\"screeneddone[]\" " . getData ("screeneddone", "radio", 2) . " type=\"radio\" value=\"2\" />" . $pregnantPrenatal[$lang][2] . "</td></tr>
+	  <tr><td id=\"cancerColonDtTitle\"> " . $ConcerColonStatus[$lang][5] . "</td><td><input class=\"oh2\" tabindex=\"1524\" type=\"text\" id=\"cancerColonDt\" name=\"cancerColon\" value= \"" .substr($date[0],-2)."/".$date[1]."/".substr($date[2],0,2)."\" size=\"8\" maxlength=\"8\"\></td></tr>
+	  <tr><td>".$ConcerColonStatus[$lang][4]."
+	   <input class=\"oh3\" tabindex=\"1519\" id=\"screenedMethode1\" name=\"screenedMethode[]\" " . getData ("screenedMethode", "radio", 1) . " type=\"radio\" value=\"1\" />" . $ConcerColonStatus[$lang][7] . "
+			<input class=\"oh3\" tabindex=\"1520\" id=\"screenedMethode2\" name=\"screenedMethode[]\" " . getData ("screenedMethode", "radio", 2) . " type=\"radio\" value=\"2\" />" . $ConcerColonStatus[$lang][8] . "</td><tr>
+			<tr><td><span style=\"white-space: nowrap;\">
+			 ". $ConcerColonStatus[$lang][3] . " : <span style=\"white-space: nowrap;\">
+			<input class=\"oh3\" tabindex=\"1521\" id=\"cancerColonStatus1\" name=\"cancerColonStatus[]\" " . getData ("cancerColonStatus", "radio", 1) . " type=\"radio\" value=\"1\" />" . $ConcerColonStatus[$lang][0] . "
+			<input class=\"oh3\" tabindex=\"1522\" id=\"cancerColonStatus2\" name=\"cancerColonStatus[]\" " . getData ("cancerColonStatus", "radio", 2) . " type=\"radio\" value=\"2\" />" . $ConcerColonStatus[$lang][1] . "
+			<input class=\"oh3\" tabindex=\"1523\" id=\"cancerColonStatus3\" name=\"cancerColonStatus[]\" " . getData ("cancerColonStatus", "radio", 4) . " type=\"radio\" value=\"4\" />" . $ConcerColonStatus[$lang][2] .
+       "</span>	</td>
+	   </tr></table>
+	  </td>
+	  </tr>	  
+	  
      </table>
 ";
 
@@ -172,7 +211,7 @@ echo"
 $tabIndex = 1700;
 if(getUiConfig(getSessionUser()) == "3" || getUiConfig(getSessionUser()) == "2")
 {
-echo "<div><table><tr><td width=\"50%\">";
+echo "<div>";
 include ("include/tbStatus_followup.php");
 echo "</td><td valign=\"top\" class=\"vert_line\">&nbsp;</td>
        <td valign=\"top\" class=\"left_pad\" width=\"50%\">
@@ -264,14 +303,14 @@ if (!$tabsOn) {
 
 
 $tabIndex = 2000;
-echo "<div id=\"pane2\"><table>";
+echo "<div id=\"pane2\"><table width=\"100%\">";
 include ("symptoms/fup1.php");
 echo "\n</table></div>";
 
 
 
 $tabIndex = 3000;
-echo "<div id=\"pane4\"><table>";
+echo "<div id=\"pane4\"><table  width=\"100%\">";
 include ("clinicalExam/1.php");
 echo "\n</table></div>";
 
@@ -374,6 +413,45 @@ echo "<div id=\"pane3\"><table>";
 include ("conditions/1.php");
 //include ("include/conditions.php");
 echo "\n</table></div>";
+
+
+echo "<div id=\"pane3\">
+<table width=\"100%\">
+	 <tr>
+       <td class=\"s_header\" colspan=\"10\">" . $GrossessAllaitement[$lang][0] . "</td>
+      </tr> 
+	<tr>       
+       <td> ".$GrossessAllaitement[$lang][1]."
+	        <input  tabindex=\"5519\" id=\"grossesseOuiNon1\" name=\"grossesseOuiNon[]\" " . getData ("grossesseOuiNon", "radio", 1) . " type=\"radio\" value=\"1\" />Oui
+			<input  tabindex=\"5520\" id=\"grossesseOuiNon2\" name=\"grossesseOuiNon[]\" " . getData ("grossesseOuiNon", "radio", 2) . " type=\"radio\" value=\"2\" />Non<br /> <span style=\"white-space: nowrap;\">
+        </td>
+		<td> ".$GrossessAllaitement[$lang][3]."
+	        <input  tabindex=\"5517\" id=\"grossesseStartDate\" name=\"grossesseStartDate\"  type=\"date\" value=\"" . getData ("grossesseStartDate", "textarea", 0) . "\" />			
+        </td>
+		<td> ".$GrossessAllaitement[$lang][4]."
+	        <input  tabindex=\"5518\" id=\"grossesseEndDate\" name=\"grossesseEndDate\"  type=\"date\" value=\"" . getData ("grossesseEndDate", "textarea", 0) . "\" />
+        </td>
+      </tr>  
+	  <tr>       
+       <td> ".$GrossessAllaitement[$lang][2]."
+	        <input  tabindex=\"5521\" id=\"allaitementOuiNon1\" name=\"allaitementOuiNon[]\" " . getData ("allaitementOuiNon", "radio", 1) . " type=\"radio\" value=\"1\" />Oui
+			<input  tabindex=\"5522\" id=\"allaitementOuiNon2\" name=\"allaitementOuiNon[]\" " . getData ("allaitementOuiNon", "radio", 2) . " type=\"radio\" value=\"2\" />Non<br /> <span style=\"white-space: nowrap;\">
+        </td>
+		<td> ".$GrossessAllaitement[$lang][3]."
+	        <input  tabindex=\"5523\" id=\"allaitementStartDate\" name=\"allaitementStartDate\"  type=\"date\" value=\"" . getData ("allaitementStartDate", "textarea", 0) . "\" />			
+        </td>
+		<td> ".$GrossessAllaitement[$lang][4]."
+	        <input  tabindex=\"5524\" id=\"allaitementEndDate\" name=\"allaitementEndDate\"  type=\"date\" value=\"" . getData ("allaitementEndDate", "textarea", 0) . "\" />
+        </td>
+      </tr> \n</table></div>";	  
+
+
+
+
+
+
+
+
 
 echo "
 <!-- ******************************************************************** -->
@@ -652,12 +730,58 @@ echo "<div id=\"pane5\">
 echo "\n</table></div>";
 
 $tabIndex = 8000;
-echo "<div id=\"pane6\"><table>";
+echo "<div id=\"pane6\"><table width=\"100%\">";
 include ("medicalEligibility/".$version . ".php");
 echo "\n</table></div>";
+
+
+// Non Eligibility                 tabstart:30000
+echo "
+<div id=\"pane7\">
+  <table class=\"header\">";
+$tabIndex = 30000;
+      echo "<tr>
+       <td class=\"s_header\" colspan=\"10\">" . $nonEligibility[$lang][0] . "</td>
+      </tr> 
+      <tr>
+       <td><input tabindex=\"" . ($tabIndex + 1) .  "\" name=\"refusVolontaireArv\" " . getData ("refusVolontaireArv", "checkbox") .  " type=\"checkbox\" value=\"On\">" .  $nonEligibility[$lang][1] . "</td> 
+	   </tr>
+	   <tr>
+       <td colspan=\"2\"><input tabindex=\"" . ($tabIndex + 2) . "\" name=\"decisionMedicaleARV\" " . getData ("decisionMedicaleARV", "checkbox") . " type=\"checkbox\" value=\"On\">" . $nonEligibility[$lang][2] . "</td>
+	   </tr>
+	   <tr>
+	   <td colspan=\"2\" style=\"padding-left:50px\"><input tabindex=\"" . ($tabIndex + 3) . "\" name=\"infectionOpportunistesARV\" " . getData ("infectionOpportunistesARV", "checkbox") . " type=\"checkbox\" value=\"On\">" . $nonEligibility[$lang][3] . "</td>
+      </tr>
+      <tr>       
+       <td colspan=\"2\" style=\"padding-left:50px\"><input tabindex=\"" . ($tabIndex + 4) . "\" name=\"troublePsychiatriquesARV\" " . getData ("troublePsychiatriquesARV", "checkbox") . " type=\"checkbox\" value=\"On\">" . $nonEligibility[$lang][4] . "</td>
+	   </tr>
+	   <tr>
+	   <td colspan=\"2\" style=\"padding-left:50px\"><input tabindex=\"" . ($tabIndex + 5) . "\" name=\"deniARV\" " . getData ("deniARV", "checkbox") . " type=\"checkbox\" value=\"On\">" . $nonEligibility[$lang][5] . "</td>
+	   </tr>
+	   <tr>
+	   <td colspan=\"2\" style=\"padding-left:50px\"><input tabindex=\"" . ($tabIndex + 5) . "\" name=\"maladieIntercurrentesARV\" " . getData ("maladieIntercurrentesARV", "checkbox") . " type=\"checkbox\" value=\"On\">" . $nonEligibility[$lang][6] . "</td>
+	   </tr>
+	   <tr>
+       <td colspan=\"2\"><input tabindex=\"" . ($tabIndex + 2) . "\" name=\"autreCausesARV\" " . getData ("autreCausesARV", "checkbox") . " type=\"checkbox\" value=\"On\">" . $nonEligibility[$lang][7] . " <input tabindex=\"1106\" id=\"autreCausesARVSpecify\" name=\"autreCausesARVSpecify\" " . getData ("autreCausesARVSpecify", "text") . " type=\"text\" size=\"100\" ></td>
+	   </tr>
+";
+
+echo "
+	</table>
+  </div>";  
+  
+
+
+
+
+
+
+
+
+
 $formName = "followup";
 echo "
-   <div id=\"pane7\"><table>
+   <div id=\"pane7\"><table  width=\"100%\">
    <tr>
     <td>
      <table class=\"b_header_nb\" width=\"100%\" border=\"0\">
@@ -672,6 +796,19 @@ echo "
       <tr>
        <td><textarea tabindex=\"10001\" name=\"followupComments\" cols=\"80\" rows=\"5\">" . getData ("followupComments", "textarea") . "</textarea></td>
       </tr>
+	  	  <tr>
+			 <td class=\"s_header\"><b>" . $assessmentPlan_header[$lang][4] . "</b></td>
+			</tr>
+	<tr>
+	<td id=\"pprocedureDateFDtTitle\">" . $intervention[$lang][6]. "<input class=\"oh2\" tabindex=\"9999\" id=\"procedureDateFDt\" name=\"procedureDate\" value= \"" .substr($dateProcedure[0],-2)."/".$dateProcedure[1]."/".substr($dateProcedure[2],0,2)."\" type=\"text\" size=\"8\" maxlength=\"8\"\></td>
+			</tr>		
+	<tr><td><input id=\"cryotherapie\" name=\"cryotherapie\"  tabindex=\"" . ($tabIndex + 5) . "\" " . getData ("cryotherapie", "checkbox", 1) . " type=\"checkbox\" value=\"On\">".$intervention[$lang][1]."</td></tr>
+	<tr>   <td><input id=\"leep\" name=\"leep\"  tabindex=\"" . ($tabIndex + 5) . "\" " . getData ("leep", "checkbox", 1) . " type=\"checkbox\" value=\"On\">".$intervention[$lang][2]."</td></tr>
+	<tr>   <td><input id=\"thermocoagulation\" name=\"thermocoagulation\"  tabindex=\"" . ($tabIndex + 5) . "\" " . getData ("thermocoagulation", "checkbox", 1) . " type=\"checkbox\" value=\"On\">".$intervention[$lang][3]."</td></tr>
+	<tr>   <td><input id=\"conisation\" name=\"conisation\"  tabindex=\"" . ($tabIndex + 5) . "\" " . getData ("conisation", "checkbox", 1) . " type=\"checkbox\" value=\"On\">".$intervention[$lang][4]."</td></tr>
+	<tr>   <td><input id=\"hysterectomie\" name=\"hysterectomie\"  tabindex=\"" . ($tabIndex + 5) . "\" " . getData ("hysterectomie", "checkbox", 1) . " type=\"checkbox\" value=\"On\">".$intervention[$lang][5]."</td></tr>	  
+     
+	  
      </table>
     </td>
    </tr></table>

@@ -196,12 +196,8 @@ function ymdToDate (year,month,day) {
 		if( tempYear >= 1000) {
 			outYear = tempYear;
 		} else {
-			if(tempYear <= 18) {
-				outYear = 2000 + tempYear;
-			} else {
-				outYear = 1900 + tempYear;
-			}	
-		}
+				outYear = 2000 + tempYear;	
+		       }
 	}
 	/* zero pad 1 digit month */
 	if(!isNaN(inMonth)) {

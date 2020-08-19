@@ -9,7 +9,7 @@ CREATE TABLE schemaVersion (
  whenUpgraded timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
  PRIMARY KEY  (version)
 );
-insert into schemaVersion set version=46, scriptName='support/schema-updates/0046-AddIntervention.sql';
+insert into schemaVersion set version=47, scriptName='support/schema-updates/0047-addIndicatorPnls.sql';
 
 DROP TABLE IF EXISTS adherenceCounseling;
 CREATE TABLE adherenceCounseling (
@@ -3555,4 +3555,28 @@ create table patientAlert(siteCode int,
                           alertId int,
                           insertDate date
                           )  ENGINE=InnoDB DEFAULT CHARSET=utf8;
+						  
+drop table if exists drugRupture;						  
+create table drugRupture(
+id int primary key auto_increment,
+sitecode	varchar(10),	
+drugID	int(11),
+startDate	date,
+endDate	date,
+signature	varchar(55),
+createDate	datetime,
+lastDate	datetime);
+
+drop table if exists iap_indicator;
+create table iap_indicator (
+id int primary key auto_increment,
+indicatorID int,
+name varchar(25),
+definition longtext,
+numerotor longtext,
+denominator longtext,
+type varchar(25)
+);
+						  
+						  
                           

@@ -22,13 +22,13 @@ $discEnrollment_header = array (
 );
 $everOn = array (
    "en" => array (
-	"Was the patient ever on ARV treatment?",
-	"Yes",
-	"No"),
+	"What type of HIV / AIDS care has the patient received?",
+	"The patient received antiretrovirals",
+	"The patient did not receive antiretrovirals"),
    "fr" => array (
-	"Est-ce que le patient recevait traitement ARV?",
-	"Oui",
-	"Non")
+	"Quel type de soins VIH/SIDA le patient a-t-il reçu ?",
+	"Le patient a reçu des antirétroviraux",
+	"Le patient n’a pas reçu d’antirétroviraux")
 );
 $ending = array (
    "en" => array (
@@ -366,13 +366,13 @@ $ending_1 = array (
 );
 $everOn_1 = array (
    "en" => array (
-	"Was the patient ever on ARV treatment?",
-	"Yes",
-	"No, skip to Reason for program disenrollment"),
+	"What type of HIV / AIDS care has the patient received?",
+	"The patient received antiretrovirals",
+	"The patient did not receive antiretrovirals"),
    "fr" => array (
-	"Est-ce que le patient recevait traitement ARV?",
-	"Oui",
-	"Non, <i>sauter &#xe0; Raison d'arr&#xea;t</i>")
+	"Quel type de soins VIH/SIDA le patient a-t-il reçu ?",
+	"Le patient a reçu des antirétroviraux",
+	"Le patient n’a pas reçu d’antirétroviraux")
 );
 $discEnrollDd_1= array (
 	"en" => array (
@@ -605,4 +605,53 @@ $reasonDiscDeathDd_1_0 = array (
    "fr" => array (
 	"Cause pr&#xe9;sum&#xe9;e du d&#xe9;c&#xe8;s:")
 );
+
+
+$reasonDiscNoFollowup_2 = array (
+   "en" => array (
+	"<b>Reason for program disenrollment, </b><i>specify</i>",
+	"Lost to follow-up for more than three years and having benefited from four unsuccessful home visits",
+	"Emigration, <i>specify</i>",
+	""),
+   "fr" => array (
+	"<b>Raison de discontinuation,</b><i>pr&#xe9;ciser</i>",
+	"Perdu de vue de plus de trois ans et ayant bénéficié de quatre visites à domicile infructueuses",
+	"Émigration,<i>pr&#xe9;ciser</i>",
+	"")
+);
+
+$reasonDiscDeath_2 = array (
+   "en" => array (
+	"Death, specify the cause below",	
+    "Tuberculosis",
+	"Infectious and / or parasitic diseases linked to HIV",
+	"HIV-related cancer",
+	"Other diseases or conditions related to HIV",
+	"Natural causes (cancer and infections, etc.) unrelated to HIV",
+	"Non-natural causes (trauma, accident, suicide, homicide, war, etc.)",
+	"Unknown"),
+   "fr" => array (
+	"Décès,<i>pr&#xe9;ciser la cause ci-dessous</i>",
+	"Tuberculose",
+	"Maladies infectieuses et/ou parasitaires liées au VIH",
+	"Cancer lié au VIH",
+	"Autres maladies ou conditions liées au VIH",
+	"Causes naturelles (cancer et infections, etc ) non liées au VIH",
+	"Causes non naturelles (traumatisme, accident, suicide, homicide, guerre, etc)",
+	"Inconnue")
+);
+
+$discReason_2 = array (
+   "en" => array (
+	"Discontinuations, <i>specify</i>",
+	"Decision of the provider",
+	"Denied",
+	"Troubles psychiatriques et / ou psychologiques"),
+   "fr" => array (
+	"Arrêt, <i>pr&#xe9;ciser</i>",
+	"Decision du prestataire",
+	"Déni",
+	"Troubles psychiatriques et/ou psychologiques")
+);
+
 ?>

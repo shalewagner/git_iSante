@@ -176,7 +176,8 @@ echo "<li class=\"dropdown\"><a class=\"dropdown-toggle\" href=\"#\" data-toggle
         echo "
         <li><a id=\"" . $cmdList[10] . "\" href=\"./reports.php?" . ($noidFromGet == "true" ? "noid=true&" : "") . "rtype=qualityCare&testType=0&" . $menustring . "\">" . $cmdLabel[$lang][10] . "</a></li>
         <li><a id=\"" . $cmdList[11] . "\" href=\"./reports.php?" . ($noidFromGet == "true" ? "noid=true&" : "") . "rtype=aggregatePop&testType=0&" . $menustring . "\">" . $cmdLabel[$lang][11] . "</a></li>";
-
+        echo "<li><a id=\"iap\" href=\"./iap_design.php\">Indicateur d'alerte precoce</a></li>";
+		 echo "<li><a id=\"iap\" href=\"./arv_design.php\">Rapport mensuel soins cliniques VIH-ARV</a></li>";
         if (PC_AUTH) {
             echo "
         <li><a id=\"" . $cmdList[29] . "\" href=\"./reports.php?" . ($noidFromGet == "true" ? "noid=true&" : "") . "rtype=primaryCare&testType=0&" . $menustring . "\">" . $cmdLabel[$lang][29] . "</a></li>";
@@ -235,6 +236,7 @@ $saveViralResultsLabel = ($lang == 'fr') ? 'Enregistrer les résultats viraux':'
 echo '
         <li><a id="barcodeReport" href="' . $viralLoadURL . '">' . $viralLoadLabel . '</a></li>
         <li><a id="loadViral" href="./loadViral.php">' . $saveViralResultsLabel . '</a></li>
+		<li><a id="drugRupture" href="./drugRupture.php">Signaler une rupture de Stock</a></li>
     </ul>
 </li>';
 }
@@ -245,6 +247,7 @@ echo '
 <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" id="' . $topLabelsId[6] . '">' . $topLabels[$lang][6] . ' <b class="caret"></b></a>
 <ul class="dropdown-menu">
 	<li><a id="' . $cmdList[19] . '" href="./helpfile.php?file=report_definitions_1.0&extension=php&titleen=EMR%20Report%20Definitions&titlefr=Rapport%20de%20d%e9finition%20EMR&' . $menustring . '">' . $cmdLabel[$lang][19] . '</a></li>
+	<li><a id="18.3"  href="helpfiles/ChangeDocument18.3' . $lang . '.pdf" target="_blank">' . $newIn . '18.3' .    '</a></li>
 	<li><a id="18.2"  href="helpfiles/ChangeDocument18.2' . $lang . '.pdf" target="_blank">' . $newIn . '18.2' .    '</a></li>
 	<li><a id="18.1"  href="helpfiles/ChangeDocument18.1' . $lang . '.pdf" target="_blank">' . $newIn . '18.1' .    '</a></li>
 	<li><a id="17.3"  href="helpfiles/ChangeDocument17.3' . $lang . '.pdf" target="_blank">' . $newIn . '17.3' .    '</a></li>

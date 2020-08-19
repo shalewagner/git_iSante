@@ -3,9 +3,8 @@
 /* last date modified :  nov 4 */
 function updateObgynSnapshot($lastModified) {
 
-	
-database()->query('INSERT INTO dw_obgyn_snapshot (patientID, visitDate, mammographDt, papTestResult, leucorhee, metrorragieSymptom, sexAgression, consult_obs, grossesseHautRisque, tetanosDtD1, hypertensionArteryA, hemorragieVaginale,hemorragieVaginalet1, membraneRupture, vacuum, laborMethod, laborMystery, laborDifficultBirth, vitalWeight1, ppVitalBp1, ironSup, utilisationPartogramme, beneficieGATPA, laborEvolution, plusDe30Ans, plusDe40Ans, 	femmesVuesPrenatal, suiviPrenatal, 	accouchement,membraneRuptureDeno,cxca_scrnNum,cxca_scrnDeno,cxca_txDeno,cxca_txNum)
- SELECT patientID, maxDate AS visiteDate,
+database()->query('INSERT INTO dw_obgyn_snapshot (patientID, visitDate, mammographDt, papTestResult, leucorhee, metrorragieSymptom, sexAgression, consult_obs, grossesseHautRisque, tetanosDtD1, hypertensionArteryA, hemorragieVaginale,hemorragieVaginalet1, membraneRupture, vacuum, laborMethod, laborMystery, laborDifficultBirth, vitalWeight1, ppVitalBp1, ironSup, utilisationPartogramme, beneficieGATPA, laborEvolution, plusDe30Ans, plusDe40Ans, femmesVuesPrenatal, suiviPrenatal, accouchement,membraneRuptureDeno)
+SELECT patientID, maxDate AS visiteDate,
 COUNT(CASE WHEN concept_id = 8039 THEN patientID ELSE NULL END) AS mammographDt,
 COUNT(CASE WHEN concept_id = 7073 THEN patientID ELSE NULL END) AS papTestResult,
 COUNT(CASE WHEN concept_id = 7886 THEN patientID ELSE NULL END) AS leucorhee,
@@ -33,11 +32,7 @@ COUNT(CASE WHEN concept_id = 984746 THEN patientID ELSE NULL END) AS plusDe40Ans
 COUNT(CASE WHEN concept_id = 683632 THEN patientID ELSE NULL END) AS femmesVuesPrenatal, 
 COUNT(CASE WHEN concept_id = 70729 THEN patientID ELSE NULL END) AS suiviPrenatal,
 COUNT(CASE WHEN concept_id = 70478 THEN patientID ELSE NULL END) AS accouchement ,
-COUNT(CASE WHEN concept_id = 7802 THEN patientID ELSE NULL END) AS membraneRuptureDeno,
-count(case when concept_id=70485 then patientID else null end) AS cxca_scrnNum,
-count(case when concept_id=7073 then patientID else null end) AS cxca_scrnDeno,
-count(case when concept_id=70029 then patientID else null end) AS cxca_txDeno,
-count(case when concept_id=162812 then patientID else null end) AS cxca_txNum
+COUNT(CASE WHEN concept_id = 7802 THEN patientID ELSE NULL END) AS membraneRuptureDeno
 FROM
 (
  
@@ -344,47 +339,6 @@ GROUP BY 1
 )t
 
 GROUP BY patientID, maxDate', array('8039','7073','7886','70631','70176','70018','71079','7007','70190','7809','7200','7820','71137','71279','7280','7248','70792','iron','70521','984746','284746','683632','70729','70478','70086','70635','7802'));
-	
-
-
-
-database()->query('
-INSERT INTO dw_obgyn_snapshot (patientID, visitDate,cxca_scrnNum)
-select p.patientID,  DATE(e.visitDate) AS maxDate,count(*) as cxca_scrnNum 
-from pepfarTable p,patient p1,encValidAll e
-where p.patientID=p1.patientID and e.patientID=p.patientID
-AND (p.patientID in (select patientID from vitals where papTest=1) or p.patientID in (select e.patientID from encounter e,obs o where o.encounter_id=e.encounter_id and encStatus<255 and o.concept_id in (70485,7073, 70401)))
-AND YEAR(NOW())-dobYy between 15 and 49
-group by 1,2
-ON DUPLICATE KEY UPDATE cxca_scrnNum=values(cxca_scrnNum);');
-
-database()->query('
-INSERT INTO dw_obgyn_snapshot (patientID, visitDate,cxca_scrnDeno)
-select  p.patientID  ,  DATE(e.visitDate) AS maxDate,count(*) as cxca_scrnDeno
-from pepfarTable p,patient p1,encValidAll e
-where p.patientID=p1.patientID and e.patientID=p.patientID
-AND YEAR(NOW())-dobYy between 15 and 49
-group by 1,2
-ON DUPLICATE KEY UPDATE cxca_scrnDeno=values(cxca_scrnDeno);');
-
-database()->query('
-INSERT INTO dw_obgyn_snapshot (patientID, visitDate,cxca_txDeno)
-select p.patientID ,  DATE(e.visitDate) AS maxDate,count(*) as cxca_txDeno
-from pepfarTable p,patient p1,(select e.patientID,e.visitDate from obs o,encounter e where o.encounter_id=e.encounter_id and e.encStatus<255 and concept_id in (70029,70485)) e
-where p.patientID=p1.patientID and e.patientID=p.patientID
-AND YEAR(NOW())-dobYy between 15 and 49 
-group by 1,2
-ON DUPLICATE KEY UPDATE cxca_txDeno=values(cxca_txDeno);');
-
-database()->query('
-INSERT INTO dw_obgyn_snapshot (patientID, visitDate,cxca_txNum)
-select p.patientID,  DATE(ifnull(e.visitDate,e1.visitDate)) AS maxDate,count(*) as cxca_txNum
-from pepfarTable p,patient p1,(select e.patientID,e.visitDate from obs o,encounter e where o.encounter_id=e.encounter_id and e.encStatus<255 and concept_id in (70029,70485)) e,
-(select e.patientID,visitDate from obs o,encounter e where o.encounter_id=e.encounter_id and e.encStatus<255 and concept_id in (162812,162810,163408)) e1
-where p.patientID=p1.patientID and e.patientID=p.patientID and e1.patientID=p.patientID
-AND YEAR(NOW())-dobYy between 15 and 49 
-group by 1,2
-ON DUPLICATE KEY UPDATE cxca_txNum=values(cxca_txNum);');
 
 }
 
@@ -396,8 +350,6 @@ function obgynSlices($key, $orgType, $time_period) {
 		-4 => array(0, "where femmesVuesPrenatal> 0 ", NULL),
 		-5 => array(0, "where accouchement > 0", NULL),
 		-6 => array(0, "where membraneRuptureDeno > 0", NULL),
-		-7 => array(0, "where cxca_scrnDeno > 0", NULL),
-		-8 => array(0, "where cxca_txDeno > 0", NULL),
 		 
 		1 => array(1, "where mammographDt = 1", array(-1)),
 		2 => array(1, "where papTestResult = 1", array(-2)), 
@@ -416,9 +368,7 @@ function obgynSlices($key, $orgType, $time_period) {
 		 15 => array(1, "where ppVitalBp1 = 1", array(-4)),
 		 16 => array(1, "where ironSup = 1", array(-4)),
 		 17 => array(0, "where hemorragieVaginalet1 = 1", NULL),
-		 18 => array(0, "where laborEvolution = 1", NULL),
-		 21 => array(1, "where cxca_scrnNum >= 1",  array(-7)),
-		 22 => array(1, "where cxca_txNum >= 1",  array(-8))
+		 18 => array(0, "where laborEvolution = 1", NULL)
 	);
 	
 	if (DEBUG_FLAG) echo "<br>Generate Patient Lists start: " . date('h:i:s') . "<br>";

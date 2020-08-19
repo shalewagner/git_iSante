@@ -112,6 +112,12 @@ generateMarkerArray();
 printLog('generateMarkerArray() finished (' . getTimer() . ' seconds elapsed)');
 
 
+startTimer();
+printLog('generateLabViral() started');
+generateLabViral();
+printLog('generateLabViral() finished (' . getTimer() . ' seconds elapsed)');
+
+
 #Record the time that this job was run.
 dbQuery("update lastJobRun set lastRun = '$dbStartDate'");
 

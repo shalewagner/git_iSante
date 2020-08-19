@@ -31,12 +31,12 @@
 				<reportFile groupLevel="5" otherLevel="2">networkSexRpt.jasper</reportFile>
 				<reportFile groupLevel="5" otherLevel="3">networkAgeRpt.jasper</reportFile>
 				<reportFile groupLevel="5" otherLevel="4">networkPregnancyRpt.jasper</reportFile>
-				<targetList>distinct ltrim(rtrim(p.clinicPatientID)) as clinicPatientID, p.patientID, p.nationalID, ltrim(rtrim(p.fname)) as fName, ltrim(rtrim(p.lname)) as lName, $localized_gender as sex, $computed_age AS age, case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc, t.maxdate as LastDate, CONCAT_WS('|', p.addrDistrict, p.addrSection, p.addrTown) AS Address, p.telephone AS Phone, p.contact AS Contact, l.reasonDesc$lang AS failList</targetList>
+				<targetList>distinct ltrim(rtrim(p.clinicPatientID)) as clinicPatientID, p.patientID, p.nationalID, ltrim(rtrim(p.fname)) as fName, ltrim(rtrim(p.lname)) as lName, $localized_gender as sex, $computed_age AS age, case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc,t.maxDate as  LastDate,max(nxt_dispd) as 'Dernier Randez-vous ARV', CONCAT_WS('|', p.addrDistrict, p.addrSection, p.addrTown) AS Address, p.telephone AS Phone, p.contact AS Contact, l.reasonDesc$lang AS failList</targetList>
 				<aggregateItemsOld>count(distinct p.clinicPatientID+fname+lname+ageYears+nationalID) as 'Compte', left(count(distinct p.clinicPatientID+fname+lname+ageYears+nationalID)/$total. * 100),4) as 'Pour cent'</aggregateItemsOld>
 				<aggregateItems>count(distinct p.patientID) as 'Compte', round(count(distinct p.patientID) / $total * 100.00, 2) as 'Pour cent'</aggregateItems>
-				<fromClause>temp$user t, #tempStatus1$user s, patientStatusLookup q, clinicLookup a, v_patients p LEFT JOIN discTable d ON p.patientID = d.patientid LEFT JOIN discReasonLookup l ON d.discType = l.discType</fromClause>
-				<whereClause>t.patientID = p.patientID and a.sitecode = p.sitecode and a.sitecode like '$site' and p.encounterType in (10, 15) and p.patientID = s.patientId and q.statusValue = s.status</whereClause>
-				<groupBy></groupBy>
+				<fromClause>temp$user t, #tempStatus1$user s, patientStatusLookup q, clinicLookup a, v_patients p LEFT JOIN discTable d ON p.patientID = d.patientid LEFT JOIN discReasonLookup l ON d.discType = l.discType left join patientDispenses p2 on p2.patientID=p.patientID</fromClause>
+				<whereClause>t.patientID = p.patientID  and a.sitecode = p.sitecode and a.sitecode like '$site' and p.encounterType in (10, 15) and p.patientID = s.patientId and q.statusValue = s.status</whereClause>
+				<groupBy>1,2</groupBy>
 				<havingClause/>
 				<orderBy>1,3,4</orderBy>
 				<query>$query</query>
@@ -1658,6 +1658,140 @@
 				<description/>
 			</report>
 		</reportSubSet>
+		<reportSubSet>
+			<title lang="en">Others</title>
+			<title lang="fr">Autres</title>
+            <report id="548" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Alert viral load </title>
+				  <title lang="fr">Alerte charge virale</title>
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <query>select descriptionFr as Alerte,count(distinct patientID) as cnt from patientAlert p, alertLookup a ,clinicLookup c where p.alertId=a.alertId and p.patientID not in(select patientID from discTable) and p.siteCode=c.siteCode and c.siteCode='$site' group by 1 order by a.alertId </query>
+			</report>		
+				
+			<report id="549" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">List of patients who started an HAART regimen</title>
+				  <title lang="fr">Liste des patients ayant démarré un régime ARV</title>
+				   <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+                    <menuSelection>dateSelect</menuSelection>				
+			 </report>
+				
+			<report id="550" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">The list of patients whose ARV refill date is expected within the next 30 days</title>
+				  <title lang="fr">La liste des patients dont la date de renflouement des ARV est prévue dans les 30 prochains jours</title>
+				   <reportFile></reportFile>
+				     <groupLevel>0</groupLevel>
+				             <otherLevel>0</otherLevel>			
+			</report>
+					
+			<report id="551" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">The list of patients whose ARV refill date has expired</title>
+				  <title lang="fr">La liste des patients dont la date de renflouement des ARV est arrivée à terme</title>
+				   <reportFile></reportFile>
+				   <groupLevel>0</groupLevel>
+				   <otherLevel>0</otherLevel>	
+                   				   
+			</report>	
+			    <report id="552" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Number of patients receiving ARVs by period</title>
+				  <title lang="fr">Nombre de patients ayant reçu des ARV par période</title>
+				   <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <menuSelection>dateSelect</menuSelection>
+			</report>	
+            
+            <report id="553" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Community distribution of ARVs</title>
+				  <title lang="fr">Distribution des ARVs en communauté (DAC)</title>
+				   <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <menuSelection>dateSelect</menuSelection>
+			</report>
+            <report id="554" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Viral load by number of copies/ml (according to the application date)</title>
+				  <title lang="fr">Charge virale en fonction du nombre de copies/ml (selon la date de demande)</title>
+				   <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <menuSelection>dateSelect</menuSelection>
+			</report>
+
+	       <report id="557" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Viral load by number of copies/ml (according to the result Date)</title>
+				  <title lang="fr">Charge virale en fonction du nombre de copies/ml (selon la date du resultat) </title>
+				   <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <menuSelection>dateSelect</menuSelection>
+			</report>	
+		    <report id="559" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Eligible children for a PCR</title>
+				  <title lang="fr">Enfants éligibles pour un PCR </title>
+				   <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+			</report>		
+		    <report id="555" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">List of patients eligible for their first viral load </title>
+				  <title lang="fr">Liste des patients eligibles pour leur premiere charge virale</title>
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone from patient p, pepfarTable t where p.patientId=t.patientID and p.patientID not in(select patientID from discTable) and p.patientID not in(select l.patientID from labs l where labID in(103,1257) and (result is not null and result !='')) group by 1  having min(visitDate) &lt;= DATE_ADD(now(), INTERVAL -6 MONTH)</query> 
+			</report>
+		   <report id="556" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Eligible for a control viral load </title>
+				  <title lang="fr">Liste des patients eligibles pour une charge virale de controle</title>
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, result, ymdtoDate(resultDateYy,resultDateMm,resultDateDd) as 'Date resultat' from patient p, labs l, ( SELECT DISTINCT patientID, MAX( ymdtoDate(resultDateYy, resultDateMm, resultDateDd)) AS DateResultat FROM  `labs` WHERE labID IN (103, 1257) GROUP BY 1) q where p.patientId=l.patientID and q.patientID=l.patientID and q.DateResultat = ymdtoDate(l.resultDateYy,l.resultDateMm,l.resultDateDd) and l.labID in(103,1257) and (result is not null and result !='') and p.patientID not in(select patientID from discTable) AND datediff(mm,DateResultat,getDate()) between 6 and 12 and digits(result) &gt; 1000 UNION select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, result, ymdtoDate(resultDateYy,resultDateMm,resultDateDd) as 'Date resultat' from patient p, labs l, (SELECT DISTINCT patientID, MAX( ymdtoDate(resultDateYy, resultDateMm, resultDateDd)) AS DateResultat FROM  `labs` WHERE labID IN (103,1257) GROUP BY 1 ) q where p.patientId=l.patientID and q.patientID=l.patientID and q.DateResultat = ymdtoDate(l.resultDateYy,l.resultDateMm,l.resultDateDd) and l.labID in(103,1257) and (result is not null and result !='') and p.patientID not in(select patientID from discTable) AND datediff(mm,DateResultat,getDate()) &gt; 12 and digits(result) &lt; 1000</query> 
+				</report>
+				
+			<report id="560" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">ARV dispensing follow-up </title>
+				  <title lang="fr">Suivi dispensation ARV</title>
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+				    <query></query> 
+				</report>	
+				
+			<report id="561" patientStatus="0" treatmentStatus="0" testType="0">
+				<title lang="en">Active patient with a viral load during the last 12 months</title>
+				<title lang="fr">Patient Actif avec une charge virale pendant les 12 dernier mois</title>
+				<reportFile></reportFile>
+				<menuSelection>dateSelect</menuSelection>
+				<query>select distinct p1.clinicPatientID as ST,$localized_gender as sex, $computed_age AS age, case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc,digits(l.result) as 'Charge Viral',date(ymdtoDate(resultDateYy,resultDateMm,resultDateDd)) as 'Date du Resultat' FROM labs l, (select patientID,max(date(ymdtoDate(resultDateYy,resultDateMm,resultDateDd))) as visitDate FROM labs where siteCode='$site' and date(ymdtoDate(resultDateYy,resultDateMm,resultDateDd)) between DATE_ADD('$end', INTERVAL -12 MONTH) AND '$end' group by 1) l1,(select patientID,patientStatus from patientStatusTemp p where p.endDate='$end' and p.patientStatus in (6,8)) p,patient p1,patientStatusLookup p2 WHERE l.labID IN (103, 1257) and l.result IS NOT NULL and digits(l.result)>0 and p.patientID=l.patientID and l.patientID=p1.patientID and p2.statusValue=p.patientStatus and l.siteCode='$site' and l1.patientID=l.patientID and l1.visitDate=date(ymdtoDate(resultDateYy,resultDateMm,resultDateDd)) and  date(ymdtoDate(resultDateYy,resultDateMm,resultDateDd)) between DATE_ADD('$end', INTERVAL -12 MONTH) AND '$end'</query>
+				<description lang="en">Active patient with a viral load result over the past 12 months</description>
+				<description lang="fr">Patient regulier et randez-vous rates ayant un resultat de charge viral pandant les 12 dernier mois</description>
+			</report>	
+			
+			<report id="562" patientStatus="0" treatmentStatus="0" testType="0">
+				<title lang="en">Patient from 15 to 49 year Detected and treated for cervical cancer(CXCA_SCRN et CXCA_TX)</title>
+				<title lang="fr">Patient âgé de 15 à 49 ans Dépisté et traité pour le cancer du col (CXCA_SCRN et CXCA_TX)</title>
+				<reportFile></reportFile>piethahsie
+				<menuSelection>dateSelect</menuSelection>
+				<query></query>
+			</report>
+			
+			<report id="563" patientStatus="0" treatmentStatus="0" testType="0">
+				<title lang="en">Patientfrom 25 to 60 year   Detected and treated for cervical cancer(CXCA_SCRN et CXCA_TX)</title>
+				<title lang="fr">Patient âgé de 25 à 60 ans Dépisté et traité pour le cancer du col (CXCA_SCRN et CXCA_TX)</title>
+				<reportFile></reportFile>
+				<menuSelection>dateSelect</menuSelection>
+				<query></query>
+			</report>
+			
+		</reportSubSet>
+		
+		
+		
 <!--    <reportSubSet>  disease and death reports 
 			<title lang="en">Incident disease and death reports</title>
 			<title lang="fr">Rapports de décès et de maladies</title>
@@ -1911,117 +2045,6 @@
                                 <menuSelection>dateSelect</menuSelection>
 				
 			    </report>	
-				
-				
-			<report id="548" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Alert viral load </title>
-				  <title lang="fr">Alerte charge virale</title>
-				    <reportFile></reportFile>
-				    <groupLevel>0</groupLevel>
-				    <otherLevel>0</otherLevel>
-				    <query>select descriptionFr as Alerte,count(distinct patientID) as cnt from patientAlert p, alertLookup a ,clinicLookup c where p.alertId=a.alertId and p.patientID not in(select patientID from discTable) and p.siteCode=c.siteCode and c.siteCode='$site' group by 1 order by a.alertId </query>
-			    </report>		
-				
-				<report id="549" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">List of patients who started an HAART regimen</title>
-				  <title lang="fr">Liste des patients ayant démarré un régime ARV</title>
-				   <reportFile></reportFile>
-				    <groupLevel>0</groupLevel>
-				    <otherLevel>0</otherLevel>
-                    <menuSelection>dateSelect</menuSelection>				
-			    </report>
-				
-				<report id="550" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">The list of patients whose ARV refill date is expected within the next 30 days</title>
-				  <title lang="fr">La liste des patients dont la date de renflouement des ARV est prévue dans les 30 prochains jours</title>
-				   <reportFile></reportFile>
-				     <groupLevel>0</groupLevel>
-				             <otherLevel>0</otherLevel>			
-			    </report>
-					
-				<report id="551" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">The list of patients whose ARV refill date has expired</title>
-				  <title lang="fr">La liste des patients dont la date de renflouement des ARV est arrivée à terme</title>
-				   <reportFile></reportFile>
-				     <groupLevel>0</groupLevel>
-				             <otherLevel>0</otherLevel>			
-			    </report>	
-			    <report id="552" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Number of patients receiving ARVs by period</title>
-				  <title lang="fr">Nombre de patients ayant reçu des ARV par période</title>
-				   <reportFile></reportFile>
-				    <groupLevel>0</groupLevel>
-				    <otherLevel>0</otherLevel>
-				    <menuSelection>dateSelect</menuSelection>
-			    </report>	
-            
-            	<report id="553" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Community distribution of ARVs</title>
-				  <title lang="fr">Distribution des ARVs en communauté (DAC)</title>
-				   <reportFile></reportFile>
-				    <groupLevel>0</groupLevel>
-				    <otherLevel>0</otherLevel>
-				    <menuSelection>dateSelect</menuSelection>
-			    </report>
-            	<report id="554" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Viral load by number of copies/ml (according to the application date)</title>
-				  <title lang="fr">Charge virale en fonction du nombre de copies/ml (selon la date de demande)</title>
-				   <reportFile></reportFile>
-				    <groupLevel>0</groupLevel>
-				    <otherLevel>0</otherLevel>
-				    <menuSelection>dateSelect</menuSelection>
-			    </report>
-
-	       <report id="557" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Viral load by number of copies/ml (according to the result Date)</title>
-				  <title lang="fr">Charge virale en fonction du nombre de copies/ml (selon la date du resultat) </title>
-				   <reportFile></reportFile>
-				    <groupLevel>0</groupLevel>
-				    <otherLevel>0</otherLevel>
-				    <menuSelection>dateSelect</menuSelection>
-			    </report>	
-		<report id="559" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Eligible children for a PCR</title>
-				  <title lang="fr">Enfants éligibles pour un PCR </title>
-				   <reportFile></reportFile>
-				    <groupLevel>0</groupLevel>
-				    <otherLevel>0</otherLevel>
-			    </report>		
-		<report id="555" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">List of patients eligible for their first viral load </title>
-				  <title lang="fr">Liste des patients eligibles pour leur premiere charge virale</title>
-				    <reportFile></reportFile>
-				    <groupLevel>0</groupLevel>
-				    <otherLevel>0</otherLevel>
-				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone from patient p, pepfarTable t where p.patientId=t.patientID and p.patientID not in(select patientID from discTable) and p.patientID not in(select l.patientID from labs l where labID in(103,1257) and (result is not null and result !='')) group by 1  having min(visitDate) &lt;= DATE_ADD(now(), INTERVAL -6 MONTH)</query> 
-				
-				</report>
-		<report id="556" patientStatus="0" treatmentStatus="0" testType="0">
-				  <title lang="en">Eligible for a control viral load </title>
-				  <title lang="fr">Liste des patients eligibles pour une charge virale de controle</title>
-				    <reportFile></reportFile>
-				    <groupLevel>0</groupLevel>
-				    <otherLevel>0</otherLevel>
-				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, result, ymdtoDate(resultDateYy,resultDateMm,resultDateDd) as 'Date resultat' from patient p, labs l, (
-
-SELECT DISTINCT patientID, MAX( ymdtoDate(
-resultDateYy, resultDateMm, resultDateDd
-) ) AS DateResultat
-FROM  `labs` 
-WHERE labID
-IN ( 103, 1257 ) 
-GROUP BY 1
-)q where p.patientId=l.patientID and q.patientID=l.patientID and q.DateResultat = ymdtoDate(l.resultDateYy,l.resultDateMm,l.resultDateDd) and l.labID in(103,1257) and (result is not null and result !='') and p.patientID not in(select patientID from discTable) AND datediff(mm,DateResultat,getDate()) between 6 and 12 and digits(result) &gt; 1000 UNION select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, result, ymdtoDate(resultDateYy,resultDateMm,resultDateDd) as 'Date resultat' from patient p, labs l, (
-
-SELECT DISTINCT patientID, MAX( ymdtoDate(
-resultDateYy, resultDateMm, resultDateDd
-) ) AS DateResultat
-FROM  `labs` 
-WHERE labID
-IN ( 103, 1257 ) 
-GROUP BY 1
-)q where p.patientId=l.patientID and q.patientID=l.patientID and q.DateResultat = ymdtoDate(l.resultDateYy,l.resultDateMm,l.resultDateDd) and l.labID in(103,1257) and (result is not null and result !='') and p.patientID not in(select patientID from discTable) AND datediff(mm,DateResultat,getDate()) &gt; 12 and digits(result) &lt; 1000</query> 
-				</report>
 		</reportSubSet>
 		<reportSubSet><!--  patient demographics -->
 		<title lang="en">Patient Demographics</title>
@@ -2285,7 +2308,7 @@ select CASE WHEN sex = 1 THEN 'Femme' WHEN sex = 2 THEN 'Homme' ELSE 'Autre' END
 				<groupLevel>0</groupLevel>
 				<otherLevel>0</otherLevel>
 				<menuSelection>dateNo</menuSelection>
-				<query>select distinct ltrim(rtrim(p.clinicPatientID)) as clinicPatientID, Nationalid, discdate as DateDiscontinued, max(visitdate) as LastDate, discdate,max(a.encountertype) as 'encountertype', a.patientID, max(a.encounter_id) as  encounter_id  from (select patientID,max(visitDate) as discDate from encValid where encountertype in (12, 21) group by 1) d, (select patientID,max(visitDate) as visit from encValid group by 1)ll, encValid a, siteName l, encTypeLookup, patient p  where d.patientid = p.patientid  and ll.patientID=a.patientID and ll.visit=a.visitDate and d.patientid = a.patientid and  d.discDate &lt; a.visitDate and a.sitecode = l.sitecode and l.sitecode = '$site'  and a.encountertype not in (12, 21) group by p.clinicPatientID, a.patientID, nationalid, discdate order by 1,2,3	</query>
+				<query>select distinct ltrim(rtrim(p.clinicPatientID)) as clinicPatientID, Nationalid, discdate as DateDiscontinued, max(visitdate) as LastDate, discdate,max(a.encountertype) as 'encountertype', a.patientID, max(a.encounter_id) as  encounter_id  from (select patientID,max(visitDate) as discDate from encValid where encountertype in (12, 21) group by 1) d, (select patientID,max(visitDate) as visit from encValid group by 1)ll, encValid a, siteName l, encTypeLookup, patient p  where d.patientid = p.patientid  and ll.patientID=a.patientID and ll.visit=a.visitDate and d.patientid = a.patientid and  d.discDate &lt; a.visitDate and a.sitecode = l.sitecode and l.sitecode = '$site'  and a.encountertype not in (12, 21,7,27,28,29,31) group by p.clinicPatientID, a.patientID, nationalid, discdate order by 1,2,3	</query>
 				<description/>
 			</report>
 		</reportSubSet>
@@ -2517,6 +2540,8 @@ select CASE WHEN sex = 1 THEN 'Femme' WHEN sex = 2 THEN 'Homme' ELSE 'Autre' END
 				<description lang="en">Proportion of patients diagnosed with diabetes type 2.&lt;BR/&gt;Numerator: All patients diagnosed with diabetes type 2 within the specified time period&lt;BR/&gt;Denominator: All patients with a visit* in the specified time period&lt;BR/&gt; &lt;BR/&gt;* primary care and HIV adult visits</description>
 				<description lang="fr">Proportion des patients atteints de diabète de type 2.&lt;BR/&gt;Numérateur : tous les patients atteints de diabète de type 2 pendant une période donnée&lt;BR/&gt;Dénominateur : tous les patients ayant passé une visite* pendant la période de temps donnée&lt;BR/&gt; &lt;BR/&gt;* les visites de soins de santé primaire et VIH (adultes)</description>
 			</report>
+			
+			
                         <!--
 			<report id="2007" patientStatus="0" treatmentStatus="0" testType="0">
 				<title lang="en">Insulin-dependent diabetes</title>

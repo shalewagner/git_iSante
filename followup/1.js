@@ -20,8 +20,9 @@ Ext.onReady(function() {
 		maskRe : /[\d\.]/,
 		validationEvent: false,
 		allowBlank:true
-	});
+	});	
 	vitalTemp.applyToMarkup(document.mainForm.vitalTemp);
+	
 	vitalBp1 = new Ext.form.TextField({
 		fieldLabel: '',
 		name: 'vitalBp1',
@@ -145,6 +146,7 @@ Ext.onReady(function() {
 	names[3] = "preg";
 	names[4] = "pregPrenat";
 	names[5] = "clinicalExam";
+
 	
 	var allElements = Ext.util.getAllElements(document.mainForm,names);
   
@@ -173,18 +175,20 @@ Ext.onReady(function() {
 				disabled: dis
 			});
 			txtFormat[txtArr[i].id].applyToMarkup(txtArr[i]);
-			if(txtArr[i].id != 'completeTreatDt') {
+			if(txtArr[i].id != 'completeTreatDt' && txtArr[i].id != 'cancerColonDt' && txtArr[i].id != 'procedureDateFDt') {
 			   (Ext.get(txtArr[i].id)).on('blur', function(){
 				errMsg =  Ext.util.validateDateFieldNonPatient(document.getElementById(this.id),document.getElementById(this.id + "Title"),'');
 
 				Ext.util.splitDate(document.getElementById(this.id),document.getElementById(this.id.substring(0,this.id.length-2) + "Dd"),document.getElementById(this.id.substring(0,this.id.length-2) + "Mm"),document.getElementById(this.id.substring(0,this.id.length-2) + "Yy"));
 				errCount = Ext.util.showErrorHead(errFields,errMsgs,this.id.substring(0,this.id.length-2),errMsg,errCount);
 
-			   });
+			   });			  
 			   errMsg = Ext.util.validateDateFieldNonPatient(document.getElementById(txtArr[i].id),document.getElementById(txtArr[i].id + "Title"),'');
+			   if (document.getElementById(txtArr[i].id.substring(0,txtArr[i].id.length-2) + "Dd") !=null )
 			   Ext.util.splitDate(document.getElementById(txtArr[i].id),document.getElementById(txtArr[i].id.substring(0,txtArr[i].id.length-2) + "Dd"),document.getElementById(txtArr[i].id.substring(0,txtArr[i].id.length-2) + "Mm"),document.getElementById(txtArr[i].id.substring(0,txtArr[i].id.length-2) + "Yy"));
-			   errCount = Ext.util.showErrorHead(errFields,errMsgs,txtArr[i].id.substring(0,txtArr[i].id.length-2),errMsg,errCount);
-                        }
+			   errCount = Ext.util.showErrorHead(errFields,errMsgs,txtArr[i].id.substring(0,txtArr[i].id.length-2),errMsg,errCount);			   
+                  }
+						
 		}  
 	  	else if(suffix == 'Mm' || suffix == 'Yy' || suffix == 'MM' || suffix == 'YY'  )
 		{
@@ -715,7 +719,8 @@ Ext.get('vitalBp1').on('blur', function(){
 	medEligSection[5] = document.mainForm.formerARVtherapy;
 	medEligSection[6] = document.mainForm.PEP;
 	medEligSection[7] = document.mainForm.expFromD1;
-	medEligSection[8] = document.mainForm.tlcLT1200;   
+	medEligSection[8] = document.mainForm.tlcLT1200;  
+	
 
 	for(var i=1;i<4;i++)
 	{
@@ -781,7 +786,8 @@ Ext.get('vitalBp1').on('blur', function(){
 			//errCount = Ext.util.clearElements(allElements["famPlan"], errFields,errMsgs, errpCount);
 		}, document.getElementById(this.id), {delay: 5});
 		Ext.util.disableSectionByRadio(document.getElementById("fp2"),  radioArr, true, newFamPlanArr);
-	}
+	}	
+	
 });
 
 

@@ -17,7 +17,7 @@ Ext.util.getYear4 = function(_val)
 		{
 				temp=_val;
 		}
-		if(temp > '20')
+		if(temp > '40')
 		{
 			return '19'+temp;
 		}
@@ -173,7 +173,7 @@ Ext.util.chkDate = function(_val,_default) {
                 _Mm = _Mm - 1;
                 var fullYear;
                 if (_Yy.length == 1) _Yy = "0" + _Yy;
-                if (Number(_Yy) <= 20) {
+                if (Number(_Yy) <= 40) {
                     if (_Yy.length == 2) fullYear = '20' + _Yy;
                     else if(_Yy.length == 3) fullYear = '0' + _Yy;
                 } else {
@@ -268,7 +268,7 @@ Ext.util.chkBirthDate = function(_val,_default)
 				var fullYear;
 				if(_Yy.length == 1)
 					_Yy = "0" + _Yy;
-				if(Number(_Yy) < 20)
+				if(Number(_Yy) < 40)
 					fullYear = '20' + _Yy;
 				else
 					fullYear = '19' + _Yy;
@@ -333,7 +333,7 @@ Ext.util.chkDt = function(_val,_default)
 				var fullYear;
 				if(_Yy.length == 1)
 					_Yy = "0" + _Yy;
-				if(Number(_Yy) < 20)
+				if(Number(_Yy) < 40)
 					fullYear = '20' + _Yy;
 				else
 					fullYear = '19' + _Yy;
@@ -2512,6 +2512,7 @@ Ext.util.validateNextVisitDt = function(_nextVistDt, _visitDt, _eid, _iconLoc)
 			{
 				curDate = Ext.util.getDate(_visitDt.value,'');
 				if(tempDate.getFullYear()<curDate.getFullYear()||(tempDate.getFullYear()==curDate.getFullYear()&&tempDate.getMonth()<curDate.getMonth())||(tempDate.getFullYear()==curDate.getFullYear()&&tempDate.getMonth()==curDate.getMonth()&&tempDate.getDate()<=curDate.getDate()))
+				//if ($.datepicker.parseDate('dd/mm/yy', curDate) > $.datepicker.parseDate('dd/mm/yy', tempDate))
 				{
 					errMsg = '65';
 				}
@@ -2574,6 +2575,7 @@ Ext.util.validateNextPickupDt = function(_nextVistDt, _visitDt, _eid, _iconLoc)
 			{
 				curDate = Ext.util.getDate(_visitDt.value,'');
 				if(tempDate.getFullYear()<curDate.getFullYear()||(tempDate.getFullYear()==curDate.getFullYear()&&tempDate.getMonth()<curDate.getMonth())||(tempDate.getFullYear()==curDate.getFullYear()&&tempDate.getMonth()==curDate.getMonth()&&tempDate.getDate()<=curDate.getDate()))
+				//if ($.datepicker.parseDate('dd/mm/yy', curDate) > $.datepicker.parseDate('dd/mm/yy', tempDate))
 				{
 					errMsg = '65';
 				}

@@ -47,9 +47,14 @@ $qry = "select REPLACE(REPLACE(r.shortName, 'ZDV', 'AZT'),'TNF','TDF') as shortN
 			$options=$options.'<option value="'.$row[1].':'.$row[2].':'.$row[3].'">'.$row[0].'</option>';
 	}
     echo $options;
-echo '</select> <p> </p></td></tr>';
    
-   
+   echo '</select> &nbsp;&nbsp;&nbsp;
+       	 <input tabindex="11001" id="regimeLigne1" name="regimeLigne[]" ' . getData("regimeLigne", "radio", 1) .' type="radio" value="1"\>' . $regimeLigne[$lang][0] .'&nbsp;
+         <input tabindex="11002" id="regimeLigne2" name="regimeLigne[]" ' . getData ("regimeLigne", "radio", 2) .' type="radio" value="2"\>'. $regimeLigne[$lang][1] .'&nbsp;
+         <input tabindex="11003" id="regimeLigne3" name="regimeLigne[]" ' . getData ("regimeLigne", "radio", 4) .' type="radio" value="4"\>'. $regimeLigne[$lang][2] .'
+		 <br/>
+      </td>
+</tr>';
    
    echo "
    <tr>

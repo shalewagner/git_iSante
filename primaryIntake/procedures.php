@@ -634,6 +634,15 @@ itemIntervention = {       // Itervention in OBGYN Stuff
 		title: '<?=_('Intervention')?>',
 		padding: 5,
 		items: [{
+				xtype: 'label',
+				layout: 'hbox',
+				width:150,
+				text: '<?=_('Date de Procedure :')?>'
+			},{
+				width:90,
+				<?= genExtWidget("procedureDate", "datefield", 0); ?> 
+			},		
+		{
       boxLabel: '<?=_('Cryotherapie ')?>',
       <?= genExtWidget('cryotherapie', 'checkbox', 0); ?> 
     },
@@ -644,6 +653,14 @@ itemIntervention = {       // Itervention in OBGYN Stuff
 	{
       boxLabel: '<?=_('Thermocoagulation ')?>',
       <?= genExtWidget('thermocoagulation', 'checkbox', 0); ?> 
+    },
+	{
+      boxLabel: '<?=_('Conisation ')?>',
+      <?= genExtWidget('conisation', 'checkbox', 0); ?> 
+    },
+	{
+      boxLabel: '<?=_('Hystérectomie ')?>',
+      <?= genExtWidget('hysterectomie', 'checkbox', 0); ?> 
     }]
     };	
 	

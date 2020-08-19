@@ -6,22 +6,31 @@ echo "
 <!-- ******************************************************************** -->
  <table class=\"header\">
       <tr>
-       			<td class=\"under_header\" colspan=\"2\">
+       			<td class=\"s_header\"  colspan=\"2\">Rapport de discontinuation des soins 
        			</td>
       </tr>
-      <tr>
-          <td  colspan=\"2\" width=\"100%\">" . $partStop_1[$lang][0] . "
-      			</td>
+	  
 	  <tr>
-	  			<td colspan=\"2\">
-				    <span><input tabindex=\"100\" name=\"partStop[]\" " . getData ("partStop", "checkbox", 1) . " type=\"radio\" value=\"1\"> " . $partStop_1[$lang][1] . "</span>
-                </td>
+	        <td colspan=\"2\" width=\"100%\">&nbsp;
+			</td>
       </tr>
-      <tr>
-	  	      	<td colspan=\"2\">
-	  				<span><input tabindex=\"101\" name=\"partStop[]\" " . getData ("partStop", "checkbox", 2) . " type=\"radio\" value=\"2\"> " . $partStop_1[$lang][2] . "</span>
-	            </td>
+	  <tr>
+			<td colspan=\"2\" width=\"100%\">" . $everOn_1[$lang][0] . "</td>
+	</tr>
+		<tr>
+			<td colspan =\"2\" width=\"100%\">
+					   <span><input tabindex=\"105\" name=\"everOn[]\" " . getData ("everOn", "checkbox", 1) . " type=\"radio\" value=\"1\"> " . $everOn_1[$lang][1] . "</span>
+			</td>
 	  </tr>
+	  <tr>
+		  <td colspan=\"2\" width=\"100%\">
+			   <span><input tabindex=\"106\" name=\"everOn[]\" " . getData ("everOn", "checkbox", 2) . " type=\"radio\" value=\"2\"> " . $everOn_1[$lang][2] . "</span>
+		  </td>
+      </tr>
+	  
+	  
+	  
+	  
 	  <tr>
 	  	        <td  id=\"disEnrollDtTitle\" width=\"50%\">
 	  	                 " . $discEnrollDd_1[$lang][0] . "
@@ -63,41 +72,6 @@ echo "
 	  		  </table>
 	  		</td>
 	  </tr>
-	  <tr>
-	        <td colspan=\"2\" width=\"100%\">&nbsp;
-			</td>
-      </tr>
-	  <tr>
-			<td colspan=\"2\" width=\"100%\">" . $everOn_1[$lang][0] . "</td>
-	</tr>
-		<tr>
-			<td colspan =\"2\" width=\"100%\">
-					   <span><input tabindex=\"105\" name=\"everOn[]\" " . getData ("everOn", "checkbox", 1) . " type=\"radio\" value=\"1\"> " . $everOn_1[$lang][1] . "</span>
-			</td>
-	  </tr>
-	  <tr>
-		  <td colspan=\"2\" width=\"100%\">
-			   <span><input tabindex=\"106\" name=\"everOn[]\" " . getData ("everOn", "checkbox", 2) . " type=\"radio\" value=\"2\"> " . $everOn_1[$lang][2] . "</span>
-		  </td>
-      </tr>
-      <tr>
-      		<td colspan=\"2\" width=\"100%\">&nbsp;
-            </td>
-      </tr>
-      <tr>
-			<td colspan=\"2\" width=\"100%\">" . $ending_1[$lang][0] . "
-			</td>
-	  </tr>
-	  <tr>
-				<td colspan=\"2\">
-					<span><input tabindex=\"107\" name=\"ending[]\" " . getData ("ending", "checkbox", 1) . " type=\"radio\" value=\"1\"> " . $ending_1[$lang][1] . "</span>
-				  </td>
-	  </tr>
-	  <tr>
-				<td colspan=\"2\">
-					<span ><input tabindex=\"108\" name=\"ending[]\" " . getData ("ending", "checkbox", 2) . " type=\"radio\" value=\"2\"> " . $ending_1[$lang][2] . "</span>
-				</td>
-	  </tr>
   </table>
 ";
 echo "
@@ -108,38 +82,31 @@ echo "
 ";
 echo "
   <table class=\"header\">
+      <tr>
+	        <td colspan=\"2\" width=\"100%\">&nbsp;
+			</td>
+      </tr>
      <tr>
-           			<td class=\"under_header\" colspan=\"2\">
+           			<td class=\"s_header\"  colspan=\"2\">".$reasonDiscNoFollowup_2[$lang][0]."
            			</td>
-   </tr>
-   <tr>
-        <td colspan=\"2\">
-             " . $reasonDiscNoFollowup_1[$lang][0] . "
-        </td>
    </tr>
   </table>
   <table>
+  <tr>
+	 <td colspan=\"2\" width=\"100%\">&nbsp;</td>
+  </tr>
      <tr>
         <td colspan=\"4\" width=\"100%\">
-     	    <input tabindex=\"3101\" name=\"reasonDiscNoFollowup\" " . getData ("reasonDiscNoFollowup", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $reasonDiscNoFollowup_1[$lang][1] . "
+     	    <input tabindex=\"3101\" name=\"reasonDiscNoFollowup\" " . getData ("reasonDiscNoFollowup", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $reasonDiscNoFollowup_2[$lang][1] . "
         </td>
      </tr>
+  <tr>
+	 <td colspan=\"2\" width=\"100%\">&nbsp;</td>
+  </tr>
      <tr>
-        <td width=\"5%\">&nbsp;</td>
-        <td colspan=\"3\" width=\"95%\">" .
-	        $min3homeVisits_1[$lang][0] . "
-        </td>
-     </tr>
-     <tr>
-     	<td width=\"5%\">&nbsp;</td>
-     	<td colspan=\"3\" width=\"95%\">
-     		<span><input tabindex=\"3102\" name=\"min3homeVisits[]\" " . getData ("min3homeVisits", "checkbox", 1) . " type=\"radio\" value=\"1\"> " . $min3homeVisits_1[$lang][1] . " <input tabindex=\"3103\" name=\"min3homeVisits[]\" " . getData ("min3homeVisits", "checkbox", 2) . " type=\"radio\" value=\"2\"> " . $min3homeVisits_1[$lang][2] . " <input tabindex=\"3104\" name=\"min3homeVisits[]\" " . getData ("min3homeVisits", "checkbox", 4) . " type=\"radio\" value=\"4\"> " . $min3homeVisits_1[$lang][3] . "</span>
-     	</td>
-     </tr>
-     <tr>
-         <td width=\"5%\">&nbsp;</td>
-         <td colspan=\"3\" width=\"95%\">" .
-             $min3homeVisitsText_1[$lang][1] . "&nbsp; <input tabindex=\"3105\" name=\"min3homeVisitsText\" " . getData ("min3homeVisitsText", "text") . " type=\"text\" size=\"82\" maxlength=\"255\">
+         <td colspan=\"4\" width=\"95%\">
+		 <input tabindex=\"3101\" name=\"emigrationCause\" " . getData ("emigrationCause", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $reasonDiscNoFollowup_2[$lang][2] 
+		  ."&nbsp; <input tabindex=\"3105\" name=\"emigrationPrecisez\" " . getData ("emigrationPrecisez", "text") . " type=\"text\" size=\"82\" maxlength=\"255\">
          </td>
      </tr>
 ";
@@ -147,6 +114,9 @@ echo "
 	//if (getAccessLevel(getSessionUser()) == 3) 
 		$transferDisabled = "";
    echo "
+   <tr>
+	 <td colspan=\"2\" width=\"100%\">&nbsp;</td>
+  </tr>
      <tr>
          <td colspan=\"4\" width=\"100%\"><input tabindex=\"3201\" name=\"reasonDiscTransfer\" " . getData ("reasonDiscTransfer", "checkbox") . " type=\"checkbox\" value=\"On\" " . $transferDisabled . " /> " .  $transferClinics_1[$lang][0] . "
          </td>
@@ -170,19 +140,15 @@ echo "
 	allClinicsDropdown ("clinicName", $site, "tabindex=\"3206\"", getData ("clinicName", "textarea"), $transferDisabled);
 	echo "
      </tr>
+  <tr>
+	 <td colspan=\"2\" width=\"100%\">&nbsp;</td>
+  </tr>
 
-
-
-     <tr>
-	           <td colspan=\"4\" width=\"100%\">
-	      	      <input tabindex=\"3305\" name=\"reasonDiscDeath\" " . getData ("reasonDiscDeath", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $reasonDiscDeath[$lang][1] . "</td>
-
-	 </tr>
-	 <tr>
-	 	<td width=\"5%\">&nbsp;</td>
-	 	<td width=\"30%\" id =\"reasonDiscDeathDtTitle\"> ". $reasonDiscDeathDd_1[$lang][0]. "
-	 	</td>
-	 	<td colspan=\"2\" width=\"95%\">
+<tr>
+	<td colspan=\"3\" width=\"100%\">
+		 <input tabindex=\"3500\" name=\"reasonDiscDeath\"  type=\"checkbox\" value=\"On\" " . getData ("reasonDiscDeath", "checkbox") . "  > " . $reasonDiscDeath_2[$lang][0] . "
+		 </td>
+	 	<td colspan=\"1\" width=\"95%\">
 	 		<table>
 	 			<tr>
 	 				<td>" . $reasonDiscDeathDd[$lang][0] . "&nbsp;&nbsp;</td>
@@ -198,83 +164,109 @@ echo "
 	 		</table>
 	    </td>
 	 </tr>
-	 <tr>
-	    <td width=\"5%\">&nbsp;</td>
-	 	<td width=\"30%\">
-	    	<span>
-	 		<input tabindex=\"3401\" id=\"sideEffects\"  name=\"sideEffects\" " . getData ("sideEffects", "checkbox") . " type=\"radio\" value=\"On\"> " . $sideEffects_1[$lang][1] . "</span>
-	 	</td>
-	    <td width=\"65%\">
-	    	<input type=\"text\" tabindex=\"3402\" size=\"40\" name=\"sideEffectsText\" " . getData ("sideEffectsText", "text") . " maxlength=\"255\">
-	 	</td>
-	 </tr>
-	 <tr>
-	    <td width=\"5%\">&nbsp;</td>
-	 	<td width=\"30%\">
-	        <span>
-	 	 	<input tabindex=\"3403\" id=\"opportunInf\" name=\"opportunInf\" " . getData ("opportunInf", "checkbox") . " type=\"radio\" value=\"On\"> " . $opportunInf_1[$lang][1] . "</span>
-	 	</td>
-	    <td width=\"65%\"><input type=\"text\" tabindex=\"3404\" size=\"40\" name=\"opportunInfText\" " . getData ("opportunInfText", "text") . " maxlength=\"255\">
-	    </td>
-	 </tr>
-	<tr>
-	    <td width=\"5%\">&nbsp;</td>
-	 	<td width=\"30%\">
-	        <span>
-	      	<input tabindex=\"3405\" id=\"discDeathOther\" name=\"discDeathOther\" " . getData ("discDeathOther", "checkbox") . " type=\"radio\" value=\"On\"> " . $discDeathOther_1[$lang][1] . "</span></td>
-	    <td width=\"65%\"><input type=\"text\" tabindex=\"3406\" size=\"40\" name=\"discDeathOtherText\" " . getData ("discDeathOtherText", "text") . " maxlength=\"255\">
-	    </td>
-    </tr>
-
-";
-		//$disReasons = array (0=>"noARVs",1=>"patientMoved",2=>"poorAdherence",3=>"patientPreference",4=>"discReasonOther");
-		//$disReasonresult = ifChecked($disReasons,4);
-		echo "
-	<tr>
-	<td colspan=\"4\" width=\"100%\">
-		 <input tabindex=\"3500\" name=\"reasonDiscOther\"  type=\"checkbox\" value=\"On\" " . getData ("reasonDiscOther", "checkbox") . "  > " . $discReason_1[$lang][0] . "
-		 </td>
-
-	</tr>
-
       <tr>
          <td width=\"5%\">&nbsp;</td>
      	<td colspan=\"3\" width=\"95%\">
-     	     <input tabindex=\"3501\" name=\"noARVs\" " . getData ("noARVs", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $noARVs[$lang][1] . "
+     	     <input tabindex=\"3501\" id=\"tuberculoseCauseDeces\" name=\"tuberculoseCauseDeces\" " . getData ("tuberculoseCauseDeces", "checkbox",1) . " type=\"checkbox\"> " . $reasonDiscDeath_2[$lang][1] . "
          </td>
       </tr>
       <tr>
          <td width=\"5%\">&nbsp;</td>
      	<td colspan=\"3\" width=\"95%\">
-     	     <input tabindex=\"3502\" name=\"patientMoved\" " . getData ("patientMoved", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $patientMoved[$lang][1] . "
+     	     <input tabindex=\"3502\" name=\"maladieInfectuesesCauseDeces\" " . getData ("maladieInfectuesesCauseDeces", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $reasonDiscDeath_2[$lang][2] . "
        </tr>
        <tr>
          <td width=\"5%\">&nbsp;</td>
      	<td colspan=\"3\" width=\"95%\">
-     	     <input tabindex=\"3503\" name=\"poorAdherence\" " . getData ("poorAdherence", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $poorAdherence[$lang][1] . "
+     	     <input tabindex=\"3503\" name=\"CancerCauseDeces\" " . getData ("CancerCauseDeces", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $reasonDiscDeath_2[$lang][3] . "
           </td>
        </tr>
        <tr>
+         <td width=\"5%\">&nbsp;</td>
+     	<td colspan=\"3\" width=\"95%\">
+     	     <input tabindex=\"3504\" name=\"autreMaladieCauseDeces\" " . getData ("autreMaladieCauseDeces", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $reasonDiscDeath_2[$lang][4] . "
+          </td>
+       </tr>
+	   <tr>
+         <td width=\"5%\">&nbsp;</td>
+     	<td colspan=\"3\" width=\"95%\">
+     	     <input tabindex=\"3504\" name=\"causeNaturelCauseDeces\" " . getData ("causeNaturelCauseDeces", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $reasonDiscDeath_2[$lang][5] . "
+          </td>
+       </tr>
+	   <tr>
+         <td width=\"5%\">&nbsp;</td>
+     	<td colspan=\"3\" width=\"95%\">
+     	     <input tabindex=\"3504\" name=\"causeNonNaturelCauseDeces\" " . getData ("causeNonNaturelCauseDeces", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $reasonDiscDeath_2[$lang][6] . "
+          </td>
+       </tr>
+        <tr>
+         <td width=\"5%\">&nbsp;</td>
+     	<td colspan=\"3\" width=\"95%\">
+     	     <input tabindex=\"3504\" name=\"inconnueCauseDeces\" " . getData ("inconnueCauseDeces", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $reasonDiscDeath_2[$lang][7] . "
+          </td>
+       </tr>
+
+
+";
+		//$disReasons = array (0=>"noARVs",1=>"patientMoved",2=>"poorAdherence",3=>"patientPreference",4=>"discReasonOther");
+		//$disReasonresult = ifChecked($disReasons,4);
+		echo "
+		  <tr>
+	 <td colspan=\"2\" width=\"100%\">&nbsp;</td>
+  </tr>
+	<tr>
+	<td colspan=\"4\" width=\"100%\">
+		 <input tabindex=\"3500\" name=\"reasonDiscOther\"  type=\"checkbox\" value=\"On\" " . getData ("reasonDiscOther", "checkbox") . "  > " . $discReason_2[$lang][0] . "
+		 </td>
+
+	</tr>
+      <tr>
          <td width=\"5%\">&nbsp;</td>
      	<td colspan=\"3\" width=\"95%\">
      	     <input tabindex=\"3504\" name=\"patientPreference\" " . getData ("patientPreference", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $patientPreference[$lang][1] . "
           </td>
+       </tr>	   
+
+      <tr>
+         <td width=\"5%\">&nbsp;</td>
+     	<td colspan=\"3\" width=\"95%\">
+     	     <input tabindex=\"3501\" name=\"decisionPrestataire\" " . getData ("decisionPrestataire", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $discReason_2[$lang][1] . "
+         </td>
+      </tr>
+	  <tr>
+         <td width=\"5%\">&nbsp;</td>
+		 <td width=\"5%\">&nbsp;</td>
+     	<td colspan=\"2\" width=\"95%\">
+     	     <input tabindex=\"3503\" name=\"poorAdherence\" " . getData ("poorAdherence", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $poorAdherence[$lang][1] . "
+          </td>
+       </tr>
+      <tr>
+         <td width=\"5%\">&nbsp;</td>
+		 <td width=\"5%\">&nbsp;</td>
+     	<td colspan=\"2\" width=\"95%\">
+     	     <input tabindex=\"3502\" name=\"deniArret\" " . getData ("deniArret", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $discReason_2[$lang][2] . "
+       </tr>
+       
+       <tr>
+         <td width=\"5%\">&nbsp;</td>
+		 <td width=\"5%\">&nbsp;</td>
+     	<td colspan=\"2\" width=\"95%\">
+     	     <input tabindex=\"3504\" name=\"troublePsychiatre\" " . getData ("troublePsychiatre", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $discReason_2[$lang][3] . "
+          </td>
        </tr>
         <tr>
-	      	  <td width=\"5%\">&nbsp;</td>
-     	<td colspan=\"3\" width=\"95%\">
+	      	<td width=\"5%\">&nbsp;</td>
+		 <td width=\"5%\">&nbsp;</td>
+     	<td colspan=\"2\" width=\"95%\">
 	        		<input tabindex=\"3601\" name=\"discReasonOther\" " . getData ("discReasonOther", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $discReasonOtherText_1[$lang][1] . " &nbsp; <input type=\"text\" tabindex=\"3602\" size=\"80\" name=\"discReasonOtherText\" " . getData ("discReasonOtherText", "text") . " maxlength=\"255\">
 	      	  </td>
        </tr>
   </table>
 
   <table class=\"header\">
-  <tr>
-       	<td colspan=\"4\" width=\"100%\">
-  	        		<input tabindex=\"3700\" name=\"reasonUnknownClosing\" " . getData ("reasonUnknownClosing", "checkbox") . " type=\"checkbox\" value=\"On\"> " . $reasonUnknownClosing_1[$lang][0] . "
-  	      	  </td>
-       </tr>
-  	<tr>
+<tr>
+	 <td colspan=\"2\" width=\"100%\">&nbsp;</td>
+  </tr>
    		<td class=\"s_header\">" . $discRemarks_1[$lang][1] . "
    		</td>
   	</tr>

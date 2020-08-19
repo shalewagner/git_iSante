@@ -44,7 +44,7 @@ printLog('Data warehouse refresh finished...starting PepfarTable refresh (' . $s
 
 updatePepfarTable(); 
 
-printLog('PepfarTable refresh finished...starting patient alert generation (' . $stopwatch->elapsed() . ' total seconds elapsed)');
+printLog('PepfarTable refresh finished...starting PatientCancerCol generation (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 
 /* don't need this anymore, because mode = 1 (ten minute job) will now do it
  * if a date is missed, various places in the code call updatePatientStatus in mode = 2, so the date will be filled in then
@@ -56,7 +56,13 @@ for ($i=1; $i <= $times; $i++) {
   updatePatientStatus(2, $endDate);
 } */
 
+
+#adding for cancerCol report 
+generatePatientCancerCol();
+printLog('generatePatientCancerCol() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
+
 #adding for the alert.
+printLog('PepfarTable refresh finished...starting patient alert generation (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 if (getConfig('serverRole') != 'consolidated') generatePatientAlert();
 printLog('generatePatientAlert() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 

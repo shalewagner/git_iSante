@@ -7401,15 +7401,17 @@ $vitalPrevWtUnits = array (
 );
 $pregnant = array (
    "en" => array (
-	"PREGNANCY",
+	"OBSTETRICS AND GYNECOLOGY",
 	"Yes",
 	"No",
-	"Unknown"),
+	"Unknown",
+	"Pregnancy"),
    "fr" => array (
-	"GROSSESSE",
+	"OBSTETRIQUE ET GYNECOLOGIE",
 	"Oui",
 	"Non",
-	"Inconnu")
+	"Inconnu",
+	"Grossesse")
 );
 $pregnantLmpDd = array (
    "en" => array (
@@ -8796,12 +8798,33 @@ $assessmentPlan_header = array (
 	"",
   "Plan",
 	"ASSESSMENT AND PLAN",
-	"Use Previous Medical History section to indicate all diagnoses made today. Use this section to describe care and treatment plan."),
+	"Use Previous Medical History section to indicate all diagnoses made today. Use this section to describe care and treatment plan.",
+	"Intervention"),	
    "fr" => array (
 	"",
 	"Plan",
   "&#xc9;VALUATION ET PLAN",
-	"Utiliser la section Ant&eacute;c&eacute;dants M&eacute;dicaux pour indiquer tous les diagnostics. Utiliser cette section pour d&eacute;crire le plan de traitement et de soin.")
+	"Utiliser la section Ant&eacute;c&eacute;dants M&eacute;dicaux pour indiquer tous les diagnostics. Utiliser cette section pour d&eacute;crire le plan de traitement et de soin.",
+	"Intervention")
+);
+
+$intervention= array (
+   "en" => array (
+	"",
+    "Cryotherapie",
+	"LEEP",
+	"Thermocoagulation",
+	"Conisation",
+	"Hystérectomie",
+	"Date of treatment"),	
+   "fr" => array (
+	"",
+	"Cryotherapie",
+	"LEEP",
+	"Thermocoagulation",
+	"Conisation",
+	"Hystérectomie",
+	"Date du traitement")
 );
 
 $nextVisitDate = array (
@@ -9074,6 +9097,113 @@ $topAlert = array (
         "<span style=\"font-weight: bold\">Version de démonstration</span> : données saisies (ou modifiés) en utilisant cette version seront réserver à la base de données ‘démonstration’",
         "Cette version est seulement pour les tests."
     )
+);
+
+
+$ConcerColonStatus = array (
+   "en" => array (
+	"Normal",
+	"Abnormal",
+	"Unknown",
+	"Result",
+	"Used Method",
+	"Date of last cervical cancer screening",
+	"cervical cancer screening",
+	"Pap test",
+	"VIA"),
+   "fr" => array (
+	"Normale",
+	"Anormale",
+	"Inconnu",
+	"Résultat",
+	"Méthode utilisée",
+	"Date du dernier dépistage du cancer du Col",
+	"Dépistage du cancer du Col",
+	"Pap test",
+	"VIA")
+);
+
+
+
+$GrossessAllaitement = array (
+   "en" => array (
+	"PREGNANCY AND BREASTFEEDING",
+	"Pregnancy",
+	"Breastfeeding",
+	"Start Date",
+	"End date"),
+   "fr" => array (
+	"GROSSESSE ET ALLAITEMENT",
+	"Grossesse",
+	"Allaitement",
+	"Date de debut",
+	"Date de fin ")
+);
+
+
+$PopulationCle = array (
+   "en" => array (
+	"Key population",
+	"HARSAH",
+	"Sex Professionals",
+	"Prisoners",
+	"Transgender",
+	"Injecting drug user"),
+   "fr" => array (
+	"Population Cle",
+	"HARSAH",
+	"Professionnels de Sex",
+	"Prisonniers",
+	"Transgenre ",
+	"Utilisateur de drogues injectables")
+);
+
+$nonEligibility = array (
+   "en" => array (
+	"NON-MEDICAL ELIGIBILITY FOR ARVs",
+	"Voluntary refusal to take ARVs",
+	"Medical decision",
+	"Opportunistic infections (OI)",
+	"Psychiatric disorders",
+	"Denial",
+	"Non-OI intercurrent diseases",
+	"Other Causes"),
+   "fr" => array (
+	"NON ÉLIGIBILITÉ MÉDICALE AUX ARV",
+	"Refus volontaire de prendre les ARV",
+	"Décision médicale",
+	"Infection opportunistes (IO)",
+	"Troubles psychiatriques",
+	"Déni",
+	"Maladies intercurrentes non IO",
+	"Autres Causes")
+);
+
+
+$debutTbTraitement = array (
+   "en" => array (
+	"TB treatment start date"),
+   "fr" => array (
+	"Date du début de traitement TB")
+);
+
+$regimeLigne = array (
+   "en" => array (
+	"1st line regime",
+	"2nd line regime",
+	"3rd line regime"),
+   "fr" => array (
+	"régime de 1ère ligne",
+	"régime de 2eme ligne",
+	"régime de 3eme ligne")
+);
+
+
+$arvTransfer = array (
+   "en" => array (
+	"ARV start date in the Reference establishment"),
+   "fr" => array (
+	"Date début ARV dans l’établissement de Reference")
 );
 
 $primCareSummaryLabels = array (
