@@ -1503,6 +1503,10 @@ function getData ($name, $type, $bin = 0) {
       case "textarea":
         return (htmlspecialchars ($GLOBALS['existingData'][$name], ENT_QUOTES));
         break;
+		
+		case "select":
+        return "<option value=\"".(htmlspecialchars ($GLOBALS['existingData'][$name], ENT_QUOTES))."\" selected >".(htmlspecialchars ($GLOBALS['existingData'][$name], ENT_QUOTES))."</option>";
+        break;
     }
   }
 }

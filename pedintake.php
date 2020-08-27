@@ -1054,6 +1054,257 @@ echo "
 </table>
 </div>";
 
+ echo "
+<div id=\"pane7\">
+  <table class=\"header\">";
+$tabIndex = 30000;
+      echo "<tr>
+       <td class=\"s_header\" colspan=\"10\"> Surveillance du traitement TB </td>
+      </tr> 
+      <tr>
+       <td>
+<table class=\"b_header_nb\" border=\"1\">
+<thead>
+  <tr>
+    <th rowspan=\"3\">Mois</th>
+    <th colspan=\"6\">Résultats de l’examen d’expectoration</th>
+    <th rowspan=\"3\">poids</th>
+  </tr>
+  <tr>
+    <th rowspan=\"2\">Date</th>
+    <th rowspan=\"2\">Bacilloscopie</th>
+    <th colspan=\"2\">GeneXpert</th>
+    <th rowspan=\"2\">Culture</th>
+    <th rowspan=\"2\">DST</th>
+  </tr>
+  <tr>
+    <th>BK</td>
+    <th>RIF</td>
+  </tr>
+</thead>
+<tbody>
+  <tr class=\"alt\">
+    <td>0</td>
+    <td><input  tabindex=\"5523\" id=\"surveillanceTbDatemois0\" name=\"surveillanceTbDatemois0\"  type=\"date\" value=\"" . getData ("surveillanceTbDatemois0", "textarea", 0) . "\" /></td>
+    <td> <input tabindex=\"110018\" id=\"bacilloscopiemois00\" name=\"bacilloscopiemois0[]\" " . getData("bacilloscopiemois0", "radio", 1) . " type=\"radio\" value=\"1\">Negatif
+         <input tabindex=\"110019\" id=\"bacilloscopiemois01\" name=\"bacilloscopiemois0[]\" " . getData ("bacilloscopiemois0", "radio", 2) . " type=\"radio\" value=\"2\">Positif+<br/>
+         <input tabindex=\"110020\" id=\"bacilloscopiemois02\" name=\"bacilloscopiemois0[]\" " . getData ("bacilloscopiemois0", "radio", 4) . " type=\"radio\" value=\"4\">Positif++
+		 <input tabindex=\"110021\" id=\"bacilloscopiemois03\" name=\"bacilloscopiemois0[]\" " . getData ("bacilloscopiemois0", "radio", 8) . " type=\"radio\" value=\"8\">Positif+++
+       <br /></td>
+    <td><input tabindex=\"11005\" id=\"geneXpertBkmois00\" name=\"geneXpertBkmois0[]\" " . getData("geneXpertBkmois0", "radio", 1) . " type=\"radio\" value=\"1\">Positif
+         <input tabindex=\"11006\" id=\"geneXpertBkmois01\" name=\"geneXpertBkmois0[]\" " . getData ("geneXpertBkmois0", "radio", 2) . " type=\"radio\" value=\"2\">Negatif<br/>
+         <input tabindex=\"11007\" id=\"geneXpertBkmois02\" name=\"geneXpertBkmois0[]\" " . getData ("geneXpertBkmois0", "radio", 4) . " type=\"radio\" value=\"4\">Indetermine
+       <br/></td>
+    <td><input tabindex=\"11008\" id=\"geneXpertRifmois00\" name=\"geneXpertRifmois0[]\" " . getData("geneXpertRifmois0", "radio", 1) . " type=\"radio\" value=\"1\">Sensible
+         <input tabindex=\"11009\" id=\"geneXpertRifmois01\" name=\"geneXpertRifmois0[]\" " . getData ("geneXpertRifmois0", "radio", 2) . " type=\"radio\" value=\"2\">Resistant
+       <br /></td>
+    <td><input tabindex=\"110010\" id=\"culturemois00\" name=\"culturemois0[]\" " . getData("culturemois0", "radio", 1) . " type=\"radio\" value=\"1\">Positif pour MTB
+         <input tabindex=\"110011\" id=\"culturemois01\" name=\"culturemois0[]\" " . getData ("culturemois0", "radio", 2) . " type=\"radio\" value=\"2\">Positif pour Non MTB<br/>
+         <input tabindex=\"110012\" id=\"culturemois02\" name=\"culturemois0[]\" " . getData ("culturemois0", "radio", 4) . " type=\"radio\" value=\"4\">Negatif
+		 <input tabindex=\"110013\" id=\"culturemois03\" name=\"culturemois0[]\" " . getData ("culturemois0", "radio", 8) . " type=\"radio\" value=\"8\">Contaminee
+       <br /></td>
+    <td><input tabindex=\"110014\" id=\"dstmois00\" name=\"dstmois0[]\" " . getData("dstmois0", "radio", 1) . " type=\"radio\" value=\"1\">Sensible à la rifampicine<br/>
+         <input tabindex=\"110015\" id=\"dstmois01\" name=\"dstmois0[]\" " . getData ("dstmois0", "radio", 2) . " type=\"radio\" value=\"2\">Résistant à la Rifampicine
+         <input tabindex=\"110016\" id=\"dstmois02\" name=\"dstmois0[]\" " . getData ("dstmois0", "radio", 4) . " type=\"radio\" value=\"4\">Indéterminé
+       <br /></td>
+    <td><input  tabindex=\"110017\" id=\"poidsmois0\" name=\"poidsmois0\" " . getData ("poidsmois0", "text") . " type=\"text\" size=\"10\"></td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td><input  tabindex=\"5524\" id=\"surveillanceTbDatemois1\" name=\"surveillanceTbDatemois1\"  type=\"date\" value=\"" . getData ("surveillanceTbDatemois1", "textarea", 0) . "\" /></td>
+    <td> <input tabindex=\"110022\" id=\"bacilloscopiemois10\" name=\"bacilloscopiemois1[]\" " . getData("bacilloscopiemois1", "radio", 1) . " type=\"radio\" value=\"1\">Negatif
+         <input tabindex=\"110023\" id=\"bacilloscopiemois11\" name=\"bacilloscopiemois1[]\" " . getData ("bacilloscopiemois1", "radio", 2) . " type=\"radio\" value=\"2\">Positif+<br/>
+         <input tabindex=\"110024\" id=\"bacilloscopiemois12\" name=\"bacilloscopiemois1[]\" " . getData ("bacilloscopiemois1", "radio", 4) . " type=\"radio\" value=\"4\">Positif++
+		 <input tabindex=\"110025\" id=\"bacilloscopiemois13\" name=\"bacilloscopiemois1[]\" " . getData ("bacilloscopiemois1", "radio", 8) . " type=\"radio\" value=\"8\">Positif+++
+       <br /></td>
+    <td><input tabindex=\"110026\" id=\"geneXpertBkmois10\" name=\"geneXpertBkmois1[]\" " . getData("geneXpertBkmois1", "radio", 1) . " type=\"radio\" value=\"1\">Positif
+         <input tabindex=\"110027\" id=\"geneXpertBkmois11\" name=\"geneXpertBkmois1[]\" " . getData ("geneXpertBkmois1", "radio", 2) . " type=\"radio\" value=\"2\">Negatif<br/>
+         <input tabindex=\"110028\" id=\"geneXpertBkmois12\" name=\"geneXpertBkmois1[]\" " . getData ("geneXpertBkmois1", "radio", 4) . " type=\"radio\" value=\"4\">Indetermine
+       <br/></td>
+    <td><input tabindex=\"110029\" id=\"geneXpertRifmois10\" name=\"geneXpertRifmois1[]\" " . getData("geneXpertRifmois1", "radio", 1) . " type=\"radio\" value=\"1\">Sensible
+         <input tabindex=\"110030\" id=\"geneXpertRifmois11\" name=\"geneXpertRifmois1[]\" " . getData ("geneXpertRifmois1", "radio", 2) . " type=\"radio\" value=\"2\">Resistant
+       <br /></td>
+    <td><input tabindex=\"110031\" id=\"culturemois10\" name=\"culturemois1[]\" " . getData("culturemois1", "radio", 1) . " type=\"radio\" value=\"1\">Positif pour MTB
+         <input tabindex=\"110032\" id=\"culturemois11\" name=\"culturemois1[]\" " . getData ("culturemois1", "radio", 2) . " type=\"radio\" value=\"2\">Positif pour Non MTB<br/>
+         <input tabindex=\"110033\" id=\"culturemois12\" name=\"culturemois1[]\" " . getData ("culturemois1", "radio", 4) . " type=\"radio\" value=\"4\">Negatif
+		 <input tabindex=\"110034\" id=\"culturemois13\" name=\"culturemois1[]\" " . getData ("culturemois1", "radio", 8) . " type=\"radio\" value=\"8\">Contaminee
+       <br /></td>
+    <td><input tabindex=\"110035\" id=\"dstmois10\" name=\"dstmois1[]\" " . getData("dstmois1", "radio", 1) . " type=\"radio\" value=\"1\">Sensible à la rifampicine<br/>
+         <input tabindex=\"110036\" id=\"dstmois11\" name=\"dstmois1[]\" " . getData ("dstmois1", "radio", 2) . " type=\"radio\" value=\"2\">Résistant à la Rifampicine
+         <input tabindex=\"110037\" id=\"dstmois12\" name=\"dstmois1[]\" " . getData ("dstmois1", "radio", 4) . " type=\"radio\" value=\"4\">Indéterminé
+       <br /></td>
+    <td><input  tabindex=\"110038\" name=\"poidsmois1\" " . getData ("poidsmois1", "text") . " type=\"text\" size=\"10\"></td>
+  </tr>
+  <tr class=\"alt\">
+    <td>2</td>
+    <td><input  tabindex=\"5525\" id=\"surveillanceTbDatemois2\" name=\"surveillanceTbDatemois2\"  type=\"date\" value=\"" . getData ("surveillanceTbDatemois2", "textarea", 0) . "\" /></td>
+    <td> <input tabindex=\"110039\" id=\"bacilloscopiemois20\" name=\"bacilloscopiemois2[]\" " . getData("bacilloscopiemois2", "radio", 1) . " type=\"radio\" value=\"1\">Negatif
+         <input tabindex=\"110040\" id=\"bacilloscopiemois21\" name=\"bacilloscopiemois2[]\" " . getData ("bacilloscopiemois2", "radio", 2) . " type=\"radio\" value=\"2\">Positif+<br/>
+         <input tabindex=\"110041\" id=\"bacilloscopiemois22\" name=\"bacilloscopiemois2[]\" " . getData ("bacilloscopiemois2", "radio", 4) . " type=\"radio\" value=\"4\">Positif++
+		 <input tabindex=\"110042\" id=\"bacilloscopiemois23\" name=\"bacilloscopiemois2[]\" " . getData ("bacilloscopiemois2", "radio", 8) . " type=\"radio\" value=\"8\">Positif+++
+       <br /></td>
+    <td><input tabindex=\"110043\" id=\"geneXpertBkmois20\" name=\"geneXpertBkmois2[]\" " . getData("geneXpertBkmois2", "radio", 1) . " type=\"radio\" value=\"1\">Positif
+         <input tabindex=\"110044\" id=\"geneXpertBkmois21\" name=\"geneXpertBkmois2[]\" " . getData ("geneXpertBkmois2", "radio", 2) . " type=\"radio\" value=\"2\">Negatif<br/>
+         <input tabindex=\"110045\" id=\"geneXpertBkmois22\" name=\"geneXpertBkmois2[]\" " . getData ("geneXpertBkmois2", "radio", 4) . " type=\"radio\" value=\"4\">Indetermine
+       <br/></td>
+    <td><input tabindex=\"110046\" id=\"geneXpertRifmois20\" name=\"geneXpertRifmois2[]\" " . getData("geneXpertRifmois2", "radio", 1) . " type=\"radio\" value=\"1\">Sensible
+         <input tabindex=\"110047\" id=\"geneXpertRifmois21\" name=\"geneXpertRifmois2[]\" " . getData ("geneXpertRifmois2", "radio", 2) . " type=\"radio\" value=\"2\">Resistant
+       <br /></td>
+    <td><input tabindex=\"110048\" id=\"culturemois20\" name=\"culturemois2[]\" " . getData("culturemois2", "radio", 1) . " type=\"radio\" value=\"1\">Positif pour MTB
+         <input tabindex=\"110049\" id=\"culturemois21\" name=\"culturemois2[]\" " . getData ("culturemois2", "radio", 2) . " type=\"radio\" value=\"2\">Positif pour Non MTB<br/>
+         <input tabindex=\"110050\" id=\"culturemois22\" name=\"culturemois2[]\" " . getData ("culturemois2", "radio", 4) . " type=\"radio\" value=\"4\">Negatif
+		 <input tabindex=\"110051\" id=\"culturemois23\" name=\"culturemois2[]\" " . getData ("culturemois2", "radio", 8) . " type=\"radio\" value=\"8\">Contaminee
+       <br /></td>
+    <td><input tabindex=\"110052\" id=\"dstmois20\" name=\"dstmois2[]\" " . getData("dstmois2", "radio", 1) . " type=\"radio\" value=\"1\">Sensible à la rifampicine<br/>
+         <input tabindex=\"110053\" id=\"dstmois21\" name=\"dstmois2[]\" " . getData ("dstmois2", "radio", 2) . " type=\"radio\" value=\"2\">Résistant à la Rifampicine
+         <input tabindex=\"110054\" id=\"dstmois22\" name=\"dstmois2[]\" " . getData ("dstmois2", "radio", 4) . " type=\"radio\" value=\"4\">Indéterminé
+       <br /></td>
+    <td><input  tabindex=\"110055\" name=\"poidsmois2\" " . getData ("poidsmois2", "text") . " type=\"text\" size=\"10\"></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><input  tabindex=\"5526\" id=\"surveillanceTbDatemois3\" name=\"surveillanceTbDatemois3\"  type=\"date\" value=\"" . getData ("surveillanceTbDatemois3", "textarea", 0) . "\" /></td>
+    <td> <input tabindex=\"110056\" id=\"bacilloscopiemois30\" name=\"bacilloscopiemois3[]\" " . getData("bacilloscopiemois3", "radio", 1) . " type=\"radio\" value=\"1\">Negatif
+         <input tabindex=\"110057\" id=\"bacilloscopiemois31\" name=\"bacilloscopiemois3[]\" " . getData ("bacilloscopiemois3", "radio", 2) . " type=\"radio\" value=\"2\">Positif+<br/>
+         <input tabindex=\"110058\" id=\"bacilloscopiemois32\" name=\"bacilloscopiemois3[]\" " . getData ("bacilloscopiemois3", "radio", 4) . " type=\"radio\" value=\"4\">Positif++
+		 <input tabindex=\"110059\" id=\"bacilloscopiemois33\" name=\"bacilloscopiemois3[]\" " . getData ("bacilloscopiemois3", "radio", 8) . " type=\"radio\" value=\"8\">Positif+++
+       <br /></td>
+    <td><input tabindex=\"110060\" id=\"geneXpertBkmois30\" name=\"geneXpertBkmois3[]\" " . getData("geneXpertBkmois3", "radio", 1) . " type=\"radio\" value=\"1\">Positif
+         <input tabindex=\"110061\" id=\"geneXpertBkmois31\" name=\"geneXpertBkmois3[]\" " . getData ("geneXpertBkmois3", "radio", 2) . " type=\"radio\" value=\"2\">Negatif<br/>
+         <input tabindex=\"110062\" id=\"geneXpertBkmois32\" name=\"geneXpertBkmois3[]\" " . getData ("geneXpertBkmois3", "radio", 4) . " type=\"radio\" value=\"4\">Indetermine
+       <br/></td>
+    <td><input tabindex=\"110063\" id=\"geneXpertRifmois30\" name=\"geneXpertRifmois3[]\" " . getData("geneXpertRifmois3", "radio", 1) . " type=\"radio\" value=\"1\">Sensible
+         <input tabindex=\"110064\" id=\"geneXpertRifmois31\" name=\"geneXpertRifmois3[]\" " . getData ("geneXpertRifmois3", "radio", 2) . " type=\"radio\" value=\"2\">Resistant
+       <br /></td>
+    <td><input tabindex=\"110065\" id=\"culturemois30\" name=\"culturemois3[]\" " . getData("culturemois3", "radio", 1) . " type=\"radio\" value=\"1\">Positif pour MTB
+         <input tabindex=\"110066\" id=\"culturemois31\" name=\"culturemois3[]\" " . getData ("culturemois3", "radio", 2) . " type=\"radio\" value=\"2\">Positif pour Non MTB<br/>
+         <input tabindex=\"110067\" id=\"culturemois32\" name=\"culturemois3[]\" " . getData ("culturemois3", "radio", 4) . " type=\"radio\" value=\"4\">Negatif
+		 <input tabindex=\"110068\" id=\"culturemois33\" name=\"culturemois3[]\" " . getData ("culturemois3", "radio", 8) . " type=\"radio\" value=\"8\">Contaminee
+       <br /></td>
+    <td><input tabindex=\"110069\" id=\"dstmois30\" name=\"dstmois3[]\" " . getData("dstmois3", "radio", 1) . " type=\"radio\" value=\"1\">Sensible à la rifampicine<br/>
+         <input tabindex=\"110070\" id=\"dstmois31\" name=\"dstmois3[]\" " . getData ("dstmois3", "radio", 2) . " type=\"radio\" value=\"2\">Résistant à la Rifampicine
+         <input tabindex=\"110071\" id=\"dstmois32\" name=\"dstmois3[]\" " . getData ("dstmois3", "radio", 4) . " type=\"radio\" value=\"4\">Indéterminé
+       <br /></td>
+    <td><input  tabindex=\"110072\" name=\"poidsmois3\" " . getData ("poidsmois3", "text") . " type=\"text\" size=\"10\"></td>
+  </tr>
+  <tr class=\"alt\">
+    <td>4</td>
+    <td><input  tabindex=\"5527\" id=\"surveillanceTbDatemois4\" name=\"surveillanceTbDatemois4\"  type=\"date\" value=\"" . getData ("surveillanceTbDatemois4", "textarea", 0) . "\" /></td>
+    <td> <input tabindex=\"110073\" id=\"bacilloscopiemois40\" name=\"bacilloscopiemois4[]\" " . getData("bacilloscopiemois4", "radio", 1) . " type=\"radio\" value=\"1\">Negatif
+         <input tabindex=\"110074\" id=\"bacilloscopiemois41\" name=\"bacilloscopiemois4[]\" " . getData ("bacilloscopiemois4", "radio", 2) . " type=\"radio\" value=\"2\">Positif+<br/>
+         <input tabindex=\"110075\" id=\"bacilloscopiemois42\" name=\"bacilloscopiemois4[]\" " . getData ("bacilloscopiemois4", "radio", 4) . " type=\"radio\" value=\"4\">Positif++
+		 <input tabindex=\"110076\" id=\"bacilloscopiemois43\" name=\"bacilloscopiemois4[]\" " . getData ("bacilloscopiemois4", "radio", 8) . " type=\"radio\" value=\"8\">Positif+++
+       <br /></td>
+    <td><input tabindex=\"110077\" id=\"geneXpertBkmois40\" name=\"geneXpertBkmois4[]\" " . getData("geneXpertBkmois4", "radio", 1) . " type=\"radio\" value=\"1\">Positif
+         <input tabindex=\"110078\" id=\"geneXpertBkmois41\" name=\"geneXpertBkmois4[]\" " . getData ("geneXpertBkmois4", "radio", 2) . " type=\"radio\" value=\"2\">Negatif<br/>
+         <input tabindex=\"110079\" id=\"geneXpertBkmois42\" name=\"geneXpertBkmois4[]\" " . getData ("geneXpertBkmois4", "radio", 4) . " type=\"radio\" value=\"4\">Indetermine
+       <br/></td>
+    <td><input tabindex=\"110080\" id=\"geneXpertRifmois40\" name=\"geneXpertRifmois4[]\" " . getData("geneXpertRifmois4", "radio", 1) . " type=\"radio\" value=\"1\">Sensible
+         <input tabindex=\"110081\" id=\"geneXpertRifmois41\" name=\"geneXpertRifmois4[]\" " . getData ("geneXpertRifmois4", "radio", 2) . " type=\"radio\" value=\"2\">Resistant
+       <br /></td>
+    <td><input tabindex=\"110082\" id=\"culturemois40\" name=\"culturemois4[]\" " . getData("culturemois4", "radio", 1) . " type=\"radio\" value=\"1\">Positif pour MTB
+         <input tabindex=\"110083\" id=\"culturemois41\" name=\"culturemois4[]\" " . getData ("culturemois4", "radio", 2) . " type=\"radio\" value=\"2\">Positif pour Non MTB<br/>
+         <input tabindex=\"110084\" id=\"culturemois42\" name=\"culturemois4[]\" " . getData ("culturemois4", "radio", 4) . " type=\"radio\" value=\"4\">Negatif
+		 <input tabindex=\"110085\" id=\"culturemois43\" name=\"culturemois4[]\" " . getData ("culturemois4", "radio", 8) . " type=\"radio\" value=\"8\">Contaminee
+       <br /></td>
+    <td><input tabindex=\"110086\" id=\"dstmois40\" name=\"dstmois4[]\" " . getData("dstmois4", "radio", 1) . " type=\"radio\" value=\"1\">Sensible à la rifampicine<br/>
+         <input tabindex=\"110087\" id=\"dstmois41\" name=\"dstmois4[]\" " . getData ("dstmois4", "radio", 2) . " type=\"radio\" value=\"2\">Résistant à la Rifampicine
+         <input tabindex=\"110088\" id=\"dstmois42\" name=\"dstmois4[]\" " . getData ("dstmois4", "radio", 4) . " type=\"radio\" value=\"4\">Indéterminé
+       <br /></td>
+    <td><input  tabindex=\"110089\" name=\"poidsmois4\" " . getData ("poidsmois4", "text") . " type=\"text\" size=\"10\"></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><input  tabindex=\"5528\" id=\"surveillanceTbDatemois5\" name=\"surveillanceTbDatemois5\"  type=\"date\" value=\"" . getData ("surveillanceTbDatemois5", "textarea", 0) . "\" /></td>
+    <td> <input tabindex=\"110090\" id=\"bacilloscopiemois50\" name=\"bacilloscopiemois5[]\" " . getData("bacilloscopiemois5", "radio", 1) . " type=\"radio\" value=\"1\">Negatif
+         <input tabindex=\"110091\" id=\"bacilloscopiemois51\" name=\"bacilloscopiemois5[]\" " . getData ("bacilloscopiemois5", "radio", 2) . " type=\"radio\" value=\"2\">Positif+<br/>
+         <input tabindex=\"110092\" id=\"bacilloscopiemois52\" name=\"bacilloscopiemois5[]\" " . getData ("bacilloscopiemois5", "radio", 4) . " type=\"radio\" value=\"4\">Positif++
+		 <input tabindex=\"110093\" id=\"bacilloscopiemois53\" name=\"bacilloscopiemois5[]\" " . getData ("bacilloscopiemois5", "radio", 8) . " type=\"radio\" value=\"8\">Positif+++
+       <br /></td>
+    <td><input tabindex=\"110094\" id=\"geneXpertBkmois50\" name=\"geneXpertBkmois5[]\" " . getData("geneXpertBkmois5", "radio", 1) . " type=\"radio\" value=\"1\">Positif
+         <input tabindex=\"110095\" id=\"geneXpertBkmois51\" name=\"geneXpertBkmois5[]\" " . getData ("geneXpertBkmois5", "radio", 2) . " type=\"radio\" value=\"2\">Negatif<br/>
+         <input tabindex=\"110096\" id=\"geneXpertBkmois52\" name=\"geneXpertBkmois5[]\" " . getData ("geneXpertBkmois5", "radio", 4) . " type=\"radio\" value=\"4\">Indetermine
+       <br/></td>
+    <td><input tabindex=\"110097\" id=\"geneXpertRifmois50\" name=\"geneXpertRifmois5[]\" " . getData("geneXpertRifmois5", "radio", 1) . " type=\"radio\" value=\"1\">Sensible
+         <input tabindex=\"110098\" id=\"geneXpertRifmois51\" name=\"geneXpertRifmois5[]\" " . getData ("geneXpertRifmois5", "radio", 2) . " type=\"radio\" value=\"2\">Resistant
+       <br /></td>
+    <td><input tabindex=\"110099\" id=\"culturemois50\" name=\"culturemois5[]\" " . getData("culturemois5", "radio", 1) . " type=\"radio\" value=\"1\">Positif pour MTB
+         <input tabindex=\"1100100\" id=\"culturemois51\" name=\"culturemois5[]\" " . getData ("culturemois5", "radio", 2) . " type=\"radio\" value=\"2\">Positif pour Non MTB<br/>
+         <input tabindex=\"1100101\" id=\"culturemois52\" name=\"culturemois5[]\" " . getData ("culturemois5", "radio", 4) . " type=\"radio\" value=\"4\">Negatif
+		 <input tabindex=\"1100102\" id=\"culturemois53\" name=\"culturemois5[]\" " . getData ("culturemois5", "radio", 8) . " type=\"radio\" value=\"8\">Contaminee
+       <br /></td>
+    <td><input tabindex=\"1100103\" id=\"dstmois50\" name=\"dstmois5[]\" " . getData("dstmois5", "radio", 1) . " type=\"radio\" value=\"1\">Sensible à la rifampicine<br/>
+         <input tabindex=\"1100104\" id=\"dstmois51\" name=\"dstmois5[]\" " . getData ("dstmois5", "radio", 2) . " type=\"radio\" value=\"2\">Résistant à la Rifampicine
+         <input tabindex=\"1100105\" id=\"dstmois52\" name=\"dstmois5[]\" " . getData ("dstmois5", "radio", 4) . " type=\"radio\" value=\"4\">Indéterminé
+       <br /></td>
+    <td><input  tabindex=\"1100106\" name=\"poidsmois5\" " . getData ("poidsmois5", "text") . " type=\"text\" size=\"10\"></td>
+  </tr>
+  <tr class=\"alt\">
+    <td>6</td>
+    <td><input  tabindex=\"5523\" id=\"surveillanceTbDatemois6\" name=\"surveillanceTbDatemois6\"  type=\"date\" value=\"" . getData ("surveillanceTbDatemois6", "textarea", 0) . "\" /></td>
+    <td> <input tabindex=\"1100107\" id=\"bacilloscopiemois60\" name=\"bacilloscopiemois6[]\" " . getData("bacilloscopiemois6", "radio", 1) . " type=\"radio\" value=\"1\">Negatif
+         <input tabindex=\"1100108\" id=\"bacilloscopiemois61\" name=\"bacilloscopiemois6[]\" " . getData ("bacilloscopiemois6", "radio", 2) . " type=\"radio\" value=\"2\">Positif+<br/>
+         <input tabindex=\"1100109\" id=\"bacilloscopiemois62\" name=\"bacilloscopiemois6[]\" " . getData ("bacilloscopiemois6", "radio", 4) . " type=\"radio\" value=\"4\">Positif++
+		 <input tabindex=\"1100110\" id=\"bacilloscopiemois63\" name=\"bacilloscopiemois6[]\" " . getData ("bacilloscopiemois6", "radio", 8) . " type=\"radio\" value=\"8\">Positif+++
+       <br /></td>
+    <td><input tabindex=\"1100111\" id=\"geneXpertBkmois60\" name=\"geneXpertBkmois6[]\" " . getData("geneXpertBkmois6", "radio", 1) . " type=\"radio\" value=\"1\">Positif
+         <input tabindex=\"1100112\" id=\"geneXpertBkmois61\" name=\"geneXpertBkmois6[]\" " . getData ("geneXpertBkmois6", "radio", 2) . " type=\"radio\" value=\"2\">Negatif<br/>
+         <input tabindex=\"1100113\" id=\"geneXpertBkmois62\" name=\"geneXpertBkmois6[]\" " . getData ("geneXpertBkmois6", "radio", 4) . " type=\"radio\" value=\"4\">Indetermine
+       <br/></td>
+    <td><input tabindex=\"1100114\" id=\"geneXpertRifmois60\" name=\"geneXpertRifmois6[]\" " . getData("geneXpertRifmois6", "radio", 1) . " type=\"radio\" value=\"1\">Sensible
+         <input tabindex=\"1100115\" id=\"geneXpertRifmois61\" name=\"geneXpertRifmois6[]\" " . getData ("geneXpertRifmois6", "radio", 2) . " type=\"radio\" value=\"2\">Resistant
+       <br /></td>
+    <td><input tabindex=\"1100116\" id=\"culturemois60\" name=\"culturemois6[]\" " . getData("culturemois6", "radio", 1) . " type=\"radio\" value=\"1\">Positif pour MTB
+         <input tabindex=\"1100117\" id=\"culturemois61\" name=\"culturemois6[]\" " . getData ("culturemois6", "radio", 2) . " type=\"radio\" value=\"2\">Positif pour Non MTB<br/>
+         <input tabindex=\"1100118\" id=\"culturemois62\" name=\"culturemois6[]\" " . getData ("culturemois6", "radio", 4) . " type=\"radio\" value=\"4\">Negatif
+		 <input tabindex=\"1100119\" id=\"culturemois63\" name=\"culturemois6[]\" " . getData ("culturemois6", "radio", 8) . " type=\"radio\" value=\"8\">Contaminee
+       <br /></td>
+    <td><input tabindex=\"1100120\" id=\"dstmois60\" name=\"dstmois6[]\" " . getData("dstmois6", "radio", 1) . " type=\"radio\" value=\"1\">Sensible à la rifampicine<br/>
+         <input tabindex=\"1100121\" id=\"dstmois61\" name=\"dstmois6[]\" " . getData ("dstmois6", "radio", 2) . " type=\"radio\" value=\"2\">Résistant à la Rifampicine
+         <input tabindex=\"1100122\" id=\"dstmois62\" name=\"dstmois6[]\" " . getData ("dstmois6", "radio", 4) . " type=\"radio\" value=\"4\">Indéterminé
+       <br /></td>
+    <td><input  tabindex=\"1100123\" name=\"poidsmois6\" " . getData ("poidsmois6", "text") . " type=\"text\" size=\"10\"></td>
+  </tr>
+  <tr>
+    <td>fin TX</td>
+    <td><input  tabindex=\"5529\" id=\"surveillanceTbDateFinTx\" name=\"surveillanceTbDateFinTx\"  type=\"date\" value=\"" . getData ("surveillanceTbDateFinTx", "textarea", 0) . "\" /></td>
+    <td> <input tabindex=\"1100123\" id=\"bacilloscopieFinTx0\" name=\"bacilloscopieFinTx[]\" " . getData("bacilloscopieFinTx", "radio", 1) . " type=\"radio\" value=\"1\">Negatif
+         <input tabindex=\"1100124\" id=\"bacilloscopieFinTx1\" name=\"bacilloscopieFinTx[]\" " . getData ("bacilloscopieFinTx", "radio", 2) . " type=\"radio\" value=\"2\">Positif+<br/>
+         <input tabindex=\"1100125\" id=\"bacilloscopieFinTx2\" name=\"bacilloscopieFinTx[]\" " . getData ("bacilloscopieFinTx", "radio", 4) . " type=\"radio\" value=\"4\">Positif++
+		 <input tabindex=\"1100126\" id=\"bacilloscopieFinTx3\" name=\"bacilloscopieFinTx[]\" " . getData ("bacilloscopieFinTx", "radio", 8) . " type=\"radio\" value=\"8\">Positif+++
+       <br /></td>
+    <td><input tabindex=\"1100127\" id=\"geneXpertBkFinTx0\" name=\"geneXpertBkFinTx[]\" " . getData("geneXpertBkFinTx", "radio", 1) . " type=\"radio\" value=\"1\">Positif
+         <input tabindex=\"1100128\" id=\"geneXpertBkFinTx1\" name=\"geneXpertBkFinTx[]\" " . getData ("geneXpertBkFinTx", "radio", 2) . " type=\"radio\" value=\"2\">Negatif<br/>
+         <input tabindex=\"1100129\" id=\"geneXpertBkFinTx2\" name=\"geneXpertBkFinTx[]\" " . getData ("geneXpertBkFinTx", "radio", 4) . " type=\"radio\" value=\"4\">Indetermine
+       <br/></td>
+    <td><input tabindex=\"1100130\" id=\"geneXpertRifFinTx0\" name=\"geneXpertRifFinTx[]\" " . getData("geneXpertRifFinTx", "radio", 1) . " type=\"radio\" value=\"1\">Sensible
+         <input tabindex=\"1100131\" id=\"geneXpertRifFinTx1\" name=\"geneXpertRifFinTx[]\" " . getData ("geneXpertRifFinTx", "radio", 2) . " type=\"radio\" value=\"2\">Resistant
+       <br /></td>
+    <td><input tabindex=\"1100132\" id=\"cultureFinTx0\" name=\"cultureFinTx[]\" " . getData("cultureFinTx", "radio", 1) . " type=\"radio\" value=\"1\">Positif pour MTB
+         <input tabindex=\"1100133\" id=\"cultureFinTx1\" name=\"cultureFinTx[]\" " . getData ("cultureFinTx", "radio", 2) . " type=\"radio\" value=\"2\">Positif pour Non MTB<br/>
+         <input tabindex=\"1100134\" id=\"cultureFinTx2\" name=\"cultureFinTx[]\" " . getData ("cultureFinTx", "radio", 4) . " type=\"radio\" value=\"4\">Negatif
+		 <input tabindex=\"1100135\" id=\"cultureFinTx3\" name=\"cultureFinTx[]\" " . getData ("cultureFinTx", "radio", 8) . " type=\"radio\" value=\"8\">Contaminee
+       <br /></td>
+    <td><input tabindex=\"1100136\" id=\"dstFinTx0\" name=\"dstFinTx[]\" " . getData("dstFinTx", "radio", 1) . " type=\"radio\" value=\"1\">Sensible à la rifampicine<br/>
+         <input tabindex=\"1100137\" id=\"dstFinTx1\" name=\"dstFinTx[]\" " . getData ("dstFinTx", "radio", 2) . " type=\"radio\" value=\"2\">Résistant à la Rifampicine
+         <input tabindex=\"1100138\" id=\"dstFinTx2\" name=\"dstFinTx[]\" " . getData ("dstFinTx", "radio", 4) . " type=\"radio\" value=\"4\">Indéterminé
+       <br /></td>
+    <td><input  tabindex=\"1100139\" name=\"poidsFinTx\" " . getData ("poidsFinTx", "text") . " type=\"text\" size=\"10\"></td>
+  </tr>
+</tbody>
+</table>
+	   
+	   
+	   </td> 
+	   </tr>
+	   
+";
+
+echo "
+	</table>
+  </div>"; 
+
+
 // Eligibility                 tabstart:7000
 echo "
 <div id=\"pane7\">
@@ -1063,9 +1314,6 @@ include ("include/pedMedicalEligibility.php");
 echo "
 </table>
 </div>";
-
-
-
 
 // Non Eligibility                 tabstart:30000
 echo "

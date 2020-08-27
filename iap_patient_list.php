@@ -120,38 +120,6 @@ having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 9 and 15
 
 break;
 
-
-case '6':{
-/* Numerateur */
-if($type=="num")
-$query="select  distinct p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
-FROM patient p1,(select A.patientID  from (
-select p.patientID,p.visitDate,p.regimen from pepfarTable p,
-(select p.patientID,max(visitDate) as visitDate from pepfarTable p,(select patientID,max(resultDate) as resultDate from labViral l where l.resultDate<='".$endDate."' group by 1) pt where p.patientID=pt.patientID and p.visitDate<=pt.resultDate group by 1) p1
-where p.patientID=p1.patientID and p.visitDate=p1.visitDate
-)A,
-(select p.patientID,p.visitDate,p.regimen from pepfarTable p,
-(select p.patientID,max(visitDate) as visitDate from pepfarTable p,(select patientID,max(resultDate) as resultDate from labViral l where l.resultDate<='".$endDate."' group by 1) pt where p.patientID=pt.patientID and p.visitDate between pt.resultDate and DATE_ADD(pt.resultDate, INTERVAL 3 month) group by 1) p1
-where p.patientID=p1.patientID and p.visitDate=p1.visitDate) B 
-where A.patientID=B.patientID and STRCMP(A.regimen,B.regimen)<>0) l
-WHERE l.patientID=p1.patientID";  
-	  
-	  
-	  
-	  
-if($type=="den")
-$query="select  distinct p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
-FROM patient p1,(select l.patientID from labViral l,
-(select patientID,max(resultDate) as resultDate from labViral l where l.resultDate<='".$endDate."' group by 1) l1
-where l.patientID=l1.patientID and 
-      l.resultDate=l1.resultDate and
-      l.result>1000 and l.past_result>1000 and 
-	  l.resultDate<='".$endDate."') p where p1.patientID=p.patientID";	
-}		  
-
-break;
-
-
 case '7':{
 /* Numerateur */
 if($type=="num")
@@ -186,7 +154,7 @@ break;
 $result = databaseSelect()->query($query)->fetchAll(PDO::FETCH_ASSOC);
         if (count($result) == 0) return '<p><center><font color="red"><bold>Aucuns résultats trouvés</bold></font></center><p>';
         // set up the table
-        $output = '<center><table class="" width="90%" border="1" cellpadding="0" cellspacing="0">';
+        $output = '<center><table id="excelTable" class="gridtable" width="90%" border="1" cellpadding="0" cellspacing="0">';
         // loop on the results 
         $i = 0;
         foreach($result as $row) {
@@ -208,6 +176,59 @@ $result = databaseSelect()->query($query)->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?> 
+<html>
+<head>
+<style type="text/css">
+
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+</style>
+<script language="javascript">
+        function printdiv(printpage) {
+            var headstr = "<html><head><title></title></head><body>";
+            var footstr = "</body>";
+            var newstr = document.all.item(printpage).innerHTML;
+            var oldstr = document.body.innerHTML;
+            document.body.innerHTML = headstr + newstr + footstr;
+            window.print();
+            document.body.innerHTML = oldstr;
+            return false;
+        }
+    </script>
+	
+<script type="text/javascript">
+var tableToExcel = (function() {
+  var uri = 'data:application/vnd.ms-excel;base64,'
+    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+    , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+    , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+  return function(table, name) {
+    if (!table.nodeType) table = document.getElementById(table)
+    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+    window.location.href = uri + base64(format(template, ctx))
+  }
+})()
+</script>	
 </head>
 
 <body text="#000000" link="#000000" alink="#000000" vlink="#000000" align="left"> 
@@ -216,11 +237,15 @@ $result = databaseSelect()->query($query)->fetchAll(PDO::FETCH_ASSOC);
 
     
   <?php ?>
-<div style="display: inline-block; width:65%; vertical-align:top;border-left: 1px solid #99BBE8;">
-      <div class="tablex" style="padding:5px">
-     </div>		 
-		   <?php echo $output ; ?>		 
-	  </div> 
+<div style="width:65%; vertical-align:top;border-left: 1px solid #99BBE8;">
+<div style="float:right;padding:15px;margin-right:35px;">
+ <input name="b_print" type="button"  onClick="printdiv('print_section');" value=" Imprimer ">
+ <button onclick="tableToExcel('excelTable', 'List patient')">Exporter dans EXCEL</button>
+ </div>
+      <div id="print_section" style="padding:5px">     	 
+		   <?php echo $output ; ?>		
+      </div>			   
+</div> 
   
   </body>
 </html>

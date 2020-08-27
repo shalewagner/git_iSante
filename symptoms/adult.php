@@ -33,10 +33,12 @@ echo "
        <td><input tabindex=\"" . ($tabIndex + 3) . "\" name=\"cough\" " . getData ("cough", "checkbox") . " type=\"checkbox\" value=\"On\">" . $cough[$lang][1] . "</td>
        <td><input tabindex=\"" . ($tabIndex + 8) . "\" name=\"nausea\" " . getData ("nausea", "checkbox") . " type=\"checkbox\" value=\"On\">" . $nausea[$lang][1] . "</td>
        <td><input tabindex=\"" . ($tabIndex + 13) . "\" name=\"vomiting\" " . getData ("vomiting", "checkbox") . " type=\"checkbox\" value=\"On\">" . $vomiting[$lang][1] . "</td>
+	   <td><input tabindex=\"" . ($tabIndex + 24) . "\" name=\"adenopathies\" " . getData ("adenopathies", "checkbox") . " type=\"checkbox\" value=\"On\">" . $adenopathies[$lang][1] . "</td>
       </tr>
       <tr>
        <td><input tabindex=\"" . ($tabIndex + 4) . "\" name=\"expectoration\" " . getData ("expectoration", "checkbox") . " type=\"checkbox\" value=\"On\">" . $expectoration[$lang][1] . "</td>
-       <td><input tabindex=\"" . ($tabIndex + 9) . "\" name=\"nightSweats\" " . getData ("nightSweats", "checkbox") . " type=\"checkbox\" value=\"On\">" . $nightSweats[$lang][1] . "</td>";
+       <td><input tabindex=\"" . ($tabIndex + 9) . "\" name=\"nightSweats\" " . getData ("nightSweats", "checkbox") . " type=\"checkbox\" value=\"On\">" . $nightSweats[$lang][1] . "</td>
+	   <td><input tabindex=\"" . ($tabIndex + 25) . "\" name=\"douleurThoracique\" " . getData ("douleurThoracique", "checkbox") . " type=\"checkbox\" value=\"On\">" . $douleurThoracique[$lang][1] . "</td>";
         if (getUiConfig(getSessionUser()) == "2" || getUiConfig(getSessionUser()) == "3") {
           echo "
        <td class=\"POC\"><input tabindex=\"" . ($tabIndex + 15) . "\" name=\"prurigo\" " . getData ("prurigo", "checkbox") . " type=\"checkbox\" value=\"On\">" . "Prurigo" . "</td>";
@@ -46,6 +48,8 @@ echo "
       <tr>
        <td class=\"alt\"><input tabindex=\"" . ($tabIndex + 5) . "\" name=\"dyspnea\" " . getData ("dyspnea", "checkbox") . " type=\"checkbox\" value=\"On\">" . $dyspnea[$lang][1] . "</td>
        <td class=\"alt\"><input tabindex=\"" . ($tabIndex + 10) . "\" name=\"numbness\" " . getData ("numbness", "checkbox") . " type=\"checkbox\" value=\"On\">" . $numbness[$lang][1] . "</td>
+	   <td><input tabindex=\"" . ($tabIndex + 26) . "\" name=\"fievreVesperale\" " . getData ("fievreVesperale", "checkbox") . " type=\"checkbox\" value=\"On\">" . $fievreVesperale[$lang][1] . "</td>
+	   <td><input tabindex=\"" . ($tabIndex + 27) . "\" name=\"perteAppetit\" " . getData ("perteAppetit", "checkbox") . " type=\"checkbox\" value=\"On\">" . $perteAppetit[$lang][1] . "</td>
       </tr>
      </table>
     </td>

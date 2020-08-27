@@ -53,13 +53,20 @@ echo "
        <td><input tabindex=\"" . ($tabIndex + 7) . "\" name=\"pedSympMuscPain\" " . getData ("pedSympMuscPain", "checkbox") . " type=\"checkbox\" value=\"On\">" . $pedSymp[$lang][7] . "</td>
        <td><input tabindex=\"" . ($tabIndex + 15) . "\" name=\"nausea\" " . getData ("nausea", "checkbox") . " type=\"checkbox\" value=\"On\">" . $pedSymp[$lang][15] . "</td>
        <td><input tabindex=\"" . ($tabIndex + 23) . "\" name=\"pedSympPrurigo\" " . getData ("pedSympPrurigo", "checkbox") . " type=\"checkbox\" value=\"On\">" . $pedSymp[$lang][22] . "</td>
-       <td>&nbsp;</td>
+       <td><input tabindex=\"" . ($tabIndex + 24) . "\" name=\"adenopathies\" " . getData ("adenopathies", "checkbox") . " type=\"checkbox\" value=\"On\">" . $adenopathies[$lang][1] . "</td>      
       </tr>
       <tr>
        <td><input tabindex=\"" . ($tabIndex + 8) . "\" name=\"dyspnea\" " . getData ("dyspnea", "checkbox") . " type=\"checkbox\" value=\"On\">" . $pedSymp[$lang][8] . "</td>
        <td><input tabindex=\"" . ($tabIndex + 16) . "\" name=\"pedSympNutritionalEdema\" " . getData ("pedSympNutritionalEdema", "checkbox") . " type=\"checkbox\" value=\"On\">" . $pedSymp[$lang][27] . "</td>
+       <td><input tabindex=\"" . ($tabIndex + 25) . "\" name=\"douleurThoracique\" " . getData ("douleurThoracique", "checkbox") . " type=\"checkbox\" value=\"On\">" . $douleurThoracique[$lang][1] . "</td>      
+	  <td><input tabindex=\"" . ($tabIndex + 26) . "\" name=\"fievreVesperale\" " . getData ("fievreVesperale", "checkbox") . " type=\"checkbox\" value=\"On\">" . $fievreVesperale[$lang][1] . "</td>	   
+      </tr>
+	  <tr>       
+	   <td><input tabindex=\"" . ($tabIndex + 27) . "\" name=\"perteAppetit\" " . getData ("perteAppetit", "checkbox") . " type=\"checkbox\" value=\"On\">" . $perteAppetit[$lang][1] . "</td>
+	   <td>&nbsp;</td>
        <td>&nbsp;</td>
-       <td>&nbsp;</td>
+       <td>&nbsp;</td>      
+	  <td>&nbsp;</td>
       </tr>
      </table>
     </td>

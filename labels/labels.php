@@ -9268,4 +9268,51 @@ $primCareSummaryLabels = array (
 	"Actually alimentation"
   )
 );
+
+
+$adenopathies = array (
+   "en" => array (
+	"",
+	"Lymphadenopathy",
+	""),
+   "fr" => array (
+	"",
+	"Adénopathies",
+	"")
+);
+
+$douleurThoracique = array (
+   "en" => array (
+	"",
+	"Chest pain",
+	""),
+   "fr" => array (
+	"",
+	"Douleur thoracique",
+	"")
+);
+
+$fievreVesperale = array (
+   "en" => array (
+	"",
+	"Evening fever",
+	""),
+   "fr" => array (
+	"",
+	"Fièvre vespérale",
+	"")
+);
+
+$perteAppetit = array (
+   "en" => array (
+	"",
+	"Loss of appetite",
+	""),
+   "fr" => array (
+	"",
+	"Perte d’appétit",
+	"")
+);
+
+
 ?>
