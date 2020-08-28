@@ -1746,28 +1746,28 @@ echo '<table class="gridtable" border="1">
 		  $k = ($i+($j*$NbrLigne));
 		  echo $tableau5[$k]['groupe'];
 		   echo '</td><td>';
-		   if($tableau5[$k]['indicator_id']=='5') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=5&cle=HARSAH&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau5[$k]['HARSAH']."</a>";
-		   if($tableau5[$k]['indicator_id']=='6') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=6&cle=HARSAH&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau5[$k]['HARSAH']."</a>"; 
+		   if($tableau5[$k]['indicator_id']=='5') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=5&cle=HARSAH&startDate=".$startDate."&endDate=".$endDate."\">".$tableau5[$k]['HARSAH']."</a>";
+		   if($tableau5[$k]['indicator_id']=='6') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=6&cle=HARSAH&startDate=".$startDate."&endDate=".$endDate."\">".$tableau5[$k]['HARSAH']."</a>"; 
 		 
 		 $total5_0=$total5_0+$tableau5[$k]['HARSAH'];
          echo '</td><td>';
-		 if($tableau5[$k]['indicator_id']=='5') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=5&cle=Professionnels de sexe&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau5[$k]['Professionnels de sexe']."</a>";
-		 if($tableau5[$k]['indicator_id']=='6') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=6&cle=Professionnels de sexe&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau5[$k]['Professionnels de sexe']."</a>";
+		 if($tableau5[$k]['indicator_id']=='5') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=5&cle=Professionnels de sexe&startDate=".$startDate."&endDate=".$endDate."\">".$tableau5[$k]['Professionnels de sexe']."</a>";
+		 if($tableau5[$k]['indicator_id']=='6') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=6&cle=Professionnels de sexe&startDate=".$startDate."&endDate=".$endDate."\">".$tableau5[$k]['Professionnels de sexe']."</a>";
 
 		  $total5_1=$total5_1+$tableau5[$k]['Professionnels de sexe'];
 		 echo '</td><td>';
-		 if($tableau5[$k]['indicator_id']=='5') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=5&cle=Personnes transgenres&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau5[$k]['Personnes transgenres']."</a>";
-		 if($tableau5[$k]['indicator_id']=='6') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=6&cle=Personnes transgenres&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau5[$k]['Personnes transgenres']."</a>";
+		 if($tableau5[$k]['indicator_id']=='5') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=5&cle=Personnes transgenres&startDate=".$startDate."&endDate=".$endDate."\">".$tableau5[$k]['Personnes transgenres']."</a>";
+		 if($tableau5[$k]['indicator_id']=='6') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=6&cle=Personnes transgenres&startDate=".$startDate."&endDate=".$endDate."\">".$tableau5[$k]['Personnes transgenres']."</a>";
 
 		  $total5_2=$total5_2+$tableau5[$k]['Personnes transgenres'];
 		  echo '</td><td>';
-		if($tableau5[$k]['indicator_id']=='5') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=5&cle=Prisonniers&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau5[$k]['Prisonniers']."</a>";
-		if($tableau5[$k]['indicator_id']=='6') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=6&cle=Prisonniers&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau5[$k]['Prisonniers']."</a>"; 
+		if($tableau5[$k]['indicator_id']=='5') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=5&cle=Prisonniers&startDate=".$startDate."&endDate=".$endDate."\">".$tableau5[$k]['Prisonniers']."</a>";
+		if($tableau5[$k]['indicator_id']=='6') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=6&cle=Prisonniers&startDate=".$startDate."&endDate=".$endDate."\">".$tableau5[$k]['Prisonniers']."</a>"; 
 		 
 		  $total5_3=$total5_3+$tableau5[$k]['Prisonniers'];
 		   echo '</td><td>';
-		 if($tableau5[$k]['indicator_id']=='5') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=5&cle=Utilisateurs de drogues injectables&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau5[$k]['Utilisateurs de drogues injectables']."</a>";
-		if($tableau5[$k]['indicator_id']=='6') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=6&cle=Utilisateurs de drogues injectables&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau5[$k]['Utilisateurs de drogues injectables']."</a>"; 
+		 if($tableau5[$k]['indicator_id']=='5') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=5&cle=Utilisateurs de drogues injectables&startDate=".$startDate."&endDate=".$endDate."\">".$tableau5[$k]['Utilisateurs de drogues injectables']."</a>";
+		if($tableau5[$k]['indicator_id']=='6') echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=6&cle=Utilisateurs de drogues injectables&startDate=".$startDate."&endDate=".$endDate."\">".$tableau5[$k]['Utilisateurs de drogues injectables']."</a>"; 
 
 		  $total5_4=$total5_4+$tableau5[$k]['Utilisateurs de drogues injectables'];
 		 echo '</td>';
@@ -3465,19 +3465,19 @@ echo '<table class="gridtable" border="1">
           // AFFICHAGE de l'element
 		  echo '</td><td>';
 		  $k = ($i+($j*$NbrLigne));
-		   echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=18&cle=HARSAH&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau26[$k]['HARSAH']."</a>";
+		   echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=18&cle=HARSAH&startDate=".$startDate."&endDate=".$endDate."\">".$tableau26[$k]['HARSAH']."</a>";
 		  $total26_0=$total26_0+$tableau26[$k]['HARSAH'];
 		   echo '</td><td>';
-		   echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=18&cle=Professionnels de sexe&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau26[$k]['Professionnels de sexe']."</a>";
+		   echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=18&cle=Professionnels de sexe&startDate=".$startDate."&endDate=".$endDate."\">".$tableau26[$k]['Professionnels de sexe']."</a>";
 		  $total26_1=$total26_1+$tableau26[$k]['Professionnels de sexe'];
 		   echo '</td><td>';
-		   echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=18&cle=Personnes transgenres&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau26[$k]['Personnes transgenres']."</a>";
+		   echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=18&cle=Personnes transgenres&startDate=".$startDate."&endDate=".$endDate."\">".$tableau26[$k]['Personnes transgenres']."</a>";
           $total26_2=$total26_2+$tableau26[$k]['Personnes transgenres'];
 		   echo '</td><td>';
-		   echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=18&cle=Prisonniers&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau26[$k]['Prisonniers']."</a>"; 
+		   echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=18&cle=Prisonniers&startDate=".$startDate."&endDate=".$endDate."\">".$tableau26[$k]['Prisonniers']."</a>"; 
 		  $total26_3=$total26_3+$tableau26[$k]['Prisonniers'];
 		   echo '</td><td>';
-		   echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=18&cle=Utilisateurs de drogues injectables&startDate=".$startDate."&endDate=".$endDate."&sex=& interval=\">".$tableau26[$k]['Utilisateurs de drogues injectables']."</a>"; 
+		   echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=18&cle=Utilisateurs de drogues injectables&startDate=".$startDate."&endDate=".$endDate."\">".$tableau26[$k]['Utilisateurs de drogues injectables']."</a>"; 
           $total26_4=$total26_4+$tableau26[$k]['Utilisateurs de drogues injectables'];
 		 echo '</td>';
          $j++;

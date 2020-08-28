@@ -66,6 +66,11 @@ printLog('PepfarTable refresh finished...starting patient alert generation (' . 
 if (getConfig('serverRole') != 'consolidated') generatePatientAlert();
 printLog('generatePatientAlert() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 
+#adding for arv pnls reports
+printLog('PatientAlert refresh finished...starting generateArvPnlsReports generation (' . $stopwatch->elapsed() . ' total seconds elapsed)');
+generateArvPnlsReports() ;
+printLog('ArvPnlsReports finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
+
 #adding r34 daily run.
 if (getConfig('defsitecode') == '31100') {
 	printLog('runR34 started');
