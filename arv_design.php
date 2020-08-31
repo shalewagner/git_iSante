@@ -1253,13 +1253,17 @@ var tableToExcel = (function() {
   
   <div style="float:left; padding:15px; margin-right:35px; width:90%;">
  <input name="b_print" type="button"  onClick="printdiv('print_section');" value=" Imprimer ">
- <button onclick="tableToExcel('excelTable', 'Rapport mensuel des soins cliniques VIH-ARV')">Exporter dans EXCEL</button>
+ <button onclick="tableToExcel('print_section', 'Rapport mensuel des soins cliniques VIH-ARV')">Exporter dans EXCEL</button>
  </div>
   
   
 <div id="print_section" style="width:90%; padding:15px; vertical-align:top;border-left: 1px solid #99BBE8;">
 		 
 		   <?php 
+		   
+if(isset($startDate)){		   
+		   
+		   
 		   
 if ($NbreData != 0) {
 $i = 0;
@@ -5671,7 +5675,9 @@ echo 'pas de données à afficher';
 
 echo '<div>&nbsp;</div>';
 
-
+}
+else 
+	echo 'pas de données à afficher';
 
 
 /*echo $table;*/ ?>
