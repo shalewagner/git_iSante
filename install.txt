@@ -1,0 +1,51 @@
+
+Procedure for upgrading to 20.1 TEST
+
+ 
+1. You may start from any iSanté version greater than or equal to 14.2. If necessary, install iSanté 14.2 from the ISO for new sites.
+
+2. Log in to the server as itech and shut down Apache. Everything below is done in a root shell (sudo sh) :
+
+sudo sh
+/etc/init.d/apache2 stop
+
+3. Verify that a backup was done after the last data was entered at the site.
+
+Verification (backup date should be after last data entered; size of backup should increase with each backup) :
+
+ls -lrt isante-backups/
+ 
+total 323116
+drwxrwx--x 3 itech www-data     4096 oct 12  2012 patientTransfer
+drwxrwx--x 3 itech www-data     4096 oct 12  2012 fpDuplicateLogs
+drwxrwx--x 2 itech www-data     4096 oct 12  2012 encounterFiles
+drwxr-x--- 4 root  root         4096 oct  1 15:57 case-notifications
+drwxr-x--- 4 itech itech        4096 oct 12 16:00 replication
+-rw-r----- 1 itech itech    45854752 nov 24 13:08 E_isante-backup-2015-11-24_13-05-01-d75s36101.tar
+-rw-r----- 1 itech itech    45854752 nov 25 13:07 E_isante-backup-2015-11-25_13-05-02-d75s36101.tar
+-rw-r----- 1 itech itech    45977632 nov 27 13:07 E_isante-backup-2015-11-27_13-05-01-d75s36101.tar
+-rw-r----- 1 itech itech    45977632 nov 28 13:07 E_isante-backup-2015-11-28_13-05-01-d75s36101.tar
+-rw-r----- 1 itech itech    50242272 déc  2 13:08 E_isante-backup-2015-12-02_13-05-02-d75s36101.tar
+-rw-r----- 1 itech itech    50370592 déc 14 13:07 E_isante-backup-2015-12-14_13-05-02-d75s36101.tar
+ 
+If in doubt, do a new backup :
+
+sh /var/www/isante/support/backup_db_linux.sh
+
+4. Copy this email's attachment to /home/itech/
+
+5. Do the following commands :
+mv 20.1.tar.gz /var/www/isante
+cd /var/www/isante/
+tar -xvf 20.1.tar.gz
+chown -R root:root *
+cp support/schema-user-functions/udf_itech.so /usr/lib/
+/etc/init.d/mysql force-reload
+sh digits.sh
+sh support/upgrade-database.sh
+
+php patientStatusBatch.php
+
+/etc/init.d/apache2 start
+6. Done. Verify upgrade success in the iSanté web application :
+Version in banner : 20.1 test (7e6438)

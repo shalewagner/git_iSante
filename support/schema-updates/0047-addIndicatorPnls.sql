@@ -1,3 +1,25 @@
+drop table if exists drugRupture;						  
+create table drugRupture(
+id int primary key auto_increment,
+sitecode	varchar(10),	
+drugID	int(11),
+startDate	date,
+endDate	date,
+signature	varchar(55),
+createDate	datetime,
+lastDate	datetime);
+
+drop table if exists iap_indicator;
+create table iap_indicator (
+id int primary key auto_increment,
+indicatorID int,
+name varchar(25),
+definition longtext,
+numerotor longtext,
+denominator longtext,
+type varchar(25)
+);
+
 insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type) values
 (1,'Retrait à temps des ARV (ART.7)','Retrait à temps des ARV (ART.7) - Pourcentage des patients qui retirent l\'ensemble des ARV prescrits avec maximum deux jours de retard au premier retrait après un retrait de référence défini',	
 'Nombre de patients qui retirent à temps les ARV au premier retrait après un retrait de Référence défini.',

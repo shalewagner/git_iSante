@@ -2799,12 +2799,12 @@ function generateLabViral()
 {
 database()->exec('create table if not exists labViral(patientID varchar(25),resultDate Date,result varchar(25),past_result varchar(25),past_date Date);');
 database()->exec('truncate table labViral;');
-database()->exec('insert into labViral	
+database()->query('insert into labViral	
 SELECT L.patientID,date(ymdToDate(L.resultDateYy,L.resultDateMm,L.resultDateDd)) as resultDate,L.result,
 (SELECT result FROM labs  WHERE patientID=L.patientID AND date(ymdToDate(resultDateYy,resultDateMm,resultDateDd))<date(ymdToDate(L.resultDateYy,L.resultDateMm,L.resultDateDd)) and labID IN (103, 1257)  ORDER BY date(ymdToDate(resultDateYy,resultDateMm,resultDateDd)) DESC LIMIT 1) AS past_result,
 (SELECT date(ymdToDate(resultDateYy,resultDateMm,resultDateDd)) FROM labs  WHERE patientID=L.patientID AND date(ymdToDate(resultDateYy,resultDateMm,resultDateDd))<date(ymdToDate(L.resultDateYy,L.resultDateMm,L.resultDateDd)) and labID IN (103, 1257)  ORDER BY date(ymdToDate(resultDateYy,resultDateMm,resultDateDd)) DESC LIMIT 1) AS past_date
 FROM labs AS L where labID IN (103, 1257) 
-GROUP BY (CONCAT(L.patientID,'-',date(ymdToDate(L.resultDateYy,L.resultDateMm,L.resultDateDd))));');
+GROUP BY (CONCAT(L.patientID,?,date(ymdToDate(L.resultDateYy,L.resultDateMm,L.resultDateDd))));',array('-'));
 }
 
 
