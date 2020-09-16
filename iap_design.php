@@ -59,7 +59,7 @@ $query_num="select count(distinct p.patientID) as cnt
   FROM 
 (select patientID, min(visitDate) as visitDate 
 from pepfarTable p group by patientID
-having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 12 and 12.999 
+having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."')=12
 ) p,`patientStatusTemp` pt
 WHERE patientStatus in (6,8) and 
 endDate between '".$startDate."' and '".$endDate."' and 
@@ -74,7 +74,7 @@ $query_den="select count(distinct p.patientID) as cnt
 FROM 
 (select patientID, min(visitDate) as visitDate 
 from pepfarTable p group by patientID
-having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 12 and 12.999 
+having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."')=12
 ) p,`patientStatusTemp` pt
 WHERE patientStatus <>2 and 
 endDate between '".$startDate."' and '".$endDate."' and 
@@ -235,8 +235,14 @@ where p.patientID=p1.patientID and p.visitDate=p1.visitDate
 )A,
 (select p.patientID,p.visitDate,p.regimen from pepfarTable p,
 (select p.patientID,max(visitDate) as visitDate from pepfarTable p,(select patientID,max(resultDate) as resultDate from labViral l where l.resultDate<='".$endDate."' group by 1) pt where p.patientID=pt.patientID and p.visitDate between pt.resultDate and DATE_ADD(pt.resultDate, INTERVAL 3 month) group by 1) p1
-where p.patientID=p1.patientID and p.visitDate=p1.visitDate) B 
-where A.patientID=B.patientID and STRCMP(A.regimen,B.regimen)<>0";
+where p.patientID=p1.patientID and p.visitDate=p1.visitDate) B , 
+(select l.patientID from labViral l,
+(select patientID,max(resultDate) as resultDate from labViral l where l.resultDate<='".$endDate."' group by 1) l1
+where l.patientID=l1.patientID and 
+      l.resultDate=l1.resultDate and
+      l.result>1000 and l.past_result>1000 and 
+	  l.resultDate<='".$endDate."') C
+where A.patientID=B.patientID and C.patientID=A.patientID and STRCMP(A.regimen,B.regimen)<>0";
 
 
 $result = databaseSelect()->query($query_num)->fetchAll(PDO::FETCH_ASSOC);
@@ -278,7 +284,7 @@ $query_num="select count(distinct p.patientID) as cnt
   FROM 
 (select patientID, min(visitDate) as visitDate 
 from pepfarTable p group by patientID
-having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 12 and 12.999
+having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."')=12
 ) p,`patientStatusTemp` pt
 WHERE patientStatus=9 and 
 p.patientID=pt.patientID and
@@ -293,7 +299,7 @@ $query_den="select count(distinct p.patientID) as cnt
 FROM 
 (select patientID, min(visitDate) as visitDate 
 from pepfarTable p group by patientID
-having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 12 and 12.999
+having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."')=12
 ) p,`patientStatusTemp` pt
 WHERE patientStatus in (6,8,9) and 
 p.patientID=pt.patientID and 
@@ -484,9 +490,11 @@ table.gridtable td {
             </td>
 		</tr>
     </form>
+	<?php if (isset($_REQUEST['indicateur'])) {?>
     <thead>
         <tr><th>Indicateur: <?php echo $iap['name']; ?> </th></tr>
     </thead>
+	<?php } ?>
 </table>
  
  
@@ -496,7 +504,7 @@ table.gridtable td {
 <div style="display: inline-block; width:65%; vertical-align:top;border-left: 1px solid #99BBE8;">
       <div class="tablex" style="padding:5px">
 
-	  
+<?php if (isset($_REQUEST['indicateur'])) {?>	  
 <table class="tablex1">
   <tbody>
     <tr><td>Definition</td><td><?php echo $iap['definition']; ?></td></tr>
@@ -504,7 +512,7 @@ table.gridtable td {
 	<tr><td>Denominateur</td><td><?php echo $iap['denominator']; ?></td></tr>
   </tbody>
 </table>
-	  
+	<?php } ?>	  
 	  
      </div>
 		 

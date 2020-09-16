@@ -8,6 +8,10 @@ require_once "include/standardHeaderExt.php";
 
 $startDate=$_REQUEST['startDate'];
 $endDate=$_REQUEST['endDate'];
+
+
+if(isset($_REQUEST['endDate'])) {  
+
 $NbrLigne=2;
 //$valeur=0;
 $query="select case when sex=2 then 'HOMME' when sex=1 then 'FEMME' end as sex,sex as sex_id,
@@ -67,7 +71,11 @@ $NbreData26=6;
 
 
 
-//$NbreData40=2;
+$NbreData35=2;
+$NbreData36=2;
+$NbreData37=2;
+$NbreData38=2;
+$NbreData39=2;
 $NbreData41=2;
 $NbreData42=2;
 $NbreData43=2;
@@ -90,7 +98,16 @@ $NbreData59=2;
 $NbreData60=1;
 $NbreData61=1;
 $NbreData62=1;
-
+$NbreData75=2;
+$NbreData76=2;
+$NbreData77=2;
+$NbreData78=2;
+$NbreData79=3;
+$NbreData80=3;
+$NbreData81=3;
+$NbreData82=3;
+$NbreData83=6;
+$NbreData84=6;
 //echo $NbreData;
 // creation d'un seul array avec toutes les donnees
 $k=0;
@@ -571,8 +588,166 @@ while ($val = $result27->fetch()) {
    $k++;
 }$result27->closeCursor();
 
+/*15. Patients sous ARV INACTIFS à la fin du mois*/
+/*15.1 Décédés*/
+$query35="select ps.patientStatus, case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.sex as sex_id,
+count(distinct case when (TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') < 1)
+AND ((TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end, case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'2018-02-28') >= 0)) then p.patientID else null end) as '<1 an',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 1 and 4 then p.patientID else null end) as '1-4 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 5 and 9 then p.patientID else null end) as '5-9 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 10 and 14 then p.patientID else null end) as '10-14 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 15 and 19 then p.patientID else null end) as '15-19 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 20 and 24 then p.patientID else null end) as '20-24 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 25 and 29 then p.patientID else null end) as '25-29 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 30 and 34 then p.patientID else null end) as '30-34 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 35 and 39 then p.patientID else null end) as '35-39 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 40 and 44 then p.patientID else null end) as '40-44 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 45 and 49 then p.patientID else null end) as '45-49 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') >= 50 then p.patientID else null end) as '50 ans et plus',
+count(distinct case when (p.dobYy IS NULL OR p.dobYy = '') then p.patientID else null end) as 'âge inconnu'
+from patient p, patientStatusYear ps, 
+(select pst.patientID, MAX(pst.endDate) as endDate FROM patientStatusYear pst
+WHERE DATE(pst.endDate) BETWEEN '".$startDate."' and '".$endDate."' GROUP BY 1) B
+WHERE p.patientID = ps.patientID AND ps.patientStatus = 1
+AND ps.patientID = B.patientID
+AND DATE(ps.endDate) = DATE(B.endDate)
+AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."') group by sex";
+$result35 = databaseSelect()->query($query35);
 
-/*Nombre de patients décédés CONFIRMES parmi les perdus de vue recherchés au cours du mois du rapport16.1. Nombre de patients décédés CONFIRMES parmi les perdus de vue recherchés au cours du mois du rapport*/
+$k=0;
+while ($val = $result35->fetch()) {
+   $tableau35[$k] = $val;
+   $k++;
+}$result35->closeCursor();
+
+/*15.2 Arrets des ARV (volontaire ou médical ) */
+$query36="select ps.patientStatus, case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.sex as sex_id,
+count(distinct case when (TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') < 1)
+AND ((TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end, case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'2018-02-28') >= 0)) then p.patientID else null end) as '<1 an',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 1 and 4 then p.patientID else null end) as '1-4 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 5 and 9 then p.patientID else null end) as '5-9 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 10 and 14 then p.patientID else null end) as '10-14 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 15 and 19 then p.patientID else null end) as '15-19 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 20 and 24 then p.patientID else null end) as '20-24 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 25 and 29 then p.patientID else null end) as '25-29 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 30 and 34 then p.patientID else null end) as '30-34 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 35 and 39 then p.patientID else null end) as '35-39 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 40 and 44 then p.patientID else null end) as '40-44 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 45 and 49 then p.patientID else null end) as '45-49 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') >= 50 then p.patientID else null end) as '50 ans et plus',
+count(distinct case when (p.dobYy IS NULL OR p.dobYy = '') then p.patientID else null end) as 'âge inconnu'
+from patient p, patientStatusYear ps, 
+(select pst.patientID, MAX(pst.endDate) as endDate FROM patientStatusYear pst
+WHERE DATE(pst.endDate) BETWEEN '".$startDate."' and '".$endDate."' GROUP BY 1) B
+WHERE p.patientID = ps.patientID AND ps.patientStatus = 3
+AND ps.patientID = B.patientID
+AND DATE(ps.endDate) = DATE(B.endDate)
+AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."') group by sex";
+$result36 = databaseSelect()->query($query36);
+
+$k=0;
+while ($val = $result36->fetch()) {
+   $tableau36[$k] = $val;
+   $k++;
+}$result36->closeCursor();
+
+/*15.3 Perdus de vue (Pas d'ARV depuis 28 jours ou plus)*/
+$query37="select ps.patientStatus, case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.sex as sex_id,
+count(distinct case when (TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') < 1)
+AND ((TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end, case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'2018-02-28') >= 0)) then p.patientID else null end) as '<1 an',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 1 and 4 then p.patientID else null end) as '1-4 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 5 and 9 then p.patientID else null end) as '5-9 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 10 and 14 then p.patientID else null end) as '10-14 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 15 and 19 then p.patientID else null end) as '15-19 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 20 and 24 then p.patientID else null end) as '20-24 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 25 and 29 then p.patientID else null end) as '25-29 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 30 and 34 then p.patientID else null end) as '30-34 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 35 and 39 then p.patientID else null end) as '35-39 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 40 and 44 then p.patientID else null end) as '40-44 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 45 and 49 then p.patientID else null end) as '45-49 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') >= 50 then p.patientID else null end) as '50 ans et plus',
+count(distinct case when (p.dobYy IS NULL OR p.dobYy = '') then p.patientID else null end) as 'âge inconnu'
+from patient p, patientStatusYear ps, 
+(select pst.patientID, MAX(pst.endDate) as endDate FROM patientStatusYear pst
+WHERE DATE(pst.endDate) BETWEEN '".$startDate."' and '".$endDate."' GROUP BY 1) B
+WHERE p.patientID = ps.patientID AND ps.patientStatus = 9
+AND ps.patientID = B.patientID
+AND DATE(ps.endDate) = DATE(B.endDate)
+AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."') group by sex";
+$result37 = databaseSelect()->query($query37);
+
+$k=0;
+while ($val = $result37->fetch()) {
+   $tableau37[$k] = $val;
+   $k++;
+}$result37->closeCursor();
+
+/*15.3.1 Perdus de vue ayant émigré*/
+$query38="select ps.patientStatus, case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.sex as sex_id,
+count(distinct case when (TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') < 1)
+AND ((TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end, case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'2018-02-28') >= 0)) then p.patientID else null end) as '<1 an',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 1 and 4 then p.patientID else null end) as '1-4 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 5 and 9 then p.patientID else null end) as '5-9 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 10 and 14 then p.patientID else null end) as '10-14 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 15 and 19 then p.patientID else null end) as '15-19 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 20 and 24 then p.patientID else null end) as '20-24 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 25 and 29 then p.patientID else null end) as '25-29 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 30 and 34 then p.patientID else null end) as '30-34 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 35 and 39 then p.patientID else null end) as '35-39 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 40 and 44 then p.patientID else null end) as '40-44 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 45 and 49 then p.patientID else null end) as '45-49 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') >= 50 then p.patientID else null end) as '50 ans et plus',
+count(distinct case when (p.dobYy IS NULL OR p.dobYy = '') then p.patientID else null end) as 'âge inconnu'
+from patient p, patientStatusYear ps, encounter e, obs o,
+(select pst.patientID, MAX(pst.endDate) as endDate FROM patientStatusYear pst
+WHERE DATE(pst.endDate) BETWEEN '".$startDate."' and '".$endDate."' GROUP BY 1) B
+WHERE p.patientID = ps.patientID AND ps.patientStatus = 9
+AND p.patientID = e.patientID
+AND e.encounter_id = o.encounter_id
+AND ps.patientID = B.patientID
+AND DATE(ps.endDate) = DATE(B.endDate)
+AND (o.concept_id = 163623 AND o.value_boolean = 1)
+AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."') group by sex";
+$result38 = databaseSelect()->query($query38);
+
+$k=0;
+while ($val = $result38->fetch()) {
+   $tableau38[$k] = $val;
+   $k++;
+}$result38->closeCursor();
+
+/*15.4 Transferes vers un autre site */
+$query39="select ps.patientStatus, case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.sex as sex_id,
+count(distinct case when (TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') < 1)
+AND ((TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end, case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'2018-02-28') >= 0)) then p.patientID else null end) as '<1 an',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 1 and 4 then p.patientID else null end) as '1-4 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 5 and 9 then p.patientID else null end) as '5-9 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 10 and 14 then p.patientID else null end) as '10-14 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 15 and 19 then p.patientID else null end) as '15-19 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 20 and 24 then p.patientID else null end) as '20-24 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 25 and 29 then p.patientID else null end) as '25-29 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 30 and 34 then p.patientID else null end) as '30-34 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 35 and 39 then p.patientID else null end) as '35-39 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 40 and 44 then p.patientID else null end) as '40-44 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') between 45 and 49 then p.patientID else null end) as '45-49 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy, case when p.dobMm is not null or p.dobMm<>'' then p.dobMm else '06' end , case when p.dobDd is not null or p.dobDd<>'' then p.dobDd else '15' end),'".$endDate."') >= 50 then p.patientID else null end) as '50 ans et plus',
+count(distinct case when (p.dobYy IS NULL OR p.dobYy = '') then p.patientID else null end) as 'âge inconnu'
+from patient p, patientStatusYear ps, 
+(select pst.patientID, MAX(pst.endDate) as endDate FROM patientStatusYear pst
+WHERE DATE(pst.endDate) BETWEEN '".$startDate."' and '".$endDate."' GROUP BY 1) B
+WHERE p.patientID = ps.patientID AND ps.patientStatus = 2
+AND ps.patientID = B.patientID
+AND DATE(ps.endDate) = DATE(B.endDate)
+AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."') group by sex";
+$result39 = databaseSelect()->query($query39);
+
+$k=0;
+while ($val = $result39->fetch()) {
+   $tableau39[$k] = $val;
+   $k++;
+}$result39->closeCursor();
+
+/*16.1. Nombre de patients décédés CONFIRMES parmi les perdus de vue recherchés au cours du mois du rapport*/
 
 $query41="select case when sex=2 then 'HOMME' when sex=1 then 'FEMME' end as sex,sex as sex_id,
 count(distinct case when (TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') < 1)
@@ -1096,7 +1271,255 @@ Charge virale au cours des 12 derniers mois  est inférieur à 1000 copies/ml */
 	   $k++;
 	}
 	$result62->closeCursor();
+	
+/*20.1.-Total de Patients ayant démarré le traitement ARV il y a 12 mois (TX_RET D)*/	
+	$query75="select case when sex=2 then 'HOMME' when sex=1 then 'FEMME' end as sex,sex as sex_id,
+count(distinct case when (TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') < 1)
+AND ((TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'2018-02-28') >= 0)) then  patientID else null end) as '<1 an',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 1 and 4 then   patientID else null end) as '1-4 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 5 and 9 then   patientID else null end) as '5-9 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 10 and 14 then   patientID else null end) as '10-14 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then   patientID else null end) as '30-34 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then   patientID else null end) as '35-39 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then   patientID else null end) as '40-44 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then   patientID else null end) as '45-49 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then patientID else null end) as '50 ans et plus',
+count(distinct case when (dobYy IS NULL OR dobYy = '') then patientID else null end) as 'âge inconnu'
+from arv_pnls_report
+where (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=75 group by sex";
+$result75 = databaseSelect()->query($query75);
 
+$k=0;
+while ($val = $result75->fetch()) {
+   $tableau75[$k] = $val;
+   $k++;
+}$result75->closeCursor();
+
+/*20.1.1.-Total de Patients ayant démarré le traitement ARV dans le site il y a 12 mois*/
+$query76="select case when sex=2 then 'HOMME' when sex=1 then 'FEMME' end as sex,sex as sex_id,
+count(distinct case when (TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') < 1)
+AND ((TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'2018-02-28') >= 0)) then  patientID else null end) as '<1 an',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 1 and 4 then   patientID else null end) as '1-4 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 5 and 9 then   patientID else null end) as '5-9 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 10 and 14 then   patientID else null end) as '10-14 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then   patientID else null end) as '30-34 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then   patientID else null end) as '35-39 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then   patientID else null end) as '40-44 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then   patientID else null end) as '45-49 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then patientID else null end) as '50 ans et plus',
+count(distinct case when (dobYy IS NULL OR dobYy = '') then patientID else null end) as 'âge inconnu'
+from arv_pnls_report
+where (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=76 group by sex";
+$result76 = databaseSelect()->query($query76);
+
+$k=0;
+while ($val = $result76->fetch()) {
+   $tableau76[$k] = $val;
+   $k++;
+}$result76->closeCursor();
+
+/*20.1.2.Total de Patients ayant démarré le traitement ARV dans un autre site 
+il y a 12 mois et refere pour prise en charge*/
+$query77="select case when sex=2 then 'HOMME' when sex=1 then 'FEMME' end as sex,sex as sex_id,
+count(distinct case when (TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') < 1)
+AND ((TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'2018-02-28') >= 0)) then  patientID else null end) as '<1 an',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 1 and 4 then   patientID else null end) as '1-4 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 5 and 9 then   patientID else null end) as '5-9 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 10 and 14 then   patientID else null end) as '10-14 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then   patientID else null end) as '30-34 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then   patientID else null end) as '35-39 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then   patientID else null end) as '40-44 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then   patientID else null end) as '45-49 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then patientID else null end) as '50 ans et plus',
+count(distinct case when (dobYy IS NULL OR dobYy = '') then patientID else null end) as 'âge inconnu'
+from arv_pnls_report
+where (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=77 group by sex";
+$result77 = databaseSelect()->query($query77);
+
+$k=0;
+while ($val = $result77->fetch()) {
+   $tableau77[$k] = $val;
+   $k++;
+}$result77->closeCursor();
+
+/*20.2.-Nombre de Patients ayant démarré le traitement ARV 
+il y a 12 mois et qui sont VIVANTS et toujours SOUS TRAITEMENT ARV: (TX_RET N)*/
+	$query78="select case when apr.sex=2 then 'HOMME' when apr.sex=1 then 'FEMME' end as sex,apr.sex as sex_id,
+	count(distinct case when (TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'".$endDate."') < 1)
+	AND ((TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'2018-02-28') >= 0)) then apr.patientID else null end) as '<1 an',
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'".$endDate."') between 1 and 4 then apr.patientID else null end) as '1-4 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'".$endDate."') between 5 and 9 then apr.patientID else null end) as '5-9 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'".$endDate."') between 10 and 14 then  apr.patientID else null end) as '10-14 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'".$endDate."') between 15 and 19 then   apr.patientID else null end) as '15-19 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'".$endDate."') between 20 and 24 then   apr.patientID else null end) as '20-24 ans',
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'".$endDate."') between 25 and 29 then   apr.patientID else null end) as '25-29 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'".$endDate."') between 30 and 34 then   apr.patientID else null end) as '30-34 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'".$endDate."') between 35 and 39 then   apr.patientID else null end) as '35-39 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'".$endDate."') between 40 and 44 then   apr.patientID else null end) as '40-44 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'".$endDate."') between 45 and 49 then   apr.patientID else null end) as '45-49 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(apr.dobYy, case when apr.dobMm is not null or apr.dobMm<>'' then apr.dobMm else '06' end , case when apr.dobDd is not null or apr.dobDd<>'' then apr.dobDd else '15' end),'".$endDate."') >= 50 then apr.patientID else null end) as '50 ans et plus',
+	count(distinct case when (apr.dobYy IS NULL OR apr.dobYy = '') then apr.patientID else null end) as 'âge inconnu'
+	from arv_pnls_report apr, patientStatusYear ps, 
+	(select pst.patientID, MAX(pst.endDate) AS endDate FROM patientStatusYear pst 
+	WHERE pst.endDate <= '".$endDate."' GROUP BY 1) B
+	where apr.patientID = ps.patientID
+	AND ps.patientID = B.patientID
+	AND ps.endDate = B.endDate
+	AND ps.patientStatus IN (6,8,9)
+	AND ps.endDate <= '".$endDate."'
+	AND (apr.dateVisite between '".$startDate."' and '".$endDate."') and apr.indicator_id=75 group by sex";
+	$result78 = databaseSelect()->query($query78);
+
+	$k=0;
+	while ($val = $result78->fetch()) {
+	   $tableau78[$k] = $val;
+	   $k++;
+	}$result78->closeCursor();
+	
+	/*21.1 Nombre de femmes sous ARV ayant bénéficié d'un dépistage du cancer du col 
+	de l'utérus (CXCA_SCRN) pour la 1ere fois*/
+	
+	$query79="select distinct case when cancer_col_status=1 THEN 'Negatif' WHEN cancer_col_status=2 then 'Positif' when cancer_col_status=4 then 'Suspicion de cancer' end as cancer_col, 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then   patientID else null end) as '30-34 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then   patientID else null end) as '35-39 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then   patientID else null end) as '40-44 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then   patientID else null end) as '45-49 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then patientID else null end) as '50 ans et plus',
+count(distinct case when (dobYy IS NULL OR dobYy = '') then patientID else null end) as 'âge inconnu'
+from arv_pnls_report
+where (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=79 group by cancer_col_status";
+$result79 = databaseSelect()->query($query79);
+
+$k=0;
+while ($val = $result79->fetch()) {
+   $tableau79[$k] = $val;
+   $k++;
+}$result79->closeCursor();
+
+/*21.2 Nombre de femmes sous ARV ayant bénéficié d'un dépistage du cancer du col 
+de l'utérus (CXCA_SCRN) après un 1er test negatif*/
+	$query80="select distinct case when cancer_col_status=1 THEN 'Negatif' WHEN cancer_col_status=2 then 'Positif' when cancer_col_status=4 then 'Suspicion de cancer' end as cancer_col, 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then   patientID else null end) as '30-34 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then   patientID else null end) as '35-39 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then   patientID else null end) as '40-44 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then   patientID else null end) as '45-49 ans', 
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then patientID else null end) as '50 ans et plus',
+count(distinct case when (dobYy IS NULL OR dobYy = '') then patientID else null end) as 'âge inconnu'
+from arv_pnls_report
+where (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=80 group by cancer_col_status";
+$result80 = databaseSelect()->query($query80);
+
+$k=0;
+while ($val = $result80->fetch()) {
+   $tableau80[$k] = $val;
+   $k++;
+}$result80->closeCursor();
+/*21.3 Nombre de femmes sous ARV ayant bénéficié d'un dépistage 
+du cancer du col de l'utérus (CXCA_SCRN) après traitement */
+	$query81="select distinct case when cancer_col_status=1 THEN 'Negatif' WHEN cancer_col_status=2 then 'Positif' when cancer_col_status=4 then 'Suspicion de cancer' end as cancer_col, 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then   patientID else null end) as '30-34 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then   patientID else null end) as '35-39 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then   patientID else null end) as '40-44 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then   patientID else null end) as '45-49 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then patientID else null end) as '50 ans et plus',
+	count(distinct case when (dobYy IS NULL OR dobYy = '') then patientID else null end) as 'âge inconnu'
+	from arv_pnls_report
+	where (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=81 group by cancer_col_status";
+	$result81 = databaseSelect()->query($query81);
+
+	$k=0;
+	while ($val = $result81->fetch()) {
+	   $tableau81[$k] = $val;
+	   $k++;
+	}$result81->closeCursor();
+/*22. Nombre de femmes sous ARV dépistées positives pour le cancer du col de l'utérus 
+et qui ont reçu reçu une cryothérapie,une thermocoagulation ou une LEEP :  (CXCA_TX)*/
+	$query82="select distinct case when intervention=162812 THEN 'Cryotherapie' WHEN intervention=163408 then 'Thermocoagulation' when intervention=162810 then 'LEEP' end as intervention, 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then   patientID else null end) as '30-34 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then   patientID else null end) as '35-39 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then   patientID else null end) as '40-44 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then   patientID else null end) as '45-49 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then patientID else null end) as '50 ans et plus',
+	count(distinct case when (dobYy IS NULL OR dobYy = '') then patientID else null end) as 'âge inconnu'
+	from arv_pnls_report
+	where (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=82 group by intervention";
+	$result82 = databaseSelect()->query($query82);
+
+	$k=0;
+	while ($val = $result82->fetch()) {
+	   $tableau82[$k] = $val;
+	   $k++;
+	}$result82->closeCursor();
+	
+	/*23.1. Nombre de patients  ACCEPTANTS d'une méthode de PF*/
+	
+	$query83="select distinct case when methode_pf=10 THEN 'Pilules' WHEN methode_pf=71128 then 'Injectables' when methode_pf=71127 then 'Implants' 
+	when methode_pf=71374 then 'Collier' when methode_pf=20 then 'Condom' end as methode_pf,
+	case when sex=2 then 'HOMME' when sex=1 then 'FEMME' end as sex,sex as sex_id,
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then   patientID else null end) as '30-34 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then   patientID else null end) as '35-39 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then   patientID else null end) as '40-44 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then   patientID else null end) as '45-49 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then patientID else null end) as '50 ans et plus',
+	count(distinct case when (dobYy IS NULL OR dobYy = '') then patientID else null end) as 'âge inconnu'
+	from arv_pnls_report
+	where (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=83 group by methode_pf, sex";
+	$result83 = databaseSelect()->query($query83);
+
+	$k=0;
+	while ($val = $result83->fetch()) {
+	   $tableau83[$k] = $val;
+	   $k++;
+	}$result83->closeCursor();
+	
+	/*23.2. Patients UTILISATEURS d'une méthode de PF*/
+	$query84="select distinct case when methode_pf=10 THEN 'Pilules' WHEN methode_pf=71128 then 'Injectables' when methode_pf=71127 then 'Implants' 
+	when methode_pf=71374 then 'Collier' when methode_pf=20 then 'Condom' end as methode_pf,
+	case when sex=2 then 'HOMME' when sex=1 then 'FEMME' end as sex,sex as sex_id,
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then   patientID else null end) as '30-34 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then   patientID else null end) as '35-39 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then   patientID else null end) as '40-44 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then   patientID else null end) as '45-49 ans', 
+	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then patientID else null end) as '50 ans et plus',
+	count(distinct case when (dobYy IS NULL OR dobYy = '') then patientID else null end) as 'âge inconnu'
+	from arv_pnls_report
+	where (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=83 group by methode_pf, sex";
+	$result84 = databaseSelect()->query($query84);
+
+	$k=0;
+	while ($val = $result84->fetch()) {
+	   $tableau84[$k] = $val;
+	   $k++;
+	}$result84->closeCursor();
+
+}	
 ?> 
 
 <style type="text/css">
@@ -1249,21 +1672,17 @@ var tableToExcel = (function() {
 
 </div>	
   
-  <?php ?>
+  <?php  if(isset($_REQUEST['endDate'])) { ?>
   
   <div style="float:left; padding:15px; margin-right:35px; width:90%;">
  <input name="b_print" type="button"  onClick="printdiv('print_section');" value=" Imprimer ">
- <button onclick="tableToExcel('print_section', 'Rapport mensuel des soins cliniques VIH-ARV')">Exporter dans EXCEL</button>
+ <button onclick="tableToExcel('excelTable', 'Rapport mensuel des soins cliniques VIH-ARV')">Exporter dans EXCEL</button>
  </div>
   
   
 <div id="print_section" style="width:90%; padding:15px; vertical-align:top;border-left: 1px solid #99BBE8;">
 		 
 		   <?php 
-		   
-if(isset($startDate)){		   
-		   
-		   
 		   
 if ($NbreData != 0) {
 $i = 0;
@@ -3561,10 +3980,590 @@ echo '</table>';
 
 echo '<div>&nbsp;</div>';
 
+/*15. Patients sous ARV INACTIFS à la fin du mois*/
+/*15.1 Décédés*/
+if ($NbreData35 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Patients sous ARV INACTIFS à la fin du mois <br/> Décédés</b></caption>
+<thead class=\"theadx\"><tr>
+			<th></th>
+			<th>Sex</th>
+			<th>< 1 an</th>
+			<th>1-4 ans</th>
+			<th>5-9 ans</th>
+			<th>10-14 ans</th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total35_0=0;
+			$total35_1=0;
+			$total35_2=0;
+			$total35_3=0;
+			$total35_4=0;
+			$total35_5=0;
+			$total35_6=0;
+			$total35_7=0;
+			$total35_8=0;
+			$total35_9=0;
+			$total35_10=0;
+			$total35_11=0;
+			$total35_12=0;
+   
+   for ($i=0; $i<count($tableau35); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*$NbrLigne))%$NbrLigne==$i && ($i+($j*$NbrLigne))<count($tableau35)) {
+         echo '<td>';
+          // --------------------------------------
+          // AFFICHAGE de l'element
+		  
+		  $k = ($i+($j*$NbrLigne));
+		  /*echo $tableau35[$k]['groupe'];*/
+		   echo '</td><td>';
+		  echo $tableau35[$k]['sex'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=<1 an\">".$tableau35[$k]['<1 an']."</a>";
+		 $total35_0=$total35_0+$tableau35[$k]['<1 an'];
+         echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=1-4 ans\">".$tableau35[$k]['1-4 ans']."</a>";
+		  $total35_1=$total35_1+$tableau35[$k]['1-4 ans'];
+		 echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=5-9 ans\">".$tableau35[$k]['5-9 ans']."</a>";
+		  $total35_2=$total35_2+$tableau35[$k]['5-9 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=10-14 ans\">".$tableau35[$k]['10-14 ans']."</a>";
+		  $total35_3=$total35_3+$tableau35[$k]['10-14 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=15-19 ans\">".$tableau35[$k]['15-19 ans']."</a>";
+		  $total35_4=$total35_4+$tableau35[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=20-24 ans\">".$tableau35[$k]['20-24 ans']."</a>";
+		  $total35_5=$total35_5+$tableau35[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=25-29 ans\">".$tableau35[$k]['25-29 ans']."</a>";
+		  $total35_6=$total35_6+$tableau35[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=30-34 ans\">".$tableau35[$k]['30-34 ans']."</a>";
+		  $total35_7=$total35_7+$tableau35[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=35-39 ans\">".$tableau35[$k]['35-39 ans']."</a>";
+		  $total35_8=$total35_8+$tableau35[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=40-44 ans\">".$tableau35[$k]['40-44 ans']."</a>";
+		  $total35_9=$total35_9+$tableau35[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=45-49 ans\">".$tableau35[$k]['45-49 ans']."</a>";
+		  $total35_10=$total35_10+$tableau35[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=50 ans et plus\">".$tableau35[$k]['50 ans et plus']."</a>";
+		  $total35_11=$total35_11+$tableau35[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=35&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau35[$k]['sex_id']."& interval=inconnu\">".$tableau35[$k]['âge inconnu']."</a>";
+		  $total35_12=$total35_12+$tableau35[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td></td>
+			<td>'.$total35_0.'</td>
+			<td>'.$total35_1.'</td>
+			<td>'.$total35_2.'</td>
+			<td>'.$total35_3.'</td>
+			<td>'.$total35_4.'</td>
+			<td>'.$total35_5.'</td>
+			<td>'.$total35_6.'</td>
+			<td>'.$total35_7.'</td>
+			<td>'.$total35_8.'</td>
+			<td>'.$total35_9.'</td>
+			<td>'.$total35_10.'</td>
+			<td>'.$total35_11.'</td>
+			<td>'.$total35_12.'</td>
+			</tr>';
+echo '</table>';
+}
+echo '<div>&nbsp;</div>';
 
+/*15.2 Arrets des ARV (volontaire ou médical) */
+if ($NbreData36 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Arrets des ARV (volontaire ou médical)</b></caption>
+<thead class=\"theadx\"><tr>
+			<th></th>
+			<th>Sex</th>
+			<th>< 1 an</th>
+			<th>1-4 ans</th>
+			<th>5-9 ans</th>
+			<th>10-14 ans</th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total36_0=0;
+			$total36_1=0;
+			$total36_2=0;
+			$total36_3=0;
+			$total36_4=0;
+			$total36_5=0;
+			$total36_6=0;
+			$total36_7=0;
+			$total36_8=0;
+			$total36_9=0;
+			$total36_10=0;
+			$total36_11=0;
+			$total36_12=0;
+   
+   for ($i=0; $i<count($tableau36); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*$NbrLigne))%$NbrLigne==$i && ($i+($j*$NbrLigne))<count($tableau36)) {
+         echo '<td>';
+          // --------------------------------------
+          // AFFICHAGE de l'element
+		  
+		  $k = ($i+($j*$NbrLigne));
+		  /*echo $tableau36[$k]['groupe'];*/
+		   echo '</td><td>';
+		  echo $tableau36[$k]['sex'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=<1 an\">".$tableau36[$k]['<1 an']."</a>";
+		 $total36_0=$total36_0+$tableau36[$k]['<1 an'];
+         echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=1-4 ans\">".$tableau36[$k]['1-4 ans']."</a>";
+		  $total36_1=$total36_1+$tableau36[$k]['1-4 ans'];
+		 echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=5-9 ans\">".$tableau36[$k]['5-9 ans']."</a>";
+		  $total36_2=$total36_2+$tableau36[$k]['5-9 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=10-14 ans\">".$tableau36[$k]['10-14 ans']."</a>";
+		  $total36_3=$total36_3+$tableau36[$k]['10-14 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=15-19 ans\">".$tableau36[$k]['15-19 ans']."</a>";
+		  $total36_4=$total36_4+$tableau36[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=20-24 ans\">".$tableau36[$k]['20-24 ans']."</a>";
+		  $total36_5=$total36_5+$tableau36[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=25-29 ans\">".$tableau36[$k]['25-29 ans']."</a>";
+		  $total36_6=$total36_6+$tableau36[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=30-34 ans\">".$tableau36[$k]['30-34 ans']."</a>";
+		  $total36_7=$total36_7+$tableau36[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=35-39 ans\">".$tableau36[$k]['35-39 ans']."</a>";
+		  $total36_8=$total36_8+$tableau36[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=40-44 ans\">".$tableau36[$k]['40-44 ans']."</a>";
+		  $total36_9=$total36_9+$tableau36[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=45-49 ans\">".$tableau36[$k]['45-49 ans']."</a>";
+		  $total36_10=$total36_10+$tableau36[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=50 ans et plus\">".$tableau36[$k]['50 ans et plus']."</a>";
+		  $total36_11=$total36_11+$tableau36[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=36&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau36[$k]['sex_id']."& interval=inconnu\">".$tableau36[$k]['âge inconnu']."</a>";
+		  $total36_12=$total36_12+$tableau36[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td></td>
+			<td>'.$total36_0.'</td>
+			<td>'.$total36_1.'</td>
+			<td>'.$total36_2.'</td>
+			<td>'.$total36_3.'</td>
+			<td>'.$total36_4.'</td>
+			<td>'.$total36_5.'</td>
+			<td>'.$total36_6.'</td>
+			<td>'.$total36_7.'</td>
+			<td>'.$total36_8.'</td>
+			<td>'.$total36_9.'</td>
+			<td>'.$total36_10.'</td>
+			<td>'.$total36_11.'</td>
+			<td>'.$total36_12.'</td>
+			</tr>';
+echo '</table>';
+}
+echo '<div>&nbsp;</div>';
 
+/*15.3 Perdus de vue (Pas d'ARV depuis 28 jours ou plus)*/
+if ($NbreData37 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Perdus de vue (Pas d\'ARV depuis 28 jours ou plus)</b></caption>
+<thead class=\"theadx\"><tr>
+			<th></th>
+			<th>Sex</th>
+			<th>< 1 an</th>
+			<th>1-4 ans</th>
+			<th>5-9 ans</th>
+			<th>10-14 ans</th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total37_0=0;
+			$total37_1=0;
+			$total37_2=0;
+			$total37_3=0;
+			$total37_4=0;
+			$total37_5=0;
+			$total37_6=0;
+			$total37_7=0;
+			$total37_8=0;
+			$total37_9=0;
+			$total37_10=0;
+			$total37_11=0;
+			$total37_12=0;
+   
+   for ($i=0; $i<count($tableau37); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*$NbrLigne))%$NbrLigne==$i && ($i+($j*$NbrLigne))<count($tableau37)) {
+         echo '<td>';
+          // --------------------------------------
+          // AFFICHAGE de l'element
+		  
+		  $k = ($i+($j*$NbrLigne));
+		  /*echo $tableau37[$k]['groupe'];*/
+		   echo '</td><td>';
+		  echo $tableau37[$k]['sex'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=<1 an\">".$tableau37[$k]['<1 an']."</a>";
+		 $total37_0=$total37_0+$tableau37[$k]['<1 an'];
+         echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=1-4 ans\">".$tableau37[$k]['1-4 ans']."</a>";
+		  $total37_1=$total37_1+$tableau37[$k]['1-4 ans'];
+		 echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=5-9 ans\">".$tableau37[$k]['5-9 ans']."</a>";
+		  $total37_2=$total37_2+$tableau37[$k]['5-9 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=10-14 ans\">".$tableau37[$k]['10-14 ans']."</a>";
+		  $total37_3=$total37_3+$tableau37[$k]['10-14 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=15-19 ans\">".$tableau37[$k]['15-19 ans']."</a>";
+		  $total37_4=$total37_4+$tableau37[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=20-24 ans\">".$tableau37[$k]['20-24 ans']."</a>";
+		  $total37_5=$total37_5+$tableau37[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=25-29 ans\">".$tableau37[$k]['25-29 ans']."</a>";
+		  $total37_6=$total37_6+$tableau37[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=30-34 ans\">".$tableau37[$k]['30-34 ans']."</a>";
+		  $total37_7=$total37_7+$tableau37[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=35-39 ans\">".$tableau37[$k]['35-39 ans']."</a>";
+		  $total37_8=$total37_8+$tableau37[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=40-44 ans\">".$tableau37[$k]['40-44 ans']."</a>";
+		  $total37_9=$total37_9+$tableau37[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=45-49 ans\">".$tableau37[$k]['45-49 ans']."</a>";
+		  $total37_10=$total37_10+$tableau37[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=50 ans et plus\">".$tableau37[$k]['50 ans et plus']."</a>";
+		  $total37_11=$total37_11+$tableau37[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=37&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau37[$k]['sex_id']."& interval=inconnu\">".$tableau37[$k]['âge inconnu']."</a>";
+		  $total37_12=$total37_12+$tableau37[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td></td>
+			<td>'.$total37_0.'</td>
+			<td>'.$total37_1.'</td>
+			<td>'.$total37_2.'</td>
+			<td>'.$total37_3.'</td>
+			<td>'.$total37_4.'</td>
+			<td>'.$total37_5.'</td>
+			<td>'.$total37_6.'</td>
+			<td>'.$total37_7.'</td>
+			<td>'.$total37_8.'</td>
+			<td>'.$total37_9.'</td>
+			<td>'.$total37_10.'</td>
+			<td>'.$total37_11.'</td>
+			<td>'.$total37_12.'</td>
+			</tr>';
+echo '</table>';
+}
+echo '<div>&nbsp;</div>';
+/*15.3.1 Perdus de vue ayant émigré*/
+if ($NbreData38 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Perdus de vue ayant émigré</b></caption>
+<thead class=\"theadx\"><tr>
+			<th></th>
+			<th>Sex</th>
+			<th>< 1 an</th>
+			<th>1-4 ans</th>
+			<th>5-9 ans</th>
+			<th>10-14 ans</th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total38_0=0;
+			$total38_1=0;
+			$total38_2=0;
+			$total38_3=0;
+			$total38_4=0;
+			$total38_5=0;
+			$total38_6=0;
+			$total38_7=0;
+			$total38_8=0;
+			$total38_9=0;
+			$total38_10=0;
+			$total38_11=0;
+			$total38_12=0;
+   
+   for ($i=0; $i<count($tableau38); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*$NbrLigne))%$NbrLigne==$i && ($i+($j*$NbrLigne))<count($tableau38)) {
+         echo '<td>';
+          // --------------------------------------
+          // AFFICHAGE de l'element
+		  
+		  $k = ($i+($j*$NbrLigne));
+		  /*echo $tableau38[$k]['groupe'];*/
+		   echo '</td><td>';
+		  echo $tableau38[$k]['sex'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=<1 an\">".$tableau38[$k]['<1 an']."</a>";
+		 $total38_0=$total38_0+$tableau38[$k]['<1 an'];
+         echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=1-4 ans\">".$tableau38[$k]['1-4 ans']."</a>";
+		  $total38_1=$total38_1+$tableau38[$k]['1-4 ans'];
+		 echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=5-9 ans\">".$tableau38[$k]['5-9 ans']."</a>";
+		  $total38_2=$total38_2+$tableau38[$k]['5-9 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=10-14 ans\">".$tableau38[$k]['10-14 ans']."</a>";
+		  $total38_3=$total38_3+$tableau38[$k]['10-14 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=15-19 ans\">".$tableau38[$k]['15-19 ans']."</a>";
+		  $total38_4=$total38_4+$tableau38[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=20-24 ans\">".$tableau38[$k]['20-24 ans']."</a>";
+		  $total38_5=$total38_5+$tableau38[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=25-29 ans\">".$tableau38[$k]['25-29 ans']."</a>";
+		  $total38_6=$total38_6+$tableau38[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=30-34 ans\">".$tableau38[$k]['30-34 ans']."</a>";
+		  $total38_7=$total38_7+$tableau38[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=35-39 ans\">".$tableau38[$k]['35-39 ans']."</a>";
+		  $total38_8=$total38_8+$tableau38[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=40-44 ans\">".$tableau38[$k]['40-44 ans']."</a>";
+		  $total38_9=$total38_9+$tableau38[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=45-49 ans\">".$tableau38[$k]['45-49 ans']."</a>";
+		  $total38_10=$total38_10+$tableau38[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=50 ans et plus\">".$tableau38[$k]['50 ans et plus']."</a>";
+		  $total38_11=$total38_11+$tableau38[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=38&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau38[$k]['sex_id']."& interval=inconnu\">".$tableau38[$k]['âge inconnu']."</a>";
+		  $total38_12=$total38_12+$tableau38[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td></td>
+			<td>'.$total38_0.'</td>
+			<td>'.$total38_1.'</td>
+			<td>'.$total38_2.'</td>
+			<td>'.$total38_3.'</td>
+			<td>'.$total38_4.'</td>
+			<td>'.$total38_5.'</td>
+			<td>'.$total38_6.'</td>
+			<td>'.$total38_7.'</td>
+			<td>'.$total38_8.'</td>
+			<td>'.$total38_9.'</td>
+			<td>'.$total38_10.'</td>
+			<td>'.$total38_11.'</td>
+			<td>'.$total38_12.'</td>
+			</tr>';
+echo '</table>';
+}
+echo '<div>&nbsp;</div>';
 
-
+/*15.4 Transferes vers un autre site */
+if ($NbreData39 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Transferes vers un autre site</b></caption>
+<thead class=\"theadx\"><tr>
+			<th></th>
+			<th>Sex</th>
+			<th>< 1 an</th>
+			<th>1-4 ans</th>
+			<th>5-9 ans</th>
+			<th>10-14 ans</th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total39_0=0;
+			$total39_1=0;
+			$total39_2=0;
+			$total39_3=0;
+			$total39_4=0;
+			$total39_5=0;
+			$total39_6=0;
+			$total39_7=0;
+			$total39_8=0;
+			$total39_9=0;
+			$total39_10=0;
+			$total39_11=0;
+			$total39_12=0;
+   
+   for ($i=0; $i<count($tableau39); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*$NbrLigne))%$NbrLigne==$i && ($i+($j*$NbrLigne))<count($tableau39)) {
+         echo '<td>';
+          // --------------------------------------
+          // AFFICHAGE de l'element
+		  
+		  $k = ($i+($j*$NbrLigne));
+		  /*echo $tableau39[$k]['groupe'];*/
+		   echo '</td><td>';
+		  echo $tableau39[$k]['sex'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=<1 an\">".$tableau39[$k]['<1 an']."</a>";
+		 $total39_0=$total39_0+$tableau39[$k]['<1 an'];
+         echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=1-4 ans\">".$tableau39[$k]['1-4 ans']."</a>";
+		  $total39_1=$total39_1+$tableau39[$k]['1-4 ans'];
+		 echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=5-9 ans\">".$tableau39[$k]['5-9 ans']."</a>";
+		  $total39_2=$total39_2+$tableau39[$k]['5-9 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=10-14 ans\">".$tableau39[$k]['10-14 ans']."</a>";
+		  $total39_3=$total39_3+$tableau39[$k]['10-14 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=15-19 ans\">".$tableau39[$k]['15-19 ans']."</a>";
+		  $total39_4=$total39_4+$tableau39[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=20-24 ans\">".$tableau39[$k]['20-24 ans']."</a>";
+		  $total39_5=$total39_5+$tableau39[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=25-29 ans\">".$tableau39[$k]['25-29 ans']."</a>";
+		  $total39_6=$total39_6+$tableau39[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=30-34 ans\">".$tableau39[$k]['30-34 ans']."</a>";
+		  $total39_7=$total39_7+$tableau39[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=35-39 ans\">".$tableau39[$k]['35-39 ans']."</a>";
+		  $total39_8=$total39_8+$tableau39[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=40-44 ans\">".$tableau39[$k]['40-44 ans']."</a>";
+		  $total39_9=$total39_9+$tableau39[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=45-49 ans\">".$tableau39[$k]['45-49 ans']."</a>";
+		  $total39_10=$total39_10+$tableau39[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=50 ans et plus\">".$tableau39[$k]['50 ans et plus']."</a>";
+		  $total39_11=$total39_11+$tableau39[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=39&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau39[$k]['sex_id']."& interval=inconnu\">".$tableau39[$k]['âge inconnu']."</a>";
+		  $total39_12=$total39_12+$tableau39[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td></td>
+			<td>'.$total39_0.'</td>
+			<td>'.$total39_1.'</td>
+			<td>'.$total39_2.'</td>
+			<td>'.$total39_3.'</td>
+			<td>'.$total39_4.'</td>
+			<td>'.$total39_5.'</td>
+			<td>'.$total39_6.'</td>
+			<td>'.$total39_7.'</td>
+			<td>'.$total39_8.'</td>
+			<td>'.$total39_9.'</td>
+			<td>'.$total39_10.'</td>
+			<td>'.$total39_11.'</td>
+			<td>'.$total39_12.'</td>
+			</tr>';
+echo '</table>';
+}
+echo '<div>&nbsp;</div>';
 /*16.1. Nombre de patients décédés CONFIRMES parmi les perdus de vue recherchés au cours du mois du rapport*/
 
 if ($NbreData41 != 0) {
@@ -5675,17 +6674,1024 @@ echo 'pas de données à afficher';
 
 echo '<div>&nbsp;</div>';
 
-}
-else 
-	echo 'pas de données à afficher';
+/*20.1.-Total de Patients ayant démarré le traitement ARV il y a 12 mois (TX_RET D)*/
 
+if ($NbreData75 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Total de Patients ayant démarré le traitement ARV il y a 12 mois (TX_RET D)</b></caption>
+<thead class=\"theadx\"><tr>
+			<th></th>
+			<th>Sex</th>
+			<th>< 1 an</th>
+			<th>1-4 ans</th>
+			<th>5-9 ans</th>
+			<th>10-14 ans</th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total75_0=0;
+			$total75_1=0;
+			$total75_2=0;
+			$total75_3=0;
+			$total75_4=0;
+			$total75_5=0;
+			$total75_6=0;
+			$total75_7=0;
+			$total75_8=0;
+			$total75_9=0;
+			$total75_10=0;
+			$total75_11=0;
+			$total75_12=0;
+   
+   for ($i=0; $i<count($tableau75); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*$NbrLigne))%$NbrLigne==$i && ($i+($j*$NbrLigne))<$NbreData75) {
+         echo '<td>';
+          // --------------------------------------
+          // AFFICHAGE de l'element
+		  
+		  $k = ($i+($j*$NbrLigne));
+		  /*echo $tableau75[$k]['groupe'];*/
+		   echo '</td><td>';
+		  echo $tableau75[$k]['sex'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=<1 an\">".$tableau75[$k]['<1 an']."</a>";
+		 $total75_0=$total75_0+$tableau75[$k]['<1 an'];
+         echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=1-4 ans\">".$tableau75[$k]['1-4 ans']."</a>";
+		  $total75_1=$total75_1+$tableau75[$k]['1-4 ans'];
+		 echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=5-9 ans\">".$tableau75[$k]['5-9 ans']."</a>";
+		  $total75_2=$total75_2+$tableau75[$k]['5-9 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=10-14 ans\">".$tableau75[$k]['10-14 ans']."</a>";
+		  $total75_3=$total75_3+$tableau75[$k]['10-14 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=15-19 ans\">".$tableau75[$k]['15-19 ans']."</a>";
+		  $total75_4=$total75_4+$tableau75[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=20-24 ans\">".$tableau75[$k]['20-24 ans']."</a>";
+		  $total75_5=$total75_5+$tableau75[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=25-29 ans\">".$tableau75[$k]['25-29 ans']."</a>";
+		  $total75_6=$total75_6+$tableau75[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=30-34 ans\">".$tableau75[$k]['30-34 ans']."</a>";
+		  $total75_7=$total75_7+$tableau75[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=35-39 ans\">".$tableau75[$k]['35-39 ans']."</a>";
+		  $total75_8=$total75_8+$tableau75[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=40-44 ans\">".$tableau75[$k]['40-44 ans']."</a>";
+		  $total75_9=$total75_9+$tableau75[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=45-49 ans\">".$tableau75[$k]['45-49 ans']."</a>";
+		  $total75_10=$total75_10+$tableau75[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=50 ans et plus\">".$tableau75[$k]['50 ans et plus']."</a>";
+		  $total75_11=$total75_11+$tableau75[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=75&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau75[$k]['sex_id']."& interval=inconnu\">".$tableau75[$k]['âge inconnu']."</a>";
+		  $total75_12=$total75_12+$tableau75[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td></td>
+			<td>'.$total75_0.'</td>
+			<td>'.$total75_1.'</td>
+			<td>'.$total75_2.'</td>
+			<td>'.$total75_3.'</td>
+			<td>'.$total75_4.'</td>
+			<td>'.$total75_5.'</td>
+			<td>'.$total75_6.'</td>
+			<td>'.$total75_7.'</td>
+			<td>'.$total75_8.'</td>
+			<td>'.$total75_9.'</td>
+			<td>'.$total75_10.'</td>
+			<td>'.$total75_11.'</td>
+			<td>'.$total75_12.'</td>
+			</tr>';
+echo '</table>';
+}
+echo '<div>&nbsp;</div>';
+
+/*20.1.1.-Total de Patients ayant démarré le traitement ARV dans le site il y a 12 mois*/
+if ($NbreData76 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Total de Patients ayant démarré le traitement ARV dans le site il y a 12 mois</b></caption>
+<thead class=\"theadx\"><tr>
+			<th></th>
+			<th>Sex</th>
+			<th>< 1 an</th>
+			<th>1-4 ans</th>
+			<th>5-9 ans</th>
+			<th>10-14 ans</th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total76_0=0;
+			$total76_1=0;
+			$total76_2=0;
+			$total76_3=0;
+			$total76_4=0;
+			$total76_5=0;
+			$total76_6=0;
+			$total76_7=0;
+			$total76_8=0;
+			$total76_9=0;
+			$total76_10=0;
+			$total76_11=0;
+			$total76_12=0;
+   
+   for ($i=0; $i<count($tableau76); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*$NbrLigne))%$NbrLigne==$i && ($i+($j*$NbrLigne))<$NbreData76) {
+         echo '<td>';
+          // --------------------------------------
+          // AFFICHAGE de l'element
+		  
+		  $k = ($i+($j*$NbrLigne));
+		  /*echo $tableau76[$k]['groupe'];*/
+		   echo '</td><td>';
+		  echo $tableau76[$k]['sex'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=<1 an\">".$tableau76[$k]['<1 an']."</a>";
+		 $total76_0=$total76_0+$tableau76[$k]['<1 an'];
+         echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=1-4 ans\">".$tableau76[$k]['1-4 ans']."</a>";
+		  $total76_1=$total76_1+$tableau76[$k]['1-4 ans'];
+		 echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=5-9 ans\">".$tableau76[$k]['5-9 ans']."</a>";
+		  $total76_2=$total76_2+$tableau76[$k]['5-9 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=10-14 ans\">".$tableau76[$k]['10-14 ans']."</a>";
+		  $total76_3=$total76_3+$tableau76[$k]['10-14 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=15-19 ans\">".$tableau76[$k]['15-19 ans']."</a>";
+		  $total76_4=$total76_4+$tableau76[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=20-24 ans\">".$tableau76[$k]['20-24 ans']."</a>";
+		  $total76_5=$total76_5+$tableau76[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=25-29 ans\">".$tableau76[$k]['25-29 ans']."</a>";
+		  $total76_6=$total76_6+$tableau76[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=30-34 ans\">".$tableau76[$k]['30-34 ans']."</a>";
+		  $total76_7=$total76_7+$tableau76[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=35-39 ans\">".$tableau76[$k]['35-39 ans']."</a>";
+		  $total76_8=$total76_8+$tableau76[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=40-44 ans\">".$tableau76[$k]['40-44 ans']."</a>";
+		  $total76_9=$total76_9+$tableau76[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=45-49 ans\">".$tableau76[$k]['45-49 ans']."</a>";
+		  $total76_10=$total76_10+$tableau76[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=50 ans et plus\">".$tableau76[$k]['50 ans et plus']."</a>";
+		  $total76_11=$total76_11+$tableau76[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=76&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau76[$k]['sex_id']."& interval=inconnu\">".$tableau76[$k]['âge inconnu']."</a>";
+		  $total76_12=$total76_12+$tableau76[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td></td>
+			<td>'.$total76_0.'</td>
+			<td>'.$total76_1.'</td>
+			<td>'.$total76_2.'</td>
+			<td>'.$total76_3.'</td>
+			<td>'.$total76_4.'</td>
+			<td>'.$total76_5.'</td>
+			<td>'.$total76_6.'</td>
+			<td>'.$total76_7.'</td>
+			<td>'.$total76_8.'</td>
+			<td>'.$total76_9.'</td>
+			<td>'.$total76_10.'</td>
+			<td>'.$total76_11.'</td>
+			<td>'.$total76_12.'</td>
+			</tr>';
+echo '</table>';
+}
+
+echo '<div>&nbsp;</div>';
+/*20.1.2.Total de Patients ayant démarré le traitement ARV dans un autre site 
+il y a 12 mois et refere pour prise en charge*/
+
+if ($NbreData77 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Total de Patients ayant démarré le traitement ARV dans un autre site 
+il y a 12 mois et refere pour prise en charge</b></caption>
+<thead class=\"theadx\"><tr>
+			<th></th>
+			<th>Sex</th>
+			<th>< 1 an</th>
+			<th>1-4 ans</th>
+			<th>5-9 ans</th>
+			<th>10-14 ans</th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total77_0=0;
+			$total77_1=0;
+			$total77_2=0;
+			$total77_3=0;
+			$total77_4=0;
+			$total77_5=0;
+			$total77_6=0;
+			$total77_7=0;
+			$total77_8=0;
+			$total77_9=0;
+			$total77_10=0;
+			$total77_11=0;
+			$total77_12=0;
+   
+   for ($i=0; $i<count($tableau77); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*$NbrLigne))%$NbrLigne==$i && ($i+($j*$NbrLigne))<$NbreData77) {
+         echo '<td>';
+          // --------------------------------------
+          // AFFICHAGE de l'element
+		  
+		  $k = ($i+($j*$NbrLigne));
+		  /*echo $tableau77[$k]['groupe'];*/
+		   echo '</td><td>';
+		  echo $tableau77[$k]['sex'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=<1 an\">".$tableau77[$k]['<1 an']."</a>";
+		 $total77_0=$total77_0+$tableau77[$k]['<1 an'];
+         echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=1-4 ans\">".$tableau77[$k]['1-4 ans']."</a>";
+		  $total77_1=$total77_1+$tableau77[$k]['1-4 ans'];
+		 echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=5-9 ans\">".$tableau77[$k]['5-9 ans']."</a>";
+		  $total77_2=$total77_2+$tableau77[$k]['5-9 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=10-14 ans\">".$tableau77[$k]['10-14 ans']."</a>";
+		  $total77_3=$total77_3+$tableau77[$k]['10-14 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=15-19 ans\">".$tableau77[$k]['15-19 ans']."</a>";
+		  $total77_4=$total77_4+$tableau77[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=20-24 ans\">".$tableau77[$k]['20-24 ans']."</a>";
+		  $total77_5=$total77_5+$tableau77[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=25-29 ans\">".$tableau77[$k]['25-29 ans']."</a>";
+		  $total77_6=$total77_6+$tableau77[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=30-34 ans\">".$tableau77[$k]['30-34 ans']."</a>";
+		  $total77_7=$total77_7+$tableau77[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=35-39 ans\">".$tableau77[$k]['35-39 ans']."</a>";
+		  $total77_8=$total77_8+$tableau77[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=40-44 ans\">".$tableau77[$k]['40-44 ans']."</a>";
+		  $total77_9=$total77_9+$tableau77[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=45-49 ans\">".$tableau77[$k]['45-49 ans']."</a>";
+		  $total77_10=$total77_10+$tableau77[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=50 ans et plus\">".$tableau77[$k]['50 ans et plus']."</a>";
+		  $total77_11=$total77_11+$tableau77[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=77&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau77[$k]['sex_id']."& interval=inconnu\">".$tableau77[$k]['âge inconnu']."</a>";
+		  $total77_12=$total77_12+$tableau77[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td></td>
+			<td>'.$total77_0.'</td>
+			<td>'.$total77_1.'</td>
+			<td>'.$total77_2.'</td>
+			<td>'.$total77_3.'</td>
+			<td>'.$total77_4.'</td>
+			<td>'.$total77_5.'</td>
+			<td>'.$total77_6.'</td>
+			<td>'.$total77_7.'</td>
+			<td>'.$total77_8.'</td>
+			<td>'.$total77_9.'</td>
+			<td>'.$total77_10.'</td>
+			<td>'.$total77_11.'</td>
+			<td>'.$total77_12.'</td>
+			</tr>';
+echo '</table>';
+}
+
+echo '<div>&nbsp;</div>';
+/*20.2.-Nombre de Patients ayant démarré le traitement ARV 
+il y a 12 mois et qui sont VIVANTS et toujours SOUS TRAITEMENT ARV: (TX_RET N)*/
+if ($NbreData78 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Nombre de Patients ayant démarré le traitement ARV 
+il y a 12 mois et qui sont VIVANTS et toujours SOUS TRAITEMENT ARV: (TX_RET N)</b></caption>
+<thead class=\"theadx\"><tr>
+			<th></th>
+			<th>Sex</th>
+			<th>< 1 an</th>
+			<th>1-4 ans</th>
+			<th>5-9 ans</th>
+			<th>10-14 ans</th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total78_0=0;
+			$total78_1=0;
+			$total78_2=0;
+			$total78_3=0;
+			$total78_4=0;
+			$total78_5=0;
+			$total78_6=0;
+			$total78_7=0;
+			$total78_8=0;
+			$total78_9=0;
+			$total78_10=0;
+			$total78_11=0;
+			$total78_12=0;
+   
+   for ($i=0; $i<count($tableau78); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*$NbrLigne))%$NbrLigne==$i && ($i+($j*$NbrLigne))<$NbreData78) {
+         echo '<td>';
+          // --------------------------------------
+          // AFFICHAGE de l'element
+		  
+		  $k = ($i+($j*$NbrLigne));
+		  /*echo $tableau78[$k]['groupe'];*/
+		   echo '</td><td>';
+		  echo $tableau78[$k]['sex'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=<1 an\">".$tableau78[$k]['<1 an']."</a>";
+		 $total78_0=$total78_0+$tableau78[$k]['<1 an'];
+         echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=1-4 ans\">".$tableau78[$k]['1-4 ans']."</a>";
+		  $total78_1=$total78_1+$tableau78[$k]['1-4 ans'];
+		 echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=5-9 ans\">".$tableau78[$k]['5-9 ans']."</a>";
+		  $total78_2=$total78_2+$tableau78[$k]['5-9 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=10-14 ans\">".$tableau78[$k]['10-14 ans']."</a>";
+		  $total78_3=$total78_3+$tableau78[$k]['10-14 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=15-19 ans\">".$tableau78[$k]['15-19 ans']."</a>";
+		  $total78_4=$total78_4+$tableau78[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=20-24 ans\">".$tableau78[$k]['20-24 ans']."</a>";
+		  $total78_5=$total78_5+$tableau78[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=25-29 ans\">".$tableau78[$k]['25-29 ans']."</a>";
+		  $total78_6=$total78_6+$tableau78[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=30-34 ans\">".$tableau78[$k]['30-34 ans']."</a>";
+		  $total78_7=$total78_7+$tableau78[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=35-39 ans\">".$tableau78[$k]['35-39 ans']."</a>";
+		  $total78_8=$total78_8+$tableau78[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=40-44 ans\">".$tableau78[$k]['40-44 ans']."</a>";
+		  $total78_9=$total78_9+$tableau78[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=45-49 ans\">".$tableau78[$k]['45-49 ans']."</a>";
+		  $total78_10=$total78_10+$tableau78[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=50 ans et plus\">".$tableau78[$k]['50 ans et plus']."</a>";
+		  $total78_11=$total78_11+$tableau78[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=78&startDate=".$startDate."&endDate=".$endDate."&sex=".$tableau78[$k]['sex_id']."& interval=inconnu\">".$tableau78[$k]['âge inconnu']."</a>";
+		  $total78_12=$total78_12+$tableau78[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td></td>
+			<td>'.$total78_0.'</td>
+			<td>'.$total78_1.'</td>
+			<td>'.$total78_2.'</td>
+			<td>'.$total78_3.'</td>
+			<td>'.$total78_4.'</td>
+			<td>'.$total78_5.'</td>
+			<td>'.$total78_6.'</td>
+			<td>'.$total78_7.'</td>
+			<td>'.$total78_8.'</td>
+			<td>'.$total78_9.'</td>
+			<td>'.$total78_10.'</td>
+			<td>'.$total78_11.'</td>
+			<td>'.$total78_12.'</td>
+			</tr>';
+echo '</table>';
+}
+
+echo '<div>&nbsp;</div>';
+
+/*21.1 Nombre de femmes sous ARV ayant bénéficié d'un dépistage du cancer du col 
+de l'utérus (CXCA_SCRN) pour la 1ere fois*/
+	if ($NbreData79 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Nombre de femmes sous ARV ayant bénéficié d\'un dépistage du cancer du col 
+de l\'utérus (CXCA_SCRN) pour la 1ere fois</b></caption>
+<thead><tr>
+			<th></th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total79_0=0;
+			$total79_1=0;
+			$total79_2=0;
+			$total79_3=0;
+			$total79_4=0;
+			$total79_5=0;
+			$total79_6=0;
+			$total79_7=0;
+			$total79_8=0;
+   
+   for ($i=0; $i<count($tableau79); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*3))%3==$i && ($i+($j*3))<count($tableau79)) {
+         echo '<td>';
+		  $k = ($i+($j*3));
+		  echo $tableau79[$k]['cancer_col'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=15-19 ans\">".$tableau79[$k]['15-19 ans']."</a>";
+		  $total79_0=$total79_0+$tableau79[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=20-24 ans\">".$tableau79[$k]['20-24 ans']."</a>";
+		  $total79_1=$total79_1+$tableau79[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=25-29 ans\">".$tableau79[$k]['25-29 ans']."</a>";
+		  $total79_2=$total79_2+$tableau79[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=30-34 ans\">".$tableau79[$k]['30-34 ans']."</a>";
+		  $total79_3=$total79_3+$tableau79[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=35-39 ans\">".$tableau79[$k]['35-39 ans']."</a>";
+		  $total79_4=$total79_4+$tableau79[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=40-44 ans\">".$tableau79[$k]['40-44 ans']."</a>";
+		  $total79_5=$total79_5+$tableau79[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=45-49 ans\">".$tableau79[$k]['45-49 ans']."</a>";
+		  $total79_6=$total79_6+$tableau79[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=50 ans et plus\">".$tableau79[$k]['50 ans et plus']."</a>";
+		  $total79_7=$total79_7+$tableau79[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=inconnu\">".$tableau79[$k]['âge inconnu']."</a>";
+		  $total79_8=$total79_8+$tableau79[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td>'.$total79_0.'</td>
+			<td>'.$total79_1.'</td>
+			<td>'.$total79_2.'</td>
+			<td>'.$total79_3.'</td>
+			<td>'.$total79_4.'</td>
+			<td>'.$total79_5.'</td>
+			<td>'.$total79_6.'</td>
+			<td>'.$total79_7.'</td>
+			<td>'.$total79_8.'</td>
+		</tr>';
+echo '</table>';
+}
+
+echo '<div>&nbsp;</div>';
+
+/*21.2 Nombre de femmes sous ARV ayant bénéficié d'un dépistage du cancer du col 
+de l'utérus (CXCA_SCRN) après un 1er test negatif*/
+if ($NbreData80 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Nombre de femmes sous ARV ayant bénéficié d\'un dépistage du cancer du col 
+de l\'utérus (CXCA_SCRN) après un 1er test negatif</b></caption>
+<thead><tr>
+			<th></th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total80_0=0;
+			$total80_1=0;
+			$total80_2=0;
+			$total80_3=0;
+			$total80_4=0;
+			$total80_5=0;
+			$total80_6=0;
+			$total80_7=0;
+			$total80_8=0;
+   
+   for ($i=0; $i<count($tableau80); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*3))%3==$i && ($i+($j*3))<count($tableau80)) {
+         echo '<td>';
+		  $k = ($i+($j*3));
+		  echo $tableau80[$k]['cancer_col'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=15-19 ans\">".$tableau80[$k]['15-19 ans']."</a>";
+		  $total80_0=$total80_0+$tableau80[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=20-24 ans\">".$tableau80[$k]['20-24 ans']."</a>";
+		  $total80_1=$total80_1+$tableau80[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=25-29 ans\">".$tableau80[$k]['25-29 ans']."</a>";
+		  $total80_2=$total80_2+$tableau80[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=30-34 ans\">".$tableau80[$k]['30-34 ans']."</a>";
+		  $total80_3=$total80_3+$tableau80[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=35-39 ans\">".$tableau80[$k]['35-39 ans']."</a>";
+		  $total80_4=$total80_4+$tableau80[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=40-44 ans\">".$tableau80[$k]['40-44 ans']."</a>";
+		  $total80_5=$total80_5+$tableau80[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=45-49 ans\">".$tableau80[$k]['45-49 ans']."</a>";
+		  $total80_6=$total80_6+$tableau80[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=50 ans et plus\">".$tableau80[$k]['50 ans et plus']."</a>";
+		  $total80_7=$total80_7+$tableau80[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=inconnu\">".$tableau80[$k]['âge inconnu']."</a>";
+		  $total80_8=$total80_8+$tableau80[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td>'.$total80_0.'</td>
+			<td>'.$total80_1.'</td>
+			<td>'.$total80_2.'</td>
+			<td>'.$total80_3.'</td>
+			<td>'.$total80_4.'</td>
+			<td>'.$total80_5.'</td>
+			<td>'.$total80_6.'</td>
+			<td>'.$total80_7.'</td>
+			<td>'.$total80_8.'</td>
+		</tr>';
+echo '</table>';
+}
+
+echo '<div>&nbsp;</div>';
+
+	 
+/*21.3 Nombre de femmes sous ARV ayant bénéficié d'un dépistage 
+du cancer du col de l'utérus (CXCA_SCRN) après traitement */
+if ($NbreData81 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Nombre de femmes sous ARV ayant bénéficié d\'un dépistage 
+du cancer du col de l\'utérus (CXCA_SCRN) après traitement</b></caption>
+<thead><tr>
+			<th></th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total81_0=0;
+			$total81_1=0;
+			$total81_2=0;
+			$total81_3=0;
+			$total81_4=0;
+			$total81_5=0;
+			$total81_6=0;
+			$total81_7=0;
+			$total81_8=0;
+   
+   for ($i=0; $i<count($tableau81); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*3))%3==$i && ($i+($j*3))<count($tableau81)) {
+         echo '<td>';
+		  $k = ($i+($j*3));
+		  echo $tableau81[$k]['cancer_col'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=15-19 ans\">".$tableau81[$k]['15-19 ans']."</a>";
+		  $total81_0=$total81_0+$tableau81[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=20-24 ans\">".$tableau81[$k]['20-24 ans']."</a>";
+		  $total81_1=$total81_1+$tableau81[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=25-29 ans\">".$tableau81[$k]['25-29 ans']."</a>";
+		  $total81_2=$total81_2+$tableau81[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=30-34 ans\">".$tableau81[$k]['30-34 ans']."</a>";
+		  $total81_3=$total81_3+$tableau81[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=35-39 ans\">".$tableau81[$k]['35-39 ans']."</a>";
+		  $total81_4=$total81_4+$tableau81[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=40-44 ans\">".$tableau81[$k]['40-44 ans']."</a>";
+		  $total81_5=$total81_5+$tableau81[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=45-49 ans\">".$tableau81[$k]['45-49 ans']."</a>";
+		  $total81_6=$total81_6+$tableau81[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=50 ans et plus\">".$tableau81[$k]['50 ans et plus']."</a>";
+		  $total81_7=$total81_7+$tableau81[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=inconnu\">".$tableau81[$k]['âge inconnu']."</a>";
+		  $total81_8=$total81_8+$tableau81[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td>'.$total81_0.'</td>
+			<td>'.$total81_1.'</td>
+			<td>'.$total81_2.'</td>
+			<td>'.$total81_3.'</td>
+			<td>'.$total81_4.'</td>
+			<td>'.$total81_5.'</td>
+			<td>'.$total81_6.'</td>
+			<td>'.$total81_7.'</td>
+			<td>'.$total81_8.'</td>
+		</tr>';
+echo '</table>';
+}
+
+echo '<div>&nbsp;</div>';
+
+/*22. Nombre de femmes sous ARV dépistées positives pour le cancer du col de l'utérus 
+et qui ont reçu reçu une cryothérapie,une thermocoagulation ou une LEEP :  (CXCA_TX)*/
+if ($NbreData82 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Nombre de femmes sous ARV dépistées positives pour le cancer du col de l\'utérus 
+et qui ont reçu reçu une cryothérapie,une thermocoagulation ou une LEEP :  (CXCA_TX)</b></caption>
+<thead><tr>
+			<th></th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total82_0=0;
+			$total82_1=0;
+			$total82_2=0;
+			$total82_3=0;
+			$total82_4=0;
+			$total82_5=0;
+			$total82_6=0;
+			$total82_7=0;
+			$total82_8=0;
+   
+   for ($i=0; $i<count($tableau82); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*3))%3==$i && ($i+($j*3))<count($tableau82)) {
+         echo '<td>';
+		  $k = ($i+($j*3));
+		  echo $tableau82[$k]['intervention'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=15-19 ans\">".$tableau82[$k]['15-19 ans']."</a>";
+		  $total82_0=$total82_0+$tableau82[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=20-24 ans\">".$tableau82[$k]['20-24 ans']."</a>";
+		  $total82_1=$total82_1+$tableau82[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=25-29 ans\">".$tableau82[$k]['25-29 ans']."</a>";
+		  $total82_2=$total82_2+$tableau82[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=30-34 ans\">".$tableau82[$k]['30-34 ans']."</a>";
+		  $total82_3=$total82_3+$tableau82[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=35-39 ans\">".$tableau82[$k]['35-39 ans']."</a>";
+		  $total82_4=$total82_4+$tableau82[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=40-44 ans\">".$tableau82[$k]['40-44 ans']."</a>";
+		  $total82_5=$total82_5+$tableau82[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=45-49 ans\">".$tableau82[$k]['45-49 ans']."</a>";
+		  $total82_6=$total82_6+$tableau82[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=50 ans et plus\">".$tableau82[$k]['50 ans et plus']."</a>";
+		  $total82_7=$total82_7+$tableau82[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=inconnu\">".$tableau82[$k]['âge inconnu']."</a>";
+		  $total82_8=$total82_8+$tableau82[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td>Total</td>
+			<td>'.$total82_0.'</td>
+			<td>'.$total82_1.'</td>
+			<td>'.$total82_2.'</td>
+			<td>'.$total82_3.'</td>
+			<td>'.$total82_4.'</td>
+			<td>'.$total82_5.'</td>
+			<td>'.$total82_6.'</td>
+			<td>'.$total82_7.'</td>
+			<td>'.$total82_8.'</td>
+		</tr>';
+echo '</table>';
+}
+
+echo '<div>&nbsp;</div>';
+/*Nombre de patients  ACCEPTANTS d'une méthode de PF*/
+if ($NbreData83 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Nombre de patients  ACCEPTANTS d\'une méthode de PF</b></caption>
+<thead><tr>
+			<th></th>
+			<th></th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total83_0=0;
+			$total83_1=0;
+			$total83_2=0;
+			$total83_3=0;
+			$total83_4=0;
+			$total83_5=0;
+			$total83_6=0;
+			$total83_7=0;
+			$total83_8=0;
+   
+   for ($i=0; $i<count($tableau83); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*6))%6==$i && ($i+($j*6))<count($tableau83)) {
+         echo '<td>';
+		  $k = ($i+($j*6));
+		  echo $tableau83[$k]['methode_pf'];
+		   echo '</td><td>';
+		  echo $tableau83[$k]['sex'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=15-19 ans\">".$tableau83[$k]['15-19 ans']."</a>";
+		  $total83_0=$total83_0+$tableau83[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=20-24 ans\">".$tableau83[$k]['20-24 ans']."</a>";
+		  $total83_1=$total83_1+$tableau83[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=25-29 ans\">".$tableau83[$k]['25-29 ans']."</a>";
+		  $total83_2=$total83_2+$tableau83[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=30-34 ans\">".$tableau83[$k]['30-34 ans']."</a>";
+		  $total83_3=$total83_3+$tableau83[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=35-39 ans\">".$tableau83[$k]['35-39 ans']."</a>";
+		  $total83_4=$total83_4+$tableau83[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=40-44 ans\">".$tableau83[$k]['40-44 ans']."</a>";
+		  $total83_5=$total83_5+$tableau83[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=45-49 ans\">".$tableau83[$k]['45-49 ans']."</a>";
+		  $total83_6=$total83_6+$tableau83[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=50 ans et plus\">".$tableau83[$k]['50 ans et plus']."</a>";
+		  $total83_7=$total83_7+$tableau83[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=inconnu\">".$tableau83[$k]['âge inconnu']."</a>";
+		  $total83_8=$total83_8+$tableau83[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td colspan="2"><center>Total</center></td>
+			<td>'.$total83_0.'</td>
+			<td>'.$total83_1.'</td>
+			<td>'.$total83_2.'</td>
+			<td>'.$total83_3.'</td>
+			<td>'.$total83_4.'</td>
+			<td>'.$total83_5.'</td>
+			<td>'.$total83_6.'</td>
+			<td>'.$total83_7.'</td>
+			<td>'.$total83_8.'</td>
+		</tr>';
+echo '</table>';
+}
+
+echo '<div>&nbsp;</div>';
+
+/*23.2. Patients UTILISATEURS d'une méthode de PF*/
+
+if ($NbreData84 != 0) {
+$i = 0;
+$NbrCol = 0;
+echo '<table class="gridtable" border="1">
+<caption><b>Patients UTILISATEURS d\'une méthode de PF</b></caption>
+<thead><tr>
+			<th></th>
+			<th></th>
+			<th>15-19 ans</th>
+			<th>20-24 ans</th>
+			<th>25-29 ans</th>
+			<th>30-34 ans</th>
+			<th>35-39 ans</th>
+			<th>40-44 ans</th>
+			<th>45-49 ans</th>
+			<th>50 ans et plus</th>
+			<th>âge inconnu</th>
+			</tr></thead>';
+			
+			$total84_0=0;
+			$total84_1=0;
+			$total84_2=0;
+			$total84_3=0;
+			$total84_4=0;
+			$total84_5=0;
+			$total84_6=0;
+			$total84_7=0;
+			$total84_8=0;
+   
+   for ($i=0; $i<count($tableau84); $i++) {
+      echo '<tr>';
+      $j = 0;
+	  
+      while (($i+($j*6))%6==$i && ($i+($j*6))<count($tableau84)) {
+         echo '<td>';
+		  $k = ($i+($j*6));
+		  echo $tableau84[$k]['methode_pf'];
+		   echo '</td><td>';
+		  echo $tableau84[$k]['sex'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=15-19 ans\">".$tableau84[$k]['15-19 ans']."</a>";
+		  $total84_0=$total84_0+$tableau84[$k]['15-19 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=20-24 ans\">".$tableau84[$k]['20-24 ans']."</a>";
+		  $total84_1=$total84_1+$tableau84[$k]['20-24 ans'];
+		   echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=25-29 ans\">".$tableau84[$k]['25-29 ans']."</a>";
+		  $total84_2=$total84_2+$tableau84[$k]['25-29 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=30-34 ans\">".$tableau84[$k]['30-34 ans']."</a>";
+		  $total84_3=$total84_3+$tableau84[$k]['30-34 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=35-39 ans\">".$tableau84[$k]['35-39 ans']."</a>";
+		  $total84_4=$total84_4+$tableau84[$k]['35-39 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=40-44 ans\">".$tableau84[$k]['40-44 ans']."</a>";
+		  $total84_5=$total84_5+$tableau84[$k]['40-44 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=45-49 ans\">".$tableau84[$k]['45-49 ans']."</a>";
+		  $total84_6=$total84_6+$tableau84[$k]['45-49 ans'];
+		  echo '</td><td>';
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=50 ans et plus\">".$tableau84[$k]['50 ans et plus']."</a>";
+		  $total84_7=$total84_7+$tableau84[$k]['50 ans et plus'];
+		 echo '</td><td>';
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=inconnu\">".$tableau84[$k]['âge inconnu']."</a>";
+		  $total84_8=$total84_8+$tableau84[$k]['âge inconnu'];
+		 echo '</td>';
+         $j++;
+         if ($NbrCol<$j) { $NbrCol=$j; }
+      }
+      echo '</tr>';
+   }
+   echo '<tr>
+			<td colspan="2"><center>Total</center></td>
+			<td>'.$total84_0.'</td>
+			<td>'.$total84_1.'</td>
+			<td>'.$total84_2.'</td>
+			<td>'.$total84_3.'</td>
+			<td>'.$total84_4.'</td>
+			<td>'.$total84_5.'</td>
+			<td>'.$total84_6.'</td>
+			<td>'.$total84_7.'</td>
+			<td>'.$total84_8.'</td>
+		</tr>';
+echo '</table>';
+}
+
+echo '<div>&nbsp;</div>';
 
 /*echo $table;*/ ?>
 
 
 
 
-
+  <?php  } ?>
 
 
 

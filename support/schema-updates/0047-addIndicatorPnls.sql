@@ -13,21 +13,23 @@ drop table if exists iap_indicator;
 create table iap_indicator (
 id int primary key auto_increment,
 indicatorID int,
-name varchar(25),
+name varchar(255),
 definition longtext,
 numerotor longtext,
 denominator longtext,
 type varchar(25)
 );
 
+
+
 insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type) values
-(1,'Retrait à temps des ARV (ART.7)','Retrait à temps des ARV (ART.7) - Pourcentage des patients qui retirent l\'ensemble des ARV prescrits avec maximum deux jours de retard au premier retrait après un retrait de référence défini',	
+(1,'Retrait à temps des ARV','Retrait à temps des ARV (ART.7) - Pourcentage des patients qui retirent l\'ensemble des ARV prescrits avec maximum deux jours de retard au premier retrait après un retrait de référence défini',	
 'Nombre de patients qui retirent à temps les ARV au premier retrait après un retrait de Référence défini.',
 'Nombre de patients qui ont retirés les ARV à la date désignée de début de L\’échantillonnage IAP ou après celle-ci.',
 'percentage');
 
 insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type) values
-(2,'Rétention sous TAR (ART.5)','Rétention sous TAR (ART.5) - Pourcentage de patients retenus pour le traitement 12 mois après avoir débuté',	
+(2,'Rétention sous TAR','Rétention sous TAR (ART.5) - Pourcentage de patients retenus pour le traitement 12 mois après avoir débuté',	
 'Nombre de patients en vie et sous TAR 12 mois après la mise en route du traitement',
 'Nombre total de patients qui ont commencé un TAR et qui sont censés le poursuivre pendant 12 mois au cours de la période sous rapport, y compris ceux qui sont décédés depuis le début de la thérapie, ceux qui ont arrêté le traitement, et ceux perdus de vue', 
 'percentage');
@@ -39,13 +41,13 @@ insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type
 'percentage');
 
 insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type) values
-(4,'Suppression de la charge virale (VLS.1)','Suppression de la charge virale (VLS.1) - Pourcentage de patients présentant une charge virale (<1000 copies/ml) 12 mois après la mise en route du TAR', 
+(4,'Suppression de la charge virale','Suppression de la charge virale (VLS.1) - Pourcentage de patients présentant une charge virale (<1000 copies/ml) 12 mois après la mise en route du TAR', 
 'Nombre de patients pour lesquels un résultat de mesure de la charge virale est disponible après 12 ± 3 mois', 
 'Nombre de patients en vie et sous TAR 12 mois après le début du traitement disposant d\'un résultat d\'analyse de la charge virale',
 'percentage');	
 										
 insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type) values
-(5,'Achèvement du processus d\'analyse de la charge virale (VLS.2)','Achèvement du processus d\'analyse de la charge virale (VLS.2) - Pourcentage des patients disposant d\'un résultat d\'analyse de la charge virale après 12 mois',
+(5,'Achèvement du processus d\'analyse de la charge virale','Achèvement du processus d\'analyse de la charge virale (VLS.2) - Pourcentage des patients disposant d\'un résultat d\'analyse de la charge virale après 12 mois',
 'Nombre de patients pour lesquels un résultat de mesure de la charge virale est disponible après 12 ± 3 mois',
 'Nombre de patients qui selon la politique nationale auraient dû avoir une analyse de la charge virale après 12 ±3 mois', 
 'percentage'); 
@@ -61,6 +63,8 @@ insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type
 'Nombre de personnes perdues de vue 12 mois après le début du TAR (nombre de personnes avec résultats non classifiables, c.-à-d. non classifiés comme étant en soins de santé, décédé, transféré vers un autre établissement ou arrêt)',
 'Nombre de personnes qui ont débuté le TAR au cours de la période de 12 mois (les décès connus et les transferts vers d\'autres établissements sont exclus du dénominateur)',	
 'percentage');
+
+
 
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163590,'grossesseOuiNon','grossesseOuiNon','Pregnancy','en','1','2020-07-25'),
@@ -569,4 +573,13 @@ values(163590,0,'grossesseOuiNon','Grossesse','Grossesse',1,13,0,1,'2020-07-25')
 	  (163681,0,'douleurThoracique','douleurThoracique','Douleur thoracique',10,13,0,1,'2020-07-25'),
 	  (163682,0,'fievreVesperale','fievreVesperale','Fièvre vespérale',10,13,0,1,'2020-07-25'),
 	  (163683,0,'perteAppetit','perteAppetit','Perte d’appétit',10,13,0,1,'2020-07-25');
-	     
+	  
+  
+	  
+insert into alertLookup(alertId,alertName,descriptionFr,descriptionEn,messageFr,messageEn,alertGroup,priority) values 
+(11,'prophylaxieInh','Le patient a six mois sous prophylaxie à l’INH mais n’a pas de date de fin','Patient has six months old on INH prophylaxis but has no end date','Le patient a six mois sous prophylaxie à l’INH mais n’a pas de date de fin','Patient has six months old on INH prophylaxis but has no end date',1,1);	  
+
+insert into alertLookup(alertId,alertName,descriptionFr,descriptionEn,messageFr,messageEn,alertGroup,priority) values 
+(12,'nonprophylaxieInh','Le patient est séropositif mais n’a jamais reçu de prophylaxie à l’INH','The patient is HIV positive but has never received INH prophylaxis','Le patient est séropositif mais n’a jamais reçu de prophylaxie à l’INH','The patient is HIV positive but has never received INH prophylaxis',1,1);	  
+
+     

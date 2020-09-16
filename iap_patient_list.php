@@ -13,11 +13,31 @@ $type=$_REQUEST['type'];
 $iap=getIap($indicateur);
 $query='';
 
+$categorie='';
+if (isset($_REQUEST['type'])) {
+	if($type=="num") $categorie="Numerateur";
+	if($type=="den") $categorie="Denominateur";
+}
+
+$tableHeader='<table class="gridtable" border="1">
+<thead><tr>
+<th colspan="2"> Indicateur d\'alerte precoce : '.$iap['name'].'</th></tr>
+<tr><td>Periode</td><td>'.$startDate.' - '.$endDate.'</td></tr>
+<tr><td>Type</td><td>'.$categorie.'</td></tr>';
+
+
+if (isset($_REQUEST['cle'])) $tableHeader.="<tr><th>Risk</th><th>".$_REQUEST['cle']."</th></tr>";
+
+$tableHeader.="</thead></table>";
+
+
+
+
 switch ($indicateur) {
 	case '1':{
 /* Numerateur */
 if($type=="num")
-$query="select  distinct p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
+$query="select  distinct p1.patientID,p1.location_id as siteCode,p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
 FROM patient p1,patientDispenses p,(
 select patientID,dispd,nxt_dispd from patientDispenses p1
 where p1.nxt_dispd between '".$startDate."' and '".$endDate."') pd 
@@ -26,7 +46,7 @@ where p.patientID=pd.patientID and
       p.dispd<=pd.nxt_dispd+2
 	  and p1.patientID=p.patientID";
 if($type=="den")
-$query="select  distinct p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
+$query="select  distinct p1.patientID,p1.location_id as siteCode, p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
 FROM patient p1,patientDispenses p,(
 select patientID,dispd,nxt_dispd from patientDispenses p1
 where p1.nxt_dispd between '".$startDate."' and '".$endDate."') pd 
@@ -40,7 +60,7 @@ where p.patientID=pd.patientID and
 	case '2':{
 /* Numerateur */
 if($type=="num")
-$query="select  distinct p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
+$query="select  distinct p1.patientID,p1.location_id as siteCode,p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
 FROM patient p1,(select patientID, min(visitDate) as visitDate 
 from pepfarTable p group by patientID
 having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 12 and 12.999 
@@ -52,7 +72,7 @@ and p1.patientID=p.patientID";
 	  
 	  
 if($type=="den")
-$query="select  distinct p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
+$query="select  distinct p1.patientID,p1.location_id as siteCode,p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
 FROM patient p1,(select patientID, min(visitDate) as visitDate 
 from pepfarTable p group by patientID
 having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 12 and 12.999 
@@ -67,7 +87,7 @@ and p1.patientID=p.patientID";
 	case '4':{
 /* Numerateur */
 if($type=="num")
-$query="select  distinct p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
+$query="select  distinct p1.patientID,p1.location_id as siteCode,p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
 FROM patient p1,(select patientID, min(visitDate) as visitDate 
 from pepfarTable p group by patientID
 having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 9 and 15
@@ -81,7 +101,7 @@ and p1.patientID=p.patientID";
 	  
 	  
 if($type=="den")
-$query="select  distinct p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
+$query="select  distinct p1.patientID,p1.location_id as siteCode,p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
 FROM patient p1,(select patientID, min(visitDate) as visitDate 
 from pepfarTable p group by patientID
 having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 9 and 15
@@ -98,7 +118,7 @@ and p1.patientID=p.patientID";
 case '5':{
 /* Numerateur */
 if($type=="num")
-$query="select  distinct p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
+$query="select  distinct p1.patientID,p1.location_id as siteCode,p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
 FROM patient p1,(select patientID, min(visitDate) as visitDate 
 from pepfarTable p group by patientID
 having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 9 and 15
@@ -110,7 +130,7 @@ and p1.patientID=p.patientID";
 	  
 	  
 if($type=="den")
-$query="select  distinct p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
+$query="select  distinct p1.patientID,p1.location_id as siteCode,p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
 FROM patient p1,(select patientID, min(visitDate) as visitDate 
 from pepfarTable p group by patientID
 having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 9 and 15
@@ -120,10 +140,47 @@ having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 9 and 15
 
 break;
 
+
+case '6':{
+/* Numerateur */
+if($type=="num")
+$query="select  distinct p1.patientID,p1.location_id as siteCode,p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
+FROM patient p1,(select C.patientID from (
+select p.patientID,p.visitDate,p.regimen from pepfarTable p,
+(select p.patientID,max(visitDate) as visitDate from pepfarTable p,(select patientID,max(resultDate) as resultDate from labViral l where l.resultDate<='".$endDate."' group by 1) pt where p.patientID=pt.patientID and p.visitDate<=pt.resultDate group by 1) p1
+where p.patientID=p1.patientID and p.visitDate=p1.visitDate
+)A,
+(select p.patientID,p.visitDate,p.regimen from pepfarTable p,
+(select p.patientID,max(visitDate) as visitDate from pepfarTable p,(select patientID,max(resultDate) as resultDate from labViral l where l.resultDate<='".$endDate."' group by 1) pt where p.patientID=pt.patientID and p.visitDate between pt.resultDate and DATE_ADD(pt.resultDate, INTERVAL 3 month) group by 1) p1
+where p.patientID=p1.patientID and p.visitDate=p1.visitDate) B , 
+(select l.patientID from labViral l,
+(select patientID,max(resultDate) as resultDate from labViral l where l.resultDate<='".$endDate."' group by 1) l1
+where l.patientID=l1.patientID and 
+      l.resultDate=l1.resultDate and
+      l.result>1000 and l.past_result>1000 and 
+	  l.resultDate<='".$endDate."') C
+where A.patientID=B.patientID and C.patientID=A.patientID and STRCMP(A.regimen,B.regimen)<>0) l
+WHERE l.patientID=p1.patientID";  
+	  
+	  
+	  
+	  
+if($type=="den")
+$query="select  distinct p1.patientID,p1.location_id as siteCode,p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
+FROM patient p1,(select l.patientID from labViral l,
+(select patientID,max(resultDate) as resultDate from labViral l where l.resultDate<='".$endDate."' group by 1) l1
+where l.patientID=l1.patientID and 
+      l.resultDate=l1.resultDate and
+      l.result>1000 and l.past_result>1000 and 
+	  l.resultDate<='".$endDate."') p where p1.patientID=p.patientID";	
+}		  
+
+break;
+
 case '7':{
 /* Numerateur */
 if($type=="num")
-$query="select  distinct p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
+$query="select  distinct p1.patientID,p1.location_id as siteCode,p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
 FROM patient p1,(select patientID, min(visitDate) as visitDate 
 from pepfarTable p group by patientID
 having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 12 and 12.999
@@ -135,7 +192,7 @@ and p1.patientID=p.patientID";
 	  
 	  
 if($type=="den")
-$query="select  distinct p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
+$query="select  distinct p1.patientID,p1.location_id as siteCode,p1.clinicPatientID as ST,p1.lname as Prenom,p1.fname as Nom,case when p1.sex=2 then 'M' when p1.sex=1 then 'F' else 'I' end as Sexe,round(DATEDIFF('".$endDate."',ymdToDate(p1.dobYy,p1.dobMm,p1.dobDd))/365,0) as Age,telephone
 FROM patient p1,(select patientID, min(visitDate) as visitDate 
 from pepfarTable p group by patientID
 having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 12 and 12.999
@@ -160,15 +217,15 @@ $result = databaseSelect()->query($query)->fetchAll(PDO::FETCH_ASSOC);
         foreach($result as $row) {
                if ($i == 0) { 
                        // output the column header 
-                       $output .= '<tr>';
-                       foreach($row as $key => $value) $output .= '<th>' . $key . '</th>';
-                       $output .= '</tr>'; 
+                       $output .= '<tr><th>Code ST</th><th>Prenom</th><th>Nom</th><th>Sexe</th><th>Age</th><th>Telephone</th></tr>';
+					   }				   
+                       $output .= '<tr><td><a target="_blank" rel="noopener noreferrer" href="patienttabs.php?pid='.$row['patientID'].'&lang=fr&site='.$row['siteCode'].'">'. $row['ST']. '</a></td><td>'. $row['Prenom']. '</td><td>'. $row['Nom']. '</td><td>'. $row['Sexe']. '</td><td>'. $row['Age']. '</td><td>'. $row['telephone']. '</td></tr>';
                        $i++;
                } 
-               $output .= '<tr>';
-               foreach($row as $key => $value) $output .= '<td style="font-family: Lucida Console; font-size: 12.0px; padding:3px;">' . $value . '</td>';
-               $output .= '</tr>';
-        }
+              // $output .= '<tr>';
+              // foreach($row as $key => $value) { if($key<>'patientID') $output .= '<td style="font-family: Lucida Console; font-size: 12.0px; padding:3px;">' . $value . '</td>'; }
+             //  $output .= '</tr>';
+      //  }
         // close the table 
         $output .= '</table></center>';
 
@@ -238,6 +295,7 @@ var tableToExcel = (function() {
     
   <?php ?>
 <div style="width:65%; vertical-align:top;border-left: 1px solid #99BBE8;">
+<div class="tablex" style="padding:10px;width:50%"><?php echo $tableHeader; ?></div>
 <div style="float:right;padding:15px;margin-right:35px;">
  <input name="b_print" type="button"  onClick="printdiv('print_section');" value=" Imprimer ">
  <button onclick="tableToExcel('excelTable', 'List patient')">Exporter dans EXCEL</button>
