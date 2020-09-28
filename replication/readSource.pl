@@ -412,6 +412,9 @@ given ($tableSet) {
 	    'queueStatusLookup',
 	    'referralLookup',
 	    'regimen',
+		'alertLookup',
+		'iap_indicator',
+		'drugRupture',
 	    'riskLookup',
 	    'riskOrder',
 #	    'staticConcepts'

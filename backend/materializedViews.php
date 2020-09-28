@@ -3003,16 +3003,25 @@ database()->exec('CREATE TABLE `arv_pnls_report` (
 
 database()->EXEC('ALTER TABLE arv_pnls_report ADD INDEX indicatorIDIndex (indicator_id);');
 
+/* create tranfert patient table */
 database()->exec('DROP TABLE IF EXISTS patient_transferIn;');
 database()->exec('CREATE TABLE IF NOT EXISTS patient_transferIn
 	select patientID from vitals where TransferIn=1;');
+	
+/* crate snpatshort table of vih Patient */	
+database()->exec('DROP TABLE IF EXISTS patient_snap;');
+database()->exec('CREATE TABLE IF NOT EXISTS patient_snap
+	select * from patient where hivPositive=1;');	
+
+database()->EXEC('ALTER TABLE patient_snap ADD INDEX patient_snapIndex (patientID);');	
+	
 
 /* 1. Enrolement et référence en Soins ARV 
 1.1 NOUVEAU: Nombre de personnes VIH+ nouvellement enrolées  sous ARV au cours du mois : (TX_NEW)
 */
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,DateEnrolement) 
 select 1,p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, min(p1.visitDate) as DateEnrolement 
-from patient p, pepfarTable p1 
+from patient_snap p, pepfarTable p1 
 where p.patientID=p1.patientID 
       and p.patientID not in(select patientID from patient_transferIn) 
 group by patientID;');
@@ -3021,7 +3030,7 @@ group by patientID;');
 */
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,DebutAllaitement) 
 select 2,p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, cast(o.value_text as datetime) as DebutAllaitement 
-from patient p, pepfarTable p1, obs o 
+from patient_snap p, pepfarTable p1, obs o 
 where o.concept_id = 163621 
       and p.patientID=p1.patientID 
 	  and concat(o.location_id,o.person_id) = p.patientID 
@@ -3032,7 +3041,7 @@ group by patientID;');
 
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,DateTransfert) 
 select 3, p.patientID, p.clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, case when firstCareOtherYy>0 then ymdToDate(firstCareOtherYy,firstCareOtherMm,?) else ymdToDate(v.visitDateYy,v.visitDateMm,v.visitDateDd) end as DateTransfert 
-from patient p, vitals v 
+from patient_snap p, vitals v 
 where  p.patientID =v.patientID 
       and v.transferOnArv=1;',array('01'));
 
@@ -3050,7 +3059,7 @@ where o.concept_id = 163621 and p.indicator_id=3
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,DateEnrolement,risk) 
 select 5, p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, min(p1.visitDate) as DateEnrolement, 
        case when o.concept_id=163593 then ? when o.concept_id=163594 then ? when o.concept_id=163595 then ? when o.concept_id=163596 then ? when o.concept_id=163597 then ? end as risk 
-from patient p, pepfarTable p1, obs o 
+from patient_snap p, pepfarTable p1, obs o 
 where p.patientID=p1.patientID 
       and concat(o.location_id,o.person_id) = p.patientID 
 	  and o.concept_id in(163593,163594,163595,163596,163597) 
@@ -3070,13 +3079,13 @@ where concat(o.location_id,o.person_id) = p.patientID  and indicator_id=3
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,reasonNoEnrolment,endDate) 
 select 6, p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, 
        case when t.patientStatus=4 then ? when t.patientStatus=5 then ? end as reasonNoEnrolment, endDate 
-from patient p,patientStatusTemp t 
+from patient_snap p,patientStatusTemp t 
 where p.patientID=t.patientID  
 	  and t.patientStatus in (4,5)
 union 
 select 6,p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, 
        case when o.concept_id=163602 then ? when o.concept_id=163598 then ? when o.concept_id=163604 then ? end as reasonNoEnrolment, NULL 
-from patient p,obs o 
+from patient_snap p,obs o 
 where concat(o.location_id,o.person_id) = p.patientID 
 	  and o.concept_id in(163598,163602,163604);',array('Decedes avant la prise des ARV','referes vers un autre site avant la prise des ARV','Deni','Refus volontaire de prise d`ARV','Autre'));
 
@@ -3085,7 +3094,7 @@ where concat(o.location_id,o.person_id) = p.patientID
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,reasonNoEnrolment,endDate,DebutAllaitement) 
 select 8, p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, case when t.patientStatus=4 then ? when t.patientStatus=5 then ? end as reasonNoEnrolment,
        endDate, cast(o.value_text as datetime) as DebutAllaitement 
-from patient p, patientStatusTemp t,obs o 
+from patient_snap p, patientStatusTemp t,obs o 
 where p.patientID=t.patientID 
 	  and t.patientStatus in (4,5)
 	  and o.concept_id = 163621 
@@ -3094,7 +3103,7 @@ union
 select 8,p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, 
        case when o.concept_id=163602 then ? when o.concept_id=163598 then ? when o.concept_id=163604 then ? end as reasonNoEnrolment, NULL, 
 	   cast(o.value_text as datetime) as DebutAllaitement 
-from patient p, obs o, obs o1 
+from patient_snap p, obs o, obs o1 
 where concat(o.location_id,o.person_id) = p.patientID 
 	  and concat(o1.location_id,o1.person_id) = p.patientID 
 	  and o.concept_id in(163598,163602,163604) 
@@ -3111,20 +3120,30 @@ database()->EXEC('ALTER TABLE patient_prophylaxieCTX ADD INDEX patient_prophylax
 /* Patients VIH+ sous ARV nouvellement mis sous  CTX */
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,dateprophylaxieCTX) 
 select 9, p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears,p2.dateprophylaxieCTX 
-from patient p, pepfarTable p1, patient_prophylaxieCTX p2 
+from patient_snap p, pepfarTable p1, patient_prophylaxieCTX p2 
 where p.patientID=p1.patientID 
       and p.patientID=p2.patientID ;');
-	  
+/*	  
 database()->EXEC('drop table IF EXISTS patientStatusYear;');
 database()->EXEC('create table patientStatusYear as select * from patientStatusTemp where TIMESTAMPDIFF(YEAR,endDate,now())<=2;');
-database()->EXEC('ALTER TABLE patientStatusYear ADD INDEX patientStatusYearIndex (patientID,endDate);');	  
+database()->EXEC('ALTER TABLE patientStatusYear ADD INDEX patientStatusYearIndex (patientID,endDate);');	
+*/
+
+database()->EXEC('drop table IF EXISTS patientStatusYearActive;');
+database()->EXEC('create table patientStatusYearActive as select * from patientStatusTemp where TIMESTAMPDIFF(YEAR,endDate,now())<=2 and patientStatus in (6,8);');
+database()->EXEC('ALTER TABLE patientStatusYearActive ADD INDEX patientStatusYearActiveIndex (patientID,endDate);');
+
+
+database()->EXEC('drop table IF EXISTS patientStatusYearLost;');
+database()->EXEC('create table patientStatusYearLost as select * from patientStatusTemp where TIMESTAMPDIFF(YEAR,endDate,now())<=2 and patientStatus=9;');
+database()->EXEC('ALTER TABLE patientStatusYearLost ADD INDEX patientStatusYearLostIndex (patientID,endDate);');  
 	  
 /* Patients actifs sous ARV sous CTX */
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,dateprophylaxieCTX,endDate) 
 select 10, p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears,p2.dateprophylaxieCTX , t.endDate
-from patient p, patient_prophylaxieCTX p2 ,patientStatusYear t 
+from patient_snap p, patient_prophylaxieCTX p2 ,patientStatusYearActive t 
 where p.patientID=t.patientID 
-      and p.patientID=p2.patientID and t.patientStatus in (6,8) ; ');
+      and p.patientID=p2.patientID; ');
 
 /* 5. Nombre de patients sous ARV ayant initie un traitement préventif de la TB au cours du mois
 
@@ -3138,19 +3157,24 @@ database()->exec('CREATE TABLE IF NOT EXISTS patient_prophylaxieINH
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,dateprophylaxieINH,DateEnrolement) 
 select 11, p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears,p2.dateprophylaxieINH, 
 		min(p1.visitDate) as DateEnrolement 
-from patient p, pepfarTable p1, patient_prophylaxieINH p2 
+from patient_snap p, pepfarTable p1, patient_prophylaxieINH p2 
 where p.patientID=p1.patientID 
       and p.patientID=p2.patientID 
 	  and p.patientID not in(select patientID from patient_transferIn)
 group by patientID;');
 
 
+database()->EXEC('drop table IF EXISTS patientTbStatus;');
+database()->EXEC('create table patientTbStatus as select * from tbStatus;');
+database()->EXEC('ALTER TABLE patientTbStatus ADD INDEX patientTbStatusIndex (patientID,visitDateDd,visitDateMm,visitDateYy);');  
+	
+
 
 /* 7. Nombre de patients sous ARV ayant complété un traitement préventif de la TB au cours du mois: (TB_PREV N) */
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,datearretprophylaxieINH,DateEnrolement) 
 select 12, p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, str_to_date(concat(?, arretINHMm,arretINHYy),?) as datearretprophylaxieINH, 
        min(p1.visitDate) as DateEnrolement 
-from patient p, pepfarTable p1, tbStatus t 
+from patient_snap p, pepfarTable p1, patientTbStatus t 
 where p.patientID=p1.patientID 
       and p.patientID=t.patientID 
 	  and arretINHMm is not NULL and arretINHMm !=?  
@@ -3158,20 +3182,21 @@ where p.patientID=p1.patientID
 	  and p.patientID not in (select patientID from patient_transferIn)
 group by patientID;',array('01','%d%m%y','',''));
 
-
+database()->exec('DROP TABLE IF EXISTS patient_start;');
+database()->exec('CREATE TABLE IF NOT EXISTS patient_start
+	select p1.patientID,clinicPatientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears,min(visitDate) as DateEnrolement  from pepfarTable p1,patient_snap p2 where p1.patientID=p2.patientID group by 1;');
+database()->EXEC('ALTER TABLE patient_start ADD INDEX patient_startIndex (patientID);');  
 
 
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,presenceBCG,recentNegPPD,statusPPDunknown,suspicionTBwSymptoms,noTBsymptoms,propINH,dateVisite,DateEnrolement, endDate) 
-select 13, p.patientID, clinicPatientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, presenceBCG, recentNegPPD, statusPPDunknown, suspicionTBwSymptoms, noTBsymptoms, propINH, 
-	   str_to_date(concat(visitDateDd, visitDateMm,visitDateYy),?) as dateVisite, min(p1.endDate) as DateEnrolement, p1.endDate 
-from patient p, patientStatusTemp p1, tbStatus t 
-where p.patientID=p1.patientID 
-	  and p.patientID=t.patientID 
+select 13, s.patientID, clinicPatientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, presenceBCG, recentNegPPD, statusPPDunknown, suspicionTBwSymptoms, noTBsymptoms, propINH, 
+	   str_to_date(concat(visitDateDd, visitDateMm,visitDateYy),?) as dateVisite, s.DateEnrolement, p1.endDate 
+from patient_start s, patientStatusYearActive p1, patientTbStatus t 
+where s.patientID=p1.patientID  
+	  and s.patientID=t.patientID 
 	  and (presenceBCG or recentNegPPD or statusPPDunknown or suspicionTBwSymptoms or noTBsymptoms or propINH=1) 
 	  and p1.patientStatus in (6,8) 
-	  and p.patientID not in(select patientID from patient_transferIn) 
-group by p.patientID, endDate;',array('%d%m%y'));
-
+	  and s.patientID not in(select patientID from patient_transferIn);',array('%d%m%y'));
 
 
 database()->exec('DROP TABLE IF EXISTS patient_traitemntAntiTb;');
@@ -3181,7 +3206,7 @@ database()->exec('CREATE TABLE IF NOT EXISTS patient_traitemntAntiTb
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,datetraitemntAntiTb,DateEnrolement) 
 select 14, p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears,p2.datetraitemntAntiTb, 
 	   min(p1.visitDate) as DateEnrolement  
-from patient p, pepfarTable p1, patient_traitemntAntiTb p2 
+from patient_snap p, pepfarTable p1, patient_traitemntAntiTb p2 
 where p.patientID=p1.patientID 
 	  and p.patientID=p2.patientID 
 group by patientID;');
@@ -3192,7 +3217,7 @@ database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPat
 select 15, p.patientID, clinicPatientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, presenceBCG, recentNegPPD, statusPPDunknown, suspicionTBwSymptoms, noTBsymptoms, propINH, 
 	   str_to_date(concat(t.visitDateDd, t.visitDateMm,t.visitDateYy),?) as dateVisiteTB, 
 	   min(str_to_date(concat(p1.visitDateDd, p1.visitDateMm,p1.visitDateYy),?)) as datetraitemntAntiTb 
-from patient p, tbStatus t, prescriptions p1 
+from patient_snap p, patientTbStatus t, prescriptions p1 
 where p.patientID=t.patientID 
 	  and p.patientID=p1.patientID  
 	  and hivPositive=1 
@@ -3204,21 +3229,21 @@ group by patientID;',array('%d%m%y','%d%m%y'));
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,datetraitemntAntiTb,DateEnrolement) 
 select 16, p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears,p2.datetraitemntAntiTb, 
 	   min(p1.visitDate) as DateEnrolement  
-from patient p, pepfarTable p1, patient_traitemntAntiTb p2 
+from patient_snap p, pepfarTable p1, patient_traitemntAntiTb p2 
 where p.patientID=p1.patientID 
 	  and p.patientID=p2.patientID 
 group by patientID;');
 
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,endDate) 
 select 17, p.patientID, clinicPatientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, endDate 
-from patient p,patientStatusYear p1 
+from patient_snap p,patientStatusYearActive p1 
 where p.patientID=p1.patientID 
 	  and p1.patientStatus in (6,8)');
 
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,endDate,risk) 
 select distinct 18, p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, endDate, 
 	   case when o.concept_id=163593 then ? when o.concept_id=163594 then ? when o.concept_id=163595 then ? when o.concept_id=163596 then ? when o.concept_id=163597 then ? end as risk 
-from patient p,patientStatusYear p1, obs o 
+from patient_snap p,patientStatusYearActive p1, obs o 
 where p.patientID=p1.patientID 
 	  and p1.patientStatus in (6,8) 
 	  and concat(o.location_id,o.person_id) = p.patientID 
@@ -3227,7 +3252,7 @@ where p.patientID=p1.patientID
 database()->query('insert into arv_pnls_report (indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm,dobYy,ageYears,dispd,nxt_dispd,dispensationIntervalle) 
 select distinct 19, p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, ageYears, dispd, nxt_dispd, 
 	   case when datediff(nxt_dispd, dispd) < 90 then ? when datediff(nxt_dispd, dispd) between 90 and 179 then ? when datediff(nxt_dispd, dispd) >=180 then ? end as dispensationIntervalle 
-from patient p, patientDispenses d 
+from patient_snap p, patientDispenses d 
 where p.patientID=d.patientID',array('< 3 mois','3 a 5 mois','6 mois ou plus'));
 
 
@@ -3239,71 +3264,63 @@ description: the patient was active in the past three months and he's currently 
 
 database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 SELECT DISTINCT 40,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps1.endDate
- FROM itech.patient p, itech.patientStatusYear ps, 
-	 itech.patientStatusYear ps1
+ FROM itech.patient_snap p, itech.patientStatusYearActive ps, 
+	 itech.patientStatusYearLost ps1
 	 WHERE p.patientID = ps.patientID
 	 AND ps.patientID = ps1.patientID
-	 AND (TIMESTAMPDIFF(MONTH, DATE(ps.endDate),DATE(ps1.endDate)) <= 3)
-	 AND ps.patientStatus IN (6,8)
-	 AND ps1.patientStatus = 9;');
+	 AND (TIMESTAMPDIFF(MONTH, DATE(ps.endDate),DATE(ps1.endDate)) <= 3);');
 	 
 /*16.1. Nombre de patients décédés CONFIRMES parmi les perdus de vue recherchés au cours du mois du rapport*/
 database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
  SELECT DISTINCT 41,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps1.discDate
- FROM itech.patient p, itech.patientStatusTemp ps,
+ FROM itech.patient_snap p, itech.patientStatusYearActive ps,
 	 itech.discTable ps1
 	 WHERE p.patientID = ps.patientID
 	 AND ps.patientID = ps1.patientID
 	 AND DATE(ps.endDate) < DATE(ps1.discDate)
 	 AND (TIMESTAMPDIFF(MONTH, DATE(ps.endDate),DATE(ps1.discDate)) <= 3)
-	 AND ps.patientStatus IN (6,8)
 	 AND ps1.discType = 12;');
 	 
 /*16.2. Nombre de patients perdus de vue après un traitement de moins de 3 mois sous ARV*/
 	database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	 SELECT DISTINCT 42,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps.endDate
-	 FROM itech.patient p, itech.patientDispenses pr, itech.patientStatusTemp ps
+	 FROM itech.patient_snap p, itech.patientDispenses pr, itech.patientStatusYearLost ps
 	 WHERE p.patientID = pr.patientID
 	 AND pr.patientID = ps.patientID	 
-	 AND (TIMESTAMPDIFF(MONTH, pr.dispd, DATE(ps.endDate)) <= 3)
-	 AND ps.patientStatus = 9;');
+	 AND (TIMESTAMPDIFF(MONTH, pr.dispd, DATE(ps.endDate)) <= 3);');
 	 
 /* 16.3. Nombre de patients perdus de vue après un traitement de plus de 3 mois sous ARV */
 	database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 43,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps.endDate
-	 FROM itech.patient p, itech.patientDispenses pr, itech.patientStatusTemp ps
+	 FROM itech.patient_snap p, itech.patientDispenses pr, itech.patientStatusYearLost ps
 	 WHERE p.patientID = pr.patientID
 	 AND pr.patientID = ps.patientID
-	 AND (TIMESTAMPDIFF(MONTH, pr.dispd, DATE(ps.endDate)) > 3)
-	 AND ps.patientStatus = 9;');
+	 AND (TIMESTAMPDIFF(MONTH, pr.dispd, DATE(ps.endDate)) > 3);');
 /* 16.4. Nombre de patients perdus de vue transférés CONFIRMES */
 	database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 44,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps1.discDate
-	 FROM itech.patient p, itech.patientStatusTemp ps, itech.discTable ps1
+	 FROM itech.patient_snap p, itech.patientStatusYearLost ps, itech.discTable ps1
 	 WHERE p.patientID = ps.patientID
 	 AND ps.patientID = ps1.patientID
-	 AND ps.patientStatus = 9
 	 AND ps1.discType = 11
 	 AND DATE(ps.endDate) < DATE(ps1.discDate);');
 /* 16.5. Nombre de patients perdus de vue contactés et confirmés avoir arreté le traitement ARV */
 	database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 45,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps1.discDate
-	 FROM itech.patient p, itech.patientStatusTemp ps, itech.discTable ps1
+	 FROM itech.patient_snap p, itech.patientStatusYearLost ps, itech.discTable ps1
 	 WHERE p.patientID = ps.patientID
 	 AND ps.patientID = ps1.patientID
-	 AND ps.patientStatus = 9
 	AND ps1.discType in (4,8)
 	 AND DATE(ps.endDate) < DATE(ps1.discDate);');
 /*16.1.1 Nombre de décès CONFIRMES lies a la Tuberculose parmi les 
 perdus de vue recherches au cours du mois du rapport*/
 	database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 46,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps1.discDate
-	FROM itech.patient p, itech.patientStatusTemp ps, 
+	FROM itech.patient_snap p, itech.patientStatusYearLost ps, 
 	itech.discTable ps1, itech.obs o
 	WHERE p.patientID = ps.patientID
 	AND ps.patientID = ps1.patientID
 	AND ps1.patientID = concat(o.location_id,o.person_id)
-	AND ps.patientStatus = 9
 	AND ps1.discType = 12
 	AND DATE(ps.endDate) < DATE(ps1.discDate)
 	AND concept_id = 163610 AND value_boolean = 1;');
@@ -3312,12 +3329,11 @@ perdus de vue recherches au cours du mois du rapport*/
 parmi les perdus de vue recherches au cours du mois du rapport*/
 	database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 47,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps1.discDate
-	FROM itech.patient p, itech.patientStatusTemp ps, 
+	FROM itech.patient_snap p, itech.patientStatusYearLost ps, 
 	itech.discTable ps1,  itech.obs o
 	WHERE p.patientID = ps.patientID
 	AND ps.patientID = ps1.patientID
 	AND ps1.patientID = concat(o.location_id,o.person_id)
-	AND ps.patientStatus = 9
 	AND ps1.discType = 12
 	AND DATE(ps.endDate) < DATE(ps1.discDate)
 	AND concept_id = 163611 AND value_boolean = 1;');
@@ -3326,12 +3342,11 @@ parmi les perdus de vue recherches au cours du mois du rapport*/
 ou présumé parmi les perdus de vue recherches au cours du mois*/
 	database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 48,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps1.discDate
-	FROM itech.patient p, itech.patientStatusTemp ps, 
+	FROM itech.patient_snap p, itech.patientStatusYearLost ps, 
 	itech.discTable ps1, itech.obs o
 	WHERE p.patientID = ps.patientID
 	AND ps.patientID = ps1.patientID
 	AND ps1.patientID = concat(o.location_id,o.person_id)
-	AND ps.patientStatus = 9
 	AND ps1.discType = 12
 	AND DATE(ps.endDate) < DATE(ps1.discDate)
 	AND concept_id = 163612 AND value_boolean = 1;');
@@ -3340,12 +3355,11 @@ ou présumé parmi les perdus de vue recherches au cours du mois*/
 parmi les perdus de vue recherches*/	
 	database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 49,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps1.discDate
-	FROM itech.patient p, itech.patientStatusTemp ps, 
+	FROM itech.patient_snap p, itech.patientStatusYearLost ps, 
 	itech.discTable ps1,  itech.obs o
 	WHERE p.patientID = ps.patientID
 	AND ps.patientID = ps1.patientID
 	AND ps1.patientID = concat(o.location_id,o.person_id)
-	AND ps.patientStatus = 9
 	AND ps1.discType = 12
 	AND DATE(ps.endDate) < DATE(ps1.discDate)
 	AND concept_id = 163613 AND value_boolean = 1;');
@@ -3354,12 +3368,11 @@ parmi les perdus de vue recherches*/
 ( cancers et infections, qui n'étaient pas directement liées à l'infection à VIH).*/
 	database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 50,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps1.discDate
-	FROM itech.patient p, itech.patientStatusTemp ps, 
+	FROM itech.patient_snap p, itech.patientStatusYearLost ps, 
 	itech.discTable ps1, itech.obs o
 	WHERE p.patientID = ps.patientID
 	AND ps.patientID = ps1.patientID
 	AND ps1.patientID = concat(o.location_id,o.person_id)
-	AND ps.patientStatus = 9
 	AND ps1.discType = 12
 	AND DATE(ps.endDate) < DATE(ps1.discDate)
 	AND concept_id = 163614 AND value_boolean = 1;');
@@ -3368,12 +3381,11 @@ parmi les perdus de vue recherches*/
 ( traumatisme, accident, suicide, guerre, etc.)*/
 	database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 51,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps1.discDate
-	FROM itech.patient p, itech.patientStatusTemp ps, 
+	FROM itech.patient_snap p, itech.patientStatusYearLost ps, 
 	itech.discTable ps1, itech.obs o
 	WHERE p.patientID = ps.patientID
 	AND ps.patientID = ps1.patientID
 	AND ps1.patientID = concat(o.location_id,o.person_id)
-	AND ps.patientStatus = 9
 	AND ps1.discType = 12
 	AND DATE(ps.endDate) < DATE(ps1.discDate)
 	AND concept_id = 163615 AND value_boolean = 1;');
@@ -3381,12 +3393,11 @@ parmi les perdus de vue recherches*/
 /*16.1.7 Nombre de décès  parmi les perdus de vue lies a des causes inconnues*/
 	database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 52,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, p.ageYears,ps1.discDate
-	FROM itech.patient p, itech.patientStatusTemp ps, 
+	FROM itech.patient_snap p, itech.patientStatusYearLost ps, 
 	itech.discTable ps1, itech.obs o
 	WHERE p.patientID = ps.patientID
 	AND ps.patientID = ps1.patientID
 	AND ps1.patientID = concat(o.location_id,o.person_id)
-	AND ps.patientStatus = 9
 	AND ps1.discType = 12
 	AND DATE(ps.endDate) < DATE(ps1.discDate)
 	AND concept_id = 163616 AND value_boolean = 1;');
@@ -3396,10 +3407,9 @@ parmi les perdus de vue recherches*/
 	fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 53,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, 
 	p.dobYy, p.ageYears,ps1.endDate
-	FROM itech.patient p,itech.patientStatusYear ps,itech.patientStatusYear ps1
+	FROM itech.patient_snap p,itech.patientStatusYearLost ps,itech.patientStatusYearActive ps1
 	 WHERE p.patientID = ps.patientID
 		   AND ps.patientID = ps1.patientID
-		   AND ps.patientStatus = 9
 		   AND ps1.patientStatus = 6
 		   AND DATE(ps.endDate) < DATE(ps1.endDate);');
 	
@@ -3408,12 +3418,11 @@ parmi les perdus de vue recherches*/
 	fname,sex,dobDd,dobMm,dobYy,ageYears,risk,dateVisite)
 	SELECT DISTINCT 54,p.patientID,p.clinicPatientID,p.lname, p.fname, p.sex, p.dobDd,p.dobMm, 
 	p.dobYy, p.ageYears, o.concept_id, ps1.endDate
-	FROM itech.patient p,itech.patientStatusYear ps,itech.patientStatusYear ps1, 
+	FROM itech.patient_snap p,itech.patientStatusYearLost ps,itech.patientStatusYearActive ps1, 
 	itech.obs o
 	 WHERE p.patientID = ps.patientID
 		   AND ps.patientID = ps1.patientID
 		   AND p.patientID = concat(o.location_id,o.person_id)
-		   AND ps.patientStatus = 9
 		   AND ps1.patientStatus = 6
 		   AND DATE(ps.endDate) <= DATE(ps1.endDate)
 		   AND (o.concept_id IN (163593,163594,163595,163596,163597) AND o.value_boolean = 1);');
@@ -3424,22 +3433,10 @@ de charge virale au cours des 12 derniers mois: (TX_PVLS D routine)*/
 	fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 55, p.patientID,p.clinicPatientID, p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, 
 	p.ageYears, ps.endDate
-	FROM itech.patient p, itech.patientStatusYear ps, itech.labs l, 
-	 (SELECT pst.patientID, pst.endDate FROM  itech.patientStatusYear pst 
-	 WHERE pst.patientStatus IN (6,8)) B,
-	 (SELECT la.patientID, MAX(ymdtodate(la.visitDateYy,la.visitDateMm,la.visitDateDd)) as visitDate
-	   FROM itech.labs la, itech.patientStatusYear pats WHERE 
-	   la.patientID = pats.patientID AND la.labID IN(1257,103)
-	   AND pats.patientStatus IN (6,8) GROUP BY 1) C
+	FROM itech.patient_snap p, itech.patientStatusYearActive ps, itech.labs l
 	 WHERE p.patientID = l.patientID
 	 AND p.patientID = ps.patientID
-	 AND ps.patientID = B.patientID
-	 AND ps.endDate = B.endDate
-	 AND p.patientID = B.patientID
-	 AND l.patientID = C.patientID
-	 AND ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd) = C.visitDate
-	 AND ps.patientStatus IN (6,8)
-	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(B.endDate)) between 0 AND 12)
+	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(ps.endDate)) between 0 AND 12)
 	 AND l.labID IN (1257,103)
 	 AND (
 		(l.result IS NOT NULL AND l.result <> ?)
@@ -3457,25 +3454,13 @@ ayant au moins un resultat de charge virale au cours des 12 derniers mois */
 	SELECT DISTINCT 56, p.patientID,p.clinicPatientID, p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, 
 	p.ageYears, ps.endDate,(select o1.value_text from itech.obs o1,itech.encounter e1 where e1.encounter_id=o1.encounter_id and o1.concept_id=163591 and e1.patientID=ps.patientID and o.encounter_id=o1.encounter_id) as grossesseStartDate,
 	(select o1.value_text from itech.obs o1,itech.encounter e1 where e1.encounter_id=o1.encounter_id and o1.concept_id=163592 and e1.patientID=ps.patientID and o.encounter_id=o1.encounter_id) as grossesseEndDate
-	FROM itech.patient p, itech.patientStatusYear ps, itech.labs l, 
-	 (SELECT pst.patientID, pst.endDate FROM  itech.patientStatusYear pst 
-	 WHERE pst.patientStatus IN (6,8)) B,
-	 (SELECT la.patientID, MAX(ymdtodate(la.visitDateYy,la.visitDateMm,la.visitDateDd)) as visitDate
-	   FROM itech.labs la, itech.patientStatusYear pats WHERE 
-	   la.patientID = pats.patientID AND la.labID IN(1257,103)
-	   AND pats.patientStatus IN (6,8) GROUP BY 1) C,
+	FROM itech.patient_snap p, itech.patientStatusYearActive ps, itech.labs l,
 	   itech.encounter e, itech.obs o
 	 WHERE p.patientID = l.patientID
 	 AND p.patientID = ps.patientID
-	 AND ps.patientID = B.patientID
-	 AND ps.endDate = B.endDate
-	 AND p.patientID = B.patientID
-	 AND l.patientID = C.patientID
-	 AND ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd) = C.visitDate
 	 AND p.patientID = e.patientID
 	 AND e.encounter_id = o.encounter_id
-	 AND ps.patientStatus IN (6,8)
-	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(B.endDate)) between 0 AND 12)
+	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(ps.endDate)) between 0 AND 12)
 	 AND l.labID IN (1257,103)
 	 AND (
 		(l.result IS NOT NULL AND l.result <> ?)
@@ -3494,25 +3479,13 @@ ayant au moins un resultat de charge virale au cours des 12 derniers mois*/
 	SELECT DISTINCT 57, p.patientID,p.clinicPatientID, p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, 
 	p.ageYears, ps.endDate,(select o1.value_text from itech.obs o1,itech.encounter e1 where e1.encounter_id=o1.encounter_id and o1.concept_id=163621 and e1.patientID=ps.patientID and o.encounter_id=o1.encounter_id) as allaitementStartDate,
 	(select o1.value_text from itech.obs o1,itech.encounter e1 where e1.encounter_id=o1.encounter_id and o1.concept_id=163622 and e1.patientID=ps.patientID and o.encounter_id=o1.encounter_id) as allaitementEndDate
-	FROM itech.patient p, itech.patientStatusYear ps, itech.labs l, 
-	 (SELECT pst.patientID, pst.endDate FROM  itech.patientStatusYear pst 
-	 WHERE pst.patientStatus IN (6,8)) B,
-	 (SELECT la.patientID, MAX(ymdtodate(la.visitDateYy,la.visitDateMm,la.visitDateDd)) as visitDate
-	   FROM itech.labs la, itech.patientStatusYear pats WHERE 
-	   la.patientID = pats.patientID AND la.labID IN(1257,103)
-	   AND pats.patientStatus IN (6,8) GROUP BY 1) C,
+	FROM itech.patient_snap p, itech.patientStatusYearActive ps, itech.labs l,
 	   itech.encounter e, itech.obs o
 	 WHERE p.patientID = l.patientID
 	 AND p.patientID = ps.patientID
-	 AND ps.patientID = B.patientID
-	 AND ps.endDate = B.endDate
-	 AND p.patientID = B.patientID
-	 AND l.patientID = C.patientID
-	 AND ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd) = C.visitDate
 	 AND p.patientID = e.patientID
-	 AND e.encounter_id = o.encounter_id
-	 AND ps.patientStatus IN (6,8)
-	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(B.endDate)) between 0 AND 12)
+	 AND e.encounter_id = o.encounter_id 
+	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(ps.endDate)) between 0 AND 12)
 	 AND l.labID IN (1257,103)
 	 AND (
 		(l.result IS NOT NULL AND l.result <> ?)
@@ -3531,25 +3504,13 @@ ayant au moins un resultat de charge virale au cours des 12 derniers mois*/
 	fname,sex,dobDd,dobMm, dobYy,ageYears,risk,dateVisite)
 	SELECT DISTINCT 58, p.patientID,p.clinicPatientID, p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, 
 	p.ageYears, o.concept_id, ps.endDate
-	FROM itech.patient p, itech.patientStatusYear ps, itech.labs l, 
-	 (SELECT  pst.patientID, pst.endDate FROM  itech.patientStatusYear pst 
-	 WHERE pst.patientStatus IN (6,8)) B,
-	 (SELECT la.patientID, MAX(ymdtodate(la.visitDateYy,la.visitDateMm,la.visitDateDd)) as visitDate
-	   FROM itech.labs la, itech.patientStatusYear pats WHERE 
-	   la.patientID = pats.patientID AND la.labID IN(1257,103)
-	   AND pats.patientStatus IN (6,8) GROUP BY 1) C,
+	FROM itech.patient_snap p, itech.patientStatusYearActive ps, itech.labs l,
 	   itech.encounter e, itech.obs o
 	 WHERE p.patientID = l.patientID
 	 AND p.patientID = ps.patientID
-	 AND ps.patientID = B.patientID
-	 AND ps.endDate = B.endDate
-	 AND p.patientID = B.patientID
-	 AND l.patientID = C.patientID
-	 AND ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd) = C.visitDate
 	 AND p.patientID = e.patientID
 	 AND e.encounter_id = o.encounter_id
-	 AND ps.patientStatus IN (6,8)
-	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(B.endDate)) between 0 AND 12)
+	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(ps.endDate)) between 0 AND 12)
 	 AND l.labID IN (1257,103)
 	 AND (
 		(l.result IS NOT NULL AND l.result <> ?)
@@ -3568,22 +3529,10 @@ des 12 derniers mois  est inférieur à 1000 copies/ml (TX_PVLS N routine)*/
 	fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 59, p.patientID,p.clinicPatientID, p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, 
 	p.ageYears, ps.endDate
-	FROM itech.patient p, itech.patientStatusYear ps, itech.labs l, 
-	 (SELECT  pst.patientID, pst.endDate FROM  itech.patientStatusYear pst 
-	 WHERE pst.patientStatus IN (6,8)) B,
-	 (SELECT la.patientID, MAX(ymdtodate(la.visitDateYy,la.visitDateMm,la.visitDateDd)) as visitDate
-	   FROM itech.labs la, itech.patientStatusYear pats WHERE 
-	   la.patientID = pats.patientID AND la.labID IN(1257,103)
-	   AND pats.patientStatus IN (6,8) GROUP BY 1) C
+	FROM itech.patient_snap p, itech.patientStatusYearActive ps, itech.labs l
 	 WHERE p.patientID = l.patientID
-	 AND p.patientID = ps.patientID
-	 AND ps.patientID = B.patientID
-	 AND ps.endDate = B.endDate
-	 AND p.patientID = B.patientID
-	 AND l.patientID = C.patientID
-	 AND ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd) = C.visitDate
-	 AND ps.patientStatus IN (6,8)
-	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(B.endDate)) between 0 AND 12)
+	 AND p.patientID = ps.patientID 
+	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(ps.endDate)) between 0 AND 12)
 	 AND l.labID IN (1257,103)
 	AND (
 		((l.result > 0 AND l.result < 1000) OR (l.result LIKE ? OR l.result LIKE ?))
@@ -3604,25 +3553,13 @@ database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPati
 	SELECT DISTINCT 60, p.patientID,p.clinicPatientID, p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, 
 	p.ageYears, ps.endDate,(select o1.value_text from itech.obs o1,itech.encounter e1 where e1.encounter_id=o1.encounter_id and o1.concept_id=163591 and e1.patientID=ps.patientID and o.encounter_id=o1.encounter_id) as grossesseStartDate,
 	(select o1.value_text from itech.obs o1,itech.encounter e1 where e1.encounter_id=o1.encounter_id and o1.concept_id=163592 and e1.patientID=ps.patientID and o.encounter_id=o1.encounter_id) as grossesseEndDate
-	FROM itech.patient p, itech.patientStatusYear ps, itech.labs l, 
-	 (SELECT pst.patientID, pst.endDate FROM  itech.patientStatusYear pst 
-	 WHERE pst.patientStatus IN (6,8)) B,
-	 (SELECT la.patientID, MAX(ymdtodate(la.visitDateYy,la.visitDateMm,la.visitDateDd)) as visitDate
-	   FROM itech.labs la, itech.patientStatusYear pats WHERE 
-	   la.patientID = pats.patientID AND la.labID IN(1257,103)
-	   AND pats.patientStatus IN (6,8) GROUP BY 1) C,
+	FROM itech.patient_snap p, itech.patientStatusYearActive ps, itech.labs l,
 	   itech.encounter e, itech.obs o
 	 WHERE p.patientID = l.patientID
 	 AND p.patientID = ps.patientID
-	 AND ps.patientID = B.patientID
-	 AND ps.endDate = B.endDate
-	 AND p.patientID = B.patientID
-	 AND l.patientID = C.patientID
-	 AND ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd) = C.visitDate
 	 AND p.patientID = e.patientID
 	 AND e.encounter_id = o.encounter_id
-	 AND ps.patientStatus IN (6,8)
-	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(B.endDate)) between 0 AND 12)
+	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(ps.endDate)) between 0 AND 12)
 	 AND l.labID IN (1257,103)
 	 AND (
 		((l.result > 0 AND l.result < 1000) OR (l.result LIKE ? OR l.result LIKE ?))
@@ -3642,25 +3579,13 @@ database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPati
 	SELECT DISTINCT 61, p.patientID,p.clinicPatientID, p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, 
 	p.ageYears, ps.endDate,(select o1.value_text from itech.obs o1,itech.encounter e1 where e1.encounter_id=o1.encounter_id and o1.concept_id=163621 and e1.patientID=ps.patientID and o.encounter_id=o1.encounter_id) as allaitementStartDate,
 	(select o1.value_text from itech.obs o1,itech.encounter e1 where e1.encounter_id=o1.encounter_id and o1.concept_id=163622 and e1.patientID=ps.patientID and o.encounter_id=o1.encounter_id) as allaitementEndDate
-	FROM itech.patient p, itech.patientStatusYear ps, itech.labs l, 
-	 (SELECT DISTINCT pst.patientID, pst.endDate FROM  itech.patientStatusYear pst 
-	 WHERE pst.patientStatus IN (6,8)) B,
-	 (SELECT la.patientID, MAX(ymdtodate(la.visitDateYy,la.visitDateMm,la.visitDateDd)) as visitDate
-	   FROM itech.labs la, itech.patientStatusYear pats WHERE 
-	   la.patientID = pats.patientID AND la.labID IN(1257,103)
-	   AND pats.patientStatus IN (6,8) GROUP BY 1) C,
+	FROM itech.patient_snap p, itech.patientStatusYearActive ps, itech.labs l,
 	   itech.encounter e, itech.obs o
 	 WHERE p.patientID = l.patientID
 	 AND p.patientID = ps.patientID
-	 AND ps.patientID = B.patientID
-	 AND ps.endDate = B.endDate
-	 AND p.patientID = B.patientID
-	 AND l.patientID = C.patientID
-	 AND ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd) = C.visitDate
 	 AND p.patientID = e.patientID
-	 AND e.encounter_id = o.encounter_id
-	 AND ps.patientStatus IN (6,8)
-	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(B.endDate)) between 0 AND 12)
+	 AND e.encounter_id = o.encounter_id 
+	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(ps.endDate)) between 0 AND 12)
 	 AND l.labID IN (1257,103)
 	 AND (
 		((l.result > 0 AND l.result < 1000) OR (l.result LIKE ? OR l.result LIKE ?))
@@ -3680,25 +3605,13 @@ database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPati
 	fname,sex,dobDd,dobMm, dobYy,ageYears,risk,dateVisite)
 	SELECT DISTINCT 62, p.patientID,p.clinicPatientID, p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, 
 	p.ageYears, o.concept_id, ps.endDate
-	FROM itech.patient p, itech.patientStatusYear ps, itech.labs l, 
-	 (SELECT DISTINCT pst.patientID, pst.endDate FROM  itech.patientStatusYear pst 
-	 WHERE pst.patientStatus IN (6,8)) B,
-	 (SELECT la.patientID, MAX(ymdtodate(la.visitDateYy,la.visitDateMm,la.visitDateDd)) as visitDate
-	   FROM itech.labs la, itech.patientStatusYear pats WHERE 
-	   la.patientID = pats.patientID AND la.labID IN(1257,103)
-	   AND pats.patientStatus IN (6,8) GROUP BY 1) C,
+	FROM itech.patient_snap p, itech.patientStatusYearActive ps, itech.labs l,
 	   itech.encounter e, itech.obs o
 	 WHERE p.patientID = l.patientID
 	 AND p.patientID = ps.patientID
-	 AND ps.patientID = B.patientID
-	 AND ps.endDate = B.endDate
-	 AND p.patientID = B.patientID
-	 AND l.patientID = C.patientID
-	 AND ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd) = C.visitDate
 	 AND p.patientID = e.patientID
-	 AND e.encounter_id = o.encounter_id
-	 AND ps.patientStatus IN (6,8)
-	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(B.endDate)) between 0 AND 12)
+	 AND e.encounter_id = o.encounter_id 
+	 AND (TIMESTAMPDIFF(MONTH, ymdtodate(l.visitDateYy,l.visitDateMm,l.visitDateDd),DATE(ps.endDate)) between 0 AND 12)
 	 AND l.labID IN (1257,103)
 	 AND (
 		((l.result > 0 AND l.result < 1000) OR (l.result LIKE ? OR l.result LIKE ?))
@@ -3716,9 +3629,8 @@ database()->exec('DROP TABLE IF EXISTS patient_starting_art_other_site;');
 database()->query('CREATE TABLE IF NOT EXISTS patient_starting_art_other_site
 	SELECT DISTINCT p.patientID,p.clinicPatientID, p.lname, p.fname, p.sex, 
 	p.dobDd,p.dobMm, p.dobYy, p.ageYears, o.value_datetime
-	FROM itech.patient p, itech.encounter e, itech.obs o
-	WHERE p.patientID = e.patientID
-	AND e.encounter_id = o.encounter_id 
+	FROM itech.patient_snap p,itech.obs o
+	WHERE p.patientID = concat(o.location_id,o.person_id) 
 	AND o.concept_id = 163606
 	AND (o.value_text IS NOT NULL AND o.value_text <> ?);',array(''));
 	
@@ -3729,7 +3641,7 @@ database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPati
 	fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 75, p.patientID,p.clinicPatientID, p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, 
 	p.ageYears, B.visitDate
-	FROM itech.patient p, 
+	FROM itech.patient_snap p, 
 	 (SELECT pft.patientID, MIN(DATE(pft.visitDate)) AS visitDate 
 	 FROM itech.pepfarTable pft GROUP BY 1) B
 	 WHERE p.patientID = B.patientID
@@ -3746,7 +3658,7 @@ database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPati
 	fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite)
 	SELECT DISTINCT 76, p.patientID,p.clinicPatientID, p.lname, p.fname, p.sex, p.dobDd,p.dobMm, p.dobYy, 
 	p.ageYears, B.visitDate
-	FROM itech.patient p, 
+	FROM itech.patient_snap p, 
 	 (SELECT pft.patientID, MIN(DATE(pft.visitDate)) AS visitDate 
 	 FROM itech.pepfarTable pft GROUP BY 1) B
 	 WHERE p.patientID = B.patientID
@@ -3768,58 +3680,45 @@ avec une jointure sur la table patientStatusTemp et verifier si patientStatus IN
 au cours du rapport*/ 
 	database()->EXEC('DROP TABLE IF EXISTS patient_starting_art_other_site;');
 	
+	database()->EXEC('DROP TABLE IF EXISTS patientCancerCol;');
+	database()->EXEC('create table if not EXISTS patientCancerCol as 
+	select e.patientID,e.visitDate,o.concept_id,o.value_numeric,e.encounter_id 
+	from encounter e,obs o 
+	where e.siteCode = o.location_id
+	 AND e.encounter_id = o.encounter_id 
+	 AND o.concept_id in (70029,146602)');
+	
 /*21.1 Nombre de femmes sous ARV ayant bénéficié d'un dépistage du cancer du col 
 de l'utérus (CXCA_SCRN) pour la 1ere fois*/
 database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,
 	fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite, cancer_col_status)
 	SELECT DISTINCT 79,p.patientID,clinicPatientID,p.lname,p.fname,p.sex,
-	p.dobDd,p.dobMm, p.dobYy, p.ageYears,e.visitDate,o.value_numeric AS cancer_col_status 
-	 FROM itech.patient p,itech.prescriptions pr, itech.encounter e, itech.obs o,
-	 (SELECT o1.person_id, MIN(DATE(en.visitDate)) AS visitDate 
-	 FROM itech.encounter en, itech.obs o1
-	 WHERE en.encounter_id = o1.encounter_id 
-	 AND o1.concept_id = 70029 AND o1.value_numeric IS NOT NULL GROUP BY 1) B
-	 WHERE p.patientID = pr.patientID
-	 AND p.patientID = e.patientID
-	 AND e.encounter_id = o.encounter_id
-	 AND e.siteCode = o.location_id
-	 AND p.person_id = B.person_id
-	 AND DATE(e.visitDate) = B.visitDate
-	 AND (pr.dispensed = 1 OR pr.dispAltNumPills IS NOT NULL 
-	 OR ISDATE(ymdtodate(pr.dispdateyy,pr.dispdatemm,pr.dispdatedd)) = 1 
-	 OR pr.dispAltNumDays IS NOT NULL OR pr.dispAltDosage IS NOT NULL) 
-	 AND (pr.forPepPmtct = 0 OR pr.forPepPmtct = 2 OR pr.forPepPmtct IS NULL)
-	 AND pr.drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
-	 AND o.concept_id = 70029 /*Dépistage du cancer du Col */
-	 AND o.value_numeric IS NOT NULL /* reponse 1 = oui, 2 = non*/
+	p.dobDd,p.dobMm, p.dobYy, p.ageYears,pt.visitDate,pt.value_numeric AS cancer_col_status 
+	 FROM itech.patient_snap p, patientCancerCol pt,
+	 (SELECT patientID, MIN(DATE(visitDate)) AS visitDate 
+	 FROM patientCancerCol WHERE concept_id=70029 AND value_numeric IS NOT NULL GROUP BY 1) B
+	 WHERE p.patientID = pt.patientID
+	 AND p.patientID = B.patientID
+	 AND p.patientStatus in (6,8,9,1,2,3)
+	 AND DATE(pt.visitDate) = B.visitDate	
+     AND pt.concept_id=70029	 
+	 AND pt.value_numeric IS NOT NULL /* reponse 1 = oui, 2 = non*/
 	 AND p.sex = 1;');
 /*21.2 Nombre de femmes sous ARV ayant bénéficié d'un dépistage du cancer du col 
 de l'utérus (CXCA_SCRN) après un 1er test negatif*/
 database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,
 	fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite, cancer_col_status)
 	SELECT DISTINCT 80,p.patientID,clinicPatientID,p.lname,p.fname,p.sex,
-	p.dobDd,p.dobMm, p.dobYy, p.ageYears,e.visitDate,o.value_numeric AS cancer_col_status
-	 FROM itech.patient p,itech.prescriptions pr, itech.encounter e, itech.obs o, itech.obs ob,
-	 (SELECT o1.person_id, MIN(DATE(en.visitDate)) AS visitDate, o1.value_numeric 
-	 FROM itech.encounter en, itech.obs o1
-	 WHERE en.encounter_id = o1.encounter_id AND o1.concept_id = 70029 
-	 AND o1.value_numeric = 1 GROUP BY 1) B
-	 WHERE p.patientID = pr.patientID
-	 AND p.patientID = e.patientID
-	 AND e.encounter_id = o.encounter_id
-	 AND e.siteCode = o.location_id
-	 AND o.location_id = ob.location_id
-	 AND o.encounter_id = ob.encounter_id
-	 AND p.person_id = B.person_id
-	 AND DATE(e.visitDate) > B.visitDate
-	 AND (pr.dispensed = 1 OR pr.dispAltNumPills IS NOT NULL 
-	 OR ISDATE(ymdtodate(pr.dispdateyy,pr.dispdatemm,pr.dispdatedd)) = 1 
-	 OR pr.dispAltNumDays IS NOT NULL OR pr.dispAltDosage IS NOT NULL) 
-	 AND (pr.forPepPmtct = 0 OR pr.forPepPmtct = 2 OR pr.forPepPmtct IS NULL)
-	 AND pr.drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
-	 AND o.concept_id = 146602 /*Dépistage du cancer du Col */
-	 AND o.value_numeric = 1 /* reponse 1 = oui, 2 = non*/
-	 AND ob.concept_id = 70029
+	p.dobDd,p.dobMm, p.dobYy, p.ageYears,o.visitDate,o.value_numeric AS cancer_col_status
+	 FROM itech.patient_snap p, itech.patientCancerCol o,
+	 (SELECT patientID, MIN(DATE(visitDate)) AS visitDate, value_numeric 
+	 FROM patientCancerCol WHERE concept_id = 70029 AND value_numeric = 1 GROUP BY 1) B
+	 WHERE p.patientID = o.patientID
+	 AND p.patientID = B.patientID
+	 AND p.patientStatus in (6,8,9,1,2,3)
+	 AND DATE(o.visitDate) > B.visitDate	 
+	 AND o.concept_id = 146602 /*Dépistage du cancer du Col*/
+	 AND o.value_numeric = 1 /*reponse 1 = oui, 2 = non*/
 	 AND p.sex = 1;');
 	 
 /*21.3 Nombre de femmes sous ARV ayant bénéficié d'un dépistage 
@@ -3827,20 +3726,12 @@ du cancer du col de l'utérus (CXCA_SCRN) après traitement */
 database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,
 	fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite, cancer_col_status)
 	SELECT DISTINCT 81,p.patientID,clinicPatientID,p.lname,p.fname,p.sex,
-	p.dobDd,p.dobMm, p.dobYy, p.ageYears,e.visitDate,o.value_numeric AS cancer_col_status
-	 FROM itech.patient p,itech.prescriptions pr, itech.encounter e, itech.obs o
-	 WHERE p.patientID = pr.patientID
-	 AND p.patientID = e.patientID
-	 AND e.encounter_id = o.encounter_id
-	 AND (pr.dispensed = 1 OR pr.dispAltNumPills IS NOT NULL 
-	 OR ISDATE(ymdtodate(pr.dispdateyy,pr.dispdatemm,pr.dispdatedd)) = 1 
-	 OR pr.dispAltNumDays IS NOT NULL OR pr.dispAltDosage IS NOT NULL) 
-	 AND (pr.forPepPmtct = 0 OR pr.forPepPmtct = 2 OR pr.forPepPmtct IS NULL)
-	 AND pr.drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
-	 AND o.concept_id = 70029 /*Cancer du col resultat*/
-	 /*AND o.value_numeric = 2*/ /*1=negatif, 2=positif, 4=inconnu*/
-	 AND o.value_numeric IS NOT NULL
-	 AND ymdtodate(pr.dispdateyy,pr.dispdatemm,pr.dispdatedd) <= e.visitDate
+	p.dobDd,p.dobMm, p.dobYy, p.ageYears,pt.visitDate,pt.value_numeric AS cancer_col_status
+	 FROM itech.patient_snap p, patientCancerCol pt
+	 WHERE  p.patientID = pt.patientID	 
+	 AND pt.concept_id = 70029 /*Cancer du col resultat*/
+	 AND p.patientStatus in (6,8,9,1,2,3)
+	 AND pt.value_numeric IS NOT NULL
 	 AND p.sex = 1;');
 	 
 	 /*22. Nombre de femmes sous ARV dépistées positives pour le cancer du col de l'utérus 
@@ -3849,22 +3740,16 @@ database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPati
 	fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite, intervention)
 	SELECT DISTINCT 82,p.patientID,clinicPatientID,p.lname,p.fname,p.sex,
 	p.dobDd,p.dobMm, p.dobYy, p.ageYears,e.visitDate,ob.concept_id AS intervention
-	 FROM itech.patient p,itech.prescriptions pr, itech.encounter e, itech.obs o, itech.obs ob
-	 WHERE p.patientID = pr.patientID
+	 FROM itech.patient_snap p, itech.encounter e, itech.obs o, 
+	 (SELECT patientID, visitDate, value_numeric 
+	 FROM patientCancerCol WHERE concept_id = 70029 AND value_numeric = 2) B
+	 WHERE p.patientID = B.patientID
 	 AND p.patientID = e.patientID
 	 AND e.encounter_id = o.encounter_id
 	 AND e.siteCode = o.location_id
-	 AND o.person_id = ob.person_id
-	 AND o.location_id = ob.location_id
-	 AND (pr.dispensed = 1 OR pr.dispAltNumPills IS NOT NULL 
-	 OR ISDATE(ymdtodate(pr.dispdateyy,pr.dispdatemm,pr.dispdatedd)) = 1 
-	 OR pr.dispAltNumDays IS NOT NULL OR pr.dispAltDosage IS NOT NULL) 
-	 AND (pr.forPepPmtct = 0 OR pr.forPepPmtct = 2 OR pr.forPepPmtct IS NULL)
-	 AND pr.drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
-	 AND o.concept_id = 70029
-	 AND o.value_numeric = 2
-	 AND ob.concept_id IN (162812,162810 /*LEEP*/,163408/*Thermocoagulation*/)
-	 AND ob.value_boolean = 1
+	 AND p.patientStatus in (6,8,9,1,2,3)
+	 AND o.concept_id IN (162812,162810 /*LEEP*/,163408/*Thermocoagulation*/)
+	 AND o.value_boolean = 1
 	 AND p.sex = 1;');
 	 
 	 
@@ -3877,15 +3762,14 @@ database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPati
 	CASE WHEN ISDATE(ymdtodate(v.visitDateYy,v.visitDateMm,v.visitDateDd)) = 1 THEN
 	 ymdtodate(v.visitDateYy,v.visitDateMm,v.visitDateDd)
 	 ELSE null END,10/* code for pillules*/ AS methode_pf
-	 FROM itech.patient p, itech.vitals v, itech.prescriptions pr
+	 FROM itech.patient_snap p, itech.vitals v 
 	 WHERE  p.patientID = v.patientID
-	 AND (pr.dispensed = 1 OR pr.dispAltNumPills IS NOT NULL 
-	 OR ISDATE(ymdtodate(pr.dispdateyy,pr.dispdatemm,pr.dispdatedd)) = 1 
-	 OR pr.dispAltNumDays IS NOT NULL OR pr.dispAltDosage IS NOT NULL) 
-	 AND (pr.forPepPmtct = 0 OR pr.forPepPmtct = 2 OR pr.forPepPmtct IS NULL)
-	 AND pr.drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
 	 AND v.famPlanMethodOcPills = 1 
+	 AND p.patientStatus in (6,8,9,1,2,3)
 	 AND p.sex = 1 ;');
+	 
+	 
+	 
 	
 	/*Injectables , concept_id = 71128, value_boolean = 1*/
 database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,
@@ -3895,16 +3779,11 @@ database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPati
 	CASE WHEN ISDATE(ymdtodate(e.visitDateYy,e.visitDateMm,e.visitDateDd)) = 1 THEN
 	 ymdtodate(e.visitDateYy,e.visitDateMm,e.visitDateDd)
 	 ELSE ifnull(e.visitDate,null) END,o.concept_id AS methode_pf 
-	 FROM itech.patient p, itech.prescriptions pr, itech.encounter e, itech.obs o
-	 WHERE p.patientID = pr.patientID
-	 AND p.patientID = e.patientID
+	 FROM itech.patient_snap p, itech.encounter e, itech.obs o
+	 WHERE p.patientID = e.patientID
+	 AND p.patientStatus in (6,8,9,1,2,3)
 	 AND e.encounter_id = o.encounter_id
 	 AND p.location_id = o.location_id
-	 AND (pr.dispensed = 1 OR pr.dispAltNumPills IS NOT NULL 
-	 OR ISDATE(ymdtodate(pr.dispdateyy,pr.dispdatemm,pr.dispdatedd)) = 1 
-	 OR pr.dispAltNumDays IS NOT NULL OR pr.dispAltDosage IS NOT NULL) 
-	 AND (pr.forPepPmtct = 0 OR pr.forPepPmtct = 2 OR pr.forPepPmtct IS NULL)
-	 AND pr.drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
 	 AND o.concept_id = 71128
 	 AND o.value_boolean = 1
 	 AND p.sex = 1;');
@@ -3916,16 +3795,11 @@ database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPati
 	CASE WHEN ISDATE(ymdtodate(e.visitDateYy,e.visitDateMm,e.visitDateDd)) = 1 THEN
 	 ymdtodate(e.visitDateYy,e.visitDateMm,e.visitDateDd)
 	 ELSE ifnull(e.visitDate,null) END,o.concept_id AS methode_pf
-	 FROM itech.patient p, itech.prescriptions pr, itech.encounter e, itech.obs o
-	 WHERE p.patientID = pr.patientID
-	 AND p.patientID = e.patientID
+	 FROM itech.patient_snap p,  itech.encounter e, itech.obs o
+	 WHERE p.patientID = e.patientID
 	 AND e.encounter_id = o.encounter_id
 	 AND p.location_id = o.location_id
-	 AND (pr.dispensed = 1 OR pr.dispAltNumPills IS NOT NULL 
-	 OR ISDATE(ymdtodate(pr.dispdateyy,pr.dispdatemm,pr.dispdatedd)) = 1 
-	 OR pr.dispAltNumDays IS NOT NULL OR pr.dispAltDosage IS NOT NULL) 
-	 AND (pr.forPepPmtct = 0 OR pr.forPepPmtct = 2 OR pr.forPepPmtct IS NULL)
-	 AND pr.drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
+	 AND p.patientStatus in (6,8,9,1,2,3)
 	 AND o.concept_id = 71127
 	 AND o.value_boolean = 1
 	 AND p.sex = 1;');
@@ -3937,16 +3811,12 @@ database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPati
 	CASE WHEN ISDATE(ymdtodate(e.visitDateYy,e.visitDateMm,e.visitDateDd)) = 1 THEN
 	 ymdtodate(e.visitDateYy,e.visitDateMm,e.visitDateDd)
 	 ELSE ifnull(e.visitDate,null) END,o.concept_id AS methode_pf 
-	 FROM itech.patient p, itech.prescriptions pr, itech.encounter e, itech.obs o
+	 FROM itech.patient_snap p, itech.encounter e, itech.obs o
 	 WHERE p.patientID = pr.patientID
 	 AND p.patientID = e.patientID
 	 AND e.encounter_id = o.encounter_id
 	 AND p.location_id = o.location_id
-	 AND (pr.dispensed = 1 OR pr.dispAltNumPills IS NOT NULL 
-	 OR ISDATE(ymdtodate(pr.dispdateyy,pr.dispdatemm,pr.dispdatedd)) = 1 
-	 OR pr.dispAltNumDays IS NOT NULL OR pr.dispAltDosage IS NOT NULL) 
-	 AND (pr.forPepPmtct = 0 OR pr.forPepPmtct = 2 OR pr.forPepPmtct IS NULL)
-	 AND pr.drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
+	 AND p.patientStatus in (6,8,9,1,2,3)
 	 AND o.concept_id = 71374
 	 AND o.value_boolean = 1
 	 AND p.sex = 1;');
@@ -3958,13 +3828,8 @@ database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPati
 	CASE WHEN ISDATE(ymdtodate(v.visitDateYy,v.visitDateMm,v.visitDateDd)) = 1 THEN
 	 ymdtodate(v.visitDateYy,v.visitDateMm,v.visitDateDd)
 	 ELSE null END,20 AS methode_pf
-	 FROM itech.patient p,itech.vitals v, itech.prescriptions pr
+	 FROM itech.patient_snap p,itech.vitals v 
 	 WHERE p.patientID = v.patientID
-	 AND (pr.dispensed = 1 OR pr.dispAltNumPills IS NOT NULL 
-	 OR ISDATE(ymdtodate(pr.dispdateyy,pr.dispdatemm,pr.dispdatedd)) = 1 
-	 OR pr.dispAltNumDays IS NOT NULL OR pr.dispAltDosage IS NOT NULL) 
-	 AND (pr.forPepPmtct = 0 OR pr.forPepPmtct = 2 OR pr.forPepPmtct IS NULL)
-	 AND pr.drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91)
 	 AND v.famPlanMethodCondom = 1;');
 
 

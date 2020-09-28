@@ -1388,7 +1388,7 @@ il y a 12 mois et qui sont VIVANTS et toujours SOUS TRAITEMENT ARV: (TX_RET N)*/
 	/*21.1 Nombre de femmes sous ARV ayant bénéficié d'un dépistage du cancer du col 
 	de l'utérus (CXCA_SCRN) pour la 1ere fois*/
 	
-	$query79="select distinct case when cancer_col_status=1 THEN 'Negatif' WHEN cancer_col_status=2 then 'Positif' when cancer_col_status=4 then 'Suspicion de cancer' end as cancer_col, 
+	$query79="select distinct case when cancer_col_status=1 THEN 'Negatif' WHEN cancer_col_status=2 then 'Positif' when cancer_col_status=4 then 'Suspicion de cancer' end as cancer_col,cancer_col_status, 
 count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
 count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
 count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
@@ -1410,7 +1410,7 @@ while ($val = $result79->fetch()) {
 
 /*21.2 Nombre de femmes sous ARV ayant bénéficié d'un dépistage du cancer du col 
 de l'utérus (CXCA_SCRN) après un 1er test negatif*/
-	$query80="select distinct case when cancer_col_status=1 THEN 'Negatif' WHEN cancer_col_status=2 then 'Positif' when cancer_col_status=4 then 'Suspicion de cancer' end as cancer_col, 
+	$query80="select distinct case when cancer_col_status=1 THEN 'Negatif' WHEN cancer_col_status=2 then 'Positif' when cancer_col_status=4 then 'Suspicion de cancer' end as cancer_col,cancer_col_status, 
 count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
 count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
 count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
@@ -1431,7 +1431,7 @@ while ($val = $result80->fetch()) {
 }$result80->closeCursor();
 /*21.3 Nombre de femmes sous ARV ayant bénéficié d'un dépistage 
 du cancer du col de l'utérus (CXCA_SCRN) après traitement */
-	$query81="select distinct case when cancer_col_status=1 THEN 'Negatif' WHEN cancer_col_status=2 then 'Positif' when cancer_col_status=4 then 'Suspicion de cancer' end as cancer_col, 
+	$query81="select distinct case when cancer_col_status=1 THEN 'Negatif' WHEN cancer_col_status=2 then 'Positif' when cancer_col_status=4 then 'Suspicion de cancer' end as cancer_col,cancer_col_status, 
 	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
 	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
 	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
@@ -1452,7 +1452,7 @@ du cancer du col de l'utérus (CXCA_SCRN) après traitement */
 	}$result81->closeCursor();
 /*22. Nombre de femmes sous ARV dépistées positives pour le cancer du col de l'utérus 
 et qui ont reçu reçu une cryothérapie,une thermocoagulation ou une LEEP :  (CXCA_TX)*/
-	$query82="select distinct case when intervention=162812 THEN 'Cryotherapie' WHEN intervention=163408 then 'Thermocoagulation' when intervention=162810 then 'LEEP' end as intervention, 
+	$query82="select distinct case when intervention=162812 THEN 'Cryotherapie' WHEN intervention=163408 then 'Thermocoagulation' when intervention=162810 then 'LEEP' end as intervention, intervention as intervention_id,
 	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
 	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
 	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
@@ -1474,21 +1474,23 @@ et qui ont reçu reçu une cryothérapie,une thermocoagulation ou une LEEP :  (C
 	
 	/*23.1. Nombre de patients  ACCEPTANTS d'une méthode de PF*/
 	
-	$query83="select distinct case when methode_pf=10 THEN 'Pilules' WHEN methode_pf=71128 then 'Injectables' when methode_pf=71127 then 'Implants' 
-	when methode_pf=71374 then 'Collier' when methode_pf=20 then 'Condom' end as methode_pf,
-	case when sex=2 then 'HOMME' when sex=1 then 'FEMME' end as sex,sex as sex_id,
-	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
-	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
-	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then   patientID else null end) as '25-29 ans', 
-	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then   patientID else null end) as '30-34 ans', 
-	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then   patientID else null end) as '35-39 ans', 
-	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then   patientID else null end) as '40-44 ans', 
-	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then   patientID else null end) as '45-49 ans', 
-	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then patientID else null end) as '50 ans et plus',
-	count(distinct case when (dobYy IS NULL OR dobYy = '') then patientID else null end) as 'âge inconnu'
-	from arv_pnls_report
-	where (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=83 group by methode_pf, sex";
-	$result83 = databaseSelect()->query($query83);
+	$query83="select distinct case when methode_pf=10 THEN 'Pilules' WHEN methode_pf=71128 then 'Injectables' when methode_pf=71127 then 'Implants'
+when methode_pf=71374 then 'Collier' when methode_pf=20 then 'Condom' end as methode_pf,
+case when sex=2 then 'HOMME' when sex=1 then 'FEMME' end as sex,sex as sex_id,
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then patientID else null end) as '15-19 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then patientID else null end) as '20-24 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then patientID else null end) as '25-29 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then patientID else null end) as '30-34 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then patientID else null end) as '35-39 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then patientID else null end) as '40-44 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then patientID else null end) as '45-49 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then patientID else null end) as '50 ans et plus',
+count(distinct case when (dobYy IS NULL OR dobYy = '') then patientID else null end) as 'âge inconnu'
+from arv_pnls_report,
+(SELECT ar.patientID, MIN(ar.dateVisite) AS dateVisite FROM arv_pnls_report ar GROUP BY 1) B
+where patientID = B.patientID AND dateVisite = B.dateVisite
+AND (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=83 group by methode_pf, sex";
+$result83 = databaseSelect()->query($query83);
 
 	$k=0;
 	while ($val = $result83->fetch()) {
@@ -1498,7 +1500,7 @@ et qui ont reçu reçu une cryothérapie,une thermocoagulation ou une LEEP :  (C
 	
 	/*23.2. Patients UTILISATEURS d'une méthode de PF*/
 	$query84="select distinct case when methode_pf=10 THEN 'Pilules' WHEN methode_pf=71128 then 'Injectables' when methode_pf=71127 then 'Implants' 
-	when methode_pf=71374 then 'Collier' when methode_pf=20 then 'Condom' end as methode_pf,
+	when methode_pf=71374 then 'Collier' when methode_pf=20 then 'Condom' end as methode_pf,methode_pf as methode_pf_id,
 	case when sex=2 then 'HOMME' when sex=1 then 'FEMME' end as sex,sex as sex_id,
 	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then   patientID else null end) as '15-19 ans', 
 	count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then   patientID else null end) as '20-24 ans',
@@ -7189,31 +7191,31 @@ de l\'utérus (CXCA_SCRN) pour la 1ere fois</b></caption>
 		  $k = ($i+($j*3));
 		  echo $tableau79[$k]['cancer_col'];
 		   echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=15-19 ans\">".$tableau79[$k]['15-19 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col_status']."& interval=15-19 ans\">".$tableau79[$k]['15-19 ans']."</a>";
 		  $total79_0=$total79_0+$tableau79[$k]['15-19 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=20-24 ans\">".$tableau79[$k]['20-24 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col_status']."& interval=20-24 ans\">".$tableau79[$k]['20-24 ans']."</a>";
 		  $total79_1=$total79_1+$tableau79[$k]['20-24 ans'];
 		   echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=25-29 ans\">".$tableau79[$k]['25-29 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col_status']."& interval=25-29 ans\">".$tableau79[$k]['25-29 ans']."</a>";
 		  $total79_2=$total79_2+$tableau79[$k]['25-29 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=30-34 ans\">".$tableau79[$k]['30-34 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col_status']."& interval=30-34 ans\">".$tableau79[$k]['30-34 ans']."</a>";
 		  $total79_3=$total79_3+$tableau79[$k]['30-34 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=35-39 ans\">".$tableau79[$k]['35-39 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col_status']."& interval=35-39 ans\">".$tableau79[$k]['35-39 ans']."</a>";
 		  $total79_4=$total79_4+$tableau79[$k]['35-39 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=40-44 ans\">".$tableau79[$k]['40-44 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col_status']."& interval=40-44 ans\">".$tableau79[$k]['40-44 ans']."</a>";
 		  $total79_5=$total79_5+$tableau79[$k]['40-44 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=45-49 ans\">".$tableau79[$k]['45-49 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col_status']."& interval=45-49 ans\">".$tableau79[$k]['45-49 ans']."</a>";
 		  $total79_6=$total79_6+$tableau79[$k]['45-49 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=50 ans et plus\">".$tableau79[$k]['50 ans et plus']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col_status']."& interval=50 ans et plus\">".$tableau79[$k]['50 ans et plus']."</a>";
 		  $total79_7=$total79_7+$tableau79[$k]['50 ans et plus'];
 		 echo '</td><td>';
-		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col']."& interval=inconnu\">".$tableau79[$k]['âge inconnu']."</a>";
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=79&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau79[$k]['cancer_col_status']."& interval=inconnu\">".$tableau79[$k]['âge inconnu']."</a>";
 		  $total79_8=$total79_8+$tableau79[$k]['âge inconnu'];
 		 echo '</td>';
          $j++;
@@ -7278,31 +7280,31 @@ de l\'utérus (CXCA_SCRN) après un 1er test negatif</b></caption>
 		  $k = ($i+($j*3));
 		  echo $tableau80[$k]['cancer_col'];
 		   echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=15-19 ans\">".$tableau80[$k]['15-19 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col_status']."& interval=15-19 ans\">".$tableau80[$k]['15-19 ans']."</a>";
 		  $total80_0=$total80_0+$tableau80[$k]['15-19 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=20-24 ans\">".$tableau80[$k]['20-24 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col_status']."& interval=20-24 ans\">".$tableau80[$k]['20-24 ans']."</a>";
 		  $total80_1=$total80_1+$tableau80[$k]['20-24 ans'];
 		   echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=25-29 ans\">".$tableau80[$k]['25-29 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col_status']."& interval=25-29 ans\">".$tableau80[$k]['25-29 ans']."</a>";
 		  $total80_2=$total80_2+$tableau80[$k]['25-29 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=30-34 ans\">".$tableau80[$k]['30-34 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col_status']."& interval=30-34 ans\">".$tableau80[$k]['30-34 ans']."</a>";
 		  $total80_3=$total80_3+$tableau80[$k]['30-34 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=35-39 ans\">".$tableau80[$k]['35-39 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col_status']."& interval=35-39 ans\">".$tableau80[$k]['35-39 ans']."</a>";
 		  $total80_4=$total80_4+$tableau80[$k]['35-39 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=40-44 ans\">".$tableau80[$k]['40-44 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col_status']."& interval=40-44 ans\">".$tableau80[$k]['40-44 ans']."</a>";
 		  $total80_5=$total80_5+$tableau80[$k]['40-44 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=45-49 ans\">".$tableau80[$k]['45-49 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col_status']."& interval=45-49 ans\">".$tableau80[$k]['45-49 ans']."</a>";
 		  $total80_6=$total80_6+$tableau80[$k]['45-49 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=50 ans et plus\">".$tableau80[$k]['50 ans et plus']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col_status']."& interval=50 ans et plus\">".$tableau80[$k]['50 ans et plus']."</a>";
 		  $total80_7=$total80_7+$tableau80[$k]['50 ans et plus'];
 		 echo '</td><td>';
-		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col']."& interval=inconnu\">".$tableau80[$k]['âge inconnu']."</a>";
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=80&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau80[$k]['cancer_col_status']."& interval=inconnu\">".$tableau80[$k]['âge inconnu']."</a>";
 		  $total80_8=$total80_8+$tableau80[$k]['âge inconnu'];
 		 echo '</td>';
          $j++;
@@ -7368,31 +7370,31 @@ du cancer du col de l\'utérus (CXCA_SCRN) après traitement</b></caption>
 		  $k = ($i+($j*3));
 		  echo $tableau81[$k]['cancer_col'];
 		   echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=15-19 ans\">".$tableau81[$k]['15-19 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col_status']."& interval=15-19 ans\">".$tableau81[$k]['15-19 ans']."</a>";
 		  $total81_0=$total81_0+$tableau81[$k]['15-19 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=20-24 ans\">".$tableau81[$k]['20-24 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col_status']."& interval=20-24 ans\">".$tableau81[$k]['20-24 ans']."</a>";
 		  $total81_1=$total81_1+$tableau81[$k]['20-24 ans'];
 		   echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=25-29 ans\">".$tableau81[$k]['25-29 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col_status']."& interval=25-29 ans\">".$tableau81[$k]['25-29 ans']."</a>";
 		  $total81_2=$total81_2+$tableau81[$k]['25-29 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=30-34 ans\">".$tableau81[$k]['30-34 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col_status']."& interval=30-34 ans\">".$tableau81[$k]['30-34 ans']."</a>";
 		  $total81_3=$total81_3+$tableau81[$k]['30-34 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=35-39 ans\">".$tableau81[$k]['35-39 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col_status']."& interval=35-39 ans\">".$tableau81[$k]['35-39 ans']."</a>";
 		  $total81_4=$total81_4+$tableau81[$k]['35-39 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=40-44 ans\">".$tableau81[$k]['40-44 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col_status']."& interval=40-44 ans\">".$tableau81[$k]['40-44 ans']."</a>";
 		  $total81_5=$total81_5+$tableau81[$k]['40-44 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=45-49 ans\">".$tableau81[$k]['45-49 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col_status']."& interval=45-49 ans\">".$tableau81[$k]['45-49 ans']."</a>";
 		  $total81_6=$total81_6+$tableau81[$k]['45-49 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=50 ans et plus\">".$tableau81[$k]['50 ans et plus']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col_status']."& interval=50 ans et plus\">".$tableau81[$k]['50 ans et plus']."</a>";
 		  $total81_7=$total81_7+$tableau81[$k]['50 ans et plus'];
 		 echo '</td><td>';
-		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col']."& interval=inconnu\">".$tableau81[$k]['âge inconnu']."</a>";
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=81&startDate=".$startDate."&endDate=".$endDate."&cancer_col=".$tableau81[$k]['cancer_col_status']."& interval=inconnu\">".$tableau81[$k]['âge inconnu']."</a>";
 		  $total81_8=$total81_8+$tableau81[$k]['âge inconnu'];
 		 echo '</td>';
          $j++;
@@ -7457,31 +7459,31 @@ et qui ont reçu reçu une cryothérapie,une thermocoagulation ou une LEEP :  (C
 		  $k = ($i+($j*3));
 		  echo $tableau82[$k]['intervention'];
 		   echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=15-19 ans\">".$tableau82[$k]['15-19 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention_id']."& interval=15-19 ans\">".$tableau82[$k]['15-19 ans']."</a>";
 		  $total82_0=$total82_0+$tableau82[$k]['15-19 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=20-24 ans\">".$tableau82[$k]['20-24 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention_id']."& interval=20-24 ans\">".$tableau82[$k]['20-24 ans']."</a>";
 		  $total82_1=$total82_1+$tableau82[$k]['20-24 ans'];
 		   echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=25-29 ans\">".$tableau82[$k]['25-29 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention_id']."& interval=25-29 ans\">".$tableau82[$k]['25-29 ans']."</a>";
 		  $total82_2=$total82_2+$tableau82[$k]['25-29 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=30-34 ans\">".$tableau82[$k]['30-34 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention_id']."& interval=30-34 ans\">".$tableau82[$k]['30-34 ans']."</a>";
 		  $total82_3=$total82_3+$tableau82[$k]['30-34 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=35-39 ans\">".$tableau82[$k]['35-39 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention_id']."& interval=35-39 ans\">".$tableau82[$k]['35-39 ans']."</a>";
 		  $total82_4=$total82_4+$tableau82[$k]['35-39 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=40-44 ans\">".$tableau82[$k]['40-44 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention_id']."& interval=40-44 ans\">".$tableau82[$k]['40-44 ans']."</a>";
 		  $total82_5=$total82_5+$tableau82[$k]['40-44 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=45-49 ans\">".$tableau82[$k]['45-49 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention_id']."& interval=45-49 ans\">".$tableau82[$k]['45-49 ans']."</a>";
 		  $total82_6=$total82_6+$tableau82[$k]['45-49 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=50 ans et plus\">".$tableau82[$k]['50 ans et plus']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention_id']."& interval=50 ans et plus\">".$tableau82[$k]['50 ans et plus']."</a>";
 		  $total82_7=$total82_7+$tableau82[$k]['50 ans et plus'];
 		 echo '</td><td>';
-		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention']."& interval=inconnu\">".$tableau82[$k]['âge inconnu']."</a>";
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=82&startDate=".$startDate."&endDate=".$endDate."&intervention=".$tableau82[$k]['intervention_id']."& interval=inconnu\">".$tableau82[$k]['âge inconnu']."</a>";
 		  $total82_8=$total82_8+$tableau82[$k]['âge inconnu'];
 		 echo '</td>';
          $j++;
@@ -7546,31 +7548,31 @@ echo '<table class="gridtable" border="1">
 		   echo '</td><td>';
 		  echo $tableau83[$k]['sex'];
 		   echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=15-19 ans\">".$tableau83[$k]['15-19 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf_id']."&sex=".$tableau83[$k]['sex_id']."&interval=15-19 ans\">".$tableau83[$k]['15-19 ans']."</a>";
 		  $total83_0=$total83_0+$tableau83[$k]['15-19 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=20-24 ans\">".$tableau83[$k]['20-24 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf_id']."&sex=".$tableau83[$k]['sex_id']."&interval=20-24 ans\">".$tableau83[$k]['20-24 ans']."</a>";
 		  $total83_1=$total83_1+$tableau83[$k]['20-24 ans'];
 		   echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=25-29 ans\">".$tableau83[$k]['25-29 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf_id']."&sex=".$tableau83[$k]['sex_id']."&interval=25-29 ans\">".$tableau83[$k]['25-29 ans']."</a>";
 		  $total83_2=$total83_2+$tableau83[$k]['25-29 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=30-34 ans\">".$tableau83[$k]['30-34 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf_id']."&sex=".$tableau83[$k]['sex_id']."&interval=30-34 ans\">".$tableau83[$k]['30-34 ans']."</a>";
 		  $total83_3=$total83_3+$tableau83[$k]['30-34 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=35-39 ans\">".$tableau83[$k]['35-39 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf_id']."&sex=".$tableau83[$k]['sex_id']."&interval=35-39 ans\">".$tableau83[$k]['35-39 ans']."</a>";
 		  $total83_4=$total83_4+$tableau83[$k]['35-39 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=40-44 ans\">".$tableau83[$k]['40-44 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf_id']."&sex=".$tableau83[$k]['sex_id']."&interval=40-44 ans\">".$tableau83[$k]['40-44 ans']."</a>";
 		  $total83_5=$total83_5+$tableau83[$k]['40-44 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=45-49 ans\">".$tableau83[$k]['45-49 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf_id']."&sex=".$tableau83[$k]['sex_id']."&interval=45-49 ans\">".$tableau83[$k]['45-49 ans']."</a>";
 		  $total83_6=$total83_6+$tableau83[$k]['45-49 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=50 ans et plus\">".$tableau83[$k]['50 ans et plus']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf_id']."&sex=".$tableau83[$k]['sex_id']."&interval=50 ans et plus\">".$tableau83[$k]['50 ans et plus']."</a>";
 		  $total83_7=$total83_7+$tableau83[$k]['50 ans et plus'];
 		 echo '</td><td>';
-		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf']."&sex=".$tableau83[$k]['sex_id']."&interval=inconnu\">".$tableau83[$k]['âge inconnu']."</a>";
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=83&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau83[$k]['methode_pf_id']."&sex=".$tableau83[$k]['sex_id']."&interval=inconnu\">".$tableau83[$k]['âge inconnu']."</a>";
 		  $total83_8=$total83_8+$tableau83[$k]['âge inconnu'];
 		 echo '</td>';
          $j++;
@@ -7637,31 +7639,31 @@ echo '<table class="gridtable" border="1">
 		   echo '</td><td>';
 		  echo $tableau84[$k]['sex'];
 		   echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=15-19 ans\">".$tableau84[$k]['15-19 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf_id']."&sex=".$tableau84[$k]['sex_id']."&interval=15-19 ans\">".$tableau84[$k]['15-19 ans']."</a>";
 		  $total84_0=$total84_0+$tableau84[$k]['15-19 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=20-24 ans\">".$tableau84[$k]['20-24 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf_id']."&sex=".$tableau84[$k]['sex_id']."&interval=20-24 ans\">".$tableau84[$k]['20-24 ans']."</a>";
 		  $total84_1=$total84_1+$tableau84[$k]['20-24 ans'];
 		   echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=25-29 ans\">".$tableau84[$k]['25-29 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf_id']."&sex=".$tableau84[$k]['sex_id']."&interval=25-29 ans\">".$tableau84[$k]['25-29 ans']."</a>";
 		  $total84_2=$total84_2+$tableau84[$k]['25-29 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=30-34 ans\">".$tableau84[$k]['30-34 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf_id']."&sex=".$tableau84[$k]['sex_id']."&interval=30-34 ans\">".$tableau84[$k]['30-34 ans']."</a>";
 		  $total84_3=$total84_3+$tableau84[$k]['30-34 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=35-39 ans\">".$tableau84[$k]['35-39 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf_id']."&sex=".$tableau84[$k]['sex_id']."&interval=35-39 ans\">".$tableau84[$k]['35-39 ans']."</a>";
 		  $total84_4=$total84_4+$tableau84[$k]['35-39 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=40-44 ans\">".$tableau84[$k]['40-44 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf_id']."&sex=".$tableau84[$k]['sex_id']."&interval=40-44 ans\">".$tableau84[$k]['40-44 ans']."</a>";
 		  $total84_5=$total84_5+$tableau84[$k]['40-44 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=45-49 ans\">".$tableau84[$k]['45-49 ans']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf_id']."&sex=".$tableau84[$k]['sex_id']."&interval=45-49 ans\">".$tableau84[$k]['45-49 ans']."</a>";
 		  $total84_6=$total84_6+$tableau84[$k]['45-49 ans'];
 		  echo '</td><td>';
-		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=50 ans et plus\">".$tableau84[$k]['50 ans et plus']."</a>";
+		  echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf_id']."&sex=".$tableau84[$k]['sex_id']."&interval=50 ans et plus\">".$tableau84[$k]['50 ans et plus']."</a>";
 		  $total84_7=$total84_7+$tableau84[$k]['50 ans et plus'];
 		 echo '</td><td>';
-		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf']."&sex=".$tableau84[$k]['sex_id']."&interval=inconnu\">".$tableau84[$k]['âge inconnu']."</a>";
+		 echo "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\" arv_pnls_list.php?indicateur=84&startDate=".$startDate."&endDate=".$endDate."&methode_pf=".$tableau84[$k]['methode_pf_id']."&sex=".$tableau84[$k]['sex_id']."&interval=inconnu\">".$tableau84[$k]['âge inconnu']."</a>";
 		  $total84_8=$total84_8+$tableau84[$k]['âge inconnu'];
 		 echo '</td>';
          $j++;

@@ -61,7 +61,7 @@ $query_num="select count(distinct p.patientID) as cnt
 from pepfarTable p group by patientID
 having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."')=12
 ) p,`patientStatusTemp` pt
-WHERE patientStatus in (6,8) and 
+WHERE patientStatus in (6) and 
 endDate between '".$startDate."' and '".$endDate."' and 
 p.patientID=pt.patientID";
 

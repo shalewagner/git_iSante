@@ -1,12 +1,12 @@
 Most recent change: 1970-01-01 00:00:00
-Application version: 18.3 (38cc4f)
-Schema version: 46
-Seconds elapsed: 1
-Total records read: 11508
-Records per second: 11508
+Application version: 20.1 (65c310)
+Schema version: 47
+Seconds elapsed: 8
+Total records read: 11533
+Records per second: 1441.625
 
 Record counts by table:
-alertLookup                  18
+alertLookup                  36
 clinicLookup                773
 concept                    2519
 concept_class                18
@@ -40,5 +40,8 @@ pedLabsRendering              4
 queueStatusLookup             6
 referralLookup               19
 regimen                     124
+alertLookup                  36
+iap_indicator                 7
+drugRupture                   0
 riskLookup                   37
 riskOrder                    80

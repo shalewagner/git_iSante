@@ -65,7 +65,7 @@ FROM patient p1,(select patientID, min(visitDate) as visitDate
 from pepfarTable p group by patientID
 having TIMESTAMPDIFF(MONTH, min(visitDate),'".$endDate."') between 12 and 12.999 
 ) p,`patientStatusTemp` pt
-WHERE pt.patientStatus in (6,8) and 
+WHERE pt.patientStatus in (6) and 
 endDate between '".$startDate."' and '".$endDate."' and 
 p.patientID=pt.patientID
 and p1.patientID=p.patientID";  

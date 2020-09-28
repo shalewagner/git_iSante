@@ -39,7 +39,7 @@ switch ($indicateur){
 
 if(isset($_REQUEST['sex'])) $where.=" and p.sex=".$sex."";
 if (isset($_REQUEST['cle'])) $where.=" and risk='".$_REQUEST['cle']."' ";
-if (isset($_REQUEST['cancer_col'])) $where.=" and cancer_col='".$_REQUEST['cancer_col']."' ";
+if (isset($_REQUEST['cancer_col'])) $where.=" and cancer_col_status='".$_REQUEST['cancer_col']."' ";
 if (isset($_REQUEST['intervention'])) $where.=" and intervention='".$_REQUEST['intervention']."' ";
 if (isset($_REQUEST['dispdInterval'])) $where.=" and dispensationIntervalle='".$_REQUEST['dispdInterval']."' ";
 if (isset($_REQUEST['methode_pf'])) $where.=" and methode_pf='".$_REQUEST['methode_pf']."' ";
@@ -116,32 +116,32 @@ $query='';
 
 switch ($indicateur) {
 	case '1':{
-            $query="select distinct case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and DateEnrolement between '".$startDate."' and '".$endDate."'".$where;
 
 	   }		  
 	  break;
 	case '2':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and DebutAllaitement between '".$startDate."' and '".$endDate."'".$where;
 
 	   }		  
 	  break;  
 	case '3':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and DateTransfert between '".$startDate."' and '".$endDate."'".$where;
 
 	   }		  
 	  break; 
 	case '4':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and DebutAllaitement between '".$startDate."' and '".$endDate."'".$where;
 
 	   }		  
 	  break;	
 
 	case '5':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and (DateEnrolement between '".$startDate."' and '".$endDate."' or DateTransfert between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
@@ -150,28 +150,28 @@ where a.patientID=p.patientID and (DateEnrolement between '".$startDate."' and '
 
 
 	case '6':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and (endDate between '".$startDate."' and '".$endDate."' or endDate is null) and reasonNoEnrolment is not NULL ".$where;
 
 	   }		  
 	  break;
 	  
 	case '7':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,round(DATEDIFF('".$endDate."',ymdToDate(p.dobYy,p.dobMm,p.dobDd))/365,0) as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,round(DATEDIFF('".$endDate."',ymdToDate(p.dobYy,p.dobMm,p.dobDd))/365,0) as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and (DateEnrolement between '".$startDate."' and '".$endDate."' or DateTransfert between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;	  
 
 	case '8':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and (DebutAllaitement between '".$startDate."' and '".$endDate."' and endDate between '".$startDate."' and '".$endDate."')".$where;
 
 	   }		  
 	  break;
 
 	case '9':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and dateprophylaxieCTX between '".$startDate."' and '".$endDate."'".$where;
 
 	   }		  
@@ -179,7 +179,7 @@ where a.patientID=p.patientID and dateprophylaxieCTX between '".$startDate."' an
 
 
 	case '10':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and dateprophylaxieCTX between '".$startDate."' and '".$endDate."'".$where;
 
 	   }		  
@@ -187,7 +187,7 @@ where a.patientID=p.patientID and dateprophylaxieCTX between '".$startDate."' an
 	  
 
 	case '11':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and (dateprophylaxieINH between '".$startDate."' and '".$endDate."' and DateEnrolement between '".$startDate."' and '".$endDate."') ".$where;
 
 echo $query;
@@ -196,60 +196,60 @@ echo $query;
   
 	  
 	case '111':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and (dateprophylaxieINH between '".$startDate."' and '".$endDate."' and DateEnrolement < '".$startDate."') ".$where;
 
 	   }		  
 	  break;	
 
 	case '112':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone 
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone 
 			from arv_pnls_report a,patient p
 where a.patientID=p.patientID and (dateprophylaxieINH between '".$startDate."' - INTERVAL 6 MONTH and '".$endDate."' - INTERVAL 6 MONTH and DateEnrolement between '".$startDate."' - INTERVAL 6 MONTH and '".$endDate."' - INTERVAL 6 MONTH) ".$where;
 	 }		  
 	  break;
 	  
 	case '113':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
 where a.patientID=p.patientID and (dateprophylaxieINH between '".$startDate."' - INTERVAL 6 MONTH and '".$endDate."' - INTERVAL 6 MONTH and DateEnrolement < '".$startDate."' - INTERVAL 6 MONTH)  ".$where;
 	 
 	 }		  
 	  break; 
 
 	case '12':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (DateEnrolement between '".$startDate."' - INTERVAL 6 MONTH and '".$endDate."' - INTERVAL 6 MONTH and datearretprophylaxieINH between '".$startDate."' and '".$endDate."')  ".$where;	
 	}		  
 	  break; 	
 
 	case '122':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (DateEnrolement < '".$startDate."' - INTERVAL 6 MONTH and datearretprophylaxieINH between '".$startDate."' and '".$endDate."')  ".$where;	
 	}		  
 	  break; 	
 
 	case '13':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (DateEnrolement between '".$startDate."' and '".$endDate."' and dateVisite between '".$endDate."' - INTERVAL 6 MONTH and '".$endDate." and '".$endDate."' and endDate between '".$startDate."' and '".$endDate."'') and presenceBCG=1  ".$where;	
 	}		  
 	  break; 
 	  
 	case '133':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (DateEnrolement < '".$startDate."' and dateVisite between '".$endDate."' - INTERVAL 6 MONTH and '".$endDate."' and '".$endDate."' and endDate between '".$startDate."' and '".$endDate."') and presenceBCG=1 ".$where;
 
 	   }		  
 	  break; 	
 
 	case '134':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (DateEnrolement between '".$startDate."' and '".$endDate."' and dateVisite between '".$endDate."' - INTERVAL 6 MONTH and '".$endDate."' and '".$endDate."' and endDate between '".$startDate."' and '".$endDate."') and recentNegPPD=1 ".$where;
 
 	   }		  
 	  break;
 	  
 	case '135':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (DateEnrolement < '".$startDate."' and dateVisite between '".$endDate."' - INTERVAL 6 MONTH and '".$endDate."' and '".$endDate."' and endDate between '".$startDate."' and '".$endDate."') and recentNegPPD=1 ".$where;
 
 	   }		  
@@ -257,7 +257,7 @@ where a.patientID=p.patientID and (dateprophylaxieINH between '".$startDate."' -
 
 
 	case '14':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (DateEnrolement between '".$startDate."' and '".$endDate."' and datetraitemntAntiTb between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
@@ -265,7 +265,7 @@ where a.patientID=p.patientID and (dateprophylaxieINH between '".$startDate."' -
 	  
 
 	case '144':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (DateEnrolement < '".$startDate."' and datetraitemntAntiTb between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
@@ -273,7 +273,7 @@ where a.patientID=p.patientID and (dateprophylaxieINH between '".$startDate."' -
 	  
 	  
 	case '15':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and datetraitemntAntiTb between '".$startDate."' and '".$endDate."'  ".$where;
 
 	   }		  
@@ -281,7 +281,7 @@ where a.patientID=p.patientID and (dateprophylaxieINH between '".$startDate."' -
 
 
 	case '16':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and datetraitemntAntiTb between '".$startDate."' and '".$endDate."' and DateEnrolement between '".$startDate."' and '".$endDate."'  ".$where;
 
 	   }		  
@@ -289,14 +289,14 @@ where a.patientID=p.patientID and (dateprophylaxieINH between '".$startDate."' -
 
 
 	case '166':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and datetraitemntAntiTb between '".$startDate."' and '".$endDate."' and DateEnrolement < '".$startDate."'  ".$where;
 
 	   }		  
 	  break;	
 
 	case '17':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and endDate between '".$startDate."' and '".$endDate."'  ".$where;
 
 	   }		  
@@ -304,7 +304,7 @@ where a.patientID=p.patientID and (dateprophylaxieINH between '".$startDate."' -
 
 
 	case '18':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and endDate between '".$startDate."' and '".$endDate."'  ".$where;
 
 	   }		  
@@ -312,14 +312,14 @@ where a.patientID=p.patientID and (dateprophylaxieINH between '".$startDate."' -
 	  
 	  
 	case '19':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone,dispensationIntervalle from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone,dispensationIntervalle from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dispd between '".$startDate."' and '".$endDate."')  ".$where;
 	   }		  
 	  break;	  
 	  
 	case '35':{
             
-$query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone
+$query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone
 from patient p, patientStatusYear ps, 
 (select pst.patientID, MAX(pst.endDate) as endDate FROM patientStatusYear pst
 WHERE DATE(pst.endDate) BETWEEN '".$startDate."' and '".$endDate."' GROUP BY 1) B
@@ -333,7 +333,7 @@ AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."') ". $where;
 	  
 	case '36':{
             
-$query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone
+$query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone
 from patient p, patientStatusYear ps, 
 (select pst.patientID, MAX(pst.endDate) as endDate FROM patientStatusYear pst
 WHERE DATE(pst.endDate) BETWEEN '".$startDate."' and '".$endDate."' GROUP BY 1) B
@@ -347,7 +347,7 @@ AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."')  ". $where;
 
 	case '37':{
             
-$query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone
+$query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone
 from patient p, patientStatusYear ps, 
 (select pst.patientID, MAX(pst.endDate) as endDate FROM patientStatusYear pst
 WHERE DATE(pst.endDate) BETWEEN '".$startDate."' and '".$endDate."' GROUP BY 1) B
@@ -361,7 +361,7 @@ AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."') ". $where;
 	  
 	case '38':{
             
-$query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone
+$query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone
 from patient p, patientStatusYear ps, encounter e, obs o,
 (select pst.patientID, MAX(pst.endDate) as endDate FROM patientStatusYear pst
 WHERE DATE(pst.endDate) BETWEEN '".$startDate."' and '".$endDate."' GROUP BY 1) B
@@ -379,7 +379,7 @@ AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."') ". $where;
 
 	case '39':{
             
-$query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone
+$query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone
 from patient p, patientStatusYear ps, 
 (select pst.patientID, MAX(pst.endDate) as endDate FROM patientStatusYear pst
 WHERE DATE(pst.endDate) BETWEEN '".$startDate."' and '".$endDate."' GROUP BY 1) B
@@ -392,98 +392,98 @@ AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."')  ". $where;
 	  break;
 
 	case '41':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  a.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;
 	  
 	case '42':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;	
 
 	case '43':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;	  
 	  
 	case '44':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;
 
 	case '45':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;	  
 
 	case '45':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;
 
 	case '46':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;	  
 
 	case '47':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;	
 
 	case '48':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;
 
 	case '49':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;
 
 	case '50':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;	
 
 	case '51':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;
 
 	case '52':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;	
 
 	case '53':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
@@ -491,14 +491,14 @@ AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."')  ". $where;
 
 
 	case '54':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
 	  break;	
 
 	case '55':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 
 	   }		  
@@ -506,70 +506,70 @@ AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."')  ". $where;
 
 
 	case '56':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') AND ((DebutGrossesse between '".$startDate."' and '".$endDate."') 	OR (endDate between '".$startDate."' and '".$endDate."')) ".$where;
 	   }		  
 	  break;	
 
 	case '57':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') AND ((DebutAllaitement between '".$startDate."' and '".$endDate."')	OR (endDate between '".$startDate."' and '".$endDate."')) ".$where;
 	   }		  
 	  break;	 
 
 	case '58':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 	   }		  
 	  break;
 
 	case '59':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 	   }		  
 	  break;	
 
 	case '60':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') AND ((DebutGrossesse between '".$startDate."' and '".$endDate."') OR (endDate between '".$startDate."' and '".$endDate."')) ".$where;
 	   }		  
 	  break;
 
 
 	case '61':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."')	AND ((DebutAllaitement between '".$startDate."' and '".$endDate."') OR (endDate between '".$startDate."' and '".$endDate."')) ".$where;
 	   }		  
 	  break;
 
 	case '62':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') ".$where;
 	   }		  
 	  break;	  
 	  
 	  
 	case '75':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=75 ".$where;
 	   }		  
 	  break;		  
 
 	case '76':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=76  ".$where;
 	   }		  
 	  break;
 
 	case '77':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=77 ".$where;
 	   }		  
 	  break;	
 	  
 	case '78':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone 
-      patient p, arv_pnls_report apr, patientStatusYear ps, 
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone 
+      from patient p, arv_pnls_report apr, patientStatusYear ps, 
 	(select pst.patientID, MAX(pst.endDate) AS endDate FROM patientStatusYear pst 
 	WHERE pst.endDate <= '".$endDate."' GROUP BY 1) B
 	where apr.patientID = ps.patientID
@@ -584,65 +584,62 @@ AND (DATE(ps.endDate) between '".$startDate."' and '".$endDate."')  ". $where;
 
 
 	case '79':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=79 ".$where;
 	   }		  
 	  break;
 
 	case '80':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=80 ".$where;
 	   }		  
 	  break;
 	  
 	case '81':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=81 ".$where;
 	   }		  
 	  break;	  
 
 	case '82':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=82 ".$where;
 	   }		  
 	  break;	
 
 	case '83':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=83 ".$where;
 	   }		  
 	  break;	 
 
 	case '84':{
-            $query="select distinct  case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
+            $query="select distinct  p.patientID,p.location_id as siteCode,case when p.sex=2 then 'HOMME' when p.sex=1 then 'FEMME' end as sex,p.clinicPatientID as ST,p.lname as Prenom,p.fname as Nom,TIMESTAMPDIFF(YEAR,ymdToDate(p.dobYy,p.dobMm,p.dobDd),'".$endDate."') as Age,p.telephone from arv_pnls_report a,patient p
            where a.patientID=p.patientID and (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=84 ".$where;
 	   }		  
 	  break;	  
 	  
 }
 
-
-
-$result = databaseSelect()->query($query)->fetchAll(PDO::FETCH_ASSOC);
+	$result = databaseSelect()->query($query)->fetchAll(PDO::FETCH_ASSOC);
         if (count($result) == 0) return '<p><center><font color="red"><bold>Aucuns résultats trouvés</bold></font></center><p>';
         // set up the table
-        $output = '<center><table class="gridtable" width="90%" border="1" cellpadding="0" cellspacing="0">';
+        $output = '<center><table id="excelTable" class="gridtable" width="90%" border="1" cellpadding="0" cellspacing="0">';
         // loop on the results 
         $i = 0;
         foreach($result as $row) {
                if ($i == 0) { 
                        // output the column header 
-                       $output .= '<thead><tr>';
-                       foreach($row as $key => $value) $output .= '<th>' . $key . '</th>';
-                       $output .= '</tr></thead>'; 
+                       $output .= '<tr><th>Code ST</th><th>Prenom</th><th>Nom</th><th>Sexe</th><th>Age</th><th>Telephone</th></tr>';
+					   }				   
+                       $output .= '<tr><td><a target="_blank" rel="noopener noreferrer" href="patienttabs.php?pid='.$row['patientID'].'&lang=fr&site='.$row['siteCode'].'">'. $row['ST']. '</a></td><td>'. $row['Prenom']. '</td><td>'. $row['Nom']. '</td><td>'. $row['sex']. '</td><td>'. $row['Age']. '</td><td>'. $row['telephone']. '</td></tr>';
                        $i++;
                } 
-               $output .= '<tr>';
-               foreach($row as $key => $value) $output .= '<td style="font-family: Lucida Console; font-size: 12.0px; padding:3px;">' . $value . '</td>';
-               $output .= '</tr>';
-        }
-        // close the table 
         $output .= '</table></center>';
+		
+		
+		
+		
 
 ?> 
 
