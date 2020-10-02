@@ -70,21 +70,26 @@ printLog('updateAges() started');
 updateAges();
 printLog('updateAges() finished (' . getTimer() . ' seconds elapsed)');
 
+/*
 startTimer();
 printLog('genCD4table() started');
 genCD4table();
 printLog('genCD4table() finished (' . getTimer() . ' seconds elapsed)');
-
+*/
 startTimer();
 printLog('genEligibility() started');
 genEligibility();
 printLog('genEligibility() finished (' . getTimer() . ' seconds elapsed)');
+}
+
 
 startTimer();
 printLog('genDiscDates() started');
 genDiscDates();
 printLog('genDiscDates() finished (' . getTimer() . ' seconds elapsed)');
 
+
+if (getConfig('serverRole') != 'consolidated') { 
 startTimer();
 printLog('bloodEval(1, null) started');
 bloodEval(1, null);
@@ -111,12 +116,12 @@ printLog('generateMarkerArray() started');
 generateMarkerArray();
 printLog('generateMarkerArray() finished (' . getTimer() . ' seconds elapsed)');
 
-
+if (getConfig('serverRole') != 'consolidated') { 
 startTimer();
 printLog('generateLabViral() started');
 generateLabViral();
 printLog('generateLabViral() finished (' . getTimer() . ' seconds elapsed)');
-
+}
 
 #Record the time that this job was run.
 dbQuery("update lastJobRun set lastRun = '$dbStartDate'");

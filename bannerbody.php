@@ -176,9 +176,11 @@ echo "<li class=\"dropdown\"><a class=\"dropdown-toggle\" href=\"#\" data-toggle
         echo "
         <li><a id=\"" . $cmdList[10] . "\" href=\"./reports.php?" . ($noidFromGet == "true" ? "noid=true&" : "") . "rtype=qualityCare&testType=0&" . $menustring . "\">" . $cmdLabel[$lang][10] . "</a></li>
         <li><a id=\"" . $cmdList[11] . "\" href=\"./reports.php?" . ($noidFromGet == "true" ? "noid=true&" : "") . "rtype=aggregatePop&testType=0&" . $menustring . "\">" . $cmdLabel[$lang][11] . "</a></li>";
-        echo "<li><a id=\"iap\" href=\"./iap_design.php\">Indicateur d'alerte precoce</a></li>";
+       if (getConfig('serverRole') == 'consolidated') {       
+	     echo "<li><a id=\"iap\" href=\"./iap_design.php\">Indicateur d'alerte precoce</a></li>";
 		 echo "<li><a id=\"iap\" href=\"./arv_design.php\">Rapport mensuel soins cliniques VIH-ARV</a></li>";
-        if (PC_AUTH) {
+	   }
+		if (PC_AUTH) {
             echo "
         <li><a id=\"" . $cmdList[29] . "\" href=\"./reports.php?" . ($noidFromGet == "true" ? "noid=true&" : "") . "rtype=primaryCare&testType=0&" . $menustring . "\">" . $cmdLabel[$lang][29] . "</a></li>";
         }

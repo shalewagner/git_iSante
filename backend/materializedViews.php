@@ -3739,7 +3739,7 @@ et qui ont reçu reçu une cryothérapie,une thermocoagulation ou une LEEP :  (C
 database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPatientID,lname,
 	fname,sex,dobDd,dobMm, dobYy,ageYears,dateVisite, intervention)
 	SELECT DISTINCT 82,p.patientID,clinicPatientID,p.lname,p.fname,p.sex,
-	p.dobDd,p.dobMm, p.dobYy, p.ageYears,e.visitDate,ob.concept_id AS intervention
+	p.dobDd,p.dobMm, p.dobYy, p.ageYears,e.visitDate,o.concept_id AS intervention
 	 FROM itech.patient_snap p, itech.encounter e, itech.obs o, 
 	 (SELECT patientID, visitDate, value_numeric 
 	 FROM patientCancerCol WHERE concept_id = 70029 AND value_numeric = 2) B
@@ -3812,8 +3812,7 @@ database()->query('INSERT INTO arv_pnls_report(indicator_id,patientID,clinicPati
 	 ymdtodate(e.visitDateYy,e.visitDateMm,e.visitDateDd)
 	 ELSE ifnull(e.visitDate,null) END,o.concept_id AS methode_pf 
 	 FROM itech.patient_snap p, itech.encounter e, itech.obs o
-	 WHERE p.patientID = pr.patientID
-	 AND p.patientID = e.patientID
+	 WHERE p.patientID = e.patientID
 	 AND e.encounter_id = o.encounter_id
 	 AND p.location_id = o.location_id
 	 AND p.patientStatus in (6,8,9,1,2,3)

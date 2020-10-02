@@ -62,15 +62,17 @@ generatePatientCancerCol();
 printLog('generatePatientCancerCol() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 
 #adding for the alert.
+if (getConfig('serverRole') != 'consolidated') {
 printLog('PepfarTable refresh finished...starting patient alert generation (' . $stopwatch->elapsed() . ' total seconds elapsed)');
-if (getConfig('serverRole') != 'consolidated') generatePatientAlert();
+generatePatientAlert();
 printLog('generatePatientAlert() finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
-
+}
 #adding for arv pnls reports
+if (getConfig('serverRole') != 'consolidated') {
 printLog('PatientAlert refresh finished...starting generateArvPnlsReports generation (' . $stopwatch->elapsed() . ' total seconds elapsed)');
 generateArvPnlsReports() ;
 printLog('ArvPnlsReports finished  (' . $stopwatch->elapsed() . ' total seconds elapsed)');
-
+}
 #adding r34 daily run.
 if (getConfig('defsitecode') == '31100') {
 	printLog('runR34 started');
