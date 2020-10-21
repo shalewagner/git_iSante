@@ -1477,19 +1477,19 @@ et qui ont reçu reçu une cryothérapie,une thermocoagulation ou une LEEP :  (C
 	$query83="select distinct case when methode_pf=10 THEN 'Pilules' WHEN methode_pf=71128 then 'Injectables' when methode_pf=71127 then 'Implants'
 when methode_pf=71374 then 'Collier' when methode_pf=20 then 'Condom' end as methode_pf,
 case when sex=2 then 'HOMME' when sex=1 then 'FEMME' end as sex,sex as sex_id,
-count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then patientID else null end) as '15-19 ans',
-count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then patientID else null end) as '20-24 ans',
-count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then patientID else null end) as '25-29 ans',
-count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then patientID else null end) as '30-34 ans',
-count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then patientID else null end) as '35-39 ans',
-count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then patientID else null end) as '40-44 ans',
-count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then patientID else null end) as '45-49 ans',
-count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then patientID else null end) as '50 ans et plus',
-count(distinct case when (dobYy IS NULL OR dobYy = '') then patientID else null end) as 'âge inconnu'
-from arv_pnls_report,
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 15 and 19 then p.patientID else null end) as '15-19 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 20 and 24 then p.patientID else null end) as '20-24 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 25 and 29 then p.patientID else null end) as '25-29 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 30 and 34 then p.patientID else null end) as '30-34 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 35 and 39 then p.patientID else null end) as '35-39 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 40 and 44 then p.patientID else null end) as '40-44 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') between 45 and 49 then p.patientID else null end) as '45-49 ans',
+count(distinct case when TIMESTAMPDIFF(YEAR,ymdToDate(dobYy, case when dobMm is not null or dobMm<>'' then dobMm else '06' end , case when dobDd is not null or dobDd<>'' then dobDd else '15' end),'".$endDate."') >= 50 then p.patientID else null end) as '50 ans et plus',
+count(distinct case when (dobYy IS NULL OR dobYy = '') then p.patientID else null end) as 'âge inconnu'
+from arv_pnls_report p,
 (SELECT ar.patientID, MIN(ar.dateVisite) AS dateVisite FROM arv_pnls_report ar GROUP BY 1) B
-where patientID = B.patientID AND dateVisite = B.dateVisite
-AND (dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=83 group by methode_pf, sex";
+where p.patientID = B.patientID AND p.dateVisite = B.dateVisite
+AND (p.dateVisite between '".$startDate."' and '".$endDate."') and indicator_id=83 group by methode_pf, sex";
 $result83 = databaseSelect()->query($query83);
 
 	$k=0;

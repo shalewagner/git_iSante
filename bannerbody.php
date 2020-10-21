@@ -176,8 +176,8 @@ echo "<li class=\"dropdown\"><a class=\"dropdown-toggle\" href=\"#\" data-toggle
         echo "
         <li><a id=\"" . $cmdList[10] . "\" href=\"./reports.php?" . ($noidFromGet == "true" ? "noid=true&" : "") . "rtype=qualityCare&testType=0&" . $menustring . "\">" . $cmdLabel[$lang][10] . "</a></li>
         <li><a id=\"" . $cmdList[11] . "\" href=\"./reports.php?" . ($noidFromGet == "true" ? "noid=true&" : "") . "rtype=aggregatePop&testType=0&" . $menustring . "\">" . $cmdLabel[$lang][11] . "</a></li>";
-       if (getConfig('serverRole') == 'consolidated') {       
-	     echo "<li><a id=\"iap\" href=\"./iap_design.php\">Indicateur d'alerte precoce</a></li>";
+       if (getConfig('serverRole') != 'consolidated') {       
+	     echo "<li><a id=\"iap\" href=\"./iap_design.php\">Indicateur d'alerte précoce</a></li>";
 		 echo "<li><a id=\"iap\" href=\"./arv_design.php\">Rapport mensuel soins cliniques VIH-ARV</a></li>";
 	   }
 		if (PC_AUTH) {
@@ -235,11 +235,13 @@ echo '
 $viralLoadLabel = ($lang == 'fr') ? 'Rapport pour les commandes de charge virale':'Report For Viral Load Orders';
 $viralLoadURL = 'kickPoint.php?rtype=aggregatePop&reportNumber=778&lang=' . $lang . '&site=' . $site . '&patientStatus=0&treatmentStatus=0&testType=0&groupLevel=0&otherLevel=0&menu=dateSelect';
 $saveViralResultsLabel = ($lang == 'fr') ? 'Enregistrer les résultats viraux':'Load Viral Results';
+if (getConfig('serverRole') != 'consolidated') { 
 echo '
         <li><a id="barcodeReport" href="' . $viralLoadURL . '">' . $viralLoadLabel . '</a></li>
         <li><a id="loadViral" href="./loadViral.php">' . $saveViralResultsLabel . '</a></li>
-		<li><a id="drugRupture" href="./drugRupture.php">Signaler une rupture de Stock</a></li>
-    </ul>
+		<li><a id="drugRupture" href="./drugRupture.php">Signaler une rupture de Stock</a></li>';
+}
+ echo '  </ul>
 </li>';
 }
 

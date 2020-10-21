@@ -454,7 +454,7 @@ table.gridtable td {
 
 <table id="keywords">
    <thead>
-       <tr><th> Indicateur d'alerte precoce </th></tr>
+       <tr><th> Indicateur d'alerte précoce </th></tr>
     </thead>
     <form id="form" name="form" method="post" action="" >
        <tr><td>   
@@ -470,7 +470,7 @@ table.gridtable td {
 	    </tr>  
         <tr><td>
 		        <div style="padding:5px; float:left">
-		           <label id="vitalTempTitle" style="width:50px">Date de debut</label>
+		           <label id="vitalTempTitle" style="width:50px">Date de début </label>
 		           <input id="startDate" name="startDate"  type="date" value="<?php echo $startDate; ?>"> 
 		        </div>
             </td>
@@ -507,9 +507,9 @@ table.gridtable td {
 <?php if (isset($_REQUEST['indicateur'])) {?>	  
 <table class="tablex1">
   <tbody>
-    <tr><td>Definition</td><td><?php echo $iap['definition']; ?></td></tr>
-	<tr><td>Numerateur</td><td><?php echo $iap['numerotor']; ?></td></tr>
-	<tr><td>Denominateur</td><td><?php echo $iap['denominator']; ?></td></tr>
+    <tr><td>Définition</td><td><?php echo $iap['definition']; ?></td></tr>
+	<tr><td>Numérateur </td><td><?php echo $iap['numerotor']; ?></td></tr>
+	<tr><td>Dénominateur</td><td><?php echo $iap['denominator']; ?></td></tr>
   </tbody>
 </table>
 	<?php } ?>	  

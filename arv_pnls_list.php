@@ -37,7 +37,7 @@ switch ($indicateur){
 }
 
 
-if(isset($_REQUEST['sex'])) $where.=" and p.sex=".$sex."";
+if(isset($_REQUEST['sex'])&&$_REQUEST['sex']<>'') $where.=" and p.sex=".$sex."";
 if (isset($_REQUEST['cle'])) $where.=" and risk='".$_REQUEST['cle']."' ";
 if (isset($_REQUEST['cancer_col'])) $where.=" and cancer_col_status='".$_REQUEST['cancer_col']."' ";
 if (isset($_REQUEST['intervention'])) $where.=" and intervention='".$_REQUEST['intervention']."' ";

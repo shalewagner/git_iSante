@@ -3123,11 +3123,11 @@ select 9, p.patientID, clinicPAtientId, lname, fname, sex, dobDd, dobMm, dobYy, 
 from patient_snap p, pepfarTable p1, patient_prophylaxieCTX p2 
 where p.patientID=p1.patientID 
       and p.patientID=p2.patientID ;');
-/*	  
+	  
 database()->EXEC('drop table IF EXISTS patientStatusYear;');
 database()->EXEC('create table patientStatusYear as select * from patientStatusTemp where TIMESTAMPDIFF(YEAR,endDate,now())<=2;');
 database()->EXEC('ALTER TABLE patientStatusYear ADD INDEX patientStatusYearIndex (patientID,endDate);');	
-*/
+
 
 database()->EXEC('drop table IF EXISTS patientStatusYearActive;');
 database()->EXEC('create table patientStatusYearActive as select * from patientStatusTemp where TIMESTAMPDIFF(YEAR,endDate,now())<=2 and patientStatus in (6,8);');
