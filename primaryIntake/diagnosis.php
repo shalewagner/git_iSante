@@ -207,6 +207,7 @@ $dxAll = array(
 	'otitis' => _('Otite'),
 	'parasitose' => _('Parasitose [B89]'),
 	'pertusis' => _('Coqueluche [A37.90]'),
+	'pertusisSuspected' => _('Coqueluche Suspect'), 
 	'pneumonie' => _('Pneumonie [J18.9]'),
 	'polio' => _('Poliomyélite [A80.9]'),
 	'polytrauma' => _('Poly traumatisme [869.0]'),
@@ -214,6 +215,7 @@ $dxAll = array(
 'psychiatriqueDisorder' => _('Trouble psychiatrique d’étiologie à investiguer [F99]'),  
 	'raa' => _('Rhumatisme articulaire aigu [714.30]'),
 	'rage' => _('Rage [A82.9]'),
+	'rageSuspected' => _('Rage Suspect'),
 	'retardCroissanceIU' => _('Retard croissance Intrautérin [P05.9]'),
 	'rougeole' => _('Rougeole [B05.89]'),
 	'rubella' => _('Rubéole [B06.89]'),
@@ -235,7 +237,18 @@ $dxAll = array(
 	'vaginalBleedingAbn' => _('Saignement utérin anormal [N93.8]'),
 	'varicelle' => _('Varicelle [B01.9]'), 
 	'wound' => _('Plaie'),
-        'pathRenale' => _('Pathologie rénale, précisez:')
+    'pathRenale' => _('Pathologie rénale, précisez:'),
+	'covid_suspect' => _('COVID-19 Suspect'),
+	'covid_confirme' => _('COVID-19 confirmé'),
+	'deces_maternel' => _('Décès Maternel, précisez:'),
+	'esavi' => _('ESAVI'),
+	'microcephalieCongenitale' => _('Microcéphalie congénitale'),
+	'paralysieFlasqueAigue' => _('Paralysie flasque aigue(PFA)'),
+	'pesteSuspecte' => _('Peste suspecte'),
+	'syndromeGuillainBarre' => _('Syndrome de Guillain barre'),
+	'tetanosNeonatal' => _('Tétanos néonatal(TNN)'),
+	'toxiInfectionAlimentaireCollective' => _('Toxi-infection alimentaire collective(TIAC)'),
+	'syphilisCongenitale' => _('Syphilis congénitale, précisez:')	
 );
 if ($isObgynEncounter) {
   $dxAll['genUriInfectionDx'] = _('Infection génito-urinaire (IGU) [N73.9]');
@@ -269,12 +282,18 @@ if ($isAdultEncounter) {
   $dxThisItems[] = array('concept' => 'hypertensionArtery', 't' => false , 'n' => false);
   $dxThisItems[] = array('concept' => 'malnutritionweightloss', 't' => false , 'n' => false);
   $dxThisItems[] = array('concept' => 'emergencySurgery', 't' => false , 'n' => false);
+  $dxThisItems[] = array('concept' => 'esavi', 't' => false , 'n' => false);
+  $dxThisItems[] = array('concept' => 'microcephalieCongenitale', 't' => false , 'n' => false);
+  $dxThisItems[] = array('concept' => 'syndromeGuillainBarre', 't' => false , 'n' => false);
+  $dxThisItems[] = array('concept' => 'deces_maternel', 't' => false , 'n' => false);
+  
   $dxThisItems[] = dxMakeCategory(_('Maladies infectieuses'));
   $dxThisItems[] = array('concept' => 'amygdalite', 't' => false , 'n' => false);
   $dxThisItems[] = array('concept' => 'charbon', 't' => true , 'n' => true);
   $dxThisItems[] = array('concept' => 'cholera', 't' => false , 'n' => true);
   $dxThisItems[] = array('concept' => 'conjunctivitis', 't' => true , 'n' => false);
   $dxThisItems[] = array('concept' => 'pertusis', 't' => false , 'n' => true);
+  $dxThisItems[] = array('concept' => 'pertusisSuspected', 't' => false , 'n' => true);
   $dxThisItems[] = dxMakeEmpty(); 
   $dxThisItems[] = dxMakeEmpty(); 
   $dxThisItems[] = dxMakeEmpty();
@@ -308,6 +327,7 @@ if ($isAdultEncounter) {
   $dxThisItems[] = array('concept' => 'pneumonie', 't' => false , 'n' => false);
   $dxThisItems[] = array('concept' => 'polio', 't' => false , 'n' => true);
   $dxThisItems[] = array('concept' => 'rage', 't' => false , 'n' => true);
+  $dxThisItems[] = array('concept' => 'rageSuspected', 't' => false , 'n' => true);
   $dxThisItems[] = array('concept' => 'rougeole', 't' => false , 'n' => true);
   $dxThisItems[] = array('concept' => 'rubella', 't' => false , 'n' => true); 
   $dxThisItems[] = array('concept' => 'febrileSyndrome', 't' => false, 'n' => true);
@@ -320,6 +340,14 @@ if ($isAdultEncounter) {
   $dxThisItems[] = array('concept' => 'dxMDRtb', 't' => false , 'n' => false);
   $dxThisItems[] = array('concept' => 'varicelle', 't' => false , 'n' => false);
   $dxThisItems[] = array('concept' => 'hivPositive', 't' => false , 'n' => true);
+  $dxThisItems[] = array('concept' => 'covid_suspect', 't' => false , 'n' => false);
+  $dxThisItems[] = array('concept' => 'covid_confirme', 't' => false , 'n' => false);
+  $dxThisItems[] = array('concept' => 'paralysieFlasqueAigue', 't' => false , 'n' => false);
+  $dxThisItems[] = array('concept' => 'pesteSuspecte', 't' => false , 'n' => false);
+  $dxThisItems[] = array('concept' => 'tetanosNeonatal', 't' => false , 'n' => false);
+  $dxThisItems[] = array('concept' => 'toxiInfectionAlimentaireCollective', 't' => false , 'n' => false);
+  $dxThisItems[] = array('concept' => 'syphilisCongenitale', 't' => false , 'n' => false);
+  
   $dxThisItems[] = dxMakeCategory(_('Psychiatrie'));
   $dxThisItems[] = array('concept' => 'psychiatriqueDisorder', 't' => false , 'n' => false);
   $dxThisItems[] = array('concept' => 'stress', 't' => false , 'n' => false);
@@ -432,10 +460,9 @@ if ($isPediatricEncounter) {
     array('concept' => 'nephroticsyndrome', 't' => false , 'n' => false), 
     array('concept' => 'emergencySurgery', 't' => true , 'n' => false),
     array('concept' => 'bonneSanteApparente', 't' => false , 'n' => false),
-	dxMakeEmpty(), 
-    dxMakeEmpty(),
-    dxMakeEmpty(),
-    dxMakeEmpty(),
+	array('concept' => 'esavi', 't' => false , 'n' => false),
+	array('concept' => 'microcephalieCongenitale', 't' => false , 'n' => false),
+	array('concept' => 'deces_maternel', 't' => false , 'n' => false),
 
     // 2nd column starts here
     dxMakeCategory($nag . _('Maladies infectieuses    [Code CIM 10]')),
@@ -445,6 +472,7 @@ if ($isPediatricEncounter) {
     array('concept' => 'cholera', 't' => false , 'n' => true), 
     array('concept' => 'conjunctivitis', 't' => true , 'n' => false), 
     array('concept' => 'pertusis', 't' => false , 'n' => true), 
+	array('concept' => 'pertusisSuspected', 't' => false , 'n' => true),
     array('concept' => 'dengue', 't' => true , 'n' => true), 
     array('concept' => 'diptheria', 't' => false , 'n' => true), 
     array('concept' => 'feverHemorrhagicacute', 't' => false , 'n' => false), 
@@ -469,7 +497,8 @@ if ($isPediatricEncounter) {
     // 3rd column starts here 
     dxMakeCategory($nag . _('Maladies infectieuses    [Code CIM 10]')),
     array('concept' => 'polio', 't' => false , 'n' => true), 
-    array('concept' => 'rage', 't' => false , 'n' => true), 
+    array('concept' => 'rage', 't' => false , 'n' => true),
+	array('concept' => 'rageSuspected', 't' => false , 'n' => true),
     array('concept' => 'rougeole', 't' => false , 'n' => true), 
     array('concept' => 'rubella', 't' => false, 'n' => false),
     array('concept' => 'febrileSyndrome', 't' => false , 'n' => true), 
@@ -479,6 +508,15 @@ if ($isPediatricEncounter) {
     array('concept' => 'dxMDRtb', 't' => false , 'n' => true),
     array('concept' => 'varicelle', 't' => false, 'n' => false),
     array('concept' => 'hivPositive', 't' => false , 'n' => true), 
+	
+	array('concept' => 'covid_suspect', 't' => false , 'n' => false),
+	array('concept' => 'covid_confirme', 't' => false , 'n' => false),
+	array('concept' => 'paralysieFlasqueAigue', 't' => false , 'n' => false),
+	array('concept' => 'pesteSuspecte', 't' => false , 'n' => false),
+	array('concept' => 'tetanosNeonatal', 't' => false , 'n' => false),
+	array('concept' => 'toxiInfectionAlimentaireCollective', 't' => false , 'n' => false),
+	array('concept' => 'syphilisCongenitale', 't' => false , 'n' => false),
+
     dxMakeCategory(_('Psychiatrie')),
     array('concept' => 'psychiatriqueDisorder', 't' => false , 'n' => false),
     array('concept' => 'stress', 't' => false , 'n' => false), 

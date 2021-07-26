@@ -191,7 +191,9 @@ echo "<li class=\"dropdown\"><a class=\"dropdown-toggle\" href=\"#\" data-toggle
 		<li><a class=\"submenu-item\" id=\"" . $cmdList[39] . "\" href=\"./reports-generator.php?rpt=nutrition&" . $menustring . "\">" . $cmdLabel[$lang][39] . "</a></li>
 		<li><a class=\"submenu-item\" id=\"" . $cmdList[40] . "\" href=\"./reports-generator.php?rpt=tb&" . $menustring . "\">" . $cmdLabel[$lang][40] . "</a></li>
 		<li><a class=\"submenu-item\" id=\"" . $cmdList[41] . "\" href=\"./reports-generator.php?rpt=obgyn&" . $menustring . "\">" . $cmdLabel[$lang][43] . "</a></li>
-		<li><a class=\"submenu-item\" id=\"" . $cmdList[42] . "\" href=\"./reports-generator.php?rpt=dataquality&" . $menustring . "\">" . $cmdLabel[$lang][44] . "</a></li>"; 
+		<li><a class=\"submenu-item\" id=\"" . $cmdList[42] . "\" href=\"./reports-generator.php?rpt=dataquality&" . $menustring . "\">" . $cmdLabel[$lang][44] . "</a></li>
+		<li><a class=\"submenu-item\" id=\"" . $cmdList[43] . "\" href=\"./reports-generator.php?rpt=hepdo&" . $menustring . "\">" . $cmdLabel[$lang][47] . "</a></li>
+		<li><a class=\"submenu-item\" id=\"" . $cmdList[44] . "\" href=\"./reports-generator.php?rpt=artDist&" . $menustring . "\">" . $cmdLabel[$lang][48] . "</a></li>";
 	if (getConfig('serverRole') == 'consolidated') {
 		echo "
 		<li><a class=\"submenu-item\" id=\"" . $cmdList[43] . "\" href=\"./reports-generator.php?rpt=mer&" . $menustring . "\">" . $cmdLabel[$lang][45] . "</a></li>";

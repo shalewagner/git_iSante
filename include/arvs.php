@@ -12,7 +12,7 @@ echo "
 	      </tr>
 	      <tr>
 	       <td colspan=\"2\"><i>" . $arv_header[$lang][2] . "</i></td>
-	       <td colspan=\"8\" class=\"sm_cnt\"><b>" . $arv_subhead14[$lang][0] . "</b> &nbsp; " . $arv_subhead12[$lang][1] . " &nbsp; " . $arv_subhead14[$lang][1] . " &nbsp; " . $arv_subhead12[$lang][2] . " &nbsp; " . $arv_subhead12[$lang][3] . "</td>
+	       <td colspan=\"8\" class=\"sm_cnt\"><b>" . $arv_subhead14[$lang][0] . "</b> &nbsp; " . $arv_subhead12[$lang][1] . " &nbsp; " . $arv_subhead14[$lang][1] . " &nbsp; " . $arv_subhead12[$lang][2] . " &nbsp; " . $arv_subhead12[$lang][3] . " &nbsp; " . $arv_subhead12[$lang][4] ."</td>
 	      </tr>
 	      <tr>
 	       <td class=\"bottom_line\" colspan=\"10\">&nbsp;</td>
@@ -36,6 +36,7 @@ echo "
 	            <span id=\"section0N\">(-)&nbsp;</span>" .
 	          $arv_subhead3[$version][$lang][1] .
 	         "</a></b></td>
+		   <td class=\"sm_header_cnt\">" . $arv_subhead8[$lang][4] . "</td>
 	       <td class=\"sm_header_cnt\">" . $arv_subhead8[$lang][0] . "</td>
 	       <td class=\"sm_header_cnt\">" . $arv_subhead8[$lang][1] . "</td>
 	       <td class=\"sm_header_cnt\">" . $arv_subhead8[$lang][2] . "</td>

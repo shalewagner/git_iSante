@@ -135,7 +135,42 @@ echo "
 		{" . genExtWidget('cholera2','textfield',0) . ", readOnly: true},
 		{" . genExtWidget('cholera3','textfield',0) . ", readOnly: true},
 		{" . genExtWidget('cholera4','textfield',0) . ", readOnly: true},
-		{" . genExtWidget('cholera5','textfield',0) . ", readOnly: true}]], 
+		{" . genExtWidget('cholera5','textfield',0) . ", readOnly: true}]],		
+		[{xtype: 'label', text: '" . _('Astrazeneca') . "', ctCls: 'powerUpColumnHeader'},
+		[{" . genExtWidget('covid_astrazeneca0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_astrazeneca1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_astrazeneca2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_astrazeneca3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_astrazeneca4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_astrazeneca5','textfield',0) . ", readOnly: true}]],		
+		[{xtype: 'label', text: '" . _('Moderna') . "', ctCls: 'powerUpColumnHeader'},
+		[{" . genExtWidget('covid_moderna0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_moderna1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_moderna2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_moderna3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_moderna4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_moderna5','textfield',0) . ", readOnly: true}]],		
+		[{xtype: 'label', text: '" . _('Pfizer Biontech') . "', ctCls: 'powerUpColumnHeader'},
+		[{" . genExtWidget('covid_pfizer_biontech0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_pfizer_biontech1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_pfizer_biontech2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_pfizer_biontech3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_pfizer_biontech4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_pfizer_biontech5','textfield',0) . ", readOnly: true}]],		
+		[{xtype: 'label', text: '" . _('Gamaleya Sputnickv') . "', ctCls: 'powerUpColumnHeader'},
+		[{" . genExtWidget('covid_gamaleya_sputnickv0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_gamaleya_sputnickv1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_gamaleya_sputnickv2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_gamaleya_sputnickv3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_gamaleya_sputnickv4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_gamaleya_sputnickv5','textfield',0) . ", readOnly: true}]],		
+		[{xtype: 'label', text: '" . _('Sinovac/Sinopharm') . "', ctCls: 'powerUpColumnHeader'},
+		[{" . genExtWidget('covid_sinovac_sinopharm0','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_sinovac_sinopharm1','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_sinovac_sinopharm2','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_sinovac_sinopharm3','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_sinovac_sinopharm4','textfield',0) . ", readOnly: true},
+		{" . genExtWidget('covid_sinovac_sinopharm5','textfield',0) . ", readOnly: true}]],
 		[{xtype: 'fieldset', layout:'column', 
 		ctCls: 'powerUpColumnHeader',
 		border: false,
@@ -276,6 +311,15 @@ function loadVaccinations ($pid) {
 	'hepatiteA'=>1,
 	'menengoAc'=>1,
 	'cholera'=>1,
+	'cholera'=>1,
+	'cholera'=>1,
+	'cholera'=>1,
+	'cholera'=>1,
+	'covid_astrazeneca'=>1,
+	'covid_moderna'=>1,
+	'covid_pfizer_biontech'=>1,
+	'covid_gamaleya_sputnickv'=>1,
+	'covid_sinovac_sinopharm'=>1
     );
     $qry = "(select distinct 'immunization' as 'vtype', case
 		when immunizationID = 1 then 'bcg'
@@ -319,8 +363,13 @@ function loadVaccinations ($pid) {
 		when short_name like 'typhimviDt%' then 'typhimvi' 
 		when short_name like 'menengoACDt%' then 'menengoAc' 
 		when short_name like 'hepatiteADt%' then 'hepatiteA' 
-		when short_name like 'choleraDt%' then 'cholera' 
-                when short_name like 'rorD%' then 'ror'		 
+		when short_name like 'choleraDt%' then 'cholera'
+        when short_name like 'covid_astrazenecaDt%' then 'covid_astrazeneca'
+        when short_name like 'covid_modernaDt%' then 'covid_moderna'
+        when short_name like 'covid_pfizer_biontechDt%' then 'covid_pfizer_biontech'
+        when short_name like 'covid_gamaleya_sputnickvDt%' then 'covid_gamaleya_sputnickv'		
+        when short_name like 'covid_sinovac_sinopharmDt%' then 'covid_sinovac_sinopharm'
+        when short_name like 'rorD%' then 'ror'		 
 		else 'xxxx' end, value_datetime, '' 
 		from obs o, concept c 
 		where concat(location_id, person_id) = '" . $pid . "' and o.concept_id = c.concept_id and value_datetime is not null and (
@@ -328,7 +377,10 @@ function loadVaccinations ($pid) {
 		c.short_name like 'rougeoleDt%' or c.short_name like 'rrDt%' or c.short_name like 'dtDt%' or short_name like 'tetanosDt%' or 
 		short_name like 'pnuemovaxDt%' or short_name like 'pneumovax_Dt%' or short_name like 'actHibDt%' or short_name like 'pentavDt%' or
 		short_name like 'rotavirusDt%'  or short_name like 'pneumocoqueDt%'  or short_name like 'varicelDt%'  or short_name like 'typhimviDt%' or
-		short_name like 'menengoACDt%'  or short_name like 'hepatiteADt%'  or short_name like 'choleraDt%' or short_name like 'rorD%')
+		short_name like 'menengoACDt%'  or short_name like 'hepatiteADt%'  or short_name like 'choleraDt%' or short_name like 'rorD%' or 
+		short_name like 'covid_astrazenecaDt%' or short_name like 'covid_modernaDt%'  or
+        short_name like 'covid_pfizer_biontechDt%' or short_name like 'covid_gamaleya_sputnickvDt%' or		
+        short_name like 'covid_sinovac_sinopharmDt%')
 	) union
 	(select distinct 'otherconcept', a.short_name, oa.value_datetime, ob.value_text 
 		from concept a, concept b, obs oa, obs ob 

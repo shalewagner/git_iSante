@@ -33,7 +33,10 @@ echo "
             <td><input tabindex=\"1001\" id=\"fname\" name=\"fname\" " . getData ("fname", "text") . " type=\"text\" size=\"30\" maxlength=\"255\"/></td>
             <td id=\"lnameTitle\" align=\"right\">" . $pedRegister[$lang][2] . "</td>
             <td><input tabindex=\"1002\" id=\"lname\" name=\"lname\" " . getData ("lname", "text") . " type=\"text\" size=\"30\" maxlength=\"255\"/></td>
-            <td colspan=\"2\">" . $pedRegister[$lang][3] . " <input tabindex=\"1003\" name=\"sex\" " . getData ("sex", "radio", 1) . " type=\"radio\" value=\"1\"/> " . $pedRegister[$lang][4] . " <input tabindex=\"1004\" name=\"sex\" " . getData ("sex", "radio", 2) . " type=\"radio\" value=\"2\"/> " . $pedRegister[$lang][5] ."</td>
+            <td id=\"sexTitle\" colspan=\"2\"  align=\"right\" >" . $pedRegister[$lang][3] . "</td> 
+			<td><input tabindex=\"1003\" id=\"sexF\" name=\"sex\" " . getData ("sex", "radio", 1) . " type=\"radio\" value=\"1\"/> " . $pedRegister[$lang][4] . " 
+			    <input tabindex=\"1004\" id=\"sexH\" name=\"sex\" " . getData ("sex", "radio", 2) . " type=\"radio\" value=\"2\"/> " . $pedRegister[$lang][5] ." 
+			    <input tabindex=\"100442\" id=\"sexI\" name=\"sex\" " . getData ("sex", "radio", 4) . " type=\"radio\" value=\"4\"/> " . $pedRegister[$lang][20] ."</td>
           </tr>
           <tr>
             <td>" . $addrDistrict[$lang][1] . "</td>

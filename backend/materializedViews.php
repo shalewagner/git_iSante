@@ -578,9 +578,11 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 		PRIMARY KEY (keycol,patientid,dispd), UNIQUE INDEX iDisp (patientid,dispd))');
 		database()->query('INSERT INTO patientDispenses (patientid, dispd, nxt_dispd) SELECT DISTINCT e.patientid,
 		CASE WHEN ymdtodate(p.dispdateyy,p.dispdatemm,p.dispdatedd) IS NOT NULL and p.dispdateyy != ? and p.dispdatemm != ? THEN ymdtodate(dispdateyy,dispdatemm,dispdatedd)
-		ELSE ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) END,
-		MIN(CASE WHEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) IS NOT NULL and e.nxtVisityy != ? and e.nxtvisitmm != ? THEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) ELSE NULL END)
-		FROM prescriptions p, encounter e WHERE e.encountertype in (5,18) AND encStatus < 255 AND 
+		ELSE ymdToDate(e.visitdateyy,e.visitdatemm,e.visitdatedd) END as dispd,
+		MIN(
+		case when nextVisitDateOther>= ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) then nextVisitDateOther
+             else CASE WHEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) IS NOT NULL and e.nxtVisityy != ? and e.nxtvisitmm != ? THEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) ELSE NULL END
+             END) as nxt_dispdFROM prescriptions p, encounter e WHERE e.encountertype in (5,18) AND encStatus < 255 AND 
 		p.patientid = e.patientid AND p.sitecode = e.sitecode AND p.visitdateyy = e.visitdateyy AND p.visitdatemm = e.visitdatemm AND p.visitdatedd = e.visitdatedd AND p.seqNum = e.seqNum AND 
 		drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91) AND 
 		(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR 
@@ -2933,6 +2935,12 @@ from prescriptions
 where drugID=18 and 
 (dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR dispAltDosage IS NOT NULL))');
 
+/* patient abone au service DDP */
+database()->query('INSERT INTO patientAlert(siteCode,patientID,alertId,insertDate)
+SELECT e.siteCode, e.patientID,13,date(now())
+FROM  encounter e,obs o
+WHERE  e.encounter_id=o.encounter_id and 
+      o.concept_id=163850');
 
 }
 

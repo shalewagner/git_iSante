@@ -33,7 +33,8 @@ $arvLabels = array (
 "InterUnk" => array ("name" => "interUnk", "type" => "checkbox"),
 "Comments" => array ("name" => "reasonComments", "type" => "text"),
 "forPepPmtct" => array("name" => "forPepPmtct", "type" => "checkbox"),
-"finPTME" => array("name" => "finPTME", "type" => "checkbox")
+"finPTME" => array("name" => "finPTME", "type" => "checkbox"),
+"TransDTG" => array("name" => "TransDTG", "type" => "checkbox")
 );
 
 $conditionLabels = array (
@@ -90,7 +91,8 @@ $otherDrugLabels = array (
 "InterPref" => array ("name" => "patientPreference", "type" => "checkbox"),
 "InterUnk" => array ("name" => "interUnk", "type" => "checkbox"),
 "Comments" => array ("name" => "reasonComments", "type" => "text"),
-"finPTME" => array ("name" => "finPTME", "type" => "checkbox")
+"finPTME" => array ("name" => "finPTME", "type" => "checkbox"),
+"TransDTG" => array ("name" => "TransDTG", "type" => "checkbox")
 );
 
 $otherLabLabels = array (

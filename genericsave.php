@@ -143,7 +143,7 @@ if ($encID != "") {
 				$tmpVisitYy = '200' . $tmpVisitYy;
 				break;
 			case 2: 
-				if($tmpVisitYy > 20)
+				if($tmpVisitYy > 50)
 					$tmpVisitYy = '19' . $tmpVisitYy;
 				else
 					$tmpVisitYy = '20' . $tmpVisitYy;
@@ -173,6 +173,8 @@ if ($encID != "") {
 		"nxtVisitDd" => getFieldValue('nxtVisitDd'),
 		"nxtVisitMm" => getFieldValue('nxtVisitMm'),
 		"nxtVisitYy" => getFieldValue('nxtVisitYy'),
+		"otherSite" => getFieldValue('otherSite'),
+		"nextVisitDateOther" => getFieldValue('nextVisitDateOther'),
 		"visitDate" =>  $tmpVisitDt,
 		"encounterType" => $type));
 	/* toggle hiv Positive On/Off in primary care/ob-gyn forms
@@ -426,7 +428,8 @@ if ($type == "1" || $type == "2" || $type == "16" || $type == "17" || $type == "
   "InterUnk" => array ("name" => "interUnk", "type" => "checkbox"),
   "Comments" => array ("name" => "reasonComments", "type" => "text"),
   "forPepPmtct" => array("name" => "forPepPmtct", "type" => "checkbox"),
-  "finPTME" => array("name" => "finPTME", "type" => "checkbox")
+  "finPTME" => array("name" => "finPTME", "type" => "checkbox"),
+  "TransDTG" => array("name" => "TransDTG", "type" => "checkbox")
   );
 
   // Remove any existing data

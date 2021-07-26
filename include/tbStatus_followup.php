@@ -2,14 +2,14 @@
 
 echo "
 <!-- -------------------------------------------------------------------- -->
-<!-- ---------------------------- TB Status ----------------------------- -->
+<!-- ---------------------------- TB Status BON ----------------------------- -->
 <!-- -------------------- (tab indices " . ($tabIndex + 1) . " - " . ($tabIndex + 100) . ") --------------------- -->
 <!-- -------------------------------------------------------------------- -->
 ";
 if ($encType == "1" && $version == "1")
 	$tbHead = $intakeSectLabs1[$lang][9];
 else
-	$tbHead = $tbstatus_header[$lang][1];
+	$tbHead = $tbstatus_header[$lang][3];
 
 
 echo "
@@ -19,16 +19,16 @@ echo "
       </tr>
       <tr>
        <td colspan=\"4\"><table><tr><td id=\"tbStatusTitle\"></td><td>
-         <input tabindex=\"" . ($tabIndex + 1) . "\" id=\"asymptomaticTb[]\" name=\"tbStatus[]\" " .
-           getData ("asymptomaticTb", "radio", "1") .
-           " type=\"radio\" >" .
-           $asymptomaticTb[$lang][1] ."<input type=\"hidden\" id =\"asymptomaticTb\"  name =\"asymptomaticTb\" " .  getData ("asymptomaticTb", "text") ." />
+         <input tabindex=\"" . ($tabIndex + 1) . "\" id=\"antecedentTb1\" name=\"antecedentTb[]\" " .
+           getData ("antecedentTb", "radio", 1) .
+           " type=\"radio\" value=\"1\" >" .
+           $antecedentTb[$lang][1] ."
      </td></tr></table></td>
       </tr>
       <tr>
        <td>
         <table><tr><td id=\"completeTreatTitle\"></td><td>
-          <input tabindex=\"" . ($tabIndex + 2) . "\" id=\"completeTreat[]\" name=\"tbStatus[]\" " . getData ("completeTreat", "radio", "1") . " type=\"radio\" >" . $completeTreat[$lang][1] . "<input type=\"hidden\" id =\"completeTreat\"  name =\"completeTreat\" " . getData ("completeTreat", "text") . "/>
+          <input tabindex=\"" . ($tabIndex + 2) . "\" id=\"antecedentTb2\" name=\"antecedentTb[]\" " . getData ("antecedentTb", "radio", 2) . " type=\"radio\" value=\"2\">" . $completeTreat[$lang][1] . "
         </td></tr></table>
        </td>
        <td id=\"completeTreatDtTitle\">" . $completeTreatMm[$lang][0] . "</td>
@@ -42,10 +42,9 @@ echo "
       </tr>
       <tr>
        <td><table><tr><td id=\"currentTreatTitle\">&nbsp;</td><td>
-         <input tabindex=\"" . ($tabIndex + 7) . "\" id=\"currentTreat[]\"  name=\"tbStatus[]\" " .
-           getData ("currentTreat", "radio","1") .
-           " type=\"radio\" value=\"On\">" . $currentTreat[$lang][1] . "<input type=\"hidden\" id =\"currentTreat\"  name =\"currentTreat\" " .
-           getData ("currentTreat", "text") ." />
+         <input tabindex=\"" . ($tabIndex + 7) . "\" id=\"antecedentTb3\"  name=\"antecedentTb[]\" " .
+           getData ("antecedentTb", "radio",4) .
+           " type=\"radio\" value=\"4\">" . $currentTreat[$lang][1] . "
      </td></tr></table></td>
        <td id=\"currentTreatNoTitle\">" . $currentTreatNo[$lang][1] . "</td><td>
          <input tabindex=\"" . ($tabIndex + 8) . "\" id=\"currentTreatNo\" name=\"currentTreatNo\" " . getData ("currentTreatNo", "text") . " type=\"text\" size=\"30\" maxlength=\"64\"></td>

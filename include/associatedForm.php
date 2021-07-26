@@ -60,7 +60,7 @@ if ( isset($_GET['type']) && (($_GET['type'] == 5 && $version == 1) || $_GET['ty
             <input type=\"radio\" id=\"startedArv1\" name=\"startedArv\" value=\"1\" " . $arvStartSelect . " tabindex=\"" . ($tabIndex + 3) ."\"/>" . $ARVexcl[$lang][1] . "
             <input type=\"radio\" id=\"startedArv0\" name=\"startedArv\" value=\"0\" " . $arvStartNot . " tabindex=\"" . ($tabIndex + 3) ."\"/>" . $ARVexcl[$lang][2] . "
          </td>
-	 <td width=\"20%\">" .
+	 <td width=\"20%\"  align=\"right\" colspan=\"3\">" .
             ((isset ($_GET['type']) && $_GET['type'] == 18) ? $dispcomm[1][$lang][0] : $dispcomm[$version][$lang][0]) . "
             <input type=\"checkbox\" id=\"dispComm\" name=\"dispComm\"  tabindex=\"" . ($tabIndex + 5) . "\" " . getData ("dispComm", "checkbox", 1) . " />
          </td>
@@ -82,13 +82,17 @@ if ( isset($_GET['type']) && (($_GET['type'] == 5 && $version == 1) || $_GET['ty
     echo "
             </select>
         </td>
-        <td width=\"60%\"  colspan=\"2\"><table><tr><td width=\"50%\" id=\"arvStartDateDtTitle\">
+        <td width=\"40%\"  colspan=\"2\"><table><tr><td width=\"50%\" id=\"arvStartDateDtTitle\">
             " . ((isset ($_GET['type']) && $_GET['type'] == 18) ? $arvVisitInfo[1][$lang][1] : $arvVisitInfo[$version][$lang][1]) . "</td><td>
             <input tabindex=\"" . ($tabIndex + 4) . "\" id=\"arvStartDate\" name=\"arvStartDateDt\"  value=\"" . getData ("arvStartDateDd", "textarea") . "/". getData ("arvStartDateMm", "textarea") ."/". getData ("arvStartDateYy", "textarea") . "\" type=\"text\" size=\"8\" maxlength=\"8\" />
             <input id=\"arvStartDateDd\" name=\"arvStartDateDd\" " . getData ("arvStartDateDd", "text") . " type=\"hidden\" />
             <input id=\"arvStartDateMm\" name=\"arvStartDateMm\" " . getData ("arvStartDateMm", "text") . " type=\"hidden\" />
             <input id=\"arvStartDateYy\" name=\"arvStartDateYy\" " . getData ("arvStartDateYy", "text") . " type=\"hidden\" />
         </td><td><span class=\"dateFormat\">" . $visitDate[$lang][2] . "</span></td></tr></table></td>
+		<td width=\"20%\" align=\"right\">" .
+            ((isset ($_GET['type']) && $_GET['type'] == 18) ? $ddp_dispensation[1][$lang][0] : $ddp_dispensation[$version][$lang][0]) . "
+            <input type=\"checkbox\" id=\"ddp_dispensation\" name=\"ddp_dispensation\"  tabindex=\"" . ($tabIndex + 5) . "\" " . getData ("ddp_dispensation", "checkbox", 1) . " />
+         </td>
        </tr>
       </table>
     ";

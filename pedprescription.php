@@ -38,7 +38,7 @@ $options='<option value=""> </option>';
 $qry = "select REPLACE(REPLACE(r.shortName, 'ZDV', 'AZT'),'TNF','TDF') as shortName,(select drugName from drugLookup where drugID=r.drugID1)  as drug1, 
                   (select drugName from drugLookup where drugID=r.drugID2)  as drug2,
                   (select drugName from drugLookup where drugID=r.drugID3)  as drug3
- from regimen r where regID in (3,6,80,81,90,100,101,103,109,110)";
+ from regimen r where regID in (3,6,80,81,90,100,101,103,104,109,110,115,123,124,125,127,129)";
 	$result = dbQuery ($qry);
 	if (!$result)
 		die("Could not query.");
@@ -168,6 +168,19 @@ echo "
     " </td><td><i>" . $firstTestYy[$lang][2] . "</i></td></tr></table>
     </td>
    </tr>
+   
+   <tr>
+    <td>&nbsp;</td>
+   </tr>
+   <tr>
+    <td width=\"50%\">" . $otherSite[$lang][1] . " <input tabindex=\"4601\" id=\"otherSite\" name=\"otherSite\" " . getData ("otherSite", "text") . " type=\"text\" size=\"40\" maxlength=\"255\"></td>
+    <td ><table><tr valign=\"bottom\"><td width=\"40%\">" . $nextVisitDateOther[$lang][1]  . "&nbsp;&nbsp;</td><td width=\"60%\">
+      <input tabindex=\"" . ($tabIndex + 2) . "\" id=\"nextVisitDateOther\" name=\"nextVisitDateOther\" value=\"" . getData ("nextVisitDateOther", "textarea") ."\" type=\"Date\">
+      </tr></table>
+    </td>
+   </tr>
+   
+   
   </table>";
 
 echo"

@@ -197,7 +197,7 @@ Ext.util.chkDate = function(_val,_default) {
     }
     return errMsg1;
 };
-Ext.util.checkDobDt = function(_dobNode,_default,_iconLoc) 
+Ext.util.checkDobDt = function(_dobNode,_dobNode1,_default,_iconLoc) 
 {
 	var errMsg = "";
 	var dob = _dobNode.value;
@@ -245,6 +245,7 @@ Ext.util.checkDobDt = function(_dobNode,_default,_iconLoc)
 			errMsg = "16";
 		}
 	}
+	
 	Ext.util.showErrorIcon(errMsg,_iconLoc);
 	return errMsg;
 };
@@ -1610,6 +1611,24 @@ Ext.util.checkNationalId = function(_node, _iconLoc)
 	Ext.util.showErrorIcon(errMsg,_iconLoc);
 	return errMsg;
 };
+
+Ext.util.checkSex = function(_node, _iconLoc)
+{
+	var errMsg = "";
+	if(_node[0].checked||_node[1].checked||_node[2].checked)
+	{
+		errMsg = "";
+	}
+	else 
+	{
+		errMsg = "92";
+	}
+
+	Ext.util.showErrorIcon(errMsg,_iconLoc);
+	return errMsg;
+};
+
+
 Ext.util.setDefaultRadio = function(_nodes, _default)
 {
 	if(_nodes.length > 1)

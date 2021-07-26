@@ -1788,6 +1788,108 @@
 				<query></query>
 			</report>
 			
+			<report id="565" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">list of patients who have received at least one dose of vaccine against covid 19 </title>
+				  <title lang="fr">liste des patients ayant reçu au moins une dose de vaccin contre le covid 19</title>
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+					<menuSelection>dateSelect</menuSelection>
+				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST,nationalID as codeNational, lname as Nom, fname as Prenom, telephone,c.name from patient p, obs o,encounter e,concept_name c 
+where e.patientId=p.patientID and
+      o.concept_id=c.concept_id and 
+	  lower(c.locale)='$lang'	and	e.siteCode='$site' and e.encounter_id=o.encounter_id and 
+	  o.concept_id between 163690 and 163719 and e.visitDate between '$start' and '$end'</query> 
+			</report>
+			<report id="566" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">patient list suspected for  covid 19 </title>
+				  <title lang="fr">liste des patients suspectés de covid 19</title>
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+					<menuSelection>dateSelect</menuSelection>
+				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST,nationalID as codeNational, lname as Nom, fname as Prenom, telephone,c.name from patient p, obs o,encounter e,concept_name c 
+where e.patientId=p.patientID and
+      o.concept_id=c.concept_id and 
+	  lower(c.locale)='$lang' and	e.siteCode='$site' and 
+	  e.encounter_id=o.encounter_id and 
+	  o.concept_id=163800 and e.visitDate between '$start' and '$end'</query> 
+			</report>
+			<report id="567" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">patient list confirmed for covid 19 </title>
+				  <title lang="fr">liste des patients confirmés covid 19</title>
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+					<menuSelection>dateSelect</menuSelection>
+				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST,nationalID as codeNational, lname as Nom, fname as Prenom, telephone,c.name from patient p, obs o,encounter e,concept_name c 
+where e.patientId=p.patientID and
+      o.concept_id=c.concept_id and 
+	  lower(c.locale)='$lang'	and	e.siteCode='$site' and e.encounter_id=o.encounter_id and 
+	  o.concept_id=163801 and e.visitDate between '$start' and '$end'</query> 
+			</report>
+			<report id="568" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">Active HIV + patients on ARVs screened for TB</title>
+				  <title lang="fr">Patients VIH+ actifs sous ARV dépistés pour la TB</title>
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+					<menuSelection>dateSelect</menuSelection>
+				    <query>select distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, $localized_gender as sex, $computed_age AS age, case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc,addrDistrict,contact,	addrContact,phoneContact from patient p, tbStatus t,(select patientID
+from patientStatusTemp p
+where patientStatus in (6,8) AND 
+endDate between  DATE_ADD('$end', INTERVAL -1 DAY)  and DATE_ADD('$end', INTERVAL 1 DAY)) a,patientStatusLookup p1 
+where t.patientID=a.patientID AND 
+      p.patientID=t.patientID AND
+	  p.patientStatus=p1.statusValue AND
+	  left(p.patientID,5)='$site' AND
+      (t.antecedentTB=4 or t.suspicionTBwSymptoms=1 or t.noTBsymptoms=1) AND 
+	  ymdtodate(t.visitDateYy,t.visitDateMm,t.visitDateDd)
+	  between '$start' and '$end'</query> 
+			</report>
+			
+			<report id="569" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">patients with incomplete TB prophylaxis</title>
+				  <title lang="fr">patients avec Prophylaxie incomplète contre la TB </title>
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+					<menuSelection>dateSelect</menuSelection>
+				    <query>SELECT distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, $localized_gender as sex, $computed_age AS age, case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc,addrDistrict,contact,	addrContact,phoneContact
+FROM  `tbStatus` t ,patient p,(select patientID
+from patientStatusTemp p
+where patientStatus in (6,8) AND 
+endDate between  DATE_ADD('$end', INTERVAL -1 DAY)  and DATE_ADD('$end', INTERVAL 1 DAY)) a,patientStatusLookup p1
+WHERE t.patientID=p.patientID and 
+      a.patientID=t.patientID and
+	  p.location_id='$site' and
+	  p.patientStatus=p1.statusValue and 
+	  ((IFNULL( t.debutINHYy, 0 ) >0 and 
+      DATE_ADD(ymdtoDate(debutINHYy,debutINHMm,'01'), INTERVAL 6 Month) between '$start' and '$end') or
+	  (IFNULL( t.debutINHRifaYy, 0 ) >0 and      DATE_ADD(ymdtoDate(debutINHRifaYy,debutINHRifaMm,'01'), INTERVAL 6 Month) between '$start' and '$end') or 
+	  (IFNULL( t.debutSecINHYy, 0 ) >0 and       DATE_ADD(ymdtoDate(debutSecINHYy,debutSecINHMm,'01'), INTERVAL 6 Month) between '$start' and '$end')
+	  )
+and p.patientID not in (select patientID FROM  `tbStatus` t where  (ymdtoDate(arretINHYy,arretINHMm,'01')  between '$start' and '$end') or (ymdtoDate(arretINHRifaYy,arretINHRifaMm,'01')  between '$start' and '$end') or (ymdtoDate(arretSecINHYy,arretSecINHMm,'01')  between '$start' and '$end') )</query> 
+			</report>
+			<report id="570" patientStatus="0" treatmentStatus="0" testType="0">
+				  <title lang="en">patients screened negative for TB who did not receive prophylaxis</title>
+				  <title lang="fr">patients dépistés négatifs pour la TB n’ayant pas reçu de prophylaxie  </title>
+				    <reportFile></reportFile>
+				    <groupLevel>0</groupLevel>
+				    <otherLevel>0</otherLevel>
+					<menuSelection>dateSelect</menuSelection>
+				    <query>SELECT distinct p.patientID as IdPatient, clinicPatientID as codeST, lname as Nom, fname as Prenom, telephone, $localized_gender as sex, $computed_age AS age, case when lower('$lang') = 'en' then statusDescEn else statusDescFr end as statusDesc,addrDistrict,contact,	addrContact,phoneContact
+FROM  `tbStatus` t ,patient p,(select patientID
+from patientStatusTemp p
+where patientStatus in (6,8) AND 
+endDate between  DATE_ADD('$end', INTERVAL -1 DAY)  and DATE_ADD('$end', INTERVAL 1 DAY)) a,patientStatusLookup p1
+WHERE t.patientID=p.patientID and 
+      a.patientID=t.patientID and
+	  p.location_id='$site' and
+	  p.patientStatus=p1.statusValue and 
+	  t.noTBsymptoms=1 and 
+	  p.patientID not in (select patientID FROM  `tbStatus` t where (ifnull(arretINHYy,0)>0 or ifnull(arretINHRifaYy,0)>0 or ifnull(arretSecINHYy,0)>0 or ifnull(debutINHYy,0)>0 or ifnull(debutINHRifaYy,0)>0 or ifnull(debutSecINHYy,0)>0)) </query> 
+			</report>
 		</reportSubSet>
 		
 		

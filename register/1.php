@@ -33,8 +33,11 @@ echo"
         <td id=\"fnameTitle\">" . $fname[$lang][1] . "</td>
         <td><input tabindex=\"1001\" id=\"fname\" name=\"fname\" " . getData ("fname", "text") . " type=\"text\" size=\"30\" maxlength=\"255\"></td>
         <td id=\"lnameTitle\" align=\"right\">" . $lname[$lang][1] . "</td>
-        <td><input tabindex=\"1002\" id=\"lname\" name=\"lname\" " . getData ("lname", "text") . " type=\"text\" size=\"30\" maxlength=\"255\"></td>";
-        echo "<td>" . $sex[$lang][0] . " <input tabindex=\"1003\" name=\"sex[]\" " . getData ("sex", "radio", 1) . " type=\"radio\" value=\"1\">" . $sex[$lang][1] . " <input tabindex=\"1004\" name=\"sex[]\" " . getData ("sex", "radio", 2) . " type=\"radio\" value=\"2\">" . $sex[$lang][2] . "</td>
+        <td><input tabindex=\"1002\" id=\"lname\" name=\"lname\" " . getData ("lname", "text") . " type=\"text\" size=\"30\" maxlength=\"255\"></td>
+        <td id=\"sexTitle\"  align=\"right\">" . $sex[$lang][0] . "</td>
+		<td><input tabindex=\"1003\" id=\"sexF\" name=\"sex[]\" " . getData ("sex", "radio", 1) . " type=\"radio\" value=\"1\">" . $sex[$lang][1] . " 
+		    <input tabindex=\"1004\" id=\"sexH\" name=\"sex[]\" " . getData ("sex", "radio", 2) . " type=\"radio\" value=\"2\">" . $sex[$lang][2] ." 
+			<input tabindex=\"100422\" id=\"sexI\" name=\"sex[]\" " . getData ("sex", "radio", 4) . " type=\"radio\" value=\"4\">" . $sex[$lang][3] . "</td>
       </tr>
       <tr>
        <td>" . $addrDistrict[$lang][1] . "</td>

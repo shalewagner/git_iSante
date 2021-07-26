@@ -5,7 +5,7 @@ ini_set ('memory_limit','1024M');
 $_REQUEST['noid'] = 'true';
 $key = $_REQUEST['key'];
 
-if ($key == 'all') $keyList = array('nutrition','malaria','tb','dataquality','obgyn');
+if ($key == 'all') $keyList = array('nutrition','malaria','tb','dataquality','obgyn','hepdo','artDist');
 else $keyList = array($key);
 
 $truncateFlag = $_REQUEST['truncateFlag'];

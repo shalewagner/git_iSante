@@ -950,12 +950,14 @@ $arv_subhead8 = array (
 	"Tox",
 	"Intol",
 	"Fail",
-        "End PMTCT"),
+    "End PMTCT",
+	"Trans DTG"),
    "fr" => array (
 	"Tox",
 	"Intol",
 	"Ech",
-        "Fin PTME")
+    "Fin PTME",
+	"Trans DTG")
 );
 $arv_subhead9 = array (
    "en" => array (
@@ -992,12 +994,14 @@ $arv_subhead12 = array (
 	"",
 	"<b>Tox</b>=Toxicity",
 	"<b>Fail</b>=Failure",
-        "<b>End PMTCT</b>=End of PMTCT treatment"),
+    "<b>End PMTCT</b>=End of PMTCT treatment",
+	"<b>Trans DTG</b>=Transition au dolutegravir"),
    "fr" => array (
 	"",
 	"<b>Tox</b>=Toxicit&#xe9;",
 	"<b>Ech</b>=&Eacute;chec au traitement",
-        "<b>Fin PTME</b>=Fin du traitement PTME")
+    "<b>Fin PTME</b>=Fin du traitement PTME",
+	"<b>Trans DTG</b>=Transition au dolutegravir")
 );
 $arv_subhead13 = array (
    "en" => array (
@@ -6404,12 +6408,12 @@ $sex = array (
 	"Sex",
 	"F",
 	"M",
-	"U"),
+	"Other"),
    "fr" => array (
 	"Sexe",
 	"F",
 	"H",
-	"I")
+	"Autre")
 );
 $addrDistrict = array (
    "en" => array (
@@ -7153,11 +7157,13 @@ $tbstatus_header = array (
    "en" => array (
 	"",
 	"TB STATUS",
-	"If current TB, treat TB before initiating ART"),
+	"If current TB, treat TB before initiating ART",
+	"TB HISTORY"),
    "fr" => array (
 	"",
 	"STATUT TB",
-	"Si TB active, traiter la TB avant d'initier l'ARV.")
+	"Si TB active, traiter la TB avant d'initier l'ARV.",
+	"ANTECEDENTS TB")
 );
 $asymptomaticTb = array (
    "en" => array (
@@ -7167,6 +7173,17 @@ $asymptomaticTb = array (
    "fr" => array (
 	"",
 	"Pas de signes ou sympt&#xf4;mes suggestifs de la TB",
+	"")
+);
+
+$antecedentTb = array (
+   "en" => array (
+	"",
+	"No history of TB",
+	""),
+   "fr" => array (
+	"",
+	"Aucun Antededent de TB",
 	"")
 );
 $suspectedTb = array (
@@ -8907,7 +8924,19 @@ $dispcomm = array (
 )
 );
 
+$ddp_dispensation = array (
+"0" => array (
 
+),
+"1" => array (
+    "en" => array (
+        "DDP dispensation"
+        ),
+    "fr" => array (
+        "Dispensation DDP"
+       )
+)
+);
 
 
 $badDateMessage = array (
@@ -9150,9 +9179,9 @@ $PopulationCle = array (
 	"Transgender",
 	"Injecting drug user"),
    "fr" => array (
-	"Population Cle",
+	"Population Clé",
 	"HARSAH",
-	"Professionnels de Sex",
+	"Professionnel de Sexe",
 	"Prisonniers",
 	"Transgenre ",
 	"Utilisateur de drogues injectables")
@@ -9314,5 +9343,26 @@ $perteAppetit = array (
 	"")
 );
 
+$nextVisitDateOther = array (
+   "en" => array (
+	"",
+	"Date of next dispensation at the other enrollment site",
+	""),
+   "fr" => array (
+	"",
+	"Date de prochaine dispensation dans l’autre site d’enrôlement",
+	"")
+);
+
+$otherSite = array (
+   "en" => array (
+	"",
+	"Other patient enrollment site",
+	""),
+   "fr" => array (
+	"",
+	"Autre site d'enrôlement du patient",
+	"")
+);
 
 ?>

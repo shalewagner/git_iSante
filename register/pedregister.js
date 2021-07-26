@@ -86,6 +86,44 @@ Ext.onReady(function() {
 		errMsg = Ext.util.checkClinicId(document.getElementById('clinicPatientID'),document.getElementById("clinicPatientIDTitle"),'');
 		errCount = Ext.util.showErrorHead(errFields,errMsgs,'clinicPatientID',errMsg,errCount);	
 	}); */
+	
+	if(document.getElementById('sexF').checked==false)
+  {
+  errMsg = Ext.util.checkSex(document.getElementsByName('sex'),document.getElementById("sexTitle"),'');
+  errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);
+  }
+  
+  Ext.get('sexF').on('blur', function(){	  
+  	errMsg = Ext.util.checkSex(document.getElementsByName('sex'),document.getElementById("sexTitle"),'');
+  	errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);	
+
+  });
+  
+  if(document.getElementById('sexH').checked==false)
+  {
+  errMsg = Ext.util.checkSex(document.getElementsByName('sex'),document.getElementById("sexTitle"),'');
+  errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);
+  }
+  
+  Ext.get('sexH').on('blur', function(){	  
+  	errMsg = Ext.util.checkSex(document.getElementsByName('sex'),document.getElementById("sexTitle"),'');
+  	errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);	
+
+  });
+  
+  if(document.getElementById('sexI').checked==false)
+  {
+  errMsg = Ext.util.checkSex(document.getElementsByName('sex'),document.getElementById("sexTitle"),'');
+  errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);
+  }
+  
+  Ext.get('sexI').on('blur', function(){	  
+  	errMsg = Ext.util.checkSex(document.getElementsByName('sex'),document.getElementById("sexTitle"),'');
+  	errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);	
+
+  });
+ /* end of radio group */ 
+	
 	Ext.get('fname').on('blur', function(){
 		errMsg = Ext.util.checkFName(document.getElementById('fname'),document.getElementById('fnameTitle'),'');
 		errCount = Ext.util.showErrorHead(errFields,errMsgs,'fname',errMsg,errCount);

@@ -87,16 +87,6 @@ Ext.onReady(function() {
 		});
 		taFormat.applyToMarkup(taArr[i]);	
 	}
-	
-	(Ext.get("sideEffects")).on("click", function(){
-		Ext.util.checkUnique(document.getElementById("sideEffects"),document.getElementById("opportunInf"), document.getElementById("discDeathOther"));
-	});
-	(Ext.get("opportunInf")).on("click", function(){
-		Ext.util.checkUnique(document.getElementById("opportunInf"),document.getElementById("sideEffects"), document.getElementById("discDeathOther"));
-	});
-	(Ext.get("discDeathOther")).on("click", function(){
-		Ext.util.checkUnique(document.getElementById("discDeathOther"),document.getElementById("opportunInf"), document.getElementById("sideEffects"));
-	});
 
 	//Ext.util.clickRadio(document.mainForm);	
 });

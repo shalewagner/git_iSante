@@ -72,10 +72,15 @@ Ext.onReady(function() {
   deathDtFormat.applyToMarkup(document.mainForm.deathDt);
 
   
-  Ext.get('dobDt').on('blur', function(){
+  Ext.get('dobDt').on('blur', function(){	  
   	errMsg =  Ext.util.checkDobDt(document.getElementById('dobDt'),'XX',document.getElementById('dobDtTitle'));
   	Ext.util.splitDate(document.getElementById('dobDt'),document.getElementById('dobDd'),document.getElementById('dobMm'),document.getElementById('dobYy'));
   	errCount = Ext.util.showErrorHead(errFields,errMsgs,'DobDt',errMsg,errCount);
+  if(document.getElementById('dobDt').value.length==0&&document.getElementById('ageYears').value.length==0)
+  {
+	  errMsg=93;
+	  errCount= Ext.util.showErrorHead(errFields,errMsgs,'DobDt',errMsg,errCount); 
+  }
   });
   errMsg =  Ext.util.checkDobDt(document.getElementById('dobDt'),'XX', document.getElementById('dobDtTitle'));
   Ext.util.splitDate(document.getElementById('dobDt'),document.getElementById('dobDd'),document.getElementById('dobMm'),document.getElementById('dobYy'));
@@ -90,12 +95,18 @@ Ext.onReady(function() {
   //Ext.util.splitDate(document.getElementById('dobDt'),document.getElementById('dobDd'),document.getElementById('dobMm'),document.getElementById('dobYy'));
   errCount = Ext.util.showErrorHead(errFields,errMsgs,'DobDt',errMsg,errCount);
   
-  Ext.util.setDefaultRadio(document.getElementsByName('sex[]'), 2);
+  //Ext.util.setDefaultRadio(document.getElementsByName('sex[]'), 2);
   Ext.util.setDefaultRadio(document.getElementsByName('maritalStatus[]'), 5);
   
   Ext.get('ageYears').on('blur', function(){
   	errMsg = Ext.util.validateAge(document.mainForm.ageYears,document.getElementById("ageYearsTitle"),'');
   	errCount = Ext.util.showErrorHead(errFields,errMsgs,'ageYears',errMsg,errCount);	
+ 
+ if(document.getElementById('dobDt').value.length==0&&document.getElementById('ageYears').value.length==0)
+  {
+	  errMsg=93;
+	  errCount= Ext.util.showErrorHead(errFields,errMsgs,'DobDt',errMsg,errCount);
+  }  
   });
   errMsg = Ext.util.validateAge(document.mainForm.ageYears,document.getElementById("ageYearsTitle"),'');
   errCount = Ext.util.showErrorHead(errFields,errMsgs,'ageYears',errMsg,errCount);
@@ -108,7 +119,16 @@ Ext.onReady(function() {
   	//errMsg = Ext.util.checkClinicId(document.getElementById('clinicPatientID'),document.getElementById("clinicPatientIDTitle"),'');
   	//errCount = Ext.util.showErrorHead(errFields,errMsgs,'clinicPatientID',errMsg,errCount);	
   	errMsg = Ext.util.checkNationalId(document.getElementById('nationalID'),document.getElementById("nationalIDTitle"),'');
-  	errCount = Ext.util.showErrorHead(errFields,errMsgs,'nationalID',errMsg,errCount);	
+  	errCount = Ext.util.showErrorHead(errFields,errMsgs,'nationalID',errMsg,errCount);
+    errMsg = Ext.util.checkSex(document.getElementsByName('sex[]'),document.getElementById("sexTitle"),'');
+  	errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);
+
+  if(document.getElementById('dobDt').value.length==0&&document.getElementById('ageYears').value.length==0)
+  {
+	  errMsg=93;
+	  errCount= Ext.util.showErrorHead(errFields,errMsgs,'DobDt',errMsg,errCount);
+  }
+	
   });
   Ext.get('nationalID').on('blur', function(){
   	errMsg = Ext.util.checkNationalId(document.getElementById('nationalID'),document.getElementById("nationalIDTitle"),'');
@@ -117,7 +137,50 @@ Ext.onReady(function() {
   /*Ext.get('clinicPatientID').on('blur', function(){
   	errMsg = Ext.util.checkClinicId(document.getElementById('clinicPatientID'),document.getElementById("clinicPatientIDTitle"),'');
   	errCount = Ext.util.showErrorHead(errFields,errMsgs,'clinicPatientID',errMsg,errCount);	
-  });*/
+  }); zohyishahm*/
+   
+  if(document.getElementById('dobDt').value.length==0&&document.getElementById('ageYears').value.length==0)
+  {
+	  errMsg=93;
+	  errCount= Ext.util.showErrorHead(errFields,errMsgs,'DobDt',errMsg,errCount);
+  } 
+   
+  if(document.getElementById('sexF').checked==false)
+  {
+  errMsg = Ext.util.checkSex(document.getElementsByName('sex[]'),document.getElementById("sexTitle"),'');
+  errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);
+  }
+  
+  Ext.get('sexF').on('blur', function(){	  
+  	errMsg = Ext.util.checkSex(document.getElementsByName('sex[]'),document.getElementById("sexTitle"),'');
+  	errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);	
+
+  });
+  
+  if(document.getElementById('sexH').checked==false)
+  {
+  errMsg = Ext.util.checkSex(document.getElementsByName('sex[]'),document.getElementById("sexTitle"),'');
+  errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);
+  }
+  
+  Ext.get('sexH').on('blur', function(){	  
+  	errMsg = Ext.util.checkSex(document.getElementsByName('sex[]'),document.getElementById("sexTitle"),'');
+  	errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);	
+
+  });
+  
+  if(document.getElementById('sexI').checked==false)
+  {
+  errMsg = Ext.util.checkSex(document.getElementsByName('sex[]'),document.getElementById("sexTitle"),'');
+  errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);
+  }
+  
+  Ext.get('sexI').on('blur', function(){	  
+  	errMsg = Ext.util.checkSex(document.getElementsByName('sex[]'),document.getElementById("sexTitle"),'');
+  	errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);	
+
+  });
+ /* end of radio group */ 
   Ext.get('fname').on('blur', function(){
   	errMsg = Ext.util.checkFName(document.getElementById('fname'),document.getElementById('fnameTitle'),'');
   	errCount = Ext.util.showErrorHead(errFields,errMsgs,'fname',errMsg,errCount);
@@ -126,7 +189,8 @@ Ext.onReady(function() {
   Ext.get('lname').on('blur', function(){
   	errMsg = Ext.util.checkLName(document.getElementById('lname'),document.getElementById("lnameTitle"),'');
   	errCount = Ext.util.showErrorHead(errFields,errMsgs,'lname',errMsg,errCount);	
-  });	
+  });
+  
   if(document.getElementById('vDate').value!='')
   {
   	errMsg = Ext.util.checkFName(document.getElementById('fname'),document.getElementById('fnameTitle'),'');
@@ -137,6 +201,16 @@ Ext.onReady(function() {
   	//errCount = Ext.util.showErrorHead(errFields,errMsgs,'clinicPatientID',errMsg,errCount);	
   	errMsg = Ext.util.checkNationalId(document.getElementById('nationalID'),document.getElementById("nationalIDTitle"),'');
   	errCount = Ext.util.showErrorHead(errFields,errMsgs,'nationalID',errMsg,errCount);	
+	
+	errMsg = Ext.util.checkSex(document.getElementsByName('sex[]'),document.getElementById("sexTitle"),'');
+  	errCount = Ext.util.showErrorHead(errFields,errMsgs,'sexTitle',errMsg,errCount);
+  	
+  if(document.getElementById('dobDt').value.length==0&&document.getElementById('ageYears').value.length==0)
+  {
+	  errMsg=93;	  
+	  errCount= Ext.util.showErrorHead(errFields,errMsgs,'DobDt',errMsg,errCount);
+  }
+  
   }
   //Allow multi-seletion of radios
   var tempRadioArr = allElements["radio"]; 

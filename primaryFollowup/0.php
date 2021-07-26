@@ -9,11 +9,13 @@ include 'primaryIntake/diagnosis.php';
 include 'primaryIntake/procedures.php'; 
 include 'primaryIntake/otherplans.php';
 include 'tuberculosis/tbEval.php';
+include 'primaryFollowup/powerUpsPanel2.php';
 ?>
 
 renderVerticalTabForm([
 		generalPanel,
 		vitalsPanel,
+		powerUpVaccSupp,
 		consultationPanel,
 		physicalExamPanel,
 		diagnosisPanel,

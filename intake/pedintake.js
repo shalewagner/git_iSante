@@ -740,14 +740,14 @@ Ext.onReady(function() {
 	evalTBArray[10] = 'debutINHStopMm';
 	evalTBArray[11] = 'debutINHStopYy';
 	
-	Ext.get('asymptomaticTb').on('click', function(){
-		dis = document.getElementById('asymptomaticTb').checked;
+	Ext.get('antecedentTb').on('click', function(){
+		dis = document.getElementById('antecedentTb').checked;
 		for(i=0;i<evalTBArray.length;i++)
 		{
 			document.getElementById(evalTBArray[i]).disabled = dis;
 		}
 	});
-	dis = document.getElementById('asymptomaticTb').checked;
+	dis = document.getElementById('antecedentTb').checked;
 	for(i=0;i<evalTBArray.length;i++)
 	{
 		document.getElementById(evalTBArray[i]).disabled = dis;

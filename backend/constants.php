@@ -106,11 +106,11 @@ $rxSubHeadElems = array(9,3,6,3);
 
 $pedRxs = array ("abacavir", "combivir", "didanosine", "emtricitabine", "lamivudine", "stavudine", "trizivir", "zidovudine", "tenofovir", 
   "subhead4", "efavirenz", "nevirapine","etravirine",
-  "subhead16", "lopinavirPlusBostRtv", "nelfinavir", "saquinavir", "ritonavir2",
-  "subhead17", "Raltegravir","dolutegravir","Elviltegravir");
+  "subhead16", "lopinavirPlusBostRtv", "nelfinavir", "saquinavir", "ritonavir2","atazanavir", "atazanavirPlusBostRtv",
+  "subhead17", "Raltegravir","dolutegravir","Elviltegravir","Darunavir");
 
 //no of elements in each rx section/subhead. Has to be reviewed/updated when rxs array is updated
-$pedRxSubHeadElems = array(9,3,4,3);
+$pedRxSubHeadElems = array(9,3,6,4);
 
 $other_rxs = array ("subhead10", "acetaminophen", "aspirin", "ibuprofen", "paracetamol", "tylenol",
 	"subhead101","hydroxalum","subhead102","enalapril", "hctz", "subhead11", "albendazol", "ciprofloxacin", "erythromycin", "metromidazole","doxycycline","pnc",
@@ -333,7 +333,7 @@ $rootArray = array (
 // the current version of the forms
 $formVersion = array (
 	"0" => "0",
-	"1" => "1",
+	"1" => "2",
 	"2" => "1",
 	"3" => "0",
 	"4" => "0",

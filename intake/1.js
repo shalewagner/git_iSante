@@ -232,7 +232,7 @@ Ext.onReady(function() {
 			});
 
 			txtFormat[txtArr[i].id].applyToMarkup(txtArr[i]);
-			if(txtArr[i].id!='bloodTransDt' && txtArr[i].id!='bloodExpDt' && txtArr[i].id != 'completeTreatDt')
+			if(txtArr[i].id!='bloodTransDt' && txtArr[i].id!='bloodExpDt')
 			{
 				(Ext.get(txtArr[i].id)).on('blur', function(){
 					errMsg =  Ext.util.validateDateFieldNonPatient(document.getElementById(this.id),document.getElementById(this.id + "Title"),'');
@@ -540,19 +540,15 @@ Ext.onReady(function() {
 	}	
 
 	Ext.get('completeTreatDt').on('blur',function() {
-                errMsg = Ext.util.validateAdultTbStatusSection(document.getElementById('completeTreat[]'),document.getElementById('completeTreatDt'),document.getElementById('completeTreatFac'),document.getElementById('completeTreatTitle'),document.getElementById('completeTreatDtTitle'),document.getElementById('completeTreatFacTitle'));
+                				
+		Ext.util.splitDate(document.getElementById('completeTreatDt'),document.getElementById('completeTreatDd'),document.getElementById('completeTreatMm'),document.getElementById('completeTreatYy'));		
 	});
-	Ext.get('completeTreatFac').on('blur',function() {
-                errMsg = Ext.util.validateAdultTbStatusSection(document.getElementById('completeTreat[]'),document.getElementById('completeTreatDt'),document.getElementById('completeTreatFac'),document.getElementById('completeTreatTitle'),document.getElementById('completeTreatDtTitle'),document.getElementById('completeTreatFacTitle'));
-	});
-        errMsg = Ext.util.validateAdultTbStatusSection(document.getElementById('completeTreat[]'),document.getElementById('completeTreatDt'),document.getElementById('completeTreatFac'),document.getElementById('completeTreatTitle'),document.getElementById('completeTreatDtTitle'),document.getElementById('completeTreatFacTitle'));
+	
+       
 	Ext.get('currentTreatNo').on('blur',function() {
                 errMsg = Ext.util.validateAdultTbStatusSection(document.getElementById('currentTreat[]'),document.getElementById('currentTreatNo'),document.getElementById('currentTreatFac'),document.getElementById('currentTreatTitle'),document.getElementById('currentTreatNoTitle'),document.getElementById('currentTreatFacTitle'));
 	});
-	Ext.get('currentTreatFac').on('blur',function() {
-                errMsg = Ext.util.validateAdultTbStatusSection(document.getElementById('currentTreat[]'),document.getElementById('currentTreatNo'),document.getElementById('currentTreatFac'),document.getElementById('currentTreatTitle'),document.getElementById('currentTreatNoTitle'),document.getElementById('currentTreatFacTitle'));
-	});
-        errMsg = Ext.util.validateAdultTbStatusSection(document.getElementById('currentTreat[]'),document.getElementById('currentTreatNo'),document.getElementById('currentTreatFac'),document.getElementById('currentTreatTitle'),document.getElementById('currentTreatNoTitle'),document.getElementById('currentTreatFacTitle'));
+	
 
 	
 	var taArr = Ext.util.getElementsByType(document.mainForm,"textarea");
@@ -1062,9 +1058,9 @@ Ext.onReady(function() {
 	}
 		
     var TBStatusArray = new Array(3);
-	TBStatusArray[0] = "asymptomaticTb[]";
-	TBStatusArray[1] = "completeTreat[]";
-	TBStatusArray[2] = "currentTreat[]";	
+	TBStatusArray[0] = "antecedentTb1[]";
+	TBStatusArray[1] = "antecedentTb2[]";
+	TBStatusArray[2] = "antecedentTb3[]";	
 	var functionStatus = new Array(3);
 	functionStatus[0] = "functionalStatus1";
 	functionStatus[1] = "functionalStatus2";
@@ -1081,7 +1077,7 @@ Ext.onReady(function() {
 	
 	Ext.get('vDate').on('blur', function(){
 		errMsg = Ext.util.checkItemSelected1(TBStatusArray, radioArr, true, document.getElementById('tbStatusTitle'));
-		errCount = Ext.util.showErrorHead(errFields,errMsgs,'tbStatus',errMsg,errCount);
+		errCount = Ext.util.showErrorHead(errFields,errMsgs,'antecedentTb',errMsg,errCount);
 		errMsg = Ext.util.isItemSelected(functionStatus, radioArr, false,document.getElementById('functionalStatusTitle'));
 		errCount = Ext.util.showErrorHead(errFields,errMsgs,'functionalStatus',errMsg,errCount);
 		errMsg = Ext.util.checkWhoStage(whoStages,document.getElementById('whoStageTitle'));
@@ -1090,8 +1086,7 @@ Ext.onReady(function() {
 
 	if(document.mainForm.vDate.value!='' && document.mainForm.vDate.value!='//')
 	{
-		errMsg = Ext.util.checkItemSelected1(TBStatusArray, radioArr, true, document.getElementById('tbStatusTitle'));
-		errCount = Ext.util.showErrorHead(errFields,errMsgs,'tbStatus',errMsg,errCount);
+		errCount = Ext.util.showErrorHead(errFields,errMsgs,'antecedentTb',errMsg,errCount);
 		errMsg = Ext.util.isItemSelected(functionStatus, radioArr, false,document.getElementById('functionalStatusTitle'));
 		errCount = Ext.util.showErrorHead(errFields,errMsgs,'functionalStatus',errMsg,errCount);
 		errMsg = Ext.util.checkWhoStage(whoStages,document.getElementById('whoStageTitle'));
@@ -1268,30 +1263,16 @@ Ext.onReady(function() {
 	medEligSection[6] = document.mainForm.PEP;
 	medEligSection[7] = document.mainForm.expFromD1;
 	medEligSection[8] = document.mainForm.tlcLT1200;   
-	Ext.util.disableElements(medEligYes,medEligSection,radioArr,true);
+	//Ext.util.disableElements(medEligYes,medEligSection,radioArr,true);
 	//Ext.util.disableAssoDt(document.getElementById('medElig1'),expFromD1, document.mainForm.expFromD1,radioArr,true);
 	
-	for(var i=1;i<4;i++)
-	{
-		Ext.get('medElig' + i).on('click', function(){
-			//Ext.util.disableElements(document.getElementById('medElig1'),medEligSection,radioArr,true);
-			//Ext.util.disableAssoDt(document.getElementById('medElig1'),expFromD1, document.mainForm.expFromD1,radioArr,true);
-			if( !document.getElementById('medElig1').checked){
-                                Ext.util.clearElements(medEligSection, errFields, errMsgs, errCount);
-                        }	
-	}, document.getElementById(this.id), {delay: 5});		
-	}
-
-
 	for(i=0;i<TBStatusArray.length;i++)
 	{
 		Ext.get(TBStatusArray[i]).on('click', function(){
 			var key = Ext.util.getKeyByID1(TBStatusArray, this.id);
 			Ext.util.selectDiffRadio(document.getElementById(this.id), hiddenTBArr, key,radioArr);
 			errMsg = Ext.util.checkItemSelected1(TBStatusArray, radioArr, true,document.getElementById('tbStatusTitle'));
-			errCount = Ext.util.showErrorHead(errFields,errMsgs,'tbStatus',errMsg,errCount);
-                        errMsg = Ext.util.validateAdultTbStatusSection(document.getElementById('completeTreat[]'),document.getElementById('completeTreatDt'),document.getElementById('completeTreatFac'),document.getElementById('completeTreatTitle'),document.getElementById('completeTreatDtTitle'),document.getElementById('completeTreatFacTitle'));
-                        errMsg = Ext.util.validateAdultTbStatusSection(document.getElementById('currentTreat[]'),document.getElementById('currentTreatNo'),document.getElementById('currentTreatFac'),document.getElementById('currentTreatTitle'),document.getElementById('currentTreatNoTitle'),document.getElementById('currentTreatFacTitle'));
+			errCount = Ext.util.showErrorHead(errFields,errMsgs,'antecedentTb',errMsg,errCount);       
 		}, document.getElementById(this.id), {delay: 5});
 	}
 //	var hiddenTBArr = new Array();

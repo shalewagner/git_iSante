@@ -70,7 +70,9 @@ $errorMessages = array (
 		"88" => "The number should be between 0 and 2",
 		"89" => "The number should be between 0 and 99",
 		"90" => "Please select a visit type",
-		"91" => "Please select methodology (external or iSanté)"
+		"91" => "Please select methodology (external or iSanté)",
+		"92" => "The sex should be selected!",
+		"93" => "Date of birth or age should be entered!"
 	),
 	"fr" => array (
                 "1" => "ERREUR",
@@ -139,7 +141,9 @@ $errorMessages = array (
 		"88" => "Le nombre devrait être entre 0 et 2",
 		"89" => "Le nombre devrait être entre 0 et 99",
 		"90" => "S’il vous plaît sélectionner un type de visite",
-		"91" => "S’il vous plaît choisir la méthodologie (Externe ou iSanté)"
+		"91" => "S’il vous plaît choisir la méthodologie (Externe ou iSanté)",
+		"92" => "Le champ sex devrait être entré!",
+		"93" => "La Date de naissance ou l'age devrait être entré!"
 	)
 );
 

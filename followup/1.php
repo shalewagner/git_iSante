@@ -212,7 +212,6 @@ $tabIndex = 1700;
 if(getUiConfig(getSessionUser()) == "3" || getUiConfig(getSessionUser()) == "2")
 {
 echo "<div>";
-include ("include/tbStatus_followup.php");
 echo "</td><td valign=\"top\" class=\"vert_line\">&nbsp;</td>
        <td valign=\"top\" class=\"left_pad\" width=\"50%\">
         <table class=\"b_header_nb\">
@@ -375,13 +374,36 @@ echo "
        		&nbsp;
        </td>
       </tr>
+	  
+	     
+      <tr>
+       <td><table><tr><td>
+         <input tabindex=\"" . ($tabIndex + 7) . "\" id=\"antecedentTb3\"  name=\"antecedentTb[]\" " .
+           getData ("antecedentTb", "checkbox",4) .
+           " type=\"checkbox\" value=\"4\">" . $currentTreat[$lang][1] . "
+     </td></tr></table></td>
+       <td id=\"currentTreatNoTitle\">" . $currentTreatNo[$lang][1] . "
+         <input tabindex=\"" . ($tabIndex + 8) . "\" id=\"currentTreatNo\" name=\"currentTreatNo\" " . getData ("currentTreatNo", "text") . " type=\"text\" size=\"30\" maxlength=\"64\"></td>
+       <td><table><tr><td id=\"currentTreatFacTitle\">&nbsp;</td><td>" . $currentTreatFac[$lang][1] . "
+       <input tabindex=\"" . ($tabIndex + 9) . "\" id=\"currentTreatFac\" name=\"currentTreatFac\" " . getData ("currentTreatFac", "text") . " type=\"text\" size=\"30\" maxlength=\"255\"></td></tr></table></td>
+      </tr>
+	  <tr><td>" . $debutTbTraitement[$lang][0] . "
+       <input tabindex=\"" . ($tabIndex + 10) . "\" id=\"dateDebutTb\" name=\"dateDebutTb\" type=\"date\" value=\"" . getData ("dateDebutTb", "textarea") . "\"\></td></tr>
+      </tr> 
+	  
+	  
+      <tr>
+	  <td style=\"font-weight:bold\">
+       		" . $tbEval[$lang][11] . "
+       </td>
+      </tr>
       <tr>
        <td>
         <table>
          <tr>
           <td id=\"propINHTitle\"></td>
           <td>
-			 <input tabindex=\"3506\" id=\"propINH\" name=\"propINH\" " .
+			 <input tabindex=\"14006\" id=\"propINH\" name=\"propINH\" " .
 			   getData ("propINH", "checkbox", 0) .
 			   " type=\"checkbox\" value=\"1\">" .
 			   $tbEval[$lang][7] . "
@@ -389,10 +411,62 @@ echo "
          </tr>
         </table>
        </td>
-       <td colspan=\"2\">" . $tbEval[$lang][8] . "<table><tr><td id=\"debutINHStartTitle\"></td><td><input tabindex=\"3507\" id=\"debutINHStartMM\" name=\"debutINHMm\" " . getData ("debutINHMm", "text") . " type=\"text\" size=\"2\" maxlength=\"2\">/<input tabindex=\"3508\" id=\"debutINHStartYY\"  name=\"debutINHYy\" " . getData ("debutINHYy", "text") . " type=\"text\" size=\"2\" maxlength=\"2\"><i>" . $tbEval[$lang][9] . "</i></td></tr></table></td>
+       <td>" . $tbEval[$lang][8] . "<table><tr><td id=\"debutINHStartTitle\"></td><td><input tabindex=\"14007\" id=\"debutINHStartMM\" name=\"debutINHMm\" " . getData ("debutINHMm", "text") . " type=\"text\" size=\"2\" maxlength=\"2\">/<input tabindex=\"14008\" id=\"debutINHStartYY\"  name=\"debutINHYy\" " . getData ("debutINHYy", "text") . " type=\"text\" size=\"2\" maxlength=\"2\"><i>" . $tbEval[$lang][9] . "</i></td></tr></table>
        </td>
        <td>" .
-           $tbEval[$lang][10] . "<table><tr><td id=\"debutINHStopTitle\"></td><td><input tabindex=\"3509\" id=\"debutINHStopMM\" name=\"arretINHMm\" " . getData ("arretINHMm", "text") . " type=\"text\" size=\"2\" maxlength=\"2\">/<input tabindex=\"3510\" id=\"debutINHStopYY\" name=\"arretINHYy\" " . getData ("arretINHYy", "text") . " type=\"text\" size=\"2\" maxlength=\"2\"> " . $tbEval[$lang][9] . "</td></tr></table>
+           $tbEval[$lang][10] . "<table><tr><td id=\"debutINHStopTitle\"></td><td><input tabindex=\"14009\" id=\"debutINHStopMM\" name=\"arretINHMm\" " . getData ("arretINHMm", "text") . " type=\"text\" size=\"2\" maxlength=\"2\">/<input tabindex=\"14010\" id=\"debutINHStopYY\" name=\"arretINHYy\" " . getData ("arretINHYy", "text") . " type=\"text\" size=\"2\" maxlength=\"2\"> " . $tbEval[$lang][9] . "</td></tr></table>
+       </td>
+       <td>
+       		&nbsp;
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <table>
+         <tr>
+          <td id=\"propINHRifaTitle\"></td>
+          <td>
+			 <input tabindex=\"14006\" id=\"propINHRifa\" name=\"propINHRifa\" " .
+			   getData ("propINHRifa", "checkbox", 0) .
+			   " type=\"checkbox\" value=\"1\">" .
+			   $tbEval[$lang][12] . "
+          </td>
+         </tr>
+        </table>
+       </td>
+       <td colspan=\"1\">" . $tbEval[$lang][8] . "<table><tr><td id=\"debutINHRifaStartTitle\"></td><td><input tabindex=\"14007\" id=\"debutINHRifaStartMM\" name=\"debutINHRifaMm\" " . getData ("debutINHRifaMm", "text") . " type=\"text\" size=\"2\" maxlength=\"2\">/<input tabindex=\"14008\" id=\"debutINHRifaStartYY\"  name=\"debutINHRifaYy\" " . getData ("debutINHRifaYy", "text") . " type=\"text\" size=\"2\" maxlength=\"2\"><i>" . $tbEval[$lang][9] . "</i></td></tr></table></td>
+       </td>
+       <td>" .
+           $tbEval[$lang][10] . "<table><tr><td id=\"debutINHRifaStopTitle\"></td><td><input tabindex=\"14009\" id=\"debutINHRifaStopMM\" name=\"arretINHRifaMm\" " . getData ("arretINHRifaMm", "text") . " type=\"text\" size=\"2\" maxlength=\"2\">/<input tabindex=\"14010\" id=\"debutINHRifaStopYY\" name=\"arretINHRifaYy\" " . getData ("arretINHRifaYy", "text") . " type=\"text\" size=\"2\" maxlength=\"2\"> " . $tbEval[$lang][9] . "</td></tr></table>
+       </td>
+       <td>
+       		&nbsp;
+       </td>
+      </tr>
+	  
+	  <tr>
+	  <td style=\"font-weight:bold\">
+       		" . $tbEval[$lang][13] . "
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <table>
+         <tr>
+          <td id=\"propINHTitle\"></td>
+          <td>
+			 <input tabindex=\"14006\" id=\"propSecINH\" name=\"propSecINH\" " .
+			   getData ("propSecINH", "checkbox", 0) .
+			   " type=\"checkbox\" value=\"1\">" .
+			   $tbEval[$lang][7] . "
+          </td>
+         </tr>
+        </table>
+       </td>
+       <td>" . $tbEval[$lang][8] . "<table><tr><td id=\"debutSecINHStartTitle\"></td><td><input tabindex=\"14007\" id=\"debutSecINHStartMM\" name=\"debutSecINHMm\" " . getData ("debutSecINHMm", "text") . " type=\"text\" size=\"2\" maxlength=\"2\">/<input tabindex=\"14008\" id=\"debutSecINHStartYY\"  name=\"debutSecINHYy\" " . getData ("debutSecINHYy", "text") . " type=\"text\" size=\"2\" maxlength=\"2\"><i>" . $tbEval[$lang][9] . "</i></td></tr></table>
+       </td>
+       <td>" .
+           $tbEval[$lang][10] . "<table><tr><td id=\"debutSecINHStopTitle\"></td><td><input tabindex=\"14009\" id=\"debutSecINHStopMM\" name=\"arretSecINHMm\" " . getData ("arretSecINHMm", "text") . " type=\"text\" size=\"2\" maxlength=\"2\">/<input tabindex=\"14010\" id=\"debutSecINHStopYY\" name=\"arretSecINHYy\" " . getData ("arretSecINHYy", "text") . " type=\"text\" size=\"2\" maxlength=\"2\"> " . $tbEval[$lang][9] . "</td></tr></table>
        </td>
        <td>
        		&nbsp;
@@ -401,6 +475,8 @@ echo "
      </table>
     <td>
    </tr>
+
+
 
     </table>
    </td>

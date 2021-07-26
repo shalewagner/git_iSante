@@ -60,9 +60,20 @@ function combineValues (code, errMsg) {
     if(document.mainForm.vDate.value.trim().length == 0 || document.mainForm.vDate.value == '//' )
     {
         alert(errors["77"]);
-		document.mainForm.vDate.focus(true);
+		document.mainForm.vDate.focus();
         return false;
-    }  
+    } 
+
+    var input=document.getElementById("dobDt");
+	if (input)
+    if((document.getElementById("dobDt").value.trim().length == 0 || document.getElementById("dobDt").value == '//' )&&(document.getElementById("ageYears").value.trim().length == 0))
+    {
+        alert(errors["93"]);
+		document.getElementById("dobDt").focus();
+        return false;
+    }
+
+	
     /*** removing this validation since we now have identifiers for primary care and obgyn
      *** TODO we may want to add in a check to make sure at least one of these is filled in, but I'm not going to do that now 12/12/2010 shw
     if(document.mainForm.clinicPatientID.value.trim().length == 0)
@@ -77,6 +88,18 @@ function combineValues (code, errMsg) {
         alert(errors["70"]);
         return false;
     }
+	
+	var sexInput=document.getElementsByName("sex[]")[0];
+	if(sexInput)
+	if(document.getElementsByName("sex[]")[0].checked == false && document.getElementsByName("sex[]")[1].checked == false && document.getElementsByName("sex[]")[2].checked == false)
+    {
+        alert(errors["92"]);
+        return false;
+    }
+	
+	
+	
+	
     document.forms['mainForm'].submit ();
 
 }

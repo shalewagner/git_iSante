@@ -9,7 +9,7 @@ CREATE TABLE schemaVersion (
  whenUpgraded timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
  PRIMARY KEY  (version)
 );
-insert into schemaVersion set version=47, scriptName='support/schema-updates/0047-addIndicatorPnls.sql';
+insert into schemaVersion set version=48, scriptName='support/schema-updates/0048-covid_version.sql';
 
 DROP TABLE IF EXISTS adherenceCounseling;
 CREATE TABLE adherenceCounseling (
@@ -3578,5 +3578,148 @@ denominator longtext,
 type varchar(25)
 );
 						  
+drop table if exists dw_hepdo_snapshot;
+
+CREATE TABLE IF NOT EXISTS `dw_hepdo_snapshot` (
+  `patientID` varchar(11) NOT NULL default '',
+  `visitDate` date NOT NULL,
+  `rageSuspected` tinyint(1) default '0',
+  `coquelucheSuspected` tinyint(1) default '0',
+  `choleraSuspected` tinyint(1) default '0',
+  `covidSuspected` tinyint(1) default '0',
+  `meningiteSuspected` tinyint(1) default '0',
+  `pesteSuspected` tinyint(1) default '0',
+  `rougeoleSuspected` tinyint(1) default '0',
+  `dingueSuspected` tinyint(1) default '0',
+  `charbonSuspected` tinyint(1) default '0',
+  `lepreSuspected` tinyint(1) default '0',
+  `typhoideSuspected` tinyint(1) default '0',  
+  `decesMaternel` tinyint(1) default '0',
+  `diphterieProbable` tinyint(1) default '0',
+  `esavi` tinyint(1) default '0',
+  `microcephalie` tinyint(1) default '0',
+  `paludisme` tinyint(1) default '0',
+  `pfa` tinyint(1) default '0',
+  `rage` tinyint(1) default '0',
+  `sgb` tinyint(1) default '0',
+  `sfha` tinyint(1) default '0',
+  `src` tinyint(1) default '0',
+  `tetanosNeonatal` tinyint(1) default '0',
+  
+  `tiac` tinyint(1) default '0',
+  `diabete` tinyint(1) default '0',
+  `diarheAiguAqueuse` float default '0',
+  `diarheAiguSanglante` tinyint(1) default '0',
+  `filarioseProbable` tinyint(1) default '0',
+  `infectionRespAigu` tinyint(1) default '0',
+  `sif` tinyint(1) default '0',
+  `tetanos` tinyint(1) default '0',
+  
+  `accidents` tinyint(1) default '0',
+  `cancer` tinyint(1) default '0',
+  `epilepsie` tinyint(1) default '0',
+  `hta` tinyint(1) default '0',
+  `ist` tinyint(1) default '0',
+  `malnutrition` tinyint(1) default '0',
+  `syphilis` tinyint(1) default '0',
+  `violence` tinyint(1) default '0',
+  PRIMARY KEY  (`patientID`,`visitDate`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+drop table if exists dw_hepdo_slices;
+
+CREATE TABLE `dw_hepdo_slices` (
+  `org_unit` varchar(64) NOT NULL,
+  `org_value` varchar(255) NOT NULL,
+  `indicator` smallint(6) NOT NULL,
+  `time_period` varchar(16) NOT NULL,
+  `year` smallint(5) unsigned NOT NULL,
+  `period` smallint(5) unsigned NOT NULL,
+  `gender` tinyint(3) unsigned NOT NULL,
+  `value` bigint(20) default '0',
+  `denominator` decimal(9,1) default '0.0',
+  PRIMARY KEY  (`org_unit`,`org_value`,`indicator`,`time_period`,`year`,`period`,`gender`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+drop table if exists dw_hepdo_patients;
+
+CREATE TABLE `dw_hepdo_patients` (
+  `indicator` smallint(10) NOT NULL,
+  `time_period` varchar(10) NOT NULL,
+  `year` int(11) NOT NULL,
+  `period` smallint(6) NOT NULL,
+  `patientid` varchar(11) NOT NULL,
+  PRIMARY KEY  (`indicator`,`patientid`,`time_period`,`year`,`period`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+drop table if exists dw_hepdoReportLookup;
+
+CREATE TABLE `dw_hepdoReportLookup` (
+  `indicator` smallint(6) NOT NULL,
+  `indicatorType` smallint(6) default NULL,
+  `nameen` varchar(350) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `namefr` varchar(350) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `definitionen` varchar(1024) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `definitionfr` varchar(1024) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `subGroupEn` varchar(150) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `subGroupFr` varchar(150) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `indicatorDenominator` smallint(6) default '0',
+  PRIMARY KEY  (`indicator`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+	   
+drop table if exists dw_artDist_snapshot;
+
+CREATE TABLE IF NOT EXISTS `dw_artDist_snapshot` (
+  `patientID` varchar(11) NOT NULL default '',
+  `visitDate` date NOT NULL,
+  `visitArt` tinyint(1) default '0',
+  `nextVisitArt` tinyint(1) default '0',
+  PRIMARY KEY  (`patientID`,`visitDate`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+drop table if exists dw_artDist_slices;
+
+CREATE TABLE `dw_artDist_slices` (
+  `org_unit` varchar(64) NOT NULL,
+  `org_value` varchar(255) NOT NULL,
+  `indicator` smallint(6) NOT NULL,
+  `time_period` varchar(16) NOT NULL,
+  `year` smallint(5) unsigned NOT NULL,
+  `period` smallint(5) unsigned NOT NULL,
+  `gender` tinyint(3) unsigned NOT NULL,
+  `value` bigint(20) default '0',
+  `denominator` decimal(9,1) default '0.0',
+  PRIMARY KEY  (`org_unit`,`org_value`,`indicator`,`time_period`,`year`,`period`,`gender`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+drop table if exists dw_artDist_patients;
+
+CREATE TABLE `dw_artDist_patients` (
+  `indicator` smallint(10) NOT NULL,
+  `time_period` varchar(10) NOT NULL,
+  `year` int(11) NOT NULL,
+  `period` smallint(6) NOT NULL,
+  `patientid` varchar(11) NOT NULL,
+  PRIMARY KEY  (`indicator`,`patientid`,`time_period`,`year`,`period`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+drop table if exists dw_artDistReportLookup;
+
+CREATE TABLE `dw_artDistReportLookup` (
+  `indicator` smallint(6) NOT NULL,
+  `indicatorType` smallint(6) default NULL,
+  `nameen` varchar(350) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `namefr` varchar(350) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `definitionen` varchar(1024) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `definitionfr` varchar(1024) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `subGroupEn` varchar(150) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `subGroupFr` varchar(150) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `indicatorDenominator` smallint(6) default '0',
+  PRIMARY KEY  (`indicator`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 						  
                           

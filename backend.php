@@ -1248,7 +1248,8 @@ function arvRows ($cnt, $followup = 0) {
 
        <td class=\"sm_header_cnt_np\"><table><tr><td id=\"arv_" . $a . "ContinuedTitle\"></td><td><input tabindex=\"" . $cnt++ . "\" class=\"arvPrevious\" id=\"arv_" . $a . "Continued\"  name=\"" . $a . "Continued\" " . getData ($a . "Continued", "checkbox") . " type=\"checkbox\" value=\"On\"></td></tr></table></td>
 	   <td class=\"sm_header_cnt_np\" id=\"arv_" . $a . "DiscTitle\">&nbsp;</td>
-       <td class=\"sm_header_cnt_np\"><span><input class=\"arvPrevious\"  tabindex=\"" . $cnt++ . "\" id=\"arv_" . $a . "DiscTox\" name=\"" . $a . "DiscTox\" " . getData ($a . "DiscTox", "checkbox") . " type=\"checkbox\" value=\"On\"></span></td>
+       <td class=\"sm_header_cnt_np\"><span><input class=\"arvPrevious\"  tabindex=\"" . $cnt++ . "\" id=\"arv_" . $a . "TransDTG\" name=\"" . $a . "TransDTG\" " . getData ($a . "TransDTG", "checkbox") . " type=\"checkbox\" value=\"On\"></span></td>
+	   <td class=\"sm_header_cnt_np\"><span><input class=\"arvPrevious\"  tabindex=\"" . $cnt++ . "\" id=\"arv_" . $a . "DiscTox\" name=\"" . $a . "DiscTox\" " . getData ($a . "DiscTox", "checkbox") . " type=\"checkbox\" value=\"On\"></span></td>
        <td class=\"sm_header_cnt_np\"><span><input class=\"arvPrevious\"  tabindex=\"" . $cnt++ . "\" id=\"arv_" . $a . "DiscIntol\" name=\"" . $a . "DiscIntol\" " . getData ($a . "DiscIntol", "checkbox") . " type=\"checkbox\" value=\"On\"></span></td>
        <td class=\"sm_header_cnt_np\"><span><input class=\"arvPrevious\" tabindex=\"" . $cnt++ . "\" id=\"arv_" . $a . "DiscFail\" name=\"" . $a . "DiscFail\" " . getData ($a . "DiscFail", "checkbox") . " type=\"checkbox\" value=\"On\"></span></td>
        <td class=\"sm_header_cnt_np\"><span><input class=\"arvPrevious\" tabindex=\"" . $cnt++ . "\" id=\"arv_" . $a . "DiscUnknown\" name=\"" . $a . "DiscUnknown\" " . getData ($a . "DiscUnknown", "checkbox") . " type=\"checkbox\" value=\"On\"></span></td>
@@ -2305,6 +2306,7 @@ function drugNameConvert ($drug, $name) {
     case "reasonComments": return $drug . "Comments"; break;
 	case "forPepPmtct": return $drug . "forPepPmtct"; break;
 	case "finPTME": return $drug . "finPTME"; break;
+	case "TransDTG": return $drug . "TransDTG"; break;	
     default: return ""; break;
   }
 }
@@ -2397,6 +2399,7 @@ function otherDrugNameConvert ($name, $cnt) {
     case "interUnk": return 'other' . $cnt . 'InterUnk'; break;
     case "reasonComments": return 'other' . $cnt . 'Comments'; break;
     case "finPTME": return 'other' . $cnt . 'finPTME'; break;
+	case "TransDTG": return 'other' . $cnt . 'TransDTG'; break;
     default: return ""; break;
   }
 }
@@ -2546,7 +2549,7 @@ function getExistingData ($eid, $tables) {
   $GLOBALS['checkedBoxes'] = array();
 
   $queryStmt = "SELECT encounter_id, RTRIM(siteCode), RTRIM(visitDateDd), RTRIM(visitDateMm), RTRIM(visitDateYy), seqNum, formAuthor,
-	visitPointer, encComments, formVersion, formAuthor2, labOrDrugForm, nxtVisitDd, nxtVisitMm, nxtVisitYy, creator, lastModifier, encounterType, patientID
+	visitPointer, encComments, formVersion, formAuthor2, labOrDrugForm, nxtVisitDd, nxtVisitMm, nxtVisitYy, creator, lastModifier, encounterType, patientID,otherSite,nextVisitDateOther
 	FROM encounter
 	WHERE encounter_id = '$eid' and RTRIM(sitecode) = '" . $_GET['site'] . "'";
 
@@ -2572,6 +2575,8 @@ function getExistingData ($eid, $tables) {
     $GLOBALS['existingData']['lastModifier'] = $row[16];
     $GLOBALS['existingData']['encounterType'] = $row['encounterType'];
     $GLOBALS['existingData']['patientID'] = $row['patientID'];
+	$GLOBALS['existingData']['otherSite'] = $row['otherSite'];
+    $GLOBALS['existingData']['nextVisitDateOther'] = $row['nextVisitDateOther'];
   }
 
   getPatientData ($GLOBALS['existingData']['patientID']);
@@ -3402,7 +3407,7 @@ function setQueueAccessionAndStatusById ($id, $accNo, $status) {
 function getDrugArv($drugid)
 {
     $drugOptions='';
-    $drugs_query = "SELECT drugID, drugLabel FROM drugLookup WHERE drugID IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88, 89, 90, 91 ) ";
+    $drugs_query = "SELECT drugID, drugLabel FROM drugLookup WHERE drugID IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88, 89, 90, 91,111,112 ) ";
     $drugs_res = dbQuery($drugs_query) or die ( "ERROR: unable to select from  drugLookup" );
         while ( $drug = psRowFetch( $drugs_res ) )
         {

@@ -11,6 +11,7 @@ include 'primaryIntake/diagnosis.php';
 include 'primaryIntake/procedures.php'; 
 include 'primaryIntake/otherplans.php';
 include 'tuberculosis/tbEval.php'; 
+include 'primaryIntake/powerUpsPanel.php'; 
 ?>
 
 renderVerticalTabForm([
@@ -18,6 +19,7 @@ renderVerticalTabForm([
 	relativesPanel,
 	personalHistoryPanel,
 	vitalsPanel,
+	powerUpExtTable('vaccine'),
 	consultationPanel,
 	physicalExamPanel,
 	diagnosisPanel,

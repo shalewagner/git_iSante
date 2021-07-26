@@ -8,6 +8,8 @@ require_once ("nutrition.php");
 require_once ("obgyn.php");
 require_once ("dataquality.php");
 require_once ("mer.php");
+require_once ("hepdo.php");
+require_once("artDist.php");
 
 $tempTableNames = array ();
 
@@ -73,7 +75,12 @@ function refreshSlices($key) {
         case "mer":
 		merSlices($key, $orgType, $time_period);
 		break;
-		
+		case "hepdo":
+		hepdoSlices($key, $orgType, $time_period);
+		break;
+		case "artDist":
+		artDistSlices($key, $orgType, $time_period);
+		break;
 	}
 }
 
@@ -124,7 +131,7 @@ function generatePercentsOld ($key, $indicator, $org_unit, $org_value, $query) {
 	$sql = "insert into dw_" . $key . "_slices (org_unit , org_value , indicator , time_period, year, period, gender, denominator) 
         select ?, " . $org_value . ", " . $indicator . ", time_period, year, period, t.sex, count(distinct p.patientid) 
         from dw_" . $key . "_patients p, clinicLookup, patient t 
-        where p.patientid = t.patientid and t.sex in (1,2) and sitecode = left(p.patientid,5) and indicator = " . $indb . " group by 1,2,3,4,5,6,7";
+        where p.patientid = t.patientid  and sitecode = left(p.patientid,5) and indicator = " . $indb . " group by 1,2,3,4,5,6,7";
 	if ($org_unit == 'Commune') $qArray = array($org_unit, "-");
 	else $qArray = array($org_unit); 
 	$rc = database()->query($sql, $qArray)->rowCount();
@@ -136,7 +143,7 @@ function generatePercentsOld ($key, $indicator, $org_unit, $org_value, $query) {
         select ? as org_unit, " . $org_value . " as org_value, " . $indicator . " as indicator, 
         time_period, year, period, t.sex as gender, count(distinct p.patientid) as cnt
         from dw_" . $key . "_patients p, clinicLookup, patient t 
-        where p.patientid = t.patientid and t.sex in (1,2) and sitecode = left(p.patientid,5) and indicator = " . $indicator . " 
+        where p.patientid = t.patientid  and sitecode = left(p.patientid,5) and indicator = " . $indicator . " 
         group by 1,2,3,4,5,6,7) x on m.org_unit = x.org_unit and m.org_value = x.org_value and 
         m.indicator = x.indicator and m.time_period = x.time_period and m.period = x.period and m.gender = x.gender
         set m.value = x.cnt";
@@ -217,14 +224,14 @@ function generateAmongSlices ($key, $indicator, $org_unit, $org_value, $query) {
 		$sql = "insert into dw_" . $key . "_slices 
 			select ?, " . $org_value . ", " . $indicator . ", time_period, year, period, t.sex, count(distinct p.patientid), 0 
 			from dw_" . $key . "_patients p, clinicLookup c, patient t 
-			where p.patientid = t.patientid and t.sex in (1,2) and indicator = ? and c.sitecode = left(p.patientid,5) group by 1,2,3,4,5,6,7";
+			where p.patientid = t.patientid  and indicator = ? and c.sitecode = left(p.patientid,5) group by 1,2,3,4,5,6,7";
 		if ($org_unit == 'Commune') $argArray = array($org_unit, "-", $indicator);
 		else $argArray = array($org_unit, $indicator);
 	} else {  
 		$sql = "insert into dw_" . $key . "_slices 
 			select ?, " . $org_value . ", " . $indicator . ", p.time_period, p.year, p.period, t.sex, count(distinct p.patientid), 0 
 			from dw_" . $key . "_patients p, dw_" . $key . "_patients q, clinicLookup c, patient t 
-			where p.patientid = t.patientid and t.sex in (1,2) and p.indicator = ? and q.indicator = ? and 
+			where p.patientid = t.patientid  and p.indicator = ? and q.indicator = ? and 
 			p.time_period = q.time_period and p.year = q.year and 
 			p.period = q.period and c.sitecode = left(p.patientid,5) and 
 			p.patientid = q.patientid group by 1,2,3,4,5,6,7";

@@ -151,8 +151,8 @@ echo "
 	 	<td colspan=\"1\" width=\"95%\">
 	 		<table>
 	 			<tr>
-	 				<td>" . $reasonDiscDeathDd[$lang][0] . "&nbsp;&nbsp;</td>
-	 				<td><input type=\"text\" tabindex=\"3306\" size=\"8\" id=\"reasonDiscDeathDt\" name=\"reasonDiscDeathDt\" value=\"" . getData ("reasonDiscDeathDd", "textarea") . "/". getData ("reasonDiscDeathMm", "textarea") ."/". getData ("reasonDiscDeathYy", "textarea") . "\" maxlength=\"8\">
+	 				<td id=\"reasonDiscDeathDtTitle\">" . $reasonDiscDeathDd[$lang][0] . "&nbsp;&nbsp;</td>
+	 				<td id=\"reasonDiscDeath\"><input type=\"text\" tabindex=\"3306\" size=\"8\" id=\"reasonDiscDeathDt\" name=\"reasonDiscDeathDt\" value=\"" . getData ("reasonDiscDeathDd", "textarea") . "/". getData ("reasonDiscDeathMm", "textarea") ."/". getData ("reasonDiscDeathYy", "textarea") . "\" maxlength=\"8\">
 	 					<input type=\"hidden\"							  id=\"reasonDiscDeathDd\" name=\"reasonDiscDeathDd\" " . getData ("reasonDiscDeathDd", "text") . ">
 	 					<input type=\"hidden\" tabindex=\"3307\" 		  id=\"reasonDiscDeathMm\" name=\"reasonDiscDeathMm\" " . getData ("reasonDiscDeathMm", "text") . ">
 	 					<input type=\"hidden\" tabindex=\"3308\" 		  id=\"reasonDiscDeathYy\" name=\"reasonDiscDeathYy\" " . getData ("reasonDiscDeathYy", "text") . ">

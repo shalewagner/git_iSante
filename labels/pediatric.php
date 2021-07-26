@@ -1026,7 +1026,8 @@ $pedRegister = array (
           "Name",
           "Relationship with child",
           "Tel",
-          "Emergency Contact"),
+          "Emergency Contact",
+		  "U"),
   "fr" => array (
           "INFORMATIONS D&#xc9;MOGRAPHIQUES",
           "Pr&#xe9;nom du patient",
@@ -1047,7 +1048,8 @@ $pedRegister = array (
           "Nom",
           "Lien de parent&#xe9; avec l'enfant",
           "T&#xe9;l",
-          "Contact en cas d'urgence")
+          "Contact en cas d'urgence",
+		  "I")
 );
 
 $pedFollowup = array (

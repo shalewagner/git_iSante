@@ -22,8 +22,6 @@ echo "
 <form name=\"mainForm\" target = \"mainWindow\" action=\"patienttabs.php\" method=\"post\">
   <input id=\"errorSave\" name =\"errorSave\" type=\"hidden\" value=\"\"/>
  <script language=\"JavaScript\" type=\"text/javascript\" src=\"include/arv.js\"></script>
-
-
 ";
 
 $tabIndex = 0;

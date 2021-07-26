@@ -174,9 +174,12 @@ $tbEval = array (
 		"No signs or symptoms indicating TB",
 		"PPD status unknown",
 		"Prophylaxie &agrave; I'INH",
-		"Start INH",
+		"Start ",
 		"MM/YY",
-		"End INH"
+		"End ",
+		"Primary TB Prophylaxis",
+		"INH Prophylaxis + Rifapentine ",
+		"Secondary TB Prophylaxis"
 	),
 	"fr" => array (
 		"&Eacute;VALUATION TB",
@@ -184,12 +187,15 @@ $tbEval = array (
 		"Pr&eacute;sence de cicatrice BCG",
 		"Suspicion de TB selon les sympt&ocirc;mes",
 		"R&eacute;cent PPD n&eacute;gatif",
-		"Acun signe ou symp&ocirc;tme indicatif de TB",
+		"Aucun signe ou symp&ocirc;tme indicatif de TB",
 		"Statut PPD inconnu",
 		"Prophylaxie &agrave; I'INH",
-		"Date de d&eacute;but de I'INH",
+		"Date de d&eacute;but",
 		"MM/AA",
-		"Date d'arr&ecirc;t de I'INH"
+		"Date d'arr&ecirc;t",
+		"Prophylaxie Primaire contre la TB",
+		"Prophylaxie INH + Rifapentine ",
+		"Prophylaxie Secondaire contre la TB"
 	)
 );
 

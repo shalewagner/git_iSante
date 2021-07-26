@@ -6,7 +6,7 @@ echo "
 <!-- ******************************************************************** -->
 ";
 if ($type == "1" && $version == "1")
-	$coHead = $intakeSectLabs1[$lang][15];
+	$coHead = $intakeSectLabs1[$lang][0];
 else
 	$coHead = $conditions_header_1[$lang][0];
 
@@ -14,11 +14,13 @@ else
 // the intake form.  Presumably, this is because they're the same as for
 // the follow-up form (which does have conditions listed in conditionOrder).
 // So, if we're on an intake form, use the follow-up form's order.
+echo $type;
 if ($type == "1") {
   $cond_list = generateConditionListInOrder ($lang,$version,"2");
 } else {
   $cond_list = generateConditionListInOrder ($lang,$version,$type);
 }
+
 
 //print_r($GLOBALS['existingData']);
 
