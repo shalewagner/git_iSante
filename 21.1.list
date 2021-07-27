@@ -5,7 +5,6 @@ Design Documents/Malaria_august14.docx
 Design Documents/National Consolidated Fingerprinting Design Specification.docx
 Design Documents/Reporting Framework Design Specification.docx
 Design Documents/TBindicators Nov 11_rev.docx
-"Design Documents/User Requirements For iSant\303\251 Lab Orders.docx"
 Design Documents/iSante [FS] CPOE Lab Orders.docx
 Design Documents/iSante [FS] Confidentiality Design Specification.docx
 Design Documents/iSante [FS] Group Reporting_Drilldown Design Specification.docx
@@ -159,7 +158,6 @@ JsBarcode-master/test/node/pharmacode.test.js
 Technical Notes/Restoring a site using the consolidated site gz file.docx
 Technical Notes/Setting up a consolidated site.docx
 Technical Notes/Standard Server Build Script.docx
-"Technical Notes/The iSant\303\251 Schema.docx"
 Technical Notes/Using curl to verify iS-OE interconnect.docx
 Technical Notes/Verifying Configuration And Use of the iS-OE Interconnect.docx
 Technical Notes/fingerprintChecklist.pdf
@@ -308,8 +306,6 @@ map/Ext.ux.GMapPanel3.js
 medicalEligibility/1.php
 medicalEligibility/2.js
 medicalEligibility/2.php
-patchArchives/15.1.tar.gz
-patchArchives/isante_version_14.2.1_patch.tgz
 patient/coverTab.php
 patient/coversheet.php
 patient/graphSetup.js.php
@@ -351,9 +347,6 @@ r34RunOnce.php
 register/1.js
 register/1.php
 register/pedregister.js
-"release and deployment planning/Setting Up An iSant\303\251 Server.docx"
-"release and deployment planning/iSant\303\251 Configuration Console.docx"
-"release and deployment planning/iSant\303\251 Installation Manual.docx"
 replication/consolidated/receiver/receive-file.pl
 replication/lookups-Data.csv.gz
 replication/lookups-Errors.txt

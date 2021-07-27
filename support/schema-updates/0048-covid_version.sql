@@ -305,6 +305,8 @@ go
 
 drop table if exists dw_hepdo_slices
 
+go
+
 CREATE TABLE `dw_hepdo_slices` (
   `org_unit` varchar(64) NOT NULL,
   `org_value` varchar(255) NOT NULL,
@@ -394,6 +396,7 @@ INSERT INTO `dw_hepdoReportLookup` (`indicator`, `indicatorType`, `nameen`, `nam
 (37, 0, 'Violence (physical, sexual)', 'Violences (physique, sexuelle)', '', '', 0)
 
 go
+
 insert into concept(concept_id,retired,short_name,description,datatype_id,class_id,is_set,creator,date_created)  
 values (163850,0,'ddp_dispensation','Dispensation DDP',10,13,0,0,now())
 
@@ -428,54 +431,76 @@ values (163852,'dateFinTb','dateFinTb','date de fin du traitement TB','fr',0,now
 go
 
 ALTER TABLE `tbStatus` ADD `antecedentTb` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `asymptomaticTb` 
+
 go
+
 ALTER TABLE `tbStatus` ADD `propINHRifa` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `propINH` 
+
 go
+
 ALTER TABLE `tbStatus` ADD `debutINHRifaMm` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `debutINHMm` 
+
 go 
 
 ALTER TABLE `tbStatus` ADD `debutINHRifaYy` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `debutINHYy` 
+
 go
+
 ALTER TABLE `tbStatus` ADD `arretINHRifaMm` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `arretINHMm` 
+
 go
+
 ALTER TABLE `tbStatus` ADD `arretINHRifaYy` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `arretINHYy` 
 
 go
 
 ALTER TABLE `tbStatus` ADD `propSecINH` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `propINHRifa`
+
 go 
 
 ALTER TABLE `tbStatus` ADD `debutSecINHMm` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `debutINHRifaMm`
 
 go
+
 ALTER TABLE `tbStatus` ADD `debutSecINHYy` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `debutINHRifaYy`
+
 go 
+
 ALTER TABLE `tbStatus` ADD `arretSecINHMm` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `arretINHRifaMm`
+
 go
+
 ALTER TABLE `tbStatus` ADD `arretSecINHYy` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `arretINHRifaYy`
 
 go
+
 update drugLookup set pedStdDosageEn1='50 mg QD',pedStdDosageFr1='50 mg QD'
 where drugID=89
 
 go
+
 update drugLookup set pedStdDosageEn2='10 mg QD',pedStdDosageFr2='10 mg QD'
 where drugID=89
+
 go 
 
 update drugLookup set pedStdDosageEn2='100 mg QD',pedStdDosageFr2='100 mg QD'
 where drugID=87
+
 go 
 
 update drugLookup set pedStdDosageEn1='75 mg QD',pedStdDosageFr1='75 mg QD'
 where drugID=88
+
 go 
 
 update drugLookup set pedStdDosageEn1='300/100 mg',pedStdDosageFr1='300/100 mg'
 where drugID=6
+
 go
 
 ALTER TABLE `encounter` ADD `otherSite` varchar(55) NULL DEFAULT 'NULL' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `visitDate` 
+
 go 
 
 ALTER TABLE `encounter` ADD `nextVisitDateOther` Date NULL DEFAULT NULL COMMENT 'ajouter dans la version 21.1 de isante' AFTER `otherSite` 
@@ -499,6 +524,7 @@ CREATE TABLE IF NOT EXISTS `dw_artDist_snapshot` (
 go
 
 drop table if exists dw_artDist_slices
+
 go 
 
 CREATE TABLE `dw_artDist_slices` (
@@ -530,6 +556,7 @@ CREATE TABLE `dw_artDist_patients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 go
+
 drop table if exists dw_artDistReportLookup
 
 go
@@ -552,15 +579,16 @@ go
 INSERT INTO `dw_artDistReportLookup` (`indicator`, `indicatorType`, `nameen`, `namefr`, `definitionen`, `definitionfr`, `indicatorDenominator`) VALUES
 (1, 0, 'Hike for the period', 'Rendez-vous pour la période', 'patient having hike for the period', 'patient ayant Rendez-vous pour la période', 0),
 (2, 0, 'Dispensed ART for the period','Arv dispensé pour la période','Dispensed ART for the period','Arv dispensé pour la période', 0),
-(3, 1, 'Percentage of patients who not withdrawn arvs during the period', 'Pourcentage de patient n\'ayant pas retiré des arvs pendant la période ', 'Percentage of patients who not withdrawn arvs during the period', 'Pourcentage de patient n\'ayant pas retiré des arvs pendant la période ', 1),
+(3, 1, 'Percentage of patients who not withdrawn arvs during the period', 'Pourcentage de patient n`ayant pas retiré des arvs pendant la période ', 'Percentage of patients who not withdrawn arvs during the period', 'Pourcentage de patient n`ayant pas retiré des arvs pendant la période ', 1),
 (4, 1, 'Percentage of patients who withdrawn arvs during the period', 'Pourcentage de patient ayant retiré des arvs pendant la période ', 'Percentage of patients who withdrawn arvs during the period', 'Pourcentage de patient ayant retiré des arvs pendant la période ', 1),
 (5, 1, 'Percentage of patients who withdrawn arvs after the period', 'Pourcentage de patient ayant retiré des arvs apres la période ', 'Percentage of patients who withdrawn arvs after the period', 'Pourcentage de patient ayant retiré des arvs apres la période ', 3)
 
 go
 
-ALTER TABLE `drugs` ADD `TransDTG` tinyint(3) NULL DEFAULT 'NULL' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `finPTME` 
+ALTER TABLE `drugs` ADD `TransDTG` tinyint(3) NULL DEFAULT 0 COMMENT 'ajouter dans la version 21.1 de isante' AFTER `finPTME` 
 
 go
+
 insert into regimen( regID,regimenName,drugID1,drugID2,drugID3,shortName,regGroup) 
 values ('127','1stReg127','1','20','87','ABC+3TC+RAL','1stReg127'),
        ('128','1stReg128','8','87','0','AZT+3TC+RAL','1stReg128'),
@@ -569,6 +597,6 @@ values ('127','1stReg127','1','20','87','ABC+3TC+RAL','1stReg127'),
 go
 
 insert into alertLookup(alertId,alertName,descriptionFr,descriptionEn,messageFr,messageEn,alertGroup,priority)
-values (13,'ddpPatient','Ce patient est abonné aux services DDP','Ce patient est abonné aux services DDP','Ce patient est abonné aux services DDP',1,7)
+values (13,'ddpPatient','Ce patient est abonné aux services DDP','This patient is subscribed to DDP services','Ce patient est abonné aux services DDP','This patient is subscribed to DDP services',1,7)
 
 go

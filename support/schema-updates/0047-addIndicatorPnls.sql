@@ -26,9 +26,9 @@ type varchar(25)
 go
 
 insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type) values
-(1,'Retrait à temps des ARV','Retrait à temps des ARV (ART.7) - Pourcentage des patients qui retirent l\'ensemble des ARV prescrits avec maximum deux jours de retard au premier retrait après un retrait de référence défini',	
+(1,'Retrait à temps des ARV','Retrait à temps des ARV (ART.7) - Pourcentage des patients qui retirent l`ensemble des ARV prescrits avec maximum deux jours de retard au premier retrait après un retrait de référence défini',	
 'Nombre de patients qui retirent à temps les ARV au premier retrait après un retrait de Référence défini.',
-'Nombre de patients qui ont retirés les ARV à la date désignée de début de L\’échantillonnage IAP ou après celle-ci.',
+'Nombre de patients qui ont retirés les ARV à la date désignée de début de L`échantillonnage IAP ou après celle-ci.',
 'percentage')
 
 go
@@ -42,8 +42,8 @@ insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type
 go
 
 insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type) values
-(3,'Rupture de stock','Rupture de stock - Pourcentage de mois dans l\'année du suivi de rupture de stock de tout ARV dispensé régulièrement',
-'Nombre de mois avec jour(s) dans l\'année du suivi de rupture de stock de tout ARV dispensé régulièrement par l\'établissement',
+(3,'Rupture de stock','Rupture de stock - Pourcentage de mois dans l`année du suivi de rupture de stock de tout ARV dispensé régulièrement',
+'Nombre de mois avec jour(s) dans l`année du suivi de rupture de stock de tout ARV dispensé régulièrement par l`établissement',
 '12 mois',									
 'percentage')
 
@@ -52,13 +52,13 @@ go
 insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type) values
 (4,'Suppression de la charge virale','Suppression de la charge virale (VLS.1) - Pourcentage de patients présentant une charge virale (<1000 copies/ml) 12 mois après la mise en route du TAR', 
 'Nombre de patients pour lesquels un résultat de mesure de la charge virale est disponible après 12 ± 3 mois', 
-'Nombre de patients en vie et sous TAR 12 mois après le début du traitement disposant d\'un résultat d\'analyse de la charge virale',
+'Nombre de patients en vie et sous TAR 12 mois après le début du traitement disposant d`un résultat d`analyse de la charge virale',
 'percentage')
 
 go	
 										
 insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type) values
-(5,'Achèvement du processus d\'analyse de la charge virale','Achèvement du processus d\'analyse de la charge virale (VLS.2) - Pourcentage des patients disposant d\'un résultat d\'analyse de la charge virale après 12 mois',
+(5,'Achèvement du processus d`analyse de la charge virale','Achèvement du processus d`analyse de la charge virale (VLS.2) - Pourcentage des patients disposant d`un résultat d`analyse de la charge virale après 12 mois',
 'Nombre de patients pour lesquels un résultat de mesure de la charge virale est disponible après 12 ± 3 mois',
 'Nombre de patients qui selon la politique nationale auraient dû avoir une analyse de la charge virale après 12 ±3 mois', 
 'percentage')
@@ -67,7 +67,7 @@ go
 
 insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type) values
 (6,'Changement approprié','Changement approprié - Pourcentage de patients avec un échec virologique confirmé après changement au TAR de deuxième intention dans les 3 mois',
-'Nombre de patients avec CV≥ 1000 copies/ml confirmée qui passent au TAR de deuxième intention dans les 90 jours suivant la date de l\'analyse de la charge virale de confirmation', 
+'Nombre de patients avec CV≥ 1000 copies/ml confirmée qui passent au TAR de deuxième intention dans les 90 jours suivant la date de l`analyse de la charge virale de confirmation', 
 'Nombre total de patients avec un test de confirmation de la charge virale ≥ 1000 copies/ml',
 'percentage')
 
@@ -76,7 +76,7 @@ go
 insert into iap_indicator(indicatorID,name,definition,numerotor,denominator,type) values
 (7,'Perdu de vue','Perdu de vue - Pourcentage de patients ayant débuté un TAR dans un établissement pendant une période donnée qui sont perdus de vue 12 mois après la mise en route du traitement',
 'Nombre de personnes perdues de vue 12 mois après le début du TAR (nombre de personnes avec résultats non classifiables, c.-à-d. non classifiés comme étant en soins de santé, décédé, transféré vers un autre établissement ou arrêt)',
-'Nombre de personnes qui ont débuté le TAR au cours de la période de 12 mois (les décès connus et les transferts vers d\'autres établissements sont exclus du dénominateur)',	
+'Nombre de personnes qui ont débuté le TAR au cours de la période de 12 mois (les décès connus et les transferts vers d`autres établissements sont exclus du dénominateur)',	
 'percentage')
 
 go
@@ -223,23 +223,28 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163620,'allaitementOuiNon','allaitementOuiNon','Pregnancy','en','1','2020-07-25'),
        (163620,'allaitementOuiNon','allaitementOuiNon','Grossesse','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163621,'allaitementStartDate','allaitementStartDate','Start of pregnancy','en','1','2020-07-25'),
        (163621,'allaitementStartDate','allaitementStartDate','Debut de grossesse','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163622,'allaitementEndDate','allaitementEndDate','End of pregnancy','en','1','2020-07-25'),
        (163622,'allaitementEndDate','allaitementEndDate','Fin de grossesse','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163623,'emigrationCause','emigrationCause','Emigration','en','1','2020-07-25'),
        (163623,'emigrationCause','emigrationCause','Émigration','fr','1','2020-07-25')	   
 go
+
 /* mois 0*/	   
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163624,'surveillanceTbDatemois0','surveillanceTbDatemois0','TB surveillance date month 0','en','1','2020-07-25'),
        (163624,'surveillanceTbDatemois0','surveillanceTbDatemois0','Date surveillance TB mois 0','fr','1','2020-07-25')   
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163625,'bacilloscopiemois0','bacilloscopiemois0','bacilloscopy month 0','en','1','2020-07-25'),
        (163625,'bacilloscopiemois0','bacilloscopiemois0','bacilloscopie mois 0','fr','1','2020-07-25')
@@ -253,14 +258,17 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163627,'geneXpertRifmois0','geneXpertRifmois0','geneXpert RIF month 0','en','1','2020-07-25'),
        (163627,'geneXpertRifmois0','geneXpertRifmois0','geneXpert RIF mois 0','fr','1','2020-07-25')	
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163628,'culturemois0','culturemois0','Culture month 0','en','1','2020-07-25'),
        (163628,'culturemois0','culturemois0','Culture mois 0','fr','1','2020-07-25')	   
 go 
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163629,'dstmois0','dstmois0','DST month 0','en','1','2020-07-25'),
        (163629,'dstmois0','dstmois0','DST mois 0','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163630,'poidsmois0','poidsmois0','Poids month 0','en','1','2020-07-25'),
        (163630,'poidsmois0','poidsmois0','Poids mois 0','fr','1','2020-07-25')
@@ -271,10 +279,12 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163631,'surveillanceTbDatemois1','surveillanceTbDatemois1','TB surveillance date month 1','en','1','2020-07-25'),
        (163631,'surveillanceTbDatemois1','surveillanceTbDatemois1','Date surveillance TB mois 1','fr','1','2020-07-25')	   
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163632,'bacilloscopiemois1','bacilloscopiemois1','bacilloscopy month 1','en','1','2020-07-25'),
        (163632,'bacilloscopiemois1','bacilloscopiemois1','bacilloscopie mois 1','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163633,'geneXpertBkmois1','geneXpertBkmois1','geneXpert Bk month 1','en','1','2020-07-25'),
        (163633,'geneXpertBkmois1','geneXpertBkmois1','geneXpert Bk mois 1','fr','1','2020-07-25')
@@ -284,14 +294,17 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163634,'geneXpertRifmois1','geneXpertRifmois1','geneXpert RIF month 1','en','1','2020-07-25'),
        (163634,'geneXpertRifmois1','geneXpertRifmois1','geneXpert RIF mois 1','fr','1','2020-07-25')	
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163635,'culturemois1','culturemois1','Culture month 1','en','1','2020-07-25'),
        (163635,'culturemois1','culturemois1','Culture mois 1','fr','1','2020-07-25')   
 go 
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163636,'dstmois1','dstmois1','DST month 1','en','1','2020-07-25'),
        (163636,'dstmois1','dstmois1','DST mois 1','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163637,'poidsmois1','poidsmois1','Poids month 1','en','1','2020-07-25'),
        (163637,'poidsmois1','poidsmois1','Poids mois 1','fr','1','2020-07-25')
@@ -301,6 +314,7 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163638,'surveillanceTbDatemois2','surveillanceTbDatemois2','TB surveillance date month 2','en','1','2020-07-25'),
        (163638,'surveillanceTbDatemois2','surveillanceTbDatemois2','Date surveillance TB mois 2','fr','1','2020-07-25')   
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163639,'bacilloscopiemois2','bacilloscopiemois2','bacilloscopy month 2','en','1','2020-07-25'),
        (163639,'bacilloscopiemois2','bacilloscopiemois2','bacilloscopie mois 2','fr','1','2020-07-25')
@@ -309,19 +323,23 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163640,'geneXpertBkmois2','geneXpertBkmois2','geneXpert Bk month 2','en','1','2020-07-25'),
        (163640,'geneXpertBkmois2','geneXpertBkmois2','geneXpert Bk mois 2','fr','1','2020-07-25')
 	   
-go	   
+go	
+   
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163641,'geneXpertRifmois2','geneXpertRifmois2','geneXpert RIF month 2','en','1','2020-07-25'),
        (163641,'geneXpertRifmois2','geneXpertRifmois2','geneXpert RIF mois 2','fr','1','2020-07-25')	
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163642,'culturemois2','culturemois2','Culture month 2','en','1','2020-07-25'),
        (163642,'culturemois2','culturemois2','Culture mois 2','fr','1','2020-07-25')	   
 go 
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163643,'dstmois2','dstmois2','DST month 2','en','1','2020-07-25'),
        (163643,'dstmois2','dstmois2','DST mois 2','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163644,'poidsmois2','poidsmois2','Poids month 2','en','1','2020-07-25'),
        (163644,'poidsmois2','poidsmois2','Poids mois 2','fr','1','2020-07-25')   
@@ -331,10 +349,12 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163645,'surveillanceTbDatemois3','surveillanceTbDatemois3','TB surveillance date month 3','en','1','2020-07-25'),
        (163645,'surveillanceTbDatemois3','surveillanceTbDatemois3','Date surveillance TB mois 3','fr','1','2020-07-25')	   
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163646,'bacilloscopiemois3','bacilloscopiemois3','bacilloscopy month 3','en','1','2020-07-25'),
        (163646,'bacilloscopiemois3','bacilloscopiemois3','bacilloscopie mois 3','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163647,'geneXpertBkmois3','geneXpertBkmois3','geneXpert Bk month 3','en','1','2020-07-25'),
        (163647,'geneXpertBkmois3','geneXpertBkmois3','geneXpert Bk mois 3','fr','1','2020-07-25')
@@ -344,14 +364,17 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163648,'geneXpertRifmois3','geneXpertRifmois3','geneXpert RIF month 3','en','1','2020-07-25'),
        (163648,'geneXpertRifmois3','geneXpertRifmois3','geneXpert RIF mois 3','fr','1','2020-07-25')	
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163649,'culturemois3','culturemois3','Culture month 3','en','1','2020-07-25'),
        (163649,'culturemois3','culturemois3','Culture mois 3','fr','1','2020-07-25')	   
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163650,'dstmois3','dstmois3','DST month 3','en','1','2020-07-25'),
        (163650,'dstmois3','dstmois3','DST mois 3','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163651,'poidsmois3','poidsmois3','Poids month 3','en','1','2020-07-25'),
        (163651,'poidsmois3','poidsmois3','Poids mois 3','fr','1','2020-07-25') 
@@ -361,41 +384,50 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163652,'surveillanceTbDatemois4','surveillanceTbDatemois4','TB surveillance date month 4','en','1','2020-07-25'),
        (163652,'surveillanceTbDatemois4','surveillanceTbDatemois4','Date surveillance TB mois 4','fr','1','2020-07-25')	   
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163653,'bacilloscopiemois4','bacilloscopiemois4','bacilloscopy month 4','en','1','2020-07-25'),
        (163653,'bacilloscopiemois4','bacilloscopiemois4','bacilloscopie mois 4','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163654,'geneXpertBkmois4','geneXpertBkmois4','geneXpert Bk month 4','en','1','2020-07-25'),
        (163654,'geneXpertBkmois4','geneXpertBkmois4','geneXpert Bk mois 4','fr','1','2020-07-25')
 	   
-go	   
+go	
+   
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163655,'geneXpertRifmois4','geneXpertRifmois4','geneXpert RIF month 4','en','1','2020-07-25'),
        (163655,'geneXpertRifmois4','geneXpertRifmois4','geneXpert RIF mois 4','fr','1','2020-07-25')	
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163656,'culturemois4','culturemois4','Culture month 4','en','1','2020-07-25'),
        (163656,'culturemois4','culturemois4','Culture mois 4','fr','1','2020-07-25')	   
- go
+go
+ 
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163657,'dstmois4','dstmois4','DST month 4','en','1','2020-07-25'),
        (163657,'dstmois4','dstmois4','DST mois 4','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163658,'poidsmois4','poidsmois4','Poids month 4','en','1','2020-07-25'),
        (163658,'poidsmois4','poidsmois4','Poids mois 4','fr','1','2020-07-25') 
 
 go
+
 /*mois 5*/	   
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163659,'surveillanceTbDatemois5','surveillanceTbDatemois5','TB surveillance date month 5','en','1','2020-07-25'),
        (163659,'surveillanceTbDatemois5','surveillanceTbDatemois5','Date surveillance TB mois 5','fr','1','2020-07-25')	   
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163660,'bacilloscopiemois5','bacilloscopiemois5','bacilloscopy month 5','en','1','2020-07-25'),
        (163660,'bacilloscopiemois5','bacilloscopiemois5','bacilloscopie mois 5','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163661,'geneXpertBkmois5','geneXpertBkmois5','geneXpert Bk month 5','en','1','2020-07-25'),
        (163661,'geneXpertBkmois5','geneXpertBkmois5','geneXpert Bk mois 5','fr','1','2020-07-25')
@@ -405,37 +437,45 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163662,'geneXpertRifmois5','geneXpertRifmois5','geneXpert RIF month 5','en','1','2020-07-25'),
        (163662,'geneXpertRifmois5','geneXpertRifmois5','geneXpert RIF mois 5','fr','1','2020-07-25')	
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163663,'culturemois5','culturemois5','Culture month 5','en','1','2020-07-25'),
        (163663,'culturemois5','culturemois5','Culture mois 5','fr','1','2020-07-25')	   
 go 
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163664,'dstmois5','dstmois5','DST month 5','en','1','2020-07-25'),
        (163664,'dstmois5','dstmois5','DST mois 5','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163665,'poidsmois5','poidsmois5','Poids month 5','en','1','2020-07-25'),
        (163665,'poidsmois5','poidsmois5','Poids mois 5','fr','1','2020-07-25') 	   
 	   
 go
+
 /*mois 6*/	   
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163666,'surveillanceTbDatemois6','surveillanceTbDatemois6','TB surveillance date month 6','en','1','2020-07-25'),
        (163666,'surveillanceTbDatemois6','surveillanceTbDatemois6','Date surveillance TB mois 6','fr','1','2020-07-25')	   
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163667,'bacilloscopiemois6','bacilloscopiemois6','bacilloscopy month 6','en','1','2020-07-25'),
        (163667,'bacilloscopiemois6','bacilloscopiemois6','bacilloscopie mois 6','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163668,'geneXpertBkmois6','geneXpertBkmois6','geneXpert Bk month 6','en','1','2020-07-25'),
        (163668,'geneXpertBkmois6','geneXpertBkmois6','geneXpert Bk mois 6','fr','1','2020-07-25')
 	   
-go	   
+go	
+   
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163669,'geneXpertRifmois6','geneXpertRifmois6','geneXpert RIF month 6','en','1','2020-07-25'),
        (163669,'geneXpertRifmois6','geneXpertRifmois6','geneXpert RIF mois 6','fr','1','2020-07-25')	
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163670,'culturemois6','culturemois6','Culture month 6','en','1','2020-07-25'),
        (163670,'culturemois6','culturemois6','Culture mois 6','fr','1','2020-07-25')	   
@@ -444,19 +484,23 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163671,'dstmois6','dstmois6','DST month 6','en','1','2020-07-25'),
        (163671,'dstmois6','dstmois6','DST mois 6','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163672,'poidsmois6','poidsmois6','Poids month 6','en','1','2020-07-25'),
        (163672,'poidsmois6','poidsmois6','Poids mois 6','fr','1','2020-07-25')
-go	   
+go	
+   
 /*mois fin TX*/	   
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163673,'surveillanceTbDateFinTx','surveillanceTbDateFinTx','TB surveillance date End of Tx','en','1','2020-07-25'),
        (163673,'surveillanceTbDateFinTx','surveillanceTbDateFinTx','Date surveillance TB Fin de Tx','fr','1','2020-07-25')   
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163674,'bacilloscopieFinTx','bacilloscopieFinTx','bacilloscopy End of Tx','en','1','2020-07-25'),
        (163674,'bacilloscopieFinTx','bacilloscopieFinTx','bacilloscopie Fin de Tx','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163675,'geneXpertBkFinTx','geneXpertBkFinTx','geneXpert Bk End of Tx','en','1','2020-07-25'),
        (163675,'geneXpertBkFinTx','geneXpertBkFinTx','geneXpert Bk Fin de Tx','fr','1','2020-07-25')
@@ -466,6 +510,7 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163676,'geneXpertRifFinTx','geneXpertRifFinTx','geneXpert RIF End of Tx','en','1','2020-07-25'),
        (163676,'geneXpertRifFinTx','geneXpertRifFinTx','geneXpert RIF Fin de Tx','fr','1','2020-07-25')	
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163677,'cultureFinTx','cultureFinTx','Culture End of Tx','en','1','2020-07-25'),
        (163677,'cultureFinTx','cultureFinTx','Culture Fin de Tx','fr','1','2020-07-25')	   
@@ -474,6 +519,7 @@ insert into concept_name (concept_id,name,short_name,description,locale,creator,
 values (163678,'dstFinTx','dstFinTx','DST End of Tx','en','1','2020-07-25'),
        (163678,'dstFinTx','dstFinTx','DST Fin de Tx','fr','1','2020-07-25')
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163679,'poidsFinTx','poidsFinTx','Poids End of Tx','en','1','2020-07-25'),
        (163679,'poidsFinTx','poidsFinTx','Poids Fin de Tx','fr','1','2020-07-25')		   
@@ -483,20 +529,24 @@ go
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163680,'adenopathies','adenopathies','Lymphadenopathy','en','1','2020-07-25'),
        (163680,'adenopathies','adenopathies','Adénopathies','fr','1','2020-07-25')
-go	   
+go	
+   
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163681,'douleurThoracique','douleurThoracique','Chest pain','en','1','2020-07-25'),
        (163681,'douleurThoracique','douleurThoracique','Douleur thoracique','fr','1','2020-07-25') 
 go
+
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163682,'fievreVesperale','fievreVesperale','Evening fever','en','1','2020-07-25'),
        (163682,'fievreVesperale','fievreVesperale','Fièvre vespérale','fr','1','2020-07-25')	   
-go	   
+go
+	   
 insert into concept_name (concept_id,name,short_name,description,locale,creator,date_created) 
 values (163683,'perteAppetit','perteAppetit','Loss of appetite','en','1','2020-07-25'),
        (163683,'perteAppetit','perteAppetit','Perte d’appétit','fr','1','2020-07-25')
 
-go	   
+go
+	   
 insert into concept(concept_id,retired,short_name,description,form_text,datatype_id,class_id,is_set,creator,date_created)
 values(163590,0,'grossesseOuiNon','Grossesse','Grossesse',1,13,0,1,'2020-07-25'),
       (163591,0,'grossesseStartDate','Debut de grossesse','Debut de grossesse',7,5,0,1,'2020-07-25'),
@@ -609,7 +659,9 @@ go
 	  
 insert into alertLookup(alertId,alertName,descriptionFr,descriptionEn,messageFr,messageEn,alertGroup,priority) values 
 (11,'prophylaxieInh','Le patient a six mois sous prophylaxie à l’INH mais n’a pas de date de fin','Patient has six months old on INH prophylaxis but has no end date','Le patient a six mois sous prophylaxie à l’INH mais n’a pas de date de fin','Patient has six months old on INH prophylaxis but has no end date',1,1)	  
+
 go
+
 insert into alertLookup(alertId,alertName,descriptionFr,descriptionEn,messageFr,messageEn,alertGroup,priority) values 
 (12,'nonprophylaxieInh','Le patient est séropositif mais n’a jamais reçu de prophylaxie à l’INH','The patient is HIV positive but has never received INH prophylaxis','Le patient est séropositif mais n’a jamais reçu de prophylaxie à l’INH','The patient is HIV positive but has never received INH prophylaxis',1,1)	  
 
