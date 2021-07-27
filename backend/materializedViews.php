@@ -582,7 +582,7 @@ function updatePatientStatus($mode = 1, $endDate = null) {
 		MIN(
 		case when nextVisitDateOther>= ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) then nextVisitDateOther
              else CASE WHEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) IS NOT NULL and e.nxtVisityy != ? and e.nxtvisitmm != ? THEN ymdToDate(e.nxtVisityy,e.nxtVisitmm,e.nxtVisitdd) ELSE NULL END
-             END) as nxt_dispdFROM prescriptions p, encounter e WHERE e.encountertype in (5,18) AND encStatus < 255 AND 
+             END) as nxt_dispd FROM prescriptions p, encounter e WHERE e.encountertype in (5,18) AND encStatus < 255 AND 
 		p.patientid = e.patientid AND p.sitecode = e.sitecode AND p.visitdateyy = e.visitdateyy AND p.visitdatemm = e.visitdatemm AND p.visitdatedd = e.visitdatedd AND p.seqNum = e.seqNum AND 
 		drugid IN ( 1, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 16, 17, 20, 21, 22, 23, 26, 27, 28, 29, 31, 32, 33, 34, 87, 88,89,90,91) AND 
 		(dispensed = 1 OR dispAltNumPills IS NOT NULL OR ISDATE(ymdtodate(dispdateyy,dispdatemm,dispdatedd)) = 1 OR dispAltNumDays IS NOT NULL OR 

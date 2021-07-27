@@ -8,7 +8,8 @@ values (163690,0,'covid_astrazenecaDtd1','Oxford-AstraZeneca Dose 1',8,5,0,0,now
 	   (163730,0,'covid_astrazenecaLot1','Oxford-AstraZeneca Lot 1',3,5,0,0,now()),
 	   (163731,0,'covid_astrazenecaLot2','Oxford-AstraZeneca Lot 2',3,5,0,0,now()),
 	   (163732,0,'covid_astrazenecaLot3','Oxford-AstraZeneca Lot 3',3,5,0,0,now()),
-	   (163733,0,'covid_astrazenecaLot','Oxford-AstraZeneca Lot',3,5,0,0,now());
+	   (163733,0,'covid_astrazenecaLot','Oxford-AstraZeneca Lot',3,5,0,0,now())
+go
 insert into concept_name(concept_id,name,short_name,description,locale,creator,date_created)
 values (163690,'covid_astrazeneca','covid_astrazenecaDtd1','Vaccin covid 19 Astrazeneca dose 1','fr',0,now()),
        (163690,'covid_astrazeneca','covid_astrazenecaDtd1','Vaccin covid 19 Astrazeneca dose 1','en',0,now()),
@@ -27,8 +28,8 @@ values (163690,'covid_astrazeneca','covid_astrazenecaDtd1','Vaccin covid 19 Astr
 	   (163732,'covid_astrazenecaLot','covid_astrazenecaLot3','Vaccin astrazeneca Lot 3','en',0,now()),
 	   (163732,'covid_astrazenecaLot','covid_astrazenecaLot3','Vaccin astrazeneca Lot 3','fr',0,now()),
 	   (163733,'covid_astrazenecaLot','covid_astrazenecaLot','Vaccin astrazeneca Lot','en',0,now()),
-	   (163733,'covid_astrazenecaLot','covid_astrazenecaLot','Vaccin astrazeneca Lot','fr',0,now());
-	   
+	   (163733,'covid_astrazenecaLot','covid_astrazenecaLot','Vaccin astrazeneca Lot','fr',0,now())
+go	   
 insert into concept(concept_id,retired,short_name,description,datatype_id,class_id,is_set,creator,date_created) 
 values (163695,0,'covid_modernaDtd1','Moderna Dose 1',8,5,0,0,now()),
        (163696,0,'covid_modernaDtd2','Moderna Dose 2',8,5,0,0,now()),
@@ -38,7 +39,8 @@ values (163695,0,'covid_modernaDtd1','Moderna Dose 1',8,5,0,0,now()),
 	   (163734,0,'covid_modernaLot1','Oxford-AstraZeneca Lot 1',3,5,0,0,now()),
 	   (163735,0,'covid_modernaLot2','Oxford-AstraZeneca Lot 2',3,5,0,0,now()),
 	   (163736,0,'covid_modernaLot3','Oxford-AstraZeneca Lot 3',3,5,0,0,now()),
-	   (163737,0,'covid_modernaLot','Oxford-AstraZeneca Lot',3,5,0,0,now());
+	   (163737,0,'covid_modernaLot','Oxford-AstraZeneca Lot',3,5,0,0,now())
+go
 insert into concept_name(concept_id,name,short_name,description,locale,creator,date_created)
 values (163695,'covid_moderna','covid_modernaDtd1','Vaccin covid 19 Moderna dose 1','fr',0,now()),
        (163695,'covid_moderna','covid_modernaDtd1','Vaccin covid 19 Moderna dose 1','en',0,now()),
@@ -57,8 +59,8 @@ values (163695,'covid_moderna','covid_modernaDtd1','Vaccin covid 19 Moderna dose
 	   (163736,'covid_modernaLot','covid_modernaLot3','Vaccin moderna Lot 3','en',0,now()),
 	   (163736,'covid_modernaLot','covid_modernaLot3','Vaccin moderna Lot 3','fr',0,now()),
 	   (163737,'covid_modernaLot','covid_modernaLot','Vaccin moderna Lot','en',0,now()),
-	   (163737,'covid_modernaLot','covid_modernaLot','Vaccin moderna Lot','fr',0,now());	   
-	   
+	   (163737,'covid_modernaLot','covid_modernaLot','Vaccin moderna Lot','fr',0,now())	   
+go	   
 insert into concept(concept_id,retired,short_name,description,datatype_id,class_id,is_set,creator,date_created) 
 values (163700,0,'covid_pfizer_biontechDtd1','Pfizer-BioNTech Dose 1',8,5,0,0,now()),
        (163701,0,'covid_pfizer_biontechDtd2','Pfizer-BioNTech Dose 2',8,5,0,0,now()),
@@ -68,7 +70,8 @@ values (163700,0,'covid_pfizer_biontechDtd1','Pfizer-BioNTech Dose 1',8,5,0,0,no
 	   (163738,0,'covid_pfizer_biontechLot1','Oxford-AstraZeneca Lot 1',3,5,0,0,now()),
 	   (163739,0,'covid_pfizer_biontechLot2','Oxford-AstraZeneca Lot 2',3,5,0,0,now()),
 	   (163740,0,'covid_pfizer_biontechLot3','Oxford-AstraZeneca Lot 3',3,5,0,0,now()),
-	   (163741,0,'covid_pfizer_biontechLot','Oxford-AstraZeneca Lot',3,5,0,0,now());	
+	   (163741,0,'covid_pfizer_biontechLot','Oxford-AstraZeneca Lot',3,5,0,0,now())	
+go
 insert into concept_name(concept_id,name,short_name,description,locale,creator,date_created)
 values (163700,'covid_pfizer_biontech','covid_pfizer_biontechDtd1','Vaccin covid 19 Pfizer_Biontech dose 1','fr',0,now()),
        (163700,'covid_pfizer_biontech','covid_pfizer_biontechDtd1','Vaccin covid 19 Pfizer_Biontech dose 1','en',0,now()),
@@ -87,8 +90,8 @@ values (163700,'covid_pfizer_biontech','covid_pfizer_biontechDtd1','Vaccin covid
 	   (163740,'covid_pfizer_biontechLot','covid_pfizer_biontechLot3','Vaccin pfizer_biontech Lot 3','en',0,now()),
 	   (163740,'covid_pfizer_biontechLot','covid_pfizer_biontechLot3','Vaccin pfizer_biontech Lot 3','fr',0,now()),
 	   (163741,'covid_pfizer_biontechLot','covid_pfizer_biontechLot','Vaccin pfizer_biontech Lot','en',0,now()),
-	   (163741,'covid_pfizer_biontechLot','covid_pfizer_biontechLot','Vaccin pfizer_biontech Lot','fr',0,now());	
-	   
+	   (163741,'covid_pfizer_biontechLot','covid_pfizer_biontechLot','Vaccin pfizer_biontech Lot','fr',0,now())	
+go	   
 insert into concept(concept_id,retired,short_name,description,datatype_id,class_id,is_set,creator,date_created) 
 values (163705,0,'covid_gamaleya_sputnickvDtd1','Gamaleya sputnickV Dose 1',8,5,0,0,now()),
        (163706,0,'covid_gamaleya_sputnickvDtd2','Gamaleya sputnickV Dose 2',8,5,0,0,now()),
@@ -98,7 +101,8 @@ values (163705,0,'covid_gamaleya_sputnickvDtd1','Gamaleya sputnickV Dose 1',8,5,
 	   (163742,0,'covid_gamaleya_sputnickvLot1','Oxford-AstraZeneca Lot 1',3,5,0,0,now()),
 	   (163743,0,'covid_gamaleya_sputnickvLot2','Oxford-AstraZeneca Lot 2',3,5,0,0,now()),
 	   (163744,0,'covid_gamaleya_sputnickvLot3','Oxford-AstraZeneca Lot 3',3,5,0,0,now()),
-	   (163745,0,'covid_gamaleya_sputnickvLot','Oxford-AstraZeneca Lot',3,5,0,0,now());	
+	   (163745,0,'covid_gamaleya_sputnickvLot','Oxford-AstraZeneca Lot',3,5,0,0,now())
+go
 insert into concept_name(concept_id,name,short_name,description,locale,creator,date_created)
 values (163705,'covid_gamaleya_sputnickv','covid_gamaleya_sputnickvDtd1','Vaccin covid 19 Gamaleya SputnickV(Russie) dose 1','fr',0,now()),
        (163705,'covid_gamaleya_sputnickv','covid_gamaleya_sputnickvDtd1','Vaccin covid 19 Gamaleya SputnickV(Russie) dose 1','en',0,now()),
@@ -117,8 +121,8 @@ values (163705,'covid_gamaleya_sputnickv','covid_gamaleya_sputnickvDtd1','Vaccin
 	   (163744,'covid_gamaleya_sputnickvLot','covid_gamaleya_sputnickvLot3','Vaccin gamaleya_sputnickv Lot 3','en',0,now()),
 	   (163744,'covid_gamaleya_sputnickvLot','covid_gamaleya_sputnickvLot3','Vaccin gamaleya_sputnickv Lot 3','fr',0,now()),
 	   (163745,'covid_gamaleya_sputnickvLot','covid_gamaleya_sputnickvLot','Vaccin gamaleya_sputnickv Lot','en',0,now()),
-	   (163745,'covid_gamaleya_sputnickvLot','covid_gamaleya_sputnickvLot','Vaccin gamaleya_sputnickv Lot','fr',0,now());
-	   
+	   (163745,'covid_gamaleya_sputnickvLot','covid_gamaleya_sputnickvLot','Vaccin gamaleya_sputnickv Lot','fr',0,now())
+go	   
 	   
 insert into concept(concept_id,retired,short_name,description,datatype_id,class_id,is_set,creator,date_created) 
 values (163710,0,'covid_sinovac_sinopharmDtd1','Sinovac Sinopharm Dose 1',8,5,0,0,now()),
@@ -129,7 +133,8 @@ values (163710,0,'covid_sinovac_sinopharmDtd1','Sinovac Sinopharm Dose 1',8,5,0,
 	   (163746,0,'covid_sinovac_sinopharmLot1','Oxford-AstraZeneca Lot 1',3,5,0,0,now()),
 	   (163747,0,'covid_sinovac_sinopharmLot2','Oxford-AstraZeneca Lot 2',3,5,0,0,now()),
 	   (163748,0,'covid_sinovac_sinopharmLot3','Oxford-AstraZeneca Lot 3',3,5,0,0,now()),
-	   (163749,0,'covid_sinovac_sinopharmLot','Oxford-AstraZeneca Lot',3,5,0,0,now());	 
+	   (163749,0,'covid_sinovac_sinopharmLot','Oxford-AstraZeneca Lot',3,5,0,0,now())	 
+go
 insert into concept_name(concept_id,name,short_name,description,locale,creator,date_created)
 values (163710,'covid_sinovac_sinopharm','covid_sinovac_sinopharmDtd1','Vaccin covid 19 Sinovac Sinopharm (Chine) dose 1','fr',0,now()),
        (163710,'covid_sinovac_sinopharm','covid_sinovac_sinopharmDtd1','Vaccin covid 19 Sinovac Sinopharm (Chine) dose 1','en',0,now()),
@@ -148,8 +153,8 @@ values (163710,'covid_sinovac_sinopharm','covid_sinovac_sinopharmDtd1','Vaccin c
 	   (163748,'covid_sinovac_sinopharmLot','covid_sinovac_sinopharmLot3','Vaccin sinovac_sinopharm Lot 3','en',0,now()),
 	   (163748,'covid_sinovac_sinopharmLot','covid_sinovac_sinopharmLot3','Vaccin sinovac_sinopharm Lot 3','fr',0,now()),
 	   (163749,'covid_sinovac_sinopharmLot','covid_sinovac_sinopharmLot','Vaccin sinovac_sinopharm Lot','en',0,now()),
-	   (163749,'covid_sinovac_sinopharmLot','covid_sinovac_sinopharmLot','Vaccin sinovac_sinopharm Lot','fr',0,now());
-
+	   (163749,'covid_sinovac_sinopharmLot','covid_sinovac_sinopharmLot','Vaccin sinovac_sinopharm Lot','fr',0,now())
+go
 insert into concept(concept_id,retired,short_name,description,datatype_id,class_id,is_set,creator,date_created) 
 values (163715,0,'covid_johnson_johnsonDtd1','Johnson&Johnson Dose 1',8,5,0,0,now()),
        (163716,0,'covid_johnson_johnsonDtd2','Johnson Johnson Dose 2',8,5,0,0,now()),
@@ -159,7 +164,8 @@ values (163715,0,'covid_johnson_johnsonDtd1','Johnson&Johnson Dose 1',8,5,0,0,no
 	   (163750,0,'covid_johnson_johnsonLot1','Oxford-AstraZeneca Lot 1',3,5,0,0,now()),
 	   (163751,0,'covid_johnson_johnsonLot2','Oxford-AstraZeneca Lot 2',3,5,0,0,now()),
 	   (163752,0,'covid_johnson_johnsonLot3','Oxford-AstraZeneca Lot 3',3,5,0,0,now()),
-	   (163753,0,'covid_johnson_johnsonLot','Oxford-AstraZeneca Lot',3,5,0,0,now());		   
+	   (163753,0,'covid_johnson_johnsonLot','Oxford-AstraZeneca Lot',3,5,0,0,now())		   
+go
 insert into concept_name(concept_id,name,short_name,description,locale,creator,date_created)
 values (163715,'covid_johnson_johnson','covid_johnson_johnsonDtd1','Vaccin covid 19 Johnson&Johnson(Janssen) dose 1','fr',0,now()),
        (163715,'covid_johnson_johnson','covid_johnson_johnsonDtd1','Vaccin covid 19 Johnson&Johnson(Janssen) dose 1','en',0,now()),
@@ -178,9 +184,9 @@ values (163715,'covid_johnson_johnson','covid_johnson_johnsonDtd1','Vaccin covid
 	   (163752,'covid_johnson_johnsonLot','covid_johnson_johnsonLot3','Vaccin johnson_johnson Lot 3','en',0,now()),
 	   (163752,'covid_johnson_johnsonLot','covid_johnson_johnsonLot3','Vaccin johnson_johnson Lot 3','fr',0,now()),
 	   (163753,'covid_johnson_johnsonLot','covid_johnson_johnsonLot','Vaccin johnson_johnson Lot','en',0,now()),
-	   (163753,'covid_johnson_johnsonLot','covid_johnson_johnsonLot','Vaccin johnson_johnson Lot','fr',0,now());
+	   (163753,'covid_johnson_johnsonLot','covid_johnson_johnsonLot','Vaccin johnson_johnson Lot','fr',0,now())
 /* diagnostics */	   
-
+go
 insert into concept(concept_id,retired,short_name,description,datatype_id,class_id,is_set,creator,date_created)  
 values (163800,0,'covid_suspect','COVID-19 Suspect',10,4,0,0,now()),
        (163801,0,'covid_confirme','COVID-19 confirmé',10,4,0,0,now()),
@@ -200,9 +206,9 @@ values (163800,0,'covid_suspect','COVID-19 Suspect',10,4,0,0,now()),
 	   (163815,0,'dingueSuspected','Dingue Suspect',10,4,0,0,now()),
 	   (163816,0,'charbonSuspected','Charbon Suspect',10,4,0,0,now()),
 	   (163817,0,'lepreSuspected','Lèpre Suspect',10,4,0,0,now()),
-	   (163818,0,'accidents','Accidents(domestiques, voie publique)',10,4,0,0,now());
+	   (163818,0,'accidents','Accidents(domestiques, voie publique)',10,4,0,0,now())
 	   
-
+go
 insert into concept_name(concept_id,name,short_name,description,locale,creator,date_created)
 values (163800,'covid_suspect','covid_suspect','COVID-19 Suspect','fr',0,now()),	
        (163800,'covid_suspect','covid_suspect','COVID-19 Suspected','en',0,now()),
@@ -241,12 +247,13 @@ values (163800,'covid_suspect','covid_suspect','COVID-19 Suspect','fr',0,now()),
 	   (163817,'lepreSuspected','lepreSuspected','Lèpre Suspect','fr',0,now()),
 	   (163817,'lepreSuspected','lepreSuspected','Lèpre Suspect','en',0,now()),
 	   (163818,'accidents','accidents','Accidents(domestiques, voie publique)','fr',0,now()),
-	   (163818,'accidents','accidents','Accidents(domestiques, voie publique)','en',0,now());
+	   (163818,'accidents','accidents','Accidents(domestiques, voie publique)','en',0,now())
+	   
+go	   
 	   
 	   
-	   
-	   
-drop table if exists dw_hepdo_snapshot;
+drop table if exists dw_hepdo_snapshot
+go
 
 CREATE TABLE IF NOT EXISTS `dw_hepdo_snapshot` (
   `patientID` varchar(11) NOT NULL default '',
@@ -292,9 +299,11 @@ CREATE TABLE IF NOT EXISTS `dw_hepdo_snapshot` (
   `syphilis` tinyint(1) default '0',
   `violence` tinyint(1) default '0',
   PRIMARY KEY  (`patientID`,`visitDate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-drop table if exists dw_hepdo_slices;
+go
+
+drop table if exists dw_hepdo_slices
 
 CREATE TABLE `dw_hepdo_slices` (
   `org_unit` varchar(64) NOT NULL,
@@ -307,10 +316,13 @@ CREATE TABLE `dw_hepdo_slices` (
   `value` bigint(20) default '0',
   `denominator` decimal(9,1) default '0.0',
   PRIMARY KEY  (`org_unit`,`org_value`,`indicator`,`time_period`,`year`,`period`,`gender`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+go
 
-drop table if exists dw_hepdo_patients;
+drop table if exists dw_hepdo_patients
+
+go 
 
 CREATE TABLE `dw_hepdo_patients` (
   `indicator` smallint(10) NOT NULL,
@@ -319,9 +331,13 @@ CREATE TABLE `dw_hepdo_patients` (
   `period` smallint(6) NOT NULL,
   `patientid` varchar(11) NOT NULL,
   PRIMARY KEY  (`indicator`,`patientid`,`time_period`,`year`,`period`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-drop table if exists dw_hepdoReportLookup;
+go
+
+drop table if exists dw_hepdoReportLookup
+
+go
 
 CREATE TABLE `dw_hepdoReportLookup` (
   `indicator` smallint(6) NOT NULL,
@@ -334,9 +350,9 @@ CREATE TABLE `dw_hepdoReportLookup` (
   `subGroupFr` varchar(150) character set utf8 collate utf8_unicode_ci NOT NULL,
   `indicatorDenominator` smallint(6) default '0',
   PRIMARY KEY  (`indicator`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-
+go
 
 INSERT INTO `dw_hepdoReportLookup` (`indicator`, `indicatorType`, `nameen`, `namefr`, `definitionen`, `definitionfr`, `indicatorDenominator`) VALUES
 (1, 0, 'Rage suspected', 'Agression par animal suspecte de rage', '', '', 0),
@@ -375,74 +391,102 @@ INSERT INTO `dw_hepdoReportLookup` (`indicator`, `indicatorType`, `nameen`, `nam
 (34, 0, 'Suspicious leprosy', 'Lèpre suspecte', '', '', 0),
 (35, 0, 'Malnutrition', 'Malnutrition', '', '', 0),
 (36, 0, 'Congenital syphilis', 'Syphilis congénitale', '', '', 0),
-(37, 0, 'Violence (physical, sexual)', 'Violences (physique, sexuelle)', '', '', 0);
+(37, 0, 'Violence (physical, sexual)', 'Violences (physique, sexuelle)', '', '', 0)
 
+go
 insert into concept(concept_id,retired,short_name,description,datatype_id,class_id,is_set,creator,date_created)  
-values (163850,0,'ddp_dispensation','Dispensation DDP',10,13,0,0,now());
+values (163850,0,'ddp_dispensation','Dispensation DDP',10,13,0,0,now())
+
+go
 
 insert into concept_name(concept_id,name,short_name,description,locale,creator,date_created)
 values (163850,'ddp_dispensation','ddp_dispensation','Dispensation DDP','fr',0,now()),
-(163850,'ddp_dispensation','ddp_dispensation','Dispensation DDP','en',0,now());  
+(163850,'ddp_dispensation','ddp_dispensation','Dispensation DDP','en',0,now()) 
 
+go
 
 insert into concept(concept_id,retired,short_name,description,datatype_id,class_id,is_set,creator,date_created)  
-values (163851,0,'antecedentTb','antecedent Tb',10,13,0,0,now());
+values (163851,0,'antecedentTb','antecedent Tb',10,13,0,0,now())
+
+go
 
 insert into concept_name(concept_id,name,short_name,description,locale,creator,date_created)
 values (163851,'antecedentTb','antecedentTb','antecedent Tb','fr',0,now()),
-(163851,'antecedentTb','antecedentTb','antecedent Tb','en',0,now());
+(163851,'antecedentTb','antecedentTb','antecedent Tb','en',0,now())
+
+go
 
 insert into concept(concept_id,retired,short_name,description,datatype_id,class_id,is_set,creator,date_created)  
-values (163852,0,'dateFinTb','date de fin du traitement TB',7,5,0,0,now());
+values (163852,0,'dateFinTb','date de fin du traitement TB',7,5,0,0,now())
+
+go
 
 insert into concept_name(concept_id,name,short_name,description,locale,creator,date_created)
 values (163852,'dateFinTb','dateFinTb','date de fin du traitement TB','fr',0,now()),
-(163852,'dateFinTb','dateFinTb','date de fin du traitement TB','en',0,now());
+(163852,'dateFinTb','dateFinTb','date de fin du traitement TB','en',0,now())
 	
+go
 
+ALTER TABLE `tbStatus` ADD `antecedentTb` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `asymptomaticTb` 
+go
+ALTER TABLE `tbStatus` ADD `propINHRifa` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `propINH` 
+go
+ALTER TABLE `tbStatus` ADD `debutINHRifaMm` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `debutINHMm` 
+go 
 
-ALTER TABLE `tbStatus` ADD `antecedentTb` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `asymptomaticTb` ;
+ALTER TABLE `tbStatus` ADD `debutINHRifaYy` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `debutINHYy` 
+go
+ALTER TABLE `tbStatus` ADD `arretINHRifaMm` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `arretINHMm` 
+go
+ALTER TABLE `tbStatus` ADD `arretINHRifaYy` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `arretINHYy` 
 
-ALTER TABLE `tbStatus` ADD `propINHRifa` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `propINH` ;
+go
 
-ALTER TABLE `tbStatus` ADD `debutINHRifaMm` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `debutINHMm` ;
-ALTER TABLE `tbStatus` ADD `debutINHRifaYy` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `debutINHYy` ;
-ALTER TABLE `tbStatus` ADD `arretINHRifaMm` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `arretINHMm` ;
-ALTER TABLE `tbStatus` ADD `arretINHRifaYy` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `arretINHYy` ;
+ALTER TABLE `tbStatus` ADD `propSecINH` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `propINHRifa`
+go 
 
+ALTER TABLE `tbStatus` ADD `debutSecINHMm` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `debutINHRifaMm`
 
+go
+ALTER TABLE `tbStatus` ADD `debutSecINHYy` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `debutINHRifaYy`
+go 
+ALTER TABLE `tbStatus` ADD `arretSecINHMm` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `arretINHRifaMm`
+go
+ALTER TABLE `tbStatus` ADD `arretSecINHYy` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `arretINHRifaYy`
 
-ALTER TABLE `tbStatus` ADD `propSecINH` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `propINHRifa` ;
-
-ALTER TABLE `tbStatus` ADD `debutSecINHMm` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `debutINHRifaMm` ;
-ALTER TABLE `tbStatus` ADD `debutSecINHYy` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `debutINHRifaYy` ;
-ALTER TABLE `tbStatus` ADD `arretSecINHMm` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `arretINHRifaMm` ;
-ALTER TABLE `tbStatus` ADD `arretSecINHYy` INT NOT NULL DEFAULT '0' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `arretINHRifaYy` ;
-
-
+go
 update drugLookup set pedStdDosageEn1='50 mg QD',pedStdDosageFr1='50 mg QD'
-where drugID=89;
+where drugID=89
+
+go
 update drugLookup set pedStdDosageEn2='10 mg QD',pedStdDosageFr2='10 mg QD'
-where drugID=89;
+where drugID=89
+go 
 
 update drugLookup set pedStdDosageEn2='100 mg QD',pedStdDosageFr2='100 mg QD'
-where drugID=87;
+where drugID=87
+go 
 
 update drugLookup set pedStdDosageEn1='75 mg QD',pedStdDosageFr1='75 mg QD'
-where drugID=88;
+where drugID=88
+go 
 
 update drugLookup set pedStdDosageEn1='300/100 mg',pedStdDosageFr1='300/100 mg'
-where drugID=6;
+where drugID=6
+go
 
+ALTER TABLE `encounter` ADD `otherSite` varchar(55) NULL DEFAULT 'NULL' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `visitDate` 
+go 
 
-ALTER TABLE `encounter` ADD `otherSite` varchar(55) NULL DEFAULT 'NULL' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `visitDate` ;
-ALTER TABLE `encounter` ADD `nextVisitDateOther` Date NULL DEFAULT NULL COMMENT 'ajouter dans la version 21.1 de isante' AFTER `otherSite` ;
+ALTER TABLE `encounter` ADD `nextVisitDateOther` Date NULL DEFAULT NULL COMMENT 'ajouter dans la version 21.1 de isante' AFTER `otherSite` 
 
 	   
-
+go
 
 	   
-drop table if exists dw_artDist_snapshot;
+drop table if exists dw_artDist_snapshot
+
+go 
 
 CREATE TABLE IF NOT EXISTS `dw_artDist_snapshot` (
   `patientID` varchar(11) NOT NULL default '',
@@ -450,9 +494,12 @@ CREATE TABLE IF NOT EXISTS `dw_artDist_snapshot` (
   `visitArt` tinyint(1) default '0',
   `nextVisitArt` tinyint(1) default '0',
   PRIMARY KEY  (`patientID`,`visitDate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-drop table if exists dw_artDist_slices;
+go
+
+drop table if exists dw_artDist_slices
+go 
 
 CREATE TABLE `dw_artDist_slices` (
   `org_unit` varchar(64) NOT NULL,
@@ -465,10 +512,13 @@ CREATE TABLE `dw_artDist_slices` (
   `value` bigint(20) default '0',
   `denominator` decimal(9,1) default '0.0',
   PRIMARY KEY  (`org_unit`,`org_value`,`indicator`,`time_period`,`year`,`period`,`gender`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+go
 
-drop table if exists dw_artDist_patients;
+drop table if exists dw_artDist_patients
+
+go 
 
 CREATE TABLE `dw_artDist_patients` (
   `indicator` smallint(10) NOT NULL,
@@ -477,9 +527,12 @@ CREATE TABLE `dw_artDist_patients` (
   `period` smallint(6) NOT NULL,
   `patientid` varchar(11) NOT NULL,
   PRIMARY KEY  (`indicator`,`patientid`,`time_period`,`year`,`period`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-drop table if exists dw_artDistReportLookup;
+go
+drop table if exists dw_artDistReportLookup
+
+go
 
 CREATE TABLE `dw_artDistReportLookup` (
   `indicator` smallint(6) NOT NULL,
@@ -492,33 +545,30 @@ CREATE TABLE `dw_artDistReportLookup` (
   `subGroupFr` varchar(150) character set utf8 collate utf8_unicode_ci NOT NULL,
   `indicatorDenominator` smallint(6) default '0',
   PRIMARY KEY  (`indicator`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 go
 
 INSERT INTO `dw_artDistReportLookup` (`indicator`, `indicatorType`, `nameen`, `namefr`, `definitionen`, `definitionfr`, `indicatorDenominator`) VALUES
-(1, 0, 'Hike for the period', 'Randez-vous pour la période', 'patient having hike for the period', 'patient ayant Randez-vous pour la période', 0),
+(1, 0, 'Hike for the period', 'Rendez-vous pour la période', 'patient having hike for the period', 'patient ayant Rendez-vous pour la période', 0),
 (2, 0, 'Dispensed ART for the period','Arv dispensé pour la période','Dispensed ART for the period','Arv dispensé pour la période', 0),
 (3, 1, 'Percentage of patients who not withdrawn arvs during the period', 'Pourcentage de patient n\'ayant pas retiré des arvs pendant la période ', 'Percentage of patients who not withdrawn arvs during the period', 'Pourcentage de patient n\'ayant pas retiré des arvs pendant la période ', 1),
 (4, 1, 'Percentage of patients who withdrawn arvs during the period', 'Pourcentage de patient ayant retiré des arvs pendant la période ', 'Percentage of patients who withdrawn arvs during the period', 'Pourcentage de patient ayant retiré des arvs pendant la période ', 1),
-(5, 1, 'Percentage of patients who withdrawn arvs after the period', 'Pourcentage de patient ayant retiré des arvs apres la période ', 'Percentage of patients who withdrawn arvs after the period', 'Pourcentage de patient ayant retiré des arvs apres la période ', 3);
-
-
-go
-
-ALTER TABLE `drugs` ADD `TransDTG` tinyint(3) NULL DEFAULT 'NULL' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `finPTME` ;
+(5, 1, 'Percentage of patients who withdrawn arvs after the period', 'Pourcentage de patient ayant retiré des arvs apres la période ', 'Percentage of patients who withdrawn arvs after the period', 'Pourcentage de patient ayant retiré des arvs apres la période ', 3)
 
 go
 
+ALTER TABLE `drugs` ADD `TransDTG` tinyint(3) NULL DEFAULT 'NULL' COMMENT 'ajouter dans la version 21.1 de isante' AFTER `finPTME` 
+
+go
 insert into regimen( regID,regimenName,drugID1,drugID2,drugID3,shortName,regGroup) 
 values ('127','1stReg127','1','20','87','ABC+3TC+RAL','1stReg127'),
        ('128','1stReg128','8','87','0','AZT+3TC+RAL','1stReg128'),
-	   ('129','1stReg129','34','20','87','AZT+3TC+RAL','1stReg129');
-       
+	   ('129','1stReg129','34','20','87','AZT+3TC+RAL','1stReg129')
+
 go
 
-
 insert into alertLookup(alertId,alertName,descriptionFr,descriptionEn,messageFr,messageEn,alertGroup,priority)
-values (13,'ddpPatient','Ce patient est abonné aux services DDP','Ce patient est abonné aux services DDP','Ce patient est abonné aux services DDP',1,7);
+values (13,'ddpPatient','Ce patient est abonné aux services DDP','Ce patient est abonné aux services DDP','Ce patient est abonné aux services DDP',1,7)
 
 go

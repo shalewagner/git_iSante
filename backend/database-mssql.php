@@ -175,7 +175,7 @@ function dbError($message, $data, $shouldLog=true) {
     $globalDbHandle = __getDbConnection(DB_USER, DB_PASS);
     $data['message'] = $message;
     sleep(1); //make sure we can write to eventLog (timestamp must be unique)
-    recordEvent('databaseError', $data);
+   // recordEvent('databaseError', $data);
     if (array_key_exists('query', $data)) {
       logDbMsg($message . ': ' . $data['query']);
     } else {
