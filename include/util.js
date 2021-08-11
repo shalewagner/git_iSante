@@ -197,7 +197,7 @@ Ext.util.chkDate = function(_val,_default) {
     }
     return errMsg1;
 };
-Ext.util.checkDobDt = function(_dobNode,_dobNode1,_default,_iconLoc) 
+Ext.util.checkDobDt = function(_dobNode,_default,_iconLoc) 
 {
 	var errMsg = "";
 	var dob = _dobNode.value;

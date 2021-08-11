@@ -38,7 +38,7 @@ $options='<option value=""> </option>';
 $qry = "select REPLACE(REPLACE(r.shortName, 'ZDV', 'AZT'),'TNF','TDF') as shortName,(select drugName from drugLookup where drugID=r.drugID1)  as drug1, 
                   (select drugName from drugLookup where drugID=r.drugID2)  as drug2,
                   (select drugName from drugLookup where drugID=r.drugID3)  as drug3
- from regimen r where regID in (3,6,80,81,90,100,101,103,104,109,110,115,123,124,125,127,129)";
+ from regimen r where regID in (3,6,80,81,90,100,101,103,104,109,110,115,117,119,123,122,124,125,127,129)";
 	$result = dbQuery ($qry);
 	if (!$result)
 		die("Could not query.");
