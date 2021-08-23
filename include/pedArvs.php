@@ -25,12 +25,13 @@ echo (!empty ($followup) && $followup == 1) ? "
 	      </tr>
 	      <tr>
 	       <td colspan=\"4\" width=\"40%\">&nbsp;</td>
+		   <td class=\"sm_header_cnt\" width=\"4%\">" . $pedFollowup[$lang][47] . "</td>
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedFollowup[$lang][26] . "</td>
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedFollowup[$lang][27] . "</td>
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedFollowup[$lang][28] . "</td>
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedFollowup[$lang][29] . "</td>
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedFollowup[$lang][30] . "</td>
-               <td colspan=\"2\" width=\"3%\">&nbsp;</td>
+               <td colspan=\"2\" width=\"2%\">&nbsp;</td>
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedFollowup[$lang][31] . "</td>
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedFollowup[$lang][32] . "</td>
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedFollowup[$lang][33] . "</td>
@@ -38,13 +39,13 @@ echo (!empty ($followup) && $followup == 1) ? "
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedFollowup[$lang][35] . "</td>
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedFollowup[$lang][36] . "</td>
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedFollowup[$lang][37] . "</td>
-	       <td class=\"sm_header_cnt\" width=\"9%\">" . $pedFollowup[$lang][38] . "</td>
+	       <td class=\"sm_header_cnt\" width=\"6%\">" . $pedFollowup[$lang][38] . "</td>
 	      </tr>
 	      <tr>
 	       <td class=\"top_line\" colspan=\"19\" width=\"100%\">&nbsp;</td>
               </tr>
               <tr>
-	       <td colspan=\"9\" width=\"60%\"><b><a class=\"toggle_display\"
+	       <td colspan=\"10\" width=\"60%\"><b><a class=\"toggle_display\"
 	            onclick=\"toggleDisplay(0,$arvSubHeadElems[0]);\"
 	            title=\"Toggle display\">
 	            <span id=\"section0Y\" style=\"display:none\">(+)</span>
@@ -98,7 +99,8 @@ echo (!empty ($followup) && $followup == 1) ? "
 	            <span id=\"section0N\">(-)&nbsp;</span>" .
 	          $arv_subhead3[$version][$lang][1] .
 	         "</a></b></td>
-	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedArvs[$lang][10] . "</td>
+		   <td class=\"sm_header_cnt\" width=\"4%\">" . $pedArvs[$lang][24] . "</td>
+	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedArvs[$lang][10] . "</td>		   
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedArvs[$lang][12] . "</td>
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedArvs[$lang][14] . "</td>
 	       <td class=\"sm_header_cnt\" width=\"4%\">" . $pedArvs[$lang][16] . "</td>

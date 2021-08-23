@@ -835,7 +835,8 @@ $pedArvs = array (
           "Short-term prophylactic dose only",
           "Continuing use",
           "Reason for discontinuation",
-          "Unknown"),
+          "Unknown",
+		  "Trans DTG"),
   "fr" => array (
           "ARV: TRAITEMENTS PR&#xc9;C&#xc9;DENTS",
           "Est-ce-que le patient a d&#xe9;j&#xe0; utilis&#xe9; des ARV?",
@@ -860,7 +861,8 @@ $pedArvs = array (
           "Dose de prophylaxie de courte dur&#xe9;e",
           "Utilisation courante",
           "Arr&#xea;t: raison",
-          "Inconnu")
+          "Inconnu",
+		  "Trans DTG")
 );
 
 $pedTreats = array (
@@ -1100,7 +1102,8 @@ $pedFollowup = array (
           "TOXICITY ARV",
           "Name of medication:",
           "OTHER CURRENT TREATMENTS",
-          "Continuing use"),
+          "Continuing use",
+		  "Trans DTG"),
   "fr" => array (
           "IMMUNISATION DONN&#xc9;E",
           "Indiquer tout dose de vaccin donn&#xe9; aujourd'hui ou qui n'a pas &#xe9;t&#xe9; pr&#xe9;alablement report&#xe9;. Si la date (jour, mois et/ou ann&#xe9;e) est inconnue, utiliser XX.",
@@ -1148,7 +1151,8 @@ $pedFollowup = array (
           "TOXICIT&#xc9; ARV",
           "Nom du m&#xe9;dicament:",
           "AUTRES TRAITEMENTS EN COURS",
-          "Utilisation actuelle")
+          "Utilisation actuelle",
+		  "Trans DTG")
 );
 
 $pedRx = array (
